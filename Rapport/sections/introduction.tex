@@ -1,0 +1,62 @@
+\chapter{Introduktion}\label{ch:introduction}
+\section{Indledning}
+
+Ifølge DTU’s transportvaneundersøgelse fra 2015 ses det tydeligt, at det gennemsnitligt er unge danskere i alderen 18-29 år, der cykler mest ud fra antal cyklede kilometer pr dag. Ligeledes er det cykelture til og fra arbejde og studie, der gennemsnitligt udgør størstedelen af disse cykelture.
+
+Der arbejdes på at opstille de bedste forhold for cyklisterne, resten er op til cyjlisten, kan vi hjælpe her? 
+
+kilde CPH strategi: http://www.cycling-embassy.dk/2012/01/20/good-better-best-the-city-of-copenhagens-bicycle-strategy-2011-2025/ (PDF)
+
+http://politiken.dk/motion/cykling/ECE1996301/derfor-vaelger-og-fravaelger-vi-cyklen/
+
+\section{Problemanalyse}
+Hver dag cykler tusindvis af pendlere til og fra arbejde og skole i Aalborg kommune. At så mange mennesker vælger at cykle frem for at tage bilen eller offentlig transport er både godt for cyklisten selv, vores samfund og miljøet. Det estimeres, at der for hver kilometer der cykles spares samfundet for 7 kroner blot ved at belaste sundhedssystemet mindre. Derudover vil 1\% flere cykelture årligt spare miljøet for udledningen af 16.000 ton CO2.\\
+\\
+Sundhedsmæssigt har det naturligvis også mange fordele at vælge cyklen som det daglige transportmiddel. I en inaktiv hverdag på kontoret eller skolebænken er det vigtigt med motion og frisk luft. Ifølge et studie fra University of Illinois vil man efter en cykeltur klare sig hele 15\% bedre i en mental test.\\
+Disse fakta danner grundlag for vigtigheden af at opretholde eller endda forbedre de gode cykel-statistikker, som Danmark kan fremvise.\\
+\\
+Aalborg er en cykelby, og en stor del af cyklisterne er studerende på Aalborg Universitet. De studerende har typisk en dagligdag fra 8.15 til 16.15, hvor en cykeltur to gange om dagen - foruden studierne - kan gå hen og blive anstrengende, især for dem der har langt.\\
+Derfor kunne det - for at fastholde de mange cyklister - være relevant at undersøge muligheden for at optimere cykelturen til og fra studiet således, at den vil være mindre anstrengende og eventuelt være mere overskuelig for endnu flere studerende. Det vil både være godt for samfundet, miljøet og de studerendes resultater.\\
+\\
+Men hvad kan gøre en tur mindre anstrengende og dermed øge incitamentet for at hoppe på sin cykel? En løsning kunne være at forbedre Aalborgs cykelstier og lave specielle ruter uden om de store veje og lyskryds i centrum. En helt anden løsning er el-cyklen, hvis popularitet har vundet frem i Danmark de sidste par år, som mindsker de kræfter man skal bruge især op ad bakker. Dette er begge gode forslag, som kan være med til at gøre det mindre anstrengende, og derved få flere på cyklen dagligt, men det kan gøres simplere end det.\\
+Hvor meget energi en cyklist bruger mellem punkt A og B afhænger af mange variabler som rutens længde, terræn, trafik og cyklens kvalitet. Nogle af disse variabler kan der ændres på ved eksempelvis at flytte tættere på sit studie eller forbedre sin cykel, men dette er ikke altid en nem løsning, og der er intet at gøre ved eksempelvis en stor stigning. Så hvad kan der ændres på?\\
+\\
+Der er ofte fokus på,  at bilister skal køre mere økonomisk og derved spare brændstof, men dette gælder også for cyklister med den forskel, at man ved at cykle økonomisk sparer på kroppens energi. Mange af rådene til at køre økonomisk kan endda overføres direkte “energi økonomiske” råd for cyklister. Herunder nævnes nogle af de “10 grønne køreråd”, som er relevante for cyklister:\\
+\begin{itemize}
+\item[-] Kør i så højt gear som muligt.
+\item[-] Accelerer kvikt.
+\item[-] Vær forudseende - følg med i trafikken.
+\item[-] Tjek dæktrykket.
+\end{itemize}
+For at optimere kvaliteten af cykelturen bør man derfor fokusere på at spare energi ved at bruge disse råd. Derudover er det for de fleste cyklister også vigtigt at minimere den forbrugte tid, og energiforbruget skal derfor balanceres i forhold til tiden. For det første viser flere undersøgelser, at de fleste cyklister ikke cykler energiøkonomisk, og dette bevirker, at færre tager cyklen. Her peges der på en for høj pedalfrekvens som en stor faktor. Dermed bruger man for meget energi i forhold til, hvor meget man rent faktisk flytter sig. For det andet har forskellige faktorer indvirkning på både energi- og tidsforbruget: heriblandt, at man kører alt for langt i forhold til den direkte linje mellem start- og slutpunktet, at man kører i for højt eller lavt gear, op eller ned ad bakke eller at man pludselig bremser hårdt op.\\
+I artiklen om optimal pedalfrekvens står der, at “De allerfleste vælger at træde for hurtigt, hvis ikke de er bevidste om fænomenet, og får vejledning.” Dette problem kunne løses ved at gøre cyklister opmærksomme på, hvor optimalt de kører i forhold til faktorer som pedalfrekvens og acceleration/deacceleration. I næste afsnit vil det undersøges, hvordan dette problem kan løses ved hjælp af en cykelcomputer, der analyserer nogle parametre i forhold til hvor energiøkonomisk der cykles. 
+
+\newpage
+\section{Problemformulering}
+Hvordan er det muligt at installere gyroskop, accelerometer og GPS i et elektrisk kredsløb med henblik på optimalt at opsamle relevant data fra en cyklist i forhold til præcision og hukommelse? Hvilke numeriske metoder kan med fordel anvendes til at omsætte den opsamlede data til acceleration, hastighed og position [mere kommer eventuelt])?
+
+Hvorledes kan dette sammensættes og implementeres i et C-program, der kan udgøre software til et produkt, der har til formål at give en cyklist status af cykelturen i realtid i forhold til hvor energiøkonomisk der køres, ud fra specificerede krav , og hvordan kan disse data gemmes til senere analyse?
+
+\newpage
+
+\section{Løsningsmetode}
+Til at analysere cyklens bevægelse vil der blive udviklet et system, hvor en computer regner på data fra nogle sensorer og printer dem på en skærm. Dette system vil blive koblet til cyklen og skal så udregne hvordan cyklen bevæger sig.  Hvad der helt præcist skal måles og hvilke beregninger der skal udføres på dataene vil blive beskrevet i projektafgrænsningen, men de anvendte sensorer og deres anvendelsesmuligheder  vil blive beskrevet her. 
+
+I dette projekt vil bevægelsessensorer blive koblet til en Arduino®-computer, som kan programmeres i C-kode. Arduinoen vil modtage input fra forskellige sensorer, udføre de nødvendige beregninger samt eksportere resultaterne til en LCD-skærm, som er koblet til cyklen, og et SD-kort til senere analyse. Hele denne enhed vil derfor fungere som en cykelcomputer, der analyserer og informerer om cyklens bevægelse i realtid. I dette projekt vil der blive anvendt en GPS-enhed og en INS-enhed, som tilkobles cykelcomputeren for at lave de ønskede målinger. 
+
+En GPS (Global Positioning System) er en komponent, som kan måle placering, tid, hastighed og højden over havets overflade ved hjælp af satellitter. En GPS benytter sig af mindst 4 satellitter for at kunne bestemme position og tid, men jo flere satellitter jo bedre nøjagtighed kan GPS’en give.  I dette projekt vil vi anvende et GPS-system til at bestemme en absolut position for en cykel, som så kan anvendes til forskellige analyser. 
+
+En GPS-enhed bruges som sagt til at bestemme en absolut position, men den indebærer nogle fejlkilder i forhold til præcision, og derfor kan den kombineres med en INS-enhed (Initial Navigation System) for bedre præcision. En INS består typisk af forskellige sensorer, der måler forskellige fysiske faktorer som kraftpåvirkning og orientering i forhold til en bestemt retning.  Disse målinger kan analyseres hver for sig eller bruges til at komplementere hinanden og derved opnå større præcision. I dette projekt vil der anvendes et accelerometer og et gyroskop.
+
+Et accelerometer er en elektromekanisk anordning, der kan måle acceleration ved hjælp af kraft. Kraften kan være statisk som tyngdekraften eller den kan være dynamisk, hvilket sker, når man flytter på accelerometeret eller det vibrerer. De nyeste accelerometere måler på 3 akser, og ved at benytte accelerometeret kan man derfor ved statisk acceleration finde vinklen/hældning. Derudover kan man ved dynamisk acceleration regne sig frem til bevægelsen ud fra accelerationen. Et accelerometer kan altså benyttes til at måle på accelerationen på et objekt, som eksempelvis er på vej op ad en bakke. Ud fra den målte acceleration er det muligt at beregne hastighed og position hvis der kendes nogle startbetingelser hvilket vil bruges i cykelcomputeren. 
+
+Et gyroskop benyttes til at måle på vinkelhastighed, retning og orientering. Den kan dermed hjælpe med at stabilisere samt ændre retning og orientering for et objekt. Til forskel fra et accelerometer måler et gyroskop kun ændringer og har ikke nogen bestemt reference.
+
+\section{Projektafgrænsning}
+I dette projekt udarbejdes en prototype til en cykelcomputer, der har til formål at informere cyklisten om cyklens aktuelle hastighed, kadence, antal kørte kilometer samt illustrere på en skala, hvor optimalt der cykles.
+Hvor optimalt der cykles vil være en sammenfatning af hidtil acceleration og deacceleration samt gennemsnitlig kadence, med henblik på cyklistens mulighed for at mindske sit energiforbrug.
+Begrænsninger:
+Prototypen vil blive testet og anvendt på en fast rute, således at der ikke skal tages højde for lyskryds, trafik og andre faktorer. Der vil desuden, set fra et teoretisk synspunkt, blive set bort fra faktorer som vindmodstand, friktion, osv.
+
+\section{Metode}
+
