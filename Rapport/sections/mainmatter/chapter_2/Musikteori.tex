@@ -1,13 +1,10 @@
 \chapter{Musikteori}
-I dette kapitel introduceres grundlæggende musikteori, der anvendes i projektet.
+I dette kapitel introduceres grundlæggende musikteori, der er nødvendig for forståelsen af projektet.
 \\ \\
 I nodesystemet er en node en symbolsk repræsentation af en bestemt tone, som er tilknyttet en specifik frekvens (angivet i hertz, Hz). Hver node indeholder således information om tonens højde og desuden også om dens varighed. Et nodeark er således en symbolsk repræsentation af et diagram over tid og frekvens, hvilket også kaldes et spektrogram.
 \\ \\
-Til at notere noder benytter man et nodesystem, der består af fem vandrette linjer, hvor noderne er placeret. Grundlæggende findes der 12 forskellige toner Noderne i nodesystemet består først og fremmest af stamtoner, som navngives med bogstaverne A-G afhængigt af deres vertikale placering. Efter G starter navngivningen forfra med det næste A, der ligger en oktav over det forrige. Mellem flere af stamtonerne ligger andre toner, som sammen med stamtonerne udgør de 12 grundtoner, som typisk anvendes i musik. Afstanden mellem alle grundtonerne er en halv tone.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width = 0.6\textwidth]{figures/C_dur.PNG}
-    \caption{C-dur.}
-    \label{Cdur}
-\end{figure}
+Til at notere noder benytter man et nodesystem, der består af fem vandrette linjer, hvor noderne er placeret. Grundlæggende findes der 12 forskellige toner, hvorefter denne følge gentages. Principielt set findes der således flere toner med samme navn, og disse toner siges at være oktavækvivalente, da den ene ligger et antal oktaver over den anden. Forholdet i frekvens mellem 2 oktavækvivalente toner $A_0$ og $A_n$ er derfor $A_n = 2^n A_0, n \in \mathbb{Z}$, og $A_n$ er således $n$ oktaver over $A_0$.
+\\ \\
+Noderne i nodesystemet består først og fremmest af stamtoner, som navngives med bogstaverne $A$-$G$ afhængigt af deres vertikale placering. Efter $G$ starter navngivningen forfra med det næste $A$, der ligger en oktav over det forrige. Mellem flere af stamtonerne ligger desuden andre toner, som sammen med stamtonerne udgør de 12 grundtoner. Afstanden mellem alle grundtonerne er en halv tone, og tonen mellem $C$ og $D$ noteres som C\hashsharp{}.
+\\ \\
+For at skelne mellem de oktavækvivalente toner noteres de for eksempel som $A_4$ og $A_5$. $A_4$ kaldes også kammertonen og vælges per definition normalt til at være $440$ Hz, men kan dog svinge med $\pm 3$ Hz afhængigt af den enkelte musiker eller orkester, der spiller musikken. Alle andre toner kan defineres ud fra $A_4$s frekvens, da $A_4$ er den 12. grundtone efter $A_3$, som har halvt så stor frekvens som $A_4$, og da afstanden mellem alle grundtonerne er en halv tone. Forholdet i frekvens mellem to naboliggende toner, for eksempel $C$ og $C$\hashsharp, er således $C$\hashsharp \ $= \sqrt[\leftroot{-2}\uproot{2}12]{2} \cdot C$.
