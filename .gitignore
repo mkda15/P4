@@ -13,6 +13,9 @@
 master.pdf
 Miniprojekt.pdf
 .DS_Store
+master.log
+master.synctex.gz
+master.pdf
 
 ## Intermediate documents:
 *.dvi
