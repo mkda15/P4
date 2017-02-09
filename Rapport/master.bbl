@@ -16,6 +16,34 @@
   {}
 \endgroup
 
+\entry{origins}{book}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Wallin}{W.}%
+     {Nils~L.}{N.~L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Merker}{M.}%
+     {Björn}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brown}{B.}%
+     {Steven}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {The MIT Press}%
+  }
+  \strng{namehash}{WNLMBBS1}
+  \strng{fullhash}{WNLMBBS1}
+  \field{sortinit}{W}
+  \field{title}{The Origins of Music}
+  \field{year}{2000}
+\endentry
+
 \entry{MusicTheory}{misc}{}
   \name{author}{1}{}{%
     {{}%
