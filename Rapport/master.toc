@@ -30,8 +30,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {6}Overskrift}{11}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliografi}{13}{chapter.6}
+\contentsline {chapter}{\numberline {A}Overskrift}{13}{chapter.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Overskrift}{14}{chapter.A}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Overskrift}{14}{chapter.B}
+\contentsline {chapter}{\numberline {B}Overskrift}{13}{chapter.B}
