@@ -1,4 +1,4 @@
-% $ biblatex auxiliary file $
+﻿% $ biblatex auxiliary file $
 % $ biblatex version 2.1 $
 % Do not modify the above lines!
 %
@@ -42,6 +42,30 @@
   \field{sortinit}{W}
   \field{title}{The Origins of Music}
   \field{year}{2000}
+
+\entry{AcousticNoise}{misc}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Crocker}{C.}%
+     {Malcolm~J.}{M.~J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ffowcs-Williams}{F.-W.}%
+     {John~E}{J.~E.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CMJFWJE1}
+  \strng{fullhash}{CMJFWJE1}
+  \field{sortinit}{C}
+  \field{howpublished}{AccessScience, McGraw-Hill Education}
+  \field{note}{Visited 09-02-2017}
+  \field{title}{Acoustic Noise}
+  \verb{url}
+  \verb http://www.accessscience.com/content/acoustic-noise/006100
+  \endverb
+  \field{year}{2014}
 \endentry
 
 \entry{MusicTheory}{misc}{}
