@@ -5,6 +5,9 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+
+
+
 \usepackage[
 %  disable, %turn off todonotes
  colorinlistoftodos, %enable a coloured square in the list of todos
@@ -12,203 +15,137 @@
  textsize=scriptsize, %size of the text in the todonotes
  ]{todonotes}
 \usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
 
 \usepackage[utf8]{inputenc}
 \usepackage[danish,english]{babel}
 \renewcommand\qedsymbol{$\blacksquare$}
+\usepackage{lmodern}
+\usepackage{textcomp}
+
 
 \begin{document}
 
-\begin{figure}
+%setup
+\tikzset{%
+  block/.style    = {draw, thick, rectangle, minimum height = 3em,
+    minimum width = 3em},
+  sum/.style      = {draw, circle, node distance = 2cm}, % Adder
+  input/.style    = {coordinate}, % Input
+  output/.style   = {coordinate} % Output
+}
+
+%definerer labels 
+\newcommand{\suma}{\Large$+$}
+\newcommand{\inte}{$\displaystyle \int$}
+\newcommand{\derv}{\huge$\frac{d}{dt}$}
+
+\begin{figure}[h]
 \centering
-\begin{tikzpicture}
-%ramme
-\draw (-5,0)--(-5,-3.8);
-\draw (-2,0)--(-4,0);
-\draw (-5,0)--(5,0);
-\draw (5,0)--(5,-3.8);
-\draw [dashed](0,1.5)--(0,-3.8);
-\draw (-5,-1)--(-4,0);
-\draw (5,-1)--(4,0);
-%akser
-\draw[->,line width=0.3 mm, gray] (-5.5,0.75)--(5.5,0.75);
-\draw[->,line width=0.3 mm, gray] (-5.5,0.75)--(-5.5,-4.1);
-\node [gray]at(-5.7,-3.7) {$x$};
-\node [gray]at(5.2,0.95) {$y$};
-%slæde 
-\draw (-0.75,0.2)rectangle (0.75,1.2);
-\node at(-0.4,0.95) {$M$};
-\draw[->,line width=0.5 mm, red] (0.75,0.75)--(3,0.75);
-\node at(2.5,1) {$F_m$};
-\draw[->,line width=0.5 mm, green] (-0.75,0.2)--(-2.25,0.2);
-\node at(-1.8,0.5) {$F_{\mu}$};
-\node at(1.25,-1.4) {$l$};
-%friktion
-\draw (-0.75,0.2)--(-0.50,0);
-\draw (-0.75,0)--(-0.50,0.2);
-\draw (-0.50,0)--(-0.25,0.2);
-\draw (-0.50,0.2)--(-0.25,0);
-\draw (-0.25,0)--(0,0.2);
-\draw (-0.25,0.2)--(0,0);
-\draw (0.75,0.2)--(0.50,0);
-\draw (0.75,0)--(0.50,0.2);
-\draw (0.50,0)--(0.25,0.2);
-\draw (0.50,0.2)--(0.25,0);
-\draw (0.25,0)--(0,0.2);
-\draw (0.25,0.2)--(0,0);
-%pendul
-\draw (0,0.75)--(2,-3.5);
-\draw (2,-3.5)circle[radius=0.25];
-\draw (0,-0.4) arc (-90:-57:0.9);
-\node at(0.3,-0.6) {$\theta$};
-\node at(2.5,-3.2) {$m$};
-\draw[->,line width=0.5 mm, blue] (0,0.75)--(0.8,-0.97);
-\node at(0.9,-0.5) {$F_t$};
-\draw[dashed,->,line width=0.6 mm, blue] (0,0.75)--(0,-0.97);
-\draw[dashed,->,line width=0.6 mm, blue] (0,-0.97)--(0.8,-0.97);
-%pendul
-%\draw (0,0.75)--(2,-3.5);
-%\draw (2,-3.5)circle[radius=0.25];
-%\draw (0,-0.4) arc (-90:-57:0.9);
-%\node at(0.3,-0.6) {$\theta$};
-%\draw[->,line width=0.5 mm, blue] (2,-3.5)--(0.4,-4.25);
-%\node at(0.9,-3.7) {$F_k$};
-%\draw[->,line width=0.5 mm, blue] (2,-3.5)--(2,-5.3);
-%\node at(2.5,-4.9) {$F_g$};
-%\node at(2.5,-3.2) {$m$};
-%\node at(1.8,-2.3) {$F_t$};
-%\draw[->,line width=0.5 mm, blue] (2,-3.5)--(1.25,-1.89);
+\begin{tikzpicture}[auto, thick, node distance=5cm, >=triangle 45]
+\draw
+% Drawing the blocks of first filter :
+	node [input, name=input1] {} 		
+	node [block, right of=input1] (sh) {S/H}
+	node [block, right of=sh] (quant) {Quantification}
+    node [output, name=output1, right of=quant]{}
+    node at (input1) [above=5mm] {Mic};
+;
+% Joining blocks. 
+% Commands \draw with options like [->] must be written individually
+
+\draw[->](input1) -- node {Analogue input}(sh);
+\draw[->](sh) -- node {discrete signal}(quant);
+\draw[->](quant) -- node {digital input}(output1);
+\filldraw[color=black,fill=white,thick](input1) circle (0.3);
+\draw(-0.3,0.3) -- (-0.3,-0.3);
+\draw (-1.5,0) sin (-1.40,0.5) cos (-1.30,0) sin (-1.20,-0.5) cos (-1.10,0) sin (-1,0.5) cos (-0.9,0) sin (-0.8,-0.5) cos (-0.7,0);
+
+% Boxing and labelling noise shapers
+\draw [color=gray,thick,dashed](-0.5,-1.5) rectangle (12,1.5);
+\node at (-0.5,1.7) [above=5mm, right=0mm] {\textsc{ADC}};
 \end{tikzpicture}
+\caption{Basic block-diagram of the system}
+\label{fig:model1}
 \end{figure}
-%
-\begin{figure}
-\centering
-\begin{tikzpicture}
-%akser 
-\draw[->,line width=0.3 mm, gray] (-1.5,0)--(3,0);
-\draw[->,line width=0.3 mm, gray] (-1.5,0)--(-1.5,-5);
-\draw (0,0)--(2,-4);
-\draw (2,-4)circle[radius=0.2];
-\node at(1.5,-1.75) {$l$};
-\node at(2.3,-3.6) {$m$};
-\node at(3.2,-4) {$(x_{L_1},x_{L_2})$};
-\draw [dashed](0,0.5)--(0,-5);
-\draw (0.5,-1)arc[radius=0.7,start angle=-45,end angle=-90];
-\node at(0.4,-1.5){$\theta$};
-%pile
-\draw[->,line width=0.5 mm,green] (2,-4)--(1.23,-2.5);
-\draw[dashed,->,line width=0.5 mm,green] (2,-4)--(1.23,-4);
-\draw[dashed,->,line width=0.5 mm,green] (1.23,-4)--(1.23,-2.5);
-\node at(2,-3) {$F_t$};
-\draw[->,line width=0.5 mm,blue] (2,-4)--(2,-5.5);
-\node at(2.5,-5) {$F_g$};
-\draw[->,line width=0.5 mm,red] (2,-4)--(0.6,-4.65);
-\draw[dashed,->,line width=0.5 mm,red] (2,-4)--(0.6,-4);
-\draw[dashed,->,line width=0.5 mm,red] (0.6,-4.65)--(0.6,-4);
-\node at(1.2,-4.8) {$F_k$};
-\node at(-1.8,-4.6) {$x$};
-\node at(2.7,0.2) {$y$};
-\end{tikzpicture}
-\label{fig:free_body}
-\end{figure}
+
+
+
+%%definerer labels 
+%\newcommand{\suma}{\Large$+$}
+%\newcommand{\inte}{$\displaystyle \int$}
+%\newcommand{\derv}{\huge$\frac{d}{dt}$}
 %
 %\begin{figure}
 %\centering
-%\begin{tikzpicture}[scale = 0.5]
-%ramme
-%\draw (-6,-1)--(-5,0);
-%\draw (-6,0)--(-6,-8);
-%\draw (-2,0)--(-4,0);
-%\draw (-6,0)--(10,0);
-%\draw (10,-1)--(9,0);
-%\draw (10,0)--(10,-8);
-%\draw[gray] (-6,-8)--(12,-8);
-%\draw (6,-7.7)--(6,-8.4);
-%\node at(6,-9) {$y_1$};
-%\draw (-5.7,-8)--(-6.4,-8);
-%\node at(-7,-8) {$x_0$};
-%\draw (-5.7,-3.5)--(-6.4,-3.5);
-%\node at(-7,-3.5) {$x_c$};
-%\draw (-5.7,-7.2)--(-6.4,-7.2);
-%\node at(-7,-7.2) {$x_m$};
-%slæde 
-%\draw (-4.2,0.1)circle[radius=0.1];
-%\draw (-2.8,0.1)circle[radius=0.1];
-%\draw (-4.5,0.2)rectangle (-2.5,1.5);
-%\node at(-3.5,0.9) {$M$};
-%pendul
-%\draw (-3.5,0.2)--(-3.5,-6.5);
-%\node at(-2.8,-3.5) {$l_0$};
-%\draw (-4.3,-8)rectangle (-2.8,-6.5);
-%\node at(-3.5,-7.25) {$m$};
-%\draw (-3.5,-7.7)--(-3.5,-8.4);
-%\node at(-3.5,-9) {$y_0$};
-%container 
-%\draw (-0.75,-8)rectangle (1,-6.5);
-%\draw (-0.75,-6.5)rectangle (1,-5);
-%\draw (-0.75,-5)rectangle (1,-3.5);
-%\draw (-0.75,-7.7)--(-0.75,-8.4);
-%\node at(-0.75,-9) {$y_{c0}$};
-%\draw (1,-7.7)--(1,-8.4);
-%\node at(1,-9) {$y_{c1}$};
-%% coordinatsystem
-%\draw[->,line width=0.5 mm, blue] (-3.5,0)--(-1.5,0);
-%\draw[->,line width=0.5 mm, blue] (-3.5,0)--(-3.5,-2);
-%\node at(-2,-0.5) {$y$};
-%\node at(-3.,-1.2) {$x$};
+%\begin{tikzpicture}[auto, thick, node distance=2cm, >=triangle 45]
+%\draw
+%% Drawing the blocks of first filter :
+%	node at (0,0)[right=-5mm] {}
+%	node [input, name=input1] {} 
+%	node [sum, right of=input1] (suma1) {\suma}
+%	node [block, right of=suma1] (inte1) {\inte}
+%         node at (6.8,0)[block] (Q1) {\Large $Q_1$}
+%         node [block, below of=inte1] (ret1) {\Large $T_1$};
+%% Joining blocks. 
+%% Commands \draw with options like [->] must be written individually
+%\draw[->](input1) -- node {$X(Z)$}(suma1);
+%\draw[->](suma1) -- node {} (inte1);
+%\draw[->](inte1) -- node {} (Q1);
+%\draw[->](ret1) -| node[near end]{} (suma1);
+%% Adder
+%\draw
+%	node at (5.4,-4) [sum, name=suma2] {\suma}
+%    	% Second stage of filter 
+%	node at  (1,-6) [sum, name=suma3] {\suma}
+%	node [block, right of=suma3] (inte2) {\inte}
+%	node [sum, right of=inte2] (suma4) {\suma}
+%	node [block, right of=suma4] (inte3) {\inte}
+%	node [block, right of=inte3] (Q2) {\Large $Q_2$}
+%	node at (9,-8) [block, name=ret2] {\Large $T_2$}
+%;
+%% Joining the blocks of second filter
+%\draw[->] (suma3) -- node {} (inte2);
+%\draw[->] (inte2) -- node {} (suma4);
+%\draw[->] (suma4) -- node {} (inte3);
+%\draw[->] (inte3) -- node {} (Q2);
+%\draw[->] (ret2) -| (suma3);
+%\draw[->] (ret2) -| (suma4);
+%
+%% Third stage of filter:
+%	% Defining nodes:
+%\draw
+%	node at (11.5, 0) [sum, name=suma5]{\suma}
+%	node [output, right of=suma5]{}
+%	node [block, below of=suma5] (deriv1){\derv}
+%	node [output, right of=suma5] (sal2){}
+%;
+%% Joining the blocks:
+%\draw[->] (suma2) -| node {}(suma3);
+%\draw[->] (Q1) -- (8,0) |- node {}(ret1);
+%\draw[->] (8,0) |- (suma2);
+%\draw[->] (5.4,0) -- (suma2);
+%\draw[->] (Q1) -- node {}(suma5);
+%\draw[->] (deriv1) -- node {}(suma5);
+%\draw[->] (Q2) -| node {}(deriv1);
+%\draw[<->] (ret2) -| node {}(deriv1);
+%\draw[->] (suma5) -- node {$Y(Z)$}(sal2);
+%% Drawing nodes with \textbullet
+%\draw
+%	node at (8,0) {\textbullet} 
+%	node at (8,-2){\textbullet}
+%	node at (5.4,0){\textbullet}
+%    	node at (5,-8){\textbullet}
+%    	node at (11.5,-6){\textbullet}
+%    	;
+%% Boxing and labelling noise shapers
+%\draw [color=gray,thick](-0.5,-3) rectangle (9,1);
+%\node at (-0.5,1.5) [above=5mm, right=0mm] {\textsc{first-order noise shaper}};
+%\draw [color=gray,thick](-0.5,-9) rectangle (12.5,-5);
+%\node at (-0.5,-9) [below=5mm, right=0mm] {\textsc{second-order noise shaper}};
 %\end{tikzpicture}
-%\caption{Illustration af portalkranens opstilling. Bemærk at $l_0$ er afstanden fra slædens underside til containerens massemidtpunkt placeret i $(y_0,x_m)$.}
-%\label{fig:case}
+%
+%\label{fig:free_body}
 %\end{figure}
-
-
-%\begin{figure}
-%\centering
-%\begin{tikzpicture}[scale = 0.5]
-%ramme
-%\draw (-6,-1)--(-5,0);
-%\draw (-6,0)--(-6,-8);
-%\draw (-2,0)--(-4,0);
-%\draw (-6,0)--(10,0);
-%\draw (10,-1)--(9,0);
-%\draw (10,0)--(10,-8);
-%\draw[gray] (-6,-8)--(12,-8);
-%\draw (6,-7.7)--(6,-8.4);
-%\node at(6,-9) {$y_1$};
-%\draw (-5.7,-8)--(-6.4,-8);
-%\node at(-7,-8) {$x_0$};
-%\draw (-5.7,-3.5)--(-6.4,-3.5);
-%\node at(-7,-3.5) {$x_c$};
-%\draw (-5.7,-7.2)--(-6.4,-7.2);
-%\node at(-7,-7.2) {$x_m$};
-%slæde 
-%\draw (-4.2,0.1)circle[radius=0.1];
-%\draw (-2.8,0.1)circle[radius=0.1];
-%\draw (-4.5,0.2)rectangle (-2.5,1.5);
-%\node at(-3.5,0.9) {$M$};
-%pendul
-%\draw (-3.5,0.2)--(-3.5,-6.5);
-%\node at(-2.8,-3.5) {$l_0$};
-%\draw (-4.3,-8)rectangle (-2.8,-6.5);
-%\node at(-3.5,-7.25) {$m$};
-%\draw (-3.5,-7.7)--(-3.5,-8.4);
-%\node at(-3.5,-9) {$y_0$};
-%container 
-%\draw (-0.75,-8)rectangle (1,-6.5);
-%\draw (-0.75,-6.5)rectangle (1,-5);
-%\draw (-0.75,-5)rectangle (1,-3.5);
-%\draw (-0.75,-7.7)--(-0.75,-8.4);
-%\node at(-0.75,-9) {$y_{c0}$};
-%\draw (1,-7.7)--(1,-8.4);
-%\node at(1,-9) {$y_{c1}$};
-%% coordinatsystem
-%\draw[->,line width=0.5 mm, blue] (-3.5,0)--(-1.5,0);
-%\draw[->,line width=0.5 mm, blue] (-3.5,0)--(-3.5,-2);
-%\node at(-2,-0.5) {$y$};
-%\node at(-3.,-1.2) {$x$};
-%\end{tikzpicture}
-%\caption{Illustration af portalkranens opstilling. Bemærk at $l_0$ er afstanden fra slædens underside til containerens massemidtpunkt placeret i $(y_0,x_m)$.}
-%\label{fig:case}
-%\end{figure}
-
+%
 \end{document}

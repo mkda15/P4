@@ -1,9 +1,38 @@
 In this chapter a model of and requirements to the system is specified on a superficial level. These specifications forms a basis of the further work. 
 \\ \\
+Due to the presented problem statement and delimitation of the project the purpose of the application is basically to transform a sound into a spectrogram showing the frequency due to the sound. This is illustrated by figure \ref{fig:model1}.    
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[auto, thick, node distance=3.4cm, >=triangle 45]
+\draw
+% Drawing the blocks of first filter :
+	node at (0,0)[right=-15mm] {Sound}
+	node [input, name=input1] {} 
+	node [block, right of=input1] (app1) {Application}
+    node [output, name=output1, right of=app1]{}
+    node at (6,0) [right=10mm]{Spectrogram}
+;
+% Joining blocks. 
+% Commands \draw with options like [->] must be written individually
+\draw[->](input1) -- node {input}(app1);
+\draw[->](app1) -- node {output}(output1);
 
-      
+% Boxing and labelling noise shapers
+\draw [color=gray,thick,dashed](-1.8,-1.5) rectangle (9.5,1.5);
+\node at (-1.8,1.7) [above=5mm, right=0mm] {\textsc{System}};
+\end{tikzpicture}
+\caption{Basic block-diagram of the system}
+\label{fig:model1}
+\end{figure}
+In order for an application to perform this transformation an analogue sound has to be converted into a discrete time signal, in order for a computer to process the signal into the wanted outcome. \\
+By this the system is fundamentally based upon theory about discrete time systems, including analysis and processing of such systems and the disposal data. \\
+In the following sections specifications and requirements are specified for the three parts of the system.  
+
 \section{Input}
+To process an analogue sound in a computer the sound has to be digitalized, this is done by an analogue to digital converter(ADC). An ADC basically consistent of sampling of the signal done by a sample and hold unit(S/H) followed by quantifying of the samples.
+        
+
+\section{Output}
 
 \section{Application}
 
-\section{Output}

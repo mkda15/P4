@@ -22,9 +22,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.1}Input}{5}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Application}{5}{section.4.2}
+\contentsline {section}{\numberline {4.2}Output}{5}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Output}{5}{section.4.3}
+\contentsline {section}{\numberline {4.3}Application}{5}{section.4.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {5}Overskrift}{7}{chapter.5}
 \defcounter {refsection}{0}\relax 
