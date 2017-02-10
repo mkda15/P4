@@ -19,7 +19,6 @@ lin = np.linspace(0,2*np.pi,N)
 for i in range(len(lin)):
     x[i] = np.sin(lin[i])
 
- 
 def X(x,f):
     a = 0
     for n in range(len(x)):
