@@ -15,6 +15,17 @@ Miniprojekt.pdf
 .DS_Store
 master.log
 master.synctex.gz
+Rapport/master.aux
+Rapport/master.lof
+Rapport/master.log
+Rapport/master.lot
+Rapport/master.fls
+Rapport/master.out
+Rapport/master.toc
+Rapport/master.fmt
+Rapport/master.fot
+Rapport/master.cb
+Rapport/master.cb2
 
 ## Intermediate documents:
 *.dvi

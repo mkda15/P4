@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex version 2.5 $
+% $ biblatex version 2.1 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -15,6 +15,203 @@
       \aftergroup\endinput}
   {}
 \endgroup
+
+\entry{future}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Benetos}{B.}%
+     {Emmanouil}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dixon}{D.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Giannoulis}{G.}%
+     {Dimitros}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kirchhoff}{K.}%
+     {Holger}{H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Klapuri}{K.}%
+     {Anssi}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Journal of Intelligent Information}%
+  }
+  \strng{namehash}{BE+1}
+  \strng{fullhash}{BEDSGDKHKA1}
+  \field{sortinit}{B}
+  \field{title}{Automatic Music Transcription: Challenges and Future
+  Directions}
+  \verb{url}
+  \verb http://openaccess.city.ac.uk/2524/
+  \endverb
+  \field{year}{2013}
+\endentry
+
+\entry{sol2}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Camgil}{C.}%
+     {Ali~Taylan}{A.~T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kappen}{K.}%
+     {Bert}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Barber}{B.}%
+     {David}{D.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Idiap Research Institute}%
+  }
+  \strng{namehash}{CATKBBD1}
+  \strng{fullhash}{CATKBBD1}
+  \field{sortinit}{C}
+  \field{title}{A Generative Model for Music Transcription}
+  \verb{url}
+  \verb https://infoscience.epfl.ch/record/83228/files/barber-idiap-rr-05-89.pd
+  \verb f
+  \endverb
+\endentry
+
+\entry{AcousticNoise}{misc}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Crocker}{C.}%
+     {Malcolm~J.}{M.~J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ffowcs-Williams}{F.-W.}%
+     {John~E}{J.~E.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CMJFWJE1}
+  \strng{fullhash}{CMJFWJE1}
+  \field{sortinit}{C}
+  \field{howpublished}{AccessScience, McGraw-Hill Education}
+  \field{note}{Visited 09-02-2017}
+  \field{title}{Acoustic Noise}
+  \verb{url}
+  \verb http://www.accessscience.com/content/acoustic-noise/006100
+  \endverb
+  \field{year}{2014}
+\endentry
+
+\entry{dyslexia}{book}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Ganschow}{G.}%
+     {Leonore}{L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lloyd-Jones}{L.-J.}%
+     {Jenafer}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Miles}{M.}%
+     {T.R.}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{GLLJJMT1}
+  \strng{fullhash}{GLLJJMT1}
+  \field{sortinit}{G}
+  \field{title}{Dyslexia and Musical Notation}
+  \verb{url}
+  \verb http://www.jstor.org/stable/23769692
+  \endverb
+  \field{year}{1994}
+\endentry
+
+\entry{sol1}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Klapuri}{K.}%
+     {Anssi}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Davy}{D.}%
+     {Manuel}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{KADM1}
+  \strng{fullhash}{KADM1}
+  \field{sortinit}{K}
+  \field{title}{Signal Processing Methods for Music Transcription}
+  \field{year}{2006}
+\endentry
+
+\entry{transcribe!}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Software}{S.}%
+     {Seventh~String}{S.~S.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SSS1}
+  \strng{fullhash}{SSS1}
+  \field{sortinit}{S}
+  \field{title}{Transcribe!}
+  \verb{url}
+  \verb https://www.seventhstring.com/xscribe/overview.html
+  \endverb
+\endentry
+
+\entry{origins}{book}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Wallin}{W.}%
+     {Nils~L.}{N.~L.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {erker}{e.}%
+     {Björn}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brown}{B.}%
+     {Steven}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {The MIT Press}%
+  }
+  \strng{namehash}{WNLeBBS1}
+  \strng{fullhash}{WNLeBBS1}
+  \field{sortinit}{W}
+  \field{title}{The Origins of Music}
+  \field{year}{2000}
+\endentry
 
 \entry{MusicTheory}{misc}{}
   \name{author}{1}{}{%
