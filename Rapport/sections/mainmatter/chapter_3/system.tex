@@ -31,11 +31,38 @@ In the following sections specifications and requirements are specified for the 
 \section{Input}
 To process an analogue sound in a computer the sound has to be digitalized, this is done by an analogue to digital converter(ADC). An ADC basically consistent of sampling of the signal done by a sample and hold unit(S/H) followed by quantifying of the samples. Further the signal has to be stored as a datafile suited to the application. This is illustrated by figure \ref{fig:input} 
 
-% 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[auto, thick, node distance=4.5cm, >=triangle 45]
+\draw
+% Drawing the blocks of first filter :
+	node [input, name=input1] {} 		
+	node [block, right of=input1] (sh) {S/H}
+	node [block, right of=sh] (quant) {Quantification}
+    node [output, name=output1, right of=quant]{}
+    node at (input1) [above=5mm] {Mic};
+;
+% Joining blocks. 
+% Commands \draw with options like [->] must be written individually
+
+\draw[->](input1) -- node {Analogue input}(sh);
+\draw[->](sh) -- node {Discerte signal}(quant);
+\draw[->](quant) -- node {Digital output}(output1);
+\filldraw[color=black,fill=white,thick](input1) circle (0.3);
+\draw(-0.3,0.5) -- (-0.3,-0.5);
+\draw (-1.5,0) sin (-1.40,0.5) cos (-1.30,0) sin (-1.20,-0.5) cos (-1.10,0) sin (-1,0.5) cos (-0.9,0) sin (-0.8,-0.5) cos (-0.7,0);
+
+% Boxing and labelling noise shapers
+\draw [color=gray,thick,dashed](3.5,-1.5) rectangle (10.5,1.5);
+\node at (3.5,1.7) [above=5mm, right=0mm] {\textsc{ADC}};
+\end{tikzpicture}
+\caption{Basic block-diagram illustrating an ADC where the digital output will be the input to the application} 
+\label{fig:input}
+\end{figure}
         
 
 \section{Output}
 % spectogram 
 
 \section{Application}
-% Filtering, Fourier, spectogram 
+% lagering, Filtering, Fourier, Spectogram 

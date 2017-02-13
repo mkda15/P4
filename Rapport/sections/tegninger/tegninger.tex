@@ -54,19 +54,19 @@
 % Joining blocks. 
 % Commands \draw with options like [->] must be written individually
 
-\draw[->](input1) -- node {Analogue input}(sh);
-\draw[->](sh) -- node {discrete signal}(quant);
-\draw[->](quant) -- node {digital input}(output1);
+\draw[->](input1) -- node {$x(t)$}(sh);
+\draw[->](sh) -- node {$x[n]$]}(quant);
+\draw[->](quant) -- node {digital output}(output1);
 \filldraw[color=black,fill=white,thick](input1) circle (0.3);
-\draw(-0.3,0.3) -- (-0.3,-0.3);
+\draw(-0.3,0.5) -- (-0.3,-0.5);
 \draw (-1.5,0) sin (-1.40,0.5) cos (-1.30,0) sin (-1.20,-0.5) cos (-1.10,0) sin (-1,0.5) cos (-0.9,0) sin (-0.8,-0.5) cos (-0.7,0);
 
 % Boxing and labelling noise shapers
-\draw [color=gray,thick,dashed](-0.5,-1.5) rectangle (12,1.5);
-\node at (-0.5,1.7) [above=5mm, right=0mm] {\textsc{ADC}};
+\draw [color=gray,thick,dashed](3.8,-1.5) rectangle (11.7,1.5);
+\node at (3.8,1.7) [above=5mm, right=0mm] {\textsc{ADC}};
 \end{tikzpicture}
-\caption{Basic block-diagram of the system}
-\label{fig:model1}
+\caption{Basic block-diagram illustrating an ADC where the digital output will be the input to the application }
+\label{fig:input}
 \end{figure}
 
 
