@@ -1,52 +1,61 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: master.aux
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: master.aux
 The style file: biblatex.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: master-blx.bib
 Database file #2: bib/mybib.bib
-<<<<<<< HEAD
 Biblatex version: 3.0
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 5 entries,
+You've used 9 entries,
             6047 wiz_defined-function locations,
-            1156 strings with 8654 characters,
-and the built_in function-call counts, 14144 in all, are:
-= -- 509
-> -- 551
-< -- 148
-+ -- 192
-- -- 221
-* -- 1047
-:= -- 1048
+            1175 strings with 9264 characters,
+and the built_in function-call counts, 28418 in all, are:
+= -- 1146
+> -- 1057
+< -- 329
++ -- 380
+- -- 402
+* -- 2045
+:= -- 1844
 add.period$ -- 0
-call.type$ -- 5
-change.case$ -- 59
+call.type$ -- 9
+change.case$ -- 162
 chr.to.int$ -- 35
-cite$ -- 8
-duplicate$ -- 1457
-empty$ -- 1394
-format.name$ -- 299
-if$ -- 3224
+cite$ -- 16
+duplicate$ -- 3065
+empty$ -- 2801
+format.name$ -- 605
+if$ -- 6514
 int.to.chr$ -- 0
-int.to.str$ -- 10
+int.to.str$ -- 21
 missing$ -- 0
-newline$ -- 126
-num.names$ -- 191
-pop$ -- 1347
+newline$ -- 238
+num.names$ -- 430
+pop$ -- 2667
 preamble$ -- 1
-purify$ -- 73
+purify$ -- 190
 quote$ -- 0
-skip$ -- 863
+skip$ -- 1767
 stack$ -- 0
-substring$ -- 292
-swap$ -- 475
-text.length$ -- 146
-text.prefix$ -- 4
+substring$ -- 696
+swap$ -- 973
+text.length$ -- 268
+text.prefix$ -- 8
 top$ -- 1
-type$ -- 178
+type$ -- 330
 warning$ -- 0
-while$ -- 120
+while$ -- 190
 width$ -- 0
-write$ -- 120
-=======
-Biblatex version: 2.1
->>>>>>> 27084b5dc4268504a629ce2dad191a085329ec6c
+write$ -- 228

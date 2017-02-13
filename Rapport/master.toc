@@ -15,26 +15,6 @@
 \contentsline {section}{\numberline {1.2}Problem analysis}{1}{section.1.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.1}Existing and possible solutions}{2}{subsection.1.2.1}
-<<<<<<< HEAD
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Music Theory}{3}{chapter.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}System model and requierments}{5}{chapter.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Input}{5}{section.3.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Output}{6}{section.3.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Application}{6}{section.3.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Overskrift}{7}{chapter.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Overskrift}{9}{chapter.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Overskrift}{11}{chapter.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{13}{chapter.6}
-=======
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.2}Problem statement}{2}{subsection.1.2.2}
 \defcounter {refsection}{0}\relax 
@@ -46,9 +26,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Input}{7}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Output}{7}{section.3.2}
+\contentsline {section}{\numberline {3.2}Output}{8}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Application}{7}{section.3.3}
+\contentsline {section}{\numberline {3.3}Application}{8}{section.3.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Overskrift}{9}{chapter.4}
 \defcounter {refsection}{0}\relax 
@@ -57,7 +37,6 @@
 \contentsline {chapter}{\numberline {6}Overskrift}{13}{chapter.6}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Bibliography}{15}{chapter.6}
->>>>>>> 27084b5dc4268504a629ce2dad191a085329ec6c
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {A}Overskrift}{16}{chapter.A}
 \defcounter {refsection}{0}\relax 

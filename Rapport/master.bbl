@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex version 2.1 $
+% $ biblatex version 2.5 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -16,8 +16,6 @@
   {}
 \endgroup
 
-<<<<<<< HEAD
-=======
 \entry{future}{article}{}
   \name{author}{5}{}{%
     {{}%
@@ -91,7 +89,6 @@
   \endverb
 \endentry
 
->>>>>>> 27084b5dc4268504a629ce2dad191a085329ec6c
 \entry{AcousticNoise}{misc}{}
   \name{author}{2}{}{%
     {{}%
@@ -148,8 +145,6 @@
   \field{year}{1994}
 \endentry
 
-<<<<<<< HEAD
-=======
 \entry{sol1}{book}{}
   \name{author}{2}{}{%
     {{}%
@@ -190,7 +185,6 @@
   \endverb
 \endentry
 
->>>>>>> 27084b5dc4268504a629ce2dad191a085329ec6c
 \entry{origins}{book}{}
   \name{author}{3}{}{%
     {{}%
@@ -199,11 +193,7 @@
      {}{}%
      {}{}}%
     {{}%
-<<<<<<< HEAD
-     {Merker}{M.}%
-=======
      {erker}{e.}%
->>>>>>> 27084b5dc4268504a629ce2dad191a085329ec6c
      {Björn}{B.}%
      {}{}%
      {}{}}%
@@ -216,13 +206,8 @@
   \list{publisher}{1}{%
     {The MIT Press}%
   }
-<<<<<<< HEAD
-  \strng{namehash}{WNLMBBS1}
-  \strng{fullhash}{WNLMBBS1}
-=======
   \strng{namehash}{WNLeBBS1}
   \strng{fullhash}{WNLeBBS1}
->>>>>>> 27084b5dc4268504a629ce2dad191a085329ec6c
   \field{sortinit}{W}
   \field{title}{The Origins of Music}
   \field{year}{2000}

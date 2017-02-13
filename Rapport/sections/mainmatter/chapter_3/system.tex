@@ -26,35 +26,42 @@ Due to the presented problem statement and delimitation of the project the purpo
 \end{figure}
 In order for an application to perform this transformation an analogue sound has to be converted into a discrete time signal, in order for a computer to process the signal into the wanted outcome. \\
 By this the system is fundamentally based upon theory about discrete time systems, including analysis and processing of such systems and the disposal data. \\
-In the following sections specifications and requirements are specified for the three parts of the system.  
+In the following sections specifications and requirements are specified for the three parts of the system.
 
 \section{Input}
 To process an analogue sound in a computer the sound has to be digitalized, this is done by an analogue to digital converter(ADC). An ADC basically consistent of sampling of the signal done by a sample and hold unit(S/H) followed by quantifying of the samples. Further the signal has to be stored as a datafile suited to the application. This is illustrated by figure \ref{fig:input} 
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[auto, thick, node distance=4.5cm, >=triangle 45]
+\begin{tikzpicture}[node distance=3.5cm,auto,>=latex']
 \draw
 % Drawing the blocks of first filter :
-	node [input, name=input1] {} 		
-	node [block, right of=input1] (sh) {S/H}
-	node [block, right of=sh] (quant) {Quantification}
-    node [output, name=output1, right of=quant]{}
-    node at (input1) [above=5mm] {Mic};
+	node at (0,0)[right=-13mm]{\huge\twonotes} % kan skiftet ud med sinus længere nede
+	node [input, name=input1] {} 
+	node at (input1) [above=5mm] {Mic}		
+	node [block, right of=input1] (sh) {$Sampel and hold$}
+	node [block, right of=sh] (quant) {$Quantification$}
+	node [block, right of=quant] (save) {$Storage$}
+	node [sum, right of=save] (cirk1) {}
+	node at (cirk1) [above=5mm] {App}
+    node [output, name=output1, right of=cirk1]{}
+    
+    
 ;
 % Joining blocks. 
 % Commands \draw with options like [->] must be written individually
 
-\draw[->](input1) -- node {Analogue input}(sh);
-\draw[->](sh) -- node {Discerte signal}(quant);
-\draw[->](quant) -- node {Digital output}(output1);
+\draw[->](input1) -- node {}(sh);
+\draw[->](sh) -- node {}(quant);
+\draw[->](quant) -- node {}(save);
+\draw[->](save) -- node {}(cirk1);
 \filldraw[color=black,fill=white,thick](input1) circle (0.3);
 \draw(-0.3,0.5) -- (-0.3,-0.5);
-\draw (-1.5,0) sin (-1.40,0.5) cos (-1.30,0) sin (-1.20,-0.5) cos (-1.10,0) sin (-1,0.5) cos (-0.9,0) sin (-0.8,-0.5) cos (-0.7,0);
+%\draw (-1.5,0) sin (-1.40,0.5) cos (-1.30,0) sin (-1.20,-0.5) cos (-1.10,0) sin (-1,0.5) cos (-0.9,0) sin (-0.8,-0.5) cos (-0.7,0);
 
 % Boxing and labelling noise shapers
-\draw [color=gray,thick,dashed](3.5,-1.5) rectangle (10.5,1.5);
-\node at (3.5,1.7) [above=5mm, right=0mm] {\textsc{ADC}};
+\draw [color=gray,thick,dashed](1.5,-1.5) rectangle (9,1.5);
+\node at (1.5,1.7) [above=5mm, right=0mm] {\textsc{ADC}};
 \end{tikzpicture}
 \caption{Basic block-diagram illustrating an ADC where the digital output will be the input to the application} 
 \label{fig:input}
@@ -64,5 +71,27 @@ To process an analogue sound in a computer the sound has to be digitalized, this
 \section{Output}
 % spectogram 
 
+
 \section{Application}
 % lagering, Filtering, Fourier, Spectogram 
+\begin{figure}[H]
+\centering 
+\begin{tikzpicture}[auto, node distance=3cm,>=latex'] 
+	%\node [input, name=input1] {};
+	\node [sum] (cirk1) {};
+	\node at (cirk1) [above=5mm]{Input};
+	\node [block, right of=cirk1] (filter) {$\ Filtering\ $};
+	\node [block, right of=filter] (fourier) {$\ \ Fourier \ \ $};
+	\node [block, right of=fourier] (spec) {$Spectrogram$};
+	\node [sum, right of=spec] (cirk2) {};
+	\node at (cirk2) [above=5mm] {Output};
+	\node [output, right of=cirk2] (output1) {};
+	;
+\draw [draw,->] (cirk1) -- node {$r$} (filter);
+\draw [->] (filter) -- node {$r$} (fourier);
+\draw [->] (fourier) -- node {$r$} (spec);
+\draw [->] (spec) -- node {$r$} (cirk2);
+\end{tikzpicture}
+\caption{fdklga}
+\label{fig:app}
+\end{figure}
