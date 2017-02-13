@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex version 2.5 $
+% $ biblatex version 2.1 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -16,6 +16,82 @@
   {}
 \endgroup
 
+<<<<<<< HEAD
+=======
+\entry{future}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Benetos}{B.}%
+     {Emmanouil}{E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dixon}{D.}%
+     {Simon}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Giannoulis}{G.}%
+     {Dimitros}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kirchhoff}{K.}%
+     {Holger}{H.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Klapuri}{K.}%
+     {Anssi}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Journal of Intelligent Information}%
+  }
+  \strng{namehash}{BE+1}
+  \strng{fullhash}{BEDSGDKHKA1}
+  \field{sortinit}{B}
+  \field{title}{Automatic Music Transcription: Challenges and Future
+  Directions}
+  \verb{url}
+  \verb http://openaccess.city.ac.uk/2524/
+  \endverb
+  \field{year}{2013}
+\endentry
+
+\entry{sol2}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Camgil}{C.}%
+     {Ali~Taylan}{A.~T.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kappen}{K.}%
+     {Bert}{B.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Barber}{B.}%
+     {David}{D.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Idiap Research Institute}%
+  }
+  \strng{namehash}{CATKBBD1}
+  \strng{fullhash}{CATKBBD1}
+  \field{sortinit}{C}
+  \field{title}{A Generative Model for Music Transcription}
+  \verb{url}
+  \verb https://infoscience.epfl.ch/record/83228/files/barber-idiap-rr-05-89.pd
+  \verb f
+  \endverb
+\endentry
+
+>>>>>>> 27084b5dc4268504a629ce2dad191a085329ec6c
 \entry{AcousticNoise}{misc}{}
   \name{author}{2}{}{%
     {{}%
@@ -72,6 +148,49 @@
   \field{year}{1994}
 \endentry
 
+<<<<<<< HEAD
+=======
+\entry{sol1}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Klapuri}{K.}%
+     {Anssi}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Davy}{D.}%
+     {Manuel}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{KADM1}
+  \strng{fullhash}{KADM1}
+  \field{sortinit}{K}
+  \field{title}{Signal Processing Methods for Music Transcription}
+  \field{year}{2006}
+\endentry
+
+\entry{transcribe!}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Software}{S.}%
+     {Seventh~String}{S.~S.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SSS1}
+  \strng{fullhash}{SSS1}
+  \field{sortinit}{S}
+  \field{title}{Transcribe!}
+  \verb{url}
+  \verb https://www.seventhstring.com/xscribe/overview.html
+  \endverb
+\endentry
+
+>>>>>>> 27084b5dc4268504a629ce2dad191a085329ec6c
 \entry{origins}{book}{}
   \name{author}{3}{}{%
     {{}%
@@ -80,7 +199,11 @@
      {}{}%
      {}{}}%
     {{}%
+<<<<<<< HEAD
      {Merker}{M.}%
+=======
+     {erker}{e.}%
+>>>>>>> 27084b5dc4268504a629ce2dad191a085329ec6c
      {Björn}{B.}%
      {}{}%
      {}{}}%
@@ -93,8 +216,13 @@
   \list{publisher}{1}{%
     {The MIT Press}%
   }
+<<<<<<< HEAD
   \strng{namehash}{WNLMBBS1}
   \strng{fullhash}{WNLMBBS1}
+=======
+  \strng{namehash}{WNLeBBS1}
+  \strng{fullhash}{WNLeBBS1}
+>>>>>>> 27084b5dc4268504a629ce2dad191a085329ec6c
   \field{sortinit}{W}
   \field{title}{The Origins of Music}
   \field{year}{2000}
