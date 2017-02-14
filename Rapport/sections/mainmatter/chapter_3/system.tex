@@ -27,9 +27,28 @@ Due to the presented problem statement and delimitation of the project the purpo
 In order for an application to perform this transformation an analogue sound has to be converted into a discrete time signal, in order for a computer to process the signal into the wanted outcome. \\
 By this the system is fundamentally based upon theory about discrete time systems, including analysis and processing of such systems and the disposal data. \\
 \\
-To develop/design the system the method of synthesis is used. Figure \ref{fig:synth} illustrates the synthesizing of the system from the concept of the system to the level of purpose and requirements to each part of the system.  
+To develop/design the system the method of synthesis is used. Figure \ref{fig:synth} illustrates the synthesizing of the system from the concept of the system to the level of purpose and requirements to each part of the system. The further synthesizing of the system are left for chapter \ref{ch7}. 
+
 \begin{figure}[h]
 \centering
+
+\tikzstyle{block} = [rectangle, draw,thick, 
+    text width=4.2em, text centered, minimum height=3em]
+    
+%%%%% crazy opsætning til stor parentes %%%%%
+\tikzset{round left paren/.style={ncbar=0.5cm,out=120,in=-120}}
+\tikzset{round right paren/.style={ncbar=0.5cm,out=60,in=-60}}
+\tikzset{
+    ncbar angle/.initial=90,
+    ncbar/.style={
+        to path=(\tikztostart)
+        -- ($(\tikztostart)!#1!\pgfkeysvalueof{/tikz/ncbar angle}:(\tikztotarget)$)
+        -- ($(\tikztotarget)!($(\tikztostart)!#1!\pgfkeysvalueof{/tikz/ncbar angle}:(\tikztotarget)$)!\pgfkeysvalueof{/tikz/ncbar angle}:(\tikztostart)$)
+        -- (\tikztotarget)
+    },
+    ncbar/.default=0.5cm,
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{tikzpicture}[auto, node distance=3cm, >=triangle 45, level 1/.style={sibling distance=70mm},
     level 2/.style={sibling distance=20mm}]
 \draw
@@ -61,22 +80,25 @@ To develop/design the system the method of synthesis is used. Figure \ref{fig:sy
 				node [block] (spec) {Spec.}
 				}
 			child {
-				node [block] (symb) {Symbol}
+				node [block] (symb) {Symbol Process.}
 				}	
 			}
     node [output, name=output1, right of=app1]{}
     node at (output1) [right=1mm]{$Note \ sheet$}
  % Drawing the blocks of 2. layer:  
 ;
+% stor parantes 
+\draw [blue, ultra thick] (8.6,-4) to [round left paren ] (8.6,-2);
+\draw [blue, ultra thick] (10.4,-4) to [round right paren ] (10.4,-2);
 % Joining blocks. 
 % Commands \draw with options like [->] must be written individually
 \draw[->](input1) -- node {Input}(app1);
 \draw[->](app1) -- node {Output}(output1);
+
 \end{tikzpicture}
-\caption{Basic Block  }
+\caption{synthetic block diagram of system}
 \label{fig:synth}
 \end{figure}
-
 
 
 \section{Input}
@@ -84,16 +106,20 @@ To process an analogue sound in a computer the sound has to be digitalized, this
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[node distance=3.5cm,auto,>=latex']
+\tikzstyle{block} = [rectangle,draw,thick, 
+    text width=4.2em, text centered, minimum height=3em]
+\begin{tikzpicture}[node distance=2.5cm,auto,>=latex']
 \draw
 % Drawing the blocks of first filter :
 	node at (0,0)[right=-13mm]{\huge\twonotes} % kan skiftet ud med sinus længere nede
 	node [input, name=input1] {} 
 	node at (input1) [above=5mm] {Mic}		
-	node [block, right of=input1] (sh) {$Sampel and hold$}
-	node [block, right of=sh] (quant) {$Quantification$}
-	node [block, right of=quant] (save) {$Storage$}
-	node [sum, right of=save] (cirk1) {}
+	node [block, right of=input1] (ADC) {$ADC$}
+	node [block, right of=ADC] (store) {$Storage$}
+	node [block, right of=store] (four) {$Fourier$}
+	node [block, right of=four] (filter) {$Filter$}
+	node [block, right of=filter] (spec) {$Spec.$}
+	node [sum, right of=spec] (cirk1) {}
 	node at (cirk1) [above=5mm] {App}
     node [output, name=output1, right of=cirk1]{}
     
@@ -102,10 +128,12 @@ To process an analogue sound in a computer the sound has to be digitalized, this
 % Joining blocks. 
 % Commands \draw with options like [->] must be written individually
 
-\draw[->](input1) -- node {}(sh);
-\draw[->](sh) -- node {}(quant);
-\draw[->](quant) -- node {}(save);
-\draw[->](save) -- node {}(cirk1);
+\draw[->](input1) -- node {}(ADC);
+\draw[->](ADC) -- node {}(store);
+\draw[->](store) -- node {}(four);
+\draw[->](four) -- node {}(filter);
+\draw[->](filter) -- node {}(spec);
+\draw[->](spec) -- node {}(cirk1);
 \filldraw[color=black,fill=white,thick](input1) circle (0.3);
 \draw(-0.3,0.5) -- (-0.3,-0.5);
 %\draw (-1.5,0) sin (-1.40,0.5) cos (-1.30,0) sin (-1.20,-0.5) cos (-1.10,0) sin (-1,0.5) cos (-0.9,0) sin (-0.8,-0.5) cos (-0.7,0);
