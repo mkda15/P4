@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.14)  14 FEB 2017 12:23
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.14)  14 FEB 2017 12:25
 entering extended mode
 **master.tex
 ("C:\Users\Frederik Vardinghus\Documents\GitHub\P4\Rapport\master.tex"
@@ -1902,7 +1902,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--4
 
  []
 
-<figures/Cmajor.png, id=166, 803.0pt x 101.37875pt>
+<figures/Cmajor.png, id=167, 803.0pt x 101.37875pt>
 File: figures/Cmajor.png Graphic file (type png)
  <use figures/Cmajor.png>
 Package pdftex.def Info: figures/Cmajor.png used on input line 7.
@@ -2126,11 +2126,11 @@ Package logreq Info: Writing requests to 'master.run.xml'.
 ### simple group (level 1) entered at line 2 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 29153 strings out of 493921
- 516877 string characters out of 3144833
+ 29156 strings out of 493921
+ 516914 string characters out of 3144833
  846295 words of memory out of 3000000
- 31530 multiletter control sequences out of 15000+200000
- 123589 words of font info for 144 fonts, out of 3000000 for 9000
+ 31532 multiletter control sequences out of 15000+200000
+ 123961 words of font info for 145 fonts, out of 3000000 for 9000
  1036 hyphenation exceptions out of 8191
  65i,14n,74p,1273b,3488s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc
@@ -2138,8 +2138,8 @@ Here is how much of TeX's memory you used:
 les (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files (x86)/M
 iKTeX 2.9/fonts/enc/dvips/mnsymbol/MnSymbolE.enc}{C:/Program Files (x86)/MiKTeX
  2.9/fonts/enc/dvips/mnsymbol/MnSymbolD.enc}{C:/Program Files (x86)/MiKTeX 2.9/
-fonts/enc/dvips/mnsymbol/MnSymbolC.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts
-/enc/dvips/lm/lm-ts1.enc}<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
+fonts/enc/dvips/lm/lm-ts1.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvip
+s/mnsymbol/MnSymbolC.enc}<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
 mnsymbol/MnSymbol10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/m
 athpazo/fplmbb.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmb
 x10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:
@@ -2158,9 +2158,9 @@ C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmss10.pfb><C:/Program
 Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files (x8
 6)/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Program Files (x86)/MiKTeX 2
 .9/fonts/type1/public/wasy/wasy10.pfb>
-Output written on master.pdf (20 pages, 490081 bytes).
+Output written on master.pdf (20 pages, 491092 bytes).
 PDF statistics:
- 347 PDF objects out of 1000 (max. 8388607)
+ 349 PDF objects out of 1000 (max. 8388607)
  54 named destinations out of 1000 (max. 500000)
  167 words of extra memory for PDF output out of 10000 (max. 10000000)
 
