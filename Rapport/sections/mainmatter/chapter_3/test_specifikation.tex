@@ -1,0 +1,64 @@
+\section{V-model}
+
+Lyd - blackboks - nodeark
+
+Mic - lydfil - algoritme
+
+adc - lagring  Fourier - filter - spektogram - symbolbehandling
+
+S/h - Kvantisering  Passende fil
+
+
+
+
+V model og test specifikationer.
+På blackbox niveau - Test musik ind og nodeark ud.
+
+Lydfill - test musik ind lydfill ud.
+
+Algorithme - test lydfill ind - nodeark ud.
+
+
+
+Mikrofon - Test??
+
+adc - Test??
+
+S/h - test??
+
+kvantisering - test? 
+
+
+This will be following the development model, know as  V-model \cite{v-model}.
+
+\subsection{Test specification / validation}
+The V-model will be tested from the bottom up, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. \\\\
+
+The  units in the model i are as follows 
+\begin{itemize}
+	\item Microphone
+	\item Sample and hold
+	\item Quantization
+	\item Sound file creation (Saving)
+	\item Fourier transformation
+	\item Filter (Specification??)
+	\item Spectrogram
+	\item Note sheet creation (??)
+\end{itemize}
+
+
+\subsubsection{Test of the Fourier transformation}
+This test will be done by comparing the Fourier algorithm used, with a pre-existence algorithm from matlab or python, by feeding the algorithm's known data and comparing the output int. In addition to this, the algorithm will be tested on data with an expected result like a simple sinusoidal.\\\\
+
+\subsubsection{Test on the choice of filter}
+\text
+\chr{Note, not all of the components will be tested  as they are outside of the scope of the project - Afgrænsinger her ved beskrivelse af testende?? (Aka. her) }
+
+Integration of each of the units 
+
+
+
+
+
+The music used for testing the algorithm will be simple melodies comtaining one note at a time (no chords) from one instrument at a time. This will allow insight into the methods used without complicating the recognition of notes by blending together different instruments and different sound frequencies.\\\\
+
