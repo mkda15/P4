@@ -11,9 +11,6 @@
 *.cb
 *.cb2
 master.pdf
-Miniprojekt.pdf
-.DS_Store
-master.log
 master.synctex.gz
 
 ## Intermediate documents:
