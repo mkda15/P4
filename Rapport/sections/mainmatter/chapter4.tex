@@ -1,3 +1,9 @@
 \chapter{Overskrift} \label{ch4}
 
 %\input{sections/mainmatter/chapter_4/_____.tex}
+
+About noise from chapter 2: \textregistered
+
+Playing a pitch alone in an anechoic room is a way of minimizing noise factors. There are many different noise sources from e.g. the surrounding environment, electrical equipment, other people and even the instrument playing itself since it is difficult to make a pure tone by an acoustic sound source such as a guitar. A pure tone is a sinusoidal waveform consisting of a single frequency and may therefore be difficult to play on an instrument. \cite{AcousticNoise} Usually, sound is reflected off the walls in a room which is also a source of noise. This is a form of folding and is minimized in the anechoic room because sound is absorbed by the walls. Moreover, due to the construction of the anechoic room, noise from e.g. bypassing cars is also minimized, and the sound may be recorded with a minimum of hardware which otherwise may also produce noise.
+\\ \\
+The music used in this project will therefore be recorded in an anechoic room because the noise is minimized. It is not expected that musicians using the system in the future have access to an anechoic room as well but if the system doesn't work with sounds recorded in the anechoic room then it with most certainty doesn't work at other places neither. However, in order to reproduce the conditions of a typical musician working around other people, background noise can also be made in the anechoic room but should of course not drown the music. This form of noise is additive whereas e.g. noise reflected off walls as mentioned above is multiplicative. In general, multiplicative noise depends on the state of the system whereas additive noise does not. Therefore, the output $x[n]$ of the sampled data $s[n]$ corrupted by the additive noise $a[n]$ is $x[n] = s[n] + a[n]$ whereas the equation for the multiplicative noise $m[n]$ is $x[n] = s[n]m[n]$.
