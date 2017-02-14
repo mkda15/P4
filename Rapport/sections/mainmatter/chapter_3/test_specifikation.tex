@@ -47,18 +47,20 @@ The  units in the model i are as follows
 \end{itemize}
 
 
-\subsubsection{Test of the Fourier transformation}
-This test will be done by comparing the Fourier algorithm used, with a pre-existence algorithm from matlab or python, by feeding the algorithm's known data and comparing the output int. In addition to this, the algorithm will be tested on data with an expected result like a simple sinusoidal.\\\\
-
-\subsubsection{Test on the choice of filter}
-
+\subsubsection{Unit test of the Fourier transformation}
+This test will be done by comparing the Fourier algorithm used, with a pre-existence algorithm from matlab or python, by feeding the algorithm's known data and comparing the output int. In addition to this, the algorithm will be tested on data with an expected result like a simple sinusoidal.
+\subsubsection{Unit test on the choice of filter}
+The filter will be tested on data with a high signal to noise ratio with noise expected to find in a normal use situation added on.
+\subsubsection{Unit test of spectrogram}
+Information from the fourier 
 \chr{Note, not all of the components will be tested  as they are outside of the scope of the project - Afgrænsinger her ved beskrivelse af testende?? (Aka. her)}
 
+\subsection{Integration validation}
 Integration of each of the units 
 
-
-
-
-
 The music used for testing the algorithm will be simple melodies comtaining one note at a time (no chords) from one instrument at a time. This will allow insight into the methods used without complicating the recognition of notes by blending together different instruments and different sound frequencies.\\\\
+
+\subsubsection{System test of the final product}
+The final design, will be tested by giving the final system a recording with a known result and comparing the difference between the products result and the know result. The design can be further tested to see if all the wanted characteristics of the system comply to the wanted criteria of the system.
+
 
