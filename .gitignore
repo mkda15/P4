@@ -10,10 +10,10 @@
 *.fot
 *.cb
 *.cb2
-master.aux
-master.pdf
-master.log
-master.synctex.gz
+Rapport/master.aux
+Rapport/master.pdf
+Rapport/master.log
+Rapport/master.synctex.gz
 
 ## Intermediate documents:
 *.dvi
