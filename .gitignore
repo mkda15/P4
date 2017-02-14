@@ -15,6 +15,7 @@ Miniprojekt.pdf
 .DS_Store
 master.log
 master.synctex.gz
+master.aux
 
 ## Intermediate documents:
 *.dvi
