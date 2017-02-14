@@ -1,7 +1,23 @@
-\chapter{Overskrift} \label{ch4}
-
+\chapter{Sample theory} \label{ch4}
+In this chapter the theory concerning converting an analog audio signal to a digital audio signal along with its complications is treated.
+\section{Sampling}
+Sampling is the process of representing a \textit{continuous-time} signal by a sequence of values. Doing so converts the continuous-time signal into a \textit{discrete-time signal}. \cite{pelgrom} Sampling a ball following the arc shown in figure *Insert reference* results in the plottet points in figure *Insert reference*. As such the balls path is illustrated with discrete points along the path. The distance between the points depends on the \textit{sample frequency} $f_s$ (and the velocity of the ball, but let it for this example be constant). Increasing $f_s$ increases the number of samples in some time interval while decreasing $f_s$ gives opssosite results. It is later explained which consequences increasing or decreasing $f_s$ have.\\\\
+*Insert figure with ball*\\\\
+The sample frequency $f_s$ determines the number of samples pr. second and the time at points of sampling as
+\begin{equation}
+t=\frac{n}{f_s}=nT_s, \phantom{mm} n=-\infty,\hdots-1,0,1\hdots,\infty
+\end{equation}
+where $t$ is the time period in which sampling is done, $n$ is the number of samples and $T_s$ is the time period between to consecutive samples.
+\section{Analog-to-digital conversion}\label{ADC}
+An analog-to-digital converter (ADC) is a device which as the name suggests is capable of converting an analog signal to a digital signal. The analog signal is in the case of this project voltage from a microphone reacting to sound waves. An audio ADC consists of the following elements
+\begin{enumerate}
+\item A \textit{track-} or \textit{sample-and-hold} circuit capable of sampling a voltage and \textit{holding} the value during the whole or some part of the sample period.
+\end{enumerate}
 %\input{sections/mainmatter/chapter_4/_____.tex}
-Her er en længere tekst.\\\\
+
+
+\clearpage
+\section{Noise}
 About noise from chapter 2: \textregistered
 
 Playing a pitch alone in an anechoic room is a way of minimizing noise factors. There are many different noise sources from e.g. the surrounding environment, electrical equipment, other people and even the instrument playing itself since it is difficult to make a pure tone by an acoustic sound source such as a guitar. A pure tone is a sinusoidal waveform consisting of a single frequency and may therefore be difficult to play on an instrument. \cite{AcousticNoise} Usually, sound is reflected off the walls in a room which is also a source of noise. This is a form of folding and is minimized in the anechoic room because sound is absorbed by the walls. Moreover, due to the construction of the anechoic room, noise from e.g. bypassing cars is also minimized, and the sound may be recorded with a minimum of hardware which otherwise may also produce noise.
