@@ -24,7 +24,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}System model and requierments}{7}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Input}{7}{section.3.1}
+\contentsline {section}{\numberline {3.1}Input}{8}{section.3.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.2}Output}{8}{section.3.2}
 \defcounter {refsection}{0}\relax 

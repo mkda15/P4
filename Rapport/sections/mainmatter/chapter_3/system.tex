@@ -1,32 +1,83 @@
-In this chapter a model of and requirements to the system is specified on a superficial level. These specifications forms a basis of the further work. 
-\\ \\
+In this chapter a model of and requirements to the system addressed in the problem statement is specified. This specification remains on a superficial level as a foundation to the system design in chapter (system design)\ref{?}. Further test specifications of the system are made, by means of the development model called V-model. (skal V modellen uddybes her?) By this a delimitation of the project is established. \\   
+\\
 Due to the presented problem statement and delimitation of the project the purpose of the application is basically to transform a sound into a spectrogram showing the frequency due to the sound. This is illustrated by figure \ref{fig:model1}.    
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}[auto, thick, node distance=3.4cm, >=triangle 45]
+\begin{tikzpicture}[auto, node distance=3.4cm, >=triangle 45]
 \draw
 % Drawing the blocks of first filter :
-	node at (0,0)[right=-15mm] {Sound}
+	node at (0,0)[right=-15mm] {$Music$}
 	node [input, name=input1] {} 
-	node [block, right of=input1] (app1) {Application}
+	node [block, right of=input1] (app1) {$?$}
     node [output, name=output1, right of=app1]{}
-    node at (6,0) [right=10mm]{Spectrogram}
+    node at (6,0) [right=10mm]{$Note \ sheet$}
 ;
 % Joining blocks. 
 % Commands \draw with options like [->] must be written individually
-\draw[->](input1) -- node {input}(app1);
-\draw[->](app1) -- node {output}(output1);
+\draw[->](input1) -- node {Input}(app1);
+\draw[->](app1) -- node {Output}(output1);
 
 % Boxing and labelling noise shapers
-\draw [color=gray,thick,dashed](-1.8,-1.5) rectangle (9.5,1.5);
-\node at (-1.8,1.7) [above=5mm, right=0mm] {\textsc{System}};
+\draw [color=gray,thick,dashed](-1.8,-1.2) rectangle (9.5,1.2);
+\node at (-1.8,1.5) [above=5mm, right=0mm] {\textsc{System}};
 \end{tikzpicture}
 \caption{Basic block-diagram of the system}
 \label{fig:model1}
 \end{figure}
 In order for an application to perform this transformation an analogue sound has to be converted into a discrete time signal, in order for a computer to process the signal into the wanted outcome. \\
 By this the system is fundamentally based upon theory about discrete time systems, including analysis and processing of such systems and the disposal data. \\
-In the following sections specifications and requirements are specified for the three parts of the system.
+\\
+To develop/design the system the method of synthesis is used. Figure \ref{fig:synth} illustrates the synthesizing of the system from the concept of the system to the level of purpose and requirements to each part of the system.  
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[auto, node distance=3cm, >=triangle 45, level 1/.style={sibling distance=70mm},
+    level 2/.style={sibling distance=20mm}]
+\draw
+ % Drawing the blocks of 1. layer:
+	node at (0,0)[right=-15mm] {$Music$}
+	node [input, name=input1] {} 
+	node [block, right of=input1] (app1) {$?$}
+		child {
+		node [block] (audio) {Audio file} 
+			child {
+				node [block] (mic) {Mic.}					
+				}			
+			child {
+				node [block] (ADC) {ADC}					
+				}
+			child {
+				node [block] (save) {Storage}
+				}
+			}
+		child {
+			node [block] (algorithm) {Algorithm}
+			child {
+				node [block] (four) {Fourier}
+				}
+			child {
+				node [block] (filter) {Filter}
+				}
+			child {
+				node [block] (spec) {Spec.}
+				}
+			child {
+				node [block] (symb) {Symbol}
+				}	
+			}
+    node [output, name=output1, right of=app1]{}
+    node at (output1) [right=1mm]{$Note \ sheet$}
+ % Drawing the blocks of 2. layer:  
+;
+% Joining blocks. 
+% Commands \draw with options like [->] must be written individually
+\draw[->](input1) -- node {Input}(app1);
+\draw[->](app1) -- node {Output}(output1);
+\end{tikzpicture}
+\caption{Basic Block  }
+\label{fig:synth}
+\end{figure}
+
+
 
 \section{Input}
 To process an analogue sound in a computer the sound has to be digitalized, this is done by an analogue to digital converter(ADC). An ADC basically consistent of sampling of the signal done by a sample and hold unit(S/H) followed by quantifying of the samples. Further the signal has to be stored as a datafile suited to the application. This is illustrated by figure \ref{fig:input} 
@@ -95,3 +146,5 @@ To process an analogue sound in a computer the sound has to be digitalized, this
 \caption{fdklga}
 \label{fig:app}
 \end{figure}
+
+These specifications forms a basis of the further work. 
