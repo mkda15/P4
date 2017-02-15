@@ -1,7 +1,54 @@
 \chapter{Sample theory} \label{ch4}
 In this chapter sample theory and its importance when converting an analogue audio signal to a digital audio signal along with its complications is treated. The chapter is inspired by chapters 2 *Insert used chapters* in \cite{pelgrom}.
+\section{The frequency domain}
+The following sections look at functions in both the \textit{time}- and \textit{frequency} domains and utilizes the advantages of these different visualizations. To express a function of time as a function of frequency the \textit{Fourier transform} is used. The transform decomposes a periodic function $A$ of time $t$ into an amplitude valued function $\hat{A}$ of frequency $\omega$ and shows which amplitudes of frequencies of different sinusoids are present in the signal. The mathematical background for the Fourier transform is reserved for chapter \ref{ch5} - this chapter will make do with the graphical explanation in figures \ref{fig:time} and \ref{fig:freq}. Notice the both real and imaginary amplitudes of $\hat{A}$.
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.49\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+axis lines=middle,
+xtick={-3.14159,3.14159},
+xticklabels={$-\pi$,$\pi$},
+ytick={-1.5,1.5}
+,xmin=-4.25
+,xmax=4.25
+,ymin=-1.75
+,ymax=1.75,
+samples=50]
+\addplot[red][domain=-3.14159:3.14159] {sin(deg(x))+(1/2)*cos(deg(2*x))};
+\end{axis}
+\end{tikzpicture}
+\caption{Graph of $f(x)=\sin x + \frac{1}{2} \cos 2x$ in the time domain.}
+\label{fig:time}
+\end{minipage}
+\centering
+\begin{minipage}{0.49\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+axis lines=middle,
+xtick={-6.28318,-3.14159,3.14159,6.28318},
+xticklabels={$-2\pi$,$-\pi$,$\pi$,$2\pi$},
+ytick={-1.5,1.5},
+xmin=-6.75,
+xmax=6.75,
+ymin=-1.75,
+ymax=1.75,]
+\draw[->][red](axis cs:6.28318,0)--(axis cs:6.28318,0.62665);
+\draw[->][red](axis cs:-6.28318,0)--(axis cs:-6.28318,0.62665);
+\draw[->][blue](axis cs:3.14159,0)--(axis cs:3.14159,1.2533);
+\draw[->][blue](axis cs:-3.14159,0)--(axis cs:-3.14159,1.2533);
+\end{axis}
+\end{tikzpicture}
+\caption{Graph of $\hat{f}$ in the frequency domain. Red = real, blue = imaginary.}
+\label{fig:freq}
+\end{minipage}
+\end{figure}
+The above figures illustrate the continuous Fourier transform. The transform can be discretized to the discrete Fourier transform, which is crucial, when working with sampled signals. This is likewise covered in chapter \ref{ch5}.
 \section{Sampling}
-Sampling is the process of representing a \textit{continuous-time} signal by a sequence of values. Doing so converts the continuous-time signal into a \textit{discrete-time signal}. \cite{pelgrom} Sampling a ball following the arc shown in figure \ref{fig:ball_cont} results in the plottet points in figure \ref{fig:ball_disc}. As such the balls path is illustrated with discrete points along the path. The distance between the points in time depends on the \textit{sampling frequency} $f_s$. Increasing $f_s$ increases the number of samples in some time interval while decreasing $f_s$ decreases the number of samples. It is later explained which consequences increasing or decreasing $f_s$ have.
+Sampling is the process of representing a \textit{continuous-time} signal by a sequence of values. Doing so converts the continuous-time signal into a \textit{discrete-time} signal. \cite{pelgrom} Sampling a ball following the arc shown in figure \ref{fig:ball_cont} results in the plottet points in figure \ref{fig:ball_disc}. As such the balls path is illustrated with discrete points along the path. The distance between the points in time depends on the \textit{sampling frequency} $f_s$. Increasing $f_s$ increases the number of samples in some time interval while decreasing $f_s$ decreases the number of samples. It is later explained which consequences increasing or decreasing $f_s$ have.
 \begin{figure}[H]
 \centering
 \begin{minipage}{0.49\textwidth}
@@ -11,7 +58,7 @@ Sampling is the process of representing a \textit{continuous-time} signal by a s
 \draw[->] (0,-0.25) -- (0,2) node[above] {$y$};
 \draw[scale=1,domain=0:4,smooth,variable=\x,red] plot ({\x},{-0.25*\x*\x+\x});
 \end{tikzpicture}
-\caption{Trajectory of a ball described by the time continuous function $f(t)$. In continuous time the trajectory is smooth.}
+\caption{Trajectory of a ball described by the time continuous function $A(t)$. In continuous time the trajectory is smooth.}
 \label{fig:ball_cont}
 \end{minipage}
 \centering
@@ -30,7 +77,7 @@ Sampling is the process of representing a \textit{continuous-time} signal by a s
 \draw(3.5,0.4375) node {\textbullet};
 \draw(4,0) node {\textbullet};
 \end{tikzpicture}
-\caption{Trajectory of a ball described by the time discrete function $f_s(t)$. The trajectory consists of samples of $f(t)$.}
+\caption{Trajectory of a ball described by the time discrete function $f_s(t)$. The trajectory consists of samples of $A(t)$.}
 \label{fig:ball_disc}
 \end{minipage}
 \end{figure}
@@ -52,12 +99,12 @@ Summing an infinite number of Dirac functions shifted at equally spaced time int
 \end{equation}
 Multiplying \eqref{eq:dirac_sum} with a continuous signal mathematically samples the continuous signal at the times of the Dirac pulses as shown in \eqref{eq:sampling}
 \begin{equation}\label{eq:sampling}
-f_s(t)=\int_{-\infty}^{\infty} \! f(t-\tau)\sum_{n=-\infty}^{\infty}\delta(\tau - nT_s) \, d\tau.
+A_s(t)=\int_{-\infty}^{\infty} \! A(t-\tau)\sum_{n=-\infty}^{\infty}\delta(\tau - nT_s) \, d\tau.
 \end{equation}
 The result of \eqref{eq:sampling} is exactly what is seen in figures \ref{fig:ball_cont} and \ref{fig:ball_disc}.
 \subsection{Aliasing}\label{sec:aliasing}
-In this section the problem of aliasing and the methods to overcome this phenomenon will be covered. Firstly 
-If the frequencies of two different signals differ from $f_s$ by the same amount the sequence of samples 
+In this section the problem of aliasing and the methods to overcome this phenomenon will be covered.\\\\
+If the frequencies of two different signals differ from som whole multiple of $f_s$ by the same amount (e.g. signals of $1$ Hz and $11$ Hz sampled at $f_s=10$ Hz) the sequence of samples for the two signal will be identical. 
 
 
 
