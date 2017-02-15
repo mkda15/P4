@@ -1,16 +1,16 @@
-In this chapter a model of and requirements to the system addressed in the problem statement is specified. This specification remains on a superficial level as a foundation to the system design in chapter (system design)\ref{?}. Further test specifications of the system are made, by means of the development model called V-model. (skal V modellen uddybes her?) By this a delimitation of the project is established. \\   
+In this chapter a model of and requirements to the system addressed in the problem statement is specified. This specification remains on a superficial level as a foundation to the system design in chapter \ref{ch7}. Furthermore test specifications of the system are made, by means of the used development model called the V-model. By this a delimitation of the project will be established. \\   
 \\
-Due to the presented problem statement and delimitation of the project the purpose of the application is basically to transform a sound into a spectrogram showing the frequency due to the sound. This is illustrated by figure \ref{fig:model1}.    
+Due to the presented problem statement the purpose of the application is basically to transform some music into a note sheet due to the sound. This is illustrated by figure \ref{fig:model1}.    
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}[auto, node distance=3.4cm, >=triangle 45]
+\begin{tikzpicture}[auto, node distance=3.4cm, >=triangle 45, font=\sffamily ]
 \draw
 % Drawing the blocks of first filter :
-	node at (0,0)[right=-15mm] {$Music$}
+	node at (0,0)[right=-15mm] {\textit{Music}}
 	node [input, name=input1] {} 
-	node [block, right of=input1] (app1) {$?$}
+	node [block, right of=input1] (app1) {?}
     node [output, name=output1, right of=app1]{}
-    node at (6,0) [right=10mm]{$Note \ sheet$}
+    node at (6,0) [right=10mm]{\textit{Note sheet}}
 ;
 % Joining blocks. 
 % Commands \draw with options like [->] must be written individually
@@ -19,17 +19,18 @@ Due to the presented problem statement and delimitation of the project the purpo
 
 % Boxing and labelling noise shapers
 \draw [color=gray,thick,dashed](-1.8,-1.2) rectangle (9.5,1.2);
-\node at (-1.8,1.5) [above=5mm, right=0mm] {\textsc{System}};
+\node at (-1.8,1.5) [above=5mm, right=0mm] {System};
 \end{tikzpicture}
-\caption{Basic block-diagram of the system}
+\caption{Basic concept of the system}
 \label{fig:model1}
 \end{figure}
 In order for an application to perform this transformation an analogue sound has to be converted into a discrete time signal, in order for a computer to process the signal into the wanted outcome. \\
-By this the system is fundamentally based upon theory about discrete time systems, including analysis and processing of such systems and the disposal data. \\
-\\
-To develop/design the system the method of synthesis is used. Figure \ref{fig:synth} illustrates the synthesizing of the system from the concept of the system to the level of purpose and requirements to each part of the system. The further synthesizing of the system are left for chapter \ref{ch7}. 
+By this the system is fundamentally based upon theory about discrete time systems, including analysis and processing of such systems and the disposal data.
 
-\begin{figure}[h]
+\section{Synthesizing}
+To develop/design the system a synthesis approach is used to expand the basic concept of the system in order to define the purpose and thereby requirements to each part of the system.
+Figure \ref{fig:synth} illustrates the synthesizing of the system down to a level showing the essential parts of the system on behave of the final purpose. The further synthesizing of the system are left for chapter \ref{ch7}\trine{will it be synthesizing i chaper 7?}. The next section elaborates the synthesizing process by defining the requirements for each part of the system.
+\begin{figure}[H]
 \centering
 
 \tikzstyle{block} = [rectangle, draw,thick, 
@@ -50,12 +51,12 @@ To develop/design the system the method of synthesis is used. Figure \ref{fig:sy
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{tikzpicture}[auto, node distance=3cm, >=triangle 45, level 1/.style={sibling distance=70mm},
-    level 2/.style={sibling distance=20mm}]
+    level 2/.style={sibling distance=20mm},font=\sffamily ]
 \draw
- % Drawing the blocks of 1. layer:
-	node at (0,0)[right=-15mm] {$Music$}
+ % Drawing blocks 
+	node at (0,0)[right=-15mm] {\textit{Music}}
 	node [input, name=input1] {} 
-	node [block, right of=input1] (app1) {$?$}
+	node [block, right of=input1] (app1) {?}
 		child {
 		node [block] (audio) {Audio file} 
 			child {
@@ -77,14 +78,14 @@ To develop/design the system the method of synthesis is used. Figure \ref{fig:sy
 				node [block] (filter) {Filter}
 				}
 			child {
-				node [block] (spec) {Spec.}
+				node [block] (spec) {Spectro- gram}
 				}
 			child {
 				node [block] (symb) {Symbol Process.}
 				}	
 			}
     node [output, name=output1, right of=app1]{}
-    node at (output1) [right=1mm]{$Note \ sheet$}
+    node at (output1) [right=1mm]{\textit{Note sheet}}
  % Drawing the blocks of 2. layer:  
 ;
 % stor parantes 
@@ -96,34 +97,41 @@ To develop/design the system the method of synthesis is used. Figure \ref{fig:sy
 \draw[->](app1) -- node {Output}(output1);
 
 \end{tikzpicture}
-\caption{synthetic block diagram of system}
+\caption{Synthetic block-diagram of the system}
 \label{fig:synth}
 \end{figure}
 
+        
+\subsection{Requirements (and delimitations?)}
+\subsubsection{Input}
+To process an analogue sound in a computer the sound has to be digitalized. This is done by an analogue to digital converter(ADC) which transform an audio signal\trine{audio signal: elektrisk signal hvis spænding samples} from a microphone into digital bits. Further these bits has to be stored as a datafile suited to the further algorithm. This process are to be done by the audio card in the  computer and some storage software. The software needs to provide a sampling frequency at 44,1 kHz and a bit resolution of 16 bits.\cite{Mic} \\
+The audio files for this system are limited to consist of single tones, meaning no cords, and will be recorded in anechoic chamber in order to control the amount of noise on the signal.\\      
+The produced audio file will provide as the input for the algorithm that process the sound. 
 
-\section{Input}
-To process an analogue sound in a computer the sound has to be digitalized, this is done by an analogue to digital converter(ADC). An ADC basically consistent of sampling of the signal done by a sample and hold unit(S/H) followed by quantifying of the samples. Further the signal has to be stored as a datafile suited to the application. This is illustrated by figure \ref{fig:input} 
+\subsubsection{Algorithm}
+The main part of the system is the algorithm that will provide as an application which take an audio file as input and generate the corresponding note sheet. Cf. chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones. The main purpose is thereby to identify the frequencies on the audio file. This involves transformation of the signal, from time- to frequency domain done by Fourier Transformation. Filtering of the signal is necessary if any noise is included in the signal. The spectrogram is achieved by plotting the frequency. \\
+To create the note sheet on behave of a spectrogram symbol processing is required, marked by the blue parentheses i figure \ref{fig:synth}. Based on the given time limit, and the theoretical focus in the project the system are delimited to leave out the step of symbol processing. Hence the spectrogram will make the last step in the algorithm. 
 
+\subsubsection{Output} 
+The result of the algorithm is as stated a spectrogram. A visualisation of the spectrogram will thereby make the output of the system. It is required that the spectrogram is how precise?       
+
+\section{Final system}
+On behave of the stated specifications to the system figure \ref{fig:system} illustrates the final system which will form a basis of the further work. Main focus of the project is the development of the algorithm in the application ..\trine{skal der være noget sån ala det sidste her?}}   
 \begin{figure}[H]
 \centering
-\tikzstyle{block} = [rectangle,draw,thick, 
-    text width=4.2em, text centered, minimum height=3em]
-\begin{tikzpicture}[node distance=2.5cm,auto,>=latex']
+\tikzstyle{block} = [rectangle,draw,thick, text width=4.2em, text centered, minimum height=3em]
+\begin{tikzpicture}[node distance=2.2cm,auto,font=\sffamily ,>=latex']
 \draw
 % Drawing the blocks of first filter :
 	node at (0,0)[right=-13mm]{\huge\twonotes} % kan skiftet ud med sinus længere nede
 	node [input, name=input1] {} 
-	node at (input1) [above=5mm] {Mic}		
-	node [block, right of=input1] (ADC) {$ADC$}
-	node [block, right of=ADC] (store) {$Storage$}
-	node [block, right of=store] (four) {$Fourier$}
-	node [block, right of=four] (filter) {$Filter$}
-	node [block, right of=filter] (spec) {$Spec.$}
-	node [sum, right of=spec] (cirk1) {}
-	node at (cirk1) [above=5mm] {App}
-    node [output, name=output1, right of=cirk1]{}
-    
-    
+	node at (input1) [above=5mm] {\textsf{Mic}}		
+	node [block, right of=input1] (ADC) {ADC}
+	node [block, right of=ADC] (store) {Storage}
+	node [block, right of=store] (four) {Fourier}
+	node [block, right of=four] (filter) {Filter}
+	node [block, right of=filter] (spec) {Spec.}
+	node [block, right of=spec] (out) {Visual spec.}
 ;
 % Joining blocks. 
 % Commands \draw with options like [->] must be written individually
@@ -133,46 +141,20 @@ To process an analogue sound in a computer the sound has to be digitalized, this
 \draw[->](store) -- node {}(four);
 \draw[->](four) -- node {}(filter);
 \draw[->](filter) -- node {}(spec);
-\draw[->](spec) -- node {}(cirk1);
+\draw[->](spec) -- node {}(out);
 \filldraw[color=black,fill=white,thick](input1) circle (0.3);
 \draw(-0.3,0.5) -- (-0.3,-0.5);
+%sinus wave
 %\draw (-1.5,0) sin (-1.40,0.5) cos (-1.30,0) sin (-1.20,-0.5) cos (-1.10,0) sin (-1,0.5) cos (-0.9,0) sin (-0.8,-0.5) cos (-0.7,0);
 
 % Boxing and labelling noise shapers
-\draw [color=gray,thick,dashed](1.5,-1.5) rectangle (9,1.5);
-\node at (1.5,1.7) [above=5mm, right=0mm] {\textsc{ADC}};
+\draw [color=gray,thick,dashed](-1.2,-1.3) rectangle (5.43,1.3);
+\node at (-1.2,1.5) [above=5mm, right=0mm] {Input};
+\draw [color=gray,thick,dashed](5.52,-1.3) rectangle (11.99,1.3);
+\node at (5.55,1.5) [above=5mm, right=0mm] {Application};
+\draw [color=gray,thick,dashed](12.085,-1.3) rectangle (14.3,1.3);
+\node at (12.09,1.5) [above=5mm, right=0mm] {Output};
 \end{tikzpicture}
-\caption{Basic block-diagram illustrating an ADC where the digital output will be the input to the application} 
-\label{fig:input}
+\caption{Basic block-diagram illustrating the final system} 
+\label{fig:system}
 \end{figure}
-        
-
-\section{Output}
-% spectogram 
-
-
-\section{Application}
-% lagering, Filtering, Fourier, Spectogram 
-\begin{figure}[H]
-\centering 
-\begin{tikzpicture}[auto, node distance=3cm,>=latex'] 
-	%\node [input, name=input1] {};
-	\node [sum] (cirk1) {};
-	\node at (cirk1) [above=5mm]{Input};
-	\node [block, right of=cirk1] (filter) {$\ Filtering\ $};
-	\node [block, right of=filter] (fourier) {$\ \ Fourier \ \ $};
-	\node [block, right of=fourier] (spec) {$Spectrogram$};
-	\node [sum, right of=spec] (cirk2) {};
-	\node at (cirk2) [above=5mm] {Output};
-	\node [output, right of=cirk2] (output1) {};
-	;
-\draw [draw,->] (cirk1) -- node {$r$} (filter);
-\draw [->] (filter) -- node {$r$} (fourier);
-\draw [->] (fourier) -- node {$r$} (spec);
-\draw [->] (spec) -- node {$r$} (cirk2);
-\end{tikzpicture}
-\caption{fdklga}
-\label{fig:app}
-\end{figure}
-
-These specifications forms a basis of the further work. 
