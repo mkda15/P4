@@ -43,7 +43,7 @@ To describe sampling mathematically the \textit{Dirac delta} function is introdu
 \begin{definition}[Dirac delta function]\label{def:dirac}
 The Dirac delta function is the function $\delta$ satisfying
 \begin{equation}
-\int_{-\infty}^{\infty} \! f(t)\delta(t-t_0) \, dt=f(t_0).
+\int_{-\infty}^{\infty} \! f(t)\delta(t-t_0) \, dt=f(t_0).\phantom{mm}\text{\cite{pelgrom}}
 \end{equation}
 \end{definition}
 Summing an infinite number of Dirac functions shifted at equally spaced time intervals $nT_s$ as in \eqref{eq:dirac_sum} produces a constant function of equidistant Dirac pulses.
@@ -55,8 +55,9 @@ Multiplying \eqref{eq:dirac_sum} with a continuous signal mathematically samples
 f_s(t)=\int_{-\infty}^{\infty} \! f(t-\tau)\sum_{n=-\infty}^{\infty}\delta(\tau - nT_s) \, d\tau.
 \end{equation}
 The result of \eqref{eq:sampling} is exactly what is seen in figures \ref{fig:ball_cont} and \ref{fig:ball_disc}.
-\section{Aliasing}\label{sec:aliasing}
-
+\subsection{Aliasing}\label{sec:aliasing}
+In this section the problem of aliasing and the methods to overcome this phenomenon will be covered. Firstly 
+If the frequencies of two different signals differ from $f_s$ by the same amount the sequence of samples 
 
 
 
