@@ -29,7 +29,7 @@ By this the system is fundamentally based upon theory about discrete time system
 
 \section{Synthesizing}
 To develop/design the system a synthesis approach is used to expand the basic concept of the system in order to define the purpose and thereby requirements to each part of the system.
-Figure \ref{fig:synth} illustrates the synthesizing of the system down to a level showing the essential parts of the system on behave of the final purpose. The further synthesizing of the system are left for chapter \ref{ch7}\trine{will it be synthesizing i chaper 7?}. The next section define the requirements for each part of the system.
+Figure \ref{fig:synth} illustrates the synthesizing of the system down to a level showing the essential parts of the system on behave of the final purpose. The further synthesizing of the system are left for chapter \ref{ch7}\trine{will it be synthesizing i chaper 7?}. The next section elaborates the synthesizing process by defining the requirements for each part of the system.
 \begin{figure}[H]
 \centering
 
@@ -78,7 +78,7 @@ Figure \ref{fig:synth} illustrates the synthesizing of the system down to a leve
 				node [block] (filter) {Filter}
 				}
 			child {
-				node [block] (spec) {Spec.}
+				node [block] (spec) {Spectro- gram}
 				}
 			child {
 				node [block] (symb) {Symbol Process.}
@@ -102,17 +102,21 @@ Figure \ref{fig:synth} illustrates the synthesizing of the system down to a leve
 \end{figure}
 
         
-\subsection{Requirements}
+\subsection{Requirements (and delimitations?)}
 \subsubsection{Input}
-To be able to process an analogue sound in a computer the sound has to be digitalized. This is done by an analogue to digital converter(ADC) which transform an audio signal\trine{audio signal: elektrisk signal hvis spænding samples} from a microphone into bits. Further these bits has to be stored as a datafile suited to the further algorithm. \\
-This process are to be done by the audio card in the  computer and some storage software. The software needs to provide a sampling frequency at 44,1 kHz and a bit resolution of 16 bits.\cite{Mic} \\
+To process an analogue sound in a computer the sound has to be digitalized. This is done by an analogue to digital converter(ADC) which transform an audio signal\trine{audio signal: elektrisk signal hvis spænding samples} from a microphone into digital bits. Further these bits has to be stored as a datafile suited to the further algorithm. This process are to be done by the audio card in the  computer and some storage software. The software needs to provide a sampling frequency at 44,1 kHz and a bit resolution of 16 bits.\cite{Mic} \\
 The audio files for this system are limited to consist of single tones, meaning no cords, and will be recorded in anechoic chamber in order to control the amount of noise on the signal.\\      
 The produced audio file will provide as the input for the algorithm that process the sound. 
 
 \subsubsection{Algorithm}
-The main part of the system is the algorithm that will provide as an application which take an audio file as input and generate the corresponding note sheet. As described i chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones. By this the main purpose is to identify the frequencies on the audio file.      
+The main part of the system is the algorithm that will provide as an application which take an audio file as input and generate the corresponding note sheet. Cf. chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones. The main purpose is thereby to identify the frequencies on the audio file. This involves transformation of the signal, from time- to frequency domain done by Fourier Transformation. Filtering of the signal is necessary if any noise is included in the signal. The spectrogram is achieved by plotting the frequency. \\
+To create the note sheet on behave of a spectrogram symbol processing is required, marked by the blue parentheses i figure \ref{fig:synth}. Based on the given time limit, and the theoretical focus in the project the system are delimited to leave out the step of symbol processing. Hence the spectrogram will make the last step in the algorithm. 
+
+\subsubsection{Output} 
+The result of the algorithm is as stated a spectrogram. A visualisation of the spectrogram will thereby make the output of the system. It is required that the spectrogram is how precise?       
 
 \section{Final system}
+On behave of the stated specifications to the system figure \ref{fig:system} illustrates the final system which will form a basis of the further work. Main focus of the project is the development of the algorithm in the application ..\trine{skal der være noget sån ala det sidste her?}}   
 \begin{figure}[H]
 \centering
 \tikzstyle{block} = [rectangle,draw,thick, text width=4.2em, text centered, minimum height=3em]
@@ -152,7 +156,5 @@ The main part of the system is the algorithm that will provide as an application
 \node at (12.09,1.5) [above=5mm, right=0mm] {Output};
 \end{tikzpicture}
 \caption{Basic block-diagram illustrating the final system} 
-\label{fig:input}
+\label{fig:system}
 \end{figure}
-
-These specifications forms a basis of the further work. 
