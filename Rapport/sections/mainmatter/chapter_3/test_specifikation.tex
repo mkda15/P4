@@ -27,7 +27,7 @@
 %S/h - test??
 %
 %kvantisering - test? 
-
+\trine{jeg syntes måske en hovedoverskrift med V-model er lige i overkanten}
 The V-model is a simple multiple-phase model used to describe phases in the development process. 
 The name V-model comes from V, that represents the different phases.
 The first phase is description of the system and decomposition to smaller and more specific units.
@@ -45,11 +45,11 @@ In the synthesis section, the left part of the V-model is described, and hence t
 %\chr{https://www.tutorialspoint.com/sdlc/sdlc_v_model.htm}
 
 \subsection{Test specification / validation}
-The V-model will be tested from the bottom up, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. \\\\
+The V-model will be tested from the bottom up\trine{lille omformulering af 1. sætning, det er vel systemet der testes ud fra V modellen}, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. \\\\
 Next up the coherence of the system is tested, and finally the system it self as a single unit is tested. 
 \\\\
 
-\textbf{The  units in the model are as follows }
+\textbf{The  units in the model are as follows }\trine{punkt 2 og 3 kunne være ADC, og fjerne den sidste }
 \begin{itemize}
 	\item Microphone
 	\item Sample and hold
@@ -73,7 +73,7 @@ As with verification of the Fourier transform, the spectrogram algorithm, will b
 The algorithm will then be tested on a fixed data set with a known output.
 By doing so, the output of the algorithm can hence be compared.
 \subsubsection{Unit test of note sheet creation}
-This test will be done by creating a spektrogram from a known note sheet, and trying to recreate the note sheet.
+\trine{kan vel udelades helt?}This test will be done by creating a spektrogram from a known note sheet, and trying to recreate the note sheet.
 \chr{Evt. give dette en under element der beskriver mere specifikt hvordan spektrogrammet kreeres }
 \chr{Note, not all of the components will be tested  as they are outside of the scope of the project - Afgrænsinger her ved beskrivelse af testende?? (Aka. her)}
 \subsubsection{Integration validation}
