@@ -1,5 +1,5 @@
 \chapter{Sample theory} \label{ch4}
-In this chapter the sample theory and its importance when converting an analogue audio signal to a digital audio signal along with its complications is treated.
+In this chapter sample theory and its importance when converting an analogue audio signal to a digital audio signal along with its complications is treated. The chapter is inspired by chapters 2 *Insert used chapters* in \cite{pelgrom}.
 \section{Sampling}
 Sampling is the process of representing a \textit{continuous-time} signal by a sequence of values. Doing so converts the continuous-time signal into a \textit{discrete-time signal}. \cite{pelgrom} Sampling a ball following the arc shown in figure \ref{fig:ball_cont} results in the plottet points in figure \ref{fig:ball_disc}. As such the balls path is illustrated with discrete points along the path. The distance between the points in time depends on the \textit{sampling frequency} $f_s$. Increasing $f_s$ increases the number of samples in some time interval while decreasing $f_s$ decreases the number of samples. It is later explained which consequences increasing or decreasing $f_s$ have.
 \begin{figure}[H]
@@ -11,7 +11,7 @@ Sampling is the process of representing a \textit{continuous-time} signal by a s
 \draw[->] (0,-0.25) -- (0,2) node[above] {$y$};
 \draw[scale=1,domain=0:4,smooth,variable=\x,red] plot ({\x},{-0.25*\x*\x+\x});
 \end{tikzpicture}
-\caption{Trajectory of a ball shown in continuous time.}
+\caption{Trajectory of a ball described by the time continuous function $f(t)$. In continuous time the trajectory is smooth.}
 \label{fig:ball_cont}
 \end{minipage}
 \centering
@@ -30,12 +30,12 @@ Sampling is the process of representing a \textit{continuous-time} signal by a s
 \draw(3.5,0.4375) node {\textbullet};
 \draw(4,0) node {\textbullet};
 \end{tikzpicture}
-\caption{Trajectory of a ball shown in discrete time as samples of the original trajectory.}
+\caption{Trajectory of a ball described by the time discrete function $f_s(t)$. The trajectory consists of samples of $f(t)$.}
 \label{fig:ball_disc}
 \end{minipage}
 \end{figure}
-The sampling frequency $f_s$ is number of samples pr. second (Hz) and the times at points of sampling are calculated as
-\begin{equation}
+\noindent The sampling frequency $f_s$ is number of samples pr. second (Hz) and the times at points of sampling are calculated as
+\begin{equation}\label{eq:sample_freq}
 t=\frac{n}{f_s}=nT_s, \phantom{mm} n=-\infty,\hdots-1,0,1\hdots,\infty \phantom{mm}\text{\cite{pelgrom}}
 \end{equation}
 where $t$ is the time period in which sampling is done, $n$ is the number of samples and $T_s$ is the time period between two consecutive samples.\\\\
@@ -43,9 +43,26 @@ To describe sampling mathematically the \textit{Dirac delta} function is introdu
 \begin{definition}[Dirac delta function]\label{def:dirac}
 The Dirac delta function is the function $\delta$ satisfying
 \begin{equation}
-\int_{-\infty}^{\infty} \! f(t)\delta(t-t_0) \, dt=f(t_0).
+\int_{-\infty}^{\infty} \! f(t)\delta(t-t_0) \, dt=f(t_0).\phantom{mm}\text{\cite{pelgrom}}
 \end{equation}
 \end{definition}
+Summing an infinite number of Dirac functions shifted at equally spaced time intervals $nT_s$ as in \eqref{eq:dirac_sum} produces a constant function of equidistant Dirac pulses.
+\begin{equation}\label{eq:dirac_sum}
+\sum_{n=-\infty}^{\infty}\delta(t-nT_s)
+\end{equation}
+Multiplying \eqref{eq:dirac_sum} with a continuous signal mathematically samples the continuous signal at the times of the Dirac pulses as shown in \eqref{eq:sampling}
+\begin{equation}\label{eq:sampling}
+f_s(t)=\int_{-\infty}^{\infty} \! f(t-\tau)\sum_{n=-\infty}^{\infty}\delta(\tau - nT_s) \, d\tau.
+\end{equation}
+The result of \eqref{eq:sampling} is exactly what is seen in figures \ref{fig:ball_cont} and \ref{fig:ball_disc}.
+\subsection{Aliasing}\label{sec:aliasing}
+In this section the problem of aliasing and the methods to overcome this phenomenon will be covered. Firstly 
+If the frequencies of two different signals differ from $f_s$ by the same amount the sequence of samples 
+
+
+
+
+
 \section{Analogue-to-digital conversion}\label{ADC}
 An analogue-to-digital converter (ADC) is a device which as the name suggests is capable of converting an analogue signal to a digital signal. The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. An audio ADC consists of the following elements
 \begin{enumerate}
