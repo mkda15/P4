@@ -1,67 +1,53 @@
-\section{V-model}
-
-%Lyd - blackboks - nodeark
-%
-%Mic - lydfil - algoritme
-%
-%adc - lagring  Fourier - filter - spektogram - symbolbehandling
-%
-%S/h - Kvantisering  Passende fil
-%
-%
-%
-%
-%V model og test specifikationer.
-%På blackbox niveau - Test musik ind og nodeark ud.
-%
-%Lydfill - test musik ind lydfill ud.
-%
-%Algorithme - test lydfill ind - nodeark ud.
-%
-%
-%
-%Mikrofon - Test??
-%
-%adc - Test??
-%
-%S/h - test??
-%
-%kvantisering - test? 
-\trine{jeg syntes måske en hovedoverskrift med V-model er lige i overkanten}
-The V-model is a simple multiple-phase model used to describe phases in the development process. 
-The name V-model comes from V, that represents the different phases.
-The first phase is description of the system and decomposition to smaller and more specific units.
-Along with this phase a list of test specifications are created, starting from the smallest unit, and working up to the system as a hole.
-Later on the these test will be conducted.
-\\\\
-\begin{figure}
-\centering
-\includegraphics[scale=0.5]{figures/20170215_V-model_image.png}
-\caption{Illustration of the V-model. \cite{V-modelwiki}} 
-\end{figure}\chr{Wiki link}
+\section{Test specification/validation}
+In this section test specifications will be determined in order to validate the final system. This will be done upon the concept of the V-model\cite{vmodel}, illustrated in figure \ref{fig:vmodel}.         
+The V-model is a simple multiple-phase model used to describe phases in the development process. \\
 The left side of the V, is decomposition of the problem, and the right side is the creation and integration and test of system.
-In the synthesis section, the left part of the V-model is described, and hence the next step in the V-model is the creation of the test specifications for the different parts.
+\begin{figure}[h]
+\centering
+\tikzstyle{block} = [rectangle, draw,thick,fill=white, 
+    text width=7em, text centered, minimum height=3.3em]
+\tikzstyle{myarrows}=[line width=1mm,draw=blue,-triangle 45,postaction={draw, line width=3mm, shorten >=4mm, -}]
+\begin{tikzpicture}[auto, node distance=1.6cm, >=triangle 45,font=\sffamily ]
 
-%\chr{https://www.tutorialspoint.com/sdlc/sdlc_v_model.htm}
-
-\subsection{Test specification / validation}
-The V-model will be tested from the bottom up\trine{lille omformulering af 1. sætning, det er vel systemet der testes ud fra V modellen}, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. \\\\
-Next up the coherence of the system is tested, and finally the system it self as a single unit is tested. 
-\\\\
-
-\textbf{The  units in the model are as follows }\trine{punkt 2 og 3 kunne være ADC, og fjerne den sidste }
+\draw [myarrows](-1.8,1.2)--(5.3,-6.3);
+\draw [myarrows](5.5,-5.9)--(12,1.2);
+\draw 
+	node [block](1){Conpect of System}
+	node [block, below of=1, right=0.7mm](2){Requierments and Architecture}
+	node [block, below of=2, right=0.7mm](3){Detaild Design}
+	node [block, below of=3, right=5mm](4){Implementation}
+	node [block, above of=4, right=5mm](5){Unit Testing}
+	node [block, above of=5, right=0.7mm](6){Integration Test}
+	node [block, above of=6, right=0.7mm](7){System Test}
+	node at (-0.7,-2) (11) {}
+	node at (3.4,-6.5) (22) {}
+	node at (12.9,0) (33)  {}
+	node at (6.7,-6.5) (44) {}
+;
+\draw [<->, dashed](1)--(7);
+\draw [<->, dashed](2)--(6);
+\draw [<->, dashed](3)--(5);
+\draw [decoration={text along path,
+    text={Project Definition},text align={left}},decorate]  (11) -- (22);
+\draw [decoration={text along path,
+    text={Project Test and Integration},text align={center}},decorate]  (44) -- (33);
+\end{tikzpicture}
+\caption{Concept of the V-model}
+\label{fig:vmodel}
+\end{figure}
+In the previous synthesis section, the left part of the V-model is described, and hence the next step in the V-model is the creation of the test specifications for the different parts. Along with this phase a list of test specifications are created, starting from the smallest unit, and working up to the system as a hole. Later on the these test will be conducted.\\
+\\
+The system will be tested from the bottom up, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. Next up the coherence of the system is tested, and finally the full system as a single unit is tested. \\
+\textbf{Units in the model are as follows}  
 \begin{itemize}
 	\item Microphone
-	\item Sample and hold
-	\item Quantization
+	\item ADC
 	\item Sound file creation
 	\item Fourier transformation
 	\item Filter
 	\item Spectrogram
-	\item Note sheet creation
 \end{itemize}
-
-
+Notes that test on the first three unit of the system will not be carried out in this project, because they consist of pretested hardware and software.  
 \subsubsection{Unit test of the Fourier transformation}
 This test will be done by comparing the Fourier algorithm used, with a pre-existence algorithm from matlab or python.
 By feeding the algorithms the same data set and comparing the output int. 
@@ -72,10 +58,10 @@ The filter will be tested on data with a high signal to noise ratio with noise e
 As with verification of the Fourier transform, the spectrogram algorithm, will be tested against a pre- algorithm, on the same data set.
 The algorithm will then be tested on a fixed data set with a known output.
 By doing so, the output of the algorithm can hence be compared.
-\subsubsection{Unit test of note sheet creation}
-\trine{kan vel udelades helt?}This test will be done by creating a spektrogram from a known note sheet, and trying to recreate the note sheet.
-\chr{Evt. give dette en under element der beskriver mere specifikt hvordan spektrogrammet kreeres }
-\chr{Note, not all of the components will be tested  as they are outside of the scope of the project - Afgrænsinger her ved beskrivelse af testende?? (Aka. her)}
+%\subsubsection{Unit test of note sheet creation}
+%\trine{kan vel udelades helt?}This test will be done by creating a spektrogram from a known note sheet, and trying to recreate the note sheet.
+%\chr{Evt. give dette en under element der beskriver mere specifikt hvordan spektrogrammet kreeres }
+%\chr{Note, not all of the components will be tested  as they are outside of the scope of the project - Afgrænsinger her ved beskrivelse af testende?? (Aka. her)}
 \subsubsection{Integration validation}
 The next step is to test the units as they are integrated into a single system.
 This test is done by taking the output of the previous and feeding it into the next step of the algorithm. 
@@ -83,7 +69,7 @@ This is a minor step in creating the final product.
 This product 
 simple data 
 \\\\
-The music used for testing the algorithm will be simple melodies comtaining one note at a time (no chords) from one instrument at a time. This will allow insight into the methods used without complicating the recognition of notes by blending together different instruments and different sound frequencies.\\\\
+The music used for testing the algorithm will be simple melodies containing one note at a time (no chords) from one instrument at a time. This will allow insight into the methods used without complicating the recognition of notes by blending together different instruments and different sound frequencies.
 
 \subsubsection{System test of the final product}
 The final design, will be tested by giving the final system a recording with a known result and comparing the difference between the products result and the know result. The design can be further tested to see if all the wanted characteristics of the system comply to the wanted criteria of the system.
