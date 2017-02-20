@@ -1,0 +1,49 @@
+ 
+
+Functions can be represented as a linear combination of functions on the form $\sin nt$.
+Or in other words linear combination of a oscillating function, sines, cosines or equivalently complex exponentials.
+\\\\
+It can be an advantage to decompose functions, as a series of integrals "simpler" functions, to retrieve information. Information from a function $f(x)$ will be stored in the coefficient $\{c_n\}_{n=1}^\infty$
+
+\begin{equation}
+f(x) = \sum_{n=1}^\infty c_n f_n(x)
+\end{equation}
+
+The coefficients can easily be stored on a computer.
+
+
+
+A function $f: \mathbb{R}\to\mathbb{R}$ (or $\mathbb{C}$) is called $2\pi$-periodic, if $f(\theta + 2\pi) = f(\theta), \forall\theta\in\mathbb{R}$
+
+%Lemma:
+%Suppose $F$ is $2\pi$ - periodic and integrable. Then for any real number a 
+%
+%\begin{align}
+%\int_a^{2\pi+a}F(t) dt = \int_0^{2\pi}F(t)dt
+%\end{align}
+%
+%Proof:
+%\int_0^{2\pi}F(t)dt = \int_0^a F(t) dt + \int_a^{2\pi} = \int_0^a F(t+2\pi)dt + \int_a^{2\pi} F(t) dt = \int_{2\pi}^{2\pi + a} F(t) dt + \int_a^{2\pi}F(t)dt = \int_a^{2\pi}F(t)dt	+ \int_{2\pi}^{2\pi + a} F(t)dt = \int_a^[2\pi+a}F(t)dt
+
+\begin{align*}
+	x(t) &= a_0 + \sum_{n=1}^\infty(a_n \cos(n \omega t) + b_n \sin(n \omega t))\\
+	&= \sum_{n=-\infty}^{\infty} c_n e^{n j\omega t} 
+\end{align*}
+The second part holds per Euler's formula gives:
+\begin{align*}
+	\cos(n(\theta) = \dfrac{e^{j n \theta} + e^{-j n \theta}}{2} \text{ and } \sin(n \theta) = \dfrac{e^{jn\theta-}e^{jn\theta}}{2j}
+\end{align*}
+
+\subsection{Calculation of the coefficient c_n}
+It is a necessity to calculate the $c_n$ coefficient.
+To solve $c_n$ in the equation $f(t)= \sum_{n=-\infty}^{\infty} c_n e^{n j\omega t}$
+
+First multiply both sides by $e^{-(j\omega k t)}$, where $k\in \mathbb{Z}$. And integrate both sides over a given period, T:
+
+\begin{align*}
+	\int_{0}^T f(t)e^{-(j\omega k t)} = \int_{0}^T \sum_{n=-\infty}^{\infty} c_n e^{n j\omega t} e^{-j\omega k t} dt
+\end{align*}
+
+%The superposition principle.
+%
+%any1 linear signal can be written as a linear combination of sinusoids
