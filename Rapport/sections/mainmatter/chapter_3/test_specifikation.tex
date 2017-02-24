@@ -1,7 +1,8 @@
 \section{Test specification/validation}
 In this section test specifications will be determined in order to validate the final system. This will be done upon the concept of the V-model\cite{vmodel}, illustrated in figure \ref{fig:vmodel}.         
 The V-model is a simple multiple-phase model used to describe phases in the development process. \\
-\begin{figure}[H]
+The left side of the V, is decomposition of the problem, and the right side is the creation and integration and test of system.
+\begin{figure}[h]
 \centering
 \tikzstyle{block} = [rectangle, draw,thick,fill=white, 
     text width=7em, text centered, minimum height=3.3em]
@@ -34,7 +35,6 @@ The V-model is a simple multiple-phase model used to describe phases in the deve
 \caption{Concept of the V-model}
 \label{fig:vmodel}
 \end{figure}
-The left side of the V, is decomposition of the problem, and the right side is the creation and integration and test of system.
 In the previous synthesis section, the left part of the V-model is described, and hence the next step in the V-model is the creation of the test specifications for the different parts. Along with this phase a list of test specifications are created, starting from the smallest unit, and working up to the system as a hole. Later on the these test will be conducted.\\
 \\
 The system will be tested from the bottom up, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. Next up the coherence of the system is tested, and finally the full system as a single unit is tested. \\
@@ -47,7 +47,7 @@ The system will be tested from the bottom up, starting with the smallest compone
 	\item Filter
 	\item Spectrogram
 \end{itemize}
-Notes that test on the first three unit of the system will not be documented i this project, because they consist of pretested hardware and software.  
+Notes that test on the first three unit of the system will not be carried out in this project, because they consist of pretested hardware and software.  
 \subsubsection{Unit test of the Fourier transformation}
 This test will be done by comparing the Fourier algorithm used, with a pre-existence algorithm from matlab or python.
 By feeding the algorithms the same data set and comparing the output int. 

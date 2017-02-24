@@ -1,0 +1,124 @@
+\subsection{Fourier series}
+Functions can be represented as a linear combination of functions on the form $\sin nt$.
+Or in other words linear combination of a oscillating function, sines, cosines or equivalently complex exponential.
+\\\\
+It can be an advantage to decompose functions, as a series or integral of "simpler" functions, to retrieve information.
+\begin{align*}
+	f(x) = \sum_n=1^\infty c_n f_n(x)\text{, or } f(x)= \int_{-\infty}^\infty g(u) h(u,x) du
+\end{align*}
+Information from a function $f(x)$ will, as an example be stored in the coefficient $\{c_n\}_{n=1}^\infty$.
+The coefficients can easily be stored on a computer.
+\\\\
+
+
+A function $f: \mathbb{R}\to\mathbb{R}$ (or $\mathbb{C}$) is called $2\pi$-periodic, if $f(\theta + 2\pi) = f(\theta), \forall\theta\in\mathbb{R}$
+
+\begin{align*}
+	x(t) &= a_0 + \sum_{n=1}^\infty(a_n \cos(n \omega t) + b_n \sin(n \omega t))\\
+	&= \sum_{n=-\infty}^{\infty} c_n e^{n j\omega t} 
+\end{align*}
+The second part holds per Euler's formula gives:
+\begin{align*}
+	\cos(n(\theta) = \dfrac{e^{j n \theta} + e^{-j n \theta}}{2} \text{ and } \sin(n \theta) = \dfrac{e^{jn\theta-}e^{jn\theta}}{2j}
+\end{align*}
+
+It can be simpler to work with the complex exponential function, but working with the trigonometric functions $\cos$ and $\sin$ have there advantages. 
+Like being real-valued and odd and even, cosine and sine respectively.
+
+\subsection{Calculation of the coefficient $c_n$}
+It is a necessity to calculate the $c_n$ coefficient.
+By the assumption that this can be done, and it's permissible to integrate the fourier series term by term: :\\
+\\
+To solve $c_n$ in the equation $f(t)= \sum_{n=-\infty}^{\infty} c_n e^{n j\omega t}$
+\\\\
+First multiply both sides by $e^{-(j\omega k t)}$, where $k\in \mathbb{Z}$. And integrate both sides over a given period, from $-\pi$ to $\pi$:
+
+\begin{align*}
+	\int_{-\pi}^\pi f(t)e^{-(j\omega k t)} = \int_{-\pi}^\pi \sum_{n=-\infty}^{\infty} c_n e^{n j\omega t} e^{-j\omega k t} dt
+\end{align*}
+
+The integration of a $2\pi$ - periodic function over the length of the period, can be shifted with an integer.
+
+\begin{lemma}
+Suppose $F$ is $2\pi$ - periodic and integrable. Then for any real number a 
+
+\begin{align}
+\int_a^{2\pi+a}F(t) dt = \int_0^{2\pi}F(t)dt
+\end{align}
+\end{lemma}
+\begin{proof}
+\begin{align*}
+	\int_0^{2\pi}F(t)dt 
+	&= \int_0^a F(t) dt + \int_a^{2\pi} 
+	= \int_0^a F(t+2\pi)dt + \int_a^{2\pi} F(t) dt\\ 
+	&= \int_{2\pi}^{2\pi + a} F(t) dt + \int_a^{2\pi}F(t)dt
+	= \int_a^{2\pi}F(t)dt	+ \int_{2\pi}^{2\pi + a} F(t)dt \\
+	&= \int_a^{2\pi+a}F(t)dt
+\end{align*}
+\end{proof}
+
+Pulling the summation and the constant on the right-hand side out of the integral yields the following:
+
+\begin{align*}
+	\int_{-\pi}^\pi f(t) e^{-j \omega k t}dt
+	= \sum_{-\infty}^\infty c_n \int_{\pi}^\pi e^{-j \omega(n-k)t}dt
+\end{align*} 
+
+The integral on the right-hand side has two cases to consider, $n \neq k$ and $n = k$\\\\
+
+For $n\neq k$:
+\begin{align*}
+	\forall n,n\neq k: \int_{-\pi}^\pi e^{j\omega(n-k)t}dt 
+	=\dfrac{1}{j\omega(n-k)}e^{j\omega(n-k)t}\mid_{-\pi}^{\pi}
+	=\dfrac{(-1)^{n-k}-1(-1)^{n-k}}{j\omega(n-k)}
+	=0
+\end{align*}
+\chr{Could be written with sine and cosine, to show that the integral of those 2 over a periode is 0}
+
+The second case is for $n = k$
+\begin{align*}
+	\forall n,n=k: \int_{-\pi}^\pi e^{j\omega(n-k)t}dt = \int_{-\pi}^\pi dt = 2\pi
+\end{align*}
+
+The integral can be concluded to yield either $0$ or $2\pi$:
+
+\begin{align}
+	\int_{-\pi}^{\pi} e^{j \omega (n-k)t}dt 
+	= 
+	\begin{cases}
+			2\pi \text{ if } n=k\\
+			0 \text{ otherwise}
+	\end{cases}
+\end{align}
+
+The coefficient $c_n$'s general equation is then:
+\begin{align*}
+	c_n = \dfrac{1}{2\pi} \int_{-\pi}^{\pi} f(t) e^{-(j \omega nt)}dt
+\end{align*} 
+
+\begin{definition}
+Fourier series of a $2\pi$ - periodic integrabel function $f(t)$ is defined as:
+\begin{align*}
+	\sum_{n=-\infty}^\infty c_n e^{j n \omega t}
+\end{align*}
+
+where $c_n = \dfrac{1}{2\pi}\int_{- \pi}^\pi f(t) e^{-j n \omega t}$
+\\\\
+Alternatively:
+\begin{align*}
+	\dfrac{a_0}{2} + \sum_{n=1}^\infty \left[ a_n \cos(n \omega t) + b_n \sin(\n \omega t)\right]
+\end{align*} 
+where
+\begin{align*}
+	a_n 
+	&= \dfrac{1}{\pi} \int_{-\pi}^\pi f(t) \cos (n \omega t) dt, \, n=0,1,\dots\\
+	b_n
+	&= \dfrac{1}{\pi} \int_{-\pi}^\pi f(t) \sin (n \omega t) dt, \, n=1,2,\dots	
+\end{align*}
+\end{definition}
+
+Further if a function $g(t)$ is uneven, ($g(t) = -g(-t)$), then the integral $\int_{-\pi}^\pi g(t) = 0$.
+
+\subsection{Convergence of the Fourier series}
+
+%http://cnx.org/contents/8YnJdzjg@8/Derivation-of-Fourier-Coeffici
