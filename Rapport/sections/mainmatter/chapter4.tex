@@ -77,54 +77,72 @@ x_s(t)&=x_c(t)s(t)\nonumber \\
 \label{eq:sampling}
 \end{align}
 \eqref{eq:sampling} is a mathematical representation of sampling of the continuous function $x_c(t)$ into the function $x_s(t)$ \cite{DTSP}. Although \eqref{eq:sampling} describes sampling, we have $x_s(t)\neq x[n]$ as $x_s(t)$ is defined in the interval between two samples whereas $x[n]$ only takes values at integers $n$. Although $x_s(t)\neq x[n]$ \eqref{eq:sampling} will be useful in the upcoming appliance of the Fourier transform.
-\paragraph{Example of sampling} Sampling a ball following the arc shown in figure \ref{fig:ball_cont} results in the plotted points in figure \ref{fig:ball_disc}. As such the balls path is illustrated with discrete points along the path.
-\begin{figure}[H]
-\centering
-\begin{minipage}{0.49\textwidth}
-\centering
-\begin{tikzpicture}[scale=1.4]
-\draw[->] (-0.25,0) -- (4.25,0) node[right] {$x$};
-\draw[->] (0,-0.25) -- (0,2) node[above] {$y$};
-\draw[scale=1,domain=0:4,smooth,variable=\x,red] plot ({\x},{-0.25*\x*\x+\x});
-\end{tikzpicture}
-\caption{Trajectory of a ball described by the time continuous function $x_c(t)$. In continuous time the trajectory is smooth.}
-\label{fig:ball_cont}
-\end{minipage}
-\centering
-\begin{minipage}{0.49\textwidth}
-\centering
-\begin{tikzpicture}[scale=1.4]
-\draw[->] (-0.25,0) -- (4.25,0) node[right] {$x$};
-\draw[->] (0,-0.25) -- (0,2) node[above] {$y$};
-\draw(0,0) node {\textbullet};
-\draw(0.5,0.4375) node {\textbullet};
-\draw(1,0.75) node {\textbullet};
-\draw(1.5,0.9375) node {\textbullet};
-\draw(2,1) node {\textbullet};
-\draw(2.5,0.9375) node {\textbullet};
-\draw(3,0.75) node {\textbullet};
-\draw(3.5,0.4375) node {\textbullet};
-\draw(4,0) node {\textbullet};
-\end{tikzpicture}
-\caption{Trajectory of a ball described by the time discrete function $x[n]$. The trajectory consists of samples of $x_c(t)$.}
-\label{fig:ball_disc}
-\end{minipage}
-\end{figure}
+%\paragraph{Example of sampling} Sampling a ball following the arc shown in figure \ref{fig:ball_cont} results in the plotted points in figure \ref{fig:ball_disc}. As such the balls path is illustrated with discrete points along the path.
+%\begin{figure}[H]
+%\centering
+%\begin{minipage}{0.49\textwidth}
+%\centering
+%\begin{tikzpicture}[scale=1.4]
+%\draw[->] (-0.25,0) -- (4.25,0) node[right] {$x$};
+%\draw[->] (0,-0.25) -- (0,2) node[above] {$y$};
+%\draw[scale=1,domain=0:4,smooth,variable=\x,red] plot ({\x},{-0.25*\x*\x+\x});
+%\end{tikzpicture}
+%\caption{Trajectory of a ball described by the time continuous function $x_c(t)$. In continuous time the trajectory is smooth.}
+%\label{fig:ball_cont}
+%\end{minipage}
+%\centering
+%\begin{minipage}{0.49\textwidth}
+%\centering
+%\begin{tikzpicture}[scale=1.4]
+%\draw[->] (-0.25,0) -- (4.25,0) node[right] {$x$};
+%\draw[->] (0,-0.25) -- (0,2) node[above] {$y$};
+%\draw(0,0) node {\textbullet};
+%\draw(0.5,0.4375) node {\textbullet};
+%\draw(1,0.75) node {\textbullet};
+%\draw(1.5,0.9375) node {\textbullet};
+%\draw(2,1) node {\textbullet};
+%\draw(2.5,0.9375) node {\textbullet};
+%\draw(3,0.75) node {\textbullet};
+%\draw(3.5,0.4375) node {\textbullet};
+%\draw(4,0) node {\textbullet};
+%\end{tikzpicture}
+%\caption{Trajectory of a ball described by the time discrete function $x[n]$. The trajectory consists of samples of $x_c(t)$.}
+%\label{fig:ball_disc}
+%\end{minipage}
+%\end{figure}
 \subsection{Frequency representation of sampling}
-To study the behavior of $x_s(t)$ in the frequency domain the Fourier transform is used. The Fourier transform of $s(t)$ is seen in \eqref{eq:fourier_impulse}.
+To study the behavior of $x_s(t)$ in the frequency domain the Fourier transform is used. The Fourier transform of $s(t)$ is as follows:
 \begin{equation}\label{eq:fourier_impulse}
-\hat{s}(f)=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}(f-kf_s)
+\hat{s}(j\omega_s)=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}(j\omega-kj\omega_s)
 \end{equation}
+where $j\omega$ is the complex frequency (radians pr. second).\\\\
 The Fourier transform of \eqref{eq:sampling} uses the fact, that \eqref{eq:sampling} is a product of two functions, which is a convolution in the frequency domain:
 \begin{equation}
-\hat{x}_s(f)=\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}\hat{x}_c(t)(f)*\hat{s}(f)\phantom{mm}\text{\cite{DTSP}}
+\hat{x}_s(j\omega)=\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}\hat{x}_c(t)(j\omega)*\hat{s}(j\omega)\phantom{mm}\text{\cite{DTSP}}
 \end{equation}
 It follows \frede{Hvorfor? \texttrademark} that
 \begin{equation}\label{eq:samp_freq}
-\hat{x}_s(f)=\frac{1}{T}\sum_{k=-\infty}^{\infty}\hat{x}_c(j(f-kf_s))
+\hat{x}_s(j\omega)=\frac{1}{T}\sum_{k=-\infty}^{\infty}\hat{x}_c(j(\omega-k\omega_s))
 \end{equation}
+\eqref{eq:samp_freq} mathematically samples $x_c(t)$ in the frequency domain. It is furthermore useful in the below analysis.
 \subsection{Aliasing}\label{sec:aliasing}
-From \eqref{eq:samp_freq} it is seen that $\hat{x}_s(f)$ consists of copies of $\hat{x}_c$ repeated at whole multiples of $f_s$ on both sides of the origin. From this follows that two different sampled continuous signals may have the same frequency representation. More specifically if the frequencies of two different signals differ from som whole multiple of $f_s$ by the same amount the sequence of samples for the two signals will be identical. \cite{pelgrom} This phenomenon is called aliasing and is illustrated in figures \ref{fig:aliasing1} and \ref{fig:aliasing2} where two sine waves of different frequencies are sampled with the same $f_s$.
+From \eqref{eq:samp_freq} it is seen that $\hat{x}_s(j\omega)$ consists of copies of $\hat{x}_c$ repeated at whole multiples of $j\omega_s$ on both sides of the origin - this is seen in figure \ref{fig:}.
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+xtick={-1,1},
+ytick=\empty,
+axis lines=middle,
+xmin=-10,
+xmax=10,
+ymin=-0.25,
+ymax=1.25]
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+From this follows that two different sampled continuous signals may have the same frequency representation. More specifically if the frequencies of two different signals differ from som whole multiple of $f_s$ by the same amount the sequence of samples for the two signals will be identical. \cite{pelgrom} This phenomenon is called aliasing and is illustrated in figures \ref{fig:aliasing1} and \ref{fig:aliasing2} where two sine waves of different frequencies are sampled with the same $f_s$.
 \begin{figure}[H]
 \centering
 \begin{minipage}{0.49\textwidth}
