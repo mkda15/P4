@@ -77,22 +77,7 @@ x_s(t)&=x_c(t)s(t)\nonumber \\
 \label{eq:sampling}
 \end{align}
 \eqref{eq:sampling} is a mathematical representation of sampling of the continuous function $x_c(t)$ into the function $x_s(t)$ \cite{DTSP}. Although \eqref{eq:sampling} describes sampling, we have $x_s(t)\neq x[n]$ as $x_s(t)$ is defined in the interval between two samples whereas $x[n]$ only takes values at integers $n$. Although $x_s(t)\neq x[n]$ \eqref{eq:sampling} will be useful in the upcoming appliance of the Fourier transform.
-\subsection{Frequency representation of sampling}
-To study the behavior of $x_s(t)$ in the frequency domain the Fourier transform is used. The Fourier transform of $s(t)$ is seen in \eqref{eq:fourier_impulse}.
-\begin{equation}\label{eq:fourier_impulse}
-\hat{s}(j\omega)=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}(\omega-k\omega)
-\end{equation}
-The Fourier transform of \eqref{eq:sampling} uses the fact, that \eqref{eq:sampling} is a product of two functions, which is a convolution in the frequency domain:
-\begin{equation}
-\hat{x}_s(j\omega)=\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}\hat{x_c}(t)(j\omega)*\hat{s}(j\omega)\phantom{mm}\text{\cite{DTSP}}
-\end{equation}
-It follows \frede{Hvorfor? \texttrademark} that
-\begin{equation}
-\hat{x}_s(j\omega)=\frac{1}{T}\sum_{k=-\infty}^{\infty}\hat{x_c}(j(\omega-k\omega))
-\end{equation}
-\frede{Forstår ikke helt argumentet for, hvorfor aliasing opstår ud over at bølger med forskellige frekvenser kan have samme samplingssekvens.}
-
-\paragraph{Example} Sampling a ball following the arc shown in figure \ref{fig:ball_cont} results in the plotted points in figure \ref{fig:ball_disc}. As such the balls path is illustrated with discrete points along the path.
+\paragraph{Example of sampling} Sampling a ball following the arc shown in figure \ref{fig:ball_cont} results in the plotted points in figure \ref{fig:ball_disc}. As such the balls path is illustrated with discrete points along the path.
 \begin{figure}[H]
 \centering
 \begin{minipage}{0.49\textwidth}
@@ -125,11 +110,86 @@ It follows \frede{Hvorfor? \texttrademark} that
 \label{fig:ball_disc}
 \end{minipage}
 \end{figure}
+\subsection{Frequency representation of sampling}
+To study the behavior of $x_s(t)$ in the frequency domain the Fourier transform is used. The Fourier transform of $s(t)$ is seen in \eqref{eq:fourier_impulse}.
+\begin{equation}\label{eq:fourier_impulse}
+\hat{s}(f)=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}(f-kf_s)
+\end{equation}
+The Fourier transform of \eqref{eq:sampling} uses the fact, that \eqref{eq:sampling} is a product of two functions, which is a convolution in the frequency domain:
+\begin{equation}
+\hat{x}_s(f)=\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}\hat{x}_c(t)(f)*\hat{s}(f)\phantom{mm}\text{\cite{DTSP}}
+\end{equation}
+It follows \frede{Hvorfor? \texttrademark} that
+\begin{equation}\label{eq:samp_freq}
+\hat{x}_s(f)=\frac{1}{T}\sum_{k=-\infty}^{\infty}\hat{x}_c(j(f-kf_s))
+\end{equation}
 \subsection{Aliasing}\label{sec:aliasing}
-In this section the problem of aliasing and the methods to overcome this phenomenon will be covered.\\\\
-If the frequencies of two different signals differ from som whole multiple of $f_s$ by the same amount (e.g. signals of $1$ Hz and $11$ Hz sampled at $f_s=10$ Hz) the sequence of samples for the two signal will be identical. This phenomenon is shown in figures \ref{fig:sine1} and \ref{fig:sine2}.
-
-
+From \eqref{eq:samp_freq} it is seen that $\hat{x}_s(f)$ consists of copies of $\hat{x}_c$ repeated at whole multiples of $f_s$ on both sides of the origin. From this follows that two different sampled continuous signals may have the same frequency representation. More specifically if the frequencies of two different signals differ from som whole multiple of $f_s$ by the same amount the sequence of samples for the two signals will be identical. \cite{pelgrom} This phenomenon is called aliasing and is illustrated in figures \ref{fig:aliasing1} and \ref{fig:aliasing2} where two sine waves of different frequencies are sampled with the same $f_s$.
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.49\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+axis lines=middle,
+xtick={3.14159,6.28138},
+xticklabels={$\pi$,$2\pi$},
+ytick={-1,1}
+,xmin=-.25
+,xmax=6.5
+,ymin=-1.25
+,ymax=1.25
+,samples=50]
+\addplot[red][domain=0:6.28318]{sin(deg(x))};
+\node at (axis cs:0,0) {\textbullet};
+\node at (axis cs:0.6918,0.6428) {\textbullet};
+\node at (axis cs:1.3963,0.9848) {\textbullet};
+\node at (axis cs:2.0944,0.8660) {\textbullet};
+\node at (axis cs:2.7925,0.3420) {\textbullet};
+\node at (axis cs:3.4907,-0.3420) {\textbullet};
+\node at (axis cs:4.1888,-0.8660) {\textbullet};
+\node at (axis cs:4.8869,-0.9848) {\textbullet};
+\node at (axis cs:5.5850,-0.6428) {\textbullet};
+\node at (axis cs:6.2832,0) {\textbullet};
+\end{axis}
+\end{tikzpicture}
+\caption{Sine wave of angular frequency $\omega=\frac{2\pi}{\text{s}}=1$ Hz sampled at $f_s=9$ Hz.}
+\label{fig:aliasing1}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+axis lines=middle,
+xtick={3.14159,6.28138},
+xticklabels={$\pi$,$2\pi$},
+ytick={-1,1}
+,xmin=-.25
+,xmax=6.5
+,ymin=-1.25
+,ymax=1.25
+,samples=300]
+\addplot[blue][domain=0:6.28138]{sin(deg(10*x))};
+\node at (axis cs:0,0) {\textbullet};
+\node at (axis cs:0.6918,0.6428) {\textbullet};
+\node at (axis cs:1.3963,0.9848) {\textbullet};
+\node at (axis cs:2.0944,0.8660) {\textbullet};
+\node at (axis cs:2.7925,0.3420) {\textbullet};
+\node at (axis cs:3.4907,-0.3420) {\textbullet};
+\node at (axis cs:4.1888,-0.8660) {\textbullet};
+\node at (axis cs:4.8869,-0.9848) {\textbullet};
+\node at (axis cs:5.5850,-0.6428) {\textbullet};
+\node at (axis cs:6.2832,0) {\textbullet};
+\end{axis}
+\end{tikzpicture}
+\caption{Sine wave of angular frequency $\omega=\frac{20\pi}{\text{s}}=10$ Hz sampled at $f_s=9$ Hz.}
+\label{fig:aliasing2}
+\end{minipage}
+\end{figure} 
+\noindent Aliasing is as noted also shown in the frequency domain - this is seen in figures *Insert references \texttrademark.
+\begin{center}
+*Insert figures with frequency representation of aliasing \texttrademark*
+\end{center}
+It is clear, that if $f_s-f_N\geq f_N\Rightarrow f_s\geq2f_N$ there is no overlap of the copies of $\hat{x}_c$. If however $f_s-f_N\leq f_N\Rightarrow f_s\leq 2f_N$ the copies will overlap. The consequence of aliasing is therefore that $x_c$ is not reconstructable from $x_s$ as the above figures and frequency interpretation show.
 
 
 
@@ -175,6 +235,8 @@ An analogue-to-digital converter (ADC) is a device which as the name suggests is
 \label{fig:input}
 \end{figure}
 %\input{sections/mainmatter/chapter_4/_____.tex}
+
+
 
 
 \clearpage
