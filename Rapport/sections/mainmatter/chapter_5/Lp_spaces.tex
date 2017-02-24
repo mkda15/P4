@@ -1,0 +1,92 @@
+\chapter{$\mathcal{L}^p$ and $\ell^p$ spaces}
+This chapter is inspired by (Fourier Analysis and its Applications, Gerald B. Folland), (Foundations of Signal Processing, M. Vetterli et al) and (Foundations of Time-Frequency Analysis, K. Gröchenig).
+\\ \\
+This project deals with functions in the so-called $\mathcal{L}^p$ and $\ell^p$ spaces. These spaces are introduced in the following and used later to ensure that the Fourier series and transforms used in the project actually converge. The following definitions are inspired by (M. Vetterli et al, page 31).
+
+\begin{definition}{$\mathcal{L}^p(\mathbb{R})$}
+\\
+Let $D \subset \mathbb{R}^n$ be a subset. $\mathcal{L}^2(D)$ is the set of all functions on $D$ whose squares are absolutely Lebesgue-integrable over $D$:
+\begin{align*}
+\mathcal{L}^2(a,b) = \left\{ f: \int_D |f(x)|^2 dx < \infty \right\}
+\end{align*}
+
+$\mathcal{L}^2(D)$ is the normed vector space of square-integrable complex-valued functions. The inner product is:
+\begin{align*}
+\langle x,y \rangle =  \int_D x(t) \overline{y(t)} dt
+\end{align*}
+
+Where $\overline{y(t)}$ is the complex conjugate of $y(t)$. The norm is:
+\begin{align*}
+\|x\| = \left( \int_D |x(t)|^2 dt \right)^{1/2}
+\end{align*}
+
+This definition can be expanded for any $p \in [1,\infty)$ and all of $\mathbb{R}$ such that the normed vector space $\mathcal{L}^p(\mathbb{R})$ is the subspace of $\mathbb{C}^\mathbb{R}$ consisting of vectors with finite $\mathcal{L}^p$ norm:
+\begin{align*}
+\|x\|_p = \left( \int_{-\infty}^\infty |x(t)|^p dt \right)^{1/p}
+\end{align*}
+\end{definition}
+
+As stated in (Folland, 2009, page 74), this space is simply the space of all functions $f$ such that the region between the graph of $|f|^2$ and the $x$-axis has finite area. The Lebesgue integral is therefore just another way of calculating the area between the graph of the function and the $x$-axis. The Lebesgue integral will not be elaborated further in this project as it is beyond its focus.
+\\ \\
+A similar definition is given for $\ell^p$ which deals with sequences:
+\begin{definition}{$\ell^p(\mathbb{Z})$}
+\\
+$\ell^2(\mathbb{Z})$ is the space of square-summable sequences, and the inner product is defined as:
+\begin{align*}
+\langle x,y \rangle = \sum_{n\in\mathbb{Z}} x[n] \overline{y[n]}
+\end{align*}
+
+And the norm is defined as:
+\begin{align*}
+\|x\| = \left( \sum_{n\in\mathbb{Z}} |x[n]|^2 \right)^{1/2}
+\end{align*}
+
+For any $p \in [1,\infty)$, the normed vector space $\ell^p(\mathbb{Z})$ is the subspace of $\mathbb{C}^N$ consisting of vectors with finite $\ell^p$ norm:
+\begin{align*}
+\|x\|_p = \left( \sum_{n\in\mathbb{Z}} |x[n]|^p \right)^{1/p}
+\end{align*}
+
+Furthermore, the $\ell^\infty$ norm is defined as:
+\begin{align*}
+\|x\|_\infty = \sup_{n\in\mathbb{Z}}|x[n]|
+\end{align*}
+\end{definition}
+
+The following should be rewritten as it is almost copied directly from the book.
+\\ \\
+From Folland, p. 81-82:
+One can replace the element $dx$ of linear measure on $[a,b]$ by a weighted element of measure, $w(x) dx$. To be precise, suppose $w$ is a continuous function on $[a,b]$ such that $w(x) > 0$ for all $x \in [a,b]$; we call such a $w$ a weight function on $[a,b]$. We can then define the weighted $L^2$ space $L^2_w(a,b)$ to be the set of all (Lebesgue measurable) functions on $[a,b]$ such that
+\begin{align*}
+\int_a^b |f(x)|^2 w(x) dx < \infty,
+\end{align*}
+
+and we define an inner product and norm on $L_w^2(a,b)$ by
+\begin{align*}
+\langle f,g \rangle = \int_a^b f(x) \overline{g(x)} w(x) dx, \quad \|f\|_w = \left( \int_a^b |f(x)|^2 w(x) dx \right)^{1/2}
+\end{align*}
+
+We define $L_2(D)$ to be the set of all functions $f$ such that:
+\begin{align*}
+\int_D |f(\textbf{x})|^2 d\textbf{x} < \infty
+\end{align*}
+
+and we define the inner product and norm on $L^2(D)$ by
+\begin{align*}
+\langle f,g \rangle = \int_D f(\textbf{x}) \overline{g(\textbf{x})} d \textbf{x}, \quad \|f\| = \left( \int_D |f(\textbf{x})|^2 d \textbf{x} \right)^{1/2}.
+\end{align*}
+
+Another example of a Hilbert space is the space $l^2$ of square-summable sequences. That is, the elements of $l^2$ are sequences $\{c_n\}_1^\infty$ of complex numbers such that $\sum_1^\infty |c_n|^2 < \infty$, and the inner product and norm are defined by
+\begin{align*}
+\left\langle \{c_n\},\{d_n\} \right\rangle = \sum_1^\infty c_n \overline{d}_n, \quad \left\| \{c_n\} \right\| = \left( \sum_1^\infty  |c_n|^2 \right)^{1/2}
+\end{align*}
+\\ \\
+From M. Vetterli, page 35:
+$\mathcal{L}^p(\mathbb{R})$ spaces Like for sequences, we can define other norms on $\mathbb{C}^\mathbb{R}$ as well. Again, because the space is infinite-dimensional, the choice of the norm and the requirement that it be finite restricts $\mathbb{C}^\mathbb{R}$ to a smaller set. For example, for $p \in [1,\infty)$, the $\mathcal{L}^p$ norm is
+\begin{align*}
+\|x\|_p = \left( \int_{-\infty}^{\infty} |x(t)|^p dt \right)^{1/p}
+\end{align*}
+
+The extension to $p = \infty$ leads to the $\mathcal{L}^\infty$ norm as
+\begin{align*}
+\|x\|_\infty = ess \sup_{t\in\mathbb{R}} |x(t)|.
+\end{align*}
