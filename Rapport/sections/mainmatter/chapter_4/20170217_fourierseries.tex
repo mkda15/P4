@@ -73,6 +73,7 @@ For $n\neq k$:
 	=\dfrac{(-1)^{n-k}-1(-1)^{n-k}}{j\omega(n-k)}
 	=0
 \end{align*}
+
 \chr{Could be written with sine and cosine, to show that the integral of those 2 over a periode is 0}
 
 The second case is for $n = k$
@@ -123,7 +124,7 @@ Further if a function $g(t)$ is uneven, ($g(t) = -g(-t)$), then the integral $\i
 For a $2\pi$- periodic and integrabel function, the n'th. order Fourier partial-sum is defined by: 
 
 \begin{align}\label{eq:partialsumFourierSeries}
-	S_N^f(\omega t) = \dfrac{1}{2} a_0 + \sum_1^N\left(a_n \cos n\omega t + b_n \sin n \omega t \right) = \sum_{-N}^N c_n e^jn\omegat
+	S_N^f(\omega t) = \dfrac{1}{2} a_0 + \sum_1^N\left(a_n \cos n\omega t + b_n \sin n \omega t \right) = \sum_{-N}^N c_n e^jn\omega t
 \end{align}
 
 
@@ -138,7 +139,7 @@ The sum of any infinite series is defined to be the limit of its partial sums.
 
 The N partial sum of the Fourier series be defined as:
 \begin{align}\label{eq:partialsumFourierSeries}
-	S_N^f(\omega t) = \dfrac{1}{2} a_0 + \sum_1^N\left(a_n \cos n\omega t + b_n \sin n \omega t \right) = \sum_{-N}^N c_n e^jn\omegat
+	S_N^f(\omega t) = \dfrac{1}{2} a_0 + \sum_1^N\left(a_n \cos n\omega t + b_n \sin n \omega t \right) = \sum_{-N}^N c_n e^jn\omega t
 \end{align}
 Wants to show that the partial sum \eqref{eq:partialsumFourierSeries} converges.
 Inserting the definition $a_n$ and $b_n$ or $c_n$ coefficients into \eqref{eq:partialsumFourierSeries} yields:
