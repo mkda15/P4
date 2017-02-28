@@ -1,2 +1,23 @@
 \section{The Fourier transform}
-The following chapter will focus on different aspects on the Fourier series and the Fourier transform.
+This section deals with the continuous Fourier transform. In this project the Fourier transform will be used to transform a signal $f(t)$ represented in the time domain to a signal represented in the frequency domain, which will be useful when the spectrograms need to be made. The section is inspired by \cite{FourierTrans} and \cite{FAA}.
+\\ \\
+The Fourier transform is a generalization of the Fourier series described in the former section, where $f(t) = \sum_{n=-\infty}^\infty c_n e^{\frac{2n\pi j t}{T}}$. This sequence may be regarded as a function of $n$, and $f(t)$ and $c_n$ are thus different representations of the same object. $c_n$ may also be regarded as a function of the frequency $\omega = \frac{2n\pi}{T}$. If $T$ is large, then $\omega$ becomes small, and then $Tc_n$ becomes a continuous function for $T \to \infty$. Furthermore, for $T \to \infty$ it is no longer required that $f(t)$ is periodic since the period becomes $(-\infty,\infty)$. Therefore, the Fourier transform $F(\omega)$ of $f(t)$ is the limit of the continuous function $\frac{1}{\sqrt{2\pi}} T c_n$ for $T \to \infty$, which means that:
+\begin{align*}
+\dfrac{1}{\sqrt{2\pi}} T c_n = \dfrac{1}{\sqrt{2\pi}} \int_{-T/2}^{T/2} f(t) &e^{\frac{-2n\pi j t}{T}} dt = \dfrac{1}{\sqrt{2\pi}} \int_{-T/2}^{T/2} f(t) e^{-j\omega t} dt \Rightarrow \\
+\dfrac{1}{\sqrt{2\pi}} T c_n &\to \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{-j \omega t} dt
+\end{align*}
+
+For the Fourier series expansion of $f(t)$ with $\omega = \frac{2n\pi}{T}$, let 2 consecutive values $n$ be 1 length apart so that $dn = 1$. This means that $d\omega = \frac{2\pi}{T} dn = \frac{2\pi}{T}$ and $\frac{T d\omega}{2\pi} = 1$, which shows that:
+\begin{align*}
+f(t) &= \sum_{n=-\infty}^\infty c_n e^{\frac{2n\pi j t}{T}} = \sum_{\frac{T\omega}{2\pi}=-\infty}^\infty c_n e^{j \omega t} \dfrac{T d\omega}{2 \pi} \\
+&= \dfrac{1}{\sqrt{2\pi}} \sum_{\frac{T\omega}{2\pi}=-\infty}^\infty \dfrac{T c_n}{\sqrt{2\pi}} e^{j \omega t} d\omega \to \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty F(\omega) e^{j \omega t} d \omega
+\end{align*}
+
+Notice that $\frac{1}{2\pi}$ in the first line equals $\frac{1}{\sqrt{2\pi}} \cdot \frac{1}{\sqrt{2\pi}}$ in the second line, and this substitution makes the transforms (stated below) symmetric and also certain calculations easier. \cite{Page 10, FourierTrans}
+
+Contents:
+\begin{itemize}
+\item The Fourier transform on $\mathcal{L}^1$
+\item The inverse Fourier transform
+\item The Fourier transform on $\mathcal{L}^2$
+\end{itemize}
