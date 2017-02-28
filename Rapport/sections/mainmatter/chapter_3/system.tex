@@ -72,16 +72,16 @@ Figure \ref{fig:synth} illustrates the synthesizing of the system down to a leve
 		child {
 			node [block] (algorithm) {Algorithm}
 			child {
-				node [block] (four) {Fourier}
+				node [block] (four) {Signal mod.}
 				}
 			child {
-				node [block] (filter) {Filter}
+				node [block] (filter) {Spectral analysis}
 				}
 			child {
-				node [block] (spec) {Spectro- gram}
+				node [block] (spec) {Repr. of spectrum }
 				}
 			child {
-				node [block] (symb) {Symbol Process.}
+				node [block] (symb) {Symbol process.}
 				}	
 			}
     node [output, name=output1, right of=app1]{}
@@ -102,21 +102,26 @@ Figure \ref{fig:synth} illustrates the synthesizing of the system down to a leve
 \end{figure}
 
         
-\subsection{Requirements (and delimitations?)}
-\subsubsection{Input}
-To process an analogue sound in a computer the sound has to be digitalized. This is done by an analogue to digital converter(ADC) which transform an audio signal\trine{audio signal: elektrisk signal hvis spænding samples} from a microphone into digital bits. Further these bits has to be stored as a datafile suited to the further algorithm. This process are to be done by the audio card in the  computer and some storage software. The software needs to provide a sampling frequency at 44,1 kHz and a bit resolution of 16 bits.\cite{Mic} \\
-The audio files for this system are limited to consist of single tones, meaning no cords, and will be recorded in anechoic chamber in order to control the amount of noise on the signal.\\      
-The produced audio file will provide as the input for the algorithm that process the sound. 
+\subsection{Requirements and delimitations}
+\subsubsection{Audio file}
+To process an analogue sound in a computer the sound has to be digitalized. This is done by an analogue to digital converter(ADC) which transform an audio signal from a microphone into digital bits. Further these bits has to be stored as a audio file format as MP3 format. This process are to be done by the sound card in the computer and some storage software. In order to reconstruct the analogue signal exact the software needs to provide a sampling frequency at 44,1 kHz and a bit resolution of 16 bits\cite{Mic}. Further about 5 MB memory are needed, which corresponds to a typically MP3 music file. \\
+The audio files for this system are limited to consist of single tones, meaning no cords. The tones will be recorded in an anechoic chamber which implies control upon the amount of noise on the signal.\\      
+The produced audio file will provide as the \textit{input} for the algorithm that process the sound. 
 
 \subsubsection{Algorithm}
-The main part of the system is the algorithm that will provide as an application which take an audio file as input and generate the corresponding note sheet. Cf. chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones. The main purpose is thereby to identify the frequencies on the audio file. This involves transformation of the signal, from time- to frequency domain done by Fourier Transformation. Filtering of the signal is necessary if any noise is included in the signal. The spectrogram is achieved by plotting the frequency. \\
+The main part of the system is the algorithm that will provide as an application which take an audio file as input and generate the corresponding note sheet. This involves modification of the signal, spectral analysis of the signal and further a representation of the signal spectrum.\\
+\textbf{Signal modification} are needed in this project in order to select what frequencies are wanted for the signal analysis. This will be done by a filter designed to reduce additive noise on the signal. The filter will be linear and time invariant, thus the filter will be designed to a specific audio file.\trine{specify the type of filter later}             
+\\ 
+\textbf{Spectral analysis} is 
+
+Cf. chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones. The main purpose is thereby to identify the frequencies on the audio file. This involves transformation of the signal, from time- to frequency domain done by Fourier Transformation. Filtering of the signal is necessary if any noise is included in the signal. The spectrogram is achieved by plotting the frequency. \\
 To create the note sheet on behave of a spectrogram symbol processing is required, marked by the blue parentheses i figure \ref{fig:synth}. Based on the given time limit, and the theoretical focus in the project the system are delimited to leave out the step of symbol processing. Hence the spectrogram will make the last step in the algorithm. 
 
 \subsubsection{Output} 
 The result of the algorithm is as stated a spectrogram. A visualisation of the spectrogram will thereby make the output of the system. It is required that the spectrogram is how precise?       
 
 \section{Final system}
-On behave of the stated specifications to the system figure \ref{fig:system} illustrates the final system which will form a basis of the further work. Main focus of the project is the development of the algorithm in the application ..\trine{skal der være noget sån ala det sidste her?}}   
+On behave of the stated specifications to the system figure \ref{fig:system} illustrates the final system which will form a basis of the further work. Main focus of the project is the development of the algorithm in the application ..\trine{okay der står fourier og spectrogram?}   
 \begin{figure}[H]
 \centering
 \tikzstyle{block} = [rectangle,draw,thick, text width=4.2em, text centered, minimum height=3em]
@@ -128,10 +133,10 @@ On behave of the stated specifications to the system figure \ref{fig:system} ill
 	node at (input1) [above=5mm] {\textsf{Mic}}		
 	node [block, right of=input1] (ADC) {ADC}
 	node [block, right of=ADC] (store) {Storage}
-	node [block, right of=store] (four) {Fourier}
-	node [block, right of=four] (filter) {Filter}
-	node [block, right of=filter] (spec) {Spec.}
-	node [block, right of=spec] (out) {Visual spec.}
+	node [block, right of=store] (four) {Signal Mod.}
+	node [block, right of=four] (filter) {Fourier Trans.}
+	node [block, right of=filter] (spec) {Spectro-gram}
+	node [block, right of=spec] (out) {Visual Spectrogram}
 ;
 % Joining blocks. 
 % Commands \draw with options like [->] must be written individually
