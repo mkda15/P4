@@ -120,5 +120,32 @@ where
 Further if a function $g(t)$ is uneven, ($g(t) = -g(-t)$), then the integral $\int_{-\pi}^\pi g(t) = 0$.
 
 \subsection{Convergence of the Fourier series}
+For a $2\pi$- periodic and integrabel function, the n'th. order Fourier partial-sum is defined by: 
 
+\begin{align}\label{eq:partialsumFourierSeries}
+	S_N^f(\omega t) = \dfrac{1}{2} a_0 + \sum_1^N\left(a_n \cos n\omega t + b_n \sin n \omega t \right) = \sum_{-N}^N c_n e^jn\omegat
+\end{align}
+
+
+%%%%%%
+More precisely, $f\in PS(a,b)$ iff 
+\begin{enumerate}
+	\item $f \in PC(a,b)$
+	\item $f'$ exists and is continuous on $(a,b)$ except perhaps at finitely many points $x_1,\dots,x_k$ (which will include any points where f is discontinuous), and the one-sided limits $f'(x_j-)$ and $f'(x_j+)(j)1,\dots,K)$, and also $f'(a+)$ and $f'(b-)$, exist.
+\end{enumerate}
+
+The sum of any infinite series is defined to be the limit of its partial sums.
+
+The N partial sum of the Fourier series be defined as:
+\begin{align}\label{eq:partialsumFourierSeries}
+	S_N^f(\omega t) = \dfrac{1}{2} a_0 + \sum_1^N\left(a_n \cos n\omega t + b_n \sin n \omega t \right) = \sum_{-N}^N c_n e^jn\omegat
+\end{align}
+Wants to show that the partial sum \eqref{eq:partialsumFourierSeries} converges.
+Inserting the definition $a_n$ and $b_n$ or $c_n$ coefficients into \eqref{eq:partialsumFourierSeries} yields:
+
+\begin{align*}
+	S_N^f(\omega t) = \dfrac{1}{2\pi} \sum_{-N}^N \int_{-\pi}^\pi 
+\end{align*}
 %http://cnx.org/contents/8YnJdzjg@8/Derivation-of-Fourier-Coeffici
+
+%Note to self foldning.
