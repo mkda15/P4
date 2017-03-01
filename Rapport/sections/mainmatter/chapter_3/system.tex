@@ -110,11 +110,14 @@ The produced audio file will provide as the \textit{input} for the algorithm tha
 
 \subsubsection{Algorithm}
 The main part of the system is the algorithm that will provide as an application which take an audio file as input and generate the corresponding note sheet. This involves modification of the signal, spectral analysis of the signal and further a representation of the signal spectrum.\\
-\textbf{Signal modification} are needed in this project in order to select what frequencies are wanted for the signal analysis. This will be done by a filter designed to reduce additive noise on the signal. The filter will be linear and time invariant, thus the filter will be designed to a specific audio file.\trine{specify the type of filter later}             
+\textbf{Signal modification} are needed in this project in order to select what frequencies are wanted for the signal analysis. This will be done by a digital filter designed to reduce additive noise on the signal. The filter will be linear and time invariant, thus the filter will be designed to a specific audio file.\trine{specify the type of filter later}             
 \\ 
-\textbf{Spectral analysis} is 
+\textbf{Spectral analysis} is concerning the spectrum of frequencies corresponding to the signal. This involves transformation of the signal, from time- to frequency domain.     
+The primary method used for this purpose is the Fourier transformation which will be used in this project, based on the learning goals for the project. Other method could be.. \trine{Alternativer til fourier?}. \\   
+\textbf{Representation of frequency spectrum} 
 
-Cf. chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones. The main purpose is thereby to identify the frequencies on the audio file. This involves transformation of the signal, from time- to frequency domain done by Fourier Transformation. Filtering of the signal is necessary if any noise is included in the signal. The spectrogram is achieved by plotting the frequency. \\
+ 
+Cf. chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones. The main purpose is thereby to identify the wanted frequencies on the audio file. This involves transformation of the signal, from time- to frequency domain done by Fourier Transformation. Filtering of the signal is necessary if any noise is included in the signal. The spectrogram is achieved by plotting the frequency. \\
 To create the note sheet on behave of a spectrogram symbol processing is required, marked by the blue parentheses i figure \ref{fig:synth}. Based on the given time limit, and the theoretical focus in the project the system are delimited to leave out the step of symbol processing. Hence the spectrogram will make the last step in the algorithm. 
 
 \subsubsection{Output} 
