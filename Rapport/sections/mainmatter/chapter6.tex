@@ -159,8 +159,32 @@ ymax=3]
 \caption{Signal bandlimited by $\omega_N$ sampled at $\omega_s$ in the frequency domain. Copies of $\hat{x}_c$ are seen at whole multiples of $\omega_s$.}
 \label{fig:copies}
 \end{figure}
-It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $\hat{x}_c$. If however $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing.
-\\\\
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+scale=1.5,
+unit vector ratio*=1 1 1,
+axis lines = middle,
+xtick={-2,2,-4,4},
+xticklabels={$-\omega_s$,$\omega_s$,$-2\omega_s$,$2\omega_s$},
+ytick=\empty,
+xmin=-6,
+xmax=6,
+ymin=0,
+ymax=3]
+\draw[line width=0.5mm](axis cs:0,2)--(axis cs:0.5,0.33);
+\draw[line width=0.5mm](axis cs:2,2)--(axis cs:1,0.33);
+\draw[line width=0.5mm](axis cs:0,2)--(axis cs:-1,0.33);
+\draw[line width=0.5mm](axis cs:-2,2)--(axis cs:-1,0.33);
+\draw[line width=0.5mm](axis cs:-2,2)--(axis cs:-3,0.33);
+\draw[line width=0.5mm](axis cs:2,2)--(axis cs:3,0.33);
+\end{axis}
+\end{tikzpicture}
+\caption{Signal bandlimited by $\omega_N$ sampled at $\omega_s$ in the frequency domain. Copies of $\hat{x}_c$ are seen at whole multiples of $\omega_s$.}
+\label{fig:copies}
+\end{figure}
+It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $\hat{x}_c$. If however $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing.\\\\
 As the copies of $\hat{x}_c$ appear at whole multiples of $\omega_s$ the copies can be shifted to completely cover each other. From this follows that two different sampled continuous signals may have the same frequency representation. More specifically if the frequencies of two different signals differ from som whole multiple of $j\omega_s$ by the same amount the sequence of samples for the two signals will be identical - this is seen in figures  \ref{fig:aliasing1} and \ref{fig:aliasing2} where two sine waves of different frequencies are sampled with the same $f_s$.
 \begin{figure}[H]
 \centering
