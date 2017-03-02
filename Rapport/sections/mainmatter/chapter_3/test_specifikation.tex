@@ -1,4 +1,4 @@
-\section{Test specification/validation}
+\section{Test specification}
 In this section test specifications will be determined in order to validate the final system. This will be done upon the concept of the V-model\cite{vmodel}, illustrated in figure \ref{fig:vmodel}.         
 The V-model is a simple multiple-phase model used to describe phases in the development process. \\
 The left side of the V, is decomposition of the problem, and the right side is the creation and integration and test of system.
@@ -35,25 +35,28 @@ The left side of the V, is decomposition of the problem, and the right side is t
 \caption{Concept of the V-model}
 \label{fig:vmodel}
 \end{figure}
-In the previous synthesis section, the left part of the V-model is described, and hence the next step in the V-model is the creation of the test specifications for the different parts. Along with this phase a list of test specifications are created, starting from the smallest unit, and working up to the system as a hole. Later on the these test will be conducted.\\
+In the previous synthesis section, the left part of the V-model is described, and hence the next step in the V-model is the creation of the test specifications for the different parts. Along with this phase a list of test specifications are created, starting from the smallest unit, and working up to the system as a hole. Later on these test will be conducted.\\
 \\
-The system will be tested from the bottom up, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. Next up the coherence of the system is tested, and finally the full system as a single unit is tested. \\
-\textbf{Units in the model are as follows}  
+The system will be tested from the bottom up, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. Next up the coherence of the system is tested, and finally the full system as a single unit is tested. Units in the model are as follows \\
+\textbf{Physical components }  
 \begin{itemize}
 	\item Microphone
 	\item ADC
-	\item Sound file creation
-	\item Fourier transformation
+	\item Storage
+\end{itemize}
+\textbf{Application}
+\begin{itemize}
 	\item Filter
+	\item Fourier transformation
 	\item Spectrogram
 \end{itemize}
-Notes that test on the first three unit of the system will not be carried out in this project, because they consist of pretested hardware and software.  
+Note that test on the physical components will not be carried out in this project, because pretested hardware and corresponding software are used. Tests will thereby focus on the units of the application.\\ 
+\subsubsection{Unit test on the choice of filter}
+The filter will be tested on data with a high signal to noise ratio with noise expected to find in a normal use situation added on.
 \subsubsection{Unit test of the Fourier transformation}
 This test will be done by comparing the Fourier algorithm used, with a pre-existence algorithm from matlab or python.
 By feeding the algorithms the same data set and comparing the output int. 
 In addition to this, the algorithm will be tested on data with an expected result like a simple sinusoidal.
-\subsubsection{Unit test on the choice of filter}
-The filter will be tested on data with a high signal to noise ratio with noise expected to find in a normal use situation added on.
 \subsubsection{Unit test of spectrogram}
 As with verification of the Fourier transform, the spectrogram algorithm, will be tested against a pre- algorithm, on the same data set.
 The algorithm will then be tested on a fixed data set with a known output.
@@ -66,12 +69,9 @@ By doing so, the output of the algorithm can hence be compared.
 The next step is to test the units as they are integrated into a single system.
 This test is done by taking the output of the previous and feeding it into the next step of the algorithm. 
 This is a minor step in creating the final product.
-This product 
-simple data 
 \\\\
 The music used for testing the algorithm will be simple melodies containing one note at a time (no chords) from one instrument at a time. This will allow insight into the methods used without complicating the recognition of notes by blending together different instruments and different sound frequencies.
 
 \subsubsection{System test of the final product}
 The final design, will be tested by giving the final system a recording with a known result and comparing the difference between the products result and the know result. The design can be further tested to see if all the wanted characteristics of the system comply to the wanted criteria of the system.
-
 
