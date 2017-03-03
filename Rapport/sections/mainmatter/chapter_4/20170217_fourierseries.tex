@@ -140,7 +140,9 @@ Inserting $c_n$ in the partial sum using $x$ in place of the variable $t$.
 Notice that 
 \begin{align*}
 	S_N^f (\omega t) 
-	&= \dfrac{1}{2\pi} \sum_{n=-N}^N \int_{-\pi}^\pi f(\omega x)e^{jn\omega(x-t) d(\omega x)}\text{, and let \tau = \omega(x-t) }\\
+	&= \dfrac{1}{2\pi} \sum_{n=-N}^N \int_{-\pi}^\pi f(\omega x)e^{jn\omega(x-t) d(\omega x)}\text{, and let } 
+	\tau 
+	= \omega(x-t)\\
 	= \dfrac{1}{2\pi} \sum_{n = -N}^N \int_{-\pi - \omega t}^{\pi - \omega x} f(\omega x + \tau ) e^{j n \tau} d\tau
 \end{align*}
 
@@ -159,7 +161,7 @@ Using this information we can derive the following:
 \begin{theorem}
 	Let $f(\omega t)$ be a $2\pi$-periodic and piece wise smooth then the limit of the partial sum $S_N^f$ is given by:
 	 \begin{align*}
-	 	\lim_{N\to\infty} S_N^f (\omega t) = \dfrac{1}{2}\left[f(\omega t-) + f(\omega t+)\right],\text{ \omega t\in [-\pi, \pi]}
+	 	\lim_{N\to\infty} S_N^f (\omega t) = \dfrac{1}{2}\left[f(\omega t-) + f(\omega t+)\right], \, \omega t\in [-\pi, \pi]
 	 \end{align*}
 	If $f$, is continues in $\omega t$, then:
 	\begin{align*}
