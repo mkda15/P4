@@ -1,21 +1,22 @@
 \section{The Fourier transform}
-This section deals with the continuous Fourier transform. In this project the Fourier transform will be used to transform a signal $f(t)$ represented in the time domain to a signal represented in the frequency domain, which will be useful when the spectrograms need to be made. The section is inspired by \cite{FourierTrans} and \cite{FAA}.
+This section deals with the continuous Fourier transform. In this project the Fourier transform will be used to transform a signal $f(t)$ represented in the time domain to a signal represented in the frequency domain, which will be useful when making the spectrograms mentioned in chapter \ref{ch1} \martin{Introducerer vi spektrogrammerne i kapitel 1? \textregistered}. The section is inspired by \cite{FourierTrans} and \cite{FAA}.
 \\ \\
-The Fourier transform is a generalization of the Fourier series described in the former section, where $f(t) = \sum_{n=-\infty}^\infty c_n e^{\frac{2n\pi j t}{T}}$. This sequence may be regarded as a function of $n$, and $f(t)$ and $c_n$ are thus different representations of the same object. $c_n$ may also be regarded as a function of the frequency $\omega = \frac{2n\pi}{T}$. If $T$ is large, then $\omega$ becomes small, and then $Tc_n$ becomes a continuous function for $T \to \infty$. Furthermore, for $T \to \infty$ it is no longer required that $f(t)$ is periodic since the period becomes $(-\infty,\infty)$. Therefore, the Fourier transform $F(\omega)$ of $f(t)$ is the limit of the continuous function $\frac{1}{\sqrt{2\pi}} T c_n$ for $T \to \infty$, which means that:
+The Fourier transform is a generalization of the Fourier series described in the former section, where $f(t) = \sum_{n=-\infty}^\infty c_n e^{\frac{2n\pi j t}{T}}$. This sequence may be regarded as a function of $n$, and $f(t)$ and $c_n$ are thus different representations of the same object. $c_n$ may also be regarded as a function of the frequency $\omega = \frac{2n\pi}{T}$. If the period $T$ is large, then $\omega$ becomes small, and then $Tc_n$ becomes a continuous function for $T \to \infty$. Furthermore, for $T \to \infty$ it is no longer required that $f(t)$ is periodic since the period becomes $(-\infty,\infty)$. Therefore, the Fourier transform $F(\omega)$ of $f(t)$ is the limit of the continuous function $\frac{1}{\sqrt{2\pi}} T c_n$ for $T \to \infty$, which means that:
 \begin{align*}
 \dfrac{1}{\sqrt{2\pi}} T c_n = \dfrac{1}{\sqrt{2\pi}} \int_{-T/2}^{T/2} f(t) &e^{\frac{-2n\pi j t}{T}} dt = \dfrac{1}{\sqrt{2\pi}} \int_{-T/2}^{T/2} f(t) e^{-j\omega t} dt \Rightarrow \\
 \dfrac{1}{\sqrt{2\pi}} T c_n &\to \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{-j \omega t} dt
 \end{align*}
 
-For the Fourier series expansion of $f(t)$ with $\omega = \frac{2n\pi}{T}$, let 2 consecutive values $n$ be 1 length apart so that $dn = 1$. This means that $d\omega = \frac{2\pi}{T} dn = \frac{2\pi}{T}$ and $\frac{T d\omega}{2\pi} = 1$, which shows that:
+For the Fourier series expansion of $f(t)$ with $\omega = \frac{2n\pi}{T}$, let 2 consecutive values of $n$ be 1 length apart so that $dn = 1$. This means that $d\omega = \frac{2\pi}{T} dn = \frac{2\pi}{T}$ and $\frac{T d\omega}{2\pi} = 1$, which shows that:
 \begin{align*}
 f(t) &= \sum_{n=-\infty}^\infty c_n e^{\frac{2n\pi j t}{T}} = \sum_{\frac{T\omega}{2\pi}=-\infty}^\infty c_n e^{j \omega t} \dfrac{T d\omega}{2 \pi} \\
 &= \dfrac{1}{\sqrt{2\pi}} \sum_{\frac{T\omega}{2\pi}=-\infty}^\infty \dfrac{T c_n}{\sqrt{2\pi}} e^{j \omega t} d\omega \to \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty F(\omega) e^{j \omega t} d \omega
 \end{align*}
 
-Notice that $\frac{1}{2\pi}$ in the first line equals $\frac{1}{\sqrt{2\pi}} \cdot \frac{1}{\sqrt{2\pi}}$ in the second line, and this substitution makes the transforms (stated below) symmetric and also certain calculations easier. \cite{Page 10, FourierTrans}
+Notice that $\frac{1}{2\pi}$ in the first line equals $\frac{1}{\sqrt{2\pi}} \cdot \frac{1}{\sqrt{2\pi}}$ in the second line, and this substitution makes both of the transforms (stated below) symmetric and also certain calculations easier. \cite{Page 10, FourierTrans}
 \\ \\
 \begin{definition}{The Fourier transform}
+\\
 For a continuous differentiable function $f(t)$ the Fourier transform is defined as follows:
 \begin{align*}
 F(\omega) = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{-j \omega t}
@@ -23,11 +24,92 @@ F(\omega) = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{-j \omega t}
 \end{definition}
 
 \begin{definition}{The inverse Fourier transform}
+\\
 The inverse Fourier transform of $F(\omega)$ is:
 \begin{align*}
 f(t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty F(\omega) e^{j \omega t} dt
 \end{align*}
 \end{definition}
+
+\begin{theorem}
+Let $f \in \mathcal{L}^1$. Then:
+
+\begin{enumerate}[label=(\alph*)]
+\item For any $a \in \mathbb{R}$:
+\begin{align*}
+\mathcal{F}\{f(t-a)\}(\omega) = e^{-ja\omega} F(\omega) \\
+\mathcal{F}\{e^{jat}f(t)\}(\omega) = F(\omega - a)
+\end{align*}
+
+\item If $\delta > 0$ and $f_\delta(t)=\delta^{-1}f(t/\delta)$, then
+\begin{align*}
+\mathcal{F}\{f_\delta\}(\omega) = F(\delta\omega) \\
+\mathcal{F}\{f(\delta t)\} = F_\delta(\omega)
+\end{align*}
+
+\item If $f$ is continuous and piecewise smooth and $f' \in L^1$, then
+\begin{align*}
+F'(\omega) = j\omega F(\omega)
+\end{align*}
+
+On the other hand, if $tf(t)$ is integrable, then
+\begin{align*}
+\mathcal{F}\{tf(t)\} = j F'(\omega)
+\end{align*}
+
+\item If also $g \in L^1$, then
+\begin{align*}
+\mathcal{F}\{f*g\}(\omega) = F(\omega) \cdot G(\omega)
+\end{align*}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item
+For the first equation of (a):
+\begin{align*}
+\mathcal{F}\{f(t-a)\}(\omega) = \int_{-\infty}^\infty e^{-j\omega t} f(t - a) dt = \int_{-\infty}^\infty e^{-j\omega t - j\omega a} f(t) dt = e^{-ja \omega} F(\omega)
+\end{align*}
+
+And for the second equation of (a):
+\begin{align*}
+\mathcal{F}\{e^{jat} f(t)\}(\omega) = \int_{-\infty}^\infty f(t) e^{jat} e^{-j \omega t} = \int_{-\infty}^\infty f(t) e^{j(a- \omega)t} = F(\omega - a)
+\end{align*}
+
+\item For (b):
+\begin{align*}
+\dots
+\end{align*}
+
+\item Since $f' \in L^1$ the limit
+\begin{align*}
+\lim_{t \to infty} f(t) = f(0) + \int_0^\infty f'(t) dt
+\end{align*}
+
+exists, and it must be zero since $f \in L^1$ as well. Likewise, $\lim_{t \to -\infty} = 0$, too. Integration by terms yields:
+\begin{align*}
+F'(\omega) = \int e^{-j \omega t} f'(t) dt = - \int (-j \omega) e^{-j \omega t} f(t) dt = j\omega F(\omega)
+\end{align*}
+
+If $tf(t)$ is integrable then:
+\begin{align*}
+\mathcal{F}\{tf(t)\} = \int e^{-j \omega t} t f(t) dt = j \dfrac{d}{d\omega} \int e^{-j \omega t} f(t) dt = j F'(\omega)
+\end{align*}
+
+Note that $t e^{-j \omega t} = j \dfrac{d}{d\omega} e^{-j\omega t}$.
+
+\item Finally:
+\begin{align*}
+\mathcal{F}\{f*g\}(\omega) &= \iint e^{-j \omega t} f(t - y) g(y) dy dx \\
+&= \iint e^{-j\omega(t-y)} f(t-y) e^{-j\omega y} g(y) dx dy \\
+&= \iint e^{-j\omega z} f(z) e^{-j\omega y} g(y) dz dy \\
+&= F(\omega) \cdot G(\omega)
+\end{align*}
+
+Where $z = t - y$.
+\end{enumerate}
+\end{proof}
 
 Contents:
 \begin{itemize}
