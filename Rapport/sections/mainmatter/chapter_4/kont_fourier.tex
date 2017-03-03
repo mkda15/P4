@@ -7,12 +7,14 @@ The Fourier transform is a generalization of the Fourier series described in the
 \dfrac{1}{\sqrt{2\pi}} T c_n &\to \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{-j \omega t} dt
 \end{align*}
 
+\noindent
 For the Fourier series expansion of $f(t)$ with $\omega = \frac{2n\pi}{T}$, let 2 consecutive values of $n$ be 1 length apart so that $dn = 1$. This means that $d\omega = \frac{2\pi}{T} dn = \frac{2\pi}{T}$ and $\frac{T d\omega}{2\pi} = 1$, which shows that:
 \begin{align*}
 f(t) &= \sum_{n=-\infty}^\infty c_n e^{\frac{2n\pi j t}{T}} = \sum_{\frac{T\omega}{2\pi}=-\infty}^\infty c_n e^{j \omega t} \dfrac{T d\omega}{2 \pi} \\
 &= \dfrac{1}{\sqrt{2\pi}} \sum_{\frac{T\omega}{2\pi}=-\infty}^\infty \dfrac{T c_n}{\sqrt{2\pi}} e^{j \omega t} d\omega \to \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty F(\omega) e^{j \omega t} d \omega
 \end{align*}
 
+\noindent
 Notice that $\frac{1}{2\pi}$ in the first line equals $\frac{1}{\sqrt{2\pi}} \cdot \frac{1}{\sqrt{2\pi}}$ in the second line, and this substitution makes both of the transforms (stated below) symmetric and also certain calculations easier. \cite{Page 10, FourierTrans}
 \\ \\
 \begin{definition}{The Fourier transform}
@@ -23,13 +25,34 @@ F(\omega) = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{-j \omega t}
 \end{align*}
 \end{definition}
 
-\begin{definition}{The inverse Fourier transform}
+\begin{definition}{The inverse Fourier transform} \label{InverseFourier}
 \\
 The inverse Fourier transform of $F(\omega)$ is:
 \begin{align*}
 f(t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty F(\omega) e^{j \omega t} dt
 \end{align*}
 \end{definition}
+
+As stated in \cite{FourierTrans}, the mathematical importance of the Fourier transform is:
+\begin{enumerate}
+\item If $f(t)$ has properties that are not desirable (such as discontinuities, non smoothness), then $F(\omega)$ is possibly better behaved.
+\item The Fourier transform represents a function that is not necessarily periodic and is defined on an infinite interval. The only requirement for the Fourier transform to exist is that the integral $\int_{-\infty}^\infty |f(t)| dt$ is convergent. The convergence of the Fourier transform is examined in chapter \ref{ch5}.
+\\ \\
+The Fourier transform $F(\omega)$ is a function of frequency but it also provides information on the amplitude and the phase of the signal at various frequencies. $F(\omega)$ may be written in polar coordinates as $F = |F|e^{j\theta}$ with the modulus $|F|$ representing the amplitude of the signal at a certain frequency $\omega$ and the phase shift $\theta = \arctan(\frac{Im(F)}{Re(F)}$ at the frequency $\omega$.
+\end{enumerate}
+
+\begin{definition}{Convolution}
+\\
+Let $f,g$ be functions defined on $\mathbb{R}$. Their convolution is the function $f*g$ defined by:
+\begin{align*}
+(f*g)(t) = \int_{-\infty}^\infty f(t-\tau) g(\tau) d\tau
+\end{align*}
+Provided that the integral exists.
+(similar definition for the discrete case).
+\end{definition}
+
+\noindent
+The following statement shows the symmetry between $f(t)$ and $F(\omega)$ and is inspired by \cite{FAA}.
 
 \begin{theorem}
 Let $f \in \mathcal{L}^1$. Then:
@@ -111,9 +134,13 @@ Where $z = t - y$.
 \end{enumerate}
 \end{proof}
 
+\noindent
+In all simplicity, part (a) of this theorem shows that translating a function (that is, a delay) corresponds to multiplying its Fourier transform by an exponential (which is equivalent to a phase shift since $F$ may be written in the polar coordinates $F = |F|e^{j\theta}$) and vice versa; part (b) shows that dilating a function by $\delta$ corresponds to dilating its Fourier transform by $1/\delta$ and vice versa; part (c) shows that differentiating a function corresponds to multiplying its Fourier transform by the coordinate variable and vice versa; and by the inverse Fourier tranform stated in definition \ref{InverseFourier}, it follows from part (d) that $F*G = 2 \pi (F \cdot G)$ \cite{FAA}.
+
 Contents:
 \begin{itemize}
 \item The Fourier transform on $\mathcal{L}^1$
 \item The inverse Fourier transform
 \item The Fourier transform on $\mathcal{L}^2$
+\item Fourier Transform theorems (page 60, Schafer)
 \end{itemize}
