@@ -39,7 +39,7 @@ First multiply both sides by $e^{-(j\omega k t)}$, where $k\in \mathbb{Z}$. And 
 
 The integration of a $2\pi$ - periodic function over the length of the period, can be shifted with an integer.
 
-\begin{lemma}
+\begin{lemma}\label{lemma:2pi-periodic_function}
 Suppose $F$ is $2\pi$ - periodic and integrable. Then for any real number a 
 
 \begin{align}
@@ -97,7 +97,7 @@ The coefficient $c_n$'s general equation is then:
 	c_n = \dfrac{1}{2\pi} \int_{-\pi}^{\pi} f(t) e^{-(j \omega nt)}dt
 \end{align*} 
 
-\begin{definition}
+\begin{definition} \label{def:fourier_definition}
 Fourier series of a $2\pi$ - periodic integrabel function $f(t)$ is defined as:
 \begin{align*}
 	\sum_{n=-\infty}^\infty c_n e^{j n \omega t}
@@ -127,7 +127,52 @@ For a $2\pi$- periodic and integrabel function, the n'th. order Fourier partial-
 	S_N^f(\omega t) = \dfrac{1}{2} a_0 + \sum_1^N\left(a_n \cos n\omega t + b_n \sin n \omega t \right) = \sum_{-N}^N c_n e^jn\omega t
 \end{align}
 
+with the coefficients $a_n$ and $b_n$ or $c_n$ defined as in \ref{def:fourier_definition}.\\
+\\
+Inserting $c_n$ in the partial sum using $x$ in place of the variable $t$.
 
+\begin{align*}
+	S_N^f(\omega t)
+	= \dfrac{1}{2\pi}\sum_{-N}^N \int_{-\pi}^\pi f(\omega x) e^{-j n \omega x} dx e^jn\omega t\\
+	= \dfrac{1}{2\pi}\sum_{k = -N}^N \int_{-\pi}^\pi f(\omega x) e^{j k \omega (x-t)} d(\omega x)
+\end{align*}
+
+Notice that 
+\begin{align*}
+	S_N^f (\omega t) 
+	&= \dfrac{1}{2\pi} \sum_{n=-N}^N \int_{-\pi}^\pi f(\omega x)e^{jn\omega(x-t) d(\omega x)}\text{, and let \tau = \omega(x-t) }\\
+	= \dfrac{1}{2\pi} \sum_{n = -N}^N \int_{-\pi - \omega t}^{\pi - \omega x} f(\omega x + \tau ) e^{j n \tau} d\tau
+\end{align*}
+
+By \ref{lemma:2pi-periodic_function} the above equation can be expressed as followed:
+
+\begin{align*}
+	S_N^f (\omega t) 
+	&= \dfrac{1}{2\pi} \sum_{n=-N}^N \int_{-\pi}^\pi f(\omega t + \tau) e^{jn \omega t} d\tau\\
+	&= \int_{-\pi}^\pi f(\omega t + \tau) D_N(\tau) d\tau
+\end{align*}
+Where $D_N = \dfrac{1}{2\pi}\sum_{n=-N}^{N}e^jn\tau$ is a Dirichlet-core. 
+
+The integral from $-\pi$ to $\pi$ of a Dirichlet-core is $\dfrac{1}{2}$ \chr{(Ref bogen for at undgå at snakke om Dirichlet kernen (kunne evt. vises ud fra Mortens noter)}
+Using this information we can derive the following:
+
+\begin{theorem}
+	Let $f(\omega t)$ be a $2\pi$-periodic and piece wise smooth then the limit of the partial sum $S_N^f$ is given by:
+	 \begin{align*}
+	 	\lim_{N\to\infty} S_N^f (\omega t) = \dfrac{1}{2}\left[f(\omega t-) + f(\omega t+)\right],\text{ \omega t\in [-\pi, \pi]}
+	 \end{align*}
+	If $f$, is continues in $\omega t$, then:
+	\begin{align*}
+		\lim_{N\to \infty} S_N^F(\omega t) = f(\omega t).
+	\end{align*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+	\dfrac{1}{2} f(\theta-) = f(\theta-) \int_{-\pi}^0 D_n(\tau)d\tau \text{ and } \dfrac{1}{2}f(\theta+) = f(\theta+) \int_0^\pi D_n (\tau)d\tau
+	\end{align*}
+	Which gives
+\end{proof}
 %%%%%%
 More precisely, $f\in PS(a,b)$ iff 
 \begin{enumerate}
