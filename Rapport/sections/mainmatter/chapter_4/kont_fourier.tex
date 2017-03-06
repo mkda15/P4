@@ -17,15 +17,15 @@ f(t) &= \sum_{n=-\infty}^\infty c_n e^{\frac{2n\pi j t}{T}} = \sum_{\frac{T\omeg
 \noindent
 Notice that $\frac{1}{2\pi}$ in the first line equals $\frac{1}{\sqrt{2\pi}} \cdot \frac{1}{\sqrt{2\pi}}$ in the second line, and this substitution makes both of the transforms (stated below) symmetric and also certain calculations easier. \cite{Page 10, FourierTrans}
 \\ \\
-\begin{definition}{The Fourier transform}
+\begin{definition}{The Fourier transform} \label{def:Fourier_trans}
 \\
 For a continuous differentiable function $f(t)$ the Fourier transform is defined as follows:
 \begin{align*}
-F(\omega) = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{-j \omega t}
+F(\omega) = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{-j \omega t} dt
 \end{align*}
 \end{definition}
 
-\begin{definition}{The inverse Fourier transform} \label{InverseFourier}
+\begin{definition}{The inverse Fourier transform} \label{def:InverseFourier_trans}
 \\
 The inverse Fourier transform of $F(\omega)$ is:
 \begin{align*}
@@ -33,26 +33,28 @@ f(t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty F(\omega) e^{j \omega t} dt
 \end{align*}
 \end{definition}
 
+\noindent
 As stated in \cite{FourierTrans}, the mathematical importance of the Fourier transform is:
 \begin{enumerate}
 \item If $f(t)$ has properties that are not desirable (such as discontinuities, non smoothness), then $F(\omega)$ is possibly better behaved.
 \item The Fourier transform represents a function that is not necessarily periodic and is defined on an infinite interval. The only requirement for the Fourier transform to exist is that the integral $\int_{-\infty}^\infty |f(t)| dt$ is convergent. The convergence of the Fourier transform is examined in chapter \ref{ch5}.
-\\ \\
-The Fourier transform $F(\omega)$ is a function of frequency but it also provides information on the amplitude and the phase of the signal at various frequencies. $F(\omega)$ may be written in polar coordinates as $F = |F|e^{j\theta}$ with the modulus $|F|$ representing the amplitude of the signal at a certain frequency $\omega$ and the phase shift $\theta = \arctan(\frac{Im(F)}{Re(F)}$ at the frequency $\omega$.
 \end{enumerate}
 
-\begin{definition}{Convolution}
+\noindent
+The Fourier transform $F(\omega)$ is a function of frequency but it also provides information on the amplitude and the phase of the signal at various frequencies. $F(\omega)$ may be written in polar coordinates as $F = |F|e^{j\theta}$ with the modulus $|F|$ representing the amplitude of the signal at a certain frequency $\omega$ and the phase shift $\theta = \arctan(\frac{Im(F)}{Re(F)}$ at the frequency $\omega$.
+\\ \\
+The following definition is inspired by \cite{page 206, FAA} and shows an useful tool in both theoretical and applicational aspects.
+\begin{definition}{Convolution} \label{def:Convol}
 \\
 Let $f,g$ be functions defined on $\mathbb{R}$. Their convolution is the function $f*g$ defined by:
 \begin{align*}
 (f*g)(t) = \int_{-\infty}^\infty f(t-\tau) g(\tau) d\tau
 \end{align*}
 Provided that the integral exists.
-(similar definition for the discrete case).
 \end{definition}
 
 \noindent
-The following statement shows the symmetry between $f(t)$ and $F(\omega)$ and is inspired by \cite{FAA}.
+The following statement shows the symmetry between $f(t)$ and $F(\omega)$ and is inspired by \cite{page 214, FAA}.
 
 \begin{theorem}
 Let $f \in \mathcal{L}^1$. Then:
@@ -75,7 +77,7 @@ Let $f \in \mathcal{L}^1$. Then:
 F'(\omega) = j\omega F(\omega)
 \end{align*}
 
-On the other hand, if $tf(t)$ is integrable, then
+On the other hand, if $t\cdot f(t)$ is integrable, then
 \begin{align*}
 \mathcal{F}\{tf(t)\} = j F'(\omega)
 \end{align*}
@@ -90,43 +92,44 @@ On the other hand, if $tf(t)$ is integrable, then
 \begin{proof}
 \begin{enumerate}[label=(\alph*)]
 \item
-For the first equation of (a):
+By definition \ref{def:Fourier_trans} and \ref{def:InverseFourier_trans}:
 \begin{align*}
-\mathcal{F}\{f(t-a)\}(\omega) = \int_{-\infty}^\infty e^{-j\omega t} f(t - a) dt = \int_{-\infty}^\infty e^{-j\omega t - j\omega a} f(t) dt = e^{-ja \omega} F(\omega)
+\mathcal{F}\{f(t-a)\}(\omega) = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty e^{-j\omega t} f(t - a) dt = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty e^{-j\omega t - j\omega a} f(t) dt = e^{-ja \omega} F(\omega)
 \end{align*}
 
-And for the second equation of (a):
+For the second equation:
 \begin{align*}
-\mathcal{F}\{e^{jat} f(t)\}(\omega) = \int_{-\infty}^\infty f(t) e^{jat} e^{-j \omega t} = \int_{-\infty}^\infty f(t) e^{j(a- \omega)t} = F(\omega - a)
+\mathcal{F}\{e^{jat} f(t)\}(\omega) = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{jat} e^{-j \omega t} dt = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{j(a- \omega)t} dt = F(\omega - a)
 \end{align*}
 
 \item For (b):
 \begin{align*}
-\dots
+\mathcal{F}\{f_\delta(t)\}(\omega) = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f_\delta(t) e^{-j \omega t} dt = \dots = F(\delta\omega) \\
+\mathcal{F}\{f(\delta t)\} = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(\delta t) e^{-j \omega t} dt = \dots = F_\delta(\omega)
 \end{align*}
 
-\item Since $f' \in L^1$ the limit
+\item Since $f' \in L^1$ $^[$\footnote{See chapter \ref{ch5} for explanation on this term.}$^]$ the limit
 \begin{align*}
-\lim_{t \to infty} f(t) = f(0) + \int_0^\infty f'(t) dt
+\lim_{t \to \infty} f(t) = f(0) + \int_0^\infty f'(t) dt
 \end{align*}
 
 exists, and it must be zero since $f \in L^1$ as well. Likewise, $\lim_{t \to -\infty} = 0$, too. Integration by terms yields:
 \begin{align*}
-F'(\omega) = \int e^{-j \omega t} f'(t) dt = - \int (-j \omega) e^{-j \omega t} f(t) dt = j\omega F(\omega)
+F'(\omega) = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty e^{-j \omega t} f'(t) dt =  = - \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty (-j \omega) e^{-j \omega t} f(t) dt = j\omega F(\omega)
 \end{align*}
 
 If $tf(t)$ is integrable then:
 \begin{align*}
-\mathcal{F}\{tf(t)\} = \int e^{-j \omega t} t f(t) dt = j \dfrac{d}{d\omega} \int e^{-j \omega t} f(t) dt = j F'(\omega)
+\mathcal{F}\{tf(t)\} = \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty e^{-j \omega t} t f(t) dt = j \dfrac{d}{d\omega} \left( \dfrac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty e^{-j \omega t} f(t) dt \right) = j F'(\omega)
 \end{align*}
 
 Note that $t e^{-j \omega t} = j \dfrac{d}{d\omega} e^{-j\omega t}$.
 
-\item Finally:
+\item Finally, by definition \ref{def:Convol}:
 \begin{align*}
-\mathcal{F}\{f*g\}(\omega) &= \iint e^{-j \omega t} f(t - y) g(y) dy dx \\
-&= \iint e^{-j\omega(t-y)} f(t-y) e^{-j\omega y} g(y) dx dy \\
-&= \iint e^{-j\omega z} f(z) e^{-j\omega y} g(y) dz dy \\
+\mathcal{F}\{f*g\}(\omega) &= \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-j \omega t} f(t - y) g(y) dy dx \\
+&= \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-j\omega(t-y)} f(t-y) e^{-j\omega y} g(y) dx dy \\
+&= \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-j\omega z} f(z) e^{-j\omega y} g(y) dz dy \\
 &= F(\omega) \cdot G(\omega)
 \end{align*}
 
@@ -135,12 +138,43 @@ Where $z = t - y$.
 \end{proof}
 
 \noindent
-In all simplicity, part (a) of this theorem shows that translating a function (that is, a delay) corresponds to multiplying its Fourier transform by an exponential (which is equivalent to a phase shift since $F$ may be written in the polar coordinates $F = |F|e^{j\theta}$) and vice versa; part (b) shows that dilating a function by $\delta$ corresponds to dilating its Fourier transform by $1/\delta$ and vice versa; part (c) shows that differentiating a function corresponds to multiplying its Fourier transform by the coordinate variable and vice versa; and by the inverse Fourier tranform stated in definition \ref{InverseFourier}, it follows from part (d) that $F*G = 2 \pi (F \cdot G)$ \cite{FAA}.
+In all simplicity, part (a) of this theorem shows that translating a function (that is, a delay) corresponds to multiplying its Fourier transform by an exponential (which is equivalent to a phase shift since $F$ may be written in the polar coordinates $F = |F|e^{j\theta}$) and vice versa; part (b) shows that dilating a function by $\delta$ corresponds to dilating its Fourier transform by $1/\delta$ and vice versa; part (c) shows that differentiating a function corresponds to multiplying its Fourier transform by the coordinate variable and vice versa; and by definition \ref{def:Convol} it is shown that a convolution in the time domain is equivalent to multiplying in the frequency domain and vice versa. Moreover, by the inverse Fourier tranform stated in definition \ref{def:Convol}, it follows from part (d) that $F*G = 2 \pi (F \cdot G)$ \cite{ page 215, FAA}. Similar symmetries apply to the Fourier series discussed above \cite{page 60, DTSP}.
+\\ \\
+The following theorem is inspired by \cite{page 77, FAA}.
 
-Contents:
+\begin{theorem}
+Let $\{\phi_n\}_1^\infty$ be an orthonormal set in $\mathcal{L}^2(a,b)$. The following conditions are equivalent.
+\begin{enumerate}[label=(\alph*)]
+\item If $\langle f, \phi_n \rangle = 0$ for all $n$, then $f = 0$.
+\item For every $f \in \mathcal{L}^2(a,b) we have f = \sum_1^\infty \langle f, \phi_n \rangle \phi_n$, where the series converges in norm.\\
+\item For every $f \in \mathcal{L}^2(a,b)$:
+\begin{align*}
+\|f\|^2 = \sum_1^\infty |\langle f,\phi_n \rangle|^2
+\end{align*}
+This is known as Parseval's equation.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Should we prove it?
+\end{proof}
+
+\noindent
+The following theorem is inspired by \cite{page 222, FAA}
+\begin{theorem}{The Plancherel Theorem}
+\\
+The Fourier Transform, defined originally on $\mathcal{L}^1 \cap \mathcal{L}^2$, extends uniquely to the map $F(\omega): \mathcal{L}^2 \to \mathcal{L}^2$ that satisfies:
+\begin{align*}
+\langle F, G \rangle = 2\pi \langle f,g \rangle \\
+\|F\|^2  = 2\pi \|f\|^2
+\end{align*}
+for all $f,g \in \mathcal{L}^2$.
+\end{theorem}
+
+\noindent
+Remainders of this section:
 \begin{itemize}
 \item The Fourier transform on $\mathcal{L}^1$
-\item The inverse Fourier transform
-\item The Fourier transform on $\mathcal{L}^2$
-\item Fourier Transform theorems (page 60, Schafer)
+\item The Fourier transform on $\mathcal{L}^2$ (page 221-222, FAA)
+\item Gaps...
 \end{itemize}
