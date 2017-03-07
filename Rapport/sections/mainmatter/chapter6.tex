@@ -48,7 +48,7 @@ In this chapter sample theory and its importance when converting an analogue aud
 %\end{figure}
 %The above figures illustrate the continuous Fourier transform. The transform can be discretized to the discrete Fourier transform, which is crucial, when working with sampled signals. This is likewise covered in chapter \ref{ch5}.
 \section{Sampling}
-Sampling is the process of representing a \textit{continuous-time} signal by a sequence of values. Doing so converts the continuous-time signal into a \textit{discrete-time} signal. \cite{pelgrom} The relation between a continuous function $x_c(t)$ and the discrete funtion $x[n]$ obtained by sampling $x_c(t)$ is described by
+Sampling is the process of representing a \textit{continuous-time} signal by a sequence of values $x[n]$. Doing so converts the continuous-time signal into a \textit{discrete-time} signal. \cite{pelgrom} The relation between a continuous function $x_c(t)$ and the discrete funtion $x[n]$ obtained by sampling $x_c(t)$ is described by
 \begin{equation}\label{eq:sampling_principle}
 x[n]=x_c(nT_s)
 \end{equation}
@@ -113,21 +113,19 @@ x_s(t)&=x_c(t)s(t)\nonumber \\
 \subsection{Frequency representation of sampling}
 To study the behavior of $x_s(t)$ in the frequency domain the Fourier transform is used. The Fourier transform of $s(t)$ is seen in \eqref{eq:fourier_impulse}.
 \begin{equation}\label{eq:fourier_impulse}
-\hat{s}(f)=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}(f-kf_s)
+\hat{s}(j\omega)=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}(j\omega-kj\omega_s)
 \end{equation}
+where $\omega=2\pi f$ is frequency in radians pr. second.
 The Fourier transform of \eqref{eq:sampling} uses the fact, that \eqref{eq:sampling} is a product of two functions, which is a convolution in the frequency domain:
-\begin{equation}
-\hat{x}_s(j\omega)=\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}\hat{x}_c(t)(j\omega)*\hat{s}(j\omega)\phantom{mm}\text{\cite{DTSP}}
-\end{equation}
-It follows that
-\begin{equation}\label{eq:samp_freq}
-\hat{x}_s(j\omega)=\frac{1}{T}\sum_{k=-\infty}^{\infty}\hat{x}_c(j(\omega-k\omega_s)).
-\end{equation}
-\eqref{eq:samp_freq} mathematically samples $x_c(t)$ in the frequency domain and will be useful in the below analysis.
+\begin{align}
+\hat{x}_s(j\omega)&=\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}\hat{x}_c(t)(j\omega)*\hat{s}(j\omega)\phantom{mm}\text{\cite{DTSP}}\nonumber\\
+&=\frac{1}{T}\sum_{k=-\infty}^{\infty}\hat{x}_c(j(\omega-k\omega_s))\label{eq:samp_freq}
+\end{align}
+\eqref{eq:samp_freq} mathematically samples $x_c(t)$ in the frequency domain at a rate of $\omega_s$ radians pr. second. 
+\paragraph{Bandlimited signal}
+A signal is \textit{bandlimited} if the signal contains no frequencies higher than some frequency $\omega_N$, which means $\hat{f}(j\omega)=0$ for $|\omega|>\omega_N$ \cite{FAA}. 
 \subsection{Aliasing}\label{sec:aliasing}
-\textit{Aliasing} is a consequence of not sampling  at a sufficiently high $f_s$ which results in the continous signal being non reconstructable from the sampled data.
-\\\\
-A signal is \textit{bandlimited} if there is an upper and a lower bound of frequencies in the signal. The upper bound is called $\omega_N$ and the difference between the lower and upper bound is called the \textit{badnwidth}. To avoid aliasing, the bandwidth (more specifically $\omega_N$) must be taken into account. The below analyzis shows this.
+\textit{Aliasing} is a consequence of not sampling  at a sufficiently high $f_s$ which results in the continous signal $x_c(t)$ being non reconstructable from the sampled signal $x_s(t)$.
 \\\\
 From \eqref{eq:samp_freq} it is seen that $\hat{x}_s(j\omega)$ consists of copies of $\hat{x}_c$ repeated at whole multiples of $j\omega_s$ on both sides of the origin - seen in figure \ref{fig:copies}.
 \begin{figure}[H]
@@ -165,6 +163,7 @@ ymax=3]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
+clip=false,
 scale=1.5,
 unit vector ratio*=1 1 1,
 axis lines = middle,
@@ -175,29 +174,44 @@ xmin=-6,
 xmax=6,
 ymin=0,
 ymax=3]
-\draw[line width=0.5mm](axis cs:0,2)--(axis cs:0.66,1.01);
-\draw[line width=0.5mm](axis cs:2,2)--(axis cs:1.33,1.01);
-\draw[line width=0.5mm](axis cs:0.66,1.01)--(axis cs:1.33,1,01);
-\draw[line width=0.5mm](axis cs:2,2)--(axis cs:2.66,1,01);
-\draw[line width=0.5mm](axis cs:2.66,1,01)--(axis cs:3.33,1.01);
-\draw[line width=0.5mm](axis cs:3.33,1.01)--(axis cs:4,2);
-\draw[line width=0.5mm](axis cs:4,2)--(axis cs:4.66,1.01);
+\draw[line width=0.5mm](axis cs:0,2)--(axis cs:0.66,1);
+\draw[line width=0.5mm](axis cs:2,2)--(axis cs:1.33,1);
+\draw[line width=0.5mm](axis cs:0.66,1)--(axis cs:1.33,1);
+\draw[line width=0.5mm](axis cs:2,2)--(axis cs:2.66,1);
+\draw[line width=0.5mm](axis cs:2.66,1)--(axis cs:3.33,1);
+\draw[line width=0.5mm](axis cs:3.33,1)--(axis cs:4,2);
+\draw[line width=0.5mm](axis cs:4,2)--(axis cs:4.66,1);
 \draw[line width=0.5mm](axis cs:0,2)--(axis cs:-0.66,1.01);
 \draw[line width=0.5mm](axis cs:-2,2)--(axis cs:-1.33,1.01);
-\draw[line width=0.5mm](axis cs:-0.66,1.01)--(axis cs:-1.33,1,01);
-\draw[line width=0.5mm](axis cs:-2,2)--(axis cs:-2.66,1,01);
-\draw[line width=0.5mm](axis cs:-2.66,1,01)--(axis cs:-3.33,1.01);
-\draw[line width=0.5mm](axis cs:-3.33,1.01)--(axis cs:-4,2);
-\draw[line width=0.5mm](axis cs:-4,2)--(axis cs:-4.66,1.01);
-\draw[line width=0.5mm](axis cs:-4.66,1.01)--(axis cs:-5.33,1.01);
-\draw[line width=0.5mm](axis cs:4.66,1.01)--(axis cs:5.33,1.01);
+\draw[line width=0.5mm](axis cs:-0.66,1)--(axis cs:-1.33,1);
+\draw[line width=0.5mm](axis cs:-2,2)--(axis cs:-2.66,1);
+\draw[line width=0.5mm](axis cs:-2.66,1)--(axis cs:-3.33,1);
+\draw[line width=0.5mm](axis cs:-3.33,1)--(axis cs:-4,2);
+\draw[line width=0.5mm](axis cs:-4,2)--(axis cs:-4.66,1);
+\draw[line width=0.5mm](axis cs:-4.66,1.)--(axis cs:-5.33,1);
+\draw[line width=0.5mm](axis cs:4.66,1)--(axis cs:5.33,1);
+\draw[line width=0.5mm,dashed](axis cs:0.66,1)--(axis cs:1.33,0);
+\draw[line width=0.5mm,dashed](axis cs:1.33,1)--(axis cs:0.66,0);
+\draw[line width=0.5mm,dashed](axis cs:-0.66,1)--(axis cs:-1.33,0);
+\draw[line width=0.5mm,dashed](axis cs:-1.33,1)--(axis cs:-0.66,0);
+\node at(axis cs:-0.3,-1){($\omega_s-\omega_N$)};
+\draw[->,line width=0.2mm](axis cs:-0.3,-0.7)--(axis cs:0.66,-0.1);
+\node at(axis cs:1.5,-1){$\omega_N$};
+\draw[->,line width=0.2mm](axis cs:1.5,-0.7)--(axis cs:1.33,-0.1);
+\draw[line width=0.5mm,dashed](axis cs:2.66,1)--(axis cs:3.33,0);
+\draw[line width=0.5mm,dashed](axis cs:3.33,1)--(axis cs:2.66,0);
+\draw[line width=0.5mm,dashed](axis cs:4.66,1)--(axis cs:5.33,0);
+\draw[line width=0.5mm,dashed](axis cs:-2.66,1)--(axis cs:-3.33,0);
+\draw[line width=0.5mm,dashed](axis cs:-3.33,1)--(axis cs:-2.66,0);
+\draw[line width=0.5mm,dashed](axis cs:-4.66,1)--(axis cs:-5.33,0);
 \end{axis}
 \end{tikzpicture}
 \caption{Signal bandlimited by $\omega_N$ sampled at $\omega_s<2\omega_N$ in the frequency domain - the copies of $\hat{x}_c$ overlap.}
 \label{fig:overlap}
 \end{figure}
-\noindent It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $\hat{x}_c$. If however $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing.\\\\
-As the copies of $\hat{x}_c$ appear at whole multiples of $\omega_s$ the copies can be shifted to completely cover each other. From this follows that two different sampled continuous signals may have the same frequency representation. More specifically if the frequencies of two different signals differ from som whole multiple of $j\omega_s$ by the same amount the sequence of samples for the two signals will be identical - this is seen in figures  \ref{fig:aliasing1} and \ref{fig:aliasing2} where two sine waves of different frequencies are sampled with the same $f_s$.
+\noindent It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $\hat{x}_c$. With an ideal low pass filter  a single isolated copy (centered around the origin) can be picked out, and the reverse Fourier transform used to recreate the time domain representation of the signal. If however $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing. When a signal is aliased it is not possible to pick out a single copy of the sampled signal in the frequency domain which results in $x_c(t)$ not being reconstructable from $x_s(t)$. This makes aliasing in the context of representing a continuous signal as a discrete set of values unwanted.
+\\\\
+An extreme case of aliasing happens if the frequencies of two different signals differ from some whole multiple of $f_s$ by the same amount. The sequence of samples for the two signals will then be identical - this is seen in figures  \ref{fig:aliasing1} and \ref{fig:aliasing2} where two sine waves of different frequencies are sampled with the same $f_s$.
 \begin{figure}[H]
 \centering
 \begin{minipage}{0.49\textwidth}
@@ -226,7 +240,7 @@ ytick={-1,1}
 \node at (axis cs:6.2832,0) {\textbullet};
 \end{axis}
 \end{tikzpicture}
-\caption{Sine wave of angular frequency $\omega=\frac{2\pi}{\text{s}}=1$ Hz sampled at $f_s=9$ Hz.}
+\caption{Sine wave of frequency $f=$1 Hz sampled at $f_s=9$ Hz.}
 \label{fig:aliasing1}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
@@ -242,40 +256,51 @@ ytick={-1,1}
 ,ymax=1.25
 ,samples=300]
 \addplot[blue][domain=0:6.28138]{sin(deg(10*x))};
-\node at (axis cs:0,0) {\textbullet};
-\node at (axis cs:0.6918,0.6428) {\textbullet};
-\node at (axis cs:1.3963,0.9848) {\textbullet};
-\node at (axis cs:2.0944,0.8660) {\textbullet};
-\node at (axis cs:2.7925,0.3420) {\textbullet};
-\node at (axis cs:3.4907,-0.3420) {\textbullet};
-\node at (axis cs:4.1888,-0.8660) {\textbullet};
-\node at (axis cs:4.8869,-0.9848) {\textbullet};
-\node at (axis cs:5.5850,-0.6428) {\textbullet};
-\node at (axis cs:6.2832,0) {\textbullet};
+\node at (axis cs:0,0){\textbullet};
+\node at (axis cs:0.6918,0.6428){\textbullet};
+\node at (axis cs:1.3963,0.9848){\textbullet};
+\node at (axis cs:2.0944,0.8660){\textbullet};
+\node at (axis cs:2.7925,0.3420){\textbullet};
+\node at (axis cs:3.4907,-0.3420){\textbullet};
+\node at (axis cs:4.1888,-0.8660){\textbullet};
+\node at (axis cs:4.8869,-0.9848){\textbullet};
+\node at (axis cs:5.5850,-0.6428){\textbullet};
+\node at (axis cs:6.2832,0){\textbullet};
 \end{axis}
 \end{tikzpicture}
-\caption{Sine wave of angular frequency $\omega=\frac{20\pi}{\text{s}}=10$ Hz sampled at $f_s=9$ Hz.}
+\caption{Sine wave of frequency $f=10$ Hz sampled at $f_s=9$ Hz.}
 \label{fig:aliasing2}
 \end{minipage}
 \end{figure} 
-\noindent Aliasing is as noted also shown in the frequency domain - this is seen in figures *Insert references \texttrademark.
-\begin{center}
-*Insert figures with frequency representation of aliasing \texttrademark*
-\end{center}
- The consequence of aliasing is therefore that $x_c$ is not reconstructable from $x_s$ as the above figures and frequency interpretation show. This leads to the central \textit{Nyquist-Shannon Sampling Theorem}.
-\begin{theorem}[Nyquist-Shannon Sampling Theorem]
-Let $x_c(t)$ be a bandlimited signal with
-\begin{equation}
-\hat{x}_c(j\omega)=0\phantom{m}\text{for}\phantom{m}|\omega|\geq \omega_N.
-\end{equation}
-Then $x_c(t)$ is uniquely determined by its samples $x[n]=x_c(nT)$, $n=0,\pm 1,\pm 2,\ldots$, if
-\begin{equation}
-\omega_s=\frac{2\pi}{T}\geq 2\omega_N.\phantom{mm}\text{\cite{DTSP}}
-\end{equation}
+\noindent As such the reconstructability of $x_c$ from $x_s$ depends on the relation between $f_s$ and $\omega_N$ which leads to the central \textit{Sampling Theorem}.
+\begin{theorem}[The Sampling Theorem]
+Let $f\in L^2$ and $\hat{f}(\omega)=0$ for $|\omega|\geq \omega_N$ ($f$ bandlimited). Then $f$ is completely determined by its values at the points $t_n=\frac{n\pi}{\omega_N}$, $n=0,\pm 1,\pm 2,\ldots$:
+\begin{equation*}
+f(t)=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}\text{\cite{FAA}}
+\end{equation*}
 \end{theorem}
-$\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate} respectively. This theorem is central to deciding at which frequency a signal should be sampled so as to be able to uniquely determine it.
-
-
+\begin{proof}
+Write the Fourier transform of $f$
+\begin{equation}\label{eq:proof1}
+f(t)=\frac{1}{2\pi}\int_{-\omega_N}^{\omega_N}\!\hat{f}(\omega)\mathrm{e}^{i\omega i}\,dw
+\end{equation}
+By expanding $\hat{f}$ into its Fourier series and using the negative index $-n$ we get
+\begin{equation*}
+\hat{f}(\omega)=\sum_{n=-\infty}^{\infty}c_{-n}\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}
+\end{equation*}
+where $c_{-n}$ is given by
+\begin{equation*}
+c_{-n}=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\hat{f}(\omega)\mathrm{e}^{\frac{in\pi\omega}{\omega_N}}\,dw=\frac{\pi}{\omega_N}f\left(\frac{n\pi}{\omega_N}\right).
+\end{equation*}
+Then \eqref{eq:proof1} can be written as
+\begin{align*}
+f(t)&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}\mathrm{e}^{i\omega t}\,dw\\
+&=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\mathrm{e}^{i(\omega_Nt-n\pi)\omega/\omega_N}}{i(\omega_Nt-n\pi)/\omega_N}\Bigg|_{\omega=-\omega_N}^{\omega_N}\\
+&=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\sin(\omega_Nt-n\pi)}{\omega_Nt-n\pi}\\
+&=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}\text{\cite{FAA}}
+\end{align*}
+\end{proof}
+$\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate} respectively. The theorem can be interpreted as stating, that any signal bandlimited by some Nyquist frequency $\omega_N$ can be completely determined by sampling it at the Nyquist rate $2\omega_N$. The theorem is therefore central to determining $f_s$ so as to be able to reconstruct $x_c$ from $x_s$. If the sampling frequency $\omega_s=2\omega_N$ the continuous signal is theoretically reconstructable from $x_s$, but in practice a higher sampling rate is usually used as this makes digital filtering more convenient - see chapter \ref{ch7}.
 \section{Analogue-to-digital conversion}\label{ADC}
 An analogue-to-digital converter (ADC) is a device which as the name suggests is capable of converting an analogue signal to a digital signal. The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. An audio ADC consists of the following elements
 \begin{enumerate}
