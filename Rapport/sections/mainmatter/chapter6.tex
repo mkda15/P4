@@ -273,7 +273,7 @@ ytick={-1,1}
 \end{minipage}
 \end{figure} 
 \noindent As such the reconstructability of $x_c$ from $x_s$ depends on the relation between $f_s$ and $\omega_N$ which leads to the central \textit{Sampling Theorem}.
-\begin{theorem}[The Sampling Theorem]
+\begin{theorem}[The Sampling Theorem]\label{sampling_theorem}
 Let $f\in L^2$ and $\hat{f}(\omega)=0$ for $|\omega|\geq \omega_N$ ($f$ bandlimited). Then $f$ is completely determined by its values at the points $t_n=\frac{n\pi}{\omega_N}$, $n=0,\pm 1,\pm 2,\ldots$:
 \begin{equation*}
 f(t)=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}\text{\cite{FAA}}
@@ -294,7 +294,10 @@ c_{-n}=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\hat{f}(\omega)\mathrm{e}
 \end{equation*}
 Then \eqref{eq:proof1} can be written as
 \begin{align*}
-f(t)&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}\mathrm{e}^{i\omega t}\,dw\\
+f(t)&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}\mathrm{e}^{i\omega t}\,dw
+\end{align*}
+From theorem \ref{plancherel} it follows that the Fourier transform is linear and continuous, which allows us to switch the integral and summation:\frede{Er ikke ret sikker på det her - skal spørge Henrik om det \texttrademark}
+\begin{align*}
 &=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\mathrm{e}^{i(\omega_Nt-n\pi)\omega/\omega_N}}{i(\omega_Nt-n\pi)/\omega_N}\Bigg|_{\omega=-\omega_N}^{\omega_N}\\
 &=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\sin(\omega_Nt-n\pi)}{\omega_Nt-n\pi}\\
 &=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}\text{\cite{FAA}}
