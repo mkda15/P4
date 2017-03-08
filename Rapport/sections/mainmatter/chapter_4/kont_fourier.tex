@@ -29,7 +29,7 @@ f(t) &= \dfrac{1}{2\pi} \int_{-\infty}^\infty F(\omega) e^{j\omega t} d\omega, \
 F(\omega) &= \int_{-\infty}^\infty f(t) e^{-j\omega t} dt \label{Fourier_trans}
 \end{align}
 
-As stated on \cite{page 205, FAA}, "these limiting calculations are utterly nonrigorous" but "the final result is correct under suitable conditions on $f$". \eqref{Fourier_trans} is called the Fourier transform of $f(t)$, and \eqref{Fourier_inv} is called the inverse Fourier transform.
+As stated on \cite{page 205, FAA}, ``these limiting calculations are utterly nonrigorous'' but ``the final result is correct under suitable conditions on $f$''. \eqref{Fourier_trans} is called the Fourier transform of $f(t)$, and \eqref{Fourier_inv} is called the inverse Fourier transform.
 
 %From \cite{FourierTrans} #FirstUseOfNotationForTheFourierTransform
 %The Fourier transform is a generalization of the Fourier series described in the former section, where $f(t) = \sum_{n=-\infty}^\infty c_n e^{\frac{2n\pi j t}{T}}$. This sequence may be regarded as a function of $n$, and $f(t)$ and $c_n$ are thus different representations of the same object. $c_n$ may also be regarded as a function of the frequency $\omega = \frac{2n\pi}{T}$. If the period $T$ is large, then $\omega$ becomes small, and then $Tc_n$ becomes a continuous function for $T \to \infty$. Furthermore, for $T \to \infty$ it is no longer required that $f(t)$ is periodic since the period becomes $(-\infty,\infty)$. Therefore, the Fourier transform $F(\omega)$ of $f(t)$ is the limit of the continuous function $\frac{1}{\sqrt{2\pi}} T c_n$ for $T \to \infty$, which means that:
@@ -99,13 +99,13 @@ Let $f \in \mathcal{L}^1$. Then:
 
 \item If $\delta > 0$ and $f_\delta(t)=\delta^{-1}f(t/\delta)$, then
 \begin{align*}
-\mathcal{F}\{f_\delta\}(\omega) = F(\delta\omega) \\
+\mathcal{F}\{f_\delta(t)\}(\omega) = F(\delta\omega) \\
 \mathcal{F}\{f(\delta t)\}(\omega) = F_\delta(\omega)
 \end{align*}
 
 \item If $f$ is continuous and piecewise smooth and $f' \in L^1$, then
 \begin{align*}
-F'(\omega) = j\omega F(\omega)
+\mathcal{F}\{f'(t)\}(\omega) = j\omega F(\omega)
 \end{align*}
 
 On the other hand, if $t\cdot f(t)$ is integrable, then
@@ -123,7 +123,7 @@ On the other hand, if $t\cdot f(t)$ is integrable, then
 \begin{proof}
 \begin{enumerate}[label=(\alph*)]
 \item
-By definition \ref{def:Fourier_trans} and \ref{def:InverseFourier_trans}:
+By definition \ref{def:Fourier_trans} and \ref{def:InverseFourier_trans} it follows that:
 \begin{align*}
 \mathcal{F}\{f(t-a)\}(\omega) = \int_{-\infty}^\infty e^{-j\omega t} f(t - a) dt = \int_{-\infty}^\infty e^{-j\omega t - j\omega a} f(t) dt = e^{-ja \omega} F(\omega)
 \end{align*}
@@ -133,30 +133,32 @@ For the second equation:
 \mathcal{F}\{e^{jat} f(t)\}(\omega) = \int_{-\infty}^\infty f(t) e^{jat} e^{-j \omega t} dt = \int_{-\infty}^\infty f(t) e^{j(a- \omega)t} dt = F(\omega - a)
 \end{align*}
 
-\item For (b):
+\item For (b): \martin{Any ideas on how to prove this? \textregistered}
 \begin{align*}
-\mathcal{F}\{f_\delta(t)\}(\omega) = \int_{-\infty}^\infty f_\delta(t) e^{-j \omega t} dt = \dots = F(\delta\omega) \\
-\mathcal{F}\{f(\delta t)\} = \int_{-\infty}^\infty f(\delta t) e^{-j \omega t} dt = \dots = F_\delta(\omega)
+\mathcal{F}\{f_\delta(t)\}(\omega) = \int_{-\infty}^\infty f_\delta(t) e^{-j \omega t} dt = \int_{-\infty}^\infty \delta^{-1}f(t/\delta) e^{-j \omega t} dt = \dots = F(\delta\omega) \\
+\mathcal{F}\{f(\delta t)\}(\omega) = \int_{-\infty}^\infty f(\delta t) e^{-j \omega t} dt = \dots = F_\delta(\omega)
 \end{align*}
 
-\item Since $f' \in L^1$ $^[$\footnote{See chapter \ref{ch5} for explanation on this term.}$^]$, the limit
+\item Since $f' \in L^1$ $^[$\footnote{See chapter \ref{ch5} for explanation on this term.}$^]$, the integral in the limit
 \begin{align*}
 \lim_{t \to \infty} f(t) = f(0) + \int_0^\infty f'(t) dt
 \end{align*}
 
-is finite, and the limit is 0 since $f\in \mathcal{L}^1$ and satisfies that $\int_{-\infty}^\infty$. Likewise, $\displaystyle{\lim_{t \to -\infty} f(t) = 0}$, too. Integration by terms yields:
+is finite, and the whole limit is 0 since $f\in \mathcal{L}^1$ and satisfies that $\int_{-\infty}^\infty |f(t)| dt < \infty$. Likewise, $\displaystyle{\lim_{t \to -\infty} f(t) = 0}$, too. Integration by terms yields:
 \begin{align*}
-F'(\omega) = \int_{-\infty}^\infty e^{-j \omega t} f'(t) dt = - \int_{-\infty}^\infty (-j \omega) e^{-j \omega t} f(t) dt = j\omega F(\omega)
+\mathcal{F}\{f'(t)\}(\omega) &= \int_{-\infty}^\infty e^{-j \omega t} f'(t) dt \\
+&= \left[ e^{-j\omega t} f(t) \right]_{-\infty}^\infty - \int_{-\infty}^\infty (-j \omega) e^{-j \omega t} f(t) dt \\
+&= \int_{-\infty}^\infty (j \omega) e^{-j \omega t} f(t) dt = j\omega F(\omega)
 \end{align*}
 
-If $tf(t)$ is integrable then:
+Since $e^{-j\omega t} \to 0$ for $t \to \infty$. If $tf(t)$ is integrable then:
 \begin{align*}
 \mathcal{F}\{tf(t)\} = \int_{-\infty}^\infty e^{-j \omega t} t f(t) dt = j \dfrac{d}{d\omega} \int_{-\infty}^\infty e^{-j \omega t} f(t) dt = j F'(\omega)
 \end{align*}
 
 Note that $t e^{-j \omega t} = j \dfrac{d}{d\omega} e^{-j\omega t}$.
 
-\item Finally, by definition \ref{def:Convol}:
+\item Finally, by definition \ref{def:Convol} it follows that:
 \begin{align*}
 \mathcal{F}\{f*g\}(\omega) &= \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-j \omega t} f(t - \tau) g(\tau) d\tau dt \\
 &= \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-j\omega(t-\tau)} f(t-\tau) e^{-j\omega \tau} g(\tau) dt d\tau \\
@@ -171,7 +173,7 @@ Where $z = t - \tau$.
 \noindent
 In all simplicity, part (a) of this theorem shows that translating a function (that is, a delay) corresponds to multiplying its Fourier transform by an exponential (which is equivalent to a phase shift since $F$ may be written in the polar coordinates $F = |F|e^{j\theta}$) and vice versa; part (b) shows that dilating a function by $\delta$ corresponds to dilating its Fourier transform by $1/\delta$ and vice versa; part (c) shows that differentiating a function corresponds to multiplying its Fourier transform by the coordinate variable and vice versa; and by definition \ref{def:Convol} it is shown that a convolution in the time domain is equivalent to multiplying in the frequency domain and vice versa \cite{page 215, FAA}. Similar symmetries apply to the Fourier series discussed above \cite{page 60, DTSP}.
 \\ \\
-The following theorem is inspired by \cite{page 77, FAA}.
+The following theorem is inspired by \cite{page 77, FAA}. \martin{This theorem is probably not relevant. \textregistered}
 
 \begin{theorem}
 Let $\{\phi_n\}_1^\infty$ be an orthonormal set in $\mathcal{L}^2(a,b)$. The following conditions are equivalent.
