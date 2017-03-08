@@ -48,7 +48,8 @@ In this chapter sample theory and its importance when converting an analogue aud
 %\end{figure}
 %The above figures illustrate the continuous Fourier transform. The transform can be discretized to the discrete Fourier transform, which is crucial, when working with sampled signals. This is likewise covered in chapter \ref{ch5}.
 \section{Sampling}\label{sec:sampling}
-Sampling is the process of representing a \textit{continuous-time} signal by a sequence of values $x[n]$. Doing so converts the continuous-time signal into a \textit{discrete-time} signal. \cite{pelgrom} The relation between a continuous function $x_c(t)$ and the discrete funtion $x[n]$ obtained by sampling $x_c(t)$ is described by
+In this section sampling will be defined mathematically which allows for a frequency analysis leading to the establishment of the important \textit{Sampling Theorem}.\\\\
+Sampling is the process of representing a \textit{continuous-time} signal by a finite sequence of values. Doing so converts the continuous-time signal into a \textit{discrete-time} signal. \cite{pelgrom} The relation between a continuous function $x_c(t)$ and the discrete funtion $x[n]$ obtained by sampling $x_c(t)$ is described by
 \begin{equation}\label{eq:sampling_principle}
 x[n]=x_c(nT_s)
 \end{equation}
@@ -56,7 +57,7 @@ where the \textit{sampling period }$T_s$ (time between two consecutive samples) 
 \begin{equation}\label{eq:sample_freq}
 t=\frac{n}{f_s}=nT_s, \phantom{mm} n=-\infty,\hdots-1,0,1\hdots,\infty \phantom{mm}\text{\cite{pelgrom}}
 \end{equation}
-where $n$ is the number of samples.\\\\
+where $t$ is time sampled, $n$ is the number of samples and $nT_s$ are points in time of sampling.\\\\
 To describe sampling mathematically the \textit{Dirac delta} function is introduced in definition \ref{def:dirac}.
 \begin{definition}[Dirac delta function]\label{def:dirac}
 The Dirac delta function is the function $\delta$ satisfying
@@ -308,7 +309,9 @@ f(t)&=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\r
 \end{proof}
 $\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate} respectively. The theorem can be interpreted as stating, that any signal bandlimited by some Nyquist frequency $\omega_N$ can be completely determined by sampling it at the Nyquist rate $2\omega_N$. The theorem is therefore central to determining $f_s$ so as to be able to reconstruct $x_c$ from $x_s$. If the sampling frequency $\omega_s=2\omega_N$ the continuous signal is theoretically reconstructable from $x_s$ by summation of sinc-functions (theorem \ref{sampling_theorem}), but in practice a higher sampling rate is usually used as this makes digital filtering more convenient - see chapter \ref{ch7}.
 \section{Analogue-to-digital conversion}\label{ADC}
-An analogue-to-digital converter (ADC) is a device which as the name suggests is capable of converting an analogue signal to a digital signal in a way close to the aforementioned mathematically described way. The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of an ADC, but not explain the in-depth theory, as the ADC is merely a tool and not a focus point of this project. An audio ADC consists of the following elements:
+An analogue-to-digital converter (ADC) is a device which as the name suggests is capable of converting an analogue signal to a digital signal in a way close to the mathematically described way in \ref{eq:sampling}. The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of an ADC, but not explain the in-depth theory, as the ADC is merely a tool to perform the sampling described in the previous sections and not a focus point of this project.
+\\\\
+An audio ADC consists of the following elements:
 \begin{enumerate}
 \item A \textit{track-} or \textit{sample-and-hold} circuit capable of sampling a voltage and \textit{holding} the value during the whole or some part of the sample period.
 \item A \textit{quantizer} capable of assigning discrete values to the voltage sampled.
@@ -322,7 +325,7 @@ The placement of an analogue to digital converter in a system to record sound to
 	node at (0,0)[right=-13mm]{\huge\twonotes} % kan skiftet ud med sinus længere nede
 	node [input, name=input1] {} 
 	node at (input1) [above=5mm] {Mic}		
-	node [block, right of=input1] (sh) {$Sampel and hold$}
+	node [block, right of=input1] (sh) {$Sample$-$and$-$hold$}
 	node [block, right of=sh] (quant) {$Quantification$}
 	node [block, right of=quant] (save) {$Storage$}
 	node [sum, right of=save] (cirk1) {}
@@ -351,12 +354,12 @@ The placement of an analogue to digital converter in a system to record sound to
 \end{figure}
 %\input{sections/mainmatter/chapter_4/_____.tex}
 \subsubsection{Sample-and-hold}
-A sample-and-hold (S\&H) circuit is responsible for discretizing a signal from continuous time to discrete time by sampling the signal at discrete points in time. An S\&H circuit measures a varying analogue signal (input) and creates a stable analogue signal (output) by "holding" the value of the initial signal for a period of time equal to $T_s$ \cite{pelgrom}. The stable signal can then be used for the whole duration $T_s$. In the case of this project, the input is an analogue signal of voltage from a microphone, while the stable output is an analogue voltage. The broad topic of constructing an S\&H circuit will not be covered here.\\
+A sample-and-hold (S\&H) circuit is responsible for discretizing a signal from continuous time to discrete time by sampling the signal at discrete points in time. An S\&H circuit measures a varying analogue signal (input) and creates a stable analogue signal (output) by "holding" the value of the initial signal for a period of time equal to $T_s$ \cite{pelgrom}. The stable signal can then be used for the whole duration $T_s$. In the case of this project, the input is an analogue signal of voltage from a microphone, while the stable output is an analogue voltage.\\
 In figure \ref{fig:S/H} an example of graphs of input and output of a S\&H is seen.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
-\begin{axis}[
+\begin{axis}[scale=0.8,
 ticks=none,
 %ymajorticks=false,
 %xtick={3.1416,6.2832},
@@ -387,7 +390,7 @@ In figure \ref{fig:quant} the graph of an analogue signal is seen alongside the 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
-\begin{axis}[
+\begin{axis}[scale=0.8,
 unit vector ratio*=1 1 1;
 clip=false,
 ticks=none,
