@@ -219,8 +219,8 @@ An extreme case of aliasing happens if the frequencies of two different signals 
 \begin{tikzpicture}[scale=0.8]
 \begin{axis}[
 axis lines=middle,
-xtick={3.14159,6.28138},
-xticklabels={$\pi$,$2\pi$},
+xtick={6.28138},
+xticklabels={1 s},
 ytick={-1,1}
 ,xmin=-.25
 ,xmax=6.5
@@ -240,15 +240,15 @@ ytick={-1,1}
 \node at (axis cs:6.2832,0) {\textbullet};
 \end{axis}
 \end{tikzpicture}
-\caption{Sine wave of frequency $f=$1 Hz sampled at $f_s=9$ Hz.}
+\caption{Sine wave of frequency $f=1$ Hz sampled at $f_s=9$ Hz.}
 \label{fig:aliasing1}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
 \begin{tikzpicture}[scale=0.8]
 \begin{axis}[
 axis lines=middle,
-xtick={3.14159,6.28138},
-xticklabels={$\pi$,$2\pi$},
+xtick={6.28138},
+xticklabels={1 s},
 ytick={-1,1}
 ,xmin=-.25
 ,xmax=6.5
@@ -289,26 +289,29 @@ By expanding $\hat{f}$ into its Fourier series and using the negative index $-n$
 \hat{f}(\omega)=\sum_{n=-\infty}^{\infty}c_{-n}\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}
 \end{equation*}
 where $c_{-n}$ is given by
-\begin{equation*}
-c_{-n}=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\hat{f}(\omega)\mathrm{e}^{\frac{in\pi\omega}{\omega_N}}\,dw=\frac{\pi}{\omega_N}f\left(\frac{n\pi}{\omega_N}\right).
-\end{equation*}
+\begin{align*}
+c_{-n}&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\hat{f}(\omega)\mathrm{e}^{\frac{in\pi\omega}{\omega_N}}\,dw\\
+&=\frac{\pi}{\omega_N}f\left(\frac{n\pi}{\omega_N}\right).
+\end{align*}
 Then \eqref{eq:proof1} can be written as
 \begin{align*}
 f(t)&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}\mathrm{e}^{i\omega t}\,dw
 \end{align*}
 From theorem \ref{plancherel} it follows that the Fourier transform is linear and continuous, which allows us to switch the integral and summation:\frede{Er ikke ret sikker på det her - skal spørge Henrik om det \texttrademark}
 \begin{align*}
-&=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\mathrm{e}^{i(\omega_Nt-n\pi)\omega/\omega_N}}{i(\omega_Nt-n\pi)/\omega_N}\Bigg|_{\omega=-\omega_N}^{\omega_N}\\
+f(t)&=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\mathrm{e}^{i(\omega_Nt-n\pi)\omega/\omega_N}}{i(\omega_Nt-n\pi)/\omega_N}\Bigg|_{\omega=-\omega_N}^{\omega_N}\\
 &=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\sin(\omega_Nt-n\pi)}{\omega_Nt-n\pi}\\
 &=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}\text{\cite{FAA}}
 \end{align*}
 \end{proof}
-$\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate} respectively. The theorem can be interpreted as stating, that any signal bandlimited by some Nyquist frequency $\omega_N$ can be completely determined by sampling it at the Nyquist rate $2\omega_N$. The theorem is therefore central to determining $f_s$ so as to be able to reconstruct $x_c$ from $x_s$. If the sampling frequency $\omega_s=2\omega_N$ the continuous signal is theoretically reconstructable from $x_s$, but in practice a higher sampling rate is usually used as this makes digital filtering more convenient - see chapter \ref{ch7}.
+$\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate} respectively. The theorem can be interpreted as stating, that any signal bandlimited by some Nyquist frequency $\omega_N$ can be completely determined by sampling it at the Nyquist rate $2\omega_N$. The theorem is therefore central to determining $f_s$ so as to be able to reconstruct $x_c$ from $x_s$. If the sampling frequency $\omega_s=2\omega_N$ the continuous signal is theoretically reconstructable from $x_s$ by summation of sinc-functions, but in practice a higher sampling rate is usually used as this makes digital filtering more convenient - see chapter \ref{ch7}.
 \section{Analogue-to-digital conversion}\label{ADC}
-An analogue-to-digital converter (ADC) is a device which as the name suggests is capable of converting an analogue signal to a digital signal. The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. An audio ADC consists of the following elements
+An analogue-to-digital converter (ADC) is a device which as the name suggests is capable of converting an analogue signal to a digital signal. The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of an ADC, but not explain the in-depth theory, as the ADC is merely a tool and not a focus point of this project. An audio ADC consists of the following elements:
 \begin{enumerate}
 \item A \textit{track-} or \textit{sample-and-hold} circuit capable of sampling a voltage and \textit{holding} the value during the whole or some part of the sample period.
+\item A quantizer capable of assigning discrete values to the voltage sampled.
 \end{enumerate}
+The placement of an analog to digital converter in a system to record sound to a digital storage unit is seen in figure \ref{fig:input}.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[node distance=3.5cm,auto,>=latex']
@@ -345,7 +348,30 @@ An analogue-to-digital converter (ADC) is a device which as the name suggests is
 \label{fig:input}
 \end{figure}
 %\input{sections/mainmatter/chapter_4/_____.tex}
+\subsubsection{Sample and hold}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+unit vector ratio*=1 1 1;
+clip=false,
+ticks=none,
+axis lines=middle,
+ymax=1,
+xmax=1,
+x label style={at={(axis cs:0.5,0)},anchor=north},
+y label style={at={(axis cs:0,0.5)},rotate=90,anchor=south},
+xlabel=Time,
+ylabel=Voltage]
+\draw[line width=0.5mm,red](axis cs:0,0)--(axis cs:1,1);
+\addplot+[const plot,no marks,blue]coordinates{(0,0)(0.1,0.2)(0.3,0.4)(0.5,0.6)(0.7,0.8)(0.9,1)(1,1)};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of continuous levels of voltage versus time (red) and the quantized voltage levels in bits (blue).}
+\end{figure}
 
+
+\subsubsection{Quantization}
 
 
 
