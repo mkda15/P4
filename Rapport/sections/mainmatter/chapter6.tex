@@ -47,12 +47,12 @@ In this chapter sample theory and its importance when converting an analogue aud
 %\end{minipage}
 %\end{figure}
 %The above figures illustrate the continuous Fourier transform. The transform can be discretized to the discrete Fourier transform, which is crucial, when working with sampled signals. This is likewise covered in chapter \ref{ch5}.
-\section{Sampling}
+\section{Sampling}\label{sec:sampling}
 Sampling is the process of representing a \textit{continuous-time} signal by a sequence of values $x[n]$. Doing so converts the continuous-time signal into a \textit{discrete-time} signal. \cite{pelgrom} The relation between a continuous function $x_c(t)$ and the discrete funtion $x[n]$ obtained by sampling $x_c(t)$ is described by
 \begin{equation}\label{eq:sampling_principle}
 x[n]=x_c(nT_s)
 \end{equation}
-where the \textit{sampling period }$T_s$ (time bewteen two consecutive samples) is determined by the \textit{sampling frequency} $f_s$ (samples pr. second). The relation between $T_s$, $f_s$ and the times of samplings is described by
+where the \textit{sampling period }$T_s$ (time between two consecutive samples) is determined by the \textit{sampling frequency} $f_s$ (samples pr. second). The relation between $T_s$, $f_s$ and the times of samplings is described by
 \begin{equation}\label{eq:sample_freq}
 t=\frac{n}{f_s}=nT_s, \phantom{mm} n=-\infty,\hdots-1,0,1\hdots,\infty \phantom{mm}\text{\cite{pelgrom}}
 \end{equation}
@@ -64,6 +64,8 @@ The Dirac delta function is the function $\delta$ satisfying
 \int_{-\infty}^{\infty} \! f(t)\delta(t-t_0) \, dt=f(t_0).\phantom{mm}\text{\cite{pelgrom}}
 \end{equation}
 \end{definition}
+The Dirac delta function is sometimes interpreted as a constant 0-function with an infinitely high and infinitely thin spike at the origin - theorem \ref{def:dirac} is a more rigorous definition.
+\\\\
 Summing an infinite number of Dirac functions shifted at equally spaced time intervals $nT_s$ as in \eqref{eq:dirac_sum} produces a constant function of equidistant Dirac pulses:
 \begin{equation}\label{eq:dirac_sum}
 s(t)=\sum_{n=-\infty}^{\infty}\delta(t-nT_s)\phantom{mm}\text{\cite{DTSP}}
@@ -76,7 +78,7 @@ x_s(t)&=x_c(t)s(t)\nonumber \\
 &=\sum_{n=-\infty}^{\infty}x_c(nT_s)\delta(t - nT_s)\phantom{mm}
 \label{eq:sampling}
 \end{align}
-\eqref{eq:sampling} is a mathematical representation of sampling of the continuous function $x_c(t)$ into the function $x_s(t)$ \cite{DTSP}. Although \eqref{eq:sampling} describes sampling, we have $x_s(t)\neq x[n]$ as $x_s(t)$ is defined in the interval between two samples whereas $x[n]$ only takes values at integers $n$. Although $x_s(t)\neq x[n]$ \eqref{eq:sampling} will be useful in the upcoming appliance of the Fourier transform.
+\eqref{eq:sampling} is a mathematical representation of sampling of the continuous function $x_c(t)$ into the function $x_s(t)$ \cite{DTSP}. Although \eqref{eq:sampling} matehmatically describes sampling, we have $x_s(t)\neq x[n]$ as $x_s(t)$ is defined on the interval between two samples whereas $x[n]$ only takes values at integers $n$. Although $x_s(t)\neq x[n]$ \eqref{eq:sampling} will be useful in the upcoming appliance of the Fourier transform.
 %\paragraph{Example of sampling} Sampling a ball following the arc shown in figure \ref{fig:ball_cont} results in the plotted points in figure \ref{fig:ball_disc}. As such the balls path is illustrated with discrete points along the path.
 %\begin{figure}[H]
 %\centering
@@ -113,21 +115,21 @@ x_s(t)&=x_c(t)s(t)\nonumber \\
 \subsection{Frequency representation of sampling}
 To study the behavior of $x_s(t)$ in the frequency domain the Fourier transform is used. The Fourier transform of $s(t)$ is seen in \eqref{eq:fourier_impulse}.
 \begin{equation}\label{eq:fourier_impulse}
-\hat{s}(j\omega)=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}(j\omega-kj\omega_s)
+S(j\omega)=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}(j\omega-kj\omega_s)
 \end{equation}
 where $\omega=2\pi f$ is frequency in radians pr. second.
 The Fourier transform of \eqref{eq:sampling} uses the fact, that \eqref{eq:sampling} is a product of two functions, which is a convolution in the frequency domain:
 \begin{align}
-\hat{x}_s(j\omega)&=\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}\hat{x}_c(t)(j\omega)*\hat{s}(j\omega)\phantom{mm}\text{\cite{DTSP}}\nonumber\\
-&=\frac{1}{T}\sum_{k=-\infty}^{\infty}\hat{x}_c(j(\omega-k\omega_s))\label{eq:samp_freq}
+X_s(j\omega)&=\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}X_c(t)(j\omega)*S(j\omega)\phantom{mm}\text{\cite{DTSP}}\nonumber\\
+&=\frac{1}{T}\sum_{k=-\infty}^{\infty}X_c(j(\omega-k\omega_s))\label{eq:samp_freq}
 \end{align}
 \eqref{eq:samp_freq} mathematically samples $x_c(t)$ in the frequency domain at a rate of $\omega_s$ radians pr. second. 
 \paragraph{Bandlimited signal}
-A signal is \textit{bandlimited} if the signal contains no frequencies higher than some frequency $\omega_N$, which means $\hat{f}(j\omega)=0$ for $|\omega|>\omega_N$ \cite{FAA}. 
+A signal is \textit{bandlimited} if the signal contains no frequencies higher than some frequency $\omega_N$, which means $F(j\omega)=0$ for $|\omega|>\omega_N$ \cite{FAA}. 
 \subsection{Aliasing}\label{sec:aliasing}
 \textit{Aliasing} is a consequence of not sampling  at a sufficiently high $f_s$ which results in the continous signal $x_c(t)$ being non reconstructable from the sampled signal $x_s(t)$.
 \\\\
-From \eqref{eq:samp_freq} it is seen that $\hat{x}_s(j\omega)$ consists of copies of $\hat{x}_c$ repeated at whole multiples of $j\omega_s$ on both sides of the origin - seen in figure \ref{fig:copies}.
+From \eqref{eq:samp_freq} it is seen that $X_s(j\omega)$ consists of copies of $X_c$ repeated at whole multiples of $j\omega_s$ on both sides of the origin - seen in figure \ref{fig:copies}.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -206,7 +208,7 @@ ymax=3]
 \draw[line width=0.5mm,dashed](axis cs:-4.66,1)--(axis cs:-5.33,0);
 \end{axis}
 \end{tikzpicture}
-\caption{Signal bandlimited by $\omega_N$ sampled at $\omega_s<2\omega_N$ in the frequency domain - the copies of $\hat{x}_c$ overlap.}
+\caption{Signal bandlimited by $\omega_N$ sampled at $\omega_s<2\omega_N$ in the frequency domain - the copies of $X_c$ overlap.}
 \label{fig:overlap}
 \end{figure}
 \noindent It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $\hat{x}_c$. With an ideal low pass filter  a single isolated copy (centered around the origin) can be picked out, and the reverse Fourier transform used to recreate the time domain representation of the signal. If however $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing. When a signal is aliased it is not possible to pick out a single copy of the sampled signal in the frequency domain which results in $x_c(t)$ not being reconstructable from $x_s(t)$. This makes aliasing in the context of representing a continuous signal as a discrete set of values unwanted.
@@ -274,7 +276,7 @@ ytick={-1,1}
 \end{figure} 
 \noindent As such the reconstructability of $x_c$ from $x_s$ depends on the relation between $f_s$ and $\omega_N$ which leads to the central \textit{Sampling Theorem}.
 \begin{theorem}[The Sampling Theorem]\label{sampling_theorem}
-Let $f\in L^2$ and $\hat{f}(\omega)=0$ for $|\omega|\geq \omega_N$ ($f$ bandlimited). Then $f$ is completely determined by its values at the points $t_n=\frac{n\pi}{\omega_N}$, $n=0,\pm 1,\pm 2,\ldots$:
+Let $f\in L^2$ and $F(\omega)=0$ for $|\omega|\geq \omega_N$ ($f$ bandlimited). Then $f$ is completely determined by its values at the points $t_n=\frac{n\pi}{\omega_N}$, $n=0,\pm 1,\pm 2,\ldots$:
 \begin{equation*}
 f(t)=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}\text{\cite{FAA}}
 \end{equation*}
@@ -286,7 +288,7 @@ f(t)=\frac{1}{2\pi}\int_{-\omega_N}^{\omega_N}\!\hat{f}(\omega)\mathrm{e}^{i\ome
 \end{equation}
 By expanding $\hat{f}$ into its Fourier series and using the negative index $-n$ we get
 \begin{equation*}
-\hat{f}(\omega)=\sum_{n=-\infty}^{\infty}c_{-n}\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}
+F(\omega)=\sum_{n=-\infty}^{\infty}c_{-n}\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}
 \end{equation*}
 where $c_{-n}$ is given by
 \begin{align*}
@@ -304,14 +306,14 @@ f(t)&=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\r
 &=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}\text{\cite{FAA}}
 \end{align*}
 \end{proof}
-$\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate} respectively. The theorem can be interpreted as stating, that any signal bandlimited by some Nyquist frequency $\omega_N$ can be completely determined by sampling it at the Nyquist rate $2\omega_N$. The theorem is therefore central to determining $f_s$ so as to be able to reconstruct $x_c$ from $x_s$. If the sampling frequency $\omega_s=2\omega_N$ the continuous signal is theoretically reconstructable from $x_s$ by summation of sinc-functions, but in practice a higher sampling rate is usually used as this makes digital filtering more convenient - see chapter \ref{ch7}.
+$\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate} respectively. The theorem can be interpreted as stating, that any signal bandlimited by some Nyquist frequency $\omega_N$ can be completely determined by sampling it at the Nyquist rate $2\omega_N$. The theorem is therefore central to determining $f_s$ so as to be able to reconstruct $x_c$ from $x_s$. If the sampling frequency $\omega_s=2\omega_N$ the continuous signal is theoretically reconstructable from $x_s$ by summation of sinc-functions (theorem \ref{sampling_theorem}), but in practice a higher sampling rate is usually used as this makes digital filtering more convenient - see chapter \ref{ch7}.
 \section{Analogue-to-digital conversion}\label{ADC}
-An analogue-to-digital converter (ADC) is a device which as the name suggests is capable of converting an analogue signal to a digital signal. The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of an ADC, but not explain the in-depth theory, as the ADC is merely a tool and not a focus point of this project. An audio ADC consists of the following elements:
+An analogue-to-digital converter (ADC) is a device which as the name suggests is capable of converting an analogue signal to a digital signal in a way close to the aforementioned mathematically described way. The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of an ADC, but not explain the in-depth theory, as the ADC is merely a tool and not a focus point of this project. An audio ADC consists of the following elements:
 \begin{enumerate}
 \item A \textit{track-} or \textit{sample-and-hold} circuit capable of sampling a voltage and \textit{holding} the value during the whole or some part of the sample period.
-\item A quantizer capable of assigning discrete values to the voltage sampled.
+\item A \textit{quantizer} capable of assigning discrete values to the voltage sampled.
 \end{enumerate}
-The placement of an analog to digital converter in a system to record sound to a digital storage unit is seen in figure \ref{fig:input}.
+The placement of an analogue to digital converter in a system to record sound to a digital storage unit is seen in figure \ref{fig:input}.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[node distance=3.5cm,auto,>=latex']
@@ -348,7 +350,40 @@ The placement of an analog to digital converter in a system to record sound to a
 \label{fig:input}
 \end{figure}
 %\input{sections/mainmatter/chapter_4/_____.tex}
-\subsubsection{Sample and hold}
+\subsubsection{Sample-and-hold}
+A sample-and-hold (S\&H) circuit is responsible for discretizing a signal from continuous time to discrete time by sampling the signal at discrete points in time. An S\&H circuit measures a varying analogue signal (input) and creates a stable analogue signal (output) by "holding" the value of the initial signal for a period of time equal to $T_s$ \cite{pelgrom}. The stable signal can then be used for the whole duration $T_s$. In the case of this project, the input is an analogue signal of voltage from a microphone, while the stable output is an analogue voltage. The broad topic of constructing an S\&H circuit will not be covered here.\\
+In figure \ref{fig:S/H} an example of graphs of input and output of a S\&H is seen.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+ticks=none,
+%ymajorticks=false,
+%xtick={3.1416,6.2832},
+%xticklabels={$\pi$,$2\pi$},
+unit vector ratio*=1 1 1,
+xmin=0,
+ymin=-3,
+xmax=7,
+ymax=3,
+axis lines=middle,
+x label style={at={(axis cs:7,0)},anchor=north},
+y label style={at={(axis cs:0,0)},anchor=south,rotate=90},
+xlabel=Time,
+ylabel=Voltage]
+\addplot[black,mark=none,samples=100,domain=0:6.2832,line width=0.3mm]{sin(deg(x))-2*sin(deg(2*x))};
+\addplot[const plot,blue,mark=non]coordinates{(0,0)(0.6981,-1.3268)(1.3963,0.3008)(2.0944,2.5981)(2.7925,1.6276)(3.4907,-1.6276)(4.1888,-2.5981)(4.8869,-0.3008)(5.5851,1.3268)(6.2832,0)};
+\draw[|-|](axis cs:5.5851,1.5)--(axis cs:6.2832,1.5);
+\node at(axis cs:5.9342,1.8){$T_s$};
+\end{axis}
+\end{tikzpicture}
+\caption{Voltage of input analogue signal (black) and of output analogue signal (blue). The input signal is held by a S\&H circuit for $T_s$.}
+\label{fig:S/H}
+\end{figure}
+\noindent The S\&H circuit must sample at a sufficiently high frequency as specified by the Sampling Theorem.
+\subsubsection{Quantization}
+Quantization is the process of discretizing analogue signal values to discrete values. Digital processors are incapable of dividing an interval into infinitely many subintervals (points), which means a finite number of intervals has to be used -  when an analogue signal is quantized its value is compared to a finite number of analogue values, rounded to the nearest and expressed in digital numbering (binary). The number of digital values therefore depends on the number of bits dedicated to representing a given analogue value as a digital number. When rounding the analogue value to a digital value, there is produced a round off error, which can be descreased by increasing the number of possible digital values in the interval \cite{pelgrom}.\\
+In figure \ref{fig:quant} the graph of an analogue signal is seen alongside the quantization levels.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -357,23 +392,24 @@ unit vector ratio*=1 1 1;
 clip=false,
 ticks=none,
 axis lines=middle,
+xmin=0,
+ymin=0,
 ymax=1,
 xmax=1,
 x label style={at={(axis cs:0.5,0)},anchor=north},
 y label style={at={(axis cs:0,0.5)},rotate=90,anchor=south},
 xlabel=Time,
 ylabel=Voltage]
-\draw[line width=0.5mm,red](axis cs:0,0)--(axis cs:1,1);
-\addplot+[const plot,no marks,blue]coordinates{(0,0)(0.1,0.2)(0.3,0.4)(0.5,0.6)(0.7,0.8)(0.9,1)(1,1)};
+\draw[line width=0.3mm,black](axis cs:0,0)--(axis cs:1,1);
+\draw[|-|](axis cs:0.25,0.4)--(axis cs:0.25,0.6);
+\addplot[const plot,no marks,blue]coordinates{(0,0)(0.1,0.2)(0.3,0.4)(0.5,0.6)(0.7,0.8)(0.9,1)(1,1)};
+\node at(axis cs:0.15,0.5){LSB};
 \end{axis}
 \end{tikzpicture}
-\caption{Plot of continuous levels of voltage versus time (red) and the quantized voltage levels in bits (blue).}
+\caption{Plot of continuous levels of voltage versus time (red) and the quantized voltage levels (blue) in least significant bits (LSB).}
+\label{fig:quant}
 \end{figure}
-
-
-\subsubsection{Quantization}
-
-
+\noindent There exist different ADCs \cite{pelgrom} all with the purpose of expressing a continuous analogue signal as a discrete and quantized digital signal. These different approaches will  not be described - the above description will make do for now. The process of sampling described in section \ref{sec:sampling} will be done with an ADC in the experiments later in the project.
 
 \clearpage
 \section{Noise}
