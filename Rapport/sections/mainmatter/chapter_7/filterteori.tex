@@ -1,13 +1,18 @@
 \section{Basic principals}
-When a discrete sequence $x[n]$ is applied to a system that gives the output $y[n]$ it is the impulse response of the system $h[n]$ that determined how the input sequence is affected. The output is determined by the convolution of input signal and impulse response of the system. \trine{include "LTI"}
+
+A digital filter is characterised as a \textit{linear time invariant} system referred to as a LTI system, which are to be described completely in the time domain by its impulse response $h[n]$. \\
+When a discrete sequence $x[n]$ is applied to a LTI system it is the impulse response of the system $h[n]$ that determined what the output $y[n]$ will be. In other words the impulse response determine how much of the input sequence that passes the filter. \\ 
+The output is determined by the convolution sum of input signal and impulse response of the system.
 \begin{align}
-x[n]*h[n]=y[n]
+y[n] = x[n]*h[n] = \sum_{k=1}^{\infty} x[k]h[n-k]
 \end{align}  
-Such system is refereed to as a digital filter with impulse response $h[n]$ only letting selective frequencies through.\\ The frequency response of the filter is given by the Fourier transform of the impulse response, considering the input sequence $x[n]=e^{j\omega n}$ for $-\infty < n <\infty$, the frequency response is defined as\trine{side (40) DTSP}
+The filters concerned in the project are referred to as frequency selective filters. ... that is why we what to go to the frequency domain.? \\
+\\   
+The frequency response of a filter is given by the Fourier transform of the impulse response, considering the input sequence $x[n]=e^{j\omega n}$ for $-\infty < n <\infty$, the frequency response is defined as\trine{side (40) DTSP}
 \begin{align}
 H(e^{j\omega})=\sum_{k=-\infty}^{\infty}h[k]e^{-j\omega k}
 \end{align}
-Hence the outcome of the filter becomes 
+hence the outcome of the filter becomes 
 \begin{align}
 y[n]=H(e^{j\omega})e^{-j\omega n} \label{eq:filter_output}
 \end{align} 
@@ -15,15 +20,18 @@ By \eqref{eq:filter_output} it is seen that $H(e^{j\omega})$ describes the chang
 \begin{align}
 H(e^{j\omega})=|H(e^{j\omega})|e^{j\measuredangle H(e^{j\omega})}
 \end{align}  
-where $|H(e^{j\omega})|$ and $e^{j\measuredangle H(e^{j\omega})}$ are functions of magnitude and phase response of the filter respectively, both real valued and $2\pi$-periodic.\\ If the frequency response of a filter is real it is said to have \textit{zero phase}, which is equavivalen to the phase response only tacking values that are integer multiples of $\pi$. Further if the frequency response can be written in the form 
+where $|H(e^{j\omega})|$ and $e^{j\measuredangle H(e^{j\omega})}$ are functions of \textit{magnitude} and magnitude of the filter respectively, both real valued and $2\pi$-periodic.\\ 
+If the frequency response of a filter is real it is said to have \textit{zero phase}, which is equavivalen to the phase response only tacking values that are integer multiples of $\pi$. Further if the frequency response can be written in the form 
 \begin{align}
 H(e^{j\omega})=A(e^{j\omega})e^{j(-\alpha\omega + j\beta)} 
 \end{align}
-where $\alpha$ and $\beta$ are constants and $A(e^{j\omega})$ is real,
-the filter is said to have \textit{general linear phase}. That is because the phase response consist of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resolving from \\
+where $\alpha$ and $\beta$ are constants and $A(e^{j\omega})$ is real,  the filter is said to have \textit{general linear phase}. That is because the phase response consist of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resolving from jumps of $2\pi$\trine{explain the discontinuity} \\
 \\
 
-When designing filters it is ideal to have approximately constant magnitude and zero phase corresponding to the frequency response. Though for causal systems\trine{define} zero phase is not possible to obtain, hence some phase distortion is acceptable   
+When designing filters it is ideal to have approximately constant magnitude and zero phase corresponding to the frequency response. Though for causal systems\trine{define} zero phase is not possible to obtain, hence a linear phase response is acceptable and preferred over non linear phase.
+\\
+A measure of the linearity of the phase is the group delay.\\    
+
 
 \section{Ideal filter} 
 
@@ -50,3 +58,5 @@ ymax=2.6]
 \label{fig:lowpass}
 \end{figure}
 
+noter: \\
+minimum phase system(side 250) when stable an casual system an invers system, if all zeros and pole are inside the unit circle 
