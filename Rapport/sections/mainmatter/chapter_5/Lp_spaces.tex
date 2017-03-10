@@ -3,7 +3,6 @@ This chapter is inspired by \cite{FAA}, \cite{FSP} and \cite{FTFA}.
 This project deals with functions in the so-called $\mathcal{L}^p$ and $\ell^p$ spaces. These spaces are introduced in the following and used later to ensure that the Fourier series and transforms used in the project actually converge. The following definitions are inspired by \cite{page 31, FSP}.
 
 \begin{definition}
-
 Let $D \subset \mathbb{R}^n$ be a subset. $\mathcal{L}^2(D)$ is the set of all functions on $D$ whose squares are absolutely Lebesgue-integrable over $D$:
 \begin{align*}
 \mathcal{L}^2(D) = \left\{ f: \int_D |f(t)|^2 dt < \infty \right\}
@@ -35,8 +34,7 @@ It is furthermore required that the function is measureable. This will not be el
 As stated in \cite{page 74, FAA}, the $\mathcal{L}^2$ space is simply the space of all functions $f(t)$ such that the region between the graph of $|f(t)|^2$ and the $x$-axis \martin{$t$-axis? Horizontal axis?} has finite area. The Lebesgue integral is therefore just another way of calculating the area between the graph of the function and the $x$-axis. The Lebesgue integral will not be elaborated further in this project as it is beyond its focus.
 \\ \\
 A similar definition is given for $\ell^p$ which deals with sequences:\martin{Is this definition relevant? \textregistered}
-\begin{definition}{$\ell^p(\mathbb{Z})$}
-\\
+\begin{definition}
 $\ell^2(\mathbb{Z})$ is the space of square-summable sequences, and the inner product is defined as:
 \begin{align*}
 \langle x,y \rangle = \sum_{n\in\mathbb{Z}} x[n] \overline{y[n]}
@@ -78,8 +76,7 @@ Therefore, the Fourier transform preserves inner products up to a factor of $2\p
 
 If $f$ is an arbitrary function in $\mathcal{L}^2$ it is possible to find a sequence $\{f_n\}$ such that $f_n$ and $F_n$ are in $\mathcal{L}^1$ and $f_n$ converges to $f$ in $\mathcal{L}^2$ \cite{page 82, FAA}. Since $\|F_n - F_m\|^2 = 2\pi\|f_n - f_m\|^2$, which converges to 0 as $m,n$ converges to $\infty$, $\{F_n\}$ is a Cauchy sequence in $\mathcal{L}^2$, which has a limit since it is complete. This limit only depends on $f$ and not on $\{f_n\}$. This limit is simply defined to be the Fourier transform $F$, and the domain of the Fourier transform is thus extended to include all of $\mathcal{L}^2$. This extension still preserves the norm and inner product up to a factor of $2\pi$, and it also satisfies the basic properties of the Fourier transform stated in theorem \ref{theorem:fund_Fourier}. These results are stated below \cite{page 222, FAA}.
 
-\begin{theorem}{The Plancherel Theorem} \label{Plancherel}
-\\
+\begin{theorem}[The Plancherel Theorem] \label{Plancherel}
 The Fourier Transform, defined originally on $\mathcal{L}^1 \cap \mathcal{L}^2$, extends uniquely to the map $F(\omega): \mathcal{L}^2 \to \mathcal{L}^2$ that satisfies:
 \begin{align*}
 \langle F, G \rangle = 2\pi \langle f,g \rangle \\

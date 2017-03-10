@@ -48,16 +48,14 @@ As stated on \cite{page 205, FAA}, ``these limiting calculations are utterly non
 %\noindent
 %Notice that $\frac{1}{2\pi}$ in the first line equals $\frac{1}{\sqrt{2\pi}} \cdot \frac{1}{\sqrt{2\pi}}$ in the second line, and this substitution makes both of the transforms (stated below) symmetric and also certain calculations easier. \cite{Page 10, FourierTrans}
 
-\begin{definition}{The Fourier transform} \label{def:Fourier_trans}
-\\
+\begin{definition}[The Fourier transform] \label{def:Fourier_trans}
 For a continuous differentiable function $f(t)$ the Fourier transform is defined as follows:
 \begin{align*}
 F(\omega) = \int_{-\infty}^\infty f(t) e^{-j \omega t} dt
 \end{align*}
 \end{definition}
 
-\begin{definition}{The inverse Fourier transform} \label{def:InverseFourier_trans}
-\\
+\begin{definition}[The inverse Fourier transform] \label{def:InverseFourier_trans}
 The inverse Fourier transform of $F(\omega)$ is:
 \begin{align*}
 f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty F(\omega) e^{j \omega t} d\omega
@@ -75,8 +73,7 @@ As stated in \cite{FourierTrans}, the mathematical importance of the Fourier tra
 The Fourier transform $F(\omega)$ is a function of frequency but it also provides information on the amplitude and the phase of the signal at various frequencies. $F(\omega)$ may be written in polar coordinates as $F = |F|e^{j\theta}$ with the modulus $|F|$ representing the amplitude of the signal at a certain frequency $\omega$ and the phase shift $\theta = \arctan \left(\frac{Im(F)}{Re(F)} \right)$ at the frequency $\omega$.
 \\ \\
 The following definition is inspired by \cite{page 206, FAA} and shows an useful tool in both theoretical and applicational aspects.
-\begin{definition}{Convolution} \label{def:Convol}
-\\
+\begin{definition}[The convolution integral] \label{def:Convol}
 Let $f,g$ be functions defined on $\mathbb{R}$. Their convolution is the function $f*g$ defined by:
 \begin{align*}
 (f*g)(t) = \int_{-\infty}^\infty f(t-\tau) g(\tau) d\tau
