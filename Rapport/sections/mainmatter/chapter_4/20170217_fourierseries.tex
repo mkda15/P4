@@ -1,15 +1,14 @@
 \section{Fourier series}
-Functions can be represented as a linear combination of functions on the form $\sin nt$.
-Or in other words linear combination of a oscillating function, sines, cosines or equivalently complex exponential.
+Functions can be represented as a linear combination of functions of the form $\sin nt$.
+Or in other words a linear combination of oscillating functions - sines, cosines or equivalently complex exponential.
 \\\\
-It can be an advantage to decompose functions, as a series or integral of "simpler" functions, to retrieve information.
+It can be an advantage to decompose functions as a series or integral of "simpler" functions to retrieve information:
 \begin{align*}
 	f(x) = \sum_{n=1}^\infty c_n f_n(x)\text{, or } f(x)= \int_{-\infty}^\infty g(u) h(u,x) du
 \end{align*}
-Information from a function $f(x)$ will, as an example be stored in the coefficient $\{c_n\}_{n=1}^\infty$.
-The coefficients can easily be stored on a computer.
+Information from a function $f(x)$ will as an example be stored in the coefficient $\{c_n\}_{n=1}^\infty$ which are easily stored on a computer.
 \\\\ 
-Furthermore a function $f: \mathbb{R}\to\mathbb{R}$ (or $\mathbb{C}$) is called $2\pi$-periodic, if $f(\theta + 2\pi) = f(\theta), \forall\theta\in\mathbb{R}$
+A function $f: \mathbb{R}\to\mathbb{R}$ (or $\mathbb{C}$) is called $2\pi$-periodic, if $f(\theta + 2\pi) = f(\theta), \forall\theta\in\mathbb{R}$
 
 The idea of the Fourier series is using the above information to recreate a $2\pi$- periodic signal.\\
 The Fourier series is defined as:
@@ -19,24 +18,21 @@ The Fourier series is defined as:
 \end{align*}
 The second part holds per Euler's formula:
 \begin{align*}
-	\cos(n(\theta) = \dfrac{e^{j n \theta} + e^{-j n \theta}}{2} \text{ and } \sin(n \theta) = \dfrac{e^{jn\theta}-e^{jn\theta}}{2j}
+	\cos(n\theta) = \dfrac{e^{j n \theta} + e^{-j n \theta}}{2} \text{ and } \sin(n \theta) = \dfrac{e^{jn\theta}-e^{-jn\theta}}{2j}
 \end{align*}
 
-It can be simpler to work with the complex exponential function, but working with the trigonometric functions $\cos$ and $\sin$ have there advantages. 
-Like being real-valued and odd and even, for cosine and sine respectively.
+It can be simpler to work with the complex exponential function, but working with the trigonometric functions $\cos$ and $\sin$ have their advantages like being real-valued and odd and even, for sine and cosine respectively.
 
 \subsection{Calculation of the coefficient $c_n$}
 It is a necessity to calculate the $c_n$ coefficient.
-By the assumption that this can be done, and it's permissible to integrate the fourier series term by term: :\\
+This is done by the assumption that it is possible and it is permissible to integrate the fourier series term by term:\\
 \\
-To solve $c_n$ in the equation $f(t)= \sum_{n=-\infty}^{\infty} c_n e^{n j\omega t}$
-\\\\
-First multiply both sides by $e^{-(j\omega k t)}$, where $k\in \mathbb{Z}$. And integrate both sides over a given period, from $-\pi$ to $\pi$:
+To solve $c_n$ in the equation $f(t)= \sum_{n=-\infty}^{\infty} c_n e^{n j\omega t}$ first multiply both sides by $e^{-(j\omega k t)}$, where $k\in \mathbb{Z}$. And integrate both sides from $-\pi$ to $\pi$:
 
 \begin{align} \label{eq:firststep_fouriercoefficient}
-	\int_{-\pi}^\pi f(t)e^{-(j\omega k t)} = \int_{-\pi}^\pi \sum_{n=-\infty}^{\infty} c_n e^{n j\omega t} e^{-j\omega k t} dt
+	\int_{-\pi}^\pi f(t)e^{-j\omega k t} = \int_{-\pi}^\pi \sum_{n=-\infty}^{\infty} c_n e^{n j\omega t} e^{-j\omega k t} dt
 \end{align}
-The integration of a $2\pi$ - periodic function over the length of the period, can be shifted with an integer.
+The integration of a $2\pi$-periodic function over the length of the period can be shifted with an integer.
 
 \begin{lemma}\label{lemma:2pi-periodic_function}
 Suppose $F$ is $2\pi$ - periodic and integrable. Then for any real number a 
@@ -105,9 +101,9 @@ where
 	&= \dfrac{1}{\pi} \int_{-\pi}^\pi f(t) \sin (n \omega t) dt, \, n=1,2,\dots	
 \end{align*}
 \end{definition}
-Further if a function $g(t)$ is uneven, ($g(t) = -g(-t)$), then the integral $\int_{-\pi}^\pi g(t) = 0$.
+Further if a function $g(t)$ is odd, ($g(t) = -g(-t)$), then the integral $\int_{-\pi}^\pi g(t) = 0$.
 \subsection{Convergence of the Fourier series}
-For a $2\pi$- periodic and integrabel function, the n'th. order Fourier partial-sum is defined by: 
+For a $2\pi$-periodic and integrable function, the $n$'th order Fourier partial sum is defined by: 
 \begin{align}\label{eq:partialsumFourierSeries}
 	S_N^f(t) = \dfrac{1}{2} a_0 + \sum_1^N\left(a_n \cos n\omega t + b_n \sin n \omega t \right) = \sum_{-N}^N c_n e^jn\omega t
 \end{align}
@@ -127,21 +123,21 @@ Notice that
 	= x-t\\
 	&= \dfrac{1}{2\pi} \sum_{n = -N}^N \int_{-\pi - x}^{\pi - x} f(x + \tau ) e^{j n\omega \tau} d\tau
 \end{align*}
-By \ref{lemma:2pi-periodic_function} the above equation can be expressed as followed:
+By \ref{lemma:2pi-periodic_function} the above equation can be expressed as follows
 \begin{align*}
 	S_N^f (\omega t) 
 	&= \dfrac{1}{2\pi} \sum_{n=-N}^N \int_{-\pi}^\pi f(t + \tau) e^{jn \omega t} d\tau\\
 	&= \int_{-\pi}^\pi f(t + \tau) D_N(\tau) d\tau
 \end{align*}
-Where $D_N = \dfrac{1}{2\pi}\sum_{n=-N}^{N}e^omega{jn\\tau}$ is a Dirichlet-core. 
+Where $D_N = \dfrac{1}{2\pi}\sum_{n=-N}^{N}e^{\omega jn\tau}$ is a Dirichlet-core. 
 The integral from $-\pi$ to $\pi$ of a Dirichlet-core is $\dfrac{1}{2}$ \chr{(Ref bogen for at undgå at snakke om Dirichlet kernen (kunne evt. vises ud fra Mortens noter)}
 Using this information the follwing can be derived:
 \begin{theorem}
-	Let $f(t)$ be a $2\pi$-periodic and piece wise smooth then the limit of the partial sum $S_N^f$ is given by:
+	Let $f(t)$ be $2\pi$-periodic and piece wise smooth. Then the limit of the partial sum $S_N^f$ is given by
 	 \begin{align*}
-	 	\lim_{N\to\infty} S_N^f (t) = \dfrac{1}{2}\left[f(t-) + f(t+)\right], \, t\in [-\pi, \pi]
+	 	\lim_{N\to\infty} S_N^f (t) = \dfrac{1}{2}\left[f(t-) + f(t+)\right], \, t\in [-\pi, \pi].
 	 \end{align*}
-	If $f$, is continues in $t$, then:
+	If $f$, is continuous in $t$, then
 	\begin{align*}
 		\lim_{N\to \infty} S_N^F(t) = f(t).
 	\end{align*}
@@ -150,24 +146,19 @@ Using this information the follwing can be derived:
 	\begin{align*}
 	\dfrac{1}{2} f(\theta-) = f(\theta-) \int_{-\pi}^0 D_n(\tau)d\tau \text{ and } \dfrac{1}{2}f(\theta+) = f(\theta+) \int_0^\pi D_n (\tau)d\tau
 	\end{align*}
-	Which gives \chr{Åbenlyst ikke færdigskrevet}
+	Which gives
 \end{proof}
 %%%%%%
-%More precisely, $f\in PS(a,b)$ iff 
-%\begin{enumerate}
-%	\item $f \in PC(a,b)$
-%	\item $f'$ exists and is continuous on $(a,b)$ except perhaps at finitely many points $x_1,\dots,x_k$ (which will include any points where f is discontinuous), and the one-sided limits $f'(x_j-)$ and $f'(x_j+)(j)1,\dots,K)$, and also $f'(a+)$ and $f'(b-)$, exist.
-%\end{enumerate}
-%The sum of any infinite series is defined to be the limit of its partial sums.
-%The N partial sum of the Fourier series be defined as:
-%\begin{align}\label{eq:partialsumFourierSeries}
-%	S_N^f(\omega t) = \dfrac{1}{2} a_0 + \sum_1^N\left(a_n \cos n\omega t + b_n \sin n \omega t \right) = \sum_{-N}^N c_n e^jn\omega t
-%\end{align}
-%%Wants to show that the partial sum \eqref{eq:partialsumFourierSeries} converges.
-%%Inserting the definition $a_n$ and $b_n$ or $c_n$ coefficients into \eqref{eq:partialsumFourierSeries} yields:
-%%\begin{align*}
-%%	S_N^f(\omega t) = \dfrac{1}{2\pi} \sum_{-N}^N \int_{-\pi}^\pi 
-%\end{align*}
-%%http://cnx.org/contents/8YnJdzjg@8/Derivation-of-Fourier-Coeffici
+More precisely, $f\in PS(a,b)$ iff 
+\begin{enumerate}
+	\item $f \in PC(a,b)$
+	\item $f'$ exists and is continuous on $(a,b)$ except perhaps at finitely many points $x_1,\dots,x_k$ (which will include any points where f is discontinuous), and the one-sided limits $f'(x_j-)$ and $f'(x_j+)$,$j=1,\dots,K$, and also $f'(a+)$ and $f'(b-)$, exist.
+\end{enumerate}
+The sum of any infinite series is defined to be the limit of its partial sums.
+The N partial sum of the Fourier series be defined as:
+\begin{align}\label{eq:partialsumFourierSeries}
+	S_N^f(\omega t) = \dfrac{1}{2} a_0 + \sum_1^N\left(a_n \cos n\omega t + b_n \sin n \omega t \right) = \sum_{-N}^N c_n e^{jn\omega t}
+\end{align}
+%http://cnx.org/contents/8YnJdzjg@8/Derivation-of-Fourier-Coeffici
 
 %Note to self foldning.
