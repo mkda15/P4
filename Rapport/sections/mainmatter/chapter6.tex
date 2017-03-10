@@ -159,7 +159,7 @@ ymax=3]
 \draw[line width=0.5mm](axis cs:-4,2)--(axis cs:-2.5,0);
 \end{axis}
 \end{tikzpicture}
-\caption{Signal bandlimited by $\omega_N$ sampled at $\omega_s$ in the frequency domain. Copies of $\hat{x}_c$ are seen at whole multiples of $\omega_s$.}
+\caption{Signal bandlimited by $\omega_N$ sampled at $\omega_s$ in the frequency domain. Copies of $X_c$ are seen at whole multiples of $\omega_s$.}
 \label{fig:copies}
 \end{figure}
 \begin{figure}[H]
@@ -287,20 +287,20 @@ Write the Fourier transform of $f$
 \begin{equation}\label{eq:proof1}
 f(t)=\frac{1}{2\pi}\int_{-\omega_N}^{\omega_N}\!\hat{f}(\omega)\mathrm{e}^{i\omega i}\,dw
 \end{equation}
-By expanding $\hat{f}$ into its Fourier series and using the negative index $-n$ we get
+By expanding $F$ into its Fourier series and using the negative index $-n$ we get
 \begin{equation*}
 F(\omega)=\sum_{n=-\infty}^{\infty}c_{-n}\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}
 \end{equation*}
 where $c_{-n}$ is given by
 \begin{align*}
-c_{-n}&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\hat{f}(\omega)\mathrm{e}^{\frac{in\pi\omega}{\omega_N}}\,dw\\
+c_{-n}&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!F(\omega)\mathrm{e}^{\frac{in\pi\omega}{\omega_N}}\,dw\\
 &=\frac{\pi}{\omega_N}f\left(\frac{n\pi}{\omega_N}\right).
 \end{align*}
 Then \eqref{eq:proof1} can be written as
 \begin{align*}
 f(t)&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}\mathrm{e}^{i\omega t}\,dw
 \end{align*}
-From theorem \ref{plancherel} it follows that the Fourier transform is linear and continuous, which allows us to switch the integral and summation:\frede{Er ikke ret sikker på det her - skal spørge Henrik om det \texttrademark}
+From theorem \ref{Plancherel} it follows that the Fourier transform is linear and continuous, which allows us to switch the integral and summation:\frede{Er ikke ret sikker på det her - skal spørge Henrik om det \texttrademark}
 \begin{align*}
 f(t)&=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\mathrm{e}^{i(\omega_Nt-n\pi)\omega/\omega_N}}{i(\omega_Nt-n\pi)/\omega_N}\Bigg|_{\omega=-\omega_N}^{\omega_N}\\
 &=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\sin(\omega_Nt-n\pi)}{\omega_Nt-n\pi}\\
@@ -354,8 +354,8 @@ The placement of an analogue to digital converter in a system to record sound to
 \end{figure}
 %\input{sections/mainmatter/chapter_4/_____.tex}
 \subsubsection{Sample-and-hold}
-A sample-and-hold (S\&H) circuit is responsible for discretizing a signal from continuous time to discrete time by sampling the signal at discrete points in time. An S\&H circuit measures a varying analogue signal (input) and creates a stable analogue signal (output) by "holding" the value of the initial signal for a period of time equal to $T_s$ \cite{pelgrom}. The stable signal can then be used for the whole duration $T_s$. In the case of this project, the input is an analogue signal of voltage from a microphone, while the stable output is an analogue voltage.\\
-In figure \ref{fig:S/H} an example of graphs of input and output of a S\&H is seen.
+A sample-and-hold (S\&H) circuit is responsible for discretizing a signal from continuous time to discrete time by sampling the signal at discrete points in time. An S\&H circuit measures a varying analogue signal (input) and creates a stable analogue signal (output) by "holding" the value of the initial signal for a period of time equal to $T_s$ \cite{pelgrom}. The stable signal can then be used for the whole duration $T_s$. In the case of this project, the input is an analogue signal of voltage from a microphone in continuous time, while the stable output is an analogue voltage in discrete time.\\
+In figure \ref{fig:S/H} an example of graphs of input and output of an S\&H is seen.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -383,7 +383,7 @@ ylabel=Voltage]
 \caption{Voltage of input analogue signal (black) and of output analogue signal (blue). The input signal is held by a S\&H circuit for $T_s$.}
 \label{fig:S/H}
 \end{figure}
-\noindent The S\&H circuit must sample at a sufficiently high frequency as specified by the Sampling Theorem.
+\noindent The S\&H circuit must sample at a sufficiently high frequency as specified by theorem \ref{sampling_theorem}.
 \subsubsection{Quantization}
 Quantization is the process of discretizing analogue signal values to discrete values. Digital processors are incapable of dividing an interval into infinitely many subintervals (points), which means a finite number of intervals has to be used -  when an analogue signal is quantized its value is compared to a finite number of analogue values, rounded to the nearest and expressed in digital numbering (binary). The number of digital values therefore depends on the number of bits dedicated to representing a given analogue value as a digital number. When rounding the analogue value to a digital value, there is produced a round off error, which can be descreased by increasing the number of possible digital values in the interval \cite{pelgrom}.\\
 In figure \ref{fig:quant} the graph of an analogue signal is seen alongside the quantization levels.
