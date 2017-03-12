@@ -36,15 +36,18 @@ A measure of the linearity of the phase is the group delay.\\
 \section{Ideal filter} 
 
 \begin{figure}[H]
-\centering
+	\begin{subfigure}[b]{0.32\textwidth}
+        \centering
+
 \begin{tikzpicture}[scale=1]
 \begin{axis}[
 scale=0.5,
 unit vector ratio*=1 1 1,
 axis lines = middle,
-xtick={1.5},
+xtick={1.5,3},
 xticklabels={$\omega_c$},
-ytick=\empty,
+ytick={1.5},
+yticklabels={$1$},
 xmin=0,
 xmax=3,
 ymin=0,
@@ -55,8 +58,61 @@ ymax=2.6]
 \end{axis}
 \end{tikzpicture}
 \caption{}
-\label{fig:lowpass}
+    \end{subfigure}
+\begin{subfigure}[b]{0.32\textwidth}
+        \centering
+
+\begin{tikzpicture}[scale=1]
+\begin{axis}[
+scale=0.5,
+unit vector ratio*=1 1 1,
+axis lines = middle,
+xtick={1.5},
+xticklabels={$\omega_c$},
+ytick={1.5},
+yticklabels={$1$},
+xmin=0,
+xmax=3,
+ymin=0,
+ymax=2.6]
+\node at (axis cs:0.7,2.4) {$|H(e^{j\omega})|$};
+\draw[line width=0.5mm](axis cs:1.5,1.5)--(axis cs:3,1.5);
+\draw[line width=0.5mm](axis cs:1.5,1.5)--(axis cs:1.5,0);
+\end{axis}
+\end{tikzpicture}
+
+\caption{}
+    \end{subfigure}
+ \begin{subfigure}[b]{0.32\textwidth}
+        \centering  
+\begin{tikzpicture}[scale=1]
+\begin{axis}[
+scale=0.5,
+unit vector ratio*=1 1 1,
+axis lines = middle,
+xtick={1,2},
+xticklabels={$\omega_a$,$\omega_b$},
+ytick={1.5},
+yticklabels={$1$},
+xmin=0,
+xmax=3,
+ymin=0,
+ymax=2.6]
+\node at (axis cs:0.7,2.4) {$|H(e^{j\omega})|$};
+\draw[line width=0.5mm](axis cs:1,1.5)--(axis cs:1,0);
+\draw[line width=0.5mm](axis cs:1,1.5)--(axis cs:2,1.5);
+\draw[line width=0.5mm](axis cs:2,1.5)--(axis cs:2,0);
+\end{axis}
+\end{tikzpicture}
+
+\caption{}
+    \end{subfigure}
+
+\caption{Magnitude of ideal (a) lowpass filter (b) highpass filter (c) bandpass filter}
+\label{fig:ideal}
 \end{figure}
+
+\section{Filter design}
 
 noter: \\
 minimum phase system(side 250) when stable an casual system an invers system, if all zeros and pole are inside the unit circle 
