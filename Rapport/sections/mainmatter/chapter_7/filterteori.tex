@@ -8,11 +8,11 @@ y[n] = x[n]*h[n] = \sum_{k=1}^{\infty} x[k]h[n-k]
 \end{align}  
 The filters concerned in the project are referred to as frequency selective filters. ... that is why we what to go to the frequency domain.? \\
 \\   
-The frequency response of a filter is given by the Fourier transform of the impulse response, considering the input sequence $x[n]=e^{j\omega n}$ for $-\infty < n <\infty$, the frequency response is defined as\trine{side (40) DTSP}
+The frequency response of a filter is given by the Fourier transformation of the impulse response. Consider the input sequence $x[n]=e^{j\omega n}$ for $-\infty < n <\infty$, then the frequency response is defined as\trine{side (40) DTSP}
 \begin{align}
 H(e^{j\omega})=\sum_{k=-\infty}^{\infty}h[k]e^{-j\omega k}
 \end{align}
-hence the outcome of the filter becomes 
+thus the outcome of the filter becomes 
 \begin{align}
 y[n]=H(e^{j\omega})e^{-j\omega n} \label{eq:filter_output}
 \end{align} 
@@ -20,20 +20,26 @@ By \eqref{eq:filter_output} it is seen that $H(e^{j\omega})$ describes the chang
 \begin{align}
 H(e^{j\omega})=|H(e^{j\omega})|e^{j\measuredangle H(e^{j\omega})}
 \end{align}  
-where $|H(e^{j\omega})|$ and $e^{j\measuredangle H(e^{j\omega})}$ are functions of \textit{magnitude} and magnitude of the filter respectively, both real valued and $2\pi$-periodic.\\ 
-If the frequency response of a filter is real it is said to have \textit{zero phase}, which is equivalent to the phase response only tacking values that are integer multiples of $\pi$. Further if the frequency response can be written in the form 
+where $|H(e^{j\omega})|$ and $e^{j\measuredangle H(e^{j\omega})}$ are the \textit{magnitude} and \textit{phase} response of the filter respectively, both real valued and $2\pi$-periodic.\\ 
+If the frequency response of a filter is real it is said to have \textit{zero phase}, which is equivalent to the phase response only taking values that are integer multiples of $\pi$, resolving in a straight phase with zero slope.   Further if the frequency response can be written in the form 
 \begin{align}
 H(e^{j\omega})=A(e^{j\omega})e^{j(-\alpha\omega + j\beta)} 
 \end{align}
-where $\alpha$ and $\beta$ are constants and $A(e^{j\omega})$ is real,  the filter is said to have \textit{general linear phase}. That is because the phase response consist of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resolving from jumps of $2\pi$\trine{explain the discontinuity} \\
-\\
+where $\alpha$ and $\beta$ are constants and $A(e^{j\omega})$ is real, the filter is said to have \textit{general linear phase}. That is because the phase response consist of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resolving from jumps of $2\pi$\trine{explain the discontinuity} \\
+The phase response is an expression of how each of the signal components are delayed though the system, where linear phase indicates an equal delay for all components of the signal.    \\
+A measure of the linearity of the phase is the group delay. The group delay is...  
 
-When designing filters it is ideal to have approximately constant magnitude and zero phase corresponding to the frequency response. Though for causal systems\trine{define} zero phase is not possible to obtain, hence a linear phase response is acceptable and preferred over non linear phase.
-\\
-A measure of the linearity of the phase is the group delay. The group delay is...  \\    
-
-
-\section{Ideal filter} 
+\subsection{Ideal filters} 
+When designing filters it is ideal to have approximately constant magnitude and zero phase corresponding to the frequency response. \\ For an ideal selective frequency filter the magnitude response will be constant unity for the frequencies that are wanted to pass the filter referred to as the \textit{bandpass} and zero for all other frequencies referred to as \textit{bandstop}. An example is an ideal lowpass filter with frequency response 
+\begin{align}\label{eq:low}
+H_{lp}(\text{e}^{j\omega})=
+\left\{ \begin{matrix}
+1, &\ \left| \omega \right|< \omega_c \\
+0, &\ \omega_c < \left| \omega \right| \leq \pi
+\end{matrix}\right.
+\end{align}     
+$H_{lp}(\text{e}^{j\omega})$ being $2\pi$ periodic and $\omega_c$ referred to as the cutoff frequency. The lowpass filter selects the frequencies components of the signal lower than the cutoff frequency and reject the higher frequency components. Analogues an ideal highpass or bandpass filter can defined, as illustrated on figure \ref{fig:ideal}.\\ 
+By \eqref{eq_low} it is seen that the lowpass filter has zero phase, and further it can be showed by the corresponding impulse response\trine{bør vi vise beregning af $h[n]$?} that the filter is noncasual because $h[n]= 0$ for all $n < 0$ is not true.       
 
 \begin{figure}[H]
 	\begin{subfigure}[b]{0.32\textwidth}
@@ -111,6 +117,11 @@ ymax=2.6]
 \caption{Magnitude of ideal (a) lowpass filter (b) highpass filter (c) bandpass filter}
 \label{fig:ideal}
 \end{figure}
+
+\section{FIR and IIR filter }
+
+Though for causal systems\trine{define} zero phase is not possible to obtain, hence a linear phase response is acceptable and preferred over non linear phase. 
+
 
 \section{Filter design}
 
