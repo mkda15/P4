@@ -1,0 +1,197 @@
+\section{Fourier series}
+Periodic functions can be represented as a linear combination of oscillating functions such as sines, cosines or equivalently complex exponential.
+\\\\
+It can be an advantage to decompose functions as a series or integral of ``simpler'' functions to retrieve information:
+\begin{align*}
+	f(x) = \sum_{n=1}^\infty c_n f_n(x)\text{, or } f(x)= \int_{-\infty}^\infty g(u) h(u,x) du
+\end{align*}
+Information from a function $f(x)$ will as an example be stored in the coefficient $\{c_n\}_{n=1}^\infty$ which are easily stored on a computer.
+\\ \\ 
+A function $f: \mathbb{R} \to \mathbb{R}$ (or $\mathbb{C}$) is called $2\pi$-periodic if $f(\theta + 2\pi) = f(\theta) \ \forall \ \theta\in\mathbb{R}$. The idea of the Fourier series is using the above information to recreate a $2\pi$-periodic signal. The Fourier series are defined as:
+\begin{align*}
+	f(t) &= \dfrac{a_0}{2} + \sum_{n=1}^\infty(a_n \cos(n t) + b_n \sin(n t))\\
+	&= \sum_{n=-\infty}^{\infty} c_n e^{j n t} 
+\end{align*}
+
+The second part holds per Euler's formula:
+\begin{align*}
+	\cos(n\theta) = \dfrac{e^{j n \theta} + e^{-j n \theta}}{2} \text{ and } \sin(n \theta) = \dfrac{e^{jn\theta}-e^{-jn\theta}}{2j}
+\end{align*}
+
+It can be simpler to work with the complex exponential function, but working with the trigonometric functions $\cos$ and $\sin$ have their advantages such as being real-valued and also odd and even for the sine and cosine functions, respectively.
+
+\subsection{The coefficient $c_n$}
+The $c_n$ coefficient is determined by the assumption that it is possible and it is permissible to integrate the fourier series by parts.
+\\ \\
+To solve $c_n$ in the equation $f(t)= \sum_{n=-\infty}^{\infty} c_n e^{j n t}$ first multiply both sides by $e^{-j k t}$ for $k\in \mathbb{Z}$ and integrate both sides from $-\pi$ to $\pi$:
+\begin{align} \label{eq:firststep_fouriercoefficient}
+\int_{-\pi}^\pi f(t)e^{-j k t} dt = \int_{-\pi}^\pi \sum_{n=-\infty}^{\infty} c_n e^{j n t} e^{-j k t} dt
+\end{align}
+
+Pulling the summation and the constant on the right-hand side out of the integral in \eqref{eq:firststep_fouriercoefficient} yields the following:
+\begin{align*}
+\int_{-\pi}^\pi f(t) e^{-j k t}dt = \sum_{n=-\infty}^\infty c_n \int_{-\pi}^\pi e^{j (n-k) t}dt
+\end{align*}
+
+The integral on the right-hand side has two cases to consider, $n \neq k$ and $n = k$. For $n\neq k$:
+\begin{align*}
+	\forall n,n\neq k: \int_{-\pi}^\pi e^{j(n-k)t}dt 
+	=\dfrac{1}{j(n-k)}e^{j(n-k)t}\mid_{-\pi}^{\pi}
+	=\dfrac{(-1)^{n-k}-(-1)^{n-k}}{j(n-k)}
+	=0
+\end{align*}
+
+\chr{Could be written with sine and cosine, to show that the integral of those 2 over a periode is 0}
+The second case is for $n = k$:
+\begin{align*}
+	\forall n,n=k: \int_{-\pi}^\pi e^{j(n-k)t}dt = \int_{-\pi}^\pi 1 dt = 2\pi
+\end{align*}
+
+The integral can be concluded to yield either $0$ or $2\pi$:
+\begin{align}
+	\int_{-\pi}^{\pi} e^{j (n-k)t}dt 
+	= 
+	\begin{cases}
+			2\pi \text{ if } n=k\\
+			0 \text{ otherwise}
+	\end{cases}
+\end{align}
+
+Therefore, for $n = k$:
+\begin{align*}
+\int_{-\pi}^\pi f(t)e^{-j k t} = 2\pi c_k
+\end{align*}
+
+The coefficient $c_n$'s general equation is then:
+\begin{align*}
+	c_n = \dfrac{1}{2\pi} \int_{-\pi}^{\pi} f(t) e^{-j n t}dt
+\end{align*}
+
+\begin{definition} \label{def:fourier_definition}
+The Fourier series of a $2\pi$-periodic integrable function $f(t)$ is defined as:
+\begin{align*}
+	\sum_{n=-\infty}^\infty c_n e^{j n t}
+\end{align*}
+where $c_n = \frac{1}{2\pi}\int_{- \pi}^\pi f(t) e^{-j n t}$. Therefore, $c_0 = \frac{a_0}{2} = \frac{1}{2\pi} \int_{-\pi}^\pi f(t) dt$ which is the average of $f$ on the interval $[-\pi,\pi]$.
+\\ \\
+The Fourier series can alternatively be expressed as:
+\begin{align*}
+	\dfrac{a_0}{2} + \sum_{n=1}^{\infty} \left[ a_n \cos(n t) + b_n \sin(n t)\right]
+\end{align*}
+
+where
+\begin{align*}
+	a_n 
+	&= \dfrac{1}{\pi} \int_{-\pi}^\pi f(t) \cos (n t) dt, \quad 	n \geq 0\\
+	b_n
+	&= \dfrac{1}{\pi} \int_{-\pi}^\pi f(t) \sin (n t) dt, \quad 	n \geq 1
+\end{align*}
+\end{definition}
+
+Since $\cos(nt)$ is even and $\sin(nt)$ is odd, this definition gives the following result:
+\begin{lemma}
+If $f(t)$ is even, then $f(t)\cos(nt)$ is even and $f(t)\sin(nt)$ is odd, which means that:
+\begin{align*}
+a_n = \dfrac{2}{\pi} \int_0^\pi f(t) \cos(nt) dt, \quad b_n = 0
+\end{align*}
+
+Likewise, if $f(t)$ is odd, then $f(t)\cos(nt)$ is odd and $f(t)\sin(nt)$ is even, which means that:
+\begin{align*}
+a_n = 0, \quad b_n = \dfrac{2}{\pi} \int_0^\pi f(t) \sin(nt) dt
+\end{align*}
+\end{lemma}
+
+As the following lemma shows, integration of a $2\pi$-periodic function over the length of the period can be shifted to any other interval of length $2\pi$.
+
+\begin{lemma}\label{lemma:2pi-periodic_function}
+Suppose $F$ is $2\pi$-periodic and integrable. Then for any real number a:
+
+\begin{align}
+\int_a^{2\pi+a}F(t) dt = \int_0^{2\pi}F(t)dt.
+\end{align}
+\end{lemma}
+
+\begin{proof}
+\begin{align*}
+	\int_0^{2\pi} F(t)dt 
+	&= \int_0^a F(t) dt + \int_a^{2\pi} F(t) dt
+	= \int_0^a F(t+2\pi)dt + \int_a^{2\pi} F(t) dt\\ 
+	&= \int_{2\pi}^{2\pi + a} F(t) dt + \int_a^{2\pi}F(t)dt
+	= \int_a^{2\pi+a}F(t)dt
+\end{align*}
+\end{proof}
+
+\subsection{Convergence of the Fourier series}
+\begin{definition}
+Suppose $-\infty < a < b < \infty$. A function $f$ on $[a,b]$ is piecewise continuous if:
+\begin{enumerate}
+\item $f$ is continuous on $[a,b]$ except perhaps at finitely many points $x_1, \dots, x_k$.
+\item The left-hand and right-hand limits of $f$ at each of the points $x_1, \dots, x_k$ exist:
+\begin{align*}
+f(x_j-) &= \lim_{h\to 0} f(x_j - h) \\
+f(x_j+) &= \lim_{h\to 0} f(x_j + h)
+\end{align*}
+
+for $h > 0$.
+\end{enumerate}
+
+The class of piecewise continuous functions on $[a,b]$ is denoted as $PC(a,b)$.
+\end{definition}
+
+From this definition follows the definition of piecewise smooth functions:
+\begin{definition}
+The class of piecewise smooth functions on $[a,b]$ is denoted as $PS(a,b)$. $f\in PS(a,b)$ iff
+\begin{enumerate}
+	\item $f \in PC(a,b)$.
+	\item $f'$ exists and is also piecewise continuous on $[a,b]$. This means that $f'$ is continuous on except perhaps at finitely many points $x_1, \dots, x_K$ (which includes the points where $f$ is discontinuous), and that the limits $f'(x_j-)$, $f'(x_j+)$, $f'(a+)$ and $f'(b-)$ exist.
+\end{enumerate}
+\end{definition}
+
+For a $2\pi$-periodic and integrable function, the $N$'th partial sum of the Fourier series is defined by:
+\begin{align}\label{eq:partialsumFourierSeries}
+	S_N^f(t) = \dfrac{1}{2} a_0 + \sum_{n=1}^N\left(a_n \cos(n t) + b_n \sin(n t) \right) = \sum_{n=-N}^N c_n e^{j n t}
+\end{align}
+
+with the coefficients $a_n$, $b_n$ and $c_n$ as defined in \ref{def:fourier_definition}.
+\\ \\
+Inserting $c_n$ in the partial sum using $x$ in place of the variable $t$ in definition \ref{def:fourier_definition} yields:
+\begin{align*}
+	S_N^f(t)
+	&= \dfrac{1}{2\pi}\sum_{n=-N}^N \int_{-\pi}^\pi f(x) e^{-j 		n x} dx\, e^{j n t} \\
+	&= \dfrac{1}{2\pi}\sum_{k = -N}^N \int_{-\pi}^\pi f(x) e^{		j k (x-t)} dx, \quad \quad k = -n \\
+	&= \dfrac{1}{2\pi} \sum_{n = -N}^N \int_{-\pi - t}^{\pi - 		t} f(t + \tau ) e^{j n \tau} d\tau, \quad \quad \tau = x-t
+\end{align*}
+
+By lemma \ref{lemma:2pi-periodic_function} the above equation can be expressed as follows
+\begin{align*}
+	S_N^f (t) 
+	&= \dfrac{1}{2\pi} \sum_{n=-N}^N \int_{-\pi}^\pi f(t + \tau) e^{j n \tau} d\tau\\
+	&= \int_{-\pi}^\pi f(t + \tau) D_N(\tau) d\tau
+\end{align*}
+
+where $D_N(\tau) = \dfrac{1}{2\pi}\sum_{n=-N}^{N}e^{j n \tau}$ is called the $N$'th Dirichlet kernel. The integral from $-\pi$ to $0$ and from $0$ to $\pi$ of a Dirichlet kernel both equals $\frac{1}{2}$ \cite{page 34-35, FAA}. Using this information the following theorem can be derived.
+
+\begin{theorem}
+Let $f(t)$ be $2\pi$-periodic and piecewise smooth on $\mathbb{R}$. Then the limit of the partial sum $S_N^f$ is
+	\begin{align*}
+		\lim_{N\to\infty} S_N^f (t) = \dfrac{1}{2}\left[f(t-) + 		f(t+)\right], \, t \in [-\pi, \pi].
+	\end{align*}
+
+If $f$ is continuous on $t$ then
+	\begin{align*}
+		\lim_{N\to \infty} S_N^f(t) = f(t).
+	\end{align*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		\dfrac{1}{2} f(\theta-) = f(\theta-) \int_{-\pi}^0 				D_N(\tau)d\tau, \quad \dfrac{1}{2}f(\theta+) = 					f(\theta+) \int_0^\pi D_N (\tau)d\tau
+	\end{align*}
+	which gives \martin{Consider this. \textregistered}.
+\end{proof}
+
+Therefore, the value of an infinite series is defined to be the limit of its partial sums.
+
+%http://cnx.org/contents/8YnJdzjg@8/Derivation-of-Fourier-Coeffici
+
+%Note to self foldning.
