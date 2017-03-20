@@ -130,10 +130,15 @@ For the second equation:
 \mathcal{F}\{e^{jat} f(t)\}(\omega) = \int_{-\infty}^\infty f(t) e^{jat} e^{-j \omega t} dt = \int_{-\infty}^\infty f(t) e^{j(a- \omega)t} dt = F(\omega - a)
 \end{align*}
 
-\item Let $\tau = t/\delta$: \martin{Consider this. \textregistered}
+\item For the first equation, let $\tau = t/\delta$. Hence, $t = \delta \tau$ and $dt = \delta d\tau$, which gives:
 \begin{align*}
-\mathcal{F}\{f_\delta(t)\}(\omega) = \int_{-\infty}^\infty f_\delta(t) e^{-j \omega t} dt = \int_{-\infty}^\infty \delta^{-1}f(\tau) e^{-j \omega \delta\tau} dt = \dots = F(\delta\omega) \\
-\mathcal{F}\{f(\delta t)\}(\omega) = \int_{-\infty}^\infty f(\delta t) e^{-j \omega t} dt = \dots = F_\delta(\omega)
+\mathcal{F}\{f_\delta(t)\}(\omega) &= \int_{-\infty}^\infty f_\delta(t) e^{-j \omega t} dt = \int_{-\infty}^\infty \delta^{-1}f(\tau) e^{-j \omega \delta\tau} \delta d\tau \\
+&= \int_{-\infty}^\infty f(\tau) e^{-j \omega \delta\tau} d\tau = F(\delta\omega)
+\end{align*}
+
+For the second equation, let $\tau = \delta t$. Hence, $t = \delta^{-1}\tau$ and $dt = \delta^{-1} d\tau$:
+\begin{align*}
+\mathcal{F}\{f(\delta t)\}(\omega) &= \int_{-\infty}^\infty f(\delta t) e^{-j \omega t} dt = \int_{-\infty}^\infty f(\tau) e^{-j \omega \delta^{-1}\tau} \delta^{-1} d\tau = F_\delta(\omega)
 \end{align*}
 
 \item Since $f' \in L^1$, the integral in the limit
