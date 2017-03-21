@@ -1,12 +1,12 @@
 \section{The Fast Fourier Transform} \label{sec:FFT}
 This section describes \textit{The Fast Fourier Transform}, also known as the FFT. The section is inspired by \cite{page 750, DTSP} and \cite{page 303, FSP}.
 \\ \\
-The Fast Fourier Transform is a special algorithm for fast computation of the DFT. In the following, the $N \times N$ DFT matrix is denoted by $F_N$. In section \ref{sec:DFT} the DFT of length $N$ was defined as:
+The Fast Fourier Transform is a special algorithm for fast computation of the DFT. In the following, the $N \times N$ DFT matrix is denoted by $F_N$. In section (insert reference) the DFT of length $N$ was defined as:
 \begin{align*}
-X[k] = \sum_{n=0}^{N-1} x[n] e^{-j(2\pi/N)kn} = \sum_{n=0}^{N-1} x[n] W_N^kn}, \quad k = 0, 1, \dots, N-1
+X[k] = \sum_{n=0}^{N-1} x[n] e^{-j(2\pi/N)kn} = \sum_{n=0}^{N-1} x[n] W_N^{kn}, \quad k = 0, 1, \dots, N-1
 \end{align*}
 
-with $W_N = e^{-j(2\pi/N)$. The computation of each value of the DFT requires $N$ complex multiplications and $N-1$ complex additions, and the computation of all of the $N$ values therefore requires $N^2$ complex multiplications and $N(N-1)$ complex additions. Furthermore, the DFT in terms of operations on real numbers may be expressed as:
+with $W_N = e^{-j(2\pi/N)}$. The computation of each value of the DFT requires $N$ complex multiplications and $N-1$ complex additions, and the computation of all of the $N$ values therefore requires $N^2$ complex multiplications and $N(N-1)$ complex additions. Furthermore, the DFT in terms of operations on real numbers may be expressed as:
 \begin{align*}
 X[k] = \sum_{n=0}^{N-1} \left[ (\Re\{x[n]\} \Re\{W_N^{kn}\} - \Im\{x[n]\}\Im \{W_N^{kn}\}) j(\Re{x[n]}\Im \{W_N^{kn}\} + \Im\{x[n]\} \Re\{W_N^{kn}\}) \right]
 \end{align*}
@@ -21,12 +21,12 @@ E[k] &= \sum_{n=0}^{N/2-1} x[2n] W_{N/2}^kn, \quad k = 0, 1, \dots, N/2-1 \\
 O[k] &= \sum_{n=0}^{N/2-1} x[2n+1] W_{N/2}^kn, \quad k = 0, 1, \dots, N/2-1
 \end{align*}
 
-The $N$-point DFT $X[k]$ defined in section \ref{sec:DFT} is thus $X[k] = E[k] + O[k]$ for $k = 0, 1, \dots, N/2-1$ on the right-hand side and for $k = 0, 1, \dots N-1$ on the left-hand side. $E[k]$ and $O[k]$ are $N/2$-point transforms, which are implicitly periodic with period $N/2$, and they can thus be 	evaluated over $k = 0, 1, \dots, N-1$ instead of $k = 0, 1, \dots, N/2-1$. Therefore, the $X[k]$ may be written as:
+The $N$-point DFT $X[k]$ defined in section (insert reference) is thus $X[k] = E[k] + O[k]$ for $k = 0, 1, \dots, N/2-1$ on the right-hand side and for $k = 0, 1, \dots N-1$ on the left-hand side. $E[k]$ and $O[k]$ are $N/2$-point transforms, which are implicitly periodic with period $N/2$, and they can thus be evaluated over $k = 0, 1, \dots, N-1$ instead of $k = 0, 1, \dots, N/2-1$. Therefore, the $X[k]$ may be written as:
 \begin{align} \label{FFT_modulo}
 X[k] = E[((k))_{N/2}] + W_N^k O[((k))_{N/2}], \quad k = 0, 1, \dots, N-1
 \end{align}
 
-Even though $E[k]$ and $O[k]$ are only computed for $k = 0, 1, \dots, N/2-1$, they are extended periodically. The notation $((k))_{N/2}$ signalizes $k$ modulo $N/2$. In this case, the modulo operation finds the remainder after division of $k$ by $N/2$. Thus, $E[((4))_4]$ equals $E[0]$. Hence, this periodic extension does not require any additional computation. Figure (insert reference) is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $N$-point DFT into 2 $N/2$-point DFTs (for $N = 8$). Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the arrows. \martin{Indsæt figur nogenlunde magen til figur 4, side 758, her. #Tikz \textregistered}
+Even though $E[k]$ and $O[k]$ are only computed for $k = 0, 1, \dots, N/2-1$, they are extended periodically. The notation $((k))_{N/2}$ signalizes $k$ modulo $N/2$. In this case, the modulo operation finds the remainder after division of $k$ by $N/2$. Thus, $E[((4))_4]$ equals $E[0]$. Hence, this periodic extension does not require any additional computation. Figure (insert reference) is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $N$-point DFT into 2 $N/2$-point DFTs (for $N = 8$). Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the arrows. \martin{Indsæt figur nogenlunde magen til figur 4, side 758, her. Tikz \textregistered}
 \\ \\
 According to \eqref{FFT_modulo} and figure (insert reference), $X[0]$ is obtained by multiplying $O[0]$ with $W_N^0$ and adding this product $E[0]$. Likewise, $X[4]$ is obtained by multiplying $O[((4))_4] = O[0]$ with $W_N^4$ and adding this result to $E[((4))_4] = E[0]$.
 \\ \\
