@@ -46,9 +46,9 @@ ymax=4.6]
 \label{fig:scheme}
 \end{figure}
 
-Methods for defining a continuous-time system that fits the specification are establish as known continuous-time filter designs. The \textit{Butterworth filter} which is a lowpass filter approximation will now be described along with the ?? \trine{udfyld} transformation.\\
+Methods for defining a continuous-time system that fits the specification are establish as known continuous-time filter designs. The \textit{Butterworth filter} which is a lowpass filter approximation will now be described along with the Bbiliniare transformation.\\
 For a Butterworth filter the squared magnitude are defined as follows.
-\begin{align}
+\begin{align}\label{eq:butter}
 |H_c(j\Omega)|^2=\frac{1}{1+\left( \frac{j\Omega}{j\Omega_c}\right)^{2N}}
 \end{align} 
 Further the filter is characterised by the following three properties.
@@ -63,30 +63,46 @@ Further the filter is characterised by the following three properties.
 \end{matrix}\right. , \textit{ for all }N. \\
 3.& \ \ \ \textit{Magnitude response is monotonic in pass- and stopband.}
 \end{align}
-As the order $N$ of the filter increases the characteristics become sharper and the filter approximates the ideal lowpass filter. This is illustrated on figure \ref{fig:butter}.       
+As the order $N$ of the filter increases the characteristics become sharper and the filter approximates the ideal lowpass filter. This is illustrated on figure \ref{fig:butter}. By\eqref{eq:butter} it is possible to compute the order necessary for the system to fulfil the specifications.            
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.6\textwidth]{figures/butterworth.png}
     \caption{Magnitude of Butterworth filter depending on order $N$ }
     \label{fig:butter}
-\end{figure}
+\end{figure} 
 In order to obtain causality and stability in the system representation in the $s$-domain is wanted. By substituting $s=j\Omega$ the following relation is true.
 \begin{align}
 |H_c(j\Omega)|^2 = H_c(s)H_c(-s)= \frac{1}{1+\left( \frac{s}{j\Omega_c}\right)^{2N}}
 \end{align} 
-\trine{er det nødvendigt at medtage s og poler eller skal vi bare opskrive det endelige H(s) tidligere}
+By letting the denominator in \eqref{eq:butter} equal to zero it is possible to determine the poles $s_k$ of the system as 
+\begin{align}
+s_k = (-1)^{\frac{1}{2N}}\left(j\Omega_c\right)=\Omega_c\text{e}^{\left(\frac{j\pi}{2N}\right)\left(2k+N-1\right)}, \ \ k=0,1,\ ... \ , 2N-1 
+\end{align}   
+The poles will placed equally along the circle of radius $\Omega_c$ as illustrated on figure \ref{??}. By only considering the poles in the left half plane $H_c(s)$ can be construed as a stable system. 
+\begin{align}
+H_c(s)=\frac{1}{\prod_{k=1}^{N}(s-s_k)}
+\end{align}    
+When the continuous-time filter $H_c(s)$ is defined the next step is the transformation from continuous-time to discrete-time. The bilinear transformation is a method that allows a direct transformation between the s- and z-domain. The principal of the transformation is that the imaginary axis $j\Omega$ of the s-plane is mapped onto the z-plane as the unitcircle. The bilinear transformation is defined by 
+\begin{align}
+s=\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right) 
+\end{align}
+such that 
+\begin{align}
+H_c\left[\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right)\right]=H_c(z), 
+\end{align}  
+Because $-\infty \leq \Omega \leq \infty $ is mapped to $-\pi \leq \omega \leq \omega$ the transformation is non linear which involves some frequency distortion. By this the method is restricted to situations where this is acceptable or can be compensated. Compensation can be done by the concept of pre wrapping, that consider the relation 
+\begin{align}
+\Omega_{c_{new}}=\frac{2}{T_d}\tan\frac{\omega_c}{2}
+\end{align}
+hereby it is possible to determine a new $\Omega_c$ to the continuous-time filter, in order to ensure the discrete $\omega_c$ to fit the specification.\\
+An important property of the bilinear transformation is that stability is preserved if the continuous-time filter i stable. 
 ... \\
-\\
-When the continuous-time filter $H_c(s)$ is defined the next step is the transformation from continuous-time to discrete-time. This can be done i several way.  \\
-\\
-... 
-\\
 Advantages of IIR filter:
 The process of designing a IIR filter is are rather simple when the desired properties fits an establish design method such as Butterworth. The required order of the filter is computable and the transformation to the discrete-time domain is to be done straight forward by design equations. Thus, considering the implementation, this leads to non iterative algorithms. \\
-Though by this method the magnitude response is the only parameter to be specified. Meaning that specific requirements for e.g. phase response or group delay are quarantined not to be fulfilled by this kind of IIR filter. 
-
- 
- If the desired specifications of a system are appropriate for a establish design method such as Butterworth, the required order can be computed and the transformation can be done straightforward by      
+Though by this method the magnitude response is the only parameter to be specified. Meaning that specific requirements for e.g. phase response or group delay are quarantined not to be fulfilled by this kind of IIR filter. \\
+\\
+If the desired specifications of a system are appropriate for a establish design method such as Butterworth, the required order can be computed and the transformation can be done straightforward by 
+     
 
 %
 %These properties are to be converted into specifications of the discrete-time filter by expressing the frequency in normalised radian frequency by the relation $\omega=\Omega T_d$ where $T_d$ is the sampling rate. Thus the impulse response is specified over one period as 
@@ -95,6 +111,8 @@ Though by this method the magnitude response is the only parameter to be specifi
 %\end{align}    
 %
 %The desired gain of the magnitude is often expressed in dB, where $20\log(1)=0[\text{dB}]$ \trine{is gain of magnitude a thing?} \\
+
+Because the analogue frequency response is known it is as described possible to determine the corresponding impulse response, which by sampling can be made discrete whereby the discrete frequency impulse is obtained through the Fourier transformation. Further the  
 
 \subsection{FIR filter}
 
