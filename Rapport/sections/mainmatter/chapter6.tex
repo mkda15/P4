@@ -49,7 +49,7 @@ In this chapter sample theory and its importance when converting an analogue aud
 %The above figures illustrate the continuous Fourier transform. The transform can be discretized to the discrete Fourier transform, which is crucial, when working with sampled signals. This is likewise covered in chapter \ref{ch5}.
 \section{Sampling}\label{sec:sampling}
 In this section sampling will be defined mathematically which allows for a frequency analysis leading to the establishment of the important \textit{Sampling Theorem}.\\\\
-Sampling is the process of representing a \textit{time-continuous} signal by a sequence of values. Doing so converts the continuous-time signal into a \textit{discrete-time} signal. \cite{pelgrom} The relation between a continuous function $x_c(t)$ and the discrete funtion $x(n)$ obtained by sampling $x_c(t)$ is described by
+Sampling is the process of representing a \textit{time-continuous} signal by a sequence of values. Doing so converts the time-continuous signal into a \textit{time-discrete} signal $x(n)$ \cite{pelgrom}. Sampling is usually done with digitalization of the signal in mind and this requires the signal to be discretized in amplitude too.\footnote{$x(n)$ is merely discrete in time and will be sufficient for the following mathematical representation of sampling.} When discretized in both time and amplitude the signal is referred to as $x[n]$. The relation between a continuous function $x_c(t)$ and the discrete funtion $x(n)$ obtained by sampling $x_c(t)$ is described by
 \begin{equation}\label{eq:sampling_principle}
 x(n)=x_c(nT_s)
 \end{equation}
@@ -59,18 +59,58 @@ where $n\in\mathbb{Z}$ and the \textit{sampling period }$T_s$ (time between two 
 \end{equation}
 where $n$ is the number of samples and $nT_s$ are points in time of sampling}.\\\\
 To describe sampling mathematically the \textit{Dirac delta} function is introduced in definition \ref{def:dirac}.
-\begin{definition}[Dirac delta function]\footnote{The Dirac delta function is defined as a distribution as no function satisfies the characteristics of it. This definition is therefore non-rigorous but will make do for the purposes of this section.}\label{def:dirac}
+\begin{definition}[Dirac delta function]\footnote{The Dirac delta function is defined as a distribution as no function satisfies the properties in definition \ref{def:dirac}. This definition is therefore non-rigorous but will make do for the purposes of this section.}\label{def:dirac}
 The Dirac delta function is the function $\delta$ satisfying
 \begin{equation}
 \int_{-\infty}^{\infty} \! f(t)\delta(t-t_0) \, dt=f(t_0).\phantom{mm}\text{\cite{pelgrom}}
 \end{equation}
 \end{definition}
-The Dirac delta function is sometimes interpreted as a constant 0-function with an infinitely high and infinitely narrow spike at the origin.
+The Dirac delta function is sometimes interpreted as a function $\delta$ satisfying
+\begin{equation}
+\delta(t)=\begin{cases}
+0,\phantom{mm}t\neq 0\\
+\int_{-\infty}^{\infty}\!\delta(t)\,dt=1
+\end{cases}
+\end{equation}
 \\\\
-Summing an infinite number of Dirac functions shifted at equally spaced time intervals $nT_s$ as in \eqref{eq:dirac_sum} produces a constant function of equidistant Dirac pulses:
+Summing an infinite number of Dirac functions shifted at equally spaced time intervals $nT_s$ as in \eqref{eq:dirac_sum} produces a constant function of equidistant Dirac pulses called a Dirac comb:
 \begin{equation}\label{eq:dirac_sum}
 s(t)=\sum_{n=-\infty}^{\infty}\delta(t-nT_s)\phantom{mm}\text{\cite{DTSP}}
 \end{equation}
+A Dirac comb is seen in figure \ref{fig:dirac_comb}.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+unit vector ratio*=1 1 1,
+axis lines=middle,
+clip=false,
+xmax=10,
+xmin=0,
+ymax=2.38,
+ymin=0,
+ytick=\empty,
+xtick={1,2,10},
+xticklabels={$T_s$,$2T_s$,$10T_s$},
+x label style={at={(axis cs:10.2,0)},anchor=west},
+y label style={at={(axis cs:0,2.38)},anchor=south},
+xlabel=Time,
+ylabel=Amplitude]
+\draw[->,line width=0.2mm,red](axis cs:1,0)--(axis cs:1,1.59);
+\draw[->,line width=0.2mm,red](axis cs:2,0)--(axis cs:2,1.59);
+\draw[->,line width=0.2mm,red](axis cs:3,0)--(axis cs:3,1.59);
+\draw[->,line width=0.2mm,red](axis cs:4,0)--(axis cs:4,1.59);
+\draw[->,line width=0.2mm,red](axis cs:5,0)--(axis cs:5,1.59);
+\draw[->,line width=0.2mm,red](axis cs:6,0)--(axis cs:6,1.59);
+\draw[->,line width=0.2mm,red](axis cs:7,0)--(axis cs:7,1.59);
+\draw[->,line width=0.2mm,red](axis cs:8,0)--(axis cs:8,1.59);
+\draw[->,line width=0.2mm,red](axis cs:9,0)--(axis cs:9,1.59);
+\draw[->,line width=0.2mm,red](axis cs:10,0)--(axis cs:10,1.59);
+\end{axis}
+\end{tikzpicture}
+\caption{Dirac comb $s(t)$ - an infinite sequence of Dirac pulses.}
+\label{fig:dirac_comb}
+\end{figure}
 Multiplying a continuous signal with \eqref{eq:dirac_sum} and using the property of the Dirac function \eqref{eq:sampling} is obtained:
 \begin{align}
 x_s(t)&=x_c(t)s(t)\nonumber \\
@@ -79,7 +119,66 @@ x_s(t)&=x_c(t)s(t)\nonumber \\
 &=\sum_{n=-\infty}^{\infty}x_c(nT_s)\delta(t - nT_s)\phantom{mm}
 \label{eq:sampling}
 \end{align}
-\frede{Tjek om det faktisk er Dirac delta. Så skal der måske være et integral.}\eqref{eq:sampling} is a mathematical representation of sampling of the continuous function $x_c(t)$ into the function $x_s(t)$ \cite{DTSP}. Although \eqref{eq:sampling} matehmatically describes sampling, we have $x_s(t)\neq x[n]$ as $x_s(t)$ is defined on the interval between two samples whereas $x[n]$ only takes values at integers $n$. Although $x_s(t)\neq x[n]$ \eqref{eq:sampling} will be useful in the upcoming appliance of the Fourier transform.
+\eqref{eq:sampling} is a mathematical representation of sampling of the continuous function $x_c(t)$ into the function $x_s(t)$ \cite{DTSP} - this process is seen in figures \ref{fig:signal1} where a signal is shown and \ref{fig:sampling_comb} where the signal is sampled by multiplication with a Dirac comb.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+clip=false,
+unit vector ratio*=1 1 1,
+axis lines=middle,
+xmax=10,
+xtick={5,10},
+xticklabels={$\pi$,$2\pi$},
+xmin=0,
+ymax=2.38,
+ymin=-2.38,
+ytick=\empty,
+x label style={at={(axis cs:11,0)},anchor=north},
+y label style={at={(axis cs:0,2.5)},anchor=south},
+xlabel=Time,
+ylabel=Amplitude]
+\addplot[red,domain=0:10,samples=50,line width=0.2mm]{10/6.2831*sin((2*3.1415)/10*deg(x))};
+\end{axis}
+\end{tikzpicture}
+\caption{Signal $x_c(t)=\sin(x)$}
+\label{fig:signal1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+clip=false,
+unit vector ratio*=1 1 1,
+axis lines=middle,
+xmin=0,
+xmax=10,
+ymin=-2.38,
+ymax=2.38,
+ytick=\empty,
+xtick={1,2,10},
+xticklabels={$T_s$,$2T_s$,$10T_s$},
+x label style={at={(axis cs:10.2,0)},anchor=west},
+y label style={at={(axis cs:0,2.5)},anchor=south},
+xlabel=Time,
+ylabel=Amplitude]
+\addplot[red,samples=50,domain=0:10,line width=0.2mm]{10/6.2831*sin(6.2831/10*deg(x))};
+\draw[->,line width=0.2mm](axis cs:1,0)--(axis cs:1,0.94);
+\draw[->,line width=0.2mm](axis cs:2,0)--(axis cs:2,1.51);
+\draw[->,line width=0.2mm](axis cs:3,0)--(axis cs:3,1.51);
+\draw[->,line width=0.2mm](axis cs:4,0)--(axis cs:4,0.94);
+\draw[->,line width=0.2mm](axis cs:5,0)--(axis cs:5,0);
+\draw[->,line width=0.2mm](axis cs:6,0)--(axis cs:6,-0.94);
+\draw[->,line width=0.2mm](axis cs:7,0)--(axis cs:7,-1.51);
+\draw[->,line width=0.2mm](axis cs:8,0)--(axis cs:8,-1.51);
+\draw[->,line width=0.2mm](axis cs:9,0)--(axis cs:9,-0.94);
+\draw[->,line width=0.2mm](axis cs:10,0)--(axis cs:10,0);
+\end{axis}
+\end{tikzpicture}
+\caption{Signal $x_c(t)=\sin(x)$ sampled at $f_s=10$ Hz by multiplication with a Dirac comb $s(t)=\sum_{-\infty}^{\infty}\delta(t-\frac{n}{10\pi})$.}
+\label{fig:sampling_comb}
+\end{figure}
+Although \eqref{eq:sampling} mathematically describes sampling (as in converting a time-continuous signal to a time-discrete), we have $x_s(t)\neq x[n]$ as $x_s(t)$ is not discretized in amplitude whereas $x[n]$ is. Although $x_s(t)\neq x[n]$ \eqref{eq:sampling} will be useful in the upcoming appliance of the Fourier transform.
 %\paragraph{Example of sampling} Sampling a ball following the arc shown in figure \ref{fig:ball_cont} results in the plotted points in figure \ref{fig:ball_disc}. As such the balls path is illustrated with discrete points along the path.
 %\begin{figure}[H]
 %\centering
@@ -114,28 +213,52 @@ x_s(t)&=x_c(t)s(t)\nonumber \\
 %\end{minipage}
 %\end{figure}
 \subsection{Frequency representation of sampling}
-To study the behavior of $x_s(t)$ in the frequency domain the Fourier transform is used. The Fourier transform of $s(t)$ is seen in \eqref{eq:fourier_impulse}.
-\begin{equation}\label{eq:fourier_impulse}
-S(j\omega)=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}(j\omega-kj\omega_s)
+Studying $x_s(t)$ and $s(t)$ in the frequency domain leads to some important conclusions about sampling. Before $s(t)$ is Fourier transform it is expanded into its Fourier series:
+%Firstly the Dirac delta function is Fourier transformed - the result follows directly from the definition of the Fourier transform and definition \ref{def:dirac}:
+%\begin{equation}\label{eq:fourier_delta}
+%\mathcal{F}[\delta(t)]=\Delta(\omega)=\int_{-\infty}^{\infty}\!\delta(t)\mathrm{e}^{-j\omega t}\,dt=\mathrm{e}^0=1
+%\end{equation}
+%\eqref{eq:fourier_delta} shows, that the Fourier transform of $\delta$ is a constant function of value 1. The Fourier transform of the Dirac comb $s(t)$ is given by expanding $s(t)$ with its Fourier series.
+\begin{align*}
+s(t)&=\sum_{n=-\infty}^{\infty}\delta(t-nT_s)\\
+&=\sum_{n=-\infty}^{\infty}c_n\mathrm{e}^{j\omega nt/T_s}\\
+\end{align*}
+Calculation of the $c_n$ coefficients gives
+\begin{align*}
+c_n&=\frac{1}{T_s}\int_{t_0}^{t_0+T_s}\!s(t)\mathrm{e}^{j\omega t/T_s}\,dt=\frac{1}{T}\int_{-T_s/2}^{T_s/2}\!\delta(t)\mathrm{e}^{j\omega t/T_s}\,dt=\frac{1}{T_s}\mathrm{e}^0\\&=\frac{1}{T_s}.
+\end{align*}
+And so the Fourier series of $s(t)$ is
+\begin{equation}\label{eq:dirac_series}
+s(t)=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\mathrm{e}^{j\omega nt/T_s}\phantom{mm}\forall n\in\mathbb{Z}.
 \end{equation}
-where $\omega=2\pi f$ is frequency in radians pr. second.
-The Fourier transform of \eqref{eq:sampling} uses the fact, that \eqref{eq:sampling} is a product of two functions, which is a convolution in the frequency domain:
+\eqref{eq:dirac_series} shows that the Fourier series of $s(t)$ is merely an inifite number of phase shifted sines of equal frequencies summed. This makes the following Fourier transform easy:
 \begin{align}
-X_s(j\omega)&=\frac{1}{2\pi}\sum_{k=-\infty}^{\infty}X_c(t)(j\omega)*S(j\omega)\phantom{mm}\text{\cite{DTSP}}\nonumber\\
-&=\frac{1}{T}\sum_{k=-\infty}^{\infty}X_c(j(\omega-k\omega_s))\label{eq:samp_freq}
+\mathcal{F}[s(t)](\omega)&=\frac{1}{T_s}\mathcal{F}\left[\sum_{n=-\infty}^{\infty}\mathrm{e}^{j\omega nt/T_s}\right](\omega)\nonumber\\
+&=\frac{1}{T_s}\int_{-\infty}^{\infty}\!\sum_{n=-\infty}^{\infty}\mathrm{e}^{j\omega nt/T_s}\mathrm{e}^{-j\omega t}\,dt\nonumber\\
+&=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\int_{-\infty}^{\infty}\!\mathrm{e}^{j\omega nt/T_s}\mathrm{e}^{-j\omega t},dt\nonumber\\
+&=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\delta(\omega-\frac{n}{T_s})\nonumber\\
+&=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_s)\label{eq:fourier_comb}
 \end{align}
-\frede{Skriv præcis hvilken transformation der bruges. Hvad foreår der ved citationen?}\eqref{eq:samp_freq} mathematically samples $x_c(t)$ in the frequency domain at a rate of $\omega_s$ radians pr. second. 
+\eqref{eq:fourier_comb} shows that the Fourier transform of $s(t)$ results in another Dirac comb in the frequency domain with pulses seperated by $\omega_s$.
+Calculationg the Fourier transform of \eqref{eq:sampling} uses \eqref{eq:fourier_comb} and the fact, that \eqref{eq:sampling} is a product of two functions, which is a convolution in the frequency domain:
+\begin{align}
+\mathcal{F}[x_s(t)](\omega)&=\mathcal{F}[x_c(t)s(t)]\nonumber\\
+&=\frac{1}{T}\sum_{k=-\infty}^{\infty}X_c(t)(\omega)*S(\omega)\phantom{mm}\nonumber\\
+X_s(\omega)&=\frac{1}{T}\sum_{k=-\infty}^{\infty}X_c(\omega-k\omega_s)\label{eq:samp_freq}
+\end{align}
+Just as \eqref{eq:sampling} mathematically samples $x_c(t)$ in the time domain, \eqref{eq:samp_freq} mathematically samples $x_c(t)$ in the frequency domain at a rate of $\omega_s$. Looking at this frequency domain
 \paragraph{Bandlimited signal}
-A signal is \textit{bandlimited} if the signal contains no frequencies higher than some frequency $\omega_N$, which means $F(j\omega)=0$ for $|\omega|>\omega_N$ \cite{FAA}. 
+A signal is \textit{bandlimited} if the signal contains no frequencies higher than some frequency $\omega_N$, which means $F(\omega)=0$ for $|\omega|>\omega_N$ \cite{FAA}. 
 \subsection{Aliasing}\label{sec:aliasing}
 \textit{Aliasing} is a consequence of not sampling  at a sufficiently high $f_s$ which results in the continous signal $x_c(t)$ being non reconstructable from the sampled signal $x_s(t)$.
 \\\\
-From \eqref{eq:samp_freq} it is seen that $X_s(j\omega)$ consists of copies of $X_c$ repeated at whole multiples of $j\omega_s$ on both sides of the origin - seen in figure \ref{fig:copies}.
+From \eqref{eq:samp_freq} it is seen that $X_s(\omega)$ consists of copies of $X_c$ repeated at whole multiples of $\omega_s$ on both sides of the origin - seen in figure \ref{fig:copies}.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
 scale=1.5,
+clip=false,
 unit vector ratio*=1 1 1,
 axis lines = middle,
 xtick={-4,4,1.5,-1.5,2.5,5.5,-5.5,-2.5},
@@ -151,13 +274,11 @@ ymax=3]
 \draw[line width=0.5mm](axis cs:0,2)--(axis cs:-1.5,0);
 \draw[line width=0.5mm](axis cs:4,2)--(axis cs:5.5,0);
 \draw[line width=0.5mm](axis cs:4,2)--(axis cs:2.5,0);
-\draw[line width=0.5mm](axis cs:8,2)--(axis cs:9.5,0);
-\draw[line width=0.5mm](axis cs:8,2)--(axis cs:6.5,0);
-\draw[line width=0.5mm](axis cs:-8,2)--(axis cs:-9.5,0);
-\draw[line width=0.5mm](axis cs:-8,2)--(axis cs:-6.5,0);
 \draw[line width=0.5mm](axis cs:-4,2)--(axis cs:-5.5,0);
 \draw[line width=0.5mm](axis cs:-4,2)--(axis cs:-2.5,0);
-\end{axis}
+\node at(axis cs:0,3.3){$X(\omega)$};
+\node at(axis cs:6.3,0){$\omega$};
+	\end{axis}
 \end{tikzpicture}
 \caption{Signal bandlimited by $\omega_N$ sampled at $\omega_s$ in the frequency domain. Copies of $X_c$ are seen at whole multiples of $\omega_s$.}
 \label{fig:copies}
@@ -207,12 +328,14 @@ ymax=3]
 \draw[line width=0.5mm,dashed](axis cs:-2.66,1)--(axis cs:-3.33,0);
 \draw[line width=0.5mm,dashed](axis cs:-3.33,1)--(axis cs:-2.66,0);
 \draw[line width=0.5mm,dashed](axis cs:-4.66,1)--(axis cs:-5.33,0);
+\node at(axis cs:0,3.3){$X(\omega)$};
+\node at(axis cs:6.3,0){$\omega$};
 \end{axis}
 \end{tikzpicture}
 \caption{Signal bandlimited by $\omega_N$ sampled at $\omega_s<2\omega_N$ in the frequency domain - the copies of $X_c$ overlap.}
 \label{fig:overlap}
 \end{figure}
-\noindent It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $\hat{x}_c$. With an ideal low pass filter  a single isolated copy (centered around the origin) can be picked out, and the reverse Fourier transform used to recreate the time domain representation of the signal. If however $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing. When a signal is aliased it is not possible to pick out a single copy of the sampled signal in the frequency domain which results in $x_c(t)$ not being reconstructable from $x_s(t)$. This makes aliasing in the context of representing a continuous signal as a discrete set of values unwanted.
+\noindent It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $\hat{x}_c$. With an ideal low pass filter  a single isolated copy (centered around the origin) can be picked out, and the inverse Fourier transform used to recreate the time domain representation of the signal. If however $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing. When a signal is aliased it is not possible to pick out a single copy of the sampled signal in the frequency domain which results in $x_c(t)$ not being reconstructable from $x_s(t)$. This makes aliasing in the context of representing a continuous signal as a discrete set of values unwanted.
 \\\\
 An extreme case of aliasing happens if the frequencies of two different signals differ from some whole multiple of $f_s$ by the same amount. The sequence of samples for the two signals will then be identical - this is seen in figures  \ref{fig:aliasing1} and \ref{fig:aliasing2} where two sine waves of different frequencies are sampled with the same $f_s$.
 \begin{figure}[H]
@@ -276,14 +399,18 @@ ytick={-1,1}
 \end{minipage}
 \end{figure} 
 \noindent As such the reconstructability of $x_c$ from $x_s$ depends on the relation between $f_s$ and $\omega_N$ which leads to the central \textit{Sampling Theorem}.
-\begin{theorem}[The Sampling Theorem]\label{sampling_theorem}
+\begin{theorem}[The Sampling Theorem]\cite{FAA}\label{sampling_theorem}
 Let $f\in L^2$ and $F(\omega)=0$ for $|\omega|\geq \omega_N$ ($f$ bandlimited). Then $f$ is completely determined by its values at the points $t_n=\frac{n\pi}{\omega_N}$, $n=0,\pm 1,\pm 2,\ldots$:
 \begin{equation*}
-f(t)=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}\text{\cite{FAA}}
+f(t)=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}
 \end{equation*}
+where
+\begin{equation}
+\mathrm{sinc}(x)=\frac{\sin(x)}{x}
+\end{equation}
 \end{theorem}
 \begin{proof}
-Write the Fourier transform of $f$
+Write the inverse Fourier transform of $f$
 \begin{equation}\label{eq:proof1}
 f(t)=\frac{1}{2\pi}\int_{-\omega_N}^{\omega_N}\!\hat{f}(\omega)\mathrm{e}^{i\omega i}\,dw
 \end{equation}
@@ -297,36 +424,40 @@ c_{-n}&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!F(\omega)\mathrm{e}^{\fr
 &=\frac{\pi}{\omega_N}f\left(\frac{n\pi}{\omega_N}\right).
 \end{align*}
 Then \eqref{eq:proof1} can be written as
-\begin{align*}
+\begin{align}
 f(t)&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}\mathrm{e}^{i\omega t}\,dw
-\end{align*}
-From theorem \ref{Plancherel} it follows that the Fourier transform is linear and continuous, which allows us to switch the integral and summation:\frede{Er ikke ret sikker på det her - skal spørge Henrik om det \texttrademark}
+\nonumber\\
+&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\lim_{N\to\infty}\sum_{n=-N}^{N}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}\mathrm{e}^{i\omega t}\,dw\label{eq:limit}
+\end{align}
+A linear and bounded operator is continuous. From theorem \ref{Plancherel} it follows that the Fourier transform is bounded and together with linearity of the Fourier transform it is continuous. This means that the limit in \eqref{eq:limit} can be moved outside of the integral and the summation and integral are then switched.
 \begin{align*}
-f(t)&=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\mathrm{e}^{i(\omega_Nt-n\pi)\omega/\omega_N}}{i(\omega_Nt-n\pi)/\omega_N}\Bigg|_{\omega=-\omega_N}^{\omega_N}\\
-&=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\sin(\omega_Nt-n\pi)}{\omega_Nt-n\pi}\\
+f(t)&=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\mathrm{e}^{i(\omega_Nt-n\pi)\omega/\omega_N}}{i(\omega_Nt-n\pi)/\omega_N}\Bigg|_{\omega=-\omega_N}^{\omega_N}
+\\
+&=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\sin(\omega_Nt-n\pi)}{\omega_Nt-n\pi}
+\\
 &=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}\text{\cite{FAA}}
 \end{align*}
 \end{proof}
-\frede{Hvad gør man, hvis signalet ikke er båndbegrænset?}$\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate} respectively. The theorem can be interpreted as stating, that any signal bandlimited by some Nyquist frequency $\omega_N$ can be reconstructed by sampling it at the Nyquist rate $2\omega_N$. The theorem is therefore central to determining $f_s$ so as to be able to reconstruct $x_c$ from $x_s$. If the sampling frequency $\omega_s=2\omega_N$ the continuous signal is theoretically reconstructable from $x_s$ by summation of sinc-functions (theorem \ref{sampling_theorem}), but in practice a higher sampling rate is usually used as this makes digital filtering more convenient - see chapter \ref{ch7}.
+$\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate} respectively. The theorem can be interpreted as stating, that any signal bandlimited by some Nyquist frequency $\omega_N$ can be reconstructed by sampling it at the Nyquist rate $2\omega_N$. The theorem is therefore central to determining $f_s$ so as to be able to reconstruct $x_c$ from $x_s$. If the sampling frequency $\omega_s=2\omega_N$ the continuous signal is theoretically reconstructable from $x_s$ by summation of sinc-functions (theorem \ref{sampling_theorem}).\\
+If, however, a signal is not bandlimited, the theorem does not apply and other measures must be taken. This leads to anti aliasing filters, which eliminate higher frequencies so aliasing is avoided when increasing sampling frequency is not wanted - see chapter \ref{ch7}.
 \section{Analogue-to-digital conversion}\label{ADC}
-An analogue-to-digital converter (ADC) is a device which as the name suggests is capable of converting an analogue signal to a digital signal in a way close to the mathematically described way in \ref{eq:sampling}. The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of an ADC, but not explain the in-depth theory, as the ADC is merely a tool to perform the sampling described in the previous sections and not a focus point of this project.
+An analogue-to-digital converter (ADC) is a device which converts an \textit{amplitude-continuous} signal to and \textit{amplitude-discrete} signal.  The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of analog to digital conversion, but not explain the in-depth theory, as the conversion and the components used are not focus points of this project.
 \\\\
-An audio ADC consists of the following elements:
+The process of converting and analogue audio signal to a digital audio signal consists of the following elements:
 \begin{enumerate}
-\item A \textit{track-} or \textit{sample-and-hold} circuit capable of sampling a voltage and \textit{holding} the value during the whole or some part of the sample period.
-\item A \textit{quantizer} capable of assigning discrete values to the voltage sampled.
+\item A \textit{track-} or \textit{sample-and-hold} circuit capable of discretizing the signal in time.
+\item An \textit{analog-to-digital converter} (ADC) capable of discretizing the signal in amplitude. This is called quantization.
 \end{enumerate}
-The placement of an analogue to digital converter in a system to record sound to a digital storage unit is seen in figure \ref{fig:input}.
+Sometimes thereis furthermore needed an \textit{anti-aliasing filter} to filter out high frequencies in a signal so as to avoid aliasing when sampling. Anti-aliasing filters are as earlier mentioned further explained in chapter \ref{ch7}. This is done before conversion of the signal from analogue to digital. The placement of an analogue to digital converter (and anti-aliasing filter) in a system to record sound to a digital storage unit is seen in figure \ref{fig:input}.
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[node distance=3.5cm,auto,>=latex']
+\begin{tikzpicture}[scale=0.5,node distance=2.5cm,auto,>=latex']
 \draw
-% Drawing the blocks of first filter :
-	node at (0,0)[right=-13mm]{\huge\twonotes} % kan skiftet ud med sinus længere nede
 	node [input, name=input1] {} 
-	node at (input1) [above=5mm] {Mic}		
-	node [block, right of=input1] (sh) {$Sample$-$and$-$hold$}
-	node [block, right of=sh] (quant) {$Quantification$}
+	node at (input1) [above=5mm] {Mic}
+	node [block, right of=input1] (anti) {$Anti$-$aliasing$}	
+	node [block, right of=anti] (sh) {$S\&H$}
+	node [block, right of=sh] (quant) {$ADC$}
 	node [block, right of=quant] (save) {$Storage$}
 	node [sum, right of=save] (cirk1) {}
 	node at (cirk1) [above=5mm] {App}
@@ -337,19 +468,16 @@ The placement of an analogue to digital converter in a system to record sound to
 % Joining blocks. 
 % Commands \draw with options like [->] must be written individually
 
-\draw[->](input1) -- node {}(sh);
+\draw[->](input1) -- node {}(anti);
+\draw[->](anti) -- node {}(sh);
 \draw[->](sh) -- node {}(quant);
 \draw[->](quant) -- node {}(save);
 \draw[->](save) -- node {}(cirk1);
 \filldraw[color=black,fill=white,thick](input1) circle (0.3);
 \draw(-0.3,0.5) -- (-0.3,-0.5);
 %\draw (-1.5,0) sin (-1.40,0.5) cos (-1.30,0) sin (-1.20,-0.5) cos (-1.10,0) sin (-1,0.5) cos (-0.9,0) sin (-0.8,-0.5) cos (-0.7,0);
-
-% Boxing and labelling noise shapers
-\draw [color=gray,thick,dashed](1.5,-1.5) rectangle (9,1.5);
-\node at (1.5,1.7) [above=5mm, right=0mm] {\textsc{ADC}};
 \end{tikzpicture}
-\caption{Basic block-diagram illustrating an ADC where the digital output will be the input to the application} 
+\caption{Basic block-diagram illustrating an ADC in a system for converting and analogue sound signal to a digital one.} 
 \label{fig:input}
 \end{figure}
 %\input{sections/mainmatter/chapter_4/_____.tex}
@@ -384,8 +512,8 @@ ylabel=Voltage]
 \label{fig:S/H}
 \end{figure}
 \noindent The S\&H circuit must sample at a sufficiently high frequency as specified by theorem \ref{sampling_theorem}.
-\subsubsection{Quantization}
-Quantization is the process of discretizing analogue signal values to discrete values. Digital processors are incapable of dividing an interval into infinitely many subintervals (points), which means a finite number of intervals has to be used -  when an analogue signal is quantized its value is compared to a finite number of analogue values, rounded to the nearest and expressed in digital numbering (binary). The number of digital values therefore depends on the number of bits dedicated to representing a given analogue value as a digital number. When rounding the analogue value to a digital value, there is produced a round off error, which can be descreased by increasing the number of possible digital values in the interval \cite{pelgrom}.\\
+\subsubsection{Quatization}
+Quantization is the process of discretizing analogue signal values to discrete values and is done with an analog-to-digital converter. Digital processors are incapable of dividing an interval into infinitely many subintervals (points), which means a finite number of intervals has to be used -  when an analogue signal is quantized its value is compared to a finite number of analogue values, rounded to the nearest and expressed in digital numbering (binary). The number of digital values therefore depends on the number of bits dedicated to representing a given analogue value as a digital number. When rounding the analogue value to a digital value, there is produced a round off error, which can be descreased by increasing the number of possible digital values in the interval \cite{pelgrom}.\\
 In figure \ref{fig:quant} the graph of an analogue signal is seen alongside the quantization levels.
 \begin{figure}[H]
 \centering
@@ -443,6 +571,6 @@ Bandlimited noise. White noise bandlimited in a spectrum that covers the spectru
 \item \textit{Coloured noise}\\
 Any non white noise - noise which does not have a constant power spectrum.
 \end{itemize}
-As noise reduction is generally wanted, whis project will also seek to eliminate it. Playing a pitch alone in an anechoic room is a way of minimizing noise factors. There are many different noise sources from e.g. the surrounding environment, electrical equipment, other people and even the instrument playing itself since it is difficult to make a pure tone by an acoustic sound source such as a guitar. A pure tone is a sinusoidal waveform consisting of a single frequency and may therefore be difficult to play on an instrument. \cite{AcousticNoise} Usually, sound is reflected off the walls in a room which is also a source of noise. This is a form of folding and is minimized in the anechoic room because sound is absorbed by the walls. Moreover, due to the construction of the anechoic room, noise from e.g. bypassing cars is also minimized, and the sound may be recorded with a minimum of hardware which otherwise may also produce noise.
+As noise reduction is generally wanted, this project will also seek to eliminate it by recording music in an anechoic rum. Playing a pitch alone in an anechoic room is a way of minimizing noise factors. There are many different noise sources from e.g. the surrounding environment, electrical equipment, other people and even the instrument playing itself since it is difficult to make a pure tone by an acoustic sound source such as a guitar. A pure tone is a sinusoidal waveform consisting of a single frequency and may therefore be difficult to play on an instrument. \cite{AcousticNoise} Usually, sound is reflected off the walls in a room which is also a source of noise. This is a form of folding and is minimized in the anechoic room because sound is absorbed by the walls. Moreover, due to the construction of the anechoic room, noise from e.g. bypassing cars is also minimized, and the sound may be recorded with a minimum of hardware which otherwise may also produce noise.
 \\ \\
 The music used in this project will therefore be recorded in an anechoic room because the noise is minimized. It is not expected that musicians using the system in the future have access to an anechoic room as well but if the system doesn't work with sounds recorded in the anechoic room then it with most certainty doesn't work at other places neither. However, in order to reproduce the conditions of a typical musician working around other people, background noise can also be made in the anechoic room but should of course not drown the music. This form of noise is additive whereas e.g. noise reflected off walls as mentioned above is multiplicative. In general, multiplicative noise depends on the state of the system whereas additive noise does not. Therefore the output $x[n]$ of the sampled data $s[n]$ corrupted by the additive noise $a[n]$ is $x[n] = s[n] + a[n]$ whereas the equation for the multiplicative noise $m[n]$ is $x[n] = s[n]m[n]$.
