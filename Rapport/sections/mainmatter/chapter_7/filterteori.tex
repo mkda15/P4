@@ -7,7 +7,7 @@ The output is determined by the convolution sum of input signal and impulse resp
 y[n] = x[n]*h[n] = \sum_{k=1}^{\infty} x[k]h[n-k]
 \end{align}    
 The frequency response of a filter is given by the Fourier transformation of the impulse response. Consider the input sequence $x[n]=e^{j\omega n}$ for $-\infty < n <\infty$, then the frequency response is defined as\trine{side (40) DTSP}
-\begin{align}
+\begin{align}\label{eq:freq_res}
 H(e^{j\omega})=\sum_{k=-\infty}^{\infty}h[k]e^{-j\omega k}
 \end{align}
 thus the outcome of the filter becomes 
@@ -28,8 +28,7 @@ A linear phase response is characterized by a constant group delay $\tau(\omega)
 \begin{align}
 \tau(\omega)=-\frac{d}{d\omega}\left\{ arg \left[ H(\text{e}^{j\omega}\right] \right\} = \alpha
 \end{align}
-The phase response is an expression of how each of the signal components are delayed though the system, where linear phase indicates an equal delay for all components of the signal. \trine{der findes yderligere en betingelse for konstant group delay (5.140)DTSP} 
-
+The phase response is an expression of how each of the signal components are delayed though the system, where linear phase indicates an equal delay for all components of the signal.  
 \section{Ideal filters} 
 When designing filters it is ideal to have approximately constant magnitude and zero phase corresponding to the frequency response. \\ For an ideal selective frequency filter the magnitude response will be constant unity for the frequencies that are wanted to pass the filter referred to as the \textit{bandpass} and zero for all other frequencies referred to as \textit{bandstop}. An example is an ideal lowpass filter with frequency response 
 \begin{align}\label{eq:low}
