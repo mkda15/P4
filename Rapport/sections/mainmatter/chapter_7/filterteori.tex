@@ -13,7 +13,7 @@ H(e^{j\omega})=\sum_{k=-\infty}^{\infty}h[k]e^{-j\omega k}
 thus the outcome of the filter becomes 
 \begin{align}
 y[n]=H(e^{j\omega})e^{-j\omega n} \label{eq:filter_output}
-\end{align} 
+\end{align} \trine{evt. indsæt relations til Z og transferfunction her, og ny overskrift}
 By \eqref{eq:filter_output} it is seen that $H(e^{j\omega})$ describes the change in complex amplitude of a complex exponential input signal to a given frequency. $H(e^{j\omega})$ is in general complex and hence it can be expressed as
 \begin{align}
 H(e^{j\omega})=|H(e^{j\omega})|e^{j\measuredangle H(e^{j\omega})}
@@ -28,7 +28,17 @@ A linear phase response is characterized by a constant group delay $\tau(\omega)
 \begin{align}
 \tau(\omega)=-\frac{d}{d\omega}\left\{ arg \left[ H(\text{e}^{j\omega}\right] \right\} = \alpha
 \end{align}
-The phase response is an expression of how each of the signal components are delayed though the system, where linear phase indicates an equal delay for all components of the signal.  
+The phase response is an expression of how each of the signal components are delayed though the system, where linear phase indicates an equal delay for all components of the signal. To guarantee a constant group delay, $\alpha$, $\beta$ and $h[n]$ has to fulfil the following condition, for all $\omega$
+\begin{align}
+\sum_{n=-\infty}^{\infty}h[n]\sin\left(\omega \left(n-\alpha \right) + \beta \right) = 0
+\end{align}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.6\textwidth]{figures/FIR1.png}
+    \caption{Process of convolution  a) Desired frequency response $H_d(e^{j\omega})$ and Fourier tranform of window $W(e^{j\omega})$. b) Typical approximation of $H(e^{j\omega})$ resulting from the convolution. }
+    \label{fig:FIR1}
+\end{figure} 
+
 \section{Ideal filters} 
 When designing filters it is ideal to have approximately constant magnitude and zero phase corresponding to the frequency response. \\ For an ideal selective frequency filter the magnitude response will be constant unity for the frequencies that are wanted to pass the filter referred to as the \textit{bandpass} and zero for all other frequencies referred to as \textit{bandstop}. An example is an ideal lowpass filter with frequency response 
 \begin{align}\label{eq:low}
