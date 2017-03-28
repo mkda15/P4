@@ -1,13 +1,20 @@
-In numerical practice, the equicalent of a given function f(x) of the continuous independent variable x is a finite number N of data values associated with a number t, customarily taken as running from 0 to N-1.
-
-The discrete Fourier transform F(v) is defined by:
+\subsection{Discrete Fourier Transform}
+The discrete Fourier transform for $x_n \leftrightarrow X_k$ is defined by:
 \begin{align*}
-	F(v)= N^{-1}\sum_{\tau = 0}^{N-1}f(\tau)e^{-j \omega \frac{v}{N}\tau}
+	X_k = \sum_{n=0}^{N-1} x_n W_N^{kn}
+\end{align*}
+And the inverse
+\begin{align*}
+	x_n = \dfrac{1}{N} \sum_{n=0}^{N-1}X_k W_{N}^{-kn}
 \end{align*}
 
-Where the quantity v, is an integer going from %$0 \to N-1$
+Where the quantity v, is an integer going from $0 \to N-1$
 
-The discrete Fourier transform (DFT), is the discrete time variant of the Fourier transform, can be used to transform sample into from the time domain, into the frequency domain.
+
+
+In numerical practice, the equivalent of a given function f(x) of the continuous independent variable x is a finite number N of data values associated with a number t, customarily taken as running from 0 to N-1.
+\\
+The discrete Fourier transform (DFT), is the discrete time variant of the Fourier transform, and can be used to transform sample from the time domain, into the frequency domain.
 \\\\
 Multiple parts of the DFT are analog to the continues version.
 \\\\
@@ -35,5 +42,33 @@ or alternatively
 
 \chr{Går ud fra at der i Fourier transformationen står at den kan evalueres i et endeligt interval i stedet fra uendeligt til uendeligt.}
 
-The DFT have to take into consideration that it's only feed a finite number of input data. 
-In the style the continues case of the Fourier transform, where it's possible to evaluate it over a finite interval.
+The DFT have to take into consideration that it's only feed a finite number of input data. Since this is the case, the DFT treats the data as if it were periodic.
+In the style the continues case of the Fourier transform, where it's possible to evaluate it over a finite interval, the DFT can be evaluated for the fundamental frequency ($\dfrac{1}{NT} Hz$ or $\dfrac{2\pi}{NT}rad/sec.$) in general
+\begin{align*}
+	F[n] = \sum_{k=0}^{N-1}f[k]e^{-j2\pi\frac{nk}{N}} \, (n = 0: N-1)
+\end{align*}
+
+where $F[n]$ is DFT of the sequence $f[k]$.
+This can be written on matrix form
+\begin{align*}
+	\begin{bmatrix}
+		F[0]\\ F[1]\\ F[2]\\ \vdots \\ F[N-1]
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		1 & 1 	& 1   	& \cdots & 1\\
+		1 & W 	& W^2 	& \cdots & W^{N-1}\\
+		1 & W^2	& W^4	& \cdots & W^{N-2}\\
+		1 & W^3	& W^6	& \cdots & W^{N-3}\\
+		\vdots\\
+		1 & W^{N-1}	& W^{N-2}	& \cdots & W\\
+	\end{bmatrix}
+	\begin{bmatrix}
+		f[0]\\ f[1]\\ f[2]\\ \vdots \\ f[N-1]
+	\end{bmatrix}
+\end{align*}
+
+W is called the twiddle factor and is defined as 
+\begin{align*}
+	W_N = e^{-j 2 \pi\frac{1}{N}}, \, W_N^{kn} = e^{-j 2 \pi\frac{kn}{N}}
+\end{align*}
