@@ -1,0 +1,39 @@
+In numerical practice, the equicalent of a given function f(x) of the continuous independent variable x is a finite number N of data values associated with a number t, customarily taken as running from 0 to N-1.
+
+The discrete Fourier transform F(v) is defined by:
+\begin{align*}
+	F(v)= N^{-1}\sum_{\tau = 0}^{N-1}f(\tau)e^{-j \omega \frac{v}{N}\tau}
+\end{align*}
+
+Where the quantity v, is an integer going from $0\toN-1$
+
+The discrete Fourier transform (DFT), is the discrete time variant of the Fourier transform, can be used to transform sample into from the time domain, into the frequency domain.
+\\\\
+Multiple parts of the DFT are analog to the continues version.
+\\\\
+Let a function in time $f(t)$ be a continuous signal.
+If the function is sampled N times it could be denoted
+$f[0],f[1],\dots,f[k],\dots,f[N-1]$.
+\\\\
+The Fourier Transform of $f(t)$ would be as in \ref{sec:cunt_Fourier_transform}.
+\begin{align*}
+	F(\omega) = \int_{-\infty}^\infty f(t)e^{-j\omega t} dt
+\end{align*}
+
+If you regard each sample $f[k]$ as a single impulse, with a giving area $f[k]$. Then the integrand only exist at the sample points:
+
+\begin{align*}
+	F(\omega) 
+	&= \int_0^(N-1)T f(t) e^{-j\omega t}dt\\
+	&= f[0]e^{-j0} + f[1]e^{-j\omega T} + \dots + f(N-1) e^{-j\omega(N-1)T}	
+\end{align*}
+
+or alternatively
+\begin{align*}
+	F(\omega) = \sum_{k=0}^{N-1}f[k]e^{-j\omega k T}
+\end{align*} 
+
+\chr{Går ud fra at der i Fourier transformationen står at den kan evalueres i et endeligt interval i stedet fra uendeligt til uendeligt.}
+
+The DFT have to take into consideration that it's only feed a finite number of input data. 
+In the style the continues case of the Fourier transform, where it's possible to evaluate it over a finite interval.
