@@ -32,12 +32,6 @@ The phase response is an expression of how each of the signal components are del
 \begin{align}
 \sum_{n=-\infty}^{\infty}h[n]\sin\left(\omega \left(n-\alpha \right) + \beta \right) = 0
 \end{align}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width = 0.6\textwidth]{figures/FIR1.png}
-    \caption{Process of convolution  a) Desired frequency response $H_d(e^{j\omega})$ and Fourier tranform of window $W(e^{j\omega})$. b) Typical approximation of $H(e^{j\omega})$ resulting from the convolution. }
-    \label{fig:FIR1}
-\end{figure} 
 
 \section{Ideal filters} 
 When designing filters it is ideal to have approximately constant magnitude and zero phase corresponding to the frequency response. \\ For an ideal selective frequency filter the magnitude response will be constant unity for the frequencies that are wanted to pass the filter referred to as the \textit{bandpass} and zero for all other frequencies referred to as \textit{bandstop}. An example is an ideal lowpass filter with frequency response 
