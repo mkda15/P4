@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="Forsøg_lillepeteredderkop_hurtig_auda2_data" version="1.3.0" audacityversion="2.1.3" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="16.3120181406" zoom="86.1328125000" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="Lydspor" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="1288960">
+				<waveblock start="0">
+					<simpleblockfile filename="e0001e7b.au" len="262144" min="-0.05954" max="0.05954" rms="0.008078"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e00013e2.au" len="262144" min="-0.053558" max="0.06192" rms="0.00757"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0001305.au" len="262144" min="-0.03949" max="0.030365" rms="0.004805"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="e00019ac.au" len="262144" min="-0.041992" max="0.047882" rms="0.007244"/>
+				</waveblock>
+				<waveblock start="1048576">
+					<simpleblockfile filename="e0001008.au" len="240384" min="-0.041016" max="0.054321" rms="0.005212"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>

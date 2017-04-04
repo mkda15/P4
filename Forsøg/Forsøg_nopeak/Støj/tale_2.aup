@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="tale_2_data" version="1.3.0" audacityversion="2.1.3" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="26.1108390023" zoom="86.1328125000" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="Lydspor" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="1732480">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000dbe.au" len="262144" min="-0.271423" max="0.301208" rms="0.035358"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e0000b5e.au" len="262144" min="-0.221924" max="0.270477" rms="0.038343"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0000837.au" len="262144" min="-0.155975" max="0.181793" rms="0.029359"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="e00004dd.au" len="262144" min="-0.219971" max="0.269257" rms="0.04054"/>
+				</waveblock>
+				<waveblock start="1048576">
+					<simpleblockfile filename="e000003d.au" len="262144" min="-0.199127" max="0.255096" rms="0.032141"/>
+				</waveblock>
+				<waveblock start="1310720">
+					<simpleblockfile filename="e0000176.au" len="262144" min="-0.308563" max="0.331085" rms="0.033502"/>
+				</waveblock>
+				<waveblock start="1572864">
+					<simpleblockfile filename="e0000271.au" len="159616" min="-0.221832" max="0.306213" rms="0.031625"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
