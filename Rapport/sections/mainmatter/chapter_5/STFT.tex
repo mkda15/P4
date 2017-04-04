@@ -27,10 +27,10 @@ Amazingly, the human ear and brain is able to perceive the bare signal $f$ and p
 \\ \\
 The idea in the STFT is to obtain properties of a local frequency spectrum of $f$ by restricting it to an interval and taking the Fourier transform of this interval. $f$ is restricted on this interval by using a window function, which is close to 1 near the origin and decays towards zero at the edges, which is therefore a smooth cut-off function. The boundaries created by a sharp cut-off function will be interpreted by the Fourier transform as a discontinuity or an abrupt variation of the signal, which is obviously not desirable \cite{Davis}. The following definition defines the STFT.
 
-\begin{definition}{The short-time Fourier transform}
+\begin{definition}[The short-time Fourier transform]
 Let $f,g \in \mathcal{L}^2(\mathbb{R}^d)$. For a fixed window function $g \neq 0$ the short-time Fourier transform of a function $f$ with respect to $g$ is defined as:
 \begin{align}
-V_gf(\tau,\omega) = \int_{\mathbb{R}^d} f(t) \overline{g(t - \tau)} e^{-2\pi j t \omega} dt \quad \text{ for } \tau,\omega in \mathbb{R}^d
+V_gf(\tau,\omega) = \int_{\mathbb{R}^d} f(t) \overline{g(t - \tau)} e^{-2\pi j t \omega} dt \quad \textnormal{ for } \tau,\omega \in \mathbb{R}^d
 \end{align}
 \end{definition}
 
