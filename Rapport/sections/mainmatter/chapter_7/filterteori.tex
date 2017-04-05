@@ -1,4 +1,4 @@
-\section{Basic principals}
+\section{Basic principals}\label{sec:basic_filter}
 
 A digital filter is characterised as a \textit{linear time invariant} system referred to as a LTI system, which are to be described completely in the time domain by its impulse response $h[n]$. \\
 When a discrete sequence $x[n]$ is applied to a LTI system it is the impulse response of the system $h[n]$ that determined what the output $y[n]$ will be. In other words the impulse response determine how much of the input sequence that passes the filter. \\ 
@@ -29,9 +29,10 @@ A linear phase response is characterized by a constant group delay $\tau(\omega)
 \tau(\omega)=-\frac{d}{d\omega}\left\{ arg \left[ H(\text{e}^{j\omega}\right] \right\} = \alpha
 \end{align}
 The phase response is an expression of how each of the signal components are delayed though the system, where linear phase indicates an equal delay for all components of the signal. To guarantee a constant group delay, $\alpha$, $\beta$ and $h[n]$ has to fulfil the following condition, for all $\omega$
-\begin{align}
+\begin{align}\label{eq:cons_gro}
 \sum_{n=-\infty}^{\infty}h[n]\sin\left(\omega \left(n-\alpha \right) + \beta \right) = 0
 \end{align}
+
 
 \section{Ideal filters} 
 When designing filters it is ideal to have approximately constant magnitude and zero phase corresponding to the frequency response. \\ For an ideal selective frequency filter the magnitude response will be constant unity for the frequencies that are wanted to pass the filter referred to as the \textit{bandpass} and zero for all other frequencies referred to as \textit{bandstop}. An example is an ideal lowpass filter with frequency response 

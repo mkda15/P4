@@ -158,11 +158,70 @@ Figure \ref{fig:FIR1} illustrates the convolution process referred to as windowi
     \caption{a) Frequency response $H(e^{j\omega})$ and Fourier transformation of window $W(e^{j\omega})$ b) Approximation of $H(e^{j\omega})$ resulting from windowing the desired impulse response.}
     \label{fig:FIR1}
 \end{figure}  
-The aim is to approximate the desired frequency response as good as possible. For $w[n]=1 \ \forall \ n$, $W(e^{j\omega})$ becomes a periodic impulse which implies $H(e^{j\omega})=H_d(e^{j\omega})$ though the needed truncations is not performed. The impulse train is best approximated by letting the main lobe of $W(\text{e}^{j\omega})$ be as narrow as possible and the side lobes as small as possible. This corresponds to minimizing the width of the transitband and the ripples in pass and stop band. \\ 
-Figure \ref{?} illustrates main and side lope by a plot of the magnitude response corresponding to the rectangular window\trine{indsæt figur}.\\
+The aim is to approximate the desired frequency response as good as possible. For $w[n]=1 \ \forall \ n$, $W(e^{j\omega})$ becomes a periodic impulse which implies $H(e^{j\omega})=H_d(e^{j\omega})$ though the needed truncations is not performed. The impulse train is best approximated by letting the main lobe of $W(\text{e}^{j\omega})$ be as narrow as possible and the side lobes as small as possible. This corresponds respectively to minimizing the width of the transitband and the ripples in pass and stop band, though it is not possible to achive both at ones.\\
+By increasing M the with of the main-lope is decreased, but the peak amplitude of the side-lopes also increases which results in ripples. this indicates a trade-off between main width of main-lope and amplitude of side-lopes. \\
+Figure \ref{?} illustrates main and side lope by a plot of the magnitude response corresponding to the rectangular window\trine{indsæt figur}.
+
+\subsubsection{Window types}
+The rectangular window is one out of many windows, that have different properties. The oscillations in the frequency response is a result of Gibbs phenomenon. According to converges of Fourier series\trine{uddybes her?} this can be improved by convolving the desired frequency response with a less abrupt window. So by narrowing each end of the rectangle smoothly towards zero, the amplitude peak of the side-lopes are remarkable decreased. Though this will still result in a wider main-lope. \\
+In table \ref{tab:window} some commonly used windows are defined, further the window and the corresponding Fourier transformation are illustrated on figure \ref{?}
+
+\begin{table}[H]
+\centering
+\caption{Definition of different types of windows}
+\label{tab:window}
+\begin{tabular}{l|l}
+Rectangular & $w[n] =
+\left\{ \begin{matrix}
+1, &\ 0 \leq n \leq M \\
+0, &\ Otherwise
+\end{matrix}\right. $ \\ \hline
+Bartlett    & $w[n] =
+\left\{ \begin{matrix}
+\frac{2n}{M}, &\ 0 \leq n \leq \frac{M}{2} \\
+\frac{2-2n}{M}, &\ \frac{M}{2} \leq n \leq M \\
+0, &\ Otherwise
+\end{matrix}\right.$ \\ \hline
+Hanning     & $w[n] =
+\left\{ \begin{matrix}
+0.5-0.5 \cos(\frac{2\pi n}{M}), &\ 0 \leq n \leq M \\
+0, &\ Otherwise
+\end{matrix}\right. $ \\ \hline
+Hamming     & $w[n] =
+\left\{ \begin{matrix}
+0.54-0.46 \cos(\frac{2\pi n}{M}), &\ 0 \leq n \leq M \\
+0, &\ Otherwise
+\end{matrix}\right. $ \\ \hline
+Balckman    &  $w[n] =
+\left\{ \begin{matrix}
+0.42-0.5 \cos(\frac{2\pi n}{M}) + 0.08 \cos(\frac{4\pi n}{M}), &\ 0 \leq n \leq M \\
+0, &\ Otherwise
+\end{matrix}\right.$  \\ \hline
+\end{tabular}
+\end{table}   
+** Indsæt figur her ** \\
 \\
-- different windows \\
-- linear phase 
+evt. Beskrivelse af Kaiser vindue her som udvidelse. 
+
+
+\subsubsection{Generalized linear phase FIR filter}
+A causal system with generalized linearphase has to fulfil the following relation, cf. section \ref{sec:basic_filter}
+\begin{align}
+\sum_{n=0}^{\infty}h[n]\sin\left(\omega \left(n-\alpha \right) + \beta \right) = 0
+\end{align}
+For a FIR filter to fulfil this relation if i the following set of conditions has to be fulfilled
+\begin{align}
+\beta = \left\{ \begin{matrix}
+\pi  \\
+0 
+\end{matrix}\right. , \ \ 2\alpha = M = \text{an integer} , \ \ h[n]=h[M-n] \ \text{or} \ h[n]=-h[M-n]   
+\end{align} 
+this implies that $h[n]$ is either symmetric or anti symmetric and that $\alpha = \frac{M}{2}$ becomes the symmetric point. \\
+
+
+
+
+
 
 
 
