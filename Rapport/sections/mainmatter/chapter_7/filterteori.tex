@@ -2,11 +2,11 @@
 
 A digital filter is characterised as a \textit{linear time invariant} system referred to as a LTI system, which are to be described completely in the time domain by its impulse response $h[n]$. \\
 When a discrete sequence $x[n]$ is applied to a LTI system it is the impulse response of the system $h[n]$ that determined what the output $y[n]$ will be. In other words the impulse response determine how much of the input sequence that passes the filter. \\ 
-The output $y[n]$ is determined by the convolution sum of input signal and impulse response of the system.
+The output is determined by the convolution sum of input signal and impulse response of the system.
 \begin{align}
 y[n] = x[n]*h[n] = \sum_{k=1}^{\infty} x[k]h[n-k]
 \end{align}    
-The frequency response of the system is given by the Fourier transformation of the impulse response. Consider the input sequence $x[n]=e^{j\omega n}$ for $-\infty < n <\infty$, then the frequency response is defined as\trine{side (40) DTSP}
+The frequency response of a filter is given by the Fourier transformation of the impulse response. Consider the input sequence $x[n]=e^{j\omega n}$ for $-\infty < n <\infty$, then the frequency response is defined as\trine{side (40) DTSP}
 \begin{align}\label{eq:freq_res}
 H(e^{j\omega})=\sum_{k=-\infty}^{\infty}h[k]e^{-j\omega k}
 \end{align}
@@ -43,8 +43,8 @@ H_{lp}(\text{e}^{j\omega})=
 0, &\ \omega_c < \left| \omega \right| \leq \pi
 \end{matrix}\right.
 \end{align}     
-where $H_{lp}(\text{e}^{j\omega})$ is $2\pi$ periodic. $\omega_c$ is referred to as the \textit{cutoff frequency}. The lowpass filter selects the frequencies lower than the cutoff frequency and reject the higher frequency components of the signal. By \eqref{eq:low} it is seen that the lowpass filter is real valued hence has zero phase as expected. \\
-The corresponding impulse response are determined by using the inverse Fourier transformation on the passband interval.
+where $H_{lp}(\text{e}^{j\omega})$ is $2\pi$ periodic. $\omega_c$ is referred to as the\textit{cutoff frequency}. The lowpass filter selects the frequencies lower than the cutoff frequency and reject the higher frequency components of the signal. By \eqref{eq:low} it is seen that the lowpass filter is real valued hence has zero phase as expected. \\
+The corresponding impulse response are determined by using the invers fourier transformation \eqref{??} on the passband interval.
 \begin{align}\label{eq:low_im}
 h_{lp}[n]=\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}\text{e}^{j\omega n} d\omega = \frac{1}{2\pi j n}\left[\text{e}^{j\omega n} \right]_{-\omega_c}^{\omega_c} = \frac{\sin \omega_c n}{\pi n }, \ \  -\infty < n < \infty
 \end{align}  
