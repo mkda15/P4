@@ -1,5 +1,5 @@
 \subsection{Discrete Fourier Transform}
-The discrete Fourier transform for $x_n \xleftrightarrow{\text{DFT}} X_k$ is defined by:
+The discrete Fourier transform for $x_n \xleftrightarrow{\text{DFT}} X_k$ is defined by:\frede{Skal har ikke bruges et begin\{definition\} miljø?}
 \begin{align*}
 	X_k = \sum_{n=0}^{N-1} x_n W_N^{kn}
 \end{align*}
@@ -9,7 +9,7 @@ And the inverse
 \end{align*}
 
 Where the quantity v, is an integer going from $0 \to N-1$
-\martin{Consider this. \textregistered}.\chr{Der er N samples nummerede fra 0 til og med N-1. Arealet af dette vil fremkomme ved integralet.}
+\martin{Consider this. \textregistered}.\chr{Der er N samples nummerede fra 0 til og med N-1. Arealet af dette vil fremkomme ved integralet.}\frede{Hvad er v? \texttrademark}
 
 
 In numerical practice, the equivalent of a given function f(x) of the continuous independent variable x is a finite number N of data values associated with a number t, customarily taken as running from 0 to N-1.
@@ -22,7 +22,7 @@ Let a function in time $f(t)$ be a continuous signal.
 If the function is sampled N times it could be denoted
 $f[0],f[1],\dots,f[k],\dots,f[N-1]$.
 \\\\
-The Fourier Transform of $f(t)$ would be as in \ref{sec:cunt_Fourier_transform}.
+The Fourier Transform of $f(t)$ would be as in \ref{sec:cunt_Fourier_transform}. \frede{Ref der ikke virker.}
 \begin{align*}
 	F(\omega) = \int_{-\infty}^\infty f(t)e^{-j\omega t} dt
 \end{align*}
@@ -31,7 +31,7 @@ If you regard each sample $f[k]$ as a single impulse, with a giving area $f[k]$.
 
 \begin{align*}
 	F(\omega) 
-	&= \int_0^(N-1)T f(t) e^{-j\omega t}dt\\
+	&= \int_0^{(N-1)}T f(t) e^{-j\omega t}dt\\
 	&= f[0]e^{-j0} + f[1]e^{-j\omega T} + \dots + f(N-1) e^{-j\omega(N-1)T}	
 \end{align*}
 
@@ -54,7 +54,7 @@ A sequence $x_n$, can be considered N-Periodic since
 
 In the style the continues case of the Fourier transform, where it's possible to evaluate it over a finite interval, the DFT can be evaluated for the fundamental frequency ($\dfrac{1}{NT} Hz$ or $\dfrac{2\pi}{NT}rad/sec.$) in general
 \begin{align*}
-	F[n] = \sum_{k=0}^{N-1}f[k]e^{-j2\pi\frac{nk}{N}} \, (n = 0: N-1)
+	F[n] = \sum_{k=0}^{N-1}f[k]e^{-j2\pi\frac{nk}{N}} \, (n = 0\ldotsN-1)
 \end{align*}
 
 where $F[n]$ is DFT of the sequence $f[k]$.
@@ -113,7 +113,11 @@ The DFT and inverse DFT as a pair, can be denoted as
 %	(Hx)_n) = (h \ast x)_n = \sum_{k \in \mathbb{Z}} x_k h_{n-k} =\sum_{k \in \mathbb{Z}} x_{n-k} h_k
 %\end{align*}
 % \end{definition}
-%221 \chr{Kan bruges til at vise ovenstående påstand om eigensekvenser for LSI systemer}
+%221 \chr{Kan bruges til at vise ovenstående påstand om eigensekvenser for LSI systemer, skal nok anvende circuler convolution}
 
 256 217
+
+Using the information that any modulus eigensequence is a complex exponential of the form $v_n = e^{j\omega n}$.
+Since 
+
 

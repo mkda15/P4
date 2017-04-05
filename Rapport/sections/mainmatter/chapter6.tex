@@ -1,5 +1,5 @@
 \chapter{Sample theory} \label{ch6}
-In this chapter sample theory and its importance when converting an analogue audio signal to a digital audio signal along with its complications is treated.
+In this chapter sample theory and its importance when converting an analog audio signal to a digital audio signal along with its complications is treated.
 %\section{The frequency domain}
 %The following sections look at functions in both the \textit{time}- and \textit{frequency} domains and utilizes the advantages of these different visualizations. To express a function of time as a function of frequency the \textit{Fourier transform} is used. The transform decomposes a periodic function $A$ of time $t$ into an amplitude valued function $\hat{A}$ of frequency $\omega$ and shows which amplitudes of frequencies of different sinusoids are present in the signal. The mathematical background for the Fourier transform is reserved for chapter \ref{ch5} - this chapter will make do with the graphical explanation in figures \ref{fig:time} and \ref{fig:freq}. Notice the both real and imaginary amplitudes of $\hat{A}$.
 %\begin{figure}[H]
@@ -57,21 +57,15 @@ where $n\in\mathbb{Z}$ and the \textit{sampling period }$T_s$ (time between two 
 \begin{equation}\label{eq:sample_freq}
 \frac{n}{f_s}=nT_s, \phantom{mm} n=-\infty,\hdots-1,0,1\hdots,\infty \phantom{mm}\text{\cite{pelgrom}}
 \end{equation}
-where $n$ is the number of samples and $nT_s$ are points in time of sampling}.\\\\
+where $n$ is the number of samples and $nT_s$ are points in time of sampling.\\\\
 To describe sampling mathematically the \textit{Dirac delta} function is introduced in definition \ref{def:dirac}.
 \begin{definition}[Dirac delta function]\footnote{The Dirac delta function is defined as a distribution as no function satisfies the properties in definition \ref{def:dirac}. This definition is therefore non-rigorous but sufficient for the purposes of this section.}\label{def:dirac}
 The Dirac delta function is the function $\delta$ satisfying
 \begin{equation}
-\int_{-\infty}^{\infty} \! f(t)\delta(t-t_0) \, dt=f(t_0).\phantom{mm}\text{\cite{pelgrom}}
+\int_{-\infty}^{\infty} \! f(t)\delta(t-t_0) \, dt=f(t_0).\phantom{mm}
 \end{equation}
 \end{definition}
-The Dirac delta function is sometimes interpreted as a function $\delta$ satisfying
-\begin{equation}
-\delta(t)=\begin{cases}
-0,\phantom{mm}t\neq 0\\
-\int_{-\infty}^{\infty}\!\delta(t)\,dt=1
-\end{cases}
-\end{equation}
+The Dirac delta function is sometimes interpreted as a function $\delta$ satisfying $\delta(t)=0$ for $t\neq 0$ and $\int_{-\infty}^{\infty}\!\delta(t)\,dt=1$.\\\\
 In signal processing the similar \textit{Kronecker delta sequence} is often used as a unit impulse and is defined in definition \ref{def:kronecker}.
 \begin{definition}[Kronecker delta sequence]\label{def:kronecker}
 The Kronecker delta sequence is $\{\delta_n\}_{n\in\mathbb{N}}$, where
@@ -79,7 +73,7 @@ The Kronecker delta sequence is $\{\delta_n\}_{n\in\mathbb{N}}$, where
 \delta_n=
 \begin{cases}1,\text{ for }n=0\\
 0,\text{ otherwise}
-\end{cases}\phantom{mm}n\in\mathbb{Z}\text{ \cite{DTSP}}
+\end{cases}\phantom{mm}n\in\mathbb{Z}
 \end{equation}
 \end{definition}
 Depending on the context either the Dirac or the Kronecker delta may be used. In the context of this section, the Dirac delta is preferred, as it makes the mathematical analysis of sampling easier.\\\\
@@ -129,7 +123,7 @@ x_s(t)&=x_c(t)s(t)\nonumber \\
 &=\sum_{n=-\infty}^{\infty}x_c(nT_s)\delta(t - nT_s)\phantom{mm}
 \label{eq:sampling}
 \end{align}
-\eqref{eq:sampling} is a mathematical representation of sampling of the continuous function $x_c(t)$ into the function $x_s(t)$ \cite{DTSP} - this process is seen in figures \ref{fig:signal1} where a signal is shown and \ref{fig:sampling_comb} where the signal is sampled by multiplication with a Dirac comb.
+\eqref{eq:sampling} is a mathematical representation of sampling of the continuous function $x_c(t)$ into the function $x_s(t)$ \cite{DTSP} - this process is seen in figure \ref{fig:signal1} where a signal is shown and figure \ref{fig:sampling_comb} where the signal is sampled by multiplication with a Dirac comb.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -231,36 +225,39 @@ Studying $x_s(t)$ and $s(t)$ in the frequency domain leads to some important con
 %\eqref{eq:fourier_delta} shows, that the Fourier transform of $\delta$ is a constant function of value 1. The Fourier transform of the Dirac comb $s(t)$ is given by expanding $s(t)$ with its Fourier series.
 \begin{align*}
 s(t)&=\sum_{n=-\infty}^{\infty}\delta(t-nT_s)\\
-&=\sum_{n=-\infty}^{\infty}c_n\mathrm{e}^{j\omega nt/T_s}\\
+&=\sum_{n=-\infty}^{\infty}c_n\mathrm{e}^{j nt/T_s}\\
 \end{align*}
 Calculation of the $c_n$ coefficients gives
 \begin{align*}
-c_n&=\frac{1}{T_s}\int_{t_0}^{t_0+T_s}\!s(t)\mathrm{e}^{j\omega t/T_s}\,dt=\frac{1}{T}\int_{-T_s/2}^{T_s/2}\!\delta(t)\mathrm{e}^{j\omega t/T_s}\,dt=\frac{1}{T_s}\mathrm{e}^0\\&=\frac{1}{T_s}.
+c_n&=\frac{1}{T_s}\int_{t_0}^{t_0+T_s}\!s(t)\mathrm{e}^{-jnt/T_s}\,dt=\frac{1}{T_s}\int_{-T_s/2}^{T_s/2}\!\delta(t)\mathrm{e}^{-jnt/T_s}\,dt=\frac{1}{T_s}\mathrm{e}^0\\&=\frac{1}{T_s}.
 \end{align*}
 And so the Fourier series of $s(t)$ is
 \begin{equation}\label{eq:dirac_series}
-s(t)=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\mathrm{e}^{j\omega nt/T_s}\phantom{mm}\forall n\in\mathbb{Z}.
+s(t)=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\mathrm{e}^{jnt/T_s}\phantom{mm}\forall n\in\mathbb{Z}.
 \end{equation}
 \eqref{eq:dirac_series} shows that the Fourier series of $s(t)$ is merely an inifite number of phase shifted sines of equal frequencies summed. This makes the following Fourier transform easy:
 \begin{align}
-\mathcal{F}[s(t)](\omega)&=\frac{1}{T_s}\mathcal{F}\left[\sum_{n=-\infty}^{\infty}\mathrm{e}^{j\omega nt/T_s}\right](\omega)\nonumber\\
-&=\frac{1}{T_s}\int_{-\infty}^{\infty}\!\sum_{n=-\infty}^{\infty}\mathrm{e}^{j\omega nt/T_s}\mathrm{e}^{-j\omega t}\,dt\nonumber\\
-&=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\int_{-\infty}^{\infty}\!\mathrm{e}^{j\omega nt/T_s}\mathrm{e}^{-j\omega t},dt\nonumber\\
-&=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\delta(\omega-\frac{n}{T_s})\nonumber\\
-&=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_s)\label{eq:fourier_comb}
+\mathcal{F}[s(t)](\omega)&=\frac{1}{T_s}\mathcal{F}\left[\sum_{n=-\infty}^{\infty}\mathrm{e}^{jnt/T_s}\right](\omega)\nonumber\\
+&=\frac{1}{T_s}\int_{-\infty}^{\infty}\!\sum_{n=-\infty}^{\infty}\mathrm{e}^{jnt/T_s}\mathrm{e}^{-j\omega t}\,dt\nonumber\\
+&=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\int_{-\infty}^{\infty}\!\mathrm{e}^{-j(\omega-n/T_s)t}\,dt\label{eq:fourier_comb1}
 \end{align}
-\eqref{eq:fourier_comb} shows that the Fourier transform of $s(t)$ results in another Dirac comb in the frequency domain with pulses seperated by $\omega_s$.
+\eqref{eq:fourier_comb1} is the Fourier transform of a constant function $f(t)=1$. As $f(t)=1\notin\mathcal{L}^1$ its Fourier transform is not well-defined. It can however be shown that $\mathcal{F}[1](\omega)=\delta(\omega)$\footnote{This relates to the Dirac delta function being a distribution and will not be discussed her.} and so \eqref{eq:fourier_comb1} evaluates to
+\begin{align}
+&=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\delta(\omega-\frac{n}{T_s})\nonumber\\
+&=\frac{1}{T_s}\sum_{n=-\infty}^{\infty}\delta(\omega-n\omega_s).\label{eq:fourier_comb2}
+\end{align}
+\eqref{eq:fourier_comb2} shows that the Fourier transform of $s(t)$ results in another Dirac comb in the frequency domain with pulses seperated by $\omega_s$.
 Calculating the Fourier transform of \eqref{eq:sampling} uses \eqref{eq:fourier_comb} and the fact, that \eqref{eq:sampling} is a product of two functions, which is a convolution in the frequency domain:
 \begin{align}
 \mathcal{F}[x_s(t)](\omega)&=\mathcal{F}[x_c(t)s(t)]\nonumber\\
 &=\frac{1}{T}\sum_{k=-\infty}^{\infty}X_c(t)(\omega)*S(\omega)\phantom{mm}\nonumber\\
 X_s(\omega)&=\frac{1}{T}\sum_{k=-\infty}^{\infty}X_c(\omega-k\omega_s)\label{eq:samp_freq}
 \end{align}
-Just as \eqref{eq:sampling} mathematically samples $x_c(t)$ in the time domain, \eqref{eq:samp_freq} mathematically samples $x_c(t)$ in the frequency domain at a rate of $\omega_s$. The following section \ref{sec:aliasing} draws conlusions regarding sampling frequency by studying $X(\omega)$.
-\paragraph{Bandlimited signal}
-A signal is \textit{bandlimited} if the signal contains no frequencies higher than some frequency $\omega_N$, which means $F(\omega)=0$ for $|\omega|>\omega_N$ \cite{FAA}. 
+Just as \eqref{eq:sampling} mathematically samples $x_c(t)$ in the time domain, \eqref{eq:samp_freq} mathematically samples $X_c(\omega)$ in the frequency domain at a rate of $\omega_s$. The following section \ref{sec:aliasing} draws conlusions regarding sampling frequency by studying $X_c(\omega)$.
 \subsection{Aliasing}\label{sec:aliasing}
-\textit{Aliasing} is a consequence of not sampling  at a sufficiently high $f_s$ which results in the continous signal $x_c(t)$ being non reconstructable from the sampled signal $x_s(t)$.
+\textit{Aliasing} is a consequence of not sampling  at a sufficiently high $f_s$ which results in the continuous signal $x_c(t)$ being non reconstructable from the sampled signal $x_s(t)$. In this discussion \textit{bandlimited} signals are of interest.
+\paragraph{Bandlimited signal}
+A signal is bandlimited if the signal contains no frequencies higher than some frequency $\omega_N$, which means $F(\omega)=0$ for $|\omega|>\omega_N$ \cite{FAA}.
 \\\\
 From \eqref{eq:samp_freq} it is seen that $X_s(\omega)$ consists of copies of $X_c$ repeated at whole multiples of $\omega_s$ on both sides of the origin - seen in figure \ref{fig:copies}.
 \begin{figure}[H]
@@ -345,7 +342,7 @@ ymax=3]
 \caption{Signal bandlimited by $\omega_N$ sampled at $\omega_s<2\omega_N$ in the frequency domain - the copies of $X_c$ overlap.}
 \label{fig:overlap}
 \end{figure}
-\noindent It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $\hat{x}_c$. With an ideal low pass filter  a single isolated copy (centered around the origin) can be picked out, and the inverse Fourier transform used to recreate the time domain representation of the signal. If however $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing. When a signal is aliased it is not possible to pick out a single copy of the sampled signal in the frequency domain which results in $x_c(t)$ not being reconstructable from $x_s(t)$. This makes aliasing in the context of representing a continuous signal as a discrete set of values unwanted.
+\noindent It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $X_c$. With an ideal low pass filter  a single isolated copy (centered around the origin) can be picked out, and the inverse Fourier transform used to recreate the time domain representation of the signal. If, however, $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing. When a signal is aliased it is not possible to pick out a single copy of the sampled signal in the frequency domain which results in $x_c(t)$ not being reconstructable from $x_s(t)$. This makes aliasing unwanted in the context of representing a continuous signal as a discrete set of values.
 \\\\
 An extreme case of aliasing happens if the frequencies of two different signals differ from some whole multiple of $f_s$ by the same amount. The sequence of samples for the two signals will then be identical - this is seen in figures  \ref{fig:aliasing1} and \ref{fig:aliasing2} where two sine waves of different frequencies are sampled with the same $f_s$.
 \begin{figure}[H]
@@ -422,24 +419,24 @@ where
 \begin{proof}
 Write the inverse Fourier transform of $f$
 \begin{equation}\label{eq:proof1}
-f(t)=\frac{1}{2\pi}\int_{-\omega_N}^{\omega_N}\!\hat{f}(\omega)\mathrm{e}^{j\omega t}\,dw
+f(t)=\frac{1}{2\pi}\int_{-\omega_N}^{\omega_N}\!F(\omega)\mathrm{e}^{j\omega t}\,dw
 \end{equation}
-By expanding $F$ into its Fourier series and using the negative index $-n$ we get
+By expanding $F$ into its Fourier series on $[-\omega_N,\omega_]$ and using the negative index $-n$ we get
 \begin{equation*}
-F(\omega)=\sum_{n=-\infty}^{\infty}c_{-n}\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}
+F(\omega)=\sum_{n=-\infty}^{\infty}c_{-n}\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}},\phantom{mm}\omega\in[-\omega_N,\omega_N]
 \end{equation*}
 where $c_{-n}$ is given by
 \begin{align*}
-c_{-n}&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!F(\omega)\mathrm{e}^{\frac{in\pi\omega}{\omega_N}}\,dw\\
+c_{-n}&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!F(\omega)\mathrm{e}^{\frac{jn\pi\omega}{\omega_N}}\,dw\\
 &=\frac{\pi}{\omega_N}f\left(\frac{n\pi}{\omega_N}\right).
 \end{align*}
 Then \eqref{eq:proof1} can be written as
 \begin{align}
 f(t)&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{e}^{\frac{-jn\pi\omega}{\omega_N}}\mathrm{e}^{j\omega t}\,dw
 \nonumber\\
-&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\lim_{N\to\infty}\sum_{n=-N}^{N}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{e}^{\frac{-in\pi\omega}{\omega_N}}\mathrm{e}^{j\omega t}\,dw\label{eq:limit}
+&=\frac{1}{2\omega_N}\int_{-\omega_N}^{\omega_N}\!\lim_{N\to\infty}\sum_{n=-N}^{N}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{e}^{\frac{-jn\pi\omega}{\omega_N}}\mathrm{e}^{j\omega t}\,dw\label{eq:limit}
 \end{align}
-A linear and bounded operator is continuous. From theorem \ref{Plancherel} it follows that the Fourier transform is bounded and together with linearity of the Fourier transform it is continuous. This means that the limit in \eqref{eq:limit} can be moved outside of the integral and the summation and integral are then switched.
+A linear and bounded operator is continuous. From theorem \ref{Plancherel} it follows that the Fourier transform is bounded and together with linearity of the Fourier transform it is continuous on $\mathcal{L}^2$. This means that the limit in \eqref{eq:limit} can be moved outside of the integral and the summation and integral are then switched.
 \begin{align*}
 f(t)&=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\frac{\mathrm{e}^{j(\omega_Nt-n\pi)\omega/\omega_N}}{j(\omega_Nt-n\pi)/\omega_N}\Bigg|_{\omega=-\omega_N}^{\omega_N}
 \\
@@ -448,10 +445,10 @@ f(t)&=\frac{1}{2\omega_N}\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\r
 &=\sum_{n=-\infty}^{\infty}f\left(\frac{n\pi}{\omega_N}\right)\mathrm{sinc}(\omega_Nt-n\pi)\phantom{mm}\text{\cite{FAA}}
 \end{align*}
 \end{proof}
-$\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate} respectively. The theorem can be interpreted as stating, that any signal bandlimited by some Nyquist frequency $\omega_N$ can be reconstructed by sampling it at the Nyquist rate $2\omega_N$. The theorem is therefore central to determining $f_s$ so as to be able to reconstruct $x_c$ from $x_s$. If the sampling frequency $\omega_s>2\omega_N$ the continuous signal is theoretically reconstructable from $x_s$ by summation of sinc-functions (theorem \ref{sampling_theorem}).\\
+$\omega_N$ and $2\omega_N$ are commonly referred to as the \textit{Nyquist frequency} and \textit{Nyquist rate}, respectively. The theorem can be interpreted as stating that any signal bandlimited by some Nyquist frequency $\omega_N$ can be reconstructed by sampling it at the Nyquist rate $2\omega_N$. The theorem is therefore central to determining $f_s$ so as to be able to reconstruct $x_c$ from $x_s$. If the sampling frequency $\omega_s>2\omega_N$ the continuous signal is theoretically reconstructable from $x_s$ by summation of sinc-functions (theorem \ref{sampling_theorem}).\\
 If, however, a signal is not bandlimited, the theorem does not apply and other measures must be taken. This leads to anti aliasing filters, which eliminate higher frequencies so aliasing is avoided when increasing sampling frequency is not wanted - see chapter \ref{ch7}.
-\section{Analogue-to-digital conversion}\label{ADC}
-An analogue-to-digital converter (ADC) is a device which converts an \textit{amplitude-continuous} signal to and \textit{amplitude-discrete} signal.  The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of analog to digital conversion, but not explain the in-depth theory, as the conversion and the components used are not focus points of this project.
+\section{Analog-to-digital conversion}\label{ADC}
+An analog-to-digital converter (ADC) is a device which converts an \textit{amplitude-continuous} signal to and \textit{amplitude-discrete} signal.  The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of analog to digital conversion, but not explain the in-depth theory, as the conversion and the components used are not focus points of this project.
 \\\\
 The process of converting and analogue audio signal to a digital audio signal consists of the following elements:
 \begin{enumerate}
@@ -582,3 +579,4 @@ Any non white noise - noise which does not have a constant power spectrum.
 As noise reduction is generally wanted, this project will also seek to eliminate it by recording music in an anechoic rum. Playing a pitch alone in an anechoic room is a way of minimizing noise factors. There are many different noise sources from e.g. the surrounding environment, electrical equipment, other people and even the instrument playing itself since it is difficult to make a pure tone by an acoustic sound source such as a guitar. A pure tone is a sinusoidal waveform consisting of a single frequency and may therefore be difficult to play on an instrument. \cite{AcousticNoise} Usually, sound is reflected off the walls in a room which is also a source of noise. This is a form of convolution and is minimized in the anechoic room because sound is absorbed by the walls. Moreover, due to the construction of the anechoic room, noise from e.g. bypassing cars is also minimized, and the sound may be recorded with a minimum of hardware which otherwise may also produce noise.
 \\ \\
 The music used in this project will therefore be recorded in an anechoic room because the noise is minimized. It is not expected that musicians using the system in the future have access to an anechoic room as well but if the system doesn't work with sounds recorded in the anechoic room then it with most certainty doesn't work at other places neither. However, in order to reproduce the conditions of a typical musician working around other people, background noise can also be made in the anechoic room but should of course not drown the music. This form of noise is additive whereas e.g. noise reflected off walls as mentioned above is folded with the original signal. In general, convolution noise depends on the state of the system whereas additive noise does not.
+\frede{Tilføj matematisk beskrivelse af støj.}
