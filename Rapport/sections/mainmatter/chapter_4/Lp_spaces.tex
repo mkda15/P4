@@ -1,11 +1,29 @@
 This chapter is inspired by \cite{FAA}, \cite{FSP} and \cite{FTFA}.
 \\ \\
-This project deals with functions and sequences in the so-called $\mathcal{L}^p$ and $\ell^p$ spaces, respectively. These spaces are introduced in the following and used later to ensure that the Fourier series and transforms used in the project actually converge. The following definitions are inspired by \cite{page 31, FSP}.
+This project deals with functions and sequences in the so-called $\mathcal{L}^p$ and $\ell^p$ spaces, respectively. These spaces are introduced in the following and used later to show the convergence of the Fourier series and transforms used in the project. The following definitions are inspired by \cite{page 31, FSP}.
 
-\begin{definition}
+\begin{definition}[The $\mathcal{L}^p$ spaces]
+Let $D \subset \mathbb{R}^n$ be a subset. $\mathcal{L}^p(D)$ is the set of absolutely Lebesgues-integrable functions over $D$ for any $p \in [1,\infty)$:
+\begin{align*}
+\mathcal{L}^p(D) = \left\{ f: D \subset \mathbb{R} \to \mathbb{C}: \int_D |f(t)|^p dt < \infty \right\}.
+\end{align*}
+
+The normed vector space $\mathcal{L}^p(D)$ is the subspace consisting of vectors with finite $\mathcal{L}^p$ norm:
+\begin{align*}
+\|f\|_p = \left( \int_D |f(t)|^p dt \right)^{1/p}.
+\end{align*}
+
+Collectively, the $\mathcal{L}^p$ spaces are all complete (also known as Banach spaces).
+\\ \\
+It is furthermore required that the function $f$ is measureable. This will not be elaborated further in this project as it is beyond its focus.
+\end{definition}
+
+A specific case of interest in this project is for $p = 2$.
+
+\begin{definition}[The $\mathcal{L}^2$ space]
 Let $D \subset \mathbb{R}^n$ be a subset. $\mathcal{L}^2(D)$ is the set of all functions on $D$ whose squares are absolutely Lebesgue-integrable over $D$:
 \begin{align*}
-\mathcal{L}^2(D) = \left\{ f: D \to \mathbb{C}: \int_D |f(t)|^2 dt < \infty \right\}
+\mathcal{L}^2(D) = \left\{ f: D \to \mathbb{C}: \int_D |f(t)|^2 dt < \infty \right\}.
 \end{align*}
 
 $\mathcal{L}^2(D)$ is the normed vector space of square-integrable complex-valued functions. The inner product is:
@@ -13,24 +31,11 @@ $\mathcal{L}^2(D)$ is the normed vector space of square-integrable complex-value
 \langle f,g \rangle =  \int_D f(t) \overline{g(t)} dt
 \end{align*}
 
-Where $\overline{g(t)}$ is the complex conjugate of $g(t)$. The norm is:
+where $\overline{g(t)}$ is the complex conjugate of $g(t)$. The norm is:
 \begin{align*}
-\|f\| = \left( \int_D |f(t)|^2 dt \right)^{1/2}
+\|f\| = \left( \int_D |f(t)|^2 dt \right)^{1/2}.
 \end{align*}
 
-This definition can be expanded for any $p \in [1,\infty)$ and all of $\mathbb{R}$ such that the normed vector space $\mathcal{L}^p(\mathbb{R})$ is the subspace consisting of vectors with finite $\mathcal{L}^p$ norm:
-\begin{align*}
-\|f\|_p = \left( \int_{-\infty}^\infty |f(t)|^p dt \right)^{1/p}
-\end{align*}
-
-Likewise, $\mathcal{L}^p(\mathbb{R})$ is the set of absolutely Lebesgues-integrable functions over $\mathbb{R}$:
-\begin{align*}
-\mathcal{L}^p(\mathbb{R}) = \left\{ f: \mathbb{R} \to \mathbb{C}: \int_{-\infty}^\infty |f(t)|^p dt < \infty \right\}
-\end{align*}
-
-Collectively, the $\mathcal{L}^p$ spaces are all complete (also known as Banach spaces).
-\\ \\
-It is furthermore required that the function is measureable. This will not be elaborated further in this project as it is beyond its focus.
 \end{definition}
 
 A similar definition is given for $\ell^p$ which deals with sequences:\martin{Is this definition relevant? \textregistered}
