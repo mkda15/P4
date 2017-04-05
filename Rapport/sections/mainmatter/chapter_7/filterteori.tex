@@ -20,7 +20,7 @@ H(e^{j\omega})=|H(e^{j\omega})|e^{j\measuredangle H(e^{j\omega})}
 \end{align}  
 where $|H(e^{j\omega})|$ and $e^{j\measuredangle H(e^{j\omega})}$ are the \textit{magnitude} and \textit{phase} response of the filter respectively, both real valued and $2\pi$-periodic.\\ 
 If the frequency response of a filter is real it is said to have \textit{zero phase}, which is equivalent to the phase response only taking values that are integer multiples of $\pi$, resolving in a straight phase with zero slope.   Further if the frequency response can be written in the form 
-\begin{align}
+\begin{align}\label{eq:lin_pha}
 H(e^{j\omega})=A(e^{j\omega})e^{j(-\alpha\omega + j\beta)} 
 \end{align}
 where $\alpha$ and $\beta$ are constants and $A(e^{j\omega})$ is real, the filter is said to have \textit{general linear phase}. That is because the phase response consist of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resolving from jumps of $2\pi$\trine{explain the discontinuity} \\
@@ -137,8 +137,34 @@ Thus an approximation of an ideal filter can be computed by a casual system with
 Two classes of filter are essential to identify.\\
 For all ideal filters discussed in the previous section the impulse response is defined for $-\infty < n < \infty$ such filter is specified as a \textit{infinite impulse response (IIR)} filter . In the case of the impulse response being zero outside a finite interval the filter is referred to as a \textit{finit impulse response (FIR)} filter \\
 \\
-as described generalized linear phase are wanted. 
-4 typer af FIR-filter med lin. fase side (298)DTSP\\
+As described casual systems with generalized linear phase are wanted. This is possible to guaranty by using specific types of FIR filter.\\
+A causal system with generalized linearphase has to fulfil the following relation, cf. section \ref{sec:basic_filter}
+\begin{align}
+\sum_{n=0}^{\infty}h[n]\sin\left(\omega \left(n-\alpha \right) + \beta \right) = 0
+\end{align}
+For a FIR filter to fulfil this relation the following set of conditions has to be fulfilled
+\begin{align} \label{eq:FIR_con}
+\beta = \left\{ \begin{matrix}
+\pi  \\
+0 
+\end{matrix}\right. , \ \ 2\alpha = M = \text{an integer} , \ \ h[n]=h[M-n] \ \text{or} \ h[n]=-h[M-n]   
+\end{align} 
+this implies that $h[n]$ is either symmetric or anti symmetric and that $\alpha = \frac{M}{2}$ becomes the symmetric point. \\
+On behave of these conditions four different types of FIR generalized linear phase filters is defined \cite{DTSP, p. 343}, only the type one filter will be elaborated here. Note that the conditions in \eqref{eq:FIR_con} guaranties a causal system with linear phase, but they are not a necessity. \\
+A \textit{type 1 FIR filter} is characterised by having a symmetric impulse response and $M$ to be an even integer. By applying the the symmetry condition to the definition of the Fourier transformation the frequency response is defined by   
+\begin{align}\label{eq:type1}
+H(\text{e}^{j\omega})=\text{e}^{-j\omega \frac{M}{2}} \sum_{k=0}^{\frac{M}{2}} a[k]\cos \omega k
+\end{align}
+where 
+\begin{align}
+a[k]= \left\{ \begin{matrix}
+2h\left[ \frac{M}{2} - k \right], \ \ &\ k=1,2,... , \frac{M}{2}.   \\
+h[M-n], \ \ &\ k = 0  
+\end{matrix}\right.
+\end{align}
+By this \eqref{eq:type1} has the form of\eqref{eq:lin_pha} where $A(\text{e}^{j\omega})= \sum_{k=0}^{\frac{M}{2}} a[k]\cos \omega k$ is a real function of $\omega$ and $\beta$ equals either 0 or $\pi$.\\
+\\
+
 sammenligning se side (510)DTSP
 side (251)DTSP 
 

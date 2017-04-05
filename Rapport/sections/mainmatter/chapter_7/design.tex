@@ -199,31 +199,11 @@ Balckman    &  $w[n] =
 \end{matrix}\right.$  \\ \hline
 \end{tabular}
 \end{table}   
-** Indsæt figur her ** \\
+** Indsæt figur her\trine{figur med de forskellige vinduer, og figur med tilsvarende W[n].} ** \\
 \\
+according to implementing ..
+\subsection{The Kaiser window method }
 evt. Beskrivelse af Kaiser vindue her som udvidelse. 
-
-
-\subsubsection{Generalized linear phase FIR filter}
-A causal system with generalized linearphase has to fulfil the following relation, cf. section \ref{sec:basic_filter}
-\begin{align}
-\sum_{n=0}^{\infty}h[n]\sin\left(\omega \left(n-\alpha \right) + \beta \right) = 0
-\end{align}
-For a FIR filter to fulfil this relation if i the following set of conditions has to be fulfilled
-\begin{align}
-\beta = \left\{ \begin{matrix}
-\pi  \\
-0 
-\end{matrix}\right. , \ \ 2\alpha = M = \text{an integer} , \ \ h[n]=h[M-n] \ \text{or} \ h[n]=-h[M-n]   
-\end{align} 
-this implies that $h[n]$ is either symmetric or anti symmetric and that $\alpha = \frac{M}{2}$ becomes the symmetric point. \\
-
-
-
-
-
-
-
 
 \subsection{Anti aliasing filter}
 As mentioned in section \ref{ADC} an anti aliasing filter is required in the ADC process. The purpose of filter is to avoid the aliasing phenomenon which occurs when the samplings theorem \ref{sampling_theorem} is not fulfilled. As stated a signal has to be band limited by the Nyquist frequency $\omega_N$ and since a continuous-time signal such as a sound is not guaranteed to have a bandlimited frequency the anti aliasing filter is design to remove the frequencies that are above the Nyquist frequency. \\
