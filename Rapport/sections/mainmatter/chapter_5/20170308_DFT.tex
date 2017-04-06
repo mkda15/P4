@@ -1,18 +1,19 @@
 \subsection{Discrete Fourier Transform}
-%The discrete Fourier transform for $x_n \xleftrightarrow{\text{DFT}} X_k$ is defined by:
-%\begin{align*}
-%	X_k = \sum_{n=0}^{N-1} x_n W_N^{kn}
-%\end{align*}
-%And the inverse
-%\begin{align*}
-%	x_n = \dfrac{1}{N} \sum_{n=0}^{N-1}X_k W_{N}^{-kn}
-%\end{align*}
-%
-%Where the quantity v, is an integer going from $0 \to N-1$
-%\martin{Consider this. \textregistered}.\chr{Der er N samples nummerede fra 0 til og med N-1. Arealet af dette vil fremkomme ved integralet.}
-%
-%In numerical practice, the equivalent of a given function f(x) of the continuous independent variable x is a finite number N of data values associated with a number t, customarily taken as running from 0 to N-1.
+The discrete Fourier transform for $x_n \xleftrightarrow{\text{DFT}} X_k$ is defined by:\frede{Skal har ikke bruges et begin\{definition\} miljø?}
+\begin{align*}
+	X_k = \sum_{n=0}^{N-1} x_n W_N^{kn}
+\end{align*}
+And the inverse
+\begin{align*}
+	x_n = \dfrac{1}{N} \sum_{n=0}^{N-1}X_k W_{N}^{-kn}
+\end{align*}
 
+Where the quantity v, is an integer going from $0 \to N-1$
+\martin{Consider this. \textregistered}.\chr{Der er N samples nummerede fra 0 til og med N-1. Arealet af dette vil fremkomme ved integralet.}\frede{Hvad er v? \texttrademark}
+
+
+In numerical practice, the equivalent of a given function f(x) of the continuous independent variable x is a finite number N of data values associated with a number t, customarily taken as running from 0 to N-1.
+\\
 The discrete Fourier transform (DFT), is the discrete time variant of the Fourier transform, and can be used to transform sample from the time domain, into the frequency domain.
 \\\\
 Multiple parts of the DFT are analog to the continues version.
@@ -21,7 +22,7 @@ Let a function in time $f(t)$ be a continuous signal.
 If the function is sampled N times it could be denoted
 $f[0],f[1],\dots,f[k],\dots,f[N-1]$.
 \\\\
-The Fourier Transform of $f(t)$ would be as in \ref{sec:cunt_Fourier_transform}.
+The Fourier Transform of $f(t)$ would be as in \ref{sec:cunt_Fourier_transform}. \frede{Ref der ikke virker.}
 \begin{align*}
 	F(\omega) = \int_{-\infty}^\infty f(t)e^{-j\omega t} dt
 \end{align*}
@@ -30,7 +31,7 @@ If you regard each sample $f[k]$ as a single impulse, with a giving area $f[k]$.
 
 \begin{align*}
 	F(\omega) 
-	&= \int_0^{N-1}T f(t) e^{-j\omega t}dt\\
+	&= \int_0^{(N-1)}T f(t) e^{-j\omega t}dt\\
 	&= f[0]e^{-j0} + f[1]e^{-j\omega T} + \dots + f(N-1) e^{-j\omega(N-1)T}	
 \end{align*}
 
@@ -50,9 +51,14 @@ A sequence $x_n$, can be considered N-Periodic since
 	&= \sum_{k=0}^{N-1}x_k e^{\frac{2 \pi k (n+N}{N}}\\
 	&= \sum_{k=0}^{N-1}x_k e^{\frac{2 \pi k (n}{N}} = X_n
 \end{align*} 
-In the style the continues case of the Fourier transform, where it's possible to evaluate it over a finite interval, the DFT can be evaluated for the fundamental frequency ($\dfrac{1}{NT} \text{Hz}$ or $\dfrac{2\pi}{NT} \text{rad/sec.}$) 
 
-The DFT can be written on matrix form where $F[N]$ is the DFT of the sequence $f[k]$,
+In the style the continues case of the Fourier transform, where it's possible to evaluate it over a finite interval, the DFT can be evaluated for the fundamental frequency ($\dfrac{1}{NT} Hz$ or $\dfrac{2\pi}{NT}rad/sec.$) in general
+\begin{align*}
+	F[n] = \sum_{k=0}^{N-1}f[k]e^{-j2\pi\frac{nk}{N}} \, (n = 0\ldots N-1)
+\end{align*}
+
+where $F[n]$ is DFT of the sequence $f[k]$.
+This can be written on matrix form
 \begin{align*}
 	\begin{bmatrix}
 		F[0]\\ F[1]\\ F[2]\\ \vdots \\ F[N-1]
@@ -71,22 +77,22 @@ The DFT can be written on matrix form where $F[N]$ is the DFT of the sequence $f
 	\end{bmatrix}
 \end{align*}
 
-where W is called the twiddle factor and is defined as 
+W is called the twiddle factor and is defined as 
 \begin{align*}
-	W_N = e^{-j 2 \pi\frac{1}{N}}, \, W_N^{kn} = e^{-j 2 \pi\frac{kn}{N}}.
+	W_N = e^{-j 2 \pi\frac{1}{N}}, \, W_N^{kn} = e^{-j 2 \pi\frac{kn}{N}}
 \end{align*}
 
 \begin{definition}[Discrete Fourier Transform]
 The discrete Fourier transform of a length-$N$ sequence $x$ is 
-\begin{align*}
+\begin{align*}1
 	X_k = (Fx)_k = \sum_{k=0}^{N-1} x_n W_N^{kn}, \, k\in {0, 1, \dots, N-1};
 \end{align*}
 This is called the spectrum of $x$.\\
 The inverse DFT of a length-N sequence X is
 \begin{align*}
-	x_n = \dfrac{1}{N}(F*X)_n = \dfrac{1}{N}\sum_{k=0}^{N-1} X_k W_N^{-kn}, \, n \in {0, 1, \dots, N-1}.
+	x_n = \dfrac{1}{N}(F*X)_n = \dfrac{1}{N}\sum_{k=0}^{N-1} X_k W_N^{-kn}, \, n \in {0, 1, \dots, N-1}
 \end{align*}
-
+.
 The DFT and inverse DFT as a pair, can be denoted as 
 \begin{align*}
 	x_n \xleftrightarrow{\text{DFT}} X_k
@@ -94,32 +100,22 @@ The DFT and inverse DFT as a pair, can be denoted as
 \end{definition} 
 \cite{FSP}
 
-One of the reasons the fourier transform playes an important role in mathemathic, is simply because they are based on eigensequences of a Linear shift invariant system. 
- Properties of eigensequences' leads to the following property of convolving:
-There is an equivalence between multiplying Fourier transforms of sequences, and colving the sequences.
- The DFT is an N-dimensional vector, we write as $X_k$
-\\\\
- A fundamental property of Linear shift invariant (LSI) systems is, that they all have unit-modulus complex exponential sequences as eigensequence. \cite{FSP}
-\\\\
-The DFT is the Fourier transform designed for a finite length sequence.
-It treats all finite-length sequences as a period of an infinite-length periodic sequence.
-The circular convolution operator is the appropriate description of LSI systems on circularly extended finite-length input, as in the case of DFT.  \chr{Ikke glad for denne sætning}
-%". As we haveseen in Section 3.3.3, the circular convolution operator (3.71) is the appropriate description of LSI systems operating on circularly extended finite-length inputs"
+%One of the reasons the fourier transform playes an important role in mathemathic, is simply because they are based on eigensequences of a Linear shift invariant system. 
+% Properties of eigensequences' leads to the following property of convolving:
+%There is an equivalence between multiplying Fourier transforms of sequences, and colving them.
+% The DFT is an N-dimensional vector, we write as $X_k$
+%\\\\
+% A fundamental property of Linear shift invariant (LSI) systems is, that they all have unit-modulus complex exponential sequences as eigensequence. \cite{FSP}
 
-The DFT will be introduced through the use of eigensequences of the circular convolution, which will be a diagonalization of the circular convolution operator
-
-\begin{definition}[Circular convolution]
- 	The circular convolution between length/N sequences $h$ and $x$ is defined as
-\begin{align*}
-	(Hx)_n) = (h \circledast x)_n = \sum_{k = 0}^{N-1} x_k h_{(n-k) \text{ mod $N$}} =\sum_{k = 0}^{N-1} x_{(n-k) \text{ mod $N$}} h_k
-\end{align*}
-where H is called the circular convolution operator associated with h.
-\end{definition} \cite{FSP}
+% \begin{definition}[Convolution]
+% 	The convolution between sequences $h$ and $x$ is defined as
+%\begin{align*}
+%	(Hx)_n) = (h \ast x)_n = \sum_{k \in \mathbb{Z}} x_k h_{n-k} =\sum_{k \in \mathbb{Z}} x_{n-k} h_k
+%\end{align*}
+% \end{definition}
 %221 \chr{Kan bruges til at vise ovenstående påstand om eigensekvenser for LSI systemer, skal nok anvende circuler convolution}
 
 256 217
 
-Theorem 3.8??
-
 Using the information that any modulus eigensequence is a complex exponential of the form $v_n = e^{j\omega n}$.
-Since 
+Since

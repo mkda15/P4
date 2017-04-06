@@ -1,13 +1,13 @@
 \section{Fourier series}
 Periodic functions can be represented as a linear combination of oscillating functions such as sines, cosines or equivalently complex exponential.
 \\\\
-It can be an advantage to decompose functions as a series or integral of ``simpler'' functions to retrieve information:
+It can be an advantage to decompose functions as a series or integral of simpler functions to retrieve information:
 \begin{align*}
 	f(x) = \sum_{n=1}^\infty c_n f_n(x)\text{, or } f(x)= \int_{-\infty}^\infty g(u) h(u,x) du
 \end{align*}
-Information from a function $f(x)$ will as an example be stored in the coefficient $\{c_n\}_{n=1}^\infty$ which are easily stored on a computer.
+Information from a function $f(x)$ will as an example be stored in the coefficient $\{c_n\}_{n=1}^\infty$ which are easily stored on a computer. \frede{Er det vigtigt at pointere, at $\{c_n\}$ er nem at gemme på en computer?}
 \\ \\ 
-A function $f: \mathbb{R} \to \mathbb{R}$ (or $\mathbb{C}$) is called $2\pi$-periodic if $f(\theta + 2\pi) = f(\theta) \ \forall \ \theta\in\mathbb{R}$. The idea of the Fourier series is using the above information to recreate a $2\pi$-periodic signal. The Fourier series are defined as:
+A function $f: \mathbb{R} \to \mathbb{R}$ (or $\mathbb{C}$) is called $2\pi$-periodic if $f(\theta + 2\pi) = f(\theta) \ \forall \ \theta\in\mathbb{R}$. The idea of the Fourier series is using the above information to recreate a $2\pi$-periodic signal. The Fourier series are defined as:\frede{Skal her ikke bruges et begin\{defintion\} miljø?}
 \begin{align*}
 	f(t) &= \dfrac{a_0}{2} + \sum_{n=1}^\infty(a_n \cos(n t) + b_n \sin(n t))\\
 	&= \sum_{n=-\infty}^{\infty} c_n e^{j n t} 

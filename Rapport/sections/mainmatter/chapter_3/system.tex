@@ -1,6 +1,6 @@
-In this chapter a model of and requirements to the system addressed in the problem statement is specified. This specification remains on a superficial level as a foundation to the system design in chapter \ref{ch7}. Furthermore test specifications of the system are made, by means of the used development model called the V-model. By this a delimitation of the project will be established. \\   
+In this chapter a model of and requirements to the system addressed in the problem statement are specified. This specification remains on a superficial level as a foundation to the system design in chapter \ref{ch7}. Furthermore test specifications of the system are made by means of the development model called the V-model. Through this a delimitation of the project will furthermore be established. \\   
 \\
-Due to the presented problem statement the purpose of the application is basically to transform some music into a note sheet due to the sound. This is illustrated by figure \ref{fig:model1}.    
+Due to the presented problem statement the purpose of the application is to use data representing music to create a note sheet representing said music. This is illustrated in figure \ref{fig:model1}.    
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}[auto, node distance=3.4cm, >=triangle 45, font=\sffamily ]
@@ -25,11 +25,11 @@ Due to the presented problem statement the purpose of the application is basical
 \label{fig:model1}
 \end{figure}
 In order for an application to perform this transformation an analogue sound has to be converted into a discrete time signal, in order for a computer to process the signal into the wanted outcome. \\
-By this the system is fundamentally based upon theory about discrete time systems, including analysis and processing of such systems and the disposal data.
+By this the system is fundamentally based upon theory about discrete time systems, including analysis and processing of such systems and the data at disposal.
 
 \section{Synthesizing}\label{sec:synth}
-To develop/design the system a synthesis approach is used to expand the basic concept of the system in order to define the purpose and thereby requirements to each part of the system.
-Figure \ref{fig:synth} illustrates the synthesizing of the system down to a level showing the essential parts of the system on behave of the final purpose. The further synthesizing of the system are left for chapter \ref{ch7}\trine{will it be synthesizing i chaper 7?}. The next section elaborates the synthesizing process by defining the requirements for each part of the system.
+To develop/design the system a synthesis approach is used to expand the basic concept of the system in order to define the purpose and thereby requirements of each part of the system.
+Figure \ref{fig:synth} illustrates the synthesizing of the system down to a level showing the essential parts of the system. The further synthesizing of the system is left for chapter \ref{ch7}\trine{will it be synthesizing i chaper 7?}. The next section elaborates the synthesizing process by defining the requirements for each part of the system.
 \begin{figure}[H]
 \centering
 
@@ -104,25 +104,25 @@ Figure \ref{fig:synth} illustrates the synthesizing of the system down to a leve
         
 \subsection{Requirements and delimitations}
 \subsubsection{Audio file}
-To process an analogue sound in a computer the sound has to be digitalized. This is done by an analogue to digital converter(ADC) which transform an audio signal from a microphone into digital bits. Further these bits has to be stored as a audio file format as .WAV format. This process are to be done by the sound card in the computer and some storage software. In order to reconstruct the analogue signal exact the software needs to provide a sampling frequency at 44,1 kHz and a bit resolution of 16 bits\cite{Mic}. Further about 5 MB memory are needed, which corresponds to a typically MP3 music file. \\
-The audio files for this system are limited to consist of single notes one ad a time, meaning no cords. The tones will be recorded in an anechoic chamber which implies control upon the amount of noise on the signal.\\      
-The produced audio file will provide as the \textit{input} for the algorithm that process the sound. 
+To process an analogue sound in a computer the sound has to be digitalized. This is done by a Sample \& Hold cicuirt and an analogue to digital converter (ADC) which transform an analogue audio signal from a microphone into a digital one discretized in time and amplitude. These bits are then to be stored as an audio file format as .WAV format. This process will be done by a sound card in a computer and some storage software. In order to reconstruct the analogue signal exactly the software needs to provide a sampling frequency of 44,1 kHz and a bit resolution of 16 bits \cite{Mic}. A typical MP3 fil needs about 5 MB memory. \\
+The audio files will contain music recorded in an anechoic chamber which minimizes noise and therefore allows the signal/noise ratio to be controlled better.\\      
+The produced audio file will act as the \textit{input} for the algorithm that processes the sound. 
 
 \subsubsection{Algorithm}
-The main part of the system is the algorithm that will provide as an application which take an audio file as input and generate the corresponding note sheet. This involves modification of the signal, spectral analysis of the signal and further a representation of the signal spectrum.\\ \\
-\textbf{Signal modification} are needed in this project in order to select what frequencies are wanted for the signal analysis. The modification will be done by a digital filter designed to reduce additive noise on the signal, because simple noise are expected in a recorded sound.\\
-The filter will be linear and time invariant, thus the filter will be designed to a specific audio file. The filter is expected to remove simple noise that could occur in a recording situation. \trine{specify the type of filter and noise later}             
-\\ 
-\textbf{Spectral analysis} is concerning the spectrum of frequencies corresponding to the signal. This involves transformation of the signal, from time- to frequency domain.     
-The primary method used for this purpose is the Fourier transformation which will be used in this project, based on the theoretical focus and learning goals for the project. Alternative methods could be.. \trine{Alternatives to fourier?}.\\   
-\textbf{Representation of frequency spectrum} will be done by plotting frequency over time, forming a spectrogram. By the spectrogram it is possible to analyse the frequencies of the filtered signal. As described in chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones.\\  
-\textbf{Symbol processing} is required to create a note sheet on behave of the spectrogram. 
-Though based on the given time limit, and the theoretical focus in the project the system are delimited to leave out the step of symbol processing, marked by the blue parentheses i figure \ref{fig:synth}. Hence the spectrogram will make the last step in the algorithm. \\
+The main part of the system is the algorithm which takes an audio file as input and generates a corresponding note sheet output. This involves modification, spectral analysis, a spectral representation and generation of a note sheet from the signal:
+\begin{itemize}
+\item[] \textbf{Signal modification} is needed in this project in order to select which frequencies are wanted for the signal analysis. The modification will be done by a digital filter designed to reduce noise in the signal, because noise is expected in a recorded sound. The filter will be linear and time invariant, thus the filter will be designed to a specific audio file. The filter is expected to remove the expected noise. \trine{specify the type of filter and noise later}             
+\item[] \textbf{Spectral analysis} is concerning the spectrum of frequencies corresponding to the signal. This involves transformation of the signal, from time- to frequency domain.     
+The primary method used for this purpose is the Fourier transformation which will be used in this project, based on the theoretical focus and learning goals for the project. Alternative methods could be.. \trine{Alternatives to fourier?}.
+\item[] \textbf{Representation of frequency spectrum} will be done by plotting frequency over time, forming a spectrogram. By the spectrogram it is possible to analyse the frequencies of the filtered signal. As described in chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones.
+\item[] \textbf{Symbol processing} is required to create a note sheet on behave of the spectrogram. 
+Though based on the given time limit, and the theoretical focus in the project the system are delimited to leave out the step of symbol processing, marked by the blue parentheses i figure \ref{fig:synth}. Hence the spectrogram will make the last step in the algorithm.
 A visualisation of the spectrogram will thereby make the \textit{output} of the system.   
+\end{itemize}
 
 \section{Final system}
 On behave of the stated specifications to the system figure \ref{fig:system} illustrates the final system which will form a basis of the further work. \\ \\
-The input of the system are delimited to be an audio file recorded in an anechoic chamber containing a single tone including a known noise. \\
+The input of the system is delimited to be an audio file recorded in an anechoic chamber containing music from only one instrument. \\
 The application are bounded to create a spectrogram illustrating the frequencies corresponding to the tone on the audio file. The noise are expected to be reduced in such degreed that it is possible to identify the tones by the spectrogram which will form the output of the system.\\
 \begin{figure}[H]
 \centering

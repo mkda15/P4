@@ -59,9 +59,8 @@ For an integrable function $f(t)$ the Fourier transform is defined as follows:
 The inverse Fourier transform of $F(\omega)$ is:
 \begin{align*}
 f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty F(\omega) e^{j \omega t} d\omega
-\end{align*}
+\end{align*}\frede{Skal der ikke være en notation $\mathcal{F}^-1\{F(\omega)\}(t)$ som i definitionen over?}
 \end{definition}
-
 \noindent
 As stated in \cite{FourierTrans}, the mathematical importance of the Fourier transform is: \martin{Consider this. \textregistered}
 \begin{enumerate}
@@ -70,7 +69,7 @@ As stated in \cite{FourierTrans}, the mathematical importance of the Fourier tra
 \end{enumerate}
 
 \noindent
-The Fourier transform $F(\omega)$ is a function of frequency and provides information on the amplitude and the phase of the signal at various frequencies. $F(\omega)$ may be written in polar coordinates as $F = |F|e^{j\theta}$ with the modulus $|F|$ representing the amplitude of the signal at a certain frequency $\omega$ and the phase shift $\theta = \arctan \left(\frac{Im(F)}{Re(F)} \right)$ at the frequency $\omega$.
+The Fourier transform $F(\omega)$ is a function of frequency and provides information on the amplitude and the phase of the signal at various frequencies. $F(\omega)$ may be written in polar coordinates as $F = |F|e^{j\theta}$ with the modulus $|F|$ representing the amplitude of the signal at a certain frequency $\omega$ and the phase shift $\theta = \arctan \left(\frac{Im(F)}{Re(F)} \right)$ at the frequency $\omega$. \frede{Brug mathrm (oprejst tekst) til Re og Im.}
 \\ \\
 The following definition is inspired by \cite{page 206, FAA} and shows an useful tool in both theoretical and applicational aspects.
 \begin{definition}[The convolution integral] \label{def:Convol}
@@ -107,7 +106,7 @@ Let $f \in \mathcal{L}^1$. Then:
 
 On the other hand, if $t\cdot f(t)$ is integrable, then
 \begin{align*}
-\mathcal{F}\{tf(t)\} = j F'(\omega)
+\mathcal{F}\{tf(t)\} (\omega)= j F'(\omega)
 \end{align*}
 
 \item If also $g \in L^1$, then
@@ -143,7 +142,7 @@ For the second equation, let $\tau = \delta t$. Hence, $t = \delta^{-1}\tau$ and
 
 \item Since $f' \in L^1$, the integral in the limit
 \begin{align*}
-\lim_{t \to \infty} f(t) = f(0) + \int_0^\infty f'(t) dt
+\lim_{t \to \infty} f(t) = f(0) + \lim_{t\to\infty}\int_0^t\! f'(T)\,dT
 \end{align*}
 
 is finite, and the whole limit is 0 since $f\in \mathcal{L}^1$ and satisfies that $\int_{-\infty}^\infty |f(t)| dt < \infty$. Likewise, $\displaystyle{\lim_{t \to -\infty} f(t) = 0}$, too. Integration by parts yields:
@@ -153,7 +152,7 @@ is finite, and the whole limit is 0 since $f\in \mathcal{L}^1$ and satisfies tha
 &= \int_{-\infty}^\infty (j \omega) e^{-j \omega t} f(t) dt = j\omega F(\omega)
 \end{align*}
 
-since $e^{-j\omega t} \to 0$ for $t \to \infty$. If $tf(t)$ is integrable then:
+since $e^{-j\omega t} \to 0$ for $t \to \infty$. \frede{$\mathrm{e}^{-j\omega t}$ går ikke mod 0 men er begrænset. Produktet af noget der går mod 0 og noget begrænset går mod 0.} If $tf(t)$ is integrable then:
 \begin{align*}
 \mathcal{F}\{tf(t)\} = \int_{-\infty}^\infty e^{-j \omega t} t f(t) dt = j \dfrac{d}{d\omega} \int_{-\infty}^\infty e^{-j \omega t} f(t) dt = j F'(\omega)
 \end{align*}

@@ -37,14 +37,14 @@ The left side of the V, is decomposition of the problem, and the right side is t
 \end{figure}
 In the previous synthesis section, the left part of the V-model is described, and hence the next step in the V-model is the creation of the test specifications for the different parts. Along with this phase a list of test specifications are created, starting from the smallest unit, and working up to the system as a hole. Later on these test will be conducted.\\
 \\
-The system will be tested from the bottom up, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. Next up the coherence of the system is tested, and finally the full system as a single unit is tested. Units in the model are as follows \\
-\textbf{Physical components }  
+The system will be tested from the bottom up, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. Next up the coherence of the system is tested, and finally the full system as a single unit is tested. Units in the model are as follows
+\subparagraph{Physical components}  
 \begin{itemize}
 	\item Microphone
 	\item ADC
 	\item Storage
 \end{itemize}
-\textbf{Application}
+\subparagraph{Application}
 \begin{itemize}
 	\item Filter
 	\item Fourier transformation
@@ -56,11 +56,12 @@ The filter will be tested on data with a high signal to noise ratio with noise e
 \subsubsection{Unit test of the Fourier transformation}
 This test will be done by comparing the Fourier algorithm used, with a pre-existence algorithm from matlab or python.
 By feeding the algorithms the same data set and comparing the output int. 
-In addition to this, the algorithm will be tested on data with an expected result like a simple sinusoidal.
+In addition to this, the algorithm will be tested on data with a known result like a simple sinusoidal.
 \subsubsection{Unit test of spectrogram}
-As with verification of the Fourier transform, the spectrogram algorithm, will be tested against a pre- algorithm, on the same data set.
+As with verification of the Fourier transform, the spectrogram algorithm will be tested against an existing algorithm on the same data set.
 The algorithm will then be tested on a fixed data set with a known output.
 By doing so, the output of the algorithm can hence be compared.
+\frede{Her skal nok specificeres mere. Hvad er det præcis for noget data der er input/output? F.eks. en sinus i tid som bliver til en Dirac i frekvens \texttrademark}
 %\subsubsection{Unit test of note sheet creation}
 %\trine{kan vel udelades helt?}This test will be done by creating a spektrogram from a known note sheet, and trying to recreate the note sheet.
 %\chr{Evt. give dette en under element der beskriver mere specifikt hvordan spektrogrammet kreeres }
