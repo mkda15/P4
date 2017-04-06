@@ -4,12 +4,11 @@ As described ideal filters are not computable hence the process of designing a f
 
 
 \subsection{IIR filter}
-One common way of designing an IIR-filter is to design the discrete-time filter from a corresponding continuous-time system. The idea follows four main steps. 
+One common way of designing an IIR-filter is to design the discrete-time filter from a corresponding continuous-time system. The idea follows three main steps. 
 \begin{itemize}
 \item[1.] Specify the properties desired for the filter.
 \item[2.] Hereby compute a "prototype" by a continuous-time system $H_c(j\Omega)$ that approximates the given properties.
-\item[3.] Transform the "prototype" into the discrete-time filter $H(e^{j\omega})$ by...
-\item[4.] Implementation of the filter. 
+\item[3.] Transform the "prototype" into the discrete-time filter $H(e^{j\omega})$ by... 
 \end{itemize}
 The properties of a system are specified on behave of the desired application, considering what frequencies are to pass the filter ideally. Further it is important to specify how much the filter are allowed to vary from the ideal properties, from which it will vary. \\
 Properties for an approximation to a lowpass filter could be defined by bounding the magnitude within $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$\trine{beskrivelse af convertering af spec. er udkommenteret}. 
@@ -96,10 +95,7 @@ Because $-\infty \leq \Omega \leq \infty $ is mapped to $-\pi \leq \omega \leq \
 \end{align}
 hereby it is possible to determine a new $\Omega_c$ to the continuous-time filter, in order to ensure the discrete $\omega_c$ to fit the specification.\\
 An important property of the bilinear transformation is that stability is preserved if the continuous-time filter i stable. \\
-... \\
-Advantages of IIR filter:
-The process of designing a IIR filter is rather simple when the desired properties fits an establish design method such as a Butterworth filter. The required order of the filter is computable and the transformation to the discrete-time domain is to be done straight forward. Further, considering the implementation, this leads to non iterative algorithms. \\
-Though by this method the magnitude response is the only parameter to be specified. Meaning that specific requirements for e.g. phase response or group delay are not quarantined to be fulfilled by this kind of IIR filter.
+
 
 %
 %These properties are to be converted into specifications of the discrete-time filter by expressing the frequency in normalised radian frequency by the relation $\omega=\Omega T_d$ where $T_d$ is the sampling rate. Thus the impulse response is specified over one period as 
@@ -162,9 +158,9 @@ The aim is to approximate the desired frequency response as good as possible. Fo
 By increasing M the with of the main-lope is decreased, but the peak amplitude of the side-lopes also increases which results in ripples. this indicates a trade-off between main width of main-lope and amplitude of side-lopes. \\
 Figure \ref{?} illustrates main and side lope by a plot of the magnitude response corresponding to the rectangular window\trine{indsæt figur}.
 
-\subsubsection{Window types}
+\subsubsection{Different types of windows}
 The rectangular window is one out of many windows, that have different properties. The oscillations in the frequency response is a result of Gibbs phenomenon. According to converges of Fourier series\trine{uddybes her?} this can be improved by convolving the desired frequency response with a less abrupt window. So by narrowing each end of the rectangle smoothly towards zero, the amplitude peak of the side-lopes are remarkable decreased. Though this will still result in a wider main-lope. \\
-In table \ref{tab:window} some commonly used windows are defined, further the window and the corresponding Fourier transformation are illustrated on figure \ref{?}
+In table \ref{tab:window} some commonly used windows are defined, further the windows and the corresponding Fourier transformation are illustrated on figure \ref{fig:window_types} and \ref{?}
 
 \begin{table}[H]
 \centering
@@ -199,12 +195,34 @@ Balckman    &  $w[n] =
 \end{matrix}\right.$  \\ \hline
 \end{tabular}
 \end{table}   
-** Indsæt figur her\trine{figur med de forskellige vinduer, og figur med tilsvarende W[n].} ** \\
-\\
-The defined windows all has the property of being symmetric around the point $\frac{M}{2}$, hence if the desired impulse response is also symmetric the windowed impulse will be symmetric which results in a frequency response with generalized linear phase.  
-\subsection{The Kaiser window method }
-evt. Beskrivelse af Kaiser vindue her som udvidelse. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{figures/filter_teori/window_types.pdf}
+    \caption{w[n] of respective windows of order $M = 8$}
+    \label{fig:window_types}
+\end{figure}  
+
+The defined windows all has the property of being symmetric around the point $\frac{M}{2}$, hence if the desired impulse response is also symmetric the windowed impulse will be symmetric which results in a frequency response with generalized linear phase. \\
+To conclude this section it is seen that in order to design a FIR filter by the window method one can vary the chosen window and the order of the system, until the desired specification are archived. 
+\subsubsection{The Kaiser window method}
+The Kaiser window design method consider the Kaiser window as the near-optimal window which -  compared to the other windows - has two parameters; the lenght $M+1$ and a shape parameter $\beta$. This results in \textit{one} window where changing the parameters adjusts shape and length of the window in order to achieve the optimal trade off between amplitude of side lopes and width of main lope. The Kaiser window is defined as 
+%\begin{align}
+%w[n] =
+%\left\{ \begin{matrix}
+%\frac{I_0 \left[ \beta \left( 1 - \left[ \frac{(n-\alpha)}{\alpha \right] ^{2}\right)^{\frac{1}{2}} \right]	}}{I_0(\beta)} , &\ 0 \leq n \leq M \\
+%0, &\ Otherwise
+%\end{matrix}\right. 
+%\end{align}        
+
+
+\subsection{Comparison of IIR and FIR filters}
+... \\
+Advantages of IIR filter:
+The process of designing a IIR filter is rather simple when the desired properties fits an establish design method such as a Butterworth filter. The required order of the filter is computable and the transformation to the discrete-time domain is to be done straight forward. Further, considering the implementation, this leads to non iterative algorithms. \\
+Though by this method the magnitude response is the only parameter to be specified. Meaning that specific requirements for e.g. phase response or group delay are not quarantined to be fulfilled by this kind of IIR filter.
 
 \subsection{Anti aliasing filter}
 As mentioned in section \ref{ADC} an anti aliasing filter is required in the ADC process. The purpose of filter is to avoid the aliasing phenomenon which occurs when the samplings theorem \ref{sampling_theorem} is not fulfilled. As stated a signal has to be band limited by the Nyquist frequency $\omega_N$ and since a continuous-time signal such as a sound is not guaranteed to have a bandlimited frequency the anti aliasing filter is design to remove the frequencies that are above the Nyquist frequency. \\
 An anti aliasing filter typically form an analogue low pass filter, with the Nyquist frequency as the ideal cut off frequency. Though as seen a transition band is necessary - when designing a practical filter - in which the frequencies can cause aliasing. This causes the passband cut of frequency to be larger than the Nyquist frequency.\trine{how larger}           
+
