@@ -207,14 +207,15 @@ The defined windows all has the property of being symmetric around the point $\f
 To conclude this section it is seen that in order to design a FIR filter by the window method one can vary the chosen window and the order of the system, until the desired specification are archived. 
 \subsubsection{The Kaiser window method}
 The Kaiser window design method consider the Kaiser window as the near-optimal window which -  compared to the other windows - has two parameters; the lenght $M+1$ and a shape parameter $\beta$. This results in \textit{one} window where changing the parameters adjusts shape and length of the window in order to achieve the optimal trade off between amplitude of side lopes and width of main lope. The Kaiser window is defined as 
-%\begin{align}
-%w[n] =
-%\left\{ \begin{matrix}
-%\frac{I_0 \left[ \beta \left( 1 - \left[ \frac{(n-\alpha)}{\alpha \right] ^{2}\right)^{\frac{1}{2}} \right]	}}{I_0(\beta)} , &\ 0 \leq n \leq M \\
-%0, &\ Otherwise
-%\end{matrix}\right. 
-%\end{align}        
+\begin{align}
+w[n]=\left\{\begin{matrix}
+ \frac{I_0[\beta (1-[\frac{n-\alpha}{\alpha}]^2)^{\frac{1}{2}}]}{I_0(\beta)} , &\ 0 \leq n \leq M  \\ 
+0, &\ Otherwise
+\end{matrix}\right.
+\end{align}        
+where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ the zero'th order modified Bessel function of the first kind. Figure \ref{?} show how increasing of $\beta$ tapers the window. \\
 
+  
 
 \subsection{Comparison of IIR and FIR filters}
 ... \\
