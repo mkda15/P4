@@ -127,8 +127,9 @@ where H is called the circular convolution operator associated with h.
 %221 \chr{Kan bruges til at vise ovenstående påstand om eigensekvenser for LSI systemer, skal nok anvende circuler convolution}
 
 256 217
+A property of LSI systems is, that they as eigensequences $v_n$ have all complex exponential sequences, with modulus being unit length (1) on the form $v_n = e^j \omega n$. \cite{FSP}\\
+Since the represented sequence is N periodic, the eigensequence should also be periodic with period N, which leads to the following:
 
-Theorem 3.8??
-
-Using the information that any modulus eigensequence is a complex exponential of the form $v_n = e^{j\omega n}$.
-Since 
+\begin{align*}
+	v_{n+N} = e^{j\omega (n+N)} = v_n \implies e^{j\omega N} = 1
+\end{align*}
