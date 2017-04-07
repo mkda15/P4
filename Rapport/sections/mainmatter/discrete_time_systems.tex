@@ -1,0 +1,72 @@
+\chapter{Discrete-time systems}\label{discrete_time_systems}
+This chapter is inspired by \cite{FSP}.\\\\
+This chapter will establish the theory of discrete-time systems needed for the further discussion of sampling theory, the discrete Fourier transform and filtering. Firstly, discrete-time systems are defined in definition \ref{def:discrete_time_system}.
+\begin{definition}[Discrete-time system]\label{def:discrete_time_system}
+A discrete-time system is an operator $T:V\to V$ that maps a sequence $x\in V$ to a sequence $y\in V$ such that
+\begin{equation}
+y=T(x).
+\end{equation}
+\end{definition}
+\frede{Indsæt måske figur med operator på en vektor \texttrademark}
+\section{Properties and types of discrete-time systems}\label{sec:properties_DTS}
+Discrete-time systems can have multiple properties important to consider when working with them. The following definitions will cover the need in this project.
+\begin{definition}[Linear system]\label{def:linear_system}
+A discrete-time system $T$ is called linear when, for any inputs $x$ and $y$ and any $\alpha,\beta\in\mathbb{C}$,
+\begin{equation}
+T(\alpha x+\beta y)=\alpha T(x)+\beta T(x).
+\end{equation}
+\end{definition}
+\begin{definition}[Memoryless system]\label{def:memoryless_system}
+A discrete-time system T is called memoryless when, for any $k\in\mathbb{Z}$ and any inputs $x$ and $x'$ ,
+\begin{equation}
+\mathbf{1}_{\{k\}}x=\mathbf{1}_{\{k\}}x'\,\Rightarrow\,\mathbf{1}_{\{k\}}T(x)=\mathbf{1}_{\{k\}}T(x'),
+\end{equation}
+where $\mathbf{1}_{\{k\}}$ is the indicator function such that $\mathbf{1}_{\{k\}}(x)=1$ for $x=k$ and $\mathbf{1}_{\{k\}}=0$ for $x\neq k$.
+\end{definition}
+As such the output memoryless systems depend solely on current input.
+\begin{definition}[Causal system]\label{def:causal_system}
+A discrete-time system $T$ is called causal when, for any $k\in\mathbb{Z}$ and inputs $x$ and $x'$,
+\begin{equation}
+\mathbf{1}_{\{\-infty,\ldots,k\}}x=\mathbf{1}_{\{\-infty,\ldots,k\}}x'\,\Rightarrow\,\mathbf{1}_{\{\-infty,\ldots,k\}}T(x)=\mathbf{1}_{\{\-infty,\ldots,k\}}T(x').
+\end{equation}
+\end{definition}
+As such the output of a causal system depends solely on the current and previous inputs.
+\begin{definition}[Time-invariant system]\label{def:time_invariant_system}
+A discrete-time system $T$ is called time-invariant when, for any $k\in\mathbb{Z}$ and input $x$,
+\begin{equation}
+y=T(x)\,\Rightarrow\,y'=T(x'),
+\end{equation}
+where $x_n'=x_{n-k}$ and $y_n'=y_{n-k}$.
+\end{definition}
+As such a time-invariant system does not depend on the time at which it operates - a shift in time for inputs causes an equal shift in outputs.
+\begin{definition}[BIBO-stable system]\label{def:BIBO_stable_system}
+A discrete-time system $T$ is called bounded-input, bounded-output stable (BIBO-stable) when
+\begin{equation}
+x\in\ell^{\infty}(\mathbb{Z})\,\Rightarrow\,y\in\ell^{\infty}(\mathbb{Z}),
+\end{equation}
+where $\ell^{\infty}(\mathbb{Z})$ is the space of bounded sequences.\footnote{See chapter \ref{ch4}.}
+\end{definition}
+\subsection{Linear and time-invariant systems}
+Some discrete-times systems can be described by \textit{linear difference equations}:
+\begin{equation}\label{eq:linear_diff_equation}
+y_n=\sum_{k=-\infty}^{\infty}b_k^{(n)}x_{n-k}-\sum_{k=1}{\infty}a_k^{(n)}y_{n-k}
+\end{equation}
+\eqref{eq:linear_diff_equation} relates the inputs and earlier outputs of a system to the current output in linear fashion. If the difference equation furthermore is with constant coefficients (not dependent on $n$) it becomes a linear \textit{time-invariant} difference equation as seen in \eqref{eq:LTI_diff_equation} and describes a \textit{linear time-invariant system} (LTI system).
+\begin{equation}\label{eq:LTI_diff_equation}
+y_n=\sum_{k=-\infty}^{\infty}b_kx_{n-k}-\sum_{k=1}^{\infty}a_ky_{n-k}
+\end{equation}
+\eqref{eq:LTI_diff_equation} is non-causal and infinite in input as the output $y_n$ depends on future values $x_n$ and infinitely many of these. To make the system causal and finite (and thus realizable) the number of coefficients are made finite reducing \eqref{eq:LTI_diff_equation} to
+\begin{equation}\label{eq:LTI_diff_equation_finite}
+y_n=\sum_{k=0}^Mb_kx_{n-k}-\sum_{k=1}^Na_ky_{n-k}.
+\end{equation}
+This project will focus on systems described by \eqref{eq:LTI_diff_equation_finite}.
+\subsubsection{Impulse response}
+An important characteristic of LTI systems is the unique specification of the system by its \textit{impulse response}.
+\begin{definition}[Impulse response]\label{def:impulse_response}
+A sequence h is called the impulse response of a discrete LTI system T when
+\begin{equation}
+h=T(\delta),
+\end{equation}
+where $\delta(t)=1$ for $t=0$ and $\delta(t)=0$ otherwise.
+\end{definition}
+The impulse response will be of importance in chapter \ref{ch7} when designing filters which are discrete-time systems.
