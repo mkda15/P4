@@ -16,7 +16,7 @@
 %\\
 The discrete Fourier transform (DFT), is the discrete time variant of the Fourier transform, and can be used to transform sample from the time domain, into the frequency domain.
 %\\\\
-Multiple parts of the DFT are analog to the continues version.
+Multiple parts of the DFT are analog to the continues version \cite{DFT_OX}.
 \\\\
 Let a function in time $f(t)$ be a continuous signal.
 If the function is sampled N times it could be denoted
@@ -38,11 +38,11 @@ If you regard each sample $f[k]$ as a single impulse, with a giving area $f[k]$.
 or alternatively
 \begin{align*}
 	F(\omega) = \sum_{k=0}^{N-1}f[k]e^{-j\omega k T}
-\end{align*} 
+\end{align*} \cite{DFT_OX}
 
 \chr{Går ud fra at der i Fourier transformationen står at den kan evalueres i et endeligt interval i stedet fra uendeligt til uendeligt.}
 
-The DFT have to take into consideration that it's only feed a finite number of input data. Since this is the case, the DFT treats the data as if it were periodic.
+The DFT have to take into consideration that it's only feed a finite number of input data. Since this is the case, the DFT treats the data as if it were periodic. 
 \martin{Consider this. \textregistered}.
 \\\\
 A sequence $x_n$, can be considered N-Periodic since 
@@ -50,9 +50,9 @@ A sequence $x_n$, can be considered N-Periodic since
 	X_{n+N} 
 	&= \sum_{k=0}^{N-1}x_k e^{\frac{2 \pi k (n+N}{N}}\\
 	&= \sum_{k=0}^{N-1}x_k e^{\frac{2 \pi k (n}{N}} = X_n
-\end{align*} 
+\end{align*} \cite{FSP}
 
-In the style the continues case of the Fourier transform, where it's possible to evaluate it over a finite interval, the DFT can be evaluated for the fundamental frequency ($\dfrac{1}{NT} Hz$ or $\dfrac{2\pi}{NT}rad/sec.$) 
+In the style the continues case of the Fourier transform, where it's possible to evaluate it over a finite interval, the DFT can be evaluated for the fundamental frequency ($\dfrac{1}{NT} Hz$ or $\dfrac{2\pi}{NT}rad/sec.$) \cite{DFT_OX} 
 %in general
 %\begin{align*}
 %	F[n] = \sum_{k=0}^{N-1}f[k]e^{-j2\pi\frac{nk}{N}} \, (n = 0\ldots N-1)
@@ -80,7 +80,7 @@ The DFT can be written on matrix form where $F[N]$ is the DFT of the sequence $f
 	\end{bmatrix}
 \end{align*}
 
-where W is called the twiddle factor and is defined as 
+where W is called the twiddle factor and is defined as \cite{DFT_OX}
 \begin{align*}
 	W_N = e^{-j 2 \pi\frac{1}{N}}, \, W_N^{kn} = e^{-j 2 \pi\frac{kn}{N}}.
 \end{align*}
@@ -103,7 +103,7 @@ The DFT and inverse DFT as a pair, can be denoted as
 \end{definition} 
 \cite{FSP}
 
-One of the reasons the fourier transform playes an important role in mathemathic, is simply because they are based on eigensequences of a Linear shift invariant system. 
+One of the reasons the fourier transform playes an important role in mathemathic, is simply because they are based on eigensequences of a Linear shift invariant system (Discrete equivalent of time-invariant system). 
  Properties of eigensequences' leads to the following property of convolving:
 There is an equivalence between multiplying Fourier transforms of sequences, and colving the sequences.
  The DFT is an N-dimensional vector, we write as $X_k$
@@ -124,12 +124,44 @@ The DFT will be introduced through the use of eigensequences of the circular con
 \end{align*}
 where H is called the circular convolution operator associated with h.
 \end{definition} \cite{FSP}
-%221 \chr{Kan bruges til at vise ovenstående påstand om eigensekvenser for LSI systemer, skal nok anvende circuler convolution}
 
-256 217
-A property of LSI systems is, that they as eigensequences $v_n$ have all complex exponential sequences, with modulus being unit length (1) on the form $v_n = e^j \omega n$. \cite{FSP}\\
+\begin{definition}[Eigenfunction]
+	If $D$ is a linear operator, on a function space, then $f$ is an eigenfunction for $D$ and $\lambda$ is the associated eigenvalue, whenever $Df = \lambda f$
+\end{definition}
+\cite{Eigenfunctions}
+
+A property of LSI systems is, that they as eigensequences $v_n$ have all complex exponential sequences, with modulus being unit length (1) on the form $v_n = e^j \omega n$ \cite{FSP}.\\ Same follows from Linear Time Invariant systems (LTI) \cite{DTSP}.
+\\\\
+%Egenskaver ed eigenfunctioner:
+The eigenfunction property of the complex exponential function for an LSI system, can be thus be demonstrated; consider a complex sequence of radian frequency $v_n = e^{j\omega n} \text{ for } -\infty < n < \infty$.
+\\\\
+The corresponding output of a LTI - system with an impulse response $h[n]$ is,
+
+\begin{align*}
+y[n] 
+&= \sum_{k=-\infty}^{\infty} h[k]e^{j\omega(n-k)} \nonumber \\ 
+&= e^{j\omega n} \left(\sum_{k=-\infty}^{\infty} h[k]e^{-j\omega k} \right).
+\end{align*}
+This leads to
+\begin{align}\label{eq:eigenfunction}
+y[n] = H(e^{j \omega}) e^{-j\omega n}
+\end{align}
+,
+for
+\begin{align*}
+H(e^{j\omega}) = \sum_{k=-\infty}^{\infty} h[k]e^{-j\omega k} 
+\end{align*}.
+This follows, the properties of eigenfunctions, per \chr{Ref til kort afsnit om egen functioner.}
+Consequently this leads to $e^{j\omega n}$ being an eigenfunction of the system, with the associated eigenvalue $H(e^{j\omega})$.
+\\\\
+From \eqref{eq:eigenfunction} it can be noted that $H(e^{j\omega})$ will describe the change in the complex amplitude of a complex exponential input signal as a function of the frequency $\omega$. \cite{DTSP} \chr{Might like this sentence rewritten.}
+%The eigenvalue $H(e^{j\omega})$ is called the frequency response of the system.
+
+
+
 Since the represented sequence is N periodic, the eigensequence should also be periodic with period N, which leads to the following:
 
 \begin{align*}
 	v_{n+N} = e^{j\omega (n+N)} = v_n \implies e^{j\omega N} = 1
 \end{align*}
+
