@@ -38,26 +38,26 @@ where $\overline{g(t)}$ is the complex conjugate of $g(t)$. The norm is:
 
 \end{definition}
 
-A similar definition is given for $\ell^p$ which deals with sequences:\martin{Is this definition relevant? \textregistered}
-\begin{definition}
-$\ell^2(\mathbb{Z})$ is the space of square-summable sequences, and the inner product is defined as:
-\begin{align*}
-\langle x,y \rangle = \sum_{n\in\mathbb{Z}} x[n] \overline{y[n]}
-\end{align*}
-
-And the norm is defined as:
-\begin{align*}
-\|x\| = \left( \sum_{n\in\mathbb{Z}} |x[n]|^2 \right)^{1/2}
-\end{align*}
-
+A similar definition is given for $\ell^p$ which deals with sequences:
+\begin{definition}[The $\ell^p$ spaces]
 For any $p \in [1,\infty)$, the normed vector space $\ell^p(\mathbb{Z})$ is the subspace of $\mathbb{C}^N$ consisting of vectors with finite $\ell^p$ norm:
 \begin{align*}
 \|x\|_p = \left( \sum_{n\in\mathbb{Z}} |x[n]|^p \right)^{1/p}
 \end{align*}
 
+$\ell^2(\mathbb{Z})$ is the space of square-summable sequences. The inner product is defined as:
+\begin{align*}
+\langle x,y \rangle = \sum_{n\in\mathbb{Z}} x[n] \overline{y[n]},
+\end{align*}
+
+and the norm is defined as:
+\begin{align*}
+\|x\| = \left( \sum_{n\in\mathbb{Z}} |x[n]|^2 \right)^{1/2}.
+\end{align*}
+
 Furthermore, the $\ell^\infty$ norm is defined as:
 \begin{align*}
-\|x\|_\infty = \sup_{n\in\mathbb{Z}}|x[n]|
+\|x\|_\infty = \sup_{n\in\mathbb{Z}}|x[n]|.
 \end{align*}
 \end{definition}
 
@@ -65,77 +65,13 @@ It should be noted that $\mathcal{L}^1$ is not a subspace of $\mathcal{L}^2$ and
 \begin{enumerate}
 \item If $f \in \mathcal{L}^1$ and $f$ is bounded, then $f \in \mathcal{L}^2$ since:
 \begin{align*}
-|f| \leq M \Rightarrow |f|^2 \leq M|f| \Rightarrow \int_{-\infty}^\infty |f(t)|^2 dt \leq \int_{-\infty}^\infty M|f(t)| dt < \infty
+|f| \leq M \Rightarrow |f|^2 \leq M|f| \Rightarrow \int_{-\infty}^\infty |f(t)|^2 dt \leq \int_{-\infty}^\infty M|f(t)| dt < \infty.
 \end{align*}
-\item If $f \in \mathcal{L}^2$ and vanishes outside a finite interval $[a,b]$, then $f \in \mathcal{L}^1$ since: 
+
+\item If $f \in \mathcal{L}^2$ and vanishes outside a finite interval $[a,b]$, then $f \in \mathcal{L}^1$ since:
 \begin{align*}
-\int_{-\infty}^\infty |f(t)| dt = \int_a^b |f(t)| dt \leq (b - a)^{1/2} \left( \int_a^b |f(t)|^2 dt \right)^{1/2} < \infty
+\int_{-\infty}^\infty |f(t)| dt = \int_a^b |f(t)| dt \leq (b - a)^{1/2} \left( \int_a^b |f(t)|^2 dt \right)^{1/2} < \infty.
 \end{align*}
-This follows from the Cauchy-Schwarz inequality, which says that $|\langle f,g \rangle| \leq \|f\| \|g\|$.
+
+This follows from the Cauchy-Scwharz inequality, which states that $|\langle f,g \rangle| \leq \|f\| \|g\|$.
 \end{enumerate}
-
-
-
-%Remainders of this section:
-%\begin{enumerate}
-%\item Dominated convergence, continuity of the Fourier transform (FAA, page 214).
-%\end{enumerate}
-%...
-%\\ \\
-%Noter fra vejledermødet 28-02-2017:
-%\begin{align*}
-%L^p(\mathbb{R}) =
-%\left\{\begin{matrix}
-%f : \mathbb{R} \to \mathbb{C}: \int_{-\infty}^\infty |f(x)|^p dx < \infty \\
-%Measureable (integrationsteori)
-%\end{matrix}\right.
-%\end{align*}
-%
-%For $f \in L^1(\mathbb{R}), f \in C_c^\infty(\mathbb{R}) \subset L^1(\mathbb{R})$ (hvor c'et angiver, at det er en kompakt mængde);
-%
-%\begin{align*}
-%|\hat{f}(\gamma)| \leq \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty |f(x)| \cdot |e^{j\omega x}| dx < \infty
-%\end{align*}
-%
-%F is continuously extended as an operator on $L^2 \to L^2$.
-%Plancherel's equation: $\|Ff\|_{L^2} = \|f\|_{L^2}$.
-%Parseval's equation: $\langle Ff, Fg \rangle = \langle f,g \rangle$.
-
-%The following should be rewritten as it is almost copied directly from the book.
-%\\ \\
-%From Folland, p. 81-82:
-%One can replace the element $dx$ of linear measure on $[a,b]$ by a weighted element of measure, $w(x) dx$. To be precise, suppose $w$ is a continuous function on $[a,b]$ such that $w(x) > 0$ for all $x \in [a,b]$; we call such a $w$ a weight function on $[a,b]$. We can then define the weighted $L^2$ space $L^2_w(a,b)$ to be the set of all (Lebesgue measurable) functions on $[a,b]$ such that
-%\begin{align*}
-%\int_a^b |f(x)|^2 w(x) dx < \infty,
-%\end{align*}
-%
-%and we define an inner product and norm on $L_w^2(a,b)$ by
-%\begin{align*}
-%\langle f,g \rangle = \int_a^b f(x) \overline{g(x)} w(x) dx, \quad \|f\|_w = \left( \int_a^b |f(x)|^2 w(x) dx \right)^{1/2}
-%\end{align*}
-%
-%We define $L_2(D)$ to be the set of all functions $f$ such that:
-%\begin{align*}
-%\int_D |f(\textbf{x})|^2 d\textbf{x} < \infty
-%\end{align*}
-%
-%and we define the inner product and norm on $L^2(D)$ by
-%\begin{align*}
-%\langle f,g \rangle = \int_D f(\textbf{x}) \overline{g(\textbf{x})} d \textbf{x}, \quad \|f\| = \left( \int_D |f(\textbf{x})|^2 d \textbf{x} \right)^{1/2}.
-%\end{align*}
-%
-%Another example of a Hilbert space is the space $l^2$ of square-summable sequences. That is, the elements of $l^2$ are sequences $\{c_n\}_1^\infty$ of complex numbers such that $\sum_1^\infty |c_n|^2 < \infty$, and the inner product and norm are defined by
-%\begin{align*}
-%\left\langle \{c_n\},\{d_n\} \right\rangle = \sum_1^\infty c_n \overline{d}_n, \quad \left\| \{c_n\} \right\| = \left( \sum_1^\infty  |c_n|^2 \right)^{1/2}
-%\end{align*}
-%\\ \\
-%From M. Vetterli, page 35:
-%$\mathcal{L}^p(\mathbb{R})$ spaces Like for sequences, we can define other norms on $\mathbb{C}^\mathbb{R}$ as well. Again, because the space is infinite-dimensional, the choice of the norm and the requirement that it be finite restricts $\mathbb{C}^\mathbb{R}$ to a smaller set. For example, for $p \in [1,\infty)$, the $\mathcal{L}^p$ norm is
-%\begin{align*}
-%\|x\|_p = \left( \int_{-\infty}^{\infty} |x(t)|^p dt \right)^{1/p}
-%\end{align*}
-%
-%The extension to $p = \infty$ leads to the $\mathcal{L}^\infty$ norm as
-%\begin{align*}
-%\|x\|_\infty = ess \sup_{t\in\mathbb{R}} |x(t)|.
-%\end{align*}
