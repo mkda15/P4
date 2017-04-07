@@ -213,10 +213,21 @@ w[n]=\left\{\begin{matrix}
 0, &\ Otherwise
 \end{matrix}\right.
 \end{align}        
-where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ the zero'th order modified Bessel function of the first kind. Figure \ref{?} show how increasing of $\beta$ tapers the window. \\
-
-  
-
+where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ the zero'th order modified Bessel function of the first kind.\cite{DTSP, p.474-476} Increasing $\beta$ tapers the window in the time domain, which results in smaller side lopes of the Fourier transform. Increasing $M$ causes the width of the main lope to increase though without changing the peak amplitude of the side lopes. This i illustrated on figure \ref{?} and \ref{?} respectively.\\
+In order to determine values for $\beta$ and $M$ according to the satisfy the desired specifications the following formulas are defined. First note that the peak approximation error $\delta$ - by the method of Kaiser - is determined on behave of $\beta$. Considering a lowpass filter, with a fixed $\delta$ this gives a cut off frequency of the passband $\omega_p$ defined by $|H(\text{e}^{j\omega})| \geq 1-\delta$ and cut off stopband frequency $\omega_s$ defined by $|H(\text{e}^{j\omega})| \leq \delta$. This gives a transitionband of width $\delta \omega = \omega_s - \omega_p$. Defining $\delta$ in $[dB]$ by $A=-20\log_{10} \delta$ is it possible to determine the value of $\beta$ on behave of a specific value of $A$ as 
+\begin{align}
+\beta =
+\left\{ \begin{matrix}
+0.1102\left( A-8.7 \right), &\ A \geq 50 \\
+0.5843\left(A-21\right)^{0.4}, &\ 21 \leq A \leq 50 \\
+0.0, &\  A \leq 21 
+\end{matrix}\right.
+\end{align}               
+Furthermore $M$ must satisfy the following relation. 
+\begin{align}
+M=\frac{A-8}{2.285\Delta \omega} 
+\end{align}	
+By this establishment of the Kaiser window method it is possible to design a FIR filter within desired specifications with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable.       
 \subsection{Comparison of IIR and FIR filters}
 ... \\
 Advantages of IIR filter:
