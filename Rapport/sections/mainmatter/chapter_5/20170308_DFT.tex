@@ -144,9 +144,8 @@ y[n]
 \end{align*}
 This leads to
 \begin{align}\label{eq:eigenfunction}
-y[n] = H(e^{j \omega}) e^{-j\omega n}
+y[n] = H(e^{j \omega}) e^{-j\omega n},
 \end{align}
-,
 for
 \begin{align*}
 H(e^{j\omega}) = \sum_{k=-\infty}^{\infty} h[k]e^{-j\omega k} 
@@ -156,12 +155,25 @@ Consequently this leads to $e^{j\omega n}$ being an eigenfunction of the system,
 \\\\
 From \eqref{eq:eigenfunction} it can be noted that $H(e^{j\omega})$ will describe the change in the complex amplitude of a complex exponential input signal as a function of the frequency $\omega$. \cite{DTSP} \chr{Might like this sentence rewritten.}
 %The eigenvalue $H(e^{j\omega})$ is called the frequency response of the system.
-
-
-
+\\
 Since the represented sequence is N periodic, the eigensequence should also be periodic with period N, which leads to the following:
 
 \begin{align*}
 	v_{n+N} = e^{j\omega (n+N)} = v_n \implies e^{j\omega N} = 1
 \end{align*}
 
+and $\omega = \dfrac{2 \pi k}{N}$ for $k \in \mathbb{Z}$
+
+From this the previously mentioned twiddle factor can be seen.
+
+\begin{align*}
+	v_n = e^{j(\frac{2\pi}{N}) kn} = W_N^{-kn}.
+\end{align*}\cite{FSP}
+
+The twiddle factor can be shown to be an eigensequence for the circular convolution operator.
+
+\begin{align*}
+	(h\circledast v)_n = \sum_{k=0}^{N-1} mod?
+\end{align*}
+
+This shows that a circular convolution operator $H$'s has an eigensequence that is the twidddle factor.
