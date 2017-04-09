@@ -8,10 +8,10 @@ One common way of designing an IIR-filter is to design the discrete-time filter 
 \begin{itemize}
 \item[1.] Specify the properties desired for the filter.
 \item[2.] Hereby compute a "prototype" by a continuous-time system $H_c(j\Omega)$ that approximates the given properties.
-\item[3.] Transform the "prototype" into the discrete-time filter $H(e^{j\omega})$ by... 
+\item[3.] Transform the "prototype" into the discrete-time filter $H(e^{j\omega})$.
 \end{itemize}
 The properties of a system are specified on behave of the desired application, considering what frequencies are to pass the filter ideally. Further it is important to specify how much the filter are allowed to vary from the ideal properties, from which it will vary. \\
-Properties for an approximation to a lowpass filter could be defined by bounding the magnitude within $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$\trine{beskrivelse af convertering af spec. er udkommenteret}. 
+Properties for an approximation to a lowpass filter could be defined by bounding the magnitude within $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$
 The tolerance scheme pleasing the continuous-time filter is illustrated on figure \ref{fig:scheme}\\ 
 The transition off nonzero width between the cutoff frequency of passband and stopband is necessary in order for the system to be realizable.
 
@@ -38,7 +38,7 @@ ymax=4.6]
 \draw[line width=0.5mm](axis cs:4,0.5)--(axis cs:7,0.5);
 \node at (axis cs:1,1.5) {Passband};
 \node at (axis cs:3,1.5) {Transition};
-\node at (axis cs:5.5,1.5) {Stopband};
+\node at (axis cs:5.0,1.5) {Stopband};
 \end{axis}
 \end{tikzpicture}
 \caption{Specification of frequency response}
@@ -77,7 +77,7 @@ By letting the denominator in \eqref{eq:butter} equal to zero it is possible to 
 \begin{align}
 s_k = (-1)^{\frac{1}{2N}}\left(j\Omega_c\right)=\Omega_c\text{e}^{\left(\frac{j\pi}{2N}\right)\left(2k+N-1\right)}, \ \ k=0,1,\ ... \ , 2N-1 
 \end{align}   
-The poles will placed equally along the circle of radius $\Omega_c$ as illustrated on figure \ref{??}. By only considering the poles in the left half plane $H_c(s)$ can be construed as a stable system. 
+The poles will be placed equally along the circle of radius $\Omega_c$ in the $s$-plane. By only considering the poles in the left half plane $H_c(s)$ can be construed as a stable system. 
 \begin{align}
 H_c(s)=\frac{1}{\prod_{k=1}^{N}(s-s_k)}
 \end{align}    
@@ -96,14 +96,6 @@ Because $-\infty \leq \Omega \leq \infty $ is mapped to $-\pi \leq \omega \leq \
 hereby it is possible to determine a new $\Omega_c$ to the continuous-time filter, in order to ensure the discrete $\omega_c$ to fit the specification.\\
 An important property of the bilinear transformation is that stability is preserved if the continuous-time filter i stable. \\
 
-
-%
-%These properties are to be converted into specifications of the discrete-time filter by expressing the frequency in normalised radian frequency by the relation $\omega=\Omega T_d$ where $T_d$ is the sampling rate. Thus the impulse response is specified over one period as 
-%\begin{align}
-%H_c(j\Omega)=H(e^{j\omega}), \ \ |\omega|<\pi
-%\end{align}    
-%
-%The desired gain of the magnitude is often expressed in dB, where $20\log(1)=0[\text{dB}]$ \trine{is gain of magnitude a thing?} \\
  
 
 \subsection{FIR filter}
@@ -213,7 +205,7 @@ w[n]=\left\{\begin{matrix}
 0, &\ Otherwise
 \end{matrix}\right.
 \end{align}        
-where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ the zero'th order modified Bessel function of the first kind.\cite{DTSP, p.474-476} Increasing $\beta$ tapers the window in the time domain, which results in smaller side lopes of the Fourier transform. Increasing $M$ causes the width of the main lope to increase though without changing the peak amplitude of the side lopes. This i illustrated on figure \ref{?} and \ref{?} respectively.\\
+where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ the zero'th order modified Bessel function of the first kind.\cite{DTSP, p.474-476} Increasing $\beta$ tapers the window in the time domain, which results in smaller side lopes of the Fourier transform. Increasing $M$ causes the width of the main lope to increase though without changing the peak amplitude of the side lopes. This i illustrated on figure \ref{?} and \ref{?} respectively\trine{2 figure}.\\ 
 In order to determine values for $\beta$ and $M$ according to the satisfy the desired specifications the following formulas are defined. First note that the peak approximation error $\delta$ - by the method of Kaiser - is determined on behave of $\beta$. Considering a lowpass filter, with a fixed $\delta$ this gives a cut off frequency of the passband $\omega_p$ defined by $|H(\text{e}^{j\omega})| \geq 1-\delta$ and cut off stopband frequency $\omega_s$ defined by $|H(\text{e}^{j\omega})| \leq \delta$. This gives a transitionband of width $\delta \omega = \omega_s - \omega_p$. Defining $\delta$ in $[dB]$ by $A=-20\log_{10} \delta$ is it possible to determine the value of $\beta$ on behave of a specific value of $A$ as 
 \begin{align}
 \beta =
@@ -227,14 +219,20 @@ Furthermore $M$ must satisfy the following relation.
 \begin{align}
 M=\frac{A-8}{2.285\Delta \omega} 
 \end{align}	
-By this establishment of the Kaiser window method it is possible to design a FIR filter within desired specifications with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable.       
-\subsection{Comparison of IIR and FIR filters}
-... \\
-Advantages of IIR filter:
-The process of designing a IIR filter is rather simple when the desired properties fits an establish design method such as a Butterworth filter. The required order of the filter is computable and the transformation to the discrete-time domain is to be done straight forward. Further, considering the implementation, this leads to non iterative algorithms. \\
-Though by this method the magnitude response is the only parameter to be specified. Meaning that specific requirements for e.g. phase response or group delay are not quarantined to be fulfilled by this kind of IIR filter.
+By this establishment of the Kaiser window method it is possible to design a FIR filter within desired specifications with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable.    
 
-\subsection{Anti aliasing filter}
+\subsubsection{Anti aliasing filter}
 As mentioned in section \ref{ADC} an anti aliasing filter is required in the ADC process. The purpose of filter is to avoid the aliasing phenomenon which occurs when the samplings theorem \ref{sampling_theorem} is not fulfilled. As stated a signal has to be band limited by the Nyquist frequency $\omega_N$ and since a continuous-time signal such as a sound is not guaranteed to have a bandlimited frequency the anti aliasing filter is design to remove the frequencies that are above the Nyquist frequency. \\
-An anti aliasing filter typically form an analogue low pass filter, with the Nyquist frequency as the ideal cut off frequency. Though as seen a transition band is necessary - when designing a practical filter - in which the frequencies can cause aliasing. This causes the passband cut of frequency to be larger than the Nyquist frequency.\trine{how larger}           
+An anti aliasing filter typically form an analogue low pass filter, with the Nyquist frequency as the ideal cut off frequency. Though as seen a transition band is necessary - when designing a practical filter - in which the frequencies can cause aliasing. This causes the passband cut of frequency to be larger than the Nyquist frequency.    
+   
+\subsection{Comparison of IIR and FIR filters}
+To conclude this section about design of digital filters a comparison of IIR and FIR filter will be stated considering the advantages and disadvantages of the different systems. \\ 
+\\
+The process of designing a IIR filter - presented in this section - is rather simple when the desired properties fits an establish design method such as a Butterworth filter. The required order of the filter is computable and the transformation to the discrete-time domain is to be done straight forward. Further, considering the implementation, this leads to non iterative algorithms. By this method the magnitude response is the only parameter to be specified, hence specific requirements for e.g. phase response or group delay are not guaranteed to be fulfilled by this kind of IIR filter.\\ \\
+Considering a FIR filter the main advantages - compared to FIR filters - is the possibility of getting a precise generalized linear phase. The generalised linear phase is important in order to preserve the wave form of the original signal.  
+The window method also straight forward to apply, though it is not pre-defined design equation, and so more or less iterations are often necessary before desired specifications is achieved. \\
+When choosing the right filter design computational speed is often considered which basically is related to the required order of the system and amount of needed iterations. \\
+\\
+By this it is clear that the choice of filter depends on the specific case, and how different aspects are weighted. IIR filter have many advantages in implementation and efficiency which makes it preferable in cases where a need of generalized linear phases is less significant, though in other cases linear phase by a FIR filter can be worth the extra computations.       
+
 

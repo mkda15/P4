@@ -13,7 +13,7 @@ H(e^{j\omega})=\sum_{k=-\infty}^{\infty}h[k]e^{-j\omega k}
 thus the outcome of the filter becomes 
 \begin{align}
 y[n]=H(e^{j\omega})e^{-j\omega n} \label{eq:filter_output}
-\end{align} \trine{evt. indsæt relations til Z og transferfunction her, og ny overskrift}
+\end{align} \trine{evt. indsæt relations til Z og transferfunction her, evt ny overskrift?}
 By \eqref{eq:filter_output} it is seen that $H(e^{j\omega})$ describes the change in complex amplitude of a complex exponential input signal to a given frequency. $H(e^{j\omega})$ is in general complex and hence it can be expressed as
 \begin{align}
 H(e^{j\omega})=|H(e^{j\omega})|e^{j\measuredangle H(e^{j\omega})}
@@ -50,37 +50,28 @@ h_{lp}[n]=\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}\text{e}^{j\omega n} d\omega 
 \end{align}  
 A system is called causal if the system output at time index \textit{k} depends only on input up to time \textit{k}. Further this implies $h[k] = 0$ for all $k<0$.\cite{FSP,p.196 & 208}  \\
 By \eqref{eq:low_im} the impulse response is nonzero for $n<0$ hence the filter is noncasual.\\
-Frequency- and impulse response are illustrated on figure \ref{?} \trine{Figur}
+Frequency- and impulse response are illustrated on figure \ref{fig:ideal_low}
+\begin{figure}[H]
+\begin{subfigure}[b]{0.50\textwidth}
+        \centering
+\includegraphics[scale=0.45]{figures/filter_teori/ideal_low2.pdf}
+\caption{}
+\end{subfigure}
+\begin{subfigure}[b]{0.50\textwidth}
+        \centering  
+\includegraphics[scale=0.45]{figures/filter_teori/ideal_low1.pdf}
+\caption{}
+ \end{subfigure}
+\caption{ (a)Magnitude response of ideal lowpass filter with $\omega_c = \frac{\pi}{2}$ (B) corresponding impulse response}
+\label{fig:ideal_low}
+\end{figure}
+
+
 Analogues an ideal highpass or bandpass filter can be defined, as illustrated on figure \ref{fig:ideal}.\\ 
 
 \begin{figure}[H]
-	\begin{subfigure}[b]{0.32\textwidth}
+\begin{subfigure}[b]{0.50\textwidth}
         \centering
-
-\begin{tikzpicture}[scale=1]
-\begin{axis}[
-scale=0.5,
-unit vector ratio*=1 1 1,
-axis lines = middle,
-xtick={1.5,3},
-xticklabels={$\omega_c$},
-ytick={1.5},
-yticklabels={$1$},
-xmin=0,
-xmax=3,
-ymin=0,
-ymax=2.6]
-\node at (axis cs:0.7,2.4) {$|H(e^{j\omega})|$};
-\draw[line width=0.5mm](axis cs:0,1.5)--(axis cs:1.5,1.5);
-\draw[line width=0.5mm](axis cs:1.5,1.5)--(axis cs:1.5,0);
-\draw[line width=0.5mm](axis cs:1.5,0)--(axis cs:3,0);
-\end{axis}
-\end{tikzpicture}
-\caption{}
-    \end{subfigure}
-\begin{subfigure}[b]{0.32\textwidth}
-        \centering
-
 \begin{tikzpicture}[scale=1]
 \begin{axis}[
 scale=0.5,
@@ -103,7 +94,7 @@ ymax=2.6]
 
 \caption{}
     \end{subfigure}
- \begin{subfigure}[b]{0.32\textwidth}
+ \begin{subfigure}[b]{0.50\textwidth}
         \centering  
 \begin{tikzpicture}[scale=1]
 \begin{axis}[
@@ -128,13 +119,13 @@ ymax=2.6]
 \end{tikzpicture}
 \caption{}
     \end{subfigure}
-\caption{Magnitude of ideal (a) lowpass filter (b) highpass filter (c) bandpass filter}
+\caption{Magnitude of ideal (a) highpass filter (B) bandpass filter}
 \label{fig:ideal}
-\end{figure}\trine{lav en figur med impuls responsen for a}
+\end{figure}
 When computing a filter it is not possible to let the output depend on future input, hence noncausal systems are not computable, further zero phase is not possible for a causal system. 
 Thus an approximation of an ideal filter can be computed by a casual system with general linear phase.    
 
-\subsection{FIR and IIR filter} 
+\section{FIR and IIR filter} 
 Two classes of filter are essential to identify.\\
 For all ideal filters discussed in the previous section the impulse response is defined for $-\infty < n < \infty$ such filter is specified as a \textit{infinite impulse response (IIR)} filter . In the case of the impulse response being zero outside a finite interval the filter is referred to as a \textit{finit impulse response (FIR)} filter \\
 \\
