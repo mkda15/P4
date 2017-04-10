@@ -44,7 +44,7 @@ The following statement shows the symmetry between $f(t)$ and $F(\omega)$ and is
 Let $f \in \mathcal{L}^1$. Then:
 
 \begin{enumerate}[label=(\alph*)]
-\item For any $a \in \mathbb{R}$:
+\item For any $a \in \mathbb{R}$: \label{theorem:fund_sym_Fourier_a}
 \begin{align*}
 \mathcal{F}\{f(t-a)\}(\omega) = e^{-ja\omega} F(\omega), \\
 \mathcal{F}\{e^{jat}f(t)\}(\omega) = F(\omega - a).
@@ -132,7 +132,7 @@ where $z = t - \tau$.
 \noindent
 In all simplicity, part (a) of this theorem shows that translating a function (that is, a delay) corresponds to multiplying its Fourier transform by an exponential (which is equivalent to a phase shift since $F$ may be written in the polar coordinates $F = |F|e^{j\theta}$) and vice versa; part (b) shows that dilating a function by $\delta$ corresponds to dilating its Fourier transform by $1/\delta$ and vice versa; part (c) shows that differentiating a function corresponds to multiplying its Fourier transform by the coordinate variable and vice versa; and by definition \ref{def:Convol} it is shown that a convolution in the time domain is equivalent to multiplying in the frequency domain and vice versa \cite{page 215, FAA}.
 \\ \\
-The following theorem is inspired by \cite{page 77, FAA}. \martin{Consider this. Also, what about the Riemann-Lebesgue Lemma (page 217 in Folland). \textregistered}
+The following theorem is inspired by \cite{page 77, FAA}. \martin{This is actually related to the Fourier series and the discussion about ortonormal transforms, which we have rather elegantly omitted. We need to consider whether to introduce these (with respect to the limited number of pages). \textregistered}
 
 \begin{theorem}
 Let $\{\phi_n\}_1^\infty$ be an orthonormal set in $\mathcal{L}^2(a,b)$. The following conditions are equivalent.
@@ -148,10 +148,56 @@ This is known as Parseval's equation.
 \end{theorem}
 
 \begin{proof}
-\martin{Should we prove it? \textregistered}.
+\martin{Prove it or remove it. \textregistered}.
 \end{proof}
 
-The Fourier transform $F(\omega)$ is well-defined for $f \in \mathcal{L}^1$ since
+A main result with regards to the Fourier transform is the following theorem, which is closely related to corollary \ref{coro:conv_Fourier_coeff} from the Fourier series \cite{page 217, FAA}.
+
+\begin{theorem}[The Riemann-Lebesgue Lemma]
+If $f \in \mathcal{L}^1$, then $F(\omega) \to 0$ as $\omega \to \pm \infty$.
+\end{theorem}
+
+\begin{proof}
+$f$ is supposed to be a step function such that $f(t) = \sum_{j=1}^k c_j \phi_j(t)$. $\phi(t)$ is defined as:
+\begin{align*}
+\phi(t) =
+	\begin{cases}
+		1 \quad \text{for } |t| < a \\
+		0 \quad \text{elsewhere}
+	\end{cases}
+\end{align*}
+
+Hence, each $\phi_j$ equals 1 on a bounded interval $|t - t_j| < a_j$ and 0 elsewhere. The Fourier transform of $\phi(t)$ is:
+\begin{align*}
+\mathcal{F}\{\phi(t)\}(\omega) = \int_{-a}^a e^{-j\omega t} dt = \dfrac{e^{-ja\omega} - e^{ja\omega}}{-j\omega} = 2\dfrac{\sin(a\omega)}{\omega}.
+\end{align*}
+
+By theorem \ref{theorem:fund_sym_Fourier}\ref{theorem:fund_sym_Fourier_a}, the Fourier transform of $\phi_j(t)$ is:
+\begin{align*}
+\mathcal{F}\{\phi_j(t)\}(\omega) = 2 \omega^{-1} e^{-jt_j\omega} \sin(a_j\omega),
+\end{align*}
+
+which vanishes when $\omega to \infty$, and hence so does $F(\omega)$.
+\\
+In the general case it is possible to find a sequence $\{f_n\}, f \in \mathcal{L}^1$ of step functions such that
+\begin{align*}
+\int_{-\infty}^\infty |f_n(t) - f(t)| dt \to 0.
+\end{align*}
+
+When $f$ is Riemann integrable this is simply a restatement of the fact that the integral of $f$ is the limit of Riemann sums. When $f$ is Lebesgue integrable the proof requires results from integration theory, which are omitted in this project. Since $|e^j\omega t| = 1$, the integral in the Fourier transform converges absolutely for all $\omega$ and defines a bounded function of $\omega$:
+\begin{align*}
+|F(\omega)| \leq \int_{-\infty}^\infty |f(t)| dt,
+\end{align*}
+
+which means that:
+\begin{align*}
+\sup_{\omega} |F_n(\omega) - F(\omega)| \leq \int_{-\infty}^\infty |f_n(t) - f(t)| dt \to 0 \quad \text{as } n \to \infty.
+\end{align*}
+
+Therefore, $F_n(\omega) \to F$ uniformly, and since each $F_n(\omega)$ vanishes at infinity, then so does $F(\omega)$.
+\end{proof}
+
+Moreover, the Fourier transform $F(\omega)$ is well-defined for $f \in \mathcal{L}^1$ since
 \begin{align*}
 |F(\omega)| \leq \int_{-\infty}^\infty |f(t)| \cdot |e^{j \omega t}| dt = \|f\|_{\mathcal{L}^1} < \infty.
 \end{align*}
