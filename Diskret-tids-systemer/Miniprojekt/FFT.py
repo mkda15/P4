@@ -12,25 +12,23 @@ import time
 #==============================================================================
 # Generér data
 #==============================================================================
-N = 2**8
-f_s = 2**8
-t = N/float(f_s)
-f_res = f_s/float(N)
-x = np.linspace(0,t,N)
+N = 2**15 # Antal samples og længde af FFT
+f_s = 2**2 # Samplingsfrekvens
+td = 1/float(f_s) # Samplingsperiode
+
+x = np.linspace(0,N*td,N) # Samplingspunkter i tid
+xf = np.linspace(0,1/float(2*td),N/float(2)) # Halvdelen af samplingspunkter i frekvens
 
 def f(x):
     return np.sin(np.pi/3*x)
-
 def g(x):
     return np.sin(2*np.pi/3 + np.pi/2*x)
-
 def h(x):
     return np.sin(4*np.pi/3 + 3*np.pi/4*x)
-
 def j(x):
     return np.sin(x)
 
-y = f(x)+g(x)+h(x)
+y = f(x)+g(x)+h(x) # Funktion, som samples og transformeres
 
 #==============================================================================
 # DFT
@@ -41,24 +39,22 @@ def DFT(x,c):
         a = 0+0*1j
         for n in range(c):
             a += x[n]*np.exp(-2*np.pi*1j*k*n/float(c))
-            X[k] = a/np.sqrt(N)
+            X[k] = a/float(np.sqrt(N))
     return X
 
 #==============================================================================
 # FFT
 #==============================================================================
-    
 def FFT(x):
-    """A recursive implementation of the 1D Cooley-Tukey FFT"""
     N_new = len(x)
     if N % 2 > 0:
-        raise ValueError('Nej')
-    elif N_new <= 1:  # this cutoff should be optimized
-        return DFT(x,N_new)
+        raise ValueError('nej.') # Brug N = potenser af 2
+    elif N_new <= 1:
+        return DFT(x,N_new) # Returnerer DFT når data ikke kan deles mere op
     else:
-        X_even = FFT(x[::2])
-        X_odd = FFT(x[1::2])
-        factor = np.exp(-2j * np.pi * np.arange(N_new) / N_new)
+        X_even = FFT(x[::2]) # Deler rekursivt input op - lige dele
+        X_odd = FFT(x[1::2]) # Deler rekursivt input op - ulige dele
+        factor = np.exp(-2j * np.pi * np.arange(N_new) / N_new) # Twiddlefaktor
         return np.concatenate([X_even + factor[:N_new / 2] * X_odd,
                                X_even + factor[N_new / 2:] * X_odd])
 
@@ -75,17 +71,13 @@ start = time.time()
 Y = FFT(y)
 end = time.time()
 FFT_time = end - start
-print 'Seconds to evaluate FFT', FFT_time
 
 
 
 #plt.plot(x,y)
-plt.plot(Y)
-#plt.plot(Y_slow)
-#plt.plot(np.fft.fft(y))
+plt.plot(xf,2/float(N)*np.abs(Y[:N/2]))
 
-#print(np.allclose(DFT(y,N),np.fft.fft(y)))
-
+print 'Seconds to evaluate FFT', FFT_time
 
 
 
