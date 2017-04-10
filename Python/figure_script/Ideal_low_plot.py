@@ -9,8 +9,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-w_range = np.linspace(0, np.pi, 1000)
-#n = np.linspace(0,10,len(w_range))
+w_range = np.linspace(0, np.pi, 11)
+n = np.linspace(0,10,len(w_range))
 
 
 # plot at ideal lavpas filter w_range(10000), og n(11)
@@ -20,7 +20,7 @@ def h(n,w_c):
         h[i]=(np.sin(n[i]*w_c))/((np.pi*n[i]))
     return h 
 
-n = range(11)
+#n = range(11)
 cutoff = np.pi/2 
 
 def H(w):
