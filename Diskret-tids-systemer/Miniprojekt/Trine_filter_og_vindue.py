@@ -17,10 +17,10 @@ def impulse_response(n,M,omega1,omega2):
             hd[i] = (1./(2*np.pi*(n[i]-(M/2.)))) * (np.sin(2*np.pi*omega1*(n[i]-(M/2))) - np.sin(np.pi*omega1*(n[i]-(M/2))))
     return hd
     
-delta = 0.5
-M = 8
+delta = 0.1
+M = 28
 length = M+1
-samples = 100
+samples = 1000
 
 n = np.linspace(0,length,samples)
 x = np.linspace(-np.pi, np.pi, len(n))
@@ -52,7 +52,7 @@ plt.show()
 
 h = w * hd
 plt.stem(n,h)
-plt.axis([-2,15,-0.6,0.8])
+plt.axis([-2,30,-0.6,0.8])
 plt.show()
 
 #==============================================================================
