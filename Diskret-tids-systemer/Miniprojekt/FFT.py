@@ -8,16 +8,18 @@ Created on Tue Mar 21 09:40:07 2017
 import matplotlib.pyplot as plt
 import numpy as np
 import time
+from scipy import signal
 
 #==============================================================================
 # Generér data
 #==============================================================================
-N = 2**15 # Antal samples og længde af FFT
-f_s = 2**2 # Samplingsfrekvens
+N = 2**13 # Antal samples og længde af FFT
+f_s = 2**0   # Samplingsfrekvens
 td = 1/float(f_s) # Samplingsperiode
+t = td*N
 
 x = np.linspace(0,N*td,N) # Samplingspunkter i tid
-xf = np.linspace(0,1/float(2*td),N/float(2)) # Halvdelen af samplingspunkter i frekvens
+xf = 2*np.pi*np.linspace(0,1/float(2*td),N/float(2)) # Højre halvdel af samplingspunkter i frekvens
 
 def f(x):
     return np.sin(np.pi/3*x)
@@ -26,10 +28,16 @@ def g(x):
 def h(x):
     return np.sin(4*np.pi/3 + 3*np.pi/4*x)
 def j(x):
-    return np.sin(x)
+    return np.sin(x)+np.sin(3*x)
+
+def window(x): # Hammingvindue
+    return 0.54-0.46*np.cos((2*np.pi*x)/float(N-1))
+
+w = window(np.linspace(0,N-1,N))
 
 y = f(x)+g(x)+h(x) # Funktion, som samples og transformeres
-
+#y = y*w # Windowing af signal
+     
 #==============================================================================
 # DFT
 #==============================================================================
@@ -39,7 +47,7 @@ def DFT(x,c):
         a = 0+0*1j
         for n in range(c):
             a += x[n]*np.exp(-2*np.pi*1j*k*n/float(c))
-            X[k] = a/float(np.sqrt(N))
+            X[k] = a
     return X
 
 #==============================================================================
@@ -49,7 +57,7 @@ def FFT(x):
     N_new = len(x)
     if N % 2 > 0:
         raise ValueError('nej.') # Brug N = potenser af 2
-    elif N_new <= 1:
+    elif N_new == 2:
         return DFT(x,N_new) # Returnerer DFT når data ikke kan deles mere op
     else:
         X_even = FFT(x[::2]) # Deler rekursivt input op - lige dele
@@ -58,26 +66,59 @@ def FFT(x):
         return np.concatenate([X_even + factor[:N_new / 2] * X_odd,
                                X_even + factor[N_new / 2:] * X_odd])
 
-
-    
-    
+#==============================================================================
+# Egen DFT og hastighed
+#==============================================================================
 #start = time.time()
 #Y_slow = DFT(y,N)
 #end = time.time()
 #DFT_time = end - start
 #print'Seconds to evaluate DFT', DFT_time
 
+#==============================================================================
+# Egen FFT og hastighed
+#==============================================================================
 start = time.time()
 Y = FFT(y)
 end = time.time()
 FFT_time = end - start
+Y = 2/float(N)*np.abs(Y[:N/2])
+
+#==============================================================================
+# numpy.fft og hastighed
+#==============================================================================
+start2 = time.time()
+Y2 = np.fft.fft(y)
+end2 = time.time()
+FFT2_time = end2 - start2
+Y2 = 2/float(N)*np.abs(Y2[:N/2])
+
+#==============================================================================
+# Plots
+#==============================================================================
+plt.style.use('ggplot')
+#plt.plot(x[:10],y[:10])
+plt.plot(xf,Y)
+#plt.plot(xf,Y2)
+plt.xlabel('Angular frequency')
+plt.ylabel('Amplitude')
+plt.show()
+
+Y_sort = np.argpartition(Y2,-3)[-3:]
+
+
+print 'Seconds to evaluate own FFT:  ', FFT_time
+print 'Seconds to evaluate numpy.fft:', FFT2_time
 
 
 
-#plt.plot(x,y)
-plt.plot(xf,2/float(N)*np.abs(Y[:N/2]))
 
-print 'Seconds to evaluate FFT', FFT_time
+
+
+
+
+
+
 
 
 
