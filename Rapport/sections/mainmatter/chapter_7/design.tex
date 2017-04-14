@@ -1,19 +1,18 @@
 \section{Filter design}
-In this section the process of designing digital filter are described. There will be a distinguished between techniques for IIR and FIR filters..\\
-As described ideal filters are not computable hence the process of designing a filter is based on approximation of the frequency response made by computable polynomials.  
-
+In this section the process of designing digital filter are described. There will be a distinguished between techniques for IIR and FIR filters.\\ The section is concluded by a comparison of FIR and IIR filters.\\  
+As described ideal filters are not computable. Hence the process of designing a filter is based on approximation of the frequency response - made by computable polynomials - on behave off a set of specification for the filter. Different design methods exist to archive this.     
 
 \subsection{IIR filter}
-One common way of designing an IIR-filter is to design the discrete-time filter from a corresponding continuous-time system. The idea follows three main steps. 
+One common way of designing an IIR-filter is to design the discrete time filter from a corresponding continuous time system. The method described in this section follows three main steps. 
 \begin{itemize}
 \item[1.] Specify the properties desired for the filter.
-\item[2.] Hereby compute a "prototype" by a continuous-time system $H_c(j\Omega)$ that approximates the given properties.
-\item[3.] Transform the "prototype" into the discrete-time filter $H(e^{j\omega})$.
+\item[2.] Hereby compute a "prototype" by a continuous time system $H_c(j\Omega)$ that approximates the given properties. Done as a \textit{Butterworth filter}  
+\item[3.] Transform the "prototype" into the discrete time filter $H(e^{j\omega})$. Done with the \textit{Bilinear trasformation}. 
 \end{itemize}
 The properties of a system are specified on behave of the desired application, considering what frequencies are to pass the filter ideally. Further it is important to specify how much the filter are allowed to vary from the ideal properties, from which it will vary. \\
-Properties for an approximation to a lowpass filter could be defined by bounding the magnitude within $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$
-The tolerance scheme pleasing the continuous-time filter is illustrated on figure \ref{fig:scheme}\\ 
-The transition off nonzero width between the cutoff frequency of passband and stopband is necessary in order for the system to be realizable.
+Properties for an approximation to a lowpass filter could be defined by bounding the magnitude within $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$. \\
+The tolerance scheme pleasing the continuous time filter is illustrated on figure \ref{fig:scheme}.
+The transition of nonzero width between the cutoff frequency of passband and stopband is necessary in order for the system to be realizable.
 
 \begin{figure}[H]
 \centering
@@ -45,8 +44,7 @@ ymax=4.6]
 \label{fig:scheme}
 \end{figure}
 
-Methods for defining a continuous-time system that fits the specification are establish as known continuous-time filter designs. The \textit{Butterworth filter} which is a lowpass filter approximation will now be described along with the Bbiliniare transformation.\\
-For a Butterworth filter the squared magnitude are defined as follows.
+Methods for defining a continuous time system that fits the specification are establish as known continuous time filter designs as the Butterworth filter which is a lowpass filter approximation. For the Butterworth filter the squared magnitude is defined as follows.
 \begin{align}\label{eq:butter}
 |H_c(j\Omega)|^2=\frac{1}{1+\left( \frac{j\Omega}{j\Omega_c}\right)^{2N}}
 \end{align} 
@@ -62,7 +60,7 @@ Further the filter is characterised by the following three properties.
 \end{matrix}\right. , \textit{ for all }N. \\
 3.& \ \ \ \textit{Magnitude response is monotonic in pass- and stopband.}
 \end{align}
-As the order $N$ of the filter increases the characteristics become sharper and the filter approximates the ideal lowpass filter. This is illustrated on figure \ref{fig:butter}. By\eqref{eq:butter} it is possible to compute the order necessary for the system to fulfil the specifications.            
+As the order $N$ of the filter increases the characteristics become sharper and the filter approximates the ideal lowpass filter. This is illustrated on figure \ref{fig:butter}. By \eqref{eq:butter} it is possible to compute the order necessary for the system to fulfil the specifications.            
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.6\textwidth]{figures/butterworth.png}
@@ -81,7 +79,7 @@ The poles will be placed equally along the circle of radius $\Omega_c$ in the $s
 \begin{align}
 H_c(s)=\frac{1}{\prod_{k=1}^{N}(s-s_k)}
 \end{align}    
-When the continuous-time filter $H_c(s)$ is defined the next step is the transformation from continuous-time to discrete-time. The bilinear transformation is a method that allows a direct transformation between the s- and z-domain. The principal of the transformation is that the imaginary axis $j\Omega$ of the s-plane is mapped onto the z-plane as the unitcircle. The bilinear transformation is defined by 
+When the continuous time filter $H_c(s)$ is defined the next step is the transformation from continuous time to discrete time. The Bilinear transformation is a method that allows a direct transformation between the s- and z-domain. The principal of the transformation is that the imaginary axis $j\Omega$ of the s-plane is mapped onto the z-plane as the unitcircle. The bilinear transformation is defined by 
 \begin{align}
 s=\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right) 
 \end{align}
@@ -99,10 +97,10 @@ An important property of the bilinear transformation is that stability is preser
  
 
 \subsection{FIR filter}
-Design of FIR filters are in contrast to IIR filters based on approximating the desired discrete-time frequency response directly. By this method it is possible to guarantee a general linear phase of the system. The window method..   
+Design of FIR filters are in contrast to IIR filters based on approximating the desired discrete-time frequency response directly. By this method it is possible to guarantee a general linear phase of the system. The window method will be described in this section.   
 
 \subsubsection{The Window method}
-The window method is considered a simple method for designing FIR filters. The method takes off from the desired frequency response $H_d$ whereby the desired impulse response is obtained by the inverse Fourier transformation of frequency response
+The window method is considered a simple method for designing FIR filters. The method takes off from the desired frequency response $H_d$ - specified as for the IIR filter. Hereby the desired impulse response is obtained by the inverse Fourier transformation of the desired frequency response.
 \begin{align}
 h_d[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi} H_d(\text{e}^{j\omega})\text{e}^{j\omega} d\omega
 \end{align}
@@ -147,7 +145,7 @@ Figure \ref{fig:FIR1} illustrates the convolution process referred to as windowi
     \label{fig:FIR1}
 \end{figure}  
 The aim is to approximate the desired frequency response as good as possible. For $w[n]=1 \ \forall \ n$, $W(e^{j\omega})$ becomes a periodic impulse which implies $H(e^{j\omega})=H_d(e^{j\omega})$ though the needed truncations is not performed. The impulse train is best approximated by letting the main lobe of $W(\text{e}^{j\omega})$ be as narrow as possible and the side lobes as small as possible. This corresponds respectively to minimizing the width of the transitband and the ripples in pass and stop band, though it is not possible to achive both at ones.\\
-By increasing M the with of the main-lope is decreased, but the peak amplitude of the side-lopes also increases which results in ripples. this indicates a trade-off between main width of main-lope and amplitude of side-lopes. \\
+By increasing M the with of the main-lope is decreased, but the peak amplitude of the side-lopes also increases which results in ripples. This indicates a trade off between main width of main-lope and amplitude of side-lopes. \\
 Figure \ref{?} illustrates main and side lope by a plot of the magnitude response corresponding to the rectangular window\trine{indsæt figur}.
 
 \subsubsection{Different types of windows}
@@ -206,7 +204,7 @@ w[n]=\left\{\begin{matrix}
 \end{matrix}\right.
 \end{align}        
 where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ the zero'th order modified Bessel function of the first kind.\cite{DTSP, p.474-476} Increasing $\beta$ tapers the window in the time domain, which results in smaller side lopes of the Fourier transform. Increasing $M$ causes the width of the main lope to increase though without changing the peak amplitude of the side lopes. This i illustrated on figure \ref{?} and \ref{?} respectively\trine{2 figure}.\\ 
-In order to determine values for $\beta$ and $M$ according to the satisfy the desired specifications the following formulas are defined. First note that the peak approximation error $\delta$ - by the method of Kaiser - is determined on behave of $\beta$. Considering a lowpass filter, with a fixed $\delta$ this gives a cut off frequency of the passband $\omega_p$ defined by $|H(\text{e}^{j\omega})| \geq 1-\delta$ and cut off stopband frequency $\omega_s$ defined by $|H(\text{e}^{j\omega})| \leq \delta$. This gives a transitionband of width $\delta \omega = \omega_s - \omega_p$. Defining $\delta$ in $[dB]$ by $A=-20\log_{10} \delta$ is it possible to determine the value of $\beta$ on behave of a specific value of $A$ as 
+In order to determine values for $\beta$ and $M$ according to  satisfying the desired specifications the following formulas are defined. First note that the peak approximation error $\delta$ - by the method of Kaiser - is determined on behave of $\beta$. Considering a lowpass filter, with a fixed $\delta$ this gives a cut off frequency of the passband $\omega_p$ defined by $|H(\text{e}^{j\omega})| \geq 1-\delta$ and cut off stopband frequency $\omega_s$ defined by $|H(\text{e}^{j\omega})| \leq \delta$. This gives a transitionband of width $\delta \omega = \omega_s - \omega_p$. Defining $\delta$ in $[dB]$ by $A=-20\log_{10} \delta$ is it possible to determine the value of $\beta$ on behave of a specific value of $A$ as 
 \begin{align}
 \beta =
 \left\{ \begin{matrix}
