@@ -62,7 +62,7 @@ In the style the continues case of the Fourier transform, where it's possible to
 %This can be written on matrix form
 
 The DFT can be written on matrix form where $F[N]$ is the DFT of the sequence $f[k]$,
-\begin{align*}
+\begin{align} \label{eq:DFT_matrix}
 	\begin{bmatrix}
 		F[0]\\ F[1]\\ F[2]\\ \vdots \\ F[N-1]
 	\end{bmatrix}
@@ -78,7 +78,7 @@ The DFT can be written on matrix form where $F[N]$ is the DFT of the sequence $f
 	\begin{bmatrix}
 		f[0]\\ f[1]\\ f[2]\\ \vdots \\ f[N-1]
 	\end{bmatrix}
-\end{align*}
+\end{align}
 
 where W is called the twiddle factor and is defined as \cite{DFT_OX}
 \begin{align*}
@@ -87,9 +87,9 @@ where W is called the twiddle factor and is defined as \cite{DFT_OX}
 
 \begin{definition}[Discrete Fourier Transform]
 The discrete Fourier transform of a length-$N$ sequence $x$ is 
-\begin{align*}
+\begin{align} \label{eq:def_DFT}
 	X_k = (Fx)_k = \sum_{k=0}^{N-1} x_n W_N^{kn}, \, k\in {0, 1, \dots, N-1};
-\end{align*}
+\end{align}
 This is called the spectrum of $x$.\\
 The inverse DFT of a length-N sequence X is
 \begin{align*}
@@ -106,7 +106,6 @@ The DFT and inverse DFT as a pair, can be denoted as
 One of the reasons the fourier transform playes an important role in mathemathic, is simply because they are based on eigensequences of a Linear shift invariant system (Discrete equivalent of time-invariant system). 
  Properties of eigensequences' leads to the following property of convolving:
 There is an equivalence between multiplying Fourier transforms of sequences, and colving the sequences.
- The DFT is an N-dimensional vector, we write as $X_k$
 \\\\
  A fundamental property of Linear shift invariant (LSI) systems is, that they all have unit-modulus complex exponential sequences as eigensequence. \cite{FSP}
 \\\\
@@ -122,7 +121,7 @@ The DFT will be introduced through the use of eigensequences of the circular con
 \begin{align*}
 	(Hx)_n) = (h \circledast x)_n = \sum_{k = 0}^{N-1} x_k h_{(n-k) \text{ mod $N$}} =\sum_{k = 0}^{N-1} x_{(n-k) \text{ mod $N$}} h_k
 \end{align*}
-where H is called the circular convolution operator associated with h.
+where H is called the circular convolution operator associated with h. \chr{mod er modulus (som bogen anvender, ved ikke om vi vil bruge en anden for notation (Syntes ikke selv den er så god $(n-k) \text{ mod }N = |\dfrac{n-k}{N}|$}.
 \end{definition} \cite{FSP}
 
 \begin{definition}[Eigenfunction]
@@ -130,7 +129,7 @@ where H is called the circular convolution operator associated with h.
 \end{definition}
 \cite{Eigenfunctions}
 
-A property of LSI systems is, that they as eigensequences $v_n$ have all complex exponential sequences, with modulus being unit length (1) on the form $v_n = e^j \omega n$ \cite{FSP}.\\ Same follows from Linear Time Invariant systems (LTI) \cite{DTSP}.
+A property of LSI systems is, that they as eigensequences $v_n$ have all complex exponential sequences, with modulus being unit length (1) on the form $v_n = e^{j \omega n}$ \cite{FSP}.\\ Same follows from Linear Time Invariant systems (LTI) \cite{DTSP}.
 \\\\
 %Egenskaver ed eigenfunctioner:
 The eigenfunction property of the complex exponential function for an LSI system, can be thus be demonstrated; consider a complex sequence of radian frequency $v_n = e^{j\omega n} \text{ for } -\infty < n < \infty$.
@@ -173,7 +172,23 @@ From this the previously mentioned twiddle factor can be seen.
 The twiddle factor can be shown to be an eigensequence for the circular convolution operator.
 
 \begin{align*}
-	(h\circledast v)_n = \sum_{k=0}^{N-1} mod?
+	(h\circledast v)_n 
+	= \sum_{k=0}^{N-1} v_{(n-1)\text{ mod }N}h_i 
+	= \sum_{k=0}^{N-1} W_N^{-k((n-i) \text{ mod } N))}h_i
+	&= \sum_{k=0}^{N-1} W_N^{-k(n-i)}h_i\\
+	&= \sum_{k=0}^{N-1} h_i W_n^{ki} \, W_N^{-kn}
+	= \lambda_k v_n
 \end{align*}
 
 This shows that a circular convolution operator $H$'s has an eigensequence that is the twidddle factor.
+\\\\ \chr{Næste del er ikke en nødvendighed, men viser blot matrix formen for DFT.}
+$W_k$ in \eqref{eq:def_DFT} is a vector product between a vector of twiddle factors and vector $x \in \mathbb{C}^n$
+\begin{align*}
+	X_k =
+	\begin{bmatrix}
+		1 \\	W_N^k \\	\vdots \\ W_N^(N-1)k
+	\end{bmatrix}
+	x
+\end{align*}
+
+Producing the matrix for $X$ with $k \in \{0, 1, \dots, N-1\}$ yields the matrix form of the DFT as \eqref{eq:DFT_matrix}.
