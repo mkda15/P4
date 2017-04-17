@@ -27,6 +27,8 @@ x = np.linspace(-np.pi, np.pi, len(n))
 
 omega1 = (np.pi)/2. - delta
 omega2 = (np.pi)/2. + delta
+omega1 = np.pi/2-0.1
+omega2 = np.pi/2+0.1
 
 
 hd = impulse_response(n,M,omega1,omega2)
