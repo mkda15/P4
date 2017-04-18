@@ -1,6 +1,6 @@
 \section{Basic principals}\label{sec:basic_filter}
-A digital filter is characterised as a LTI system, previous defined by equation \eqref{eq:LTI_diff_equation_finite}. As described the system is completely characterized by its corresponding impulse response $h[n]$. In terms of the LTI system as a filter the impulse response determine the output $y[n]$ that is how much of the input sequence that passes the filter. \\
-The output of the system $y[n]$ is defined by the convolution sum of input signal and impulse response of the system.\cite{DTSP, p. 26}
+A digital filter is characterised as an LTI system, previously defined by equation \eqref{eq:LTI_diff_equation_finite}. As described the system is completely characterized by its corresponding impulse response $h[n]$. In terms of the LTI system as a filter the output $y[n]$ is the part of the signal the filters lets through. \\
+The output of the system $y[n]$ is defined by the convolution sum of input signal and impulse response of the system: \cite{DTSP, p. 26}
 \begin{align}
 y[n] = x[n]*h[n] = \sum_{k=1}^{\infty} x[k]h[n-k]
 \end{align}    
@@ -8,21 +8,21 @@ The frequency response of the system is given by the Fourier transformation of t
 \begin{align}\label{eq:freq_res}
 H(e^{j\omega})=\sum_{k=-\infty}^{\infty}h[k]e^{-j\omega k}
 \end{align}
-thus the outcome of the filter becomes 
+thus the outputof the filter becomes 
 \begin{align}
 y[n]=H(e^{j\omega})e^{-j\omega n} \label{eq:filter_output}
 \end{align} \trine{evt. indsæt relations til Z og transferfunction her, evt ny overskrift?}
 $H(e^{j\omega})$ describes the change in complex amplitude of a complex exponential input signal to a given frequency. $H(e^{j\omega})$ is in general complex and hence it can be expressed as
 \begin{align}
-H(e^{j\omega})=|H(e^{j\omega})|e^{j\measuredangle H(e^{j\omega})}
+H(e^{j\omega})=|H(e^{j\omega})|e^{j\measuredangle H(e^{j\omega})},
 \end{align}  
 where $|H(e^{j\omega})|$ and $e^{j\measuredangle H(e^{j\omega})}$ are the \textit{magnitude} and \textit{phase} response of the filter respectively, both real valued and $2\pi$-periodic.\\ 
-If the frequency response of a filter is real it is said to have \textit{zero phase}, which is equivalent to the phase response only taking values that are integer multiples of $\pi$, resolving in a straight phase with zero slope. Further if the frequency response can be written in the form 
+If the frequency response of a filter is real it is said to have \textit{zero phase}, which is equivalent to the phase response only taking values that are integer multiples of $\pi$, resulting in a straight phase with zero slope. Further if the frequency response can be written in the form 
 \begin{align}\label{eq:lin_pha}
-H(e^{j\omega})=A(e^{j\omega})e^{j(-\alpha\omega + j\beta)} 
+H(e^{j\omega})=A(e^{j\omega})e^{j(-\alpha\omega + j\beta)} ,
 \end{align}
-where $\alpha$ and $\beta$ are constants and $A(e^{j\omega})$ is real, the filter is said to have \textit{general linear phase}. That is because the phase response consist of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resolving from jumps of $2\pi$\trine{explain the discontinuity} \\
-A linear phase response is characterized by a constant group delay $\tau(\omega)$
+where $\alpha$ and $\beta$ are constants and $A(e^{j\omega})$ is real, the filter is said to have \textit{general linear phase}. That is because the phase response consists of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resulting from jumps of $2\pi$ caused by the 2$\pi$-periodicity. \\
+A linear phase response is characterized by a constant \textit{group delay} $\tau(\omega)$:
 \begin{align}
 \tau(\omega)=-\frac{d}{d\omega}\left\{ arg \left[ H(\text{e}^{j\omega}\right] \right\} = \alpha
 \end{align}
@@ -33,13 +33,13 @@ The phase response is an expression of how each of the signal components are del
 
 
 \section{Ideal filters} 
-When designing filters it is ideal to have approximately constant magnitude and zero phase corresponding to the frequency response. \\ For an ideal selective frequency filter the magnitude response will be constant unity for the frequencies that are wanted to pass the filter referred to as the \textit{bandpass} and zero for all other frequencies referred to as \textit{bandstop}. An example is an ideal lowpass filter with frequency response 
+When designing filters it is ideal to have constant magnitude and zero phase corresponding to the frequency response. \\ For an ideal selective frequency filter the magnitude response will be constant unity for the frequencies that are wanted to pass the filter referred to as the \textit{bandpass} and zero for all other frequencies referred to as \textit{bandstop}. An example is an ideal lowpass filter with frequency response 
 \begin{align}\label{eq:low}
 H_{lp}(\text{e}^{j\omega})=
 \left\{ \begin{matrix}
 1, &\ \left| \omega \right|< \omega_c \\
 0, &\ \omega_c < \left| \omega \right| \leq \pi
-\end{matrix}\right.
+\end{matrix}\right.,
 \end{align}     
 where $H_{lp}(\text{e}^{j\omega})$ is $2\pi$ periodic. $\omega_c$ is referred to as the \textit{cutoff frequency}. The lowpass filter selects the frequencies lower than the cutoff frequency and reject the higher frequency components of the input signal. By \eqref{eq:low} it is seen that the lowpass filter is real valued hence has zero phase as expected. \\
 The corresponding impulse response are determined by the inverse Fourier transformation on the passband interval.
@@ -64,7 +64,7 @@ Frequency- and impulse response are illustrated on figure \ref{fig:ideal_low}
 \end{figure}
 
 
-Analogues an ideal highpass or bandpass filter can be defined, as illustrated on figure \ref{fig:ideal}.\\ 
+Analogues of ideal highpass or bandpass filter can be defined, as illustrated on figure \ref{fig:ideal}.\\ 
 
 \begin{figure}[H]
 \begin{subfigure}[b]{0.50\textwidth}
@@ -119,19 +119,19 @@ ymax=2.6]
 \caption{Magnitude of ideal (a) highpass filter (B) bandpass filter}
 \label{fig:ideal}
 \end{figure}
-When computing a filter it is not possible to let the output depend on future input, hence noncausal systems are not computable, further zero phase is not possible for a causal system. 
+When computing a filter it is not possible to let the output depend on future input, hence noncausal systems are not computable. Zero phese is furthermore not possible for a causal system.
 Thus an approximation of an ideal filter can be computed by a casual system with general linear phase.    
 
 \section{FIR and IIR filter} 
 Two classes of filter are essential to identify.\\
-For all ideal filters discussed in the previous section the impulse response is defined for $-\infty < n < \infty$ such filter is specified as a \textit{infinite impulse response (IIR)} filter. In the case of the impulse response being zero outside a finite interval the filter is referred to as a \textit{finit impulse response (FIR)} filter. 
+For all ideal filters discussed in the previous section the impulse response is defined for $-\infty < n < \infty$. Such a filter is specified as an \textit{infinite impulse response (IIR)} filter. In the case of the impulse response being zero outside a finite interval the filter is referred to as a \textit{finit impulse response (FIR)} filter. 
 \subsection{Type 1 FIR filter}
-As described casual systems with generalized linear phase is wanted. This is possible to guaranty by using specific types of FIR filter.\\
-A causal system with generalized linear phase has to fulfil the following relation, cf. section \ref{sec:basic_filter}
+As described causal systems with generalized linear phase is wanted. This is possible to guarantee by using specific types of FIR filters.\\
+A causal system with generalized linear phase has to fulfil the following relation, cf. section \ref{sec:basic_filter}:
 \begin{align}
 \sum_{n=0}^{\infty}h[n]\sin\left(\omega \left(n-\alpha \right) + \beta \right) = 0
 \end{align}
-For a FIR filter to satisfy this relation the following set of conditions has to be fulfilled \cite{DTSP, p.342}
+For a FIR filter to satisfy this relation the following set of conditions has to be fulfilled \cite{DTSP, p.342}:
 \begin{align} \label{eq:FIR_con}
 &\beta = \left\{ \begin{matrix} 
 \pi  \\
@@ -141,8 +141,8 @@ For a FIR filter to satisfy this relation the following set of conditions has to
 &h[n]=h[M-n] \ \text{or} \ h[n]=-h[M-n] \nonumber  
 \end{align} 
 this implies that $h[n]$ is either symmetric or anti symmetric and that $\alpha = \frac{M}{2}$ becomes the symmetric point. \\
-On behave of these conditions four different types of FIR generalized linear phase filters is defined \cite{DTSP, p. 343}, only the \textit{type 1 FIR filter} will be elaborated here. Note that the conditions in \eqref{eq:FIR_con} guaranties a causal system with linear phase, but they are not a necessity. \\
-A type 1 FIR filter is characterised by having a symmetric impulse response and $M$ being an even integer. By applying the the symmetry condition to the definition of the Fourier transformation the frequency response is defined by   
+From of these conditions four different types of FIR generalized linear phase filters are defined \cite{DTSP, p. 343}, only the \textit{type 1 FIR filter} will be elaborated here. Note that the conditions in \eqref{eq:FIR_con} guarantees a causal system with linear phase, but they are not a necessity. \\
+A type 1 FIR filter is characterised by having a symmetric impulse response and $M$ being an even integer. By applying the symmetry condition to the definition of the Fourier transformation the frequency response is defined by   
 \begin{align}\label{eq:type1}
 H(\text{e}^{j\omega})=\text{e}^{-j\omega \frac{M}{2}} \sum_{k=0}^{\frac{M}{2}} a[k]\cos \omega k
 \end{align}
