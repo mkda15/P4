@@ -11,15 +11,15 @@ import time
 from scipy import signal
 
 #==============================================================================
-# Generér data
+# Generer data
 #==============================================================================
-N = 2**13 # Antal samples og længde af FFT
-f_s = 2**0   # Samplingsfrekvens
+N = 2**12 # Antal samples og laengde af FFT
+f_s = 2**1   # Samplingsfrekvens
 td = 1/float(f_s) # Samplingsperiode
 t = td*N
 
 x = np.linspace(0,N*td,N) # Samplingspunkter i tid
-xf = 2*np.pi*np.linspace(0,1/float(2*td),N/float(2)) # Højre halvdel af samplingspunkter i frekvens
+xf = 2*np.pi*np.linspace(0,1/float(2*td),N/float(2)) # Hoejre halvdel af samplingspunkter i frekvens
 
 def f(x):
     return np.sin(np.pi/3*x)
@@ -35,7 +35,7 @@ def window(x): # Hammingvindue
 
 w = window(np.linspace(0,N-1,N))
 
-y = f(x)+g(x)+h(x) # Funktion, som samples og transformeres
+y = f(x)+g(x)+h(x)# Funktion, som samples og transformeres
 #y = y*w # Windowing af signal
      
 #==============================================================================
@@ -58,7 +58,7 @@ def FFT(x):
     if N % 2 > 0:
         raise ValueError('nej.') # Brug N = potenser af 2
     elif N_new == 2:
-        return DFT(x,N_new) # Returnerer DFT når data ikke kan deles mere op
+        return DFT(x,N_new) # Returnerer DFT naar data ikke kan deles mere op
     else:
         X_even = FFT(x[::2]) # Deler rekursivt input op - lige dele
         X_odd = FFT(x[1::2]) # Deler rekursivt input op - ulige dele
@@ -97,9 +97,10 @@ Y2 = 2/float(N)*np.abs(Y2[:N/2])
 # Plots
 #==============================================================================
 plt.style.use('ggplot')
-#plt.plot(x[:10],y[:10])
-plt.plot(xf,Y)
+plt.plot(x[:10],y[:10])
+#plt.plot(xf,Y)
 #plt.plot(xf,Y2)
+plt.legend('Y')
 plt.xlabel('Angular frequency')
 plt.ylabel('Amplitude')
 plt.show()
