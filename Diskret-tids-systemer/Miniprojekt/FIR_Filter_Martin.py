@@ -9,13 +9,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
 
-M = 200
+M = 300
 l = M+1
-Fs = 0.9
 
 n = np.linspace(0,l,l+1)
 x = np.linspace(-np.pi,np.pi,len(n))
-xf = np.linspace(0,10*np.pi,len(n))
 
 f1 = (5*np.pi/12.) / (2*np.pi)
 f2 = (5*np.pi/8.) / (2*np.pi)
@@ -30,10 +28,19 @@ def h(n,M,f1,f2):
             - (np.sin(2*np.pi*f2*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.)))
     return hd
 
-def ha(n,M,a): # Hanning window if a = 0.5. Hamming window if a = 0.54.
+def rect(n,M):
     w = np.zeros(len(n))
     for i in range(len(n)):
-        if abs(x[i]) <= M/2.:
+        if n[i] >= 0 and n[i] <= M:
+            w[i] = 1
+        else:
+            w[i] = 0
+    return w
+
+def ha(n,M,a): # Hann window if a = 0.5. Hamming window if a = 0.54.
+    w = np.zeros(len(n))
+    for i in range(len(n)):
+        if n[i] >= 0 and n[i] <= M:
             w[i] = a - (1 - a)*np.cos((2*np.pi*n[i])/M)
         else:
             w[i] = 0
@@ -42,7 +49,10 @@ def ha(n,M,a): # Hanning window if a = 0.5. Hamming window if a = 0.54.
 def blackman(n,M):
     w = np.zeros(len(n))
     for i in range(len(n)):
-        w[i] = 0.42 - 0.5*np.cos((2*np.pi*n[i])/M) + 0.8*np.cos((4*np.pi*n[i])/M)
+        if n[i] >= 0 and n[i] <= M:
+            w[i] = 0.42 - 0.5*np.cos((2*np.pi*n[i])/M) + 0.8*np.cos((4*np.pi*n[i])/M)
+        else:
+            w[i] = 0
     return w
     
 w = ha(n,M,0.54)
@@ -58,7 +68,7 @@ H = np.abs(fft(h,n))
 plt.figure(2)
 plt.plot(x, H)
 plt.axis([0,np.pi,0,2])
-plt.title('Our bandstop filter frequency response')
+plt.title('Amplitude-respons for baandstopfilter')
 plt.xlabel('Frequency [radians / second]')
 plt.ylabel('Amplitude')
 plt.axvline(f1*(2*np.pi), color='yellow') # lower cutoff frequency
