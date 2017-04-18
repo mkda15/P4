@@ -23,14 +23,14 @@ def h(n,w_c):
 #n = range(11)
 cutoff = np.pi/2 
 
-#def H(w):
-#    H = np.zeros(len(w))
-#    for i in range(len(w)):
-#        if np.abs(w[i])< np.pi/2 :
-#            H[i] = 1
-#        else :
-#            H[i] = 0
-#    return H
+def H(w):
+    H = np.zeros(len(w))
+    for i in range(len(w)):
+        if np.abs(w[i])< np.pi/2 :
+            H[i] = 1
+        else :
+            H[i] = 0
+    return H
 
 
 
