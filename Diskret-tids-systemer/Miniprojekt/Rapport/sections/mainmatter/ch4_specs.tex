@@ -5,7 +5,7 @@ FIR-filteret vælges til at være af type 1, altså er filterordenen $M$ lige og
 \omega_{c_2} &= \omega_2 + \dfrac{\omega_3 - \omega_2}{2} = \frac{\pi}{2} + \dfrac{\pi}{8} = \dfrac{5\pi}{8}. \\
 \end{align*}
 
-\section{Design}
+\section{Design} \label{ch4_design}
 I dette afsnit dokumenteres Python-koden, der anvendes til at filtrere signalet. Først hentes de nødvendige pakker, og herefter defineres henholdsvis filterordenen $M$, længden af filteret $l = M + 1$, en vektor $n$ med $l+1$ heltal mellem 0 og $l$ samt en vektor $x$ med $l+1$ værdier mellem $-\pi$ og $\pi$. Da $\omega_{c_n} = 2\pi f_n$ kan frekvensen $f_n$ i Hz opnås ved relationen $f_n = \frac{\omega_{c_1}}{2\pi}$. Disse definitioner er vist herunder:
 \begin{lstlisting}
 import numpy as np
@@ -21,7 +21,7 @@ f1 = (5*np.pi/12.) / (2*np.pi)
 f2 = (5*np.pi/8.) / (2*np.pi)
 \end{lstlisting}
 
-Herefter defineres den ideelle impulsrespons $h_d$ som en funktion, der er 0 mellem $\omega_{c_1}$ og $\omega_{c_2}$ og ellers er 1. Denne udledes længere nede... Denne funktion bruger vektoren $n$, ordenen $M$ samt frekvenserne $f_1$ og $f_2$ i Hz defineret ovenfor. Den ideelle impulsrespons er derfor:
+Herefter defineres den ideelle impulsrespons $h_d$ som en funktion, der er 0 mellem $\omega_{c_1}$ og $\omega_{c_2}$ og ellers er 1. Denne udledes i appendix. Denne funktion bruger vektoren $n$, ordenen $M$ samt frekvenserne $f_1$ og $f_2$ i Hz defineret ovenfor. Den ideelle impulsrespons er derfor:
 \begin{align*}
 h_d[n] = \begin{cases} \dfrac{\sin\left(2 \pi f_1\left(n - \frac{M}{2}\right)\right)}{\pi\left(n - \frac{M}{2}\right)} - \dfrac{\sin\left(2\pi f_1\left(n - \frac{M}{2}\right)\right)}{\pi\left(n - \frac{M}{2}\right)} \quad &\text{for} \quad n \neq \frac{M}{2} \\
 1 - 2(f_2 - f_1) \quad &\text{for} \quad n = \frac{M}{2}
@@ -60,4 +60,17 @@ Grafen for Hamming-vinduet er vist på figur \ref{fig:Hamming}.
     \label{fig:Hamming}
 \end{figure}
 
-Efter implementeringen af vinduerne kaldes funktionerne for den ideelle impulsrespons og det ønskede vindue, som herefter ganges sammen. Dette resultat Fourier-transformeres ved hjælp af den implementerede FFT beskrevet tidligere. Hermed opnås frekvensresponsen $H(e^{j\omega}$, og absolutværdien af dette er amplituderesponsen, som (ideelt set) er 0 mellem $\omega_{c_1}$ og $\omega_{c_2}$ og 1 ellers. Dette afhænger dog især af valget af vinduet og filterordenen $M$. Herunder ses eksempler på grafer for det rektangulære vindue, Hamming-vinduet og Blackman-vinduet med filterordener på henholdsvis 10, 50 og 400.
+Efter implementeringen af vinduerne kaldes funktionerne for den ideelle impulsrespons og det ønskede vindue, som herefter ganges sammen. Dette resultat Fourier-transformeres ved hjælp af den implementerede FFT beskrevet tidligere. Hermed opnås frekvensresponsen $H(e^{j\omega})$, og absolutværdien af dette er amplituderesponsen, som (ideelt set) er 0 mellem $\omega_{c_1}$ og $\omega_{c_2}$ og 1 ellers. Dette afhænger dog især af valget af vinduet og filterordenen $M$. Figur \ref{fig:filter_rekt} viser eksempler på anvendelsen af det rektangulære vindue for $M = 30$ og $M = 100$.
+
+\begin{figure}[H]
+\begin{minipage}{0.49\textwidth}
+\includegraphics[width=0.9\textwidth]{figures/Filter_rekt_30.PNG}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\includegraphics[width=0.9\textwidth]{figures/Filter_rekt_100.PNG}
+\end{minipage}
+\caption{Eksempler på båndstopfilteret ved hjælp af det rektangulære vindue og med forskellige filterordener $M$. De to grønne streger markerer $\omega_1$ og $\omega_3$, som skal beholdes, og de to gule streger markerer $\omega_{c_1}$ og $\omega_{c_2}$, som ligger symmetrisk omkring den røde streg, der markerer $\omega_2$, som skal elimineres.}
+\label{fig:filter_rekt}
+\end{figure}
+
+Ud fra figur \ref{fig:filter_rekt} ses det tydeligt, at filteret til en vis grad overholder specifikationerne for begge værdier af $M$, at transitionsbåndet bliver smallere for højere $M$ samt at der er såkaldte ``ripples'' i pasbåndet. Disse ``ripples'' skyldes det rektangulære vindue, der pludselig fra $0$ til $1$ og tilbage igen. For at undgå dette kan man bruge et glattere vindue som for eksempel Hamming-vinduet illustreret på figur \ref{fig:Hamming}.
