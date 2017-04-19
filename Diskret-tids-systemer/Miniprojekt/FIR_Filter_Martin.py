@@ -9,14 +9,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
 
-M = 300
+M = 100
 l = M+1
 
 n = np.linspace(0,l,l+1)
 x = np.linspace(-np.pi,np.pi,len(n))
 
-f1 = (5*np.pi/12.) / (2*np.pi)
-f2 = (5*np.pi/8.) / (2*np.pi)
+delta = np.pi/15.
+
+f1 = (np.pi/2. - delta) / (2*np.pi)
+f2 = (np.pi/2. + delta) / (2*np.pi)
 
 def h(n,M,f1,f2):
     hd = np.zeros(len(n))
@@ -55,7 +57,7 @@ def blackman(n,M):
             w[i] = 0
     return w
     
-w = ha(n,M,0.54)
+w = rect(n,M)
 hd = h(n,M,f1,f2)
 
 def fft(x,n):
@@ -68,8 +70,8 @@ H = np.abs(fft(h,n))
 plt.figure(2)
 plt.plot(x, H)
 plt.axis([0,np.pi,0,2])
-plt.title('Amplitude-respons for baandstopfilter')
-plt.xlabel('Frequency [radians / second]')
+plt.title(r'Amplituderespons for filteret, det rektangulaere vindue, $M = %d$' %(M))
+plt.xlabel('Frekvens [rad / s]')
 plt.ylabel('Amplitude')
 plt.axvline(f1*(2*np.pi), color='yellow') # lower cutoff frequency
 plt.axvline(f2*(2*np.pi), color='yellow') # upper cutoff frequency
@@ -81,12 +83,12 @@ plt.axvline(3*np.pi/4, color='green') # frequency to keep
 # Scipy 
 #==============================================================================
 
-omega1_scp = (5*np.pi/12)
-omega2_scp = (5*np.pi/8)
+omega1_scp = np.pi/2-delta
+omega2_scp = np.pi/2+delta
 
 N = [omega1_scp,omega2_scp]
 plt.figure(3)
-b, a = signal.butter(15, N, 'bandstop', analog=True)
+b, a = signal.butter(10, N, 'bandstop', analog=True)
 w, h = signal.freqs(b, a)
 plt.plot(w, abs(h), "b-", label = "Bandstop filter")
 plt.title('Scipys bandstop filter frequency response')
