@@ -2,7 +2,7 @@
 I dette kapitel foretages der frekvensanalyse af det samplede signal $s[n]$. Dette gøres for at undersøge signalets frekvensmæssige indhold og fortsætte det videre arbejde med modifikation af signalets indhold.\\\\
 Frekvensanalysen gøres mulig med den diskrete Fouriertransformation (DFT), som beregnes ved hjælp af en \textit{fast Fourier transform}-algoritme (FFT) baseret på Cooley-Tukey algoritmen. Algoritmen er implementeret i Python og udnytter DFT-summens symmetri til at lave en rekursiv opdeling af summen, således den beregningsmæssige kompleksitet nedbringes fra $O(N^2)$ (naiv implementering af DFT) til $O(N\log N)$ for store $N$, hvor $N$ er datalængden.
 \section{Dokumentation af algoritmer}
-Herunder ses inplementeringen af DFT og FFT i et Pythonscript.
+Herunder ses implementeringen af DFT og FFT i et Pythonscript.
 \begin{lstinputlisting}{FFT.py}
 \end{lstinputlisting}
 \section{Tids- og frekvensplot}
