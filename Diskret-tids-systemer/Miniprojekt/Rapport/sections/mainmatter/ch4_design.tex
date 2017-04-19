@@ -39,7 +39,6 @@ Grafen for Hamming-vinduet er vist på figur \ref{fig:Hamming}.
     \caption{Eksempel på Hamming-vinduet.}
     \label{fig:Hamming}
 \end{figure}
-
 Efter implementeringen af vinduerne kaldes funktionerne for den ideelle impulsrespons og det ønskede vindue, som herefter ganges sammen. Dette resultat Fourier-transformeres ved hjælp af den implementerede FFT beskrevet tidligere. Hermed opnås frekvensresponsen $H(e^{j\omega})$, og absolutværdien af dette er amplituderesponsen, som (ideelt set) er 0 mellem $\omega_{c_1}$ og $\omega_{c_2}$ og 1 ellers. Dette afhænger dog især af valget af vinduet og filterordenen $M$. Figur \ref{fig:filter_rekt} viser eksempler på anvendelsen af det rektangulære vindue for $M = 30$ og $M = 100$.
 
 \begin{figure}[H]
