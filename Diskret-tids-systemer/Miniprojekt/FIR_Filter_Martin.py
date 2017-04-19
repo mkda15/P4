@@ -97,8 +97,6 @@ def blackman(n,M): # Blackman-vinduet
 w = ha(n,M,0.54)
 hd = hd(n,M,o1,o2)
 
-print (len(w))
-
 def fft(x,n):
     return np.fft.fft(x)
 
@@ -121,9 +119,6 @@ plt.axvline(o2, color='yellow') # Øvre knækfrekvens
 plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
 plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
 plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
-
-plt.figure(4)
-plt.plot(x, np.angle(H))
 
 #==============================================================================
 # Filteret i Scipy til sammenligning 
