@@ -1,1 +1,32 @@
-fjkls
+Første punkt er at definere den idelle frekvens respons på baggrund af speceficationerne for filtres der skal defineres som et type 1 FIR bandstop filter. \\
+Den idelle frekvens response defineres som følger på baggrung af opstillede specifikationer.
+\begin{align}
+ H_d(\text{e}^{j\omega})= \begin{cases}
+  {e}^{-j\omega\frac{M}{2}}, \ \ \ & |\omega| \leq\omega_1 \\
+ 0, \ \ \ & \omega_1 \leq |\omega| \leq \omega_2 \\
+  \text{e}^{-j\omega\frac{M}{2}}, \ \ \ & \omega_2 \leq |\omega| 
+\end{cases}
+\end{align}  
+herudfra bestemmes den idelle impuls respons ved hjælp af den inverse fourier tranformation 
+\begin{align}
+h_d[n] &= \frac{1}{2\pi} \left(  \int_{-\pi}^{-\omega_2} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega + \int_{-\omega_1}^{\omega_1} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega +\int_{\omega_2}^{\pi} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega	\right) \\
+h_d[n] &= \frac{1}{2\pi} \left(  \int_{-\pi}^{-\omega_2} \text{e}^{j\omega \left(n- \frac{M}{2} \right) } d\omega + \int_{-\omega_1}^{\omega_1} \text{e}^{j\omega \left(n- \frac{M}{2} \right) }  d\omega +\int_{\omega_2}^{\pi} \text{e}^{j\omega \left( n-\frac{M}{2} \right) } d\omega	\right)
+\end{align} 
+her udnyttes nu at
+\begin{align}
+\int_{-\pi}^{\pi} \text{e}^{j\omega \left(n- \frac{M}{2} \right) }  d\omega =& \int_{-\pi}^{\pi} \cos\left( \omega \left(n-\frac{M}{2}\right)\right)+j \sin \left( \omega \left(n-\frac{M}{2}\right) \right) d\omega \\
+=& \left[ \sin\left(\omega \left(n-\frac{M}{2}\right)\right) \right]_{-\pi}^{\pi} \cdot \frac{1}{n- \frac{M}{2}}
+\end{align}    
+Således fås 
+\begin{align}
+h_d[n]= \frac{1}{\pi \left(n-\frac{M}{2}\right)} \left(\sin\left(\omega_2 \left(n-\frac{M}{2}\right)\right) - \sin\left(\omega_1 \left(n-\frac{M}{2}\right)\right) \right)
+\end{align}
+Således er den idelle impuls respons defineret for $n \neq 0$. For $n=0$ defineres den idelle impuls respons som følger, med anvendelse af l'Hôspitals regel $\lim \frac{f(x)}{g(x)}=\lim \frac{f'(x)}{g'(x)}$ .
+\begin{align}
+h_d[0]=& \frac{1}{\pi} \left( \cos\left( \omega_1\left(n-\frac{M}{2}\right) \right)\omega_1 - \cos\left( \omega_2\left(n-\frac{M}{2}\right) \right)\omega_2 0 \cos\left(\pi \left( n- \frac{M}{2}\right) \right) \pi \right) \\
+=& \frac{1}{\pi}\left( \omega_1 - \omega_2 + \pi \right) \\
+=& 1 - \frac{\omega_2-\omega_1}{\pi}
+\end{align} 
+
+Den idelle impuls respons udgør nu et causalt system, der skal trunkeres ved hjælp af en såkaldt vindus funktion. Det rektangulare anvendes   
+ 
