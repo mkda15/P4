@@ -6,17 +6,13 @@ Herunder ses inplementeringen af DFT og FFT i et Pythonscript.
 \begin{lstinputlisting}{FFT.py}
 \end{lstinputlisting}
 \section{Tids- og frekvensplot}
-I dette afsnit undersøges signalets frekvensspektrum og hvordan dette afhænger af antallet af samples $N$ og samplingsfrekvensen $f_s$. Det vides, at opløsningen i tid afhænger af $f_s$ :
-\begin{equation}\label{eq:tidsoploesning}
-T = \frac{1}{f_s},
-\end{equation}
-hvor $T$ er samplingsperiode - tiden mellem to samples. Desuden vides, at opløsningen i frekvens afhænger af $f_s$ og $N$:
-\begin{equation}\label{eq:frekvensoploesning}
-bin=\frac{f_s}{N},
-\end{equation}
-hvor $bin$ er intervallet mellem to diskrete frekvenser i frekvensdomænet. Følgende afsnit undersøger disse relationer.\\\\
-Herunder i figur \ref{fig:1} ses signalet i tids- og frekvensdomænet samplet ved $f_s=1$ Hz og ved $N=2^8$, $2^{12}$ og $2^{18}$.
-\begin{figure}
+I dette afsnit undersøges signalets frekvensspektrum og hvordan dette afhænger af antallet af samples $N$ og samplingsfrekvensen $f_s$. Det vides, at opløsningen i tid afhænger af $f_s$ og at opløsningen i frekvens afhænger af $f_s$ og $N$, således
+\begin{align*}\label{eq:tidsoploesning}
+T = \frac{1}{f_s}\phantom{m}\text{og}\phantom{m} bin=\frac{f_s}{N},
+\end{align*}
+hvor $T$ er samplingsperioden og $bin$ er intervallet mellem to diskrete frekvenser i frekvensdomænet. Dette afsnit undersøger disse relationer.\\
+På figur \ref{fig:1} ses signalet i tids- og frekvensdomænet samplet ved $f_s=1$ Hz og ved $N=2^8$, $2^{12}$ og $2^{18}$ samples.
+\begin{figure}[H]
 \begin{minipage}{0.49\textwidth}
 \includegraphics[width=\textwidth]{figures/signal_1hz.png}
 \includegraphics[width=\textwidth]{figures/frekvensanalyse/1hz_freq2}
@@ -28,8 +24,8 @@ Herunder i figur \ref{fig:1} ses signalet i tids- og frekvensdomænet samplet ve
 \caption{Plot af signal samplet ved $f_s=1$ Hz i tidsdomænet og plot af tilhørende frekvensdomæne for antal af samples $N=2^8$, $2^{12}$ og $2^{18}$.}
 \label{fig:1}
 \end{figure}
-Herunder i figur \ref{fig:1} ses signalet i tids- og frekvensdomænet samplet ved $f_s=32$ Hz og ved $N=2^8$, $2^{12}$ og $2^{18}$.
-\begin{figure}
+\noindent På figur \ref{fig:1} ses signalet ligeledes i tids- og frekvensdomænet med samplet ved $f_s=32$ Hz og ved $N=2^8$, $2^{12}$ og $2^{18}$ samples.
+\begin{figure}[H]
 \begin{minipage}{0.49\textwidth}
 \includegraphics[width=\textwidth]{figures/signal_32hz.png}
 \includegraphics[width=\textwidth]{figures/frekvensanalyse/32hz_freq2}
