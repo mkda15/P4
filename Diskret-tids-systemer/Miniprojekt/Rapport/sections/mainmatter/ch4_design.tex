@@ -1,34 +1,14 @@
 \section{Design} \label{ch4_design}
-I dette afsnit dokumenteres Python-koden, der anvendes til at filtrere signalet. Først hentes de nødvendige pakker, og herefter defineres henholdsvis filterordenen $M$, længden af filteret $l = M + 1$, en vektor $n$ med $l+1$ heltal mellem 0 og $l$ samt en vektor $x$ med $l+1$ værdier mellem $-\pi$ og $\pi$. Da $\omega_{c_n} = 2\pi f_n$ kan frekvensen $f_n$ i Hz opnås ved relationen $f_n = \frac{\omega_{c_1}}{2\pi}$. Disse definitioner er vist herunder:
-\begin{lstlisting}
-import numpy as np
-import matplotlib.pyplot as plt
-
-M = 200
-l = M+1
-
-n = np.linspace(0,l,l+1)
-x = np.linspace(-np.pi,np.pi,len(n))
-
-f1 = (5*np.pi/12.) / (2*np.pi)
-f2 = (5*np.pi/8.) / (2*np.pi)
-\end{lstlisting}
-
-Herefter defineres den ideelle impulsrespons $h_d$ som en funktion, der er 0 mellem $\omega_{c_1}$ og $\omega_{c_2}$ og ellers er 1. Denne udledes i appendix og er vist på figur \ref{fig:ideel_amp_respons}.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width = 0.6\textwidth]{figures/ideel_amp_respons.PNG}
-    \caption{Den ideelle amplituderespons for filteret.}
-    \label{fig:ideel_amp_respons}
-\end{figure}
-
+I dette afsnit dokumenteres design processen samt væsentlige dele af Python-koden, der anvendes til at filtrere signalet.\\
+Først defineres henholdsvis filterordenen $M$, længden af filteret $l = M + 1$, en vektor $n$ med $l+1$ heltal mellem 0 og $l$ samt en vektor $x$ med $l+1$ værdier mellem $-\pi$ og $\pi$. Da $\omega_{c_n} = 2\pi f_n$ kan frekvensen $f_n$ i Hz opnås ved relationen $f_n = \frac{\omega_{c_1}}{2\pi}$. \\
+\\
+Den ideelle impulsrespons $h_d$ defineres nu som en funktion, på baggrund af den ideelle amplituderespons $|H_d(\text{e}^{j\omega})|$ jf. figur \ref{fig:ideel_amp_respons}. Udledning af $h_d[n]$ findes i bilag \ref{app1}. \\
 Funktionen i Python bruger vektoren $n$, ordenen $M$ samt frekvenserne $f_1$ og $f_2$ i Hz defineret ovenfor. Den ideelle impulsrespons er derfor:
 \begin{align*}
 h_d[n] = \begin{cases} \dfrac{\sin\left(2 \pi f_1\left(n - \frac{M}{2}\right)\right)}{\pi\left(n - \frac{M}{2}\right)} - \dfrac{\sin\left(2\pi f_1\left(n - \frac{M}{2}\right)\right)}{\pi\left(n - \frac{M}{2}\right)} \quad &\text{for} \quad n \neq \frac{M}{2} \\
 1 - 2(f_2 - f_1) \quad &\text{for} \quad n = \frac{M}{2}
 \end{cases}
 \end{align*}
-
 Dette er implementeret i koden således:
 \begin{lstlisting}
 def h(n,M,f1,f2):
@@ -40,7 +20,6 @@ def h(n,M,f1,f2):
             hd[i] = (np.sin(2*np.pi*f1*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.))) - (np.sin(2*np.pi*f2*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.)))
     return hd
 \end{lstlisting}
-
 Fordi impulsresponsen er endelig skal den ideelle impulsrespons ganges med en vinduesfunktion, der herefter Fourier-transformeres for at opnå en realistisk frekvens- og amplituderespons. Der er forskellige muligheder for denne vinduesfunktion såsom det rektangulære vindue, Hamming-vinduet, Hann-vinduet og Blackman-vinduet. Disse er beskrevet i \cite{side 558-559, DTSP}. Implementeringen af vinduerne i koden er ganske simpel, og som eksempel ses implementeringen af Hann- og Hamming-vinduet herunder:
 \begin{lstlisting}
 def ha(n,M,a): # Hann-vindue hvis a = 0.5. Hamming-vindue hvis a = 0.54.
