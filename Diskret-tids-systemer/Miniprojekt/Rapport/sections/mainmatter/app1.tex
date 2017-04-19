@@ -1,5 +1,6 @@
-Første punkt er at definere den idelle frekvens respons på baggrund af speceficationerne for filtres der skal defineres som et type 1 FIR bandstop filter. \\
-Den idelle frekvens response defineres som følger på baggrung af opstillede specifikationer.
+\chapter{Bilag}
+\section{Udledning af ideal impulsrespons}
+For udledning af den ideelle impulsrespons, defineres først den ideelle frekvensrespons som følger, på baggrund af speceficationerne for filtres defineret i section \ref{ch4_design}.
 \begin{align}
  H_d(\text{e}^{j\omega})= \begin{cases}
   {e}^{-j\omega\frac{M}{2}}, \ \ \ & |\omega| \leq\omega_1 \\
@@ -7,7 +8,7 @@ Den idelle frekvens response defineres som følger på baggrung af opstillede sp
   \text{e}^{-j\omega\frac{M}{2}}, \ \ \ & \omega_2 \leq |\omega| 
 \end{cases}
 \end{align}  
-herudfra bestemmes den idelle impuls respons ved hjælp af den inverse fourier tranformation 
+Herudfra bestemmes den ideelle impulsrespons ved hjælp af den inverse Fouriertransformation.  
 \begin{align}
 h_d[n] &= \frac{1}{2\pi} \left(  \int_{-\pi}^{-\omega_2} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega + \int_{-\omega_1}^{\omega_1} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega +\int_{\omega_2}^{\pi} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega	\right) \\
 h_d[n] &= \frac{1}{2\pi} \left(  \int_{-\pi}^{-\omega_2} \text{e}^{j\omega \left(n- \frac{M}{2} \right) } d\omega + \int_{-\omega_1}^{\omega_1} \text{e}^{j\omega \left(n- \frac{M}{2} \right) }  d\omega +\int_{\omega_2}^{\pi} \text{e}^{j\omega \left( n-\frac{M}{2} \right) } d\omega	\right)
@@ -19,14 +20,17 @@ her udnyttes nu at
 \end{align}    
 Således fås 
 \begin{align}
-h_d[n]= \frac{1}{\pi \left(n-\frac{M}{2}\right)} \left(\sin\left(\omega_2 \left(n-\frac{M}{2}\right)\right) - \sin\left(\omega_1 \left(n-\frac{M}{2}\right)\right) \right)
+h_d[n]= \frac{1}{\pi \left(n-\frac{M}{2}\right)} \left(\sin\left(\omega_2 \left(n-\frac{M}{2}\right)\right) - \sin\left(\omega_1 \left(n-\frac{M}{2}\right)\right) - \sin\left( \pi\left( n + \frac{M}{2} \right) \right) \right)
 \end{align}
-Således er den idelle impuls respons defineret for $n \neq 0$. For $n=0$ defineres den idelle impuls respons som følger, med anvendelse af l'Hôspitals regel $\lim \frac{f(x)}{g(x)}=\lim \frac{f'(x)}{g'(x)}$ .
+Da sidste led må være $0$ defineres den ideelle impulsrespons som følger.
+\begin{align}
+h_d[n]= \frac{1}{\pi \left(n-\frac{M}{2}\right)} \left(\sin\left(\omega_2 \left(n-\frac{M}{2}\right)\right) - \sin\left(\omega_1 \left(n-\frac{M}{2}\right)\right)\right)
+\end{align}
+Dette gælder dog kun for $n \neq 0$ dermed defineres $h_d[0]$ seperat. Hertil anvendes l'Hôspitals regel $\lim \frac{f(x)}{g(x)}=\lim \frac{f'(x)}{g'(x)}$ .
 \begin{align}
 h_d[0]=& \frac{1}{\pi} \left( \cos\left( \omega_1\left(n-\frac{M}{2}\right) \right)\omega_1 - \cos\left( \omega_2\left(n-\frac{M}{2}\right) \right)\omega_2 0 \cos\left(\pi \left( n- \frac{M}{2}\right) \right) \pi \right) \\
 =& \frac{1}{\pi}\left( \omega_1 - \omega_2 + \pi \right) \\
 =& 1 - \frac{\omega_2-\omega_1}{\pi}
 \end{align} 
-
-Den idelle impuls respons udgør nu et causalt system, der skal trunkeres ved hjælp af en såkaldt vindus funktion. Det rektangulare anvendes   
+ 
  
