@@ -9,28 +9,61 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
 
+#==============================================================================
+# Plot af den ideelle impulsrespons
+#==============================================================================
+
+t = np.linspace(0,np.pi,1000)
+y = np.zeros(len(t))
+
+delta = np.pi/15.
+o1 = np.pi/2 - delta
+o2 = np.pi/2 + delta
+
+for i in range(len(t)):
+    if o1 >= t[i-3]:
+        y[i] = 1
+
+for i in range(len(t)):
+    if t[i-3] >= o2:
+        y[i] = 1
+
+plt.plot(t,y)
+plt.axis([0,np.pi,0,2])
+plt.axvline(o1, color='yellow')
+plt.axvline(o2, color='yellow')
+plt.axvline(np.pi/2, color='red')
+plt.axvline(np.pi/3, color='green')
+plt.axvline(3*np.pi/4, color='green')
+plt.title('Den ideelle amplituderespons for filteret')
+plt.xlabel('Frekvens [rad / s]')
+plt.ylabel('Amplitude')
+
+#==============================================================================
+# Definitioner (filterorden, -længde, indeks, knækfrekvenser og impulsrespons)
+#==============================================================================
+
 M = 92
 l = M+1
 
 n = np.linspace(0,l,l+1)
 x = np.linspace(-np.pi,np.pi,len(n))
 
-delta = np.pi/15.
-
-f1 = (np.pi/2. - delta) / (2*np.pi)
-f2 = (np.pi/2. + delta) / (2*np.pi)
-
-def h(n,M,f1,f2):
+def hd(n,M,f1,f2): 
     hd = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] == M/2:
-            hd[i] = 1 - 2*(f2 - f1)
+            hd[i] = 1 - (o2 - o1)/np.pi
         else:
-            hd[i] = (np.sin(2*np.pi*f1*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.))) \
-            - (np.sin(2*np.pi*f2*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.)))
+            hd[i] = (np.sin(o1*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.))) \
+            - (np.sin(o2*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.)))
     return hd
 
-def rect(n,M):
+#==============================================================================
+# Vinduer
+#==============================================================================
+
+def rect(n,M): # Det ektangulaere vindue
     w = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] >= 0 and n[i] <= M:
@@ -39,7 +72,7 @@ def rect(n,M):
             w[i] = 0
     return w
 
-def ha(n,M,a): # Hann window if a = 0.5. Hamming window if a = 0.54.
+def ha(n,M,a): # Hann-vindue, hvis a = 0.5. Hamming-vindue, hvis a = 0.54.
     w = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] >= 0 and n[i] <= M:
@@ -48,7 +81,7 @@ def ha(n,M,a): # Hann window if a = 0.5. Hamming window if a = 0.54.
             w[i] = 0
     return w
 
-def blackman(n,M):
+def blackman(n,M): # Blackman-vinduet
     w = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] >= 0 and n[i] <= M:
@@ -56,9 +89,13 @@ def blackman(n,M):
         else:
             w[i] = 0
     return w
-    
+
+#==============================================================================
+# Beregning af impuls- og amplituderespons
+#==============================================================================
+
 w = ha(n,M,0.54)
-hd = h(n,M,f1,f2)
+hd = hd(n,M,o1,o2)
 
 def fft(x,n):
     return np.fft.fft(x)
@@ -67,40 +104,42 @@ h = hd * w
 
 H = np.abs(fft(h,n))
 
+#==============================================================================
+# Graf over amplituderesponsen
+#==============================================================================
+
 plt.figure(2)
 plt.plot(x, H)
 plt.axis([0,np.pi,0,2])
 plt.title(r'Amplituderespons for filteret, Hamming-vinduet, $M = %d$' %(M))
 plt.xlabel('Frekvens [rad / s]')
 plt.ylabel('Amplitude')
-plt.axvline(f1*(2*np.pi), color='yellow') # lower cutoff frequency
-plt.axvline(f2*(2*np.pi), color='yellow') # upper cutoff frequency
-plt.axvline(np.pi/2, color='red') # frequency to be eliminated
-plt.axvline(np.pi/3, color='green') # frequency to keep
-plt.axvline(3*np.pi/4, color='green') # frequency to keep
+plt.axvline(o1, color='yellow') # Nedre knækfrekvens
+plt.axvline(o2, color='yellow') # Øvre knækfrekvens
+plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
+plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
+plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
+
+plt.figure(4)
+plt.plot(x, np.angle(H))
 
 #==============================================================================
-# Scipy 
+# Filteret i Scipy til sammenligning 
 #==============================================================================
 
-omega1_scp = np.pi/2-delta
-omega2_scp = np.pi/2+delta
-
-N = [omega1_scp,omega2_scp]
+N = [o1,o2]
 plt.figure(3)
 b, a = signal.butter(10, N, 'bandstop', analog=True)
 w, h = signal.freqs(b, a)
-plt.plot(w, abs(h), "b-", label = "Bandstop filter")
-plt.title('Scipys bandstop filter frequency response')
-plt.xlabel('Frequency [radians / second]')
+plt.plot(w, abs(h), "b-")
+plt.title('Amplitude for Scipys baandstop-filter')
+plt.xlabel('Frekvens [rad / s]')
 plt.ylabel('Amplitude')
-plt.legend(loc = "lower left")
 plt.margins(0, 0.1)
 plt.axis([0,np.pi,0,2])
-plt.grid(which='both', axis='both')
-plt.axvline(omega1_scp, color='yellow') # lower cutoff frequency
-plt.axvline(omega2_scp, color='yellow') # upper cutoff frequency
-plt.axvline(np.pi/2, color='red') # frequency to be eliminated
-plt.axvline(np.pi/3, color='green') # frequency to keep
-plt.axvline(3*np.pi/4, color='green') # frequency to keep
+plt.axvline(o1, color='yellow') # Nedre knækfrekvens
+plt.axvline(o2, color='yellow') # Øvre knækfrekvens
+plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
+plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
+plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
 plt.show()

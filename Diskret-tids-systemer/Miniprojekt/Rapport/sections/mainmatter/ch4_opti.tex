@@ -7,6 +7,8 @@ For at optimere filteret anvendes et andet vindue. Ved at eksperimentere med de 
 \begin{minipage}{0.49\textwidth}
 \includegraphics[width=0.9\textwidth]{figures/Filter_Hamming_92.PNG}
 \end{minipage}
-\caption{Eksempler på båndstopfilteret ved hjælp af det rektangulære vindue og med forskellige filterordener $M$. De to grønne streger markerer $\omega_1$ og $\omega_3$, som skal beholdes, og de to gule streger markerer $\omega_{c_1}$ og $\omega_{c_2}$, som ligger symmetrisk omkring den røde streg, der markerer $\omega_2$, som skal elimineres.}
-\label{fig:filter_rekt}
+\caption{Eksempler på båndstopfilteret under anvendelse af Hann- og Hamming-vinduet med $M=92$.}
+\label{fig:filter_Hann_Hamming}
 \end{figure}
+
+Fra figur \ref{fig:filter_Hann_Hamming} fremgår det, at der ikke er nogle ripples i pasbåndet, hvor amplituden desuden er 1. Derudover er amplituden 0 i stopbåndet, hvor $\omega_2$ ligger. Således opfylder filteret specifikationerne for denne filterorden. Lavere orden medfører færre beregninger og bredere transitionsbånd, og sidstnævnte har ikke nogen særlig betydning i dette tilfælde, fordi afstandene mellem de 3 frekvenser i signalet er så store.
