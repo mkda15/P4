@@ -121,7 +121,7 @@ The DFT will be introduced through the use of eigensequences of the circular con
 \begin{align*}
 	(Hx)_n) = (h \circledast x)_n = \sum_{k = 0}^{N-1} x_k h_{(n-k) \text{ mod $N$}} =\sum_{k = 0}^{N-1} x_{(n-k) \text{ mod $N$}} h_k
 \end{align*}
-where H is called the circular convolution operator associated with h. \chr{mod er modulus (som bogen anvender, ved ikke om vi vil bruge en anden for notation (Syntes ikke selv den er så god $(n-k) \text{ mod }N = |\dfrac{n-k}{N}|$}.
+where H is called the circular convolution operator associated with h. \chr{mod er modulus (som bogen anvender, ved ikke om vi vil bruge en anden for notation (Syntes ikke selv den er så god $(n-k) \text{ mod }N = \left<k\right>_n$}.
 \end{definition} \cite{FSP}
 
 \begin{definition}[Eigenfunction]
@@ -149,7 +149,7 @@ for
 \begin{align*}
 H(e^{j\omega}) = \sum_{k=-\infty}^{\infty} h[k]e^{-j\omega k} 
 \end{align*}.
-This follows, the properties of eigenfunctions, per \chr{Ref til kort afsnit om egen functioner.}
+This follows, the properties of eigenfunctions, per definition.
 Consequently this leads to $e^{j\omega n}$ being an eigenfunction of the system, with the associated eigenvalue $H(e^{j\omega})$.
 \\\\
 From \eqref{eq:eigenfunction} it can be noted that $H(e^{j\omega})$ will describe the change in the complex amplitude of a complex exponential input signal as a function of the frequency $\omega$. \cite{DTSP} \chr{Might like this sentence rewritten.}
