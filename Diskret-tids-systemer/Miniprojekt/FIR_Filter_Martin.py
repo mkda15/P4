@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
 
-M = 100
+M = 92
 l = M+1
 
 n = np.linspace(0,l,l+1)
@@ -57,7 +57,7 @@ def blackman(n,M):
             w[i] = 0
     return w
     
-w = rect(n,M)
+w = ha(n,M,0.54)
 hd = h(n,M,f1,f2)
 
 def fft(x,n):
@@ -70,7 +70,7 @@ H = np.abs(fft(h,n))
 plt.figure(2)
 plt.plot(x, H)
 plt.axis([0,np.pi,0,2])
-plt.title(r'Amplituderespons for filteret, det rektangulaere vindue, $M = %d$' %(M))
+plt.title(r'Amplituderespons for filteret, Hamming-vinduet, $M = %d$' %(M))
 plt.xlabel('Frekvens [rad / s]')
 plt.ylabel('Amplitude')
 plt.axvline(f1*(2*np.pi), color='yellow') # lower cutoff frequency
