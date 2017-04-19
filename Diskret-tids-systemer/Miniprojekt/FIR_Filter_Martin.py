@@ -21,11 +21,11 @@ o1 = np.pi/2 - delta
 o2 = np.pi/2 + delta
 
 for i in range(len(t)):
-    if o1 >= t[i-3]:
+    if o1 >= t[i]:
         y[i] = 1
 
 for i in range(len(t)):
-    if t[i-3] >= o2:
+    if t[i] >= o2:
         y[i] = 1
 
 plt.plot(t,y)
@@ -96,6 +96,8 @@ def blackman(n,M): # Blackman-vinduet
 
 w = ha(n,M,0.54)
 hd = hd(n,M,o1,o2)
+
+print (len(w))
 
 def fft(x,n):
     return np.fft.fft(x)
