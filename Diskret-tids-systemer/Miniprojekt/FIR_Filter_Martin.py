@@ -124,19 +124,19 @@ plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
 # Filteret i Scipy til sammenligning 
 #==============================================================================
 
-N = [o1,o2]
-plt.figure(3)
-b, a = signal.butter(10, N, 'bandstop', analog=True)
-w, h = signal.freqs(b, a)
-plt.plot(w, abs(h), "b-")
-plt.title('Amplitude for Scipys baandstop-filter')
-plt.xlabel('Frekvens [rad / s]')
-plt.ylabel('Amplitude')
-plt.margins(0, 0.1)
-plt.axis([0,np.pi,0,2])
-plt.axvline(o1, color='yellow') # Nedre knækfrekvens
-plt.axvline(o2, color='yellow') # Øvre knækfrekvens
-plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
-plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
-plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
-plt.show()
+#N = [o1,o2]
+#plt.figure(3)
+#b, a = signal.butter(10, N, 'bandstop', analog=True)
+#w, h = signal.freqs(b, a)
+#plt.plot(w, abs(h), "b-")
+#plt.title('Amplitude for Scipys baandstop-filter')
+#plt.xlabel('Frekvens [rad / s]')
+#plt.ylabel('Amplitude')
+#plt.margins(0, 0.1)
+#plt.axis([0,np.pi,0,2])
+#plt.axvline(o1, color='yellow') # Nedre knækfrekvens
+#plt.axvline(o2, color='yellow') # Øvre knækfrekvens
+#plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
+#plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
+#plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
+#plt.show()
