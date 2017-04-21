@@ -143,7 +143,7 @@ y[n]
 \end{align*}
 This leads to
 \begin{align}\label{eq:eigenfunction}
-y[n] = H(e^{j \omega}) e^{-j\omega n},
+y[n] = H(e^{j \omega}) e^{j\omega n},
 \end{align}
 for
 \begin{align*}
@@ -152,7 +152,7 @@ H(e^{j\omega}) = \sum_{k=-\infty}^{\infty} h[k]e^{-j\omega k}
 This follows, the properties of eigenfunctions, per definition.
 Consequently this leads to $e^{j\omega n}$ being an eigenfunction of the system, with the associated eigenvalue $H(e^{j\omega})$.
 \\\\
-From \eqref{eq:eigenfunction} it can be noted that $H(e^{j\omega})$ will describe the change in the complex amplitude of a complex exponential input signal as a function of the frequency $\omega$. \cite{DTSP} \chr{Might like this sentence rewritten.}
+From \eqref{eq:eigenfunction} it can be noted that $H(e^{j\omega})$ will describe the change in the complex amplitude of a complex exponential input signal as a function of the frequency $\omega$. \cite{DTSP} \chr{Might like this sentence rewritten., og dette bliver gentaget i filter sektionen (ved ikke hvad sammenhængen det er brugt til der)}
 %The eigenvalue $H(e^{j\omega})$ is called the frequency response of the system.
 \\
 Since the represented sequence is N periodic, the eigensequence should also be periodic with period N, which leads to the following:
