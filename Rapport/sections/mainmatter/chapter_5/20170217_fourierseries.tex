@@ -11,12 +11,13 @@ Information from a function $f(x)$ will as an example be stored in the coefficie
 A function $f: \mathbb{R} \to \mathbb{R}$ (or $\mathbb{C}$) is called $2\pi$-periodic if $f(\theta + 2\pi) = f(\theta) \ \forall \ \theta\in\mathbb{R}$. The idea of the Fourier series is using the above information to recreate a $2\pi$-periodic signal. The Fourier series is defined as:
 \begin{align*}
 f(t) &= \dfrac{a_0}{2} + \sum_{n=1}^\infty(a_n \cos(n t) + b_n \sin(n t))\\
-&= \sum_{n=-\infty}^{\infty} c_n e^{j n t}.
+&= \sum_{n=-\infty}^{\infty} c_n \text{e}^{j n t}.
 \end{align*}
 
 The second part holds per Euler's formula:
 \begin{align*}
-\cos(n\theta) = \dfrac{e^{j n \theta} + e^{-j n \theta}}{2} \text{ and } \sin(n \theta) = \dfrac{e^{jn\theta}-e^{-jn\theta}}{2j}.
+\cos(n\theta) &= \dfrac{\text{e}^{j n \theta} + \text{e}^{-j n \theta}}{2}, \\
+\sin(n \theta) &= \dfrac{\text{e}^{jn\theta}-\text{e}^{-jn\theta}}{2j}.
 \end{align*}
 
 It can be simpler to work with the complex exponential function, but working with the trigonometric functions cosine and sine have their advantages such as being real-valued and also odd and even for the sine and cosine functions, respectively.
@@ -24,20 +25,20 @@ It can be simpler to work with the complex exponential function, but working wit
 \subsection{The coefficient $c_n$}
 The $c_n$ coefficient is determined by the assumption that it is possible to integrate the fourier series by parts.
 \\ \\
-To determine $c_n$ in the equation $f(t)= \sum_{n=-\infty}^{\infty} c_n e^{j n t}$ first multiply both sides by $e^{-j k t}$ for $k\in \mathbb{Z}$ and integrate both sides from $-\pi$ to $\pi$:
+To determine $c_n$ in the equation $f(t)= \sum_{n=-\infty}^{\infty} c_n \text{e}^{j n t}$ first multiply both sides by $\text{e}^{-j k t}$ for $k\in \mathbb{Z}$ and integrate both sides from $-\pi$ to $\pi$:
 \begin{align} \label{eq:firststep_fouriercoefficient}
-\int_{-\pi}^\pi f(t)e^{-j k t} dt = \int_{-\pi}^\pi \sum_{n=-\infty}^{\infty} c_n e^{j n t} e^{-j k t} dt.
+\int_{-\pi}^\pi f(t)\text{e}^{-j k t} dt = \int_{-\pi}^\pi \sum_{n=-\infty}^{\infty} c_n \text{e}^{j n t} \text{e}^{-j k t} dt.
 \end{align}
 
 Pulling the summation and the constant on the right-hand side out of the integral in \eqref{eq:firststep_fouriercoefficient} yields the following:
 \begin{align*}
-\int_{-\pi}^\pi f(t) e^{-j k t}dt = \sum_{n=-\infty}^\infty c_n \int_{-\pi}^\pi e^{j (n-k) t}dt.
+\int_{-\pi}^\pi f(t) \text{e}^{-j k t}dt = \sum_{n=-\infty}^\infty c_n \int_{-\pi}^\pi \text{e}^{j (n-k) t}dt.
 \end{align*}
 
 The integral on the right-hand side has two cases to consider, $n \neq k$ and $n = k$. For $n\neq k$:
 \begin{align*}
-	\forall n,n\neq k: \int_{-\pi}^\pi e^{j(n-k)t}dt 
-	=\dfrac{1}{j(n-k)}e^{j(n-k)t}\mid_{-\pi}^{\pi}
+	\forall n,n\neq k: \int_{-\pi}^\pi \text{e}^{j(n-k)t}dt 
+	=\dfrac{1}{j(n-k)}\text{e}^{j(n-k)t}\mid_{-\pi}^{\pi}
 	=\dfrac{(-1)^{n-k}-(-1)^{n-k}}{j(n-k)}
 	=0.
 \end{align*}
@@ -45,12 +46,12 @@ The integral on the right-hand side has two cases to consider, $n \neq k$ and $n
 \chr{Could be written with sine and cosine, to show that the integral of those 2 over a periode is 0}
 The second case is for $n = k$:
 \begin{align*}
-\forall n,n=k: \int_{-\pi}^\pi e^{j(n-k)t}dt = \int_{-\pi}^\pi 1 dt = 2\pi.
+\forall n,n=k: \int_{-\pi}^\pi \text{e}^{j(n-k)t}dt = \int_{-\pi}^\pi 1 dt = 2\pi.
 \end{align*}
 
 The integral can be concluded to yield either $0$ or $2\pi$:
 \begin{align}
-	\int_{-\pi}^{\pi} e^{j (n-k)t}dt 
+	\int_{-\pi}^{\pi} \text{e}^{j (n-k)t}dt 
 	= 
 	\begin{cases}
 			2\pi \text{ if } n=k\\
@@ -60,21 +61,21 @@ The integral can be concluded to yield either $0$ or $2\pi$:
 
 Therefore, for $n = k$:
 \begin{align*}
-\int_{-\pi}^\pi f(t)e^{-j k t} = 2\pi c_k.
+\int_{-\pi}^\pi f(t)\text{e}^{-j k t} = 2\pi c_k.
 \end{align*}
 
-The coefficient $c_n$'s general equation is then:
+Changing the index to $n$ gives the coefficient $c_n$'s general equation:
 \begin{align*}
-	c_n = \dfrac{1}{2\pi} \int_{-\pi}^{\pi} f(t) e^{-j n t}dt.
+	c_n = \dfrac{1}{2\pi} \int_{-\pi}^{\pi} f(t) \text{e}^{-j n t}dt.
 \end{align*}
 
 \begin{definition} \label{def:fourier_definition}
 The Fourier series of a $2\pi$-periodic integrable function $f(t)$ is defined as:
 \begin{align*}
-	\sum_{n=-\infty}^\infty c_n e^{j n t},
+	\sum_{n=-\infty}^\infty c_n \text{e}^{j n t},
 \end{align*}
 
-where $c_n = \frac{1}{2\pi}\int_{- \pi}^\pi f(t) e^{-j n t} dt$. Therefore, $c_0 = \frac{a_0}{2} = \frac{1}{2\pi} \int_{-\pi}^\pi f(t) dt$ which is the average of $f$ on the interval $[-\pi,\pi]$.
+where $c_n = \frac{1}{2\pi}\int_{- \pi}^\pi f(t) \text{e}^{-j n t} dt$. Therefore, $c_0 = \frac{a_0}{2} = \frac{1}{2\pi} \int_{-\pi}^\pi f(t) dt$, which is the average of $f$ on the interval $[-\pi,\pi]$.
 \\ \\
 The Fourier series can alternatively be expressed as:
 \begin{align*}
@@ -155,7 +156,7 @@ To sum up, $f$ is piecewise smooth if its graph only has finitely many jumps and
 \\ \\
 For a $2\pi$-periodic and integrable function, the $N$'th partial sum of the Fourier series is defined by:
 \begin{align}\label{eq:partialsumFourierSeries}
-	S_N^f(t) = \dfrac{1}{2} a_0 + \sum_{n=1}^N\left(a_n \cos(n 		t) + b_n \sin(n t) \right) = \sum_{n=-N}^N c_n e^{j n t}
+	S_N^f(t) = \dfrac{1}{2} a_0 + \sum_{n=1}^N\left(a_n \cos(n 		t) + b_n \sin(n t) \right) = \sum_{n=-N}^N c_n \text{e}^{j n t}
 \end{align}
 
 with the coefficients $a_n$, $b_n$ and $c_n$ as in definition \ref{def:fourier_definition}.
@@ -163,15 +164,15 @@ with the coefficients $a_n$, $b_n$ and $c_n$ as in definition \ref{def:fourier_d
 Inserting $c_n$ in the partial sum using $x$ in place of the variable $t$ in definition \ref{def:fourier_definition} yields:
 \begin{align*}
 	S_N^f(t)
-	&= \dfrac{1}{2\pi}\sum_{n=-N}^N \int_{-\pi}^\pi f(x) e^{-j 		n x} dx\, e^{j n t} \\
-	&= \dfrac{1}{2\pi}\sum_{k = -N}^N \int_{-\pi}^\pi f(x) e^{		j k (x-t)} dx, \quad \quad k = -n, \\
-	&= \dfrac{1}{2\pi} \sum_{n = -N}^N \int_{-\pi - t}^{\pi - 		t} f(t + \tau ) e^{j n \tau} d\tau, \quad \quad \tau = x-t.
+	&= \dfrac{1}{2\pi}\sum_{n=-N}^N \int_{-\pi}^\pi f(x) 			\text{e}^{-j n x} dx\, \text{e}^{j n t} \\
+	&= \dfrac{1}{2\pi}\sum_{k = -N}^N \int_{-\pi}^\pi f(x) 			\text{e}^{j k (x-t)} dx, \quad \quad k = -n, \\
+	&= \dfrac{1}{2\pi} \sum_{n = -N}^N \int_{-\pi - t}^{\pi - 		t} f(t + \tau ) \text{e}^{j n \tau} d\tau, \quad \quad \tau 	= x-t.
 \end{align*}
 
 By lemma \ref{lemma:2pi-periodic_function} the above equation can be expressed as follows
 \begin{align} \label{eq:dirichlet}
 	S_N^f (t) 
-	&= \dfrac{1}{2\pi} \sum_{n=-N}^N \int_{-\pi}^\pi f(t + 			\tau) e^{j n \tau} d\tau \nonumber \\
+	&= \dfrac{1}{2\pi} \sum_{n=-N}^N \int_{-\pi}^\pi f(t + 			\tau) \text{e}^{j n \tau} d\tau \nonumber \\
 	&= \int_{-\pi}^\pi f(t + \tau) D_N(\tau) d\tau,
 \end{align}
 
@@ -207,8 +208,8 @@ The integral from $-\pi$ to $0$ and from $0$ to $\pi$ of a Dirichlet kernel both
 	
 	The $N$'th Dirichlet kernel may be written as:
 	\begin{align} \label{eq:Dirichlet_proof}
-		D_N(\tau) &= \dfrac{1}{2\pi}\sum_{n=-N}^{N}e^{j n \tau} 		= \dfrac{1}{2\pi} e^{-jN\tau} \sum_{n=0}^{2N} e^{jn				\tau} \nonumber \\
-		&= \dfrac{1}{2\pi} e^{-jN\tau} \dfrac{e^{j(2N+1)				\tau}-1}{e^{j\tau}-1} = \dfrac{1}{2\pi} \dfrac{e^{j(N			+1)\tau}-e^{-jN\tau}}{e^{j\tau}-1}, \quad \tau \neq 0
+		D_N(\tau) &= \dfrac{1}{2\pi}\sum_{n=-N}^{N}\text{e}^{j 			n \tau} = \dfrac{1}{2\pi} \text{e}^{-jN\tau} \sum_{n=0}			^{2N} \text{e}^{jn \tau} \nonumber \\
+		&= \dfrac{1}{2\pi} \text{e}^{-jN\tau} \dfrac{e^{j(2N+1)			\tau}-1}{\text{e}^{j\tau}-1} = \dfrac{1}{2\pi} 					\dfrac{\text{e}^{j(N+1)\tau}-\text{e}^{-jN\tau}}				{\text{e}^{j\tau}-1}, \quad \tau \neq 0
 	\end{align}
 	
 	since in general:
@@ -220,23 +221,25 @@ The integral from $-\pi$ to $0$ and from $0$ to $\pi$ of a Dirichlet kernel both
 	\begin{align} \label{eq:g_tau}
 		g(\tau) =
 		\begin{cases}
-			\dfrac{f(\theta + \tau) - f(\theta-)}{e^{j\tau}-1} 				\quad \text{for } -\pi < \tau < 0 \\ \\
-			\dfrac{f(\theta + \tau) - f(\theta+)}{e^{j\tau}-1} 				\quad \text{for } 0 < \tau < \pi
+			\dfrac{f(\theta + \tau) - f(\theta-)}{\text{e}^{j				\tau}-1} \quad \text{for } -\pi < \tau < 0 \\ \\
+			\dfrac{f(\theta + \tau) - f(\theta+)}{\text{e}^{j				\tau}-1} \quad \text{for } 0 < \tau < \pi
 		\end{cases}
 	\end{align}	
 	
 	By using \eqref{eq:Dirichlet_proof} and \eqref{eq:g_tau}, 		then \eqref{eq:S_N_proof} may be written as:
 	\begin{align} \label{eq:5.1.1_final}
-		\dfrac{1}{2\pi} \int_{-\pi}^\pi g(\tau) \left(e^{j(N+1)			\tau} - e^{-jN\tau}\right) d\tau = C_{-(N+1)} - C_N
+		\dfrac{1}{2\pi} \int_{-\pi}^\pi g(\tau) \left(\text{e}			^{j(N+1)\tau} - \text{e}^{-jN\tau}\right) d\tau = C_{-			(N+1)} - C_N.
 	\end{align}
 	
 	$g$ is a well-behaved function on $[-\pi,\pi]$ except near 		$\tau = 0$ where the denominator equals 0, which suggests 		that $g$ is not piecewise continuous. However, by 				l'Hôpital's rule:
 	\begin{align*}
-		\lim_{\tau \to 0+} g(\tau) = \lim_{\tau \to 0+} 				\dfrac{f(\theta + \tau) - f(\theta+)}{e^{j\tau}-1} = 			\lim_{\tau \to 0+} \dfrac{f'(\theta + \tau)}{je^{j				\tau}} = \dfrac{f'(\theta+)}{j}.
+		\lim_{\tau \to 0+} g(\tau) = \lim_{\tau \to 0+} 				\dfrac{f(\theta + \tau) - f(\theta+)}{\text{e}^{j				\tau}-1} = \lim_{\tau \to 0+} \dfrac{f'(\theta + \tau)}			{j\text{e}^{j\tau}} = \dfrac{f'(\theta+)}{j}.
 	\end{align*}
 	
-	Likewise, $\displaystyle{\lim_{\tau \to 0-}} g(\tau) = 			\frac{f'(\theta-)}{j}$. Both of these limits are finite, 		and hence $g$ is actually piecewise continuous on $[-\pi,		\pi]$. The Fourier coefficients $C_n = \frac{1}{2\pi} 			\int_{-\pi}^\pi g(\tau)e^{jn\tau} d\tau$ tend to zero as $n 	\to \pm \infty$ by corollary \ref{coro:conv_Fourier_coeff}. 	Therefore, \eqref{eq:5.1.1_final} also vanishes as $N \to 		\infty$, which shows that \eqref{eq:S_N_proof} also tend to 	zero as $n \to \infty$, which completes the proof.
+	Likewise, $\displaystyle{\lim_{\tau \to 0-}} g(\tau) = 			\frac{f'(\theta-)}{j}$. Both of these limits are finite, 		and hence $g$ is actually piecewise continuous on $[-\pi,		\pi]$. The Fourier coefficients $C_n = \frac{1}{2\pi} 			\int_{-\pi}^\pi g(\tau)\text{e}^{jn\tau} d\tau$ tend to 		zero as $n 	\to \pm \infty$ by corollary 						\ref{coro:conv_Fourier_coeff}. 	Therefore, \eqref{eq:5.1.1_final} also vanishes as $N \to \infty$, which 				shows that \eqref{eq:S_N_proof} also tend to zero as $n 		\to \infty$, which completes the proof.
 \end{proof}
+
+\martin{Mangler i dette afsnit: vi bør nok udvide afsnittet til også at dække blandt andet uniform konvergens (fra forelæsningen i AHA), men på grund af begrænsningen af sider er vi så nødt til at smide dette afsnit ned i appendix. Det er også fint, da vi ikke bruger Fourier-rækkerne direkte.}
 
 %http://cnx.org/contents/8YnJdzjg@8/Derivation-of-Fourier-Coeffici
 

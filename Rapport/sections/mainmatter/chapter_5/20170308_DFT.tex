@@ -1,4 +1,4 @@
-\subsection{Discrete Fourier Transform}
+\subsection{The Discrete Fourier Transform} \label{sec:DFT}
 %The discrete Fourier transform for $x_n \xleftrightarrow{\text{DFT}} X_k$ is defined by:\frede{Skal har ikke bruges et begin\{definition\} miljø?}
 %\begin{align*}
 %	X_k = \sum_{n=0}^{N-1} x_n W_N^{kn}
@@ -14,45 +14,44 @@
 %
 %In numerical practice, the equivalent of a given function f(x) of the continuous independent variable x is a finite number N of data values associated with a number t, customarily taken as running from 0 to N-1.
 %\\
-The discrete Fourier transform (DFT), is the discrete time variant of the Fourier transform, and can be used to transform sample from the time domain, into the frequency domain.
+The discrete Fourier transform (DFT) is the discrete time variant of the Fourier transform and can be used to transform samples from the time domain into the frequency domain.
 %\\\\
-Multiple parts of the DFT are analog to the continues version \cite{DFT_OX}.
-\\\\
+Multiple parts of the DFT are analog to the continuous version \cite{DFT_OX}.
+\\ \\
 Let a function in time $f(t)$ be a continuous signal.
-If the function is sampled N times it could be denoted
+If the function is sampled $N$ times it may be denoted
 $f[0],f[1],\dots,f[k],\dots,f[N-1]$.
-\\\\
-The Fourier Transform of $f(t)$ would be as in \ref{sec:cunt_Fourier_transform}. \frede{Ref der ikke virker.}
+\\ \\
+The Fourier transform of $f(t)$ would be as in section \ref{sec:cont_Fourier_Transform}:
 \begin{align*}
-	F(\omega) = \int_{-\infty}^\infty f(t)e^{-j\omega t} dt
+	F(\omega) = \int_{-\infty}^\infty f(t)\text{e}^{-j\omega t} dt.
 \end{align*}
 
-If you regard each sample $f[k]$ as a single impulse, with a giving area $f[k]$. Then the integrand only exist at the sample points:
-
+If each sample $f[k]$ is regarded as a single impulse with a given area $f[k]$, then the integrand only exist at the sample points \cite{DFT_OX}:
 \begin{align*}
 	F(\omega) 
-	&= \int_0^{(N-1)}T f(t) e^{-j\omega t}dt\\
-	&= f[0]e^{-j0} + f[1]e^{-j\omega T} + \dots + f(N-1) e^{-j\omega(N-1)T}	
+	&= \int_0^{(N-1)}T f(t) \text{e}^{-j\omega t}dt\\
+	&= f[0]\text{e}^{-j0} + f[1]\text{e}^{-j\omega T} + \dots + 	f(N-1) \text{e}^{-j	\omega(N-1)T}	
 \end{align*}
 
-or alternatively
+or alternatively:
 \begin{align*}
-	F(\omega) = \sum_{k=0}^{N-1}f[k]e^{-j\omega k T}
-\end{align*} \cite{DFT_OX}
+	F(\omega) = \sum_{k=0}^{N-1}f[k]\text{e}^{-j\omega k T}.
+\end{align*}
 
 \chr{Går ud fra at der i Fourier transformationen står at den kan evalueres i et endeligt interval i stedet fra uendeligt til uendeligt.}
 
-The DFT have to take into consideration that it's only feed a finite number of input data. Since this is the case, the DFT treats the data as if it were periodic. 
-\martin{Consider this. \textregistered}.
-\\\\
-A sequence $x_n$, can be considered N-Periodic since 
+The DFT have to take into consideration that it is only fed a finite number of input data. Since this is the case, the DFT treats the data as if it were periodic.
+\\ \\
+A sequence $x(n)$ can be considered $N$-periodic since:
 \begin{align*}
-	X_{n+N} 
-	&= \sum_{k=0}^{N-1}x_k e^{\frac{2 \pi k (n+N}{N}}\\
-	&= \sum_{k=0}^{N-1}x_k e^{\frac{2 \pi k (n}{N}} = X_n
-\end{align*} \cite{FSP}
+	X_{n+N}
+	&= \sum_{k=0}^{N-1} x_k \text{e}^{\frac{2 \pi k (n+N)}{N}}		\\
+	&= \sum_{k=0}^{N-1} x_k \text{e}^{\frac{2 \pi k n}{N}}			\text{e}^{\frac{2 \pi k N}{N}} \\
+	&= \sum_{k=0}^{N-1} x_k \text{e}^{\frac{2 \pi k n}{N}} = 		X_n.
+\end{align*}
 
-In the style the continues case of the Fourier transform, where it's possible to evaluate it over a finite interval, the DFT can be evaluated for the fundamental frequency ($\dfrac{1}{NT} Hz$ or $\dfrac{2\pi}{NT}rad/sec.$) \cite{DFT_OX} 
+In the continuous case of the Fourier transform, where it's possible to evaluate it over a finite interval, the DFT can be evaluated for the fundamental frequency ($\dfrac{1}{NT} \ Hz$ or $\dfrac{2\pi}{NT} \ rad/sec.$) \cite{DFT_OX}.
 %in general
 %\begin{align*}
 %	F[n] = \sum_{k=0}^{N-1}f[k]e^{-j2\pi\frac{nk}{N}} \, (n = 0\ldots N-1)
@@ -60,117 +59,198 @@ In the style the continues case of the Fourier transform, where it's possible to
 %
 %where $F[n]$ is DFT of the sequence $f[k]$.
 %This can be written on matrix form
-
-The DFT can be written on matrix form where $F[N]$ is the DFT of the sequence $f[k]$,
+\\ \\
+The DFT can be written on matrix form, where $X_k$ is the DFT of the sequence $x_n$:
 \begin{align} \label{eq:DFT_matrix}
 	\begin{bmatrix}
-		F[0]\\ F[1]\\ F[2]\\ \vdots \\ F[N-1]
+		X_0\\ X_1\\ X_2\\ X_3 \\ \vdots \\ X_{N-1}
 	\end{bmatrix}
 	=
 	\begin{bmatrix}
-		1 & 1 	& 1   	& \cdots & 1\\
-		1 & W 	& W^2 	& \cdots & W^{N-1}\\
-		1 & W^2	& W^4	& \cdots & W^{N-2}\\
-		1 & W^3	& W^6	& \cdots & W^{N-3}\\
-		\vdots\\
-		1 & W^{N-1}	& W^{N-2}	& \cdots & W\\
+		1 & 1 	& 1   	& \hdots & 1\\
+		1 & W_N 	& W_N^2 	& \hdots & W_N^{N-1} \\
+		1 & W_N^2	& W_N^4	& \hdots & W_N^{N-2} \\
+		1 & W_N^3	& W_N^6	& \hdots & W_N^{N-3} \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		1 & W_N^{N-1}	& W_N^{2(N-1)}	& \hdots & 						W_N^{(N-1)^2} \\
 	\end{bmatrix}
 	\begin{bmatrix}
-		f[0]\\ f[1]\\ f[2]\\ \vdots \\ f[N-1]
-	\end{bmatrix}
+		x_0\\ x_1\\ x_2\\ x_3\\ \vdots \\ x_{N-1}
+	\end{bmatrix} 
+	\implies
+	\bar{X} = F\bar{x} 
 \end{align}
 
-where W is called the twiddle factor and is defined as \cite{DFT_OX}
+where $\bar{X}$ and $\bar{x}$ are column vectors and $W$ is called the twiddle factor and is defined as \cite{DFT_OX}:
 \begin{align*}
-	W_N = e^{-j 2 \pi\frac{1}{N}}, \, W_N^{kn} = e^{-j 2 \pi\frac{kn}{N}}.
+	W_N = \text{e}^{-j\frac{2 \pi}{N}}, \quad W_N^{kn} = \text{e}^{-j\frac{2 \pi}{N}kn}.
 \end{align*}
 
-\begin{definition}[Discrete Fourier Transform]
-The discrete Fourier transform of a length-$N$ sequence $x$ is 
+Since $W_N^N = \text{e}^{-j2\pi} = 1$ then $W_N$ is a unit root of order $N$. Furthermore, $|W_N^k| = 1$ for all $k$, and then:
+\begin{align*}
+\sum_{i=0}^{N-1} F_{mi} (F^*)_{in} &= \sum_{i=0}^{N-1} W_N^{mi} (\bar{W}_N)^{in} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}mi} \text{e}^{j\frac{2\pi}{N}ni} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}(m-n)i} \\ &=
+\begin{cases}
+N, &m = n \\
+\dfrac{\text{e}^{-j\frac{2\pi}{N}(m-n)N}-1}{1-\text{e}^{-j\frac{2\pi}{N}(m-n)}}, \quad &m \neq n
+\end{cases} =
+\begin{cases}
+N, &m = n \\
+0, \quad &m \neq n
+\end{cases}
+\end{align*}
+
+where the second last equation follows since the sum is a geometric sum:
+\begin{align*}
+\sum_{i=0}^{N-1} r^i = \dfrac{r^N-1}{1-r}
+\end{align*}
+
+Therefore, $F^*F = N \cdot I$, where $I$ is the identity matrix and $F^*$ is the complex conjugate of $F$, that is $F^* = [\bar{F}_{ji}]_{ij}$. Hence:
+\begin{align*}
+F^{-1} = \dfrac{1}{N} F^*.
+\end{align*}
+
+$F$ is thus a unitary operator (up to scaling) known as the DFT operator, which preserves the Euclidean norm (up to scaling) and $\frac{F}{\sqrt{N}}$ is a unitary matrix. Therefore, Parseval's equality holds \cite{page 258, FSP}:
+\begin{align*}
+\|x\|^2 = \sum_{n=0}^{N-1} |x_n|^2 = \dfrac{1}{N} \sum_{k=0}^{N-1} |X_k|^2 = \dfrac{1}{N} \|X_k\|^2 = \dfrac{1}{N} \|Fx\|^2.
+\end{align*}
+
+This leads to the definition of the DFT \cite{page 253, FSP}.
+
+\begin{definition}[The Discrete Fourier Transform]
+The discrete Fourier transform of a length-$N$ sequence $x$ is an invertible and linear transform $\mathcal{F}: \mathbb{C}^N \to \mathbb{C}^N$ defined as:
 \begin{align} \label{eq:def_DFT}
-	X_k = (Fx)_k = \sum_{k=0}^{N-1} x_n W_N^{kn}, \, k\in {0, 1, \dots, N-1};
+	X_k = (Fx)_k = \sum_{n=0}^{N-1} x_n W_N^{kn}, \quad k\in \{0, 1, \dots, N-1\}.
 \end{align}
-This is called the spectrum of $x$.\\
-The inverse DFT of a length-N sequence X is
+
+This is called the spectrum of $x$. \\
+The inverse DFT of a length-$N$ sequence $X$ is
 \begin{align*}
-	x_n = \dfrac{1}{N}(F*X)_n = \dfrac{1}{N}\sum_{k=0}^{N-1} X_k W_N^{-kn}, \, n \in {0, 1, \dots, N-1}.
+	x_n = \dfrac{1}{N}(F^*X)_n = \dfrac{1}{N}\sum_{k=0}^{N-1} X_k W_N^{-kn}, \, n \in \{0,1,\dots,N-1\}.
 \end{align*}
 
-The DFT and inverse DFT as a pair, can be denoted as 
+The DFT and the inverse DFT can be denoted as a pair as:
 \begin{align*}
-	x_n \xleftrightarrow{\text{DFT}} X_k
+	x_n \xleftrightarrow{\text{DFT}} X_k.
 \end{align*}
-\end{definition} 
-\cite{FSP}
+\end{definition}
 
-One of the reasons the fourier transform playes an important role in mathemathic, is simply because they are based on eigensequences of a Linear shift invariant system (Discrete equivalent of time-invariant system). 
- Properties of eigensequences' leads to the following property of convolving:
-There is an equivalence between multiplying Fourier transforms of sequences, and colving the sequences.
+Plancherel's equation holds since for $\bar{X} = F\bar{x}$ and $\bar{Y} = F\bar{y}$ \martin{Vi skal finde på en smart måde at skelne mellem kompleks konjugerede og vektorer. \textregistered}:
+\begin{align*}
+\sum_{n=0}^{N-1} x_n \bar{y}_n = \langle \bar{x},\bar{y} \rangle = \dfrac{1}{N} \langle F^*F\bar{x},\bar{y} \rangle = \dfrac{1}{N} \langle \bar{X},\bar{Y} \rangle = \dfrac{1}{N} \sum_{k=0}^{N-1} X_k \bar{Y_k}
+\end{align*}
+
+One of the reasons the Fourier transforms play an important role in mathemathics is simply because they are based on eigensequences of a linear shift-invariant system (the discrete equivalent of time-invariant system).
+Properties of eigensequences lead to the following property of convolving:
+There is an equivalence between multiplying Fourier transforms of sequences and convolving the sequences.
 \\\\
- A fundamental property of Linear shift invariant (LSI) systems is, that they all have unit-modulus complex exponential sequences as eigensequence. \cite{FSP}
+ A fundamental property of linear shift invariant (LSI) systems is that they all have unit-modulus complex exponential sequences as eigensequence \cite{FSP}.
 \\\\
 The DFT is the Fourier transform designed for a finite length sequence.
 It treats all finite-length sequences as a period of an infinite-length periodic sequence.
-The circular convolution operator is the appropriate description of LSI systems on circularly extended finite-length input, as in the case of DFT.  \chr{Ikke glad for denne sætning}
+The circular convolution operator is the appropriate description of LSI systems on circularly extended finite-length input, as in the case of DFT. \chr{Ikke glad for denne sætning}
 %". As we haveseen in Section 3.3.3, the circular convolution operator (3.71) is the appropriate description of LSI systems operating on circularly extended finite-length inputs"
 
-The DFT will be introduced through the use of eigensequences of the circular convolution, which will be a diagonalization of the circular convolution operator
+The DFT will be introduced through the use of eigensequences of the circular convolution, which will be a diagonalization of the circular convolution operator \cite{FSP}. The circular convolution uses the the $k \text{ mod } N$ function is the modulo function, which is a unique way of writing $k = LN + r$ for $k,L \in \mathbb{Z}$ and $0\leq r \leq N$.
 
 \begin{definition}[Circular convolution]
- 	The circular convolution between length/N sequences $h$ and $x$ is defined as
+ 	The circular convolution between length-$N$ sequences $h$ and $x$ is defined as
 \begin{align*}
-	(Hx)_n) = (h \circledast x)_n = \sum_{k = 0}^{N-1} x_k h_{(n-k) \text{ mod $N$}} =\sum_{k = 0}^{N-1} x_{(n-k) \text{ mod $N$}} h_k
+	(Hx)_n = (h \circledast x)_n = \sum_{k = 0}^{N-1} x_k h_{(n-k) \text{ mod } N} =\sum_{k = 0}^{N-1} x_{(n-k) \text{ mod } N} h_k
 \end{align*}
-where H is called the circular convolution operator associated with h. \chr{mod er modulus (som bogen anvender, ved ikke om vi vil bruge en anden for notation (Syntes ikke selv den er så god $(n-k) \text{ mod }N = \left<k\right>_n$}.
-\end{definition} \cite{FSP}
+where $H$ is the circular convolution operator associated with $h$. \chr{mod er modulus (som bogen anvender, ved ikke om vi vil bruge en anden for notation (Syntes ikke selv den er så god $(n-k) \text{ mod }N = \left<k\right>_n$}.
+\end{definition}
+
+For a general $k\in\mathbb{Z}$ with $k = LN + r, 0 \leq r \leq N$:
+\begin{align*}
+X_k = \sum_{n=0}^{N-1} x_n W_N^{kn} = \sum_{n=0}^{N-1} x_n W_N^{(LN+r)n} = \sum_{n=0}^{N-1} x_n W_N^{rn} = X_{k \text{ mod } N}.
+\end{align*}
+
+\begin{lemma}
+For $\bar{x} = [x_0 \dots x_{N-1}]^T$ and $0 \leq L \leq N$, then:
+\begin{align*}
+y_n  = x_{(n-L) \text{ mod } N} \xleftrightarrow{\text{DFT}} Y_k = X_k \text{e}^{-j\frac{2\pi}{N} kL}.
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+\begin{align*}
+Y_k = \sum_{n=0}^{N-1} x_{(n-L) \text{ mod } N} \text{e}^{-j\frac{2\pi}{N} kn} &= \sum_{n=0}^{L-1} x_{(n-L) \text{ mod } N}\text{e}^{-j\frac{2\pi}{N} kn} + \sum_{n=L}^{N-1} x_{n-L}\text{e}^{-j\frac{2\pi}{N} kn} \\
+&= \sum_{n=0}^{L-1} x_{N-L+n}\text{e}^{-j\frac{2\pi}{N} kn} + \sum_{n=L}^{N-1} x_{n-L}\text{e}^{-j\frac{2\pi}{N} kn} \\
+&= \sum_{m=N-L}^{N-1} x_{m}\text{e}^{-j\frac{2\pi}{N} k(m+L)} + \sum_{n=L}^{N-1} x_{n-L}\text{e}^{-j\frac{2\pi}{N} kn}
+\end{align*}
+
+with $m = N - L + n$ so that $n = m + L - N$ in the last equation. Since the last sum
+\begin{align*}
+\sum_{n=L}^{N-1} x_{n-L}\text{e}^{-j\frac{2\pi}{N} kn} = \sum_{m=0}^{N-1-L} x_m \text{e}^{-j\frac{2\pi}{N}k(m+L)}
+\end{align*}
+
+with $m = n - L$ so that $n = m + L$, the two sums above may be gathered into one sum:
+\begin{align*}
+Y_k &= \sum_{m=N-L}^{N-1} x_{m}\text{e}^{-j\frac{2\pi}{N} k(m+L)} + \sum_{m=0}^{N-1-L} x_m \text{e}^{-j\frac{2\pi}{N}k(m+L)}  \\
+&= \sum_{m=0}^{N-1} x_m \text{e}^{-j\frac{2\pi}{N}k(m+L)} = \sum_{m=0}^{N-1} x_m \text{e}^{-j\frac{2\pi}{N}kL} \cdot \text{e}^{-j\frac{2\pi}{N}km} = X_k \text{e}^{-j\frac{2\pi}{N}kL}
+\end{align*}
+\end{proof}
+
+This result is used to prove the following main theorem.
+
+\begin{theorem}
+For $\bar{x} = [x_0 \dots x_{N-1}]^T$ and $\bar{y} = [y_0 \dots y_{N-1}]^T$, then:
+\begin{align*}
+z = x \circledast y \xleftrightarrow{\text{DFT}} Z_k = X_k Y_k.
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+The following sums are finite and may be therefore be interchanged:
+\begin{align*}
+Z_k &= \sum_{n=0}^{N-1} z_n \text{e}^{-j\frac{2\pi}{N}kn} = \sum_{n=0}^{N-1} \left( \sum_{m=0}^{N-1} x_m y_{(n-m) \text{ mod } N} \right) \text{e}^{-j\frac{2\pi}{N}kn} \\
+&= \sum_{m=0}^{N-1} x_m \left( \sum_{n=0}^{N-1} y_{(n-m) \text{ mod } N} \text{e}^{-j\frac{2\pi}{N}kn} \right) = \sum_{m=0}^{N-1} x_m \left( \text{e}^{-j\frac{2\pi}{N}km} \cdot Y_k \right) \\
+&= \left( \sum_{m=0}^{N-1} x_m \text{e}^{-j\frac{2\pi}{N}km} \right) \cdot Y_k = X_k Y_k
+\end{align*}
+\end{proof}
 
 \begin{definition}[Eigenfunction]
-	If $D$ is a linear operator, on a function space, then $f$ is an eigenfunction for $D$ and $\lambda$ is the associated eigenvalue, whenever $Df = \lambda f$
+If $D$ is a linear operator on a function space then $f$ is an eigenfunction for $D$ and $\lambda$ is the associated eigenvalue, whenever $Df = \lambda f$ \cite{Eigenfunctions}.
 \end{definition}
-\cite{Eigenfunctions}
 
-A property of LSI systems is, that they as eigensequences $v_n$ have all complex exponential sequences, with modulus being unit length (1) on the form $v_n = e^{j \omega n}$ \cite{FSP}.\\ Same follows from Linear Time Invariant systems (LTI) \cite{DTSP}.
+A property of LSI systems is that they as eigensequences $v_n$ all have complex exponential sequences with modulus being unit length on the form $v_n = \text{e}^{j \omega n}$ \cite{FSP}.\\ The same follows from Linear Time Invariant (LTI) systems \cite{DTSP}.
 \\\\
 %Egenskaver ed eigenfunctioner:
-The eigenfunction property of the complex exponential function for an LSI system, can be thus be demonstrated; consider a complex sequence of radian frequency $v_n = e^{j\omega n} \text{ for } -\infty < n < \infty$.
+The eigenfunction property of the complex exponential function for an LSI system can thus be demonstrated as follows. Consider a complex sequence of radian frequency $v_n = \text{e}^{j\omega n} \text{ for } -\infty < n < \infty$.
 \\\\
-The corresponding output of a LTI - system with an impulse response $h[n]$ is,
-
+The corresponding output of a LTI system with impulse response $h[n]$ is
 \begin{align*}
 y[n] 
-&= \sum_{k=-\infty}^{\infty} h[k]e^{j\omega(n-k)} \nonumber \\ 
-&= e^{j\omega n} \left(\sum_{k=-\infty}^{\infty} h[k]e^{-j\omega k} \right).
+&= \sum_{k=-\infty}^{\infty} h[k]\text{e}^{j\omega(n-k)} \nonumber \\ 
+&= \text{e}^{j\omega n} \left(\sum_{k=-\infty}^{\infty} h[k]\text{e}^{-j\omega k} \right).
 \end{align*}
+
 This leads to
 \begin{align}\label{eq:eigenfunction}
-y[n] = H(e^{j \omega}) e^{j\omega n},
+y[n] = H(\text{e}^{j \omega}) \text{e}^{j\omega n}
 \end{align}
+
 for
 \begin{align*}
-H(e^{j\omega}) = \sum_{k=-\infty}^{\infty} h[k]e^{-j\omega k} 
-\end{align*}.
-This follows, the properties of eigenfunctions, per definition.
-Consequently this leads to $e^{j\omega n}$ being an eigenfunction of the system, with the associated eigenvalue $H(e^{j\omega})$.
-\\\\
-From \eqref{eq:eigenfunction} it can be noted that $H(e^{j\omega})$ will describe the change in the complex amplitude of a complex exponential input signal as a function of the frequency $\omega$. \cite{DTSP} \chr{Might like this sentence rewritten., og dette bliver gentaget i filter sektionen (ved ikke hvad sammenhængen det er brugt til der)}
-%The eigenvalue $H(e^{j\omega})$ is called the frequency response of the system.
-\\
-Since the represented sequence is N periodic, the eigensequence should also be periodic with period N, which leads to the following:
-
-\begin{align*}
-	v_{n+N} = e^{j\omega (n+N)} = v_n \implies e^{j\omega N} = 1
+H(\text{e}^{j\omega}) = \sum_{k=-\infty}^{\infty} h[k]\text{e}^{-j\omega k}.
 \end{align*}
 
-and $\omega = \dfrac{2 \pi k}{N}$ for $k \in \mathbb{Z}$
-
-From this the previously mentioned twiddle factor can be seen.
-
+This follows from the properties of eigenfunctions. Consequently, this leads to $\text{e}^{j\omega n}$ being an eigenfunction of the system with the associated eigenvalue $H(\text{e}^{j\omega})$.
+\\\\
+From \eqref{eq:eigenfunction} it can be noted that $H(\text{e}^{j\omega})$ will describe the change in the complex amplitude of a complex exponential input signal as a function of the frequency $\omega$ \cite{DTSP}. \chr{Might like this sentence rewritten., og dette bliver gentaget i filter sektionen (ved ikke hvad sammenhængen det er brugt til der)}
+%The eigenvalue $H(e^{j\omega})$ is called the frequency response of the system.
+\\
+Since the represented sequence is $N$-periodic, the eigensequence should also be periodic with period $N$, which leads to the following:
 \begin{align*}
-	v_n = e^{j(\frac{2\pi}{N}) kn} = W_N^{-kn}.
-\end{align*}\cite{FSP}
+v_{n+N} = \text{e}^{j\omega (n+N)} = v_n \implies \text{e}^{j\omega N} = 1
+\end{align*}
+
+with $\omega = \dfrac{2 \pi k}{N}$ for $k \in \mathbb{Z}$. From this the previously mentioned twiddle factor can be seen \cite{FSP}:
+\begin{align*}
+v_n = e^{j\frac{2\pi}{N} kn} = W_N^{-kn}.
+\end{align*}
 
 The twiddle factor can be shown to be an eigensequence for the circular convolution operator.
-
 \begin{align*}
 	(h\circledast v)_n 
 	= \sum_{k=0}^{N-1} v_{(n-1)\text{ mod }N}h_i 
@@ -180,15 +260,15 @@ The twiddle factor can be shown to be an eigensequence for the circular convolut
 	= \lambda_k v_n
 \end{align*}
 
-This shows that a circular convolution operator $H$'s has an eigensequence that is the twidddle factor.
-\\\\ \chr{Næste del er ikke en nødvendighed, men viser blot matrix formen for DFT.}
-$W_k$ in \eqref{eq:def_DFT} is a vector product between a vector of twiddle factors and vector $x \in \mathbb{C}^n$
+This shows that a circular convolution operator $H$ has an eigensequence that is the twidddle factor.
+\\\\ \chr{Næste del er ikke en nødvendighed, men viser blot matrix formen for DFT.} \martin{Vi har allerede skrevet matrix-formen for DFT'en, og dette giver ikke rigtigt mening i forhold til, så dette bør slettes. \textregistered}
+$W_k$ in \eqref{eq:def_DFT} is a vector product between a vector of twiddle factors and a vector $x \in \mathbb{C}^N$:
 \begin{align*}
 	X_k =
 	\begin{bmatrix}
-		1 \\	W_N^k \\	\vdots \\ W_N^(N-1)k
+		1 \\	W_N^k \\	\vdots \\ W_N^{(N-1)k}
 	\end{bmatrix}
 	x
 \end{align*}
 
-Producing the matrix for $X$ with $k \in \{0, 1, \dots, N-1\}$ yields the matrix form of the DFT as \eqref{eq:DFT_matrix}.
+Producing the matrix for $X$ with $k \in \{0, 1, \dots, N-1\}$ yields the matrix form of the DFT as \eqref{eq:DFT_matrix} \martin{Mangler for dette afsnit: vi skal a) være enige om notationen for indekser (herunder notationen ved cirkulær foldning i for eksempel definition 6.2.5), b) vælge den bedste notation for modulus-funktionen og c) finde på en måde at skelne mellem kompleks konjugerede og vektorer. Derudover skal første del af afsnittet om sampling af $f(t)$ tilpasses notationen i resten af afsnittet, og sidste del af afsnittet om egenfunktioner skal kobles bedre sammen med resten af afsnittet (også med hensyn til notation). Endelig bør der angives sider ved kildehenvisningerne, hvor det er muligt. \textregistered}.

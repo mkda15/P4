@@ -30,7 +30,7 @@ The idea in the STFT is to obtain properties of a local frequency spectrum of $f
 \begin{definition}[The short-time Fourier transform]
 Let $f,g \in \mathcal{L}^2(\mathbb{R}^d)$. For a fixed window function $g \neq 0$ the short-time Fourier transform of a function $f$ with respect to $g$ is defined as:
 \begin{align}
-V_gf(\tau,\omega) = \int_{\mathbb{R}^d} f(t) g(t - \tau) e^{-j t \omega} dt \quad \textnormal{ for } \tau,\omega \in \mathbb{R}^d
+V_gf(\tau,\omega) = \int_{\mathbb{R}^d} f(t) g(t - \tau) \text{e}^{-j t \omega} dt \quad \textnormal{ for } \tau,\omega \in \mathbb{R}^d
 \end{align}
 \end{definition}
 
@@ -143,9 +143,6 @@ where it has been assumed that $\lim_{|t| \to \infty} t |x(t)|^2 = 0$. This resu
 &= \dfrac{1}{4 \cdot 4\pi^2 \|x(t)\|^4} \left[ \int_{-\infty}^\infty |x(t)|^2 dt \right]^2 \\
 &= \dfrac{\|x(t)\|^4}{16\pi^2 \|x(t)\|^4} = \dfrac{1}{16\pi^2}.
 \end{align*}
-
 \end{proof}
 
-- The discrete STFT? \\
-- The Uncertainty Principle: page 26 and proof? \\
-Materiale om Heisenbergs usikkerhedsprincip: afsnit 3.2.6, side 135; afsnit 9.1.2, side 409.
+Therefore, the optimal variance in time and frequency satifies the relation $\sigma_t^2\sigma_\omega^2 = \frac{1}{16\pi^2}$ \martin{Mangler i dette afsnit: skal naturligvis rettes igennem, og man kunne måske tilføje noget af det der står i noterne fra lektion 12 i AHA. Derudover mangler vi minimum én figur, der illustrerer STFT'en}.

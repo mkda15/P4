@@ -1,30 +1,22 @@
 \section{The Fourier transform} \label{sec:cont_Fourier_Transform}
-This section deals with the continuous Fourier transform. In this project the Fourier transform will be used to transform a signal $f(t)$ represented in the time domain to a signal represented in the frequency domain, which will be useful when making the spectrograms mentioned in chapter \ref{ch1}. The section is inspired by \cite{FourierTrans} and \cite{FAA}.
+This section deals with the continuous Fourier transform. In this project the Fourier transform will be the background for transforming a signal $f(t)$ represented in the time domain to a signal $F(\omega)$ represented in the frequency domain, which will be useful when making the spectrograms mentioned in chapter \ref{ch1}. The section is inspired by \cite{FourierTrans} and \cite{FAA}.
 \\ \\
 The Fourier transform is a way of expanding functions on all of $\mathbb{R}$ in the same way that the Fourier series are used to expand functions on a finite interval.
 
 \begin{definition}[The Fourier transform] \label{def:Fourier_trans}
 For a function $f \in \mathcal{L}^1$ the Fourier transform of $f$ is defined as follows:
 \begin{align*}
-\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^\infty f(t) e^{-j \omega t} dt
+\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^\infty f(t) \text{e}^{-j \omega t} dt
 \end{align*}
 \end{definition}
 
 \begin{definition}[The inverse Fourier transform] \label{def:InverseFourier_trans}
 For $F \in \mathcal{L}^1$, the inverse Fourier transform of $F(\omega)$ is:
 \begin{align*}
-\mathcal{F}^{-1}\{F(\omega)\}(t) = f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty F(\omega) e^{j \omega t} d\omega
+\mathcal{F}^{-1}\{F(\omega)\}(t) = f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty F(\omega) \text{e}^{j \omega t} d\omega
 \end{align*}
 \end{definition}
 
-\noindent
-As stated in \cite{FourierTrans}, the mathematical importance of the Fourier transform is: \martin{Consider this. \textregistered}
-\begin{enumerate}
-\item If $f(t)$ has properties that are not desirable (such as discontinuities, non smoothness), then $F(\omega)$ is possibly better behaved.
-\item The Fourier transform represents a function that is not necessarily periodic and is defined on an infinite interval. The only requirement for the Fourier transform to exist is that the integral $\int_{-\infty}^\infty |f(t)| dt$ is convergent. The convergence of the Fourier transform is examined later in this chapter.
-\end{enumerate}
-
-\noindent
 The Fourier transform $F(\omega)$ is a function of frequency and provides information on the amplitude and the phase of the signal at various frequencies. $F(\omega)$ may be written in polar coordinates as $F = |F|e^{j\theta}$ with the modulus $|F|$ representing the amplitude of the signal at a certain frequency $\omega$ and the phase shift $\theta = \arctan \left(\frac{\operatorname{Im}(F)}{\operatorname{Re}(F)} \right)$ at the frequency $\omega$.
 \\ \\
 The following definition is inspired by \cite{page 206, FAA} and shows a useful tool in both theoretical and applicational aspects.
@@ -46,8 +38,8 @@ Let $f \in \mathcal{L}^1$. Then:
 \begin{enumerate}[label=(\alph*)]
 \item For any $a \in \mathbb{R}$: \label{theorem:fund_sym_Fourier_a}
 \begin{align*}
-\mathcal{F}\{f(t-a)\}(\omega) = e^{-ja\omega} F(\omega), \\
-\mathcal{F}\{e^{jat}f(t)\}(\omega) = F(\omega - a).
+\mathcal{F}\{f(t-a)\}(\omega) = \text{e}^{-ja\omega} F(\omega), \\
+\mathcal{F}\{\text{e}^{jat}f(t)\}(\omega) = F(\omega - a).
 \end{align*}
 
 \item If $\delta > 0$ and $f_\delta(t)=\delta^{-1}f(t/\delta)$, then
@@ -78,23 +70,23 @@ On the other hand, if $t\cdot f(t)$ is integrable, then
 \item
 By definitions \ref{def:Fourier_trans} and \ref{def:InverseFourier_trans} it follows that:
 \begin{align*}
-\mathcal{F}\{f(t-a)\}(\omega) = \int_{-\infty}^\infty e^{-j\omega t} f(t - a) dt = \int_{-\infty}^\infty e^{-j\omega t - j\omega a} f(t) dt = e^{-ja \omega} F(\omega).
+\mathcal{F}\{f(t-a)\}(\omega) = \int_{-\infty}^\infty \text{e}^{-j\omega t} f(t - a) dt = \int_{-\infty}^\infty \text{e}^{-j\omega t - j\omega a} f(t) dt = \text{e}^{-ja \omega} F(\omega).
 \end{align*}
 
 For the second equation:
 \begin{align*}
-\mathcal{F}\{e^{jat} f(t)\}(\omega) = \int_{-\infty}^\infty f(t) e^{jat} e^{-j \omega t} dt = \int_{-\infty}^\infty f(t) e^{j(a- \omega)t} dt = F(\omega - a).
+\mathcal{F}\{\text{e}^{jat} f(t)\}(\omega) = \int_{-\infty}^\infty f(t) \text{e}^{jat} \text{e}^{-j \omega t} dt = \int_{-\infty}^\infty f(t) \text{e}^{j(a- \omega)t} dt = F(\omega - a).
 \end{align*}
 
 \item For the first equation, let $\tau = t/\delta$. Hence, $t = \delta \tau$ and $dt = \delta d\tau$, which gives:
 \begin{align*}
-\mathcal{F}\{f_\delta(t)\}(\omega) &= \int_{-\infty}^\infty f_\delta(t) e^{-j \omega t} dt = \int_{-\infty}^\infty \delta^{-1}f(\tau) e^{-j \omega \delta\tau} \delta d\tau \\
-&= \int_{-\infty}^\infty f(\tau) e^{-j \omega \delta\tau} d\tau = F(\delta\omega).
+\mathcal{F}\{f_\delta(t)\}(\omega) &= \int_{-\infty}^\infty f_\delta(t) \text{e}^{-j \omega t} dt = \int_{-\infty}^\infty \delta^{-1}f(\tau) \text{e}^{-j \omega \delta\tau} \delta d\tau \\
+&= \int_{-\infty}^\infty f(\tau) \text{e}^{-j \omega \delta\tau} d\tau = F(\delta\omega).
 \end{align*}
 
 For the second equation, let $\tau = \delta t$. Hence, $t = \delta^{-1}\tau$ and $dt = \delta^{-1} d\tau$:
 \begin{align*}
-\mathcal{F}\{f(\delta t)\}(\omega) &= \int_{-\infty}^\infty f(\delta t) e^{-j \omega t} dt = \int_{-\infty}^\infty f(\tau) e^{-j \omega \delta^{-1}\tau} \delta^{-1} d\tau = F_\delta(\omega).
+\mathcal{F}\{f(\delta t)\}(\omega) &= \int_{-\infty}^\infty f(\delta t) \text{e}^{-j \omega t} dt = \int_{-\infty}^\infty f(\tau) \text{e}^{-j \omega \delta^{-1}\tau} \delta^{-1} d\tau = F_\delta(\omega).
 \end{align*}
 
 \item Since $f' \in L^1$, the integral in the limit
@@ -104,24 +96,24 @@ For the second equation, let $\tau = \delta t$. Hence, $t = \delta^{-1}\tau$ and
 
 is finite, and the whole limit is 0 since $f \in \mathcal{L}^1$ satisfies $\int_{-\infty}^\infty |f(t)| dt < \infty$. Likewise, $\displaystyle{\lim_{t \to -\infty} f(t) = 0}$, too. Integration by parts yields:
 \begin{align*}
-\mathcal{F}\{f'(t)\}(\omega) &= \int_{-\infty}^\infty e^{-j \omega t} f'(t) dt \\
-&= \left[ e^{-j\omega t} f(t) \right]_{-\infty}^\infty - \int_{-\infty}^\infty (-j \omega) e^{-j \omega t} f(t) dt \\
-&= \int_{-\infty}^\infty (j \omega) e^{-j \omega t} f(t) dt = j\omega F(\omega)
+\mathcal{F}\{f'(t)\}(\omega) &= \int_{-\infty}^\infty \text{e}^{-j \omega t} f'(t) dt \\
+&= \left[ \text{e}^{-j\omega t} f(t) \right]_{-\infty}^\infty - \int_{-\infty}^\infty (-j \omega) \text{e}^{-j \omega t} f(t) dt \\
+&= \int_{-\infty}^\infty (j \omega) \text{e}^{-j \omega t} f(t) dt = j\omega F(\omega)
 \end{align*}
 
-since $|e^{-j\omega t}| = 1 \ \forall \ t$ in the second equation. If $tf(t)$ is integrable then:
+since $|\text{e}^{-j\omega t}| = 1 \ \forall \ t$ in the second equation. If $tf(t)$ is integrable then:
 \begin{align*}
-\mathcal{F}\{tf(t)\}(\omega) = \int_{-\infty}^\infty e^{-j \omega t} t f(t) dt = j \dfrac{d}{d\omega} \int_{-\infty}^\infty e^{-j \omega t} f(t) dt = j F'(\omega)
+\mathcal{F}\{tf(t)\}(\omega) = \int_{-\infty}^\infty \text{e}^{-j \omega t} t f(t) dt = j \dfrac{d}{d\omega} \int_{-\infty}^\infty \text{e}^{-j \omega t} f(t) dt = j F'(\omega)
 \end{align*}
 
-Note that $t e^{-j \omega t} = j \dfrac{d}{d\omega} e^{-j\omega t}$.
+Note that $t \text{e}^{-j \omega t} = j \dfrac{d}{d\omega} \text{e}^{-j\omega t}$.
 
 \item Finally, by definition \ref{def:Convol} it follows that:
 \begin{align*}
-\mathcal{F}\{f*g\}(\omega) &= \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-j \omega t} f(t - \tau) g(\tau) d\tau dt \\
-&= \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-j\omega(t-\tau)} f(t-\tau) e^{-j\omega \tau} g(\tau) dt d\tau \\
-&= \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-j\omega z} f(z) e^{-j\omega \tau} g(\tau) dz d\tau \\
-&= \int_{-\infty}^\infty e^{-j\omega z} f(z) dz \int_{-\infty}^\infty e^{-j\omega \tau} g(\tau) d\tau \\
+\mathcal{F}\{f*g\}(\omega) &= \int_{-\infty}^\infty \int_{-\infty}^\infty \text{e}^{-j \omega t} f(t - \tau) g(\tau) d\tau dt \\
+&= \int_{-\infty}^\infty \int_{-\infty}^\infty \text{e}^{-j\omega(t-\tau)} f(t-\tau) \text{e}^{-j\omega \tau} g(\tau) dt d\tau \\
+&= \int_{-\infty}^\infty \int_{-\infty}^\infty \text{e}^{-j\omega z} f(z) \text{e}^{-j\omega \tau} g(\tau) dz d\tau \\
+&= \int_{-\infty}^\infty \text{e}^{-j\omega z} f(z) dz \int_{-\infty}^\infty \text{e}^{-j\omega \tau} g(\tau) d\tau \\
 &= F(\omega) \cdot G(\omega),
 \end{align*}
 
@@ -130,7 +122,7 @@ where $z = t - \tau$.
 \end{proof}
 
 \noindent
-In all simplicity, part (a) of this theorem shows that translating a function (that is, a delay) corresponds to multiplying its Fourier transform by an exponential (which is equivalent to a phase shift since $F$ may be written in the polar coordinates $F = |F|e^{j\theta}$) and vice versa; part (b) shows that dilating a function by $\delta$ corresponds to dilating its Fourier transform by $1/\delta$ and vice versa; part (c) shows that differentiating a function corresponds to multiplying its Fourier transform by the coordinate variable and vice versa; and by definition \ref{def:Convol} it is shown that a convolution in the time domain is equivalent to multiplying in the frequency domain and vice versa \cite{page 215, FAA}.
+In all simplicity, part (a) of this theorem shows that translating a function (that is, a delay) corresponds to multiplying its Fourier transform by an exponential (which is equivalent to a phase shift since $F$ may be written in the polar coordinates $F = |F|\text{e}^{j\theta}$) and vice versa; part (b) shows that dilating a function by $\delta$ corresponds to dilating its Fourier transform by $1/\delta$ and vice versa; part (c) shows that differentiating a function corresponds to multiplying its Fourier transform by the coordinate variable and vice versa; and by definition \ref{def:Convol} it is shown that a convolution in the time domain is equivalent to multiplying in the frequency domain and vice versa \cite{page 215, FAA}.
 \\ \\
 The following theorem is inspired by \cite{page 77, FAA}. \martin{This is actually related to the Fourier series and the discussion about ortonormal transforms, which we have rather elegantly omitted. We need to consider whether to introduce these (with respect to the limited number of pages). \textregistered}
 
@@ -169,17 +161,17 @@ $f$ is supposed to be a step function such that $f(t) = \sum_{j=1}^k c_j \phi_j(
 
 Hence, each $\phi_j$ equals 1 on a bounded interval $|t - t_j| < a_j$ and 0 elsewhere. The Fourier transform of $\phi(t)$ is:
 \begin{align*}
-\mathcal{F}\{\phi(t)\}(\omega) = \int_{-a}^a e^{-j\omega t} dt = \dfrac{e^{-ja\omega} - e^{ja\omega}}{-j\omega} = 2\dfrac{\sin(a\omega)}{\omega}.
+\mathcal{F}\{\phi(t)\}(\omega) = \int_{-a}^a \text{e}^{-j\omega t} dt = \dfrac{e^{-ja\omega} - \text{e}^{ja\omega}}{-j\omega} = 2\dfrac{\sin(a\omega)}{\omega}.
 \end{align*}
 
 By theorem \ref{theorem:fund_sym_Fourier}\ref{theorem:fund_sym_Fourier_a}, the Fourier transform of $\phi_j(t)$ is:
 \begin{align*}
-\mathcal{F}\{\phi_j(t)\}(\omega) = 2 \omega^{-1} e^{-jt_j\omega} \sin(a_j\omega),
+\mathcal{F}\{\phi_j(t)\}(\omega) = 2 \omega^{-1} \text{e}^{-jt_j\omega} \sin(a_j\omega),
 \end{align*}
 
-which vanishes when $\omega to \infty$, and hence so does $F(\omega)$.
+which vanishes when $\omega \to \infty$, and hence so does $F(\omega)$.
 \\
-In the general case it is possible to find a sequence $\{f_n\}, f \in \mathcal{L}^1$ of step functions such that
+In the general case it is possible to find a sequence $\{f_n\}, f \in \mathcal{L}^1$, of step functions such that
 \begin{align*}
 \int_{-\infty}^\infty |f_n(t) - f(t)| dt \to 0.
 \end{align*}
@@ -199,13 +191,13 @@ Therefore, $F_n(\omega) \to F$ uniformly, and since each $F_n(\omega)$ vanishes 
 
 Moreover, the Fourier transform $F(\omega)$ is well-defined for $f \in \mathcal{L}^1$ since
 \begin{align*}
-|F(\omega)| \leq \int_{-\infty}^\infty |f(t)| \cdot |e^{j \omega t}| dt = \|f\|_{\mathcal{L}^1} < \infty.
+|F(\omega)| \leq \int_{-\infty}^\infty |f(t)| \cdot |\text{e}^{j \omega t}| dt = \|f\|_{\mathcal{L}^1} < \infty.
 \end{align*}
 
 However, $F$ is not guaranteed to be in $\mathcal{L}^1$, which means the inverse Fourier transform might not be applicable. This is the reason why the space $\mathcal{L}^2$ also plays a significant role for Fourier transforms. If $f, g, F, G \in \mathcal{L}^1$ then $f$, $g$, $F$ and $G$ are also in $\mathcal{L}^2$ \cite{page 219, FAA}. By the definitions in chapter \ref{ch4} it follows that
 \begin{align*}
-2\pi \langle f,g \rangle = 2\pi \int_{-\infty}^\infty f(t) \overline{g(t)} dt &= \int_{-\infty}^\infty \int_{-\infty}^\infty f(t) \overline{e^{j\omega t} G(\omega)} d\omega dt \\
-&= \int_{-\infty}^\infty \int_{-\infty}^\infty f(t) e^{-j\omega t} \overline{G(\omega)} dt d\omega \\
+2\pi \langle f,g \rangle = 2\pi \int_{-\infty}^\infty f(t) \overline{g(t)} dt &= \int_{-\infty}^\infty \int_{-\infty}^\infty f(t) \overline{\text{e}^{j\omega t} G(\omega)} d\omega dt \\
+&= \int_{-\infty}^\infty \int_{-\infty}^\infty f(t) \text{e}^{-j\omega t} \overline{G(\omega)} dt d\omega \\
 &= \int_{-\infty}^\infty F(\omega) \overline{G(\omega)} d\omega = \langle F,G \rangle.
 \end{align*}
 
@@ -224,3 +216,5 @@ The Fourier Transform, defined originally on $\mathcal{L}^1 \cap \mathcal{L}^2$,
 \end{align*}
 for all $f,g \in \mathcal{L}^2$.
 \end{theorem}
+
+\martin{Mangler i dette afsnit: der skal ryddes lidt op i dette afsnit, da nogle af sætningerne sandsynligvis hører til under afsnittet om Fourier-rækker.}
