@@ -10,7 +10,7 @@ import scipy.io.wavfile as siw
 import matplotlib.pyplot as plt
 import numpy as np
 import time
-import winsound
+#import winsound
 
 #==============================================================================
 # Hent data
