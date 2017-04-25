@@ -8,8 +8,10 @@ from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
  
-fs = 2500.
-ft = 0.25
+fs = 44100.
+if not type(fs) == float:
+    raise ValueError("The sampling frequency should be a float.")
+ft = 50 / fs
 ft1 = 40 / fs
 ft2 = 50 / fs
 b = 0.05
@@ -73,10 +75,10 @@ def rect(n,M): # Rectangular window
 def lp(n,M,ft): # Lowpass filter
     h = np.zeros(len(n))
     for i in range(len(n)):
-        if i != M/2.:
-            h[i] = np.sin(2*np.pi*ft*(i - M/2.)) / (np.pi*(i - M/2.))
-        else:
+        if i == M/2.:
             h[i] = 2*ft
+        else:
+            h[i] = np.sin(2*np.pi*ft*(i - M/2.)) / (np.pi*(i - M/2.))
     return h
 
 def bp(n,M,ft1,ft2): # Bandpass filter
@@ -89,7 +91,16 @@ def bp(n,M,ft1,ft2): # Bandpass filter
             - (np.sin(ft1*2*np.pi*(i - M/2.))))
     return h
 
-h = lp(n,M,ft)*Kaiser(n,M1)
+def hp(n,M,ft): # Highpass filter
+    h = np.zeros(len(n))
+    for i in range(len(n)):
+        if i == M/2.:            
+            h[i] = 1 - 2*ft
+        else:
+            h[i] = - np.sin(2*np.pi*ft*(i - M/2.)) / (np.pi*(i - M/2.))            
+    return h
+
+h = hp(n,M,ft)*Kaiser(n,M1)
 
 # Normalize to get unity gain.
 h = h / np.sum(h)
