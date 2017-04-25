@@ -1,16 +1,32 @@
-The filter design process is documented in this section including test and optimization. As stated in section \ref{valg af filter} a FIR filter of type I, design by the Kaiser window is wanted.
-\subsection{Specifications} 
-By the aim of letting a limited frequency band though the filter - as found in the frequency analysis chapter \ref{?} - the filter is to be designed as a bandpass filter. It is essential to note that the filter to be design in this project is not an adaptive filter. Meaning that the filter specification will be chosen on behalf of a specific signal with known noise.\\
-This filter are determined to remove noise in the form of background speak from a low E note.     
+The filter design process is documented in this section including test and optimization. As stated in section \ref{sec:filtervalg} a FIR filter of type I, designed by the Kaiser window is wanted.
+\subsection{Specifications}\label{sec:FIRspec} 
+By the aim of letting a limited frequency band though the filter - as found in the frequency analysis chapter \ref{ch9} - the filter is to be designed as a bandpass filter. It is essential to note that the filter to be design in this project is not an adaptive filter. Meaning that the filter specification will be chosen on behalf of a specific signal with known noise. During test the filter is adapted to other signals only by chancing the specifications for the cut off frequencies.\\
+This filter is determined to remove noise in the form of background speaking from a signal representing a low E note. \\
+Due to the frequency analysis of single tones section \ref{sec:single} the energy in the signal is located within a frequency band from 75 Hz to 1000 Hz.  
+By letting the cut off frequencies $ft$ of the filter be respectively 75 Hz and 1000 Hz this makes the passband of the filter. 
+\\
+!!!Something about the analysis of the noise, maybe!!!\\
+
+The peak approximation error $\delta$ is determined as $\delta=0.05$. Further the width of the transition band is determined as $\Delta \omega = ((ft + \frac{\delta_2}{2})-(ft - \frac{\delta}{2}))2\pi$.\\
+On behalf of the determined specifications the magnitude response of the ideal filter is sketched in figure \ref{??}   
+\\ Indsæt figur \\ 
+Due to the method of the Kaiser window, section \ref{subsec:FIR}, the shape parameter $\beta$ and the order of the filter $M$ is determined as  
+\begin{align}
+\beta =& \ 0.1102(60-8.7) = 5.65326 \\
+M =& \ \frac{60-8}{2.285\cdot 0.05\cdot 2\pi}\approx 74 
+\end{align}
 \subsection{Implementation}
+The implementation of the filter basically follows algorithm \ref{alg:FIR}. First filter specifications are defined. Then one function defines the ideal impulse response as the inverse Fourier transformation of the ideal filter specified on figure \ref{??}. For derivation of the ideal impulse response of a bandpass filter consult appendix \ref{appC}. Another function defines the Kaiser window. Then the filter is defined by multiplying the ideal...
+
 \begin{algorithm}[H]
 \caption{Compute type I FIR filter}
-\label{array-sum}
+\label{alg:FIR}
 \begin{algorithmic}[1] 
-\State $N = $ \Comment {Lenght of filter} 
-\State $M = N-1$ \Comment {Order of filter}
-\State $\omega_1 = $ \Comment {Cutoff frequency $1$}
-\State $\omega_2 = $ \Comment {Cutoff frequency $2$}
+\State $M = 74$ \Comment {Order of filter} 
+\State $\beta = 5.65326$ \Comment {Shape parameter}
+\State $N = M+1$ \Comment {Lenght of filter}
+\State $f1_1 = 75$ \Comment {Cutoff frequency $1$}
+\State $f1_2 = 1000$ \Comment {Cutoff frequency $2$}
 \Procedure{Compute ideal impulse response}{$h_d$}
     \For {each integer $i$ in $h_d$}
         \If {$i == \frac{M}{2}$}
@@ -31,10 +47,10 @@ This filter are determined to remove noise in the form of background speak from 
 		\State $w[i]=\frac{sum_n}{sum_d}$
 	\EndFor
 	\State Return $w$
-\EndProcedure 
+\EndProcedure
 \\
 \Procedure{Compute frequency response}{$H$}
-	\State $h = h_d \cdot w$ \Comment{Realizable impulse response}
+	\State $h = h_d \cdot w$ \Comment{Windowed impulse response}
 	\State $H = fft(h)$ \Comment {Fourier transformation of impulse response}
 	\State Return $H$
 \EndProcedure

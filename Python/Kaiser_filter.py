@@ -100,7 +100,7 @@ def hp(n,M,ft): # Highpass filter
             h[i] = - np.sin(2*np.pi*ft*(i - M/2.)) / (np.pi*(i - M/2.))            
     return h
 
-h = hp(n,M,ft)*Kaiser(n,M1)
+h = lp(n,M,ft)*Kaiser(n,M1)
 
 # Normalize to get unity gain.
 h = h / np.sum(h)
