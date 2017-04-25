@@ -17,13 +17,13 @@ plt.style.use('ggplot')
 #==============================================================================
 wav1 = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')
 #wav1 = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_lys.wav')
-wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')
-#wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/tale_1.wav')
+#wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')
+wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/tale_1.wav')
 #wav = siw.read('Lydfiler/forsoeg_nopeak/melodi/alene/forsoeg_lillepeteredderkop_langsom.wav')
 #wav = siw.read('Lydfiler/forsoeg_nopeak/melodi/akkorder/forsoeg_lillepeteredderkop_langsom.wav')
 #wav1 = siw.read('Lydfiler/forsoeg_nopeak/akkorder/forsoeg_akkord_lys.wav')
 #wav1 = siw.read('Lydfiler/forsoeg_nopeak/skala/forsoeg_skala_hurtig.wav')
-#wav = siw.read('Lydfiler/forsoeg_nopeak/stoej/sang_3_mester_jakob.wav')
+#wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/sang_3_mester_jakob.wav')
 freq1 = wav1[0] #signal
 data1 = wav1[1]
 freq2 = wav2[0] #noise

@@ -1,16 +1,8 @@
-\chapter{System design and validation} \label{ch8}
-With the concept and requirement for the system established in section \ref{sec:synth} and necessary theoretical knowledge obtained through chapter \ref{ch4} to \ref{ch7} system design are to be set up in this chapter. Test for validation of each unit will be carried out and documented along with the design process according to the test specifications in section \ref{sec:testspec}. One section is allocated to each software unit in the application cp. section \ref{sec:testspec}. The chapter concludes with a test of the final system followed by an evaluation.  \\
+\chapter{Filtering} \label{ch8}
+It is wanted to reduces eventual noise in the music signal that is to be processed by the application hence this chapter introduces the basic filter theory necessary for the system. Basic theory concerning mathematically ideal filters is described, followed by design techniques of practical non ideal filters. This chapter is inspired by \cite{DTSP, ch. 5,7} and \cite{FSP, sec. 3.4.4}. \\
+Note that filters concerned in the project are only digital filters, meaning the filter is a algorithm to be executed on a computer. An analog filter is in contrast constructed by physical component. Both types rely on the input/output relation that are to be mathematically represented.
 
-\section{Fourier transformation - FFT}
 
-\section{Filter}
-\input{sections/mainmatter/chapter_8/Filterdesign.tex}
+\input{sections/mainmatter/chapter_8/filterteori.tex}
 
-\section{STFT}
-
-\section{Spectrogram}
-
-\section{Integration validation}
-
-\section{Final system test}
-
+\input{sections/mainmatter/chapter_8/design.tex}

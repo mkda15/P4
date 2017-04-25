@@ -1,5 +1,9 @@
-fee
-\begin{algorithm}
+The filter design process is documented in this section including test and optimization. As stated in section \ref{valg af filter} a FIR filter of type I, design by the Kaiser window is wanted.
+\subsection{Specifications} 
+By the aim of letting a limited frequency band though the filter - as found in the frequency analysis chapter \ref{?} - the filter is to be designed as a bandpass filter. It is essential to note that the filter to be design in this project is not an adaptive filter. Meaning that the filter specification will be chosen on behalf of a specific signal with known noise.\\
+This filter are determined to remove noise in the form of background speak from a low E note.     
+\subsection{Implementation}
+\begin{algorithm}[H]
 \caption{Compute type I FIR filter}
 \label{array-sum}
 \begin{algorithmic}[1] 
