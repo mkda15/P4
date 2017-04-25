@@ -13,7 +13,7 @@ from scipy import signal
 #==============================================================================
 # Generer data
 #==============================================================================
-N = 2**12 # Antal samples og laengde af FFT
+N = 1000 # Antal samples og laengde af FFT
 f_s = 2**1   # Samplingsfrekvens
 td = 1/float(f_s) # Samplingsperiode
 t = td*N
@@ -41,6 +41,7 @@ y = f(x)+g(x)+h(x)# Funktion, som samples og transformeres
 #==============================================================================
 # DFT
 #==============================================================================
+
 def DFT(x,c):
     X = np.zeros(c,dtype=complex)
     for k in range(len(x)):
@@ -53,10 +54,14 @@ def DFT(x,c):
 #==============================================================================
 # FFT
 #==============================================================================
+
+def is_power2(num): # Checks if a number is a power of 2
+	return num != 0 and ((num & (num - 1)) == 0)
+
 def FFT(x):
     N_new = len(x)
-    if N % 2 > 0:
-        raise ValueError('nej.') # Brug N = potenser af 2
+    if is_power2(N) == False:
+        raise ValueError('N should be a power of 2.') # Brug N = potenser af 2
     elif N_new == 2:
         return DFT(x,N_new) # Returnerer DFT naar data ikke kan deles mere op
     else:
