@@ -1,0 +1,31 @@
+fee
+\begin{algorithm}
+\caption{Compute type I FIR filter}
+\label{array-sum}
+\begin{algorithmic}[1] 
+\State $N = $ \Comment {Lenght of filter} 
+\State $M = N-1$ \Comment {Order of filter}
+\State $\omega_1 = $
+\State $\omega_2 = $
+\Procedure{Compute ideal impulse response}{$h_d$}
+    \For {each integer $i$ in $h_d$}
+        \If {$i == \frac{M}{2}$}
+        		\State $h_d[i] = 2(\omega_2 - \omega_1)$
+        	\Else 
+        		\State  $h_d[i] = \frac{1}{ (\pi (i - \frac{M}{2}))}(\sin(\omega_2 2 \pi (i - \frac{M}{2})) - (\sin(\omega_1 2 \pi (i - \frac{M}{2}))))$ 
+        	\EndIf 
+	\EndFor
+	\State Return $h_d$
+\EndProcedure
+\\
+\Procedure{Compute kaiser window}{$w$}
+	\For {each integer $i$ in length of $N$}
+		\For {each integer $j$ in length of $M$}
+			\State $w[i] =\frac{(\frac{1}{j!})^2 \left( \left( \frac{\beta}{2} \sqrt{\left(1 - \left( \frac{2*i}{N-1}\right) - 1\right)^2}\right)^{2j}\right)}{(\frac{1}{j!})^2 \left( \frac{\beta}{2}\right)^{j2}}$
+
+
+
+\EndProcedure 
+
+\end{algorithmic}
+\end{algorithm}
