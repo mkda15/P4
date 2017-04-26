@@ -58,7 +58,7 @@ M =& \ \frac{26-8}{2.285 \cdot 0.05\cdot 2\pi}\approx 26
 \end{align}
 Note that $M$ is rounded up to nearest even integer 
 \subsection{Implementation}
-The implementation of the filter basically follows algorithm \ref{alg:FIR}. First filter specifications are defined. Then one function defines the ideal impulse response as the inverse Fourier transformation of the ideal filter specified on figure \ref{??}. For derivation of the ideal impulse response of a bandpass filter consult appendix \ref{appC}. Another function defines the Kaiser window from the given inputs $\beta$ and $M$. Then the filter is defined by multiplying the ideal impulse response and the Kaiser window to get a realizable impulse response. By FFT the frequency response of the filter is obtained. Figure \ref{??} illustrate a plot of the magnitude response corresponding to the filter in the frequency domain.   
+The implementation of the filter basically follows algorithm \ref{alg:FIR}. First filter specifications are defined. Then one function defines the ideal impulse response as the inverse Fourier transformation of the ideal filter specified on figure \ref{fig:spec_Hd}. For derivation of the ideal impulse response of a bandpass filter consult appendix \ref{appC}. Another function defines the Kaiser window from the given inputs $\beta$ and $M$. Then the filter is defined by multiplying the ideal impulse response and the Kaiser window to get a realizable impulse response. By FFT the frequency response of the filter is obtained. Figure \ref{??} illustrate a plot of the magnitude response corresponding to the filter in the frequency domain.   
 
 \begin{algorithm}[H]
 \caption{Compute type I FIR filter}
