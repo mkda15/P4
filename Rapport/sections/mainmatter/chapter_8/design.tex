@@ -92,7 +92,7 @@ Because $-\infty \leq \Omega \leq \infty $ is mapped to $-\pi \leq \omega \leq \
 \end{align}
 Hereby it is possible to determine a new $\Omega_c$ to the continuous-time filter in order to ensure the discrete $\omega_c$ to fit the specification.\\
 An important property of the bilinear transformation is that stability is preserved if the continuous-time filter i stable.
-\subsection{FIR filter}
+\subsection{FIR filter}\label{subsec:FIR}
 Design of FIR filters are in contrast to IIR filters based on approximating the desired discrete-time frequency response directly. By this method it is possible to guarantee a general linear phase of the system. The method also uses the window method, which is described in the following section.
 \subsubsection{The window method}
 The window method is considered a simple method for designing FIR filters. The method takes off from the desired frequency response $H_d$ - specified as for the IIR filter. Hereby the desired impulse response is obtained by the inverse Fourier transformation of the desired frequency response:
@@ -208,7 +208,7 @@ w[n]=\left\{\begin{matrix}
 \end{align}
 
 where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ is the zero'th order modified Bessel function of the first kind \cite{DTSP, p.474-476}. Increasing $\beta$ tapers the window in the time domain, which results in smaller side lopes of the Fourier transform. Increasing $M$ causes the width of the main lope to increase but without changing the peak amplitude of the side lopes. This is illustrated in figures \ref{?} and \ref{?}, respectively \trine{2 figurer.}.\\ 
-In order to determine values for $\beta$ and $M$ according to  satisfying the desired specifications the following formulas are defined. First note that the peak approximation error $\delta$ - by the method of Kaiser - is determined on behalf of $\beta$. Considering a lowpass filter with a fixed $\delta$ this gives a cut off frequency of the passband $\omega_p$ defined by $|H(\text{e}^{j\omega})| \geq 1-\delta$ and cut off frequency of the stopband $\omega_s$ defined by $|H(\text{e}^{j\omega})| \leq \delta$. This gives a transitionband of width $\delta \omega = \omega_s - \omega_p$. Defining $\delta$ in $[dB]$ by $A=-20\log_{10} \delta$ it is possible to determine the value of $\beta$ on behalf of a specific value of $A$ as 
+In order to determine values for $\beta$ and $M$ according to  satisfying the desired specifications the following formulas are defined. First note that the peak approximation error $\delta$ - by the method of Kaiser - is determined on behalf of $\beta$. Considering a lowpass filter with a fixed $\delta$ this gives a cut off frequency of the passband $\omega_p$ defined by $|H(\text{e}^{j\omega})| \geq 1-\delta$ and cut off frequency of the stopband $\omega_s$ defined by $|H(\text{e}^{j\omega})| \leq \delta$. This gives a transitionband of width $\Delta \omega = \omega_s - \omega_p$. Defining $\delta$ in $[dB]$ by $A=-20\log_{10} \delta$ it is possible to determine the value of $\beta$ on behalf of a specific value of $A$ as 
 \begin{align}
 \beta =
 \left\{ \begin{matrix}
