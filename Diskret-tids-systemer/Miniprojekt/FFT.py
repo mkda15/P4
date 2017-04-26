@@ -112,19 +112,5 @@ plt.show()
 
 Y_sort = np.argpartition(Y2,-3)[-3:]
 
-
 print 'Seconds to evaluate own FFT:  ', FFT_time
 print 'Seconds to evaluate numpy.fft:', FFT2_time
-
-
-
-
-
-
-
-
-
-
-
-
-
