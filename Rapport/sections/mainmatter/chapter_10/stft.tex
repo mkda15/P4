@@ -1,0 +1,72 @@
+In this section the STFT will be implemented and tested to check that it fulfils the test criteria specified in chapter \ref{ch3}. This includes creating a spectrogram from the results of the STFT and check if this is consistent with the expected results.
+\subsection{Implementation}
+The implementation of the STFT requieres an FFT algorithm and will use the algorithm described in pseudocode \ref{FFTalg}.\\\\
+The STFT will be implemented in Python and the pseudocode for the implementation is seen below in \ref{STFTalg}.
+\begin{algorithm}[H]
+\caption{STFT algorithm}
+\label{STFTalg}
+\begin{algorithmic}[1]
+\State $FFTsize=1000$ \Comment{Length of window and FFT in STFT}
+\State $overlap=2$ \Comment{Number of overlaps of every FFT}
+\State $data=$ import of recording \Comment{Recording imported as .wav file}\\
+\Procedure{Compute STFT}{}
+\State $step=FFTsize/overlap$
+\State $w=hanning(FFTsize)$ \Comment{Hanning window of length $=FFTsize$}
+\For{each $i$ at intervals of $step$ in length of $data-FFTsize$}
+\State $stft = array[FFT(w\cdot data[i:i+FFTsize])]$
+\EndFor
+\State Return $stft$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+The algorithm for generating a spectrogram from the STFT is likewise implemented in Python and is seen in pseudocode \ref{SPECTROalg}.
+\begin{algorithm}[H]
+\caption{Generate spectrogram}
+\label{SPECTROalg}
+\begin{algorithmic}[1]
+\State $freq=$ sampling frequency of data
+\State $stft=STFT(data)$ \Comment{Perform STFT on $data$}
+\State $tid=len(data)/freq$ \Comment{Length of data in seconds.}
+\State $stft=20\cdot log_{10}(abs(stft.T))$ \Comment{dB gain of transposed $stft$}\\
+\State $x=linspace(0,tid,len(X[1]))$ \Comment{Ticks for x-axis}
+\State $y=linspace(0,freq/2,len(len(X[0])$ \Comment{Ticks for y-axis}\\
+\State $spec=pcolormesh(x,y,X)$ \Comment{Plot amplitudes as colors with positions $(x,y)$.}
+\State $colorbar(spec)$ \Comment{Legend of colors illustrated as a colorbar.}
+\end{algorithmic}
+\end{algorithm}
+\subsection{Validation}
+The validation of the STFT and spectrogram will be done as a whole enity and the test specification consists of generating a spectrogram from a signal containing a single sinusoidal wave which changes frequency once during the sampling interval. The signal is defined as
+\begin{equation}
+sig(x)=\begin{cases}\sin(2\pi x)\,\text{for }x<\frac{t}{2}\\
+\sin(6\pi x)\,\text{for }x\geq\frac{t}{2}
+\end{cases}.
+\end{equation}
+The sinuses are then of 1 and 3 Hz respectively and the signal is sampled for $t=26214$ seconds at $f_s=10$ Hz. In figure \ref{fig:test_stft1} is seen a spectrogram of the signal generated with a window length of 100 and an overlap of 2. In figure \ref{fig:test_stft2} is seen a spectrogram with a window length of 10000 and an overlap of 2.
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{figures/validation/stft/1.png}
+\caption{Spectrogram...}
+\label{fig:test_stft1}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{figures/validation/stft/2.png}
+\caption{Spectrogram...}
+\label{fig:test_stft2}
+\end{minipage}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
