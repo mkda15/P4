@@ -12,10 +12,10 @@ fs = 44100.
 if not type(fs) == float:
     raise ValueError("The sampling frequency should be a float.")
 ft = 50 / fs
-ft1 = 40 / fs
-ft2 = 50 / fs
+ft1 = 75 / fs
+ft2 = 1000 / fs
 b = 0.05
-A = 60
+A = int(-20*np.log10(b))
 
 # N = 201
 N = int(np.ceil((A - 8) / (2.285 * 2 * np.pi * b))) + 1 # Length of the filter
@@ -87,7 +87,7 @@ def bp(n,M,ft1,ft2): # Bandpass filter
         if i == M/2:
             h[i] = 2*(ft2 - ft1)
         else:
-            h[i] = 1 / (np.pi*(i - M/2.))*(np.sin(ft2*2*np.pi*(i - M/2.)) \
+            h[i] = (1 / (np.pi*(i - M/2.)))*(np.sin(ft2*2*np.pi*(i - M/2.)) \
             - (np.sin(ft1*2*np.pi*(i - M/2.))))
     return h
 
@@ -100,7 +100,7 @@ def hp(n,M,ft): # Highpass filter
             h[i] = - np.sin(2*np.pi*ft*(i - M/2.)) / (np.pi*(i - M/2.))            
     return h
 
-h = lp(n,M,ft)*Kaiser(n,M1)
+h = bp(n,M,ft1,ft2)*Kaiser(n,M1)
 
 # Normalize to get unity gain.
 h = h / np.sum(h)
