@@ -1,16 +1,16 @@
 \chapter{Derivation of ideal impulse response}\label{appC}
-In \trine{Dette er udledning af båndstop, skal laves om til bandpass!!!}order to derive the ideal impulse response the ideal frequency response is defined as follows on behave of figure \ref{fig i FIR spec}\trine{husk ref}.
+In \trine{Dette er udledning af båndstop, skal laves om til bandpass!!!}order to derive the ideal impulse response the ideal frequency response is defined as follows on behave of figure \ref{fig:spec_Hd}
 \begin{align*}
  H_d(\text{e}^{j\omega})= \begin{cases}
-  \text{e}^{-j\omega\frac{M}{2}}, \ \ \ & |\omega| \leq\omega_{c_1} \\
- 0, \ \ \ & \omega_{c_1} \leq |\omega| \leq \omega_{c_2} \\
-  \text{e}^{-j\omega\frac{M}{2}}, \ \ \ & \omega_{c_2} \leq |\omega| 
+ 0, \ \ \ & |\omega| \leq \omega_{c_1} \\
+  \text{e}^{-j\omega\frac{M}{2}}, \ \ \ & \omega_{c1} \leq | \omega | \leq \omega_{c2} \\
+  0, \ \ \ & \omega_{c_2} \leq |\omega| \leq \pi 
 \end{cases}
 \end{align*}
 From this the ideal impulse response is determined by the inverse Fourier transformation 
 \begin{align*}
-h_d[n] &= \frac{1}{2\pi} \left(  \int_{-\pi}^{-\omega_{c_2}} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega + \int_{-\omega_{c_1}}^{\omega_{c_1}} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega +\int_{\omega_{c_2}}^{\pi} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega	\right) \\
-&= \frac{1}{2\pi} \left(  \int_{-\pi}^{-\omega_{c_2}} \text{e}^{j\omega \left(n- \frac{M}{2} \right) } d\omega + \int_{-\omega_{c_1}}^{\omega_{c_1}} \text{e}^{j\omega \left(n- \frac{M}{2} \right) }  d\omega + \int_{\omega_{c_2}}^{\pi} \text{e}^{j\omega \left( n-\frac{M}{2} \right) } d\omega	\right).
+h_d[n] &= \frac{1}{2\pi} \left(  \int_{-\omega_{c2}}^{-\omega_{c_1}} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega + \int_{\omega_{c_1}}^{\omega_{c_2}} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega	\right) \\
+&= \frac{1}{2\pi} \left(  \int_{-\omega_{c2}}^{-\omega_{c_1}} \text{e}^{j\omega \left(n- \frac{M}{2} \right) } d\omega + \int_{\omega_{c_1}}^{\omega_{c_2}} \text{e}^{j\omega \left(n- \frac{M}{2} \right) }  d\omega \right).
 \end{align*}
 Then one use that the following is true
 \begin{align*}
