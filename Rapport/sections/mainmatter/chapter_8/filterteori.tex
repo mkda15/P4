@@ -140,9 +140,9 @@ For a FIR filter to satisfy this relation the following set of conditions has to
 &2\alpha = M = \text{an integer} \\ 
 &h[n]=h[M-n] \ \text{or} \ h[n]=-h[M-n] \nonumber  
 \end{align} 
-this implies that $h[n]$ is either symmetric or anti symmetric and that $\alpha = \frac{M}{2}$ becomes the symmetric point. \\
-From of these conditions four different types of FIR generalized linear phase filters are defined \cite{DTSP, p. 343}, only the \textit{type 1 FIR filter} will be elaborated here. Note that the conditions in \eqref{eq:FIR_con} guarantees a causal system with linear phase, but they are not a necessity. \\
-A type 1 FIR filter is characterised by having a symmetric impulse response and $M$ being an even integer. By applying the symmetry condition to the definition of the Fourier transformation the frequency response is defined by   
+this implies that $h[n]$ is either symmetric or anti symmetric and that $\alpha = \frac{M}{2}$ becomes the symmetry point. \\
+From these conditions four different types of FIR filter with generalized linear phase are defined \cite{DTSP, p. 343}, only the \textit{type 1 FIR filter} will be elaborated here.
+A type 1 FIR filter is characterised by having a symmetric impulse response and $M$ being an even integer. By applying the symmetry condition to the definition of the Fourier transformation the frequency response is defined by\trine{rettelse: ref eller lav udledning.}   
 \begin{align}\label{eq:type1}
 H(\text{e}^{j\omega})=\text{e}^{-j\omega \frac{M}{2}} \sum_{k=0}^{\frac{M}{2}} a[k]\cos \omega k,
 \end{align}
@@ -150,7 +150,7 @@ where
 \begin{align}
 a[k]= \left\{ \begin{matrix}
 2h\left[ \frac{M}{2} - k \right], \ \ &\ k=1,2,... , \frac{M}{2}.   \\
-h[M-n], \ \ &\ k = 0  
+h[\frac{M}{2}], \ \ &\ k = 0  
 \end{matrix}\right.
 \end{align}
 By this \eqref{eq:type1} has the form of \eqref{eq:lin_pha} where $A(\text{e}^{j\omega})= \sum_{k=0}^{\frac{M}{2}} a[k]\cos \omega k$ is a real function of $\omega$ and $\beta$ equals either 0 or $\pi$. Hence a constant group delay is achieved.
