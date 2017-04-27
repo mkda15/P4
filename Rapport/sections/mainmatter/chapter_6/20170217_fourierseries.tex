@@ -37,19 +37,18 @@ Pulling the summation and the constant on the right-hand side out of the integra
 
 The integral on the right-hand side has two cases to consider, $n \neq k$ and $n = k$. For $n\neq k$:
 \begin{align*}
-	\forall n,n\neq k: \int_{-\pi}^\pi \text{e}^{j(n-k)t}dt 
+	\int_{-\pi}^\pi \text{e}^{j(n-k)t}dt 
 	=\dfrac{1}{j(n-k)}\text{e}^{j(n-k)t}\mid_{-\pi}^{\pi}
 	=\dfrac{(-1)^{n-k}-(-1)^{n-k}}{j(n-k)}
 	=0.
 \end{align*}
 
-\chr{Could be written with sine and cosine, to show that the integral of those 2 over a periode is 0}
 The second case is for $n = k$:
 \begin{align*}
-\forall n,n=k: \int_{-\pi}^\pi \text{e}^{j(n-k)t}dt = \int_{-\pi}^\pi 1 dt = 2\pi.
+\int_{-\pi}^\pi \text{e}^{j(n-k)t}dt = \int_{-\pi}^\pi 1 dt = 2\pi.
 \end{align*}
 
-The integral can be concluded to yield either $0$ or $2\pi$:
+The integral can be concluded to yield either $2\pi$ or $0$:
 \begin{align}
 	\int_{-\pi}^{\pi} \text{e}^{j (n-k)t}dt 
 	= 
@@ -68,6 +67,8 @@ Changing the index to $n$ gives the coefficient $c_n$'s general equation:
 \begin{align*}
 	c_n = \dfrac{1}{2\pi} \int_{-\pi}^{\pi} f(t) \text{e}^{-j n t}dt.
 \end{align*}
+
+The above is defined in the following definition \cite{page 18-20, FAA}.
 
 \begin{definition} \label{def:fourier_definition}
 The Fourier series of a $2\pi$-periodic integrable function $f(t)$ is defined as:
@@ -91,7 +92,8 @@ where
 \end{align*}
 \end{definition}
 
-Since $\cos(nt)$ is even and $\sin(nt)$ is odd, this definition gives the following result:
+Since $\cos(nt)$ is even and $\sin(nt)$ is odd, this definition gives the following result \cite{page 21, FAA}.
+
 \begin{lemma}
 If $f(t)$ is even, then $f(t)\cos(nt)$ is even and $f(t)\sin(nt)$ is odd, which means that:
 \begin{align*}
@@ -176,12 +178,14 @@ By lemma \ref{lemma:2pi-periodic_function} the above equation can be expressed a
 	&= \int_{-\pi}^\pi f(t + \tau) D_N(\tau) d\tau,
 \end{align}
 
-where $D_N(\tau) = \dfrac{1}{2\pi}\sum_{n=-N}^{N}e^{j n \tau}$ is called the $N$'th Dirichlet kernel. The following corollary is used to prove theorem \ref{theo:main_convergence}.
+where $D_N(\tau) = \dfrac{1}{2\pi}\sum_{n=-N}^{N}e^{j n \tau}$ is called the $N$'th Dirichlet kernel. The following corollary is used to prove theorem \ref{theo:main_convergence} \cite{page 31, FAA}.
+
 \begin{corollary} \label{coro:conv_Fourier_coeff}
 The Fourier coefficients $a_n$, $b_n$ and $c_n$ all tend to zero as $n \to \pm \infty$.
 \end{corollary}
 
-The following theorem is the main convergence theorem in this section.
+The following theorem is the main convergence theorem in this section \cite{page 35, FAA}.
+
 \begin{theorem} \label{theo:main_convergence}
 Let $f(t)$ be $2\pi$-periodic and piecewise smooth on $\mathbb{R}$. Then the limit of the partial sum $S_N^f$ is
 	\begin{align*}
@@ -195,7 +199,7 @@ If $f$ is continuous at $t$, then
 \end{theorem}
 
 \begin{proof}
-The integral from $-\pi$ to $0$ and from $0$ to $\pi$ of a Dirichlet kernel both equals $\frac{1}{2}$ \cite{page 34-35, FAA}. Hence:
+The integral from $-\pi$ to $0$ and from $0$ to $\pi$ of a Dirichlet kernel both equals $\frac{1}{2}$ \cite{page 35, FAA}. Hence:
 	\begin{align*}
 		\dfrac{1}{2} f(\theta-) = f(\theta-) \int_{-\pi}^0 				D_N(\tau)d\tau, \quad \dfrac{1}{2}f(\theta+) = 					f(\theta+) \int_0^\pi D_N (\tau)d\tau,
 	\end{align*}
@@ -226,7 +230,7 @@ The integral from $-\pi$ to $0$ and from $0$ to $\pi$ of a Dirichlet kernel both
 		\end{cases}
 	\end{align}	
 	
-	By using \eqref{eq:Dirichlet_proof} and \eqref{eq:g_tau}, 		then \eqref{eq:S_N_proof} may be written as:
+	By using \eqref{eq:Dirichlet_proof} and \eqref{eq:g_tau}, 		then \eqref{eq:S_N_proof} may be written as the Fourier 		coefficients:
 	\begin{align} \label{eq:5.1.1_final}
 		\dfrac{1}{2\pi} \int_{-\pi}^\pi g(\tau) \left(\text{e}			^{j(N+1)\tau} - \text{e}^{-jN\tau}\right) d\tau = C_{-			(N+1)} - C_N.
 	\end{align}
@@ -236,7 +240,8 @@ The integral from $-\pi$ to $0$ and from $0$ to $\pi$ of a Dirichlet kernel both
 		\lim_{\tau \to 0+} g(\tau) = \lim_{\tau \to 0+} 				\dfrac{f(\theta + \tau) - f(\theta+)}{\text{e}^{j				\tau}-1} = \lim_{\tau \to 0+} \dfrac{f'(\theta + \tau)}			{j\text{e}^{j\tau}} = \dfrac{f'(\theta+)}{j}.
 	\end{align*}
 	
-	Likewise, $\displaystyle{\lim_{\tau \to 0-}} g(\tau) = 			\frac{f'(\theta-)}{j}$. Both of these limits are finite, 		and hence $g$ is actually piecewise continuous on $[-\pi,		\pi]$. The Fourier coefficients $C_n = \frac{1}{2\pi} 			\int_{-\pi}^\pi g(\tau)\text{e}^{jn\tau} d\tau$ tend to 		zero as $n 	\to \pm \infty$ by corollary 						\ref{coro:conv_Fourier_coeff}. 	Therefore, \eqref{eq:5.1.1_final} also vanishes as $N \to \infty$, which 				shows that \eqref{eq:S_N_proof} also tend to zero as $n 		\to \infty$, which completes the proof.
+	Likewise, $\displaystyle{\lim_{\tau \to 0-}} g(\tau) = 			\frac{f'(\theta-)}{j}$. Both of these limits are finite, 		and hence $g$ is actually piecewise continuous on $[-\pi,		\pi]$. The Fourier coefficients $C_N = \frac{1}{2\pi} 			\int_{-\pi}^\pi g(\tau)\text{e}^{-jN\tau} d\tau$ tend to 		zero as $N 	\to \pm \infty$ by corollary 						\ref{coro:conv_Fourier_coeff}. 	Therefore,
+	\eqref{eq:5.1.1_final} also vanishes as $N \to \infty$, 		which shows that \eqref{eq:S_N_proof} also tend to zero as 		$N \to \infty$, which completes the proof.
 \end{proof}
 
 \martin{Mangler i dette afsnit: vi bør nok udvide afsnittet til også at dække blandt andet uniform konvergens (fra forelæsningen i AHA), men på grund af begrænsningen af sider er vi så nødt til at smide dette afsnit ned i appendix. Det er også fint, da vi ikke bruger Fourier-rækkerne direkte.}

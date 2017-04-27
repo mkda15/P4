@@ -78,17 +78,17 @@ The DFT can be written on matrix form, where $X_k$ is the DFT of the sequence $x
 		x_0\\ x_1\\ x_2\\ x_3\\ \vdots \\ x_{N-1}
 	\end{bmatrix} 
 	\implies
-	\bar{X} = F\bar{x} 
+	\textbf{X} = F\textbf{x}
 \end{align}
 
-where $\bar{X}$ and $\bar{x}$ are column vectors and $W$ is called the twiddle factor and is defined as \cite{DFT_OX}:
+where $\textbf{X}$ and $\textbf{x}$ are column vectors and $W$ is called the twiddle factor and is defined as \cite{DFT_OX}:
 \begin{align*}
 	W_N = \text{e}^{-j\frac{2 \pi}{N}}, \quad W_N^{kn} = \text{e}^{-j\frac{2 \pi}{N}kn}.
 \end{align*}
 
 Since $W_N^N = \text{e}^{-j2\pi} = 1$ then $W_N$ is a unit root of order $N$. Furthermore, $|W_N^k| = 1$ for all $k$, and then:
 \begin{align*}
-\sum_{i=0}^{N-1} F_{mi} (F^*)_{in} &= \sum_{i=0}^{N-1} W_N^{mi} (\bar{W}_N)^{in} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}mi} \text{e}^{j\frac{2\pi}{N}ni} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}(m-n)i} \\ &=
+\sum_{i=0}^{N-1} F_{mi} (F^*)_{in} &= \sum_{i=0}^{N-1} W_N^{mi} (\overline{W}_N)^{in} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}mi} \text{e}^{j\frac{2\pi}{N}ni} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}(m-n)i} \\ &=
 \begin{cases}
 N, &m = n \\
 \dfrac{\text{e}^{-j\frac{2\pi}{N}(m-n)N}-1}{1-\text{e}^{-j\frac{2\pi}{N}(m-n)}}, \quad &m \neq n
@@ -104,7 +104,7 @@ where the second last equation follows since the sum is a geometric sum:
 \sum_{i=0}^{N-1} r^i = \dfrac{r^N-1}{1-r}
 \end{align*}
 
-Therefore, $F^*F = N \cdot I$, where $I$ is the identity matrix and $F^*$ is the complex conjugate of $F$, that is $F^* = [\bar{F}_{ji}]_{ij}$. Hence:
+Therefore, $F^*F = N \cdot I$, where $I$ is the identity matrix and $F^*$ is the complex conjugate of $F$, that is $F^* = [\overline{F}_{ji}]_{ij}$. Hence:
 \begin{align*}
 F^{-1} = \dfrac{1}{N} F^*.
 \end{align*}
@@ -134,9 +134,9 @@ The DFT and the inverse DFT can be denoted as a pair as:
 \end{align*}
 \end{definition}
 
-Plancherel's equation holds since for $\bar{X} = F\bar{x}$ and $\bar{Y} = F\bar{y}$ \martin{Vi skal finde på en smart måde at skelne mellem kompleks konjugerede og vektorer. \textregistered}:
+Plancherel's equation holds since for $\textbf{X} = F\textbf{x}$ and $\textbf{Y} = F\textbf{y}$:
 \begin{align*}
-\sum_{n=0}^{N-1} x_n \bar{y}_n = \langle \bar{x},\bar{y} \rangle = \dfrac{1}{N} \langle F^*F\bar{x},\bar{y} \rangle = \dfrac{1}{N} \langle \bar{X},\bar{Y} \rangle = \dfrac{1}{N} \sum_{k=0}^{N-1} X_k \bar{Y_k}
+\sum_{n=0}^{N-1} x_n \overline{y}_n = \langle \textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle F^*F\textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle \textbf{X},\textbf{Y} \rangle = \dfrac{1}{N} \sum_{k=0}^{N-1} X_k \overline{Y}_k
 \end{align*}
 
 One of the reasons the Fourier transforms play an important role in mathemathics is simply because they are based on eigensequences of a linear shift-invariant system (the discrete equivalent of time-invariant system).
@@ -157,7 +157,7 @@ The DFT will be introduced through the use of eigensequences of the circular con
 \begin{align*}
 	(Hx)_n = (h \circledast x)_n = \sum_{k = 0}^{N-1} x_k h_{(n-k) \text{ mod } N} =\sum_{k = 0}^{N-1} x_{(n-k) \text{ mod } N} h_k
 \end{align*}
-where $H$ is the circular convolution operator associated with $h$. \chr{mod er modulus (som bogen anvender, ved ikke om vi vil bruge en anden for notation (Syntes ikke selv den er så god $(n-k) \text{ mod }N = \left<k\right>_n$}.
+where $H$ is the circular convolution operator associated with $h$ \chr{mod er modulus (som bogen anvender, ved ikke om vi vil bruge en anden for notation (Syntes ikke selv den er så god $(n-k) \text{ mod }N = \left<k\right>_n$}.
 \end{definition}
 
 For a general $k\in\mathbb{Z}$ with $k = LN + r, 0 \leq r \leq N$:
@@ -166,7 +166,7 @@ X_k = \sum_{n=0}^{N-1} x_n W_N^{kn} = \sum_{n=0}^{N-1} x_n W_N^{(LN+r)n} = \sum_
 \end{align*}
 
 \begin{lemma}
-For $\bar{x} = [x_0 \dots x_{N-1}]^T$ and $0 \leq L \leq N$, then:
+For $\textbf{x} = [x_0 \dots x_{N-1}]^T$ and $0 \leq L \leq N$, then:
 \begin{align*}
 y_n  = x_{(n-L) \text{ mod } N} \xleftrightarrow{\text{DFT}} Y_k = X_k \text{e}^{-j\frac{2\pi}{N} kL}.
 \end{align*}
@@ -191,12 +191,12 @@ Y_k &= \sum_{m=N-L}^{N-1} x_{m}\text{e}^{-j\frac{2\pi}{N} k(m+L)} + \sum_{m=0}^{
 \end{align*}
 \end{proof}
 
-This result is used to prove the following main theorem.
+This result is used to prove the following main theorem, which shows that the circular convolution in the time domain corresponds to multiplication in the frequency domain. Therefore, this theorem is analogous to part (d) in theorem \ref{theorem:fund_sym_Fourier}.
 
 \begin{theorem}
-For $\bar{x} = [x_0 \dots x_{N-1}]^T$ and $\bar{y} = [y_0 \dots y_{N-1}]^T$, then:
+For $\textbf{x} = [x_0 \dots x_{N-1}]^T$ and $\textbf{y} = [y_0 \dots y_{N-1}]^T$, then:
 \begin{align*}
-z = x \circledast y \xleftrightarrow{\text{DFT}} Z_k = X_k Y_k.
+\textbf{z} = \textbf{x} \circledast \textbf{y} \xleftrightarrow{\text{DFT}} Z_k = X_k Y_k.
 \end{align*}
 \end{theorem}
 
@@ -209,8 +209,10 @@ Z_k &= \sum_{n=0}^{N-1} z_n \text{e}^{-j\frac{2\pi}{N}kn} = \sum_{n=0}^{N-1} \le
 \end{align*}
 \end{proof}
 
+The following definition is the background for an important property of the DFT \cite{Eigenfunctions}.
+
 \begin{definition}[Eigenfunction]
-If $D$ is a linear operator on a function space then $f$ is an eigenfunction for $D$ and $\lambda$ is the associated eigenvalue, whenever $Df = \lambda f$ \cite{Eigenfunctions}.
+If $D$ is a linear operator on a function space then $f$ is an eigenfunction for $D$ and $\lambda$ is the associated eigenvalue, whenever $Df = \lambda f$.
 \end{definition}
 
 A property of LSI systems is that they as eigensequences $v_n$ all have complex exponential sequences with modulus being unit length on the form $v_n = \text{e}^{j \omega n}$ \cite{FSP}.\\ The same follows from Linear Time Invariant (LTI) systems \cite{DTSP}.
@@ -262,13 +264,13 @@ The twiddle factor can be shown to be an eigensequence for the circular convolut
 
 This shows that a circular convolution operator $H$ has an eigensequence that is the twidddle factor.
 \\\\ \chr{Næste del er ikke en nødvendighed, men viser blot matrix formen for DFT.} \martin{Vi har allerede skrevet matrix-formen for DFT'en, og dette giver ikke rigtigt mening i forhold til, så dette bør slettes. \textregistered}
-$W_k$ in \eqref{eq:def_DFT} is a vector product between a vector of twiddle factors and a vector $x \in \mathbb{C}^N$:
+$X_k$ in \eqref{eq:def_DFT} is a vector product between a vector of twiddle factors and a vector $x \in \mathbb{C}^N$:
 \begin{align*}
 	X_k =
 	\begin{bmatrix}
 		1 \\	W_N^k \\	\vdots \\ W_N^{(N-1)k}
 	\end{bmatrix}
-	x
+	\textbf{x}
 \end{align*}
 
-Producing the matrix for $X$ with $k \in \{0, 1, \dots, N-1\}$ yields the matrix form of the DFT as \eqref{eq:DFT_matrix} \martin{Mangler for dette afsnit: vi skal a) være enige om notationen for indekser (herunder notationen ved cirkulær foldning i for eksempel definition 6.2.5), b) vælge den bedste notation for modulus-funktionen og c) finde på en måde at skelne mellem kompleks konjugerede og vektorer. Derudover skal første del af afsnittet om sampling af $f(t)$ tilpasses notationen i resten af afsnittet, og sidste del af afsnittet om egenfunktioner skal kobles bedre sammen med resten af afsnittet (også med hensyn til notation). Endelig bør der angives sider ved kildehenvisningerne, hvor det er muligt. \textregistered}.
+Producing the matrix for $X$ with $k \in \{0, 1, \dots, N-1\}$ yields the matrix form of the DFT as \eqref{eq:DFT_matrix} \martin{Mangler for dette afsnit: vi skal a) være enige om notationen for indekser (herunder notationen ved cirkulær foldning i for eksempel definition 6.2.5) og b) vælge den bedste notation for modulus-funktionen. Derudover skal første del af afsnittet om sampling af $f(t)$ tilpasses notationen i resten af afsnittet (og generelt notationen for sampling), og sidste del af afsnittet om egenfunktioner skal kobles bedre sammen med resten af afsnittet (også med hensyn til notation). Endelig bør der angives sider ved kildehenvisningerne, hvor det er muligt. \textregistered}.
