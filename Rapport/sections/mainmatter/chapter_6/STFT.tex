@@ -1,5 +1,5 @@
 \section{The Short-Time Fourier Transform}
-A signal in time contains informations about the amplitude of the signal at specific times but does not hold any explicit informations about the frequencies. On the other hand, the Fourier transform of a signal contains information about a certain frequency but not at which time it appears.
+A signal in time contains information about the amplitude of the signal at specific times but does not hold any explicit informations about the frequencies. On the other hand, the Fourier transform of a signal contains information about a certain frequency but not at which time it appears.
 \\ \\
 From a musical point of view, let $f(t)$ be a piece of music describing the amplitude of the vibration of a speaker membrane in time, $t \in \mathbb{R}$. From this signal one is possibly able to detect the rythmical patterns of the music but probably not the melody or just single tones. On the other hand, the Fourier transform of $f$, $\mathcal{F}\{f(t)\}(\omega)$, will show the dominating frequencies of the piece of music from which one can detect the tones but not the duration of these. Therefore, neither the signal in time $f(t)$ nor the Fourier transform $F(\omega)$ in frequency contains all the relevant information in order to describe the signal.
 \\
@@ -38,11 +38,11 @@ Figure (insert reference to the figure) illustrates how the window function slid
 \\ \\
 Clearly, the STFT depends on how wide the window is:
 \paragraph{A rather wide window} leads to good \textit{frequency resolutions}, and e.g. constant frequencies are thus clearly visible in the time-frequency plane. However, a short pulse will be blurred in the time-frequency plane as a wide window can't exactly determine at what time the spike occurs.
-\paragraph{A rather narrow window} leads to good \textit{time resolutions}, which means that a spike is clearly visible at a given time, but constant frequencies are on the other hand blurred \cite{Davis}. \\
-This is due to the fact that it is fundamentally impossible to simultaneously have the complete information of a signal in both the time and frequency domain. This is a consequence of the Heisenberg uncertainty principle \cite{Wang}.
+\paragraph{A rather narrow window} leads to good \textit{time resolutions}, which means that a spike is clearly visible at a given time, but constant frequencies are on the other hand blurred \cite{Davis}. \\\\
+This apparent tradeoff is due to the fact that it is fundamentally impossible to simultaneously have the complete information of a signal in both the time and frequency domain. This is a consequence of the Heisenberg uncertainty principle \cite{Wang}.
 
-\subsection{The Heisenberg uncertainty principle}
-The Heisenberg uncertainty principle come from quantum physics, where it is impossible to simultaneously measure both the position and the momentum of a particle accurately since higher precision in one quantity implies lower precision in the other. This is also the case in the time and frequency domain, which the following lemma shows \cite{page 123, Wang}.
+\subsection{The Heisenberg uncertainty principle}\label{sec:heisenberg}
+The Heisenberg uncertainty principle comes from quantum physics, where it is impossible to simultaneously measure both the position and the momentum of a particle accurately since higher precision in one quantity implies lower precision in the other. This is also the case in the time and frequency domain, which the following lemma shows \cite{page 123, Wang}.
 
 \begin{lemma}
 \begin{align*}
@@ -103,7 +103,7 @@ Let $\mathcal{F}\{x(t)\}(\omega) = F(\omega)$ be the spectrum of a given functio
 It is assumed that $\mu_t = \mu_\omega = 0$ without loss of generality, and then:
 \begin{align} \label{eq:Heis_proof}
 \sigma_t^2 \sigma_\omega^2 = \dfrac{1}{\|x(t)\|^4} \int_{-\infty}^\infty |tx(t)|^2 dt \int_{-\infty}^\infty |\omega F(\omega)|^2 d\omega.
-\end{align}
+\end{align}\frede{Hvorfor $\|x(t)\|^4$ og ikke $\|x(t)\|^2\|F(\omega)\|^2$? \texttrademark}
 
 Due to property (c) in theorem \ref{theorem:fund_sym_Fourier} and Parseval's equation it is seen that:
 \begin{align*}
