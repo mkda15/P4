@@ -221,14 +221,10 @@ Furthermore, $M$ must satisfy the following relation:
 M=\frac{A-8}{2.285\Delta \omega}.
 \end{align}
 
-By this establishment of the Kaiser window method it is possible to design a FIR filter within desired specifications with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable.    
-
-\subsubsection{Anti-aliasing filter}
-As mentioned in section \ref{ADC} an anti-aliasing filter is required in the sampling process. The purpose of this filter is to avoid the aliasing phenomenon which occurs when the sampling theorem \ref{sampling_theorem} is not fulfilled. As stated a signal has to be band limited by the Nyquist frequency $\omega_N$ and since a continuous-time signal such as a sound is not guaranteed to have a bandlimited frequency the anti-aliasing filter is designed to remove the frequencies that are above the Nyquist frequency. \\
-An anti-aliasing filter typically form an analogue low pass filter with the Nyquist frequency as the ideal cut off frequency. Though as seen a transition band is necessary - when designing a practical filter - in which the frequencies can cause aliasing. This causes the passband cut of frequency to be larger than the Nyquist frequency.    
+By this establishment of the Kaiser window method it is possible to design a FIR filter within desired specifications with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable.       
    
 \subsection{Comparison of IIR and FIR filters}
-\trine{flyt denne section til section 7.2}This section about the design of digital filters concludes with a comparison of IIR and FIR filters, which considers the advantages and disadvantages of the different systems. \\ 
+This section about the design of digital filters concludes with a comparison of IIR and FIR filters, which considers the advantages and disadvantages of the different systems. \\ 
 \\
 The process of designing an IIR filter - presented in this section - is rather simple when the desired properties fits a predefined filter such as a Butterworth filter. The required order of the filter is computable, and the transformation to the discrete-time domain is done straight forward. Furthermore, considering the implementation, this leads to non-iterative algorithms. By this method the magnitude response is the only parameter to be specified, hence specific requirements for e.g. phase response or group delay are not guaranteed to be fulfilled by this kind of IIR filter. \\ \\
 Considering a FIR filter the main advantages - compared to IIR filters - is the possibility of getting a precise generalized linear phase. The generalised linear phase is important in order to preserve the wave form of the original signal.  
