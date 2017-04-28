@@ -14,8 +14,8 @@ if not type(fs) == float:
 ft = 50 / fs
 ft1 = 500 / fs
 ft2 = 1000 / fs
-b = 0.1
-d = 0.5
+b = 0.05
+d = 0.05
 A = int(-20*np.log10(d))
 
 # N = 201
@@ -110,7 +110,6 @@ def hp(n,M,ft): # Highpass filter
     return h
 
 h = bp(n,M,ft1,ft2)*Kaiser(n,M1)
-
 # Normalize to get unity gain.
 h = h / np.sum(h)
 
@@ -118,4 +117,4 @@ omega = np.linspace(0,np.pi,len(n))
 
 H = np.fft.fft(h)
 
-plt.plot(n,(np.abs(H)))
+plt.plot(omega,(np.abs(H)))
