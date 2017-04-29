@@ -14,11 +14,13 @@ import winsound
 #==============================================================================
 # Variable
 #==============================================================================
-cut = np.pi/65.
+cut = np.pi/60.
+cut1 = np.pi/50.
+cut2 = np.pi/45.
 
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')
-freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/tale_1.wav')
-test, testdata = siw.read('Lydfiler/forsoeg_nopeak/output/')
+freq , data  = siw.read('Lydfiler/clean_pc.wav')
+freq2, noise = siw.read('Lydfiler/clean_noise_pc.wav')
+freq3, signal = siw.read('Lydfiler/noise_pc.wav')
 
 #==============================================================================
 # Filter funktion defineres
@@ -67,13 +69,13 @@ def add_noise(data,noise,c = 0.5): #kilde side 229 i DTSP
 #==============================================================================
 # Filter koefficenter udregnes
 #==============================================================================
-noise = noise[:len(data)]
-signal = add_noise(data,noise,c = 0.25)
+#noise = noise[:len(data)]
+#signal = add_noise(data,noise,c = 0.25)
 
 w = Hanning(n,M) #Hanning eller Hamming for nu
-#hd = ImpulsresponsBS(n,M,cut1,cut2)
+hd = ImpulsresponsBS(n,M,cut1,cut2)
 #hd = ImpulsresponsHP(n,M,cut)
-hd = ImpulsresponsLP(n,M,cut)
+#hd = ImpulsresponsLP(n,M,cut)
 h = hd * w
 H = np.fft.fft(h,(len(signal)))
 
