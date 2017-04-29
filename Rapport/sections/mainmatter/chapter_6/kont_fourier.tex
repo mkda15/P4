@@ -1,4 +1,4 @@
-\section{The Fourier transform} \label{sec:cont_Fourier_Transform}
+\section{The Continuous Fourier Transform} \label{sec:cont_Fourier_Transform}
 This section deals with the continuous Fourier transform. In this project the Fourier transform will be the background for transforming a signal $f(t)$ represented in the time domain to a signal $F(\omega)$ represented in the frequency domain, which will be useful when making the spectrograms mentioned in chapter \ref{ch1}. The section is inspired by \cite{FourierTrans} and \cite{FAA}.
 \\ \\
 The Fourier transform is a way of expanding functions on all of $\mathbb{R}$ in the same way that the Fourier series are used to expand functions on a finite interval.
@@ -124,25 +124,6 @@ where $z = t - \tau$.
 \noindent
 In all simplicity, part (a) of this theorem shows that translating a function (that is, a delay) corresponds to multiplying its Fourier transform by an exponential (which is equivalent to a phase shift since $F$ may be written in the polar coordinates $F = |F|\text{e}^{j\theta}$) and vice versa; part (b) shows that dilating a function by $\delta$ corresponds to dilating its Fourier transform by $1/\delta$ and vice versa; part (c) shows that differentiating a function corresponds to multiplying its Fourier transform by the coordinate variable and vice versa; and by definition \ref{def:Convol} it is shown that a convolution in the time domain is equivalent to multiplying in the frequency domain and vice versa \cite{page 215, FAA}.
 \\ \\
-The following theorem is inspired by \cite{page 77, FAA}. \martin{This is actually related to the Fourier series and the discussion about ortonormal transforms, which we have rather elegantly omitted. We need to consider whether to introduce these (with respect to the limited number of pages). \textregistered}
-
-\begin{theorem} \label{theo:Fourier_series_Parseval}
-Let $\{\phi_n\}_1^\infty$ be an orthonormal set in $\mathcal{L}^2(a,b)$. The following conditions are equivalent.
-\begin{enumerate}[label=(\alph*)]
-\item If $\langle f, \phi_n \rangle = 0$ for all $n$, then $f = 0$.
-\item For every $f \in \mathcal{L}^2(a,b)$ we have $f = \sum_1^\infty \langle f, \phi_n \rangle \phi_n$, where the series converges in norm.\\
-\item For every $f \in \mathcal{L}^2(a,b)$:
-\begin{align*}
-\|f\|^2 = \sum_1^\infty |\langle f,\phi_n \rangle|^2
-\end{align*}
-This is known as Parseval's equation.
-\end{enumerate}
-\end{theorem}
-
-\begin{proof}
-\martin{Prove it or remove it. \textregistered}.
-\end{proof}
-
 A main result with regards to the Fourier transform is the following theorem, which is closely related to corollary \ref{coro:conv_Fourier_coeff} from the Fourier series \cite{page 217, FAA}.
 
 \begin{theorem}[The Riemann-Lebesgue Lemma]

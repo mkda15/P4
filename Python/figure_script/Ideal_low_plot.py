@@ -46,7 +46,7 @@ def H(w):
 plt.plot(w_range,H(w_range))
 plt.axis([-np.pi, np.pi, 0, 1.5])
 plt.xlabel("$\omega$", fontsize=20)
-plt.ylabel("|H($e^{j\omega}$)|", fontsize=15)
-plt.savefig("figures/ideal_low2.pdf")
+plt.ylabel("|H($\omega$)|", fontsize=15)
+#plt.savefig("figures/ideal_low2.pdf")
 plt.show()
 

@@ -12,10 +12,11 @@ fs = 44100.
 if not type(fs) == float:
     raise ValueError("The sampling frequency should be a float.")
 ft = 50 / fs
-ft1 = 75 / fs
+ft1 = 500 / fs
 ft2 = 1000 / fs
 b = 0.05
-A = int(-20*np.log10(b))
+d = 0.05
+A = int(-20*np.log10(d))
 
 # N = 201
 N = int(np.ceil((A - 8) / (2.285 * 2 * np.pi * b))) + 1 # Length of the filter
@@ -33,7 +34,7 @@ else:
 #alpha = 3 # Notice: the Kaiser window is a rectangular window for alpha = 0.
 #beta = np.pi*alpha
 n = np.arange(N)
-v = np.linspace(0, np.pi, len(n))
+
 
 #==============================================================================
 # Windows
@@ -41,13 +42,21 @@ v = np.linspace(0, np.pi, len(n))
 
 def Kaiser(n,M): # Kaiser window
     w = np.zeros(len(n))
-    for i in range(len(n)):
-        sum_t = 0
-        sum_n = 0
-        for j in range(M1):
-            sum_t += ((1/np.math.factorial(j))**2) * (((beta/2)*np.sqrt(1 - ((2*i)/(N-1) - 1)**2))**(2*j))
-            sum_n += ((1/np.math.factorial(j))**2) * ((beta/2)**(2*j))
-        w[i] = sum_t/sum_n
+    if beta == 0 :
+        for i in range(len(n)):
+            if n[i] >= 0 and n[i] <= M:
+                w[i] = 1
+            else:
+                w[i] = 0
+        return w
+    else:
+        for i in range(len(n)):
+            sum_t = 0
+            sum_n = 0
+            for j in range(M1):
+                sum_t += ((1/np.math.factorial(j))**2) * (((beta/2)*np.sqrt(1 - ((2*i)/(N-1) - 1)**2))**(2*j))
+                sum_n += ((1/np.math.factorial(j))**2) * ((beta/2)**(2*j))
+            w[i] = sum_t/sum_n
     return w
 
 def ha(n,M,a): # Hann window, if a = 0.5. Hamming window, if a = 0.54.
@@ -101,10 +110,11 @@ def hp(n,M,ft): # Highpass filter
     return h
 
 h = bp(n,M,ft1,ft2)*Kaiser(n,M1)
-
 # Normalize to get unity gain.
 h = h / np.sum(h)
 
+omega = np.linspace(0,np.pi,len(n))
+
 H = np.fft.fft(h)
 
-plt.plot(v,(np.abs(H)))
+plt.plot(omega,(np.abs(H)))

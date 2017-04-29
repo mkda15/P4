@@ -18,9 +18,11 @@ plt.style.use('ggplot')
 wav1 = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')
 #wav1 = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_lys.wav')
 #wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')
-wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/tale_1.wav')
+wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')
+#wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/tale_1.wav')
+#wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_random_huj_1.wav')
 #wav = siw.read('Lydfiler/forsoeg_nopeak/melodi/alene/forsoeg_lillepeteredderkop_langsom.wav')
-#wav = siw.read('Lydfiler/forsoeg_nopeak/melodi/akkorder/forsoeg_lillepeteredderkop_langsom.wav')
+#wav1 = siw.read('Lydfiler/forsoeg_nopeak/melodi/akkorder/forsoeg_lillepeteredderkop_langsom.wav')
 #wav1 = siw.read('Lydfiler/forsoeg_nopeak/akkorder/forsoeg_akkord_lys.wav')
 #wav1 = siw.read('Lydfiler/forsoeg_nopeak/skala/forsoeg_skala_hurtig.wav')
 #wav2 = siw.read('Lydfiler/forsoeg_nopeak/stoej/sang_3_mester_jakob.wav')
@@ -38,7 +40,7 @@ else:
 
 freq = freq1
 data1 = data1/1000  #normalized data
-data2 = (data2/1000)
+data2 = (data2/1000)*10
 data = data1
 N = len(data)
 if N % 2 > 0:

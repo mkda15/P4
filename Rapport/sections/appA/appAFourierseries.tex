@@ -1,0 +1,440 @@
+\chapter{Fourier Series} \label{appA:Fourierseries}
+Periodic functions can be represented as a linear combination of oscillating functions such as sines, cosines or the equivalent complex exponentials.
+\\ \\
+It can be an advantage to decompose functions as a series or integral of ``simpler'' functions to retrieve information:
+\begin{align*}
+f(x) = \sum_{n=1}^\infty c_n f_n(x)\text{, or } f(x)= \int_{-\infty}^\infty g(u) h(u,x) du.
+\end{align*}
+
+Information from a function $f(x)$ will as an example be stored in the coefficient $\{c_n\}_{n=1}^\infty$ which are easily stored on a computer.
+\\ \\
+A function $f: \mathbb{R} \to \mathbb{R}$ (or $\mathbb{C}$) is called $2\pi$-periodic if $f(\theta + 2\pi) = f(\theta) \ \forall \ \theta\in\mathbb{R}$. The idea of the Fourier series is using the above information to recreate a $2\pi$-periodic signal. The Fourier series is defined as:
+\begin{align*}
+f(t) &= \dfrac{a_0}{2} + \sum_{n=1}^\infty(a_n \cos(n t) + b_n \sin(n t))\\
+&= \sum_{n=-\infty}^{\infty} c_n \text{e}^{j n t}.
+\end{align*}
+
+The second part holds per Euler's formula:
+\begin{align*}
+\cos(n\theta) &= \dfrac{\text{e}^{j n \theta} + \text{e}^{-j n \theta}}{2}, \\
+\sin(n \theta) &= \dfrac{\text{e}^{jn\theta}-\text{e}^{-jn\theta}}{2j}.
+\end{align*}
+
+It can be simpler to work with the complex exponential function, but working with the trigonometric functions cosine and sine have their advantages such as being real-valued and also odd and even for the sine and cosine functions, respectively.
+
+\section{The coefficient $c_n$}
+The $c_n$ coefficient is determined by the assumption that it is possible to integrate the fourier series by parts.
+\\ \\
+To determine $c_n$ in the equation $f(t)= \sum_{n=-\infty}^{\infty} c_n \text{e}^{j n t}$ first multiply both sides by $\text{e}^{-j k t}$ for $k\in \mathbb{Z}$ and integrate both sides from $-\pi$ to $\pi$:
+\begin{align} \label{eq:firststep_fouriercoefficient}
+\int_{-\pi}^\pi f(t)\text{e}^{-j k t} dt = \int_{-\pi}^\pi \sum_{n=-\infty}^{\infty} c_n \text{e}^{j n t} \text{e}^{-j k t} dt.
+\end{align}
+
+Pulling the summation and the constant on the right-hand side out of the integral in \eqref{eq:firststep_fouriercoefficient} yields the following:
+\begin{align*}
+\int_{-\pi}^\pi f(t) \text{e}^{-j k t}dt = \sum_{n=-\infty}^\infty c_n \int_{-\pi}^\pi \text{e}^{j (n-k) t}dt.
+\end{align*}
+
+The integral on the right-hand side has two cases to consider, $n \neq k$ and $n = k$. For $n\neq k$:
+\begin{align*}
+	\int_{-\pi}^\pi \text{e}^{j(n-k)t}dt 
+	=\dfrac{1}{j(n-k)}\text{e}^{j(n-k)t}\mid_{-\pi}^{\pi}
+	=\dfrac{(-1)^{n-k}-(-1)^{n-k}}{j(n-k)}
+	=0.
+\end{align*}
+
+The second case is for $n = k$:
+\begin{align*}
+\int_{-\pi}^\pi \text{e}^{j(n-k)t}dt = \int_{-\pi}^\pi 1 dt = 2\pi.
+\end{align*}
+
+The integral can be concluded to yield either $2\pi$ or $0$:
+\begin{align}
+	\int_{-\pi}^{\pi} \text{e}^{j (n-k)t}dt 
+	= 
+	\begin{cases}
+			2\pi \text{ if } n=k\\
+			0 \text{ otherwise}
+	\end{cases}
+\end{align}
+
+Therefore, for $n = k$:
+\begin{align*}
+\int_{-\pi}^\pi f(t)\text{e}^{-j k t} = 2\pi c_k.
+\end{align*}
+
+Changing the index to $n$ gives the coefficient $c_n$'s general equation:
+\begin{align*}
+	c_n = \dfrac{1}{2\pi} \int_{-\pi}^{\pi} f(t) \text{e}^{-j n t}dt.
+\end{align*}
+
+The above is defined in the following definition \cite{page 18-20, FAA}.
+
+\begin{definition} \label{def:fourier_definition}
+The Fourier series of a $2\pi$-periodic integrable function $f(t)$ is defined as:
+\begin{align*}
+	f(t) = \sum_{n=-\infty}^\infty c_n \text{e}^{j n t},
+\end{align*}
+
+where $c_n = \frac{1}{2\pi}\int_{- \pi}^\pi f(t) \text{e}^{-j n t} dt$. Therefore, $c_0 = \frac{a_0}{2} = \frac{1}{2\pi} \int_{-\pi}^\pi f(t) dt$, which is the average of $f$ on the interval $[-\pi,\pi]$.
+\\ \\
+The Fourier series can alternatively be expressed as:
+\begin{align*}
+	\dfrac{a_0}{2} + \sum_{n=1}^{\infty} \left[ a_n \cos(n t) + 	b_n \sin(n t)\right],
+\end{align*}
+
+where
+\begin{align*}
+	a_n 
+	&= \dfrac{1}{\pi} \int_{-\pi}^\pi f(t) \cos (n t) dt, \quad 	n \geq 0, \\
+	b_n
+	&= \dfrac{1}{\pi} \int_{-\pi}^\pi f(t) \sin (n t) dt, \quad 	n \geq 1.
+\end{align*}
+\end{definition}
+
+Since $\cos(nt)$ is even and $\sin(nt)$ is odd, this definition gives the following result \cite{page 21, FAA}.
+
+\begin{lemma}
+If $f(t)$ is even, then $f(t)\cos(nt)$ is even and $f(t)\sin(nt)$ is odd, which means that:
+\begin{align*}
+a_n = \dfrac{2}{\pi} \int_0^\pi f(t) \cos(nt) dt, \quad b_n = 0.
+\end{align*}
+
+Likewise, if $f(t)$ is odd, then $f(t)\cos(nt)$ is odd and $f(t)\sin(nt)$ is even, which means that:
+\begin{align*}
+a_n = 0, \quad b_n = \dfrac{2}{\pi} \int_0^\pi f(t) \sin(nt) dt.
+\end{align*}
+\end{lemma}
+
+As the following lemma shows, integration of a $2\pi$-periodic function over the length of the period can be shifted to any other interval of length $2\pi$.
+
+\begin{lemma}\label{lemma:2pi-periodic_function}
+Suppose $F$ is $2\pi$-periodic and integrable. Then for any real number a:
+
+\begin{align}
+\int_a^{2\pi+a}F(t) dt = \int_0^{2\pi}F(t)dt.
+\end{align}
+\end{lemma}
+
+\begin{proof}
+\begin{align*}
+	\int_0^{2\pi} F(t)dt 
+	&= \int_0^a F(t) dt + \int_a^{2\pi} F(t) dt
+	= \int_0^a F(t+2\pi)dt + \int_a^{2\pi} F(t) dt\\ 
+	&= \int_{2\pi}^{2\pi + a} F(t) dt + \int_a^{2\pi}F(t)dt
+	= \int_a^{2\pi+a}F(t)dt.
+\end{align*}
+\end{proof}
+
+\section{Convergence of the Fourier series}
+In this section the convergence of the Fourier series is examined through piecewise continuous and piecewise smooth functions. The section is inspired by \cite{page 31-36, FAA}.
+
+\begin{definition}
+Suppose $-\infty < a < b < \infty$. A function $f$ on $[a,b]$ is piecewise continuous if:
+\begin{enumerate}
+\item $f$ is continuous on $[a,b]$ except perhaps at finitely many points $x_1, \dots, x_k$.
+\item The left-hand and right-hand limits of $f$ at each of the points $x_1, \dots, x_k$ exist:
+\begin{align*}
+f(x_j-) &= \lim_{h\to 0} f(x_j - h) \\
+f(x_j+) &= \lim_{h\to 0} f(x_j + h)
+\end{align*}
+
+for $h > 0$. Notice that only the right-hand (or left-hand) limit is required to exist if one of the points $x_j$ is the endpoint $a$ (or $b$).
+\end{enumerate}
+
+The space of piecewise continuous functions on $[a,b]$ is denoted as $PC(a,b)$.
+\end{definition}
+
+From this definition follows the definition of piecewise smooth functions:
+\begin{definition}
+The space of piecewise smooth functions on $[a,b]$ is denoted as $PS(a,b)$. $f\in PS(a,b)$ iff
+\begin{enumerate}
+	\item $f \in PC(a,b)$.
+	\item $f'$ exists and is also piecewise continuous on $[a,b]$. This means that $f'$ is continuous on except perhaps at finitely many points $x_1, \dots, x_K$ (which includes the points where $f$ is discontinuous), and that the limits $f'(x_j-)$, $f'(x_j+)$, $f'(a+)$ and $f'(b-)$ exist (for $j = 1,\dots, K$).
+\end{enumerate}
+\end{definition}
+
+To sum up, $f$ is piecewise smooth if its graph only has finitely many jumps and corners where $f$ and $f'$ are discontinuous, respectively. E.g. $f(x) = \frac{1}{x}$ at $x = 0$ and sharp cusps results in infinite discontinuities for $f$ and $f'$, respectively, and are not allowed for piecewise smooth functions.
+\\ \\
+For a $2\pi$-periodic and integrable function, the $N$'th partial sum of the Fourier series is defined by:
+\begin{align}\label{eq:partialsumFourierSeries}
+	S_N^f(t) = \dfrac{1}{2} a_0 + \sum_{n=1}^N\left(a_n \cos(n 		t) + b_n \sin(n t) \right) = \sum_{n=-N}^N c_n \text{e}^{j n t}
+\end{align}
+
+with the coefficients $a_n$, $b_n$ and $c_n$ as in definition \ref{def:fourier_definition}.
+\\ \\
+Inserting $c_n$ in the partial sum using $x$ in place of the variable $t$ in definition \ref{def:fourier_definition} yields:
+\begin{align*}
+	S_N^f(t)
+	&= \dfrac{1}{2\pi}\sum_{n=-N}^N \int_{-\pi}^\pi f(x) 			\text{e}^{-j n x} dx\, \text{e}^{j n t} \\
+	&= \dfrac{1}{2\pi}\sum_{k = -N}^N \int_{-\pi}^\pi f(x) 			\text{e}^{j k (x-t)} dx, \quad \quad k = -n, \\
+	&= \dfrac{1}{2\pi} \sum_{n = -N}^N \int_{-\pi - t}^{\pi - 		t} f(t + \tau ) \text{e}^{j n \tau} d\tau, \quad \quad \tau 	= x-t.
+\end{align*}
+
+By lemma \ref{lemma:2pi-periodic_function} the above equation can be expressed as follows
+\begin{align} \label{eq:dirichlet}
+	S_N^f (t) 
+	&= \dfrac{1}{2\pi} \sum_{n=-N}^N \int_{-\pi}^\pi f(t + 			\tau) \text{e}^{j n \tau} d\tau \nonumber \\
+	&= \int_{-\pi}^\pi f(t + \tau) D_N(\tau) d\tau,
+\end{align}
+
+where $D_N(\tau) = \dfrac{1}{2\pi}\sum_{n=-N}^{N}\text{e}^{j n \tau}$ is called the $N$'th Dirichlet kernel. The following lemma is inspired by \cite{page 30, FAA}.
+
+\begin{lemma}[Bessel's Inequality] \label{lemma:Bessel1}
+If $f$ is $2\pi$-periodic and Riemann integrable $[-\pi,\pi]$, and the Fourier coefficients $c_n$ as defined in definition \ref{def:fourier_definition}, then
+\begin{align*}
+\sum_{n=-\infty}^\infty |c_n|^2 \leq \dfrac{1}{2\pi} \int_{-\pi}^\pi |f(t)|^2 dt.
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+For $z \in \mathbb{C}$ is $|z|^2 = z \overline{z}$. For $N \in \mathbb{N}$
+\begin{align*}
+0 &\leq \left| f(t) - \sum_{n=-N}^N c_n \text{e}^{jnt} \right|^2 = \left( f(t) - \sum_{n=-N}^N c_n \text{e}^{jnt} \right) \left( \overline{f(t)} - \sum_{n=-N}^N \overline{c_n} \text{e}^{-jnt} \right) \\
+&= |f(t)|^2 - \sum_{n=-N}^N \left[ c_n \overline{f(t)} \text{e}^{jnt} + \overline{c_n} f(t) \text{e}^{-jnt} \right] + \sum_{m,n=-N}^N c_m\overline{c_n} \text{e}^{j(m-n)t}.
+\end{align*}
+
+Multiplying both sides by $\frac{1}{2\pi}$ and integrating from $-\pi$ to $\pi$ gives
+\begin{align*}
+0 &\leq \dfrac{1}{2\pi} \int_{-\pi}^\pi \left| f(t) - \sum_{n=-N}^N c_n \text{e}^{jnt} \right|^2 dt = \dfrac{1}{2\pi} \int_{-\pi}^\pi |f(t)|^2 dt - \sum_{n=-N}^N \left[ c_n \overline{c_n} + \overline{c_n} c_n \right] + \sum_{n=-N}^N c_n \overline{c_n} \\
+&= \dfrac{1}{2\pi} \int_{-\pi}^\pi |f(t)|^2 dt - \sum_{n=-N}^N |c_n|^2
+\end{align*}
+
+since
+\begin{align*}
+\dfrac{1}{2\pi} \int_{-\pi}^\pi \text{e}^{j(m-n)t} dt =
+\begin{cases}
+1, \ m = n \\
+0, \ m \neq n
+\end{cases}
+\end{align*}
+
+It follows that
+\begin{align*}
+\sum_{n=-N}^N |c_n|^2 \leq \dfrac{1}{2\pi} \int_{-\pi}^\pi |f(t)|^2 dt.
+\end{align*}
+
+Letting $N\to\infty$ completes the proof.
+\end{proof}
+
+The following corollary is used to prove theorem \ref{theo:main_convergence} \cite{page 31, FAA}.
+
+\begin{corollary} \label{coro:conv_Fourier_coeff}
+The Fourier coefficients $a_n$, $b_n$ and $c_n$ all tend to zero as $n \to \pm \infty$.
+\end{corollary}
+
+The following theorem is the main convergence theorem in this section \cite{page 35, FAA}.
+
+\begin{theorem} \label{theo:main_convergence}
+Let $f(t)$ be $2\pi$-periodic and piecewise smooth on $\mathbb{R}$. Then the limit of the partial sum $S_N^f$ is
+	\begin{align*}
+		\lim_{N\to\infty} S_N^f (t) = \dfrac{1}{2}\left[f(t-) + 		f(t+)\right], \, t \in [-\pi, \pi].
+	\end{align*}
+
+If $f$ is continuous at $t$, then
+	\begin{align*}
+		\lim_{N\to \infty} S_N^f(t) = f(t).
+	\end{align*}
+\end{theorem}
+
+\begin{proof}
+The integral from $-\pi$ to $0$ and from $0$ to $\pi$ of a Dirichlet kernel both equals $\frac{1}{2}$ \cite{page 35, FAA}. Hence:
+	\begin{align*}
+		\dfrac{1}{2} f(\theta-) = f(\theta-) \int_{-\pi}^0 				D_N(\tau)d\tau, \quad \dfrac{1}{2}f(\theta+) = 					f(\theta+) \int_0^\pi D_N (\tau)d\tau,
+	\end{align*}
+	
+	which by \eqref{eq:dirichlet} gives:
+	\begin{align} \label{eq:S_N_proof}
+		S_N^f(\theta) &- \dfrac{1}{2}\left[f(\theta-) + 				f(\theta+)\right] \nonumber \\
+		&= \int_{-\pi}^0 \left[f(\theta + \tau) - f(\theta-) 			\right] D_N(\tau) d\tau + \int_0^\pi \left[f(\theta + 			\tau) - f(\theta+) \right] D_N(\tau) d\tau.
+	\end{align}
+	
+	The $N$'th Dirichlet kernel may be written as:
+	\begin{align} \label{eq:Dirichlet_proof}
+		D_N(\tau) &= \dfrac{1}{2\pi}\sum_{n=-N}^{N}\text{e}^{j 			n \tau} = \dfrac{1}{2\pi} \text{e}^{-jN\tau} \sum_{n=0}			^{2N} \text{e}^{jn \tau} \nonumber \\
+		&= \dfrac{1}{2\pi} \text{e}^{-jN\tau} \dfrac{e^{j(2N+1)			\tau}-1}{\text{e}^{j\tau}-1} = \dfrac{1}{2\pi} 					\dfrac{\text{e}^{j(N+1)\tau}-\text{e}^{-jN\tau}}				{\text{e}^{j\tau}-1}, \quad \tau \neq 0
+	\end{align}
+	
+	since in general:
+	\begin{align*}
+		\sum_{n=0}^K r^n = \frac{r^{K+1}-1}{r-1}, \quad r \neq 			1.
+	\end{align*}
+	
+	A function $g(\tau)$ is defined to be:
+	\begin{align} \label{eq:g_tau}
+		g(\tau) =
+		\begin{cases}
+			\dfrac{f(\theta + \tau) - f(\theta-)}{\text{e}^{j				\tau}-1} \quad \text{for } -\pi < \tau < 0 \\ \\
+			\dfrac{f(\theta + \tau) - f(\theta+)}{\text{e}^{j				\tau}-1} \quad \text{for } 0 < \tau < \pi
+		\end{cases}
+	\end{align}	
+	
+	By using \eqref{eq:Dirichlet_proof} and \eqref{eq:g_tau}, 		then \eqref{eq:S_N_proof} may be written as the Fourier 		coefficients:
+	\begin{align} \label{eq:5.1.1_final}
+		\dfrac{1}{2\pi} \int_{-\pi}^\pi g(\tau) \left(\text{e}			^{j(N+1)\tau} - \text{e}^{-jN\tau}\right) d\tau = C_{-			(N+1)} - C_N.
+	\end{align}
+	
+	$g$ is a well-behaved function on $[-\pi,\pi]$ except near 		$\tau = 0$ where the denominator equals 0, which suggests 		that $g$ is not piecewise continuous. However, by 				l'Hôpital's rule:
+	\begin{align*}
+		\lim_{\tau \to 0+} g(\tau) = \lim_{\tau \to 0+} 				\dfrac{f(\theta + \tau) - f(\theta+)}{\text{e}^{j				\tau}-1} = \lim_{\tau \to 0+} \dfrac{f'(\theta + \tau)}			{j\text{e}^{j\tau}} = \dfrac{f'(\theta+)}{j}.
+	\end{align*}
+	
+	Likewise, $\displaystyle{\lim_{\tau \to 0-}} g(\tau) = 			\frac{f'(\theta-)}{j}$. Both of these limits are finite, 		and hence $g$ is actually piecewise continuous on $[-\pi,		\pi]$. The Fourier coefficients $C_N = \frac{1}{2\pi} 			\int_{-\pi}^\pi g(\tau)\text{e}^{-jN\tau} d\tau$ tend to 		zero as $N 	\to \pm \infty$ by corollary 						\ref{coro:conv_Fourier_coeff}. 	Therefore,
+	\eqref{eq:5.1.1_final} also vanishes as $N \to \infty$, 		which shows that \eqref{eq:S_N_proof} also tend to zero as 		$N \to \infty$, which completes the proof.
+\end{proof}
+
+\section{Orthogonality of the Fourier Series} \label{sec:FS_ort}
+Fourier series are only one of a large class of interesting and useful infinite series expansions that are based on so-called \textit{orthogonal systems} or \textit{orthogonal sets} of functions \cite{page 62, FAA} \martin{Dette er faktisk kopieret direkte fra indledningen til kapitel 3 i Folland. Er det et problem? \textregistered}. This section studies the orthogonality of the Fourier series and is inspired by \cite{pages 62-77, FAA} and the lecture notes from the course \textit{Anvendt Harmonisk Analyse}.
+For $\textbf{x},\textbf{y} \in \mathbb{C}^N$ the dot product is
+\begin{align*}
+\langle \textbf{x},\textbf{y} \rangle = \sum_{i=1}^N x_i \overline{y_i},
+\end{align*}
+
+and the vectors $\textbf{x},\textbf{y}$ are orthogonal if and only if $\langle \textbf{x},\textbf{y} \rangle = 0$. The norm on $\mathbb{C}^N$ is:
+\begin{align*}
+\|\textbf{x}\|^2 = \langle \textbf{x},\textbf{x} \rangle
+\end{align*}
+
+A basis $\{\textbf{b}_\textbf{j}\}_{j=1}^N$ is an ortonormal basis for 
+$\mathbb{C}^N$ if it is ortogonal and normalized:
+\begin{align*}
+\langle \textbf{b}_\textbf{i}, \textbf{b}_\textbf{j} \rangle =
+\begin{cases}
+	1, \ i = j \\
+	0, \ i \neq j
+\end{cases}
+\end{align*}
+
+The decomposition of a vector $\textbf{x} \in \mathbb{C}^N$ is:
+\begin{align*}
+\textbf{x} = \sum_{i=1}^N \langle \textbf{x}, \textbf{b}_\textbf{i} \rangle \textbf{b}_\textbf{i}.
+\end{align*}
+
+The Fourier series fits into this theory formation. For
+$f,g \in PC(a,b)$ the dot product and norm is defined as
+\begin{align*}
+\langle f,g \rangle = \int_a^b f(x) \overline{g(x)} dx,
+\|f\| = \left( \int_a^b |f(x)|^2 dx \right)^{\frac{1}{2}} = \sqrt{\langle f,f \rangle}.
+\end{align*}
+
+Furthermore, for $f,g \in PC(a,b)$, the Cauchy-Schwarz inequality and the triangle inequality holds:
+\begin{align*}
+|\langle f,g \rangle| &\leq \|f\| \|g\|, \\
+\|f+g\| &= \|f\| + \|g\|.
+\end{align*}
+
+Consider the function $\phi(t) = \frac{1}{\sqrt{2\pi}} \text{e}^{jnt}$ defined on $[-\pi,\pi]$. Since
+\begin{align*}
+\langle \phi_m, \phi_n \rangle = \dfrac{1}{2\pi} \int_{-\pi}^\pi \text{e}^{j(m-n)t} dt =
+\begin{cases}
+1, \ m = n \\
+0, \ m \neq n
+\end{cases}
+\end{align*}
+
+$\{\phi_n\}_{n\in\mathbb{Z}}$ is an ortonormal family of functions. The Fourier coefficient $c_n$ is
+\begin{align*}
+c_n = \dfrac{1}{2\pi} \int_{-\pi}^\pi f(t) \overline{\text{e}^{jnt}} dt = \dfrac{1}{\sqrt{2\pi}} \langle f,\phi_n \rangle.
+\end{align*}
+
+Therefore, the Fourier series for $f$ is
+\begin{align} \label{eq:ort_fam}
+f(t) = \sum_{n=-\infty}^\infty c_n \text{e}^{jnt} = \sum_{n=-\infty}^\infty \langle f, \phi_n \rangle \phi_n,
+\end{align}
+
+which is the decomposition of a vector in $\mathbb{C}^N$ with an ortonormal basis.
+\\ \\
+For a sequence $\{f_n\}_{n=1}^\infty \in PC(a,b)$ it is said that $f_n \to f$ in norm if
+\begin{align*}
+\|f - f_n\| = \left( \int_a^b |f(x) - f_n(x)|^2  dx \right)^\frac{1}{2} \to 0 \ \text{for} \ n \to \infty.
+\end{align*}
+
+However, $PC(a,b)$ is not complete, which means that there exists a Cauchy-sequence in $PC(a,b)$ that does not converge to a $f \in PC(a,b)$. This problem is solved by imposing the completion $\mathcal{L}^2(a,b)$ (from chapter \ref{ch5}) of $PC(a,b)$ under the norm $\|\cdot\|$:
+\begin{align*}
+\mathcal{L}^2(a,b) = \{f: \int_a^b |f(t)|^2 dt < \infty \},
+\end{align*}
+
+where the integral is the Lebesgue integral. In order to make $\|\cdot\|$ into a norm, equivalence classes of functions are imposed by$^[$\footnote{Further details of these equivalence classes are beyond the scope of this project.}$^]$
+\begin{align*}
+f \sim g \Leftrightarrow \int_a^b |f(x) - g(x)|^2 dx = 0.
+\end{align*}
+
+This is the reason why $\mathcal{L}^2(a,b)$ is a Hilbert space (see also chapter \ref{ch5}). For $f \in \mathcal{L}^2(a,b)$ it is possible to find a sequence of continuous functions $\{f_n\}_{n=1}^\infty$ such that $\|f - f_n\| \to 0$ for $n \to \infty$, where $\{f_n\}$ can be chosen to be a sequence of smooth functions.
+\\ \\
+The following lemma is a generalization of the special case of Bessel's inequality in lemma \ref{lemma:Bessel1} \cite{page 75, FAA}.
+
+\begin{lemma}[Bessel's inequality] \label{lemma:Bessel2}
+Let $\{\phi_n\}_{n=1}^\infty$ be a ortonormal family in $\mathcal{L}^2(a,b)$, and let $f \in \mathcal{L}^2(a,b)$. Then
+\begin{align*}
+\sum_{n=1}^\infty |\langle f,\phi_n\rangle|^2 \leq \|f\|^2
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+Since
+\begin{align*}
+\langle f, \langle f,\phi_n \rangle \phi_n \rangle = \overline{\langle f,\phi_n \rangle} \langle f,\phi_n \rangle = |\langle f, \phi_n \rangle|^2,
+\end{align*}
+
+and due to Pythagora's theorem it is seen that
+\begin{align*}
+\left\|\sum_{n=1}^N \langle f, \phi_n \rangle \phi_n \right\|^2 = \sum_{n=1}^N |\langle f, \phi_n \rangle |^2.
+\end{align*}
+
+Since $\|a + b\|^2 = \|a\|^2 + 2 \operatorname{Re} \langle a,b  \rangle + \|b\|^2$ for any $a,b \in \mathbb{C}^k$ \cite{page 64, FAA} it follows that:
+\begin{align*}
+0 &\leq \|f - \sum_{n=1}^N \langle f, \phi_n \rangle \phi_n\|^2 = \|f\|^2 - 2\operatorname{Re} \left\langle f, \sum_{n=1}^N \langle f,\phi_n\rangle \phi_n \right\rangle + \left\|\sum_{n=1}^N \langle f, \phi_n \rangle \phi_n \right\|^2 \\
+&= \|f\|^2 - 2\sum_{n=1}^N |\langle f, \phi_n \rangle |^2 + \sum_{n=1}^N |\langle f, \phi_n \rangle |^2 = \|f\|^2 - \sum_{n=1}^N |\langle f, \phi_n \rangle |^2.
+\end{align*}
+\end{proof}
+
+This result entails the following lemma.
+\begin{lemma}
+For $f \in \mathcal{L}^2(a,b)$ and an ortonormal family $\{\phi_n\}_{n=1}^\infty$ the sum $\sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n$ converges in norm and $\left\| \sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n \right\| \leq \|f\|$.
+\end{lemma}
+
+\begin{proof}
+According to Bessel's inequality the sum $\sum_{n=1}^\infty | \langle f,\phi_n \rangle |^2$ converges, which means that
+\begin{align*}
+\left\|\sum_{n=M}^N \langle f, \phi_n \rangle \phi_n \right\|^2 = \sum_{n=M}^N |\langle f, \phi_n \rangle |^2 \to 0 \ \text{for} \ M,N \to \infty,
+\end{align*}
+
+where the equality follows from Pythagora's theorem. Therefore, $\sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n$ is a Cauchy-sequence in the complete space $\mathcal{L}^2(a,b)$, which means that the sequence converges in $\mathcal{L}^2(a,b)$. Furthermore:
+\begin{align*}
+\left\|\sum_{n=1}^\infty \langle f, \phi_n \rangle \phi_n \right\|^2 = \lim_{N\to \infty} \left\|\sum_{n=1}^N \langle f, \phi_n \rangle \phi_n \right\|^2 = \lim_{N\to\infty} \sum_{n=1}^N | \langle f,\phi_n \rangle |^2 = \sum_{n=1}^\infty | \langle f,\phi_n \rangle |^2 \leq \|f\|^2.
+\end{align*}
+\end{proof}
+
+The final question in this section is when an ortonormal family in $\mathcal{L}^2(a,b)$ actually is an ortonormal basis for $\mathcal{L}^2(a,b)$. An ortonormal family $\{\phi_n\}_{n=1}^\infty$ satisfies $f = \sum_{n=-\infty}^\infty \langle f, \phi_n \rangle \phi_n \ \forall f \in \mathcal{L}^2(a,b)$ as in \eqref{eq:ort_fam}. The following theorem is inspired by \cite{page 77, FAA}.
+
+\begin{theorem} \label{theo:Fourier_series_Parseval}
+Let $\{\phi_n\}_{n=1}^\infty$ be an orthonormal family in $\mathcal{L}^2(a,b)$. The following conditions are equivalent.
+\begin{enumerate}[label=(\alph*)]
+\item If $\langle f, \phi_n \rangle = 0$ for all $n$, then $f = 0$.
+\item For every $f \in \mathcal{L}^2(a,b)$ we have $f = \sum_{n=1}^\infty \langle f, \phi_n \rangle \phi_n$ with convergence in norm.\\
+\item For all $f \in \mathcal{L}^2(a,b)$:
+\begin{align*}
+\|f\|^2 = \sum_1^\infty |\langle f,\phi_n \rangle|^2
+\end{align*}
+This is known as Parseval's equation.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The proof is recursive, which means that it is proven that condition \textit{(a)} implies \textit{(b)}, which implies \textit{(c)}, which in turn implies \textit{(a)}. In order to prove that \textit{(a)} implies \textit{(b)} let $f\in\mathcal{L}^2(a,b)$. The sum $\sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n$ converges in norm. Let $g = f - \sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n$. It follows that
+\begin{align*}
+\langle g,\phi_m \rangle = \langle f, \phi_m \rangle - \left\langle \sum_{n=1}^\infty \langle f,\phi_n\rangle \phi_n, \phi_m \right\rangle &= \langle f, \phi_m \rangle - \langle f, \phi_m \rangle \\
+&= 0 \ \forall \ m \Rightarrow g = 0 \Rightarrow f = \sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n.
+\end{align*}
+
+\textit{(b)} implies \textit{(c)} due to Pythagora's theorem:
+\begin{align*}
+\|f\|^2 = \lim_{N\to\infty} \left\| \sum_{n=1}^N \langle f,\phi_n \rangle \phi_n \right\|^2 = \lim_{N\to\infty} \sum_{n=1}^N |\langle f,\phi_n \rangle|^2 = \sum_{n=1}^\infty |\langle f,\phi_n \rangle|^2.
+\end{align*}
+
+Finally, \textit{(c)} implies \textit{(a)} since if $\langle f,\phi_n \rangle = 0 \ \forall \ n$, then $\|f\| = 0 \Rightarrow f = 0$.
+\end{proof}
+
+%http://cnx.org/contents/8YnJdzjg@8/Derivation-of-Fourier-Coeffici
+
+%Note to self foldning.

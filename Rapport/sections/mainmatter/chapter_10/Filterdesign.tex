@@ -101,3 +101,14 @@ The implementation of the filter basically follows algorithm \ref{alg:FIR}. Firs
 
 \end{algorithmic}
 \end{algorithm}
+
+\subsection{Validation of filter}
+//////// section fra test specificationer ////////\\
+To validate the filter it will be tested whether the filter fulfil the specifications that will be defined during the design process. In order to clarify the effect of the filter it will be tested on a simple known signal where a noise signal is digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal to noise ratio. Hence it is possible to verify whether the filter succeed to remove the specified frequencies in order to reduce the noise. The verification will be made by analysing the frequency spectrum of the filtered signal - by plotting amplitude to frequency - compared to the original pure signal. \\
+/////////////////////////////////////////////////\\
+The implemented filter is to be tested according to test specifications described in section\ref{sec:testspec}. Figure \ref{??} show the frequency spectrum of the a single low E note with additive noise in form of a beat of hands clapping. Figure \ref{??} show the filtered signal.\\
+/// indsæt figure ////
+
+As described under specifications the filter is designed to remove all frequencies outside the frequency band from 75 Hz to 1000 Hz. It is seen by the figures that ...... \\
+By this the filter of order ?? fulfil the specifications. Though by comparing the filtered signal with the pure music signal it seen that noise occurs in between the three significant frequencies that lays in the passband.  \\
+On behalf of this test it is assumed that by changing the cut off frequencies the filter can be modified to fit other music signal.    
