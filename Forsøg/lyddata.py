@@ -122,12 +122,12 @@ def Freq_plot(lin,data):
 #==============================================================================
 # Tilføjer støj til data 
 #==============================================================================
-def add_noise(data,noise): #kilde side 229 i DTSP
+def add_noise(data,noise,c = 0.5): #kilde side 229 i DTSP
 #    signal = np.convolve(data,noise)
 #    return signal
     signal=np.zeros(len(data))    
     for i in range(len(data)):
-        signal[i]=data[i]+0.5*noise[i]
+        signal[i]=data[i]+float(c)*noise[i]
     return signal
 
 #==============================================================================
