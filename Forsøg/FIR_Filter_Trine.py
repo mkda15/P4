@@ -9,35 +9,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
 
-#==============================================================================
-# Plot af den ideelle impulsrespons
-#==============================================================================
-
-t = np.linspace(0,np.pi,1000)
-y = np.zeros(len(t))
-
-delta = np.pi/15.
-o1 = np.pi/2 - delta
-o2 = np.pi/2 + delta
-
-for i in range(len(t)):
-    if o1 >= t[i]:
-        y[i] = 1
-
-for i in range(len(t)):
-    if t[i] >= o2:
-        y[i] = 1
-
-plt.plot(t,y)
-plt.axis([0,np.pi,0,2])
-plt.axvline(o1, color='yellow')
-plt.axvline(o2, color='yellow')
-plt.axvline(np.pi/2, color='red')
-plt.axvline(np.pi/3, color='green')
-plt.axvline(3*np.pi/4, color='green')
-plt.title('Den ideelle amplituderespons for filteret')
-plt.xlabel('Frekvens [rad / s]')
-plt.ylabel('Amplitude')
 
 #==============================================================================
 # Definitioner (filterorden, -længde, indeks, knækfrekvenser og impulsrespons)
