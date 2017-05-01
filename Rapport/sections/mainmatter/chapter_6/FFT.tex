@@ -31,10 +31,10 @@ X[k] &= \sum_{n=0}^{N-1} x[n] \text{e}^{-j(2\pi/N)kn} \nonumber \\
 
 Notice that here it has been used that $e[n] = x[2n]$, $o[n] = x[2n+1]$ and that $\frac{2\pi}{N} k2n = \frac{2\pi}{N/2} kn$ in the exponents. $E[k]$ and $O[k]$ are $N/2$-point transforms, which are implicitly periodic with period $N/2$, and they can thus be evaluated over $k = 0, 1, \dots, N-1$ instead of $k = 0, 1, \dots, N/2-1$. Therefore, the $X[k]$ may be written as:
 \begin{align} \label{FFT_modulo}
-X[k] = E[((k))_{N/2}] + W_N^k O[((k))_{N/2}], \quad k = 0, 1, \dots, N-1
+X[k] = E[\langle k\rangle_{N/2}] + W_N^k O[\langle k\rangle_{N/2}], \quad k = 0, 1, \dots, N-1
 \end{align}
 
-$E[k]$ and $O[k]$ are thus extended periodically even though they are only computed for $k = 0, 1, \dots, N/2-1$. The notation $((k))_{N/2}$ signalizes $k$ modulo $N/2$. In this case, the modulo operation finds the remainder after division of $k$ by $N/2$. Thus, eg. $E[((4))_4]$ equals $E[0]$. Hence, this periodic extension does not require any additional computation. Figure \ref{fig:4} is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $8$-point DFT into two $4$-point DFTs as described in \eqref{FFT_DIT}. Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the nodes.
+$E[k]$ and $O[k]$ are thus extended periodically even though they are only computed for $k = 0, 1, \dots, N/2-1$. Hence, this periodic extension does not require any additional computation. Figure \ref{fig:4} is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $8$-point DFT into two $4$-point DFTs as described in \eqref{FFT_DIT}. Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the nodes.
 
 \begin{figure}[h]
 \centering
@@ -71,7 +71,7 @@ $E[k]$ and $O[k]$ are thus extended periodically even though they are only compu
 \label{fig:4}
 \end{figure}
 
-According to \eqref{FFT_modulo} and figure \ref{fig:4}, $X[0]$ is obtained by multiplying $O[0]$ with $W_N^0$ and adding this product to $E[0]$. Likewise, $X[4]$ is obtained by multiplying $O[((4))_4] = O[0]$ with $W_N^4$ and adding this result to $E[((4))_4] = E[0]$.
+According to \eqref{FFT_modulo} and figure \ref{fig:4}, $X[0]$ is obtained by multiplying $O[0]$ with $W_N^0$ and adding this product to $E[0]$. Likewise, $X[4]$ is obtained by multiplying $O[\langle 4\rangle_4] = O[0]$ with $W_N^4$ and adding this result to $E[\langle 4\rangle_4] = E[0]$.
 \\ \\
 Furthermore, each of the $N/2$-point DFTs may each be broken into two $N/4$-point DFTs. Combining these yields the $N/2$-point DFTs from before, whose combination yields the original $N$-point DFT. Therefore, $E[k]$ and $O[k]$ may be represented as:
 \begin{align*}
