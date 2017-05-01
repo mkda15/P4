@@ -13,7 +13,7 @@ from scipy import signal
 # Plot af den ideelle impulsrespons
 #==============================================================================
 
-t = np.linspace(0,np.pi,1000)
+t = np.linspace(0,1000,10000)
 y = np.zeros(len(t))
 
 delta = np.pi/15.
@@ -103,14 +103,17 @@ def fft(x,n):
 h = hd * w
 
 def sig(x):
-    return np.sin(np.pi/3.*x) + np.sin(np.pi/2.*x+2*np.pi/3.) + np.sin(3*np.pi/4.*x+4*np.pi/3.)
+    return np.sin(2*np.pi*np.pi/3.*x) + np.sin(2*np.pi*np.pi/2.*x+2*np.pi/3.) + np.sin(2*np.pi*3*np.pi/4.*x+4*np.pi/3.)
 
 s = sig(t)
 
 s_f = np.convolve(h,s)
 
-plt.plot(np.abs(np.fft.fft(s)[:200]))
-plt.plot(np.abs(np.fft.fft(s_f)[:200]))
+freq_inter = 3000
+
+plt.plot(np.abs(np.fft.fft(s)[:freq_inter]))
+plt.plot(np.abs(np.fft.fft(s_f)[:freq_inter]))
+#plt.plot(np.abs(np.fft.fft(h)))
 
 H = np.abs(fft(h,n))
 #plt.figure(2)
