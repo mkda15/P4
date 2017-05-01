@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 fs = 44100.
 if not type(fs) == float:
     raise ValueError("The sampling frequency should be a float.")
+    
 ft = 50 / fs
 ft1 = 500 / fs
 ft2 = 1000 / fs

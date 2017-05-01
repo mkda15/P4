@@ -1,6 +1,8 @@
-\section{Implementation of the FFT}
-This section describes the implementation of the FFT discussed in section \ref{sec:FFT}, which uses an implementation of the DFT discussed in section \ref{sec:DFT}. The implementation of the FFT is assessed by comparing both the computational efforts and the results of the implementations compared to Numpy's FFT. The results are expected to be similar since the FFT is a fast way of calculating the DFT. Firstly, the implementation of the DFT is described in the following algorithm.
+\section{FFT}
+This section describes the implementation of the FFT discussed in section \ref{sec:FFT}, which uses an implementation of the DFT discussed in section \ref{sec:DFT}. The implementation of the FFT is assessed by comparing both the computational efforts and the results of the implementations of the DFT and FFT compared to Numpy's FFT. The results are expected to be similar since the FFT is a fast way of calculating the DFT.
 
+\subsection{Implementation of the FFT}
+Firstly, the implementation of the DFT is described in the following algorithm.
 \begin{algorithm}
 \caption{DFT algorithm}
 \label{DFTalg}
@@ -31,26 +33,27 @@ The implementation of the FFT shown in the following algorithm uses a function t
 \Procedure{FFT}{x}
 	\State $N_{new}$ = length of signal x
 	\If{Power of 2(N) == False:}
-		\State{Raise Valueerror("N should be a power of 2.")}
+		\State{Raise Valueerror(``N should be a power of 2.'')}
 	\ElsIf{$N_{new}$ == 2}
 		\State{Return DFT(x,$N_{new}$)}
 	\Else
 		\State{$X_{even} = FFT(x[::2])$} \Comment{The even 				samples}
 		\State{$X_{odd} = FFT(x[1::2])$} \Comment{The odd 				samples}
-		\State{$factor = \exp(-2j\cdot \pi \cdot 						np.arange(N_{new}) / N_{new}$} \Comment{The twiddle 			factor}
+		\State{$factor = \exp(-2j\cdot \pi \cdot 						np.arange(N_{new}) / N_{new})$} \Comment{The twiddle 			factor}
 		\State{Return $np.concatenate([X_{even} + factor[: 				N_{new} / 2] \cdot X_{odd}, X_{even} + factor[N_{new} / 		2:] \cdot X_{odd}])$}
 	\EndIf
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
-Next, the FFT algorithm above is compared to both the DFT algorithm and the FFT function from the Numpy-package by measuring how long it takes for the functions to compute different amounts of random numbers. This is shown in table \ref{tab:FTcompare}.
+\subsection{Validation of the FFT}
+The FFT algorithm above is compared to both the DFT algorithm and the FFT function from the Numpy-package by measuring how long it takes for the functions to compute different amounts of random numbers. This is shown in table \ref{tab:FTcompare}.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|l|}
 \hline
-Type / $N$ & Our DFT   & Our FFT & Numpy's FFT \\ \hline
+Type / $N$ & DFT	   & FFT 	 & Numpy's FFT \\ \hline
 $2^9$  	   & $1.03$    & $0.01$  & $\sim 0.00$ \\ \hline
 $2^{10}$   & $4.43$    & $0.02$  & $\sim 0.00$ \\ \hline
 $2^{11}$   & $17.36$   & $0.03$  & $\sim 0.00$ \\ \hline
@@ -67,10 +70,9 @@ The implementation of the FFT and Numpy's FFT should also be compared for larger
 
 \begin{table}[H]
 \centering
-\label{tab:FT2compare}
 \begin{tabular}{|l|l|l|l|}
 \hline
-Type / $N$ & Our FFT   & Numpy's FFT \\ \hline
+Type / $N$ & FFT	   & Numpy's FFT \\ \hline
 $2^{18}$   & $5.15$    & $0.03$ \\ \hline
 $2^{19}$   & $9.79$    & $0.04$ \\ \hline
 $2^{20}$   & $19.74$   & $0.14$ \\ \hline
@@ -78,9 +80,10 @@ $2^{21}$   & $40.31$   & $0.26$ \\ \hline
 $2^{22}$   & $79.59$   & $0.56$ \\ \hline
 $2^{23}$   & $159.39$  & $1.08$ \\ \hline
 \end{tabular}
-\caption{Times in seconds it take for the implementations of the DFT, the FFT and Numpy's FFT to compute $N$ random numbers.}
+\caption{Times in seconds it take for the implementation of the FFT and Numpy's FFT to compute $N$ random numbers.}
+\label{tab:FT2compare}
 \end{table}
 
-Obviously, the implementation of the FFT takes rather long for large numbers of samples, whereas Numpy's FFT only takes a little more than a second. It should be noted that the results above cannot be reproduced exactly since the numbers are random, and the same amount of different numbers results in slightly different times of computations. Also, one might check the validity of the DFT and FFT algorithms by comparing the result of the algorithms and Numpy's FFT by using the Numpy function \textit{np.allclose}. An example is \textit{np.allclose(FFT(x),np.fft.fft(x)}, which returns a True-statement if the results of $FFT(x)$ described in algorithm \ref{FFTalg} and Numpy's FFT are exactly similar. This was always the case in the comparison of the implementations of the DFT, the FFT and Numpy's FFT described above.
+Obviously, the implementation of the FFT takes rather long for large numbers of samples, whereas Numpy's FFT only takes a little more than a second. It should be noted that the results above cannot be reproduced exactly since the numbers are random and the same amount of different numbers results in slightly different times of computations. Also, one might check the validity of the DFT and FFT algorithms by comparing the result of the algorithms and Numpy's FFT by using the Numpy function \textit{np.allclose}. An example is \textit{np.allclose(FFT(x),np.fft.fft(x)}, which returns a True-statement if the results of $FFT(x)$ described in algorithm \ref{FFTalg} and Numpy's FFT are exactly similar. This was always the case in the comparison of the implementations of the DFT, the FFT and Numpy's FFT described above.
 \\ \\
 Therefore, the implementation of the DFT and FFT described in algorithm \ref{DFTalg} and \ref{FFTalg}, respectively, returns the exact same values as Numpy's FFT. The DFT is obviously extremely slow for even rather small numbers of samples, and the FFT is also rather slow compared to Numpy's FFT for large numbers of samples.

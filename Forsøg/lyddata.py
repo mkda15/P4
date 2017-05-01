@@ -142,15 +142,15 @@ def add_noise(data,noise,c = 0.5): #kilde side 229 i DTSP
 #data2 = data2[start:slut]
 #lin = lin[start:slut]
 
-signal = add_noise(data1,data2)
-
-plt.plot(lin,signal, label='signal')
-plt.plot(lin,data2, label='noise')
-plt.plot(lin,data1, label='data')
-plt.xlabel('Time[Seconds]')
-plt.ylabel('Amplitude [Voltages]')
-plt.legend(loc= "lower right")
-plt.show()
+#signal = add_noise(data1,data2)
+#
+#plt.plot(lin,signal, label='signal')
+#plt.plot(lin,data2, label='noise')
+#plt.plot(lin,data1, label='data')
+#plt.xlabel('Time[Seconds]')
+#plt.ylabel('Amplitude [Voltages]')
+#plt.legend(loc= "lower right")
+#plt.show()
 
 ##==============================================================================
 ## Printer frekvens plot af ren data
@@ -164,36 +164,36 @@ print 'Samplingsfrkvens:',freq_plot[4]
 #==============================================================================
 # Printer frekvensplot af data med støj
 #==============================================================================
-freq_plot2 = Freq_plot(lin, signal)
-print 'Mest betydende frekvens:',freq_plot2[1]
-print 'Beregningstid for numpy.fft:',freq_plot2[2]
-print 'Længde af data:',freq_plot2[3]
-print 'Samplingsfrkvens:',freq_plot2[4]
+#freq_plot2 = Freq_plot(lin, signal)
+#print 'Mest betydende frekvens:',freq_plot2[1]
+#print 'Beregningstid for numpy.fft:',freq_plot2[2]
+#print 'Længde af data:',freq_plot2[3]
+#print 'Samplingsfrkvens:',freq_plot2[4]
 
 #==============================================================================
 # Printer frekvensplot af ren støj
 #==============================================================================
-freq_plot3 = Freq_plot(lin, data2)
-print 'Mest betydende frekvens:',freq_plot3[1]
-print 'Beregningstid for numpy.fft:',freq_plot3[2]
-print 'Længde af data:',freq_plot3[3]
-print 'Samplingsfrkvens:',freq_plot3[4]
+#freq_plot3 = Freq_plot(lin, data2)
+#print 'Mest betydende frekvens:',freq_plot3[1]
+#print 'Beregningstid for numpy.fft:',freq_plot3[2]
+#print 'Længde af data:',freq_plot3[3]
+#print 'Samplingsfrkvens:',freq_plot3[4]
 
 #==============================================================================
 # Signal to noise ratio
 #==============================================================================
-def power(data):
-    N=len(data)    
-    a=0
-    for i in range(N):
-        a = np.abs(data[i])**2
-    return (1/N)*a
-
-P_n = power(data2)
-P_sn = power(signal)*1000
-
-def snr(Pn,Ps):
-    return 10*np.log10((Ps-Pn)/Pn)
-
-SNR = snr(P_n,P_sn)
+#def power(data):
+#    N=len(data)    
+#    a=0
+#    for i in range(N):
+#        a = np.abs(data[i])**2
+#    return (1/N)*a
+#
+#P_n = power(data2)
+#P_sn = power(signal)*1000
+#
+#def snr(Pn,Ps):
+#    return 10*np.log10((Ps-Pn)/Pn)
+#
+#SNR = snr(P_n,P_sn)
    
