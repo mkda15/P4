@@ -1,5 +1,14 @@
 \chapter{Discrete-time systems}\label{discrete_time_systems} \label{ch4}
-This chapter is inspired by \cite{FSP}.\\\\
-This chapter will establish the theory of discrete-time systems needed for the further discussion of sampling theory, the discrete Fourier transform and filtering. Firstly, discrete-time systems are defined in definition \ref{def:discrete_time_system}.
+This chapter will establish the theory of discrete-time systems needed for the discussion of the Fourier transform, sampling theory and filtering described in chapters \ref{ch6}, \ref{ch7}, and \ref{ch8}, respectively. The chapter is inspired by \cite{page 195-, FSP}.
+\\ \\
+Firstly, discrete-time systems are defined in definition \ref{def:discrete_time_system}.
+
+\begin{definition}[Discrete-time system]\label{def:discrete_time_system}
+A discrete-time system is an operator $T: V \to V$ that maps a sequence $x\in V$ to a sequence $y\in V$ such that
+\begin{align}
+y=T(x).
+\end{align}
+\end{definition}
+\frede{Indsæt måske figur med operator på en vektor \texttrademark}
 
 \input{sections/mainmatter/chapter_4/discrete_time_systems.tex}

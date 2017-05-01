@@ -34,7 +34,7 @@ Notice that here it has been used that $e[n] = x[2n]$, $o[n] = x[2n+1]$ and that
 X[k] = E[\langle k\rangle_{N/2}] + W_N^k O[\langle k\rangle_{N/2}], \quad k = 0, 1, \dots, N-1
 \end{align}
 
-$E[k]$ and $O[k]$ are thus extended periodically even though they are only computed for $k = 0, 1, \dots, N/2-1$. Hence, this periodic extension does not require any additional computation. Figure \ref{fig:4} is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $8$-point DFT into two $4$-point DFTs as described in \eqref{FFT_DIT}. Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the nodes.
+with the modulo function $\langle k \rangle_N$ as defined in section \ref{sec:DFT}. $E[k]$ and $O[k]$ are thus extended periodically even though they are only computed for $k = 0, 1, \dots, N/2-1$. Hence, this periodic extension does not require any additional computation. Figure \ref{fig:4} is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $8$-point DFT into two $4$-point DFTs as described in \eqref{FFT_DIT}. Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the nodes.
 
 \begin{figure}[h]
 \centering
