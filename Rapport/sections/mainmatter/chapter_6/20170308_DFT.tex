@@ -18,40 +18,42 @@ The discrete Fourier transform (DFT) is the discrete time variant of the Fourier
 %\\\\
 Multiple parts of the DFT are analog to the continuous version \cite{DFT_OX}.
 \\ \\
-Let a function in time $f(t)$ be a continuous signal.
-If the function is sampled $N$ times it may be denoted
-$f[0],f[1],\dots,f[k],\dots,f[N-1]$.
-\\ \\
-The Fourier transform of $f(t)$ would be as in section \ref{sec:cont_Fourier_Transform}:
+Let a function in time $x(t)$ be a continuous signal. The Fourier transform of $x(t)$ would be as in section \ref{sec:cont_Fourier_Transform} \martin{Har udkommenteret det oprindelige og skrevet et alternativ. \textregistered}:
 \begin{align*}
-	F(\omega) = \int_{-\infty}^\infty f(t)\text{e}^{-j\omega t} dt.
+	\mathcal{F}\{x(t)\}(\omega) = X(\omega) = \int_{-\infty}^\infty x(t)\text{e}^{-j\omega t} dt.
 \end{align*}
 
-If each sample $f[k]$ is regarded as a single impulse with a given area $f[k]$, then the integrand only exist at the sample points \cite{DFT_OX}:
-\begin{align*}
-	F(\omega) 
-	&= \int_0^{(N-1)}T f(t) \text{e}^{-j\omega t}dt\\
-	&= f[0]\text{e}^{-j0} + f[1]\text{e}^{-j\omega T} + \dots + 	f(N-1) \text{e}^{-j	\omega(N-1)T}	
-\end{align*}
-
-or alternatively:
-\begin{align*}
-	F(\omega) = \sum_{k=0}^{N-1}f[k]\text{e}^{-j\omega k T}.
-\end{align*}
+%If each sample $x[k], k \in \mathbb{Z}$, is regarded as a single impulse with a given area $x[k]$, then the integrand only exist at the sample points \cite{DFT_OX} \martin{Hvor har vi det her fra? \textregistered}:
+%\begin{align*}
+%	X(\omega) 
+%	&= \int_0^{(N-1)}T x(t) \text{e}^{-j\omega t}dt\\
+%	&= x[0]\text{e}^{-j0} + x[1]\text{e}^{-j\omega T} + \dots + 	x(N-1) \text{e}^{-j	\omega(N-1)T}	
+%\end{align*}
+%
+%or alternatively \martin{Hvordan kan en sum af diskrete samples give en kontinuert funktion? Det passer ikke med definitionen. \textregistered}:
+%\begin{align*}
+%	X(\omega) = \sum_{k=0}^{N-1}x[k]\text{e}^{-j\omega k T}.
+%\end{align*}
 
 \chr{Går ud fra at der i Fourier transformationen står at den kan evalueres i et endeligt interval i stedet fra uendeligt til uendeligt.}
 
-The DFT has to take into consideration that it is only fed a finite number of input data. Since this is the case, the DFT treats the data as if it were periodic.
-\\ \\
-A sequence $x(n)$ can be considered $N$-periodic since:
+If the function is sampled $N$ times the samples may be denoted
+$x[0],x[1],\dots,x[N-1]$. The discrete version is then:
 \begin{align*}
-	X[n+N]
-	&= \sum_{k=0}^{N-1} x[k] \text{e}^{\frac{2 \pi k (n+N)}{N}}		\\
-	&= \sum_{k=0}^{N-1} x[k] \text{e}^{\frac{2 \pi k n}{N}}			\text{e}^{\frac{2 \pi k N}{N}} \\
-	&= \sum_{k=0}^{N-1} x[k] \text{e}^{\frac{2 \pi k n}{N}} = 		X[n].
+X[k] = \sum_{n=0}^{N-1} x[k]\text{e}^{-j\frac{2\pi}{N}kn}, \quad k = 0, 1, \dots, N-1
 \end{align*}
 
-In the continuous case of the Fourier transform, where it's possible to evaluate it over a finite interval, the DFT can be evaluated for the fundamental frequency ($\dfrac{1}{NT} \ Hz$ or $\dfrac{2\pi}{NT} \ rad/sec.$) \cite{DFT_OX}.
+The DFT has to take into consideration that it is only fed a finite number of input data. Since this is the case, the DFT treats the data as if it were periodic.
+\\ \\
+A sequence $x[n]$ can be considered $N$-periodic since:
+\begin{align*}
+	X[n+N]
+	&= \sum_{k=0}^{N-1} x[k] \text{e}^{-j \frac{2 \pi}{N}  k (n		+N)} \\
+	&= \sum_{k=0}^{N-1} x[k] \text{e}^{-j \frac{2 \pi k n}{N}}		\text{e}^{\frac{2 \pi}{N} kN} \\
+	&= \sum_{k=0}^{N-1} x[k] \text{e}^{-j \frac{2 \pi}{N} k n} 		= X[n].
+\end{align*}
+
+In the continuous case of the Fourier transform, where it's possible to evaluate it over a finite interval, the DFT can be evaluated for the fundamental frequency ($\dfrac{1}{NT} \ Hz$ or $\dfrac{2\pi}{NT} \ rad/sec.$) \cite{DFT_OX} \martin{Overvej dette. \textregistered}.
 %in general
 %\begin{align*}
 %	F[n] = \sum_{k=0}^{N-1}f[k]e^{-j2\pi\frac{nk}{N}} \, (n = 0\ldots N-1)
@@ -81,14 +83,14 @@ The DFT can be written in matrix form, where $X[k]$ is the DFT of the sequence $
 	\textbf{X} = F\textbf{x}
 \end{align}
 
-where $\textbf{X}$ and $\textbf{x}$ are column vectors, $F$ is the DFT in matrix form and $W$ is called the twiddle factor and is defined as \cite{DFT_OX}
+where $\textbf{X}$ and $\textbf{x}$ are column vectors, $F$ is the DFT in matrix form and $W$ is called the twiddle factor, which is defined as \cite{DFT_OX}:
 \begin{align*}
 	W_N = \text{e}^{-j\frac{2 \pi}{N}}, \quad W_N^{kn} = \text{e}^{-j\frac{2 \pi}{N}kn}.
 \end{align*}
 
-Since $W_N^N = \text{e}^{-j2\pi} = 1$ then $W_N$ is a unit root of order $N$. Furthermore, $|W_N^k| = 1$ for all $k$, and then:
+Since $W_N^N = \text{e}^{-j2\pi} = 1$ then $W_N$ is a unit root of order $N$. Let $F^*$ be the adjoint matrix of $F$, that is $(F^*)_{in} = \overline{F}_{ni}$. Then:
 \begin{align*}
-\sum_{i=0}^{N-1} F_{mi} \overline{F}_{in} &= \sum_{i=0}^{N-1} W_N^{mi} (\overline{W}_N)^{in} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}mi} \text{e}^{j\frac{2\pi}{N}ni} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}(m-n)i} \\ &=
+\sum_{i=0}^{N-1} F_{mi} (F^*)_{in} &= \sum_{i=0}^{N-1} W_N^{mi} (\overline{W}_N)^{ni} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}mi} \text{e}^{j\frac{2\pi}{N}ni} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}(m-n)i} \\ &=
 \begin{cases}
 N, &m = n \\
 \dfrac{\text{e}^{-j\frac{2\pi}{N}(m-n)N}-1}{1-\text{e}^{-j\frac{2\pi}{N}(m-n)}}, \quad &m \neq n
@@ -96,46 +98,47 @@ N, &m = n \\
 \begin{cases}
 N, &m = n \\
 0, \quad &m \neq n
-\end{cases}
+\end{cases},
 \end{align*}
 
-where the second last equation follows since the sum is a geometric sum:
+which follows from that $|W_N^k| = 1$ for all $k$ and that the sum is a geometric sum:
 \begin{align*}
-\sum_{i=0}^{N-1} r^i = \dfrac{r^N-1}{1-r}
+\sum_{i=0}^{N-1} r^i = \dfrac{r^N-1}{1-r}.
 \end{align*}
 
-Therefore, $\overline{F}F = N \cdot I$, where $I$ is the identity matrix. Hence
+Therefore, $F^*F = N \cdot I$, where $I$ is the identity matrix. Hence
 \begin{align*}
-F^{-1} = \dfrac{1}{N} \overline{F}.
+F^{-1} = \dfrac{1}{N} F^*.
 \end{align*}
 
 $F$ is thus a unitary operator (up to scaling) known as the DFT operator, which preserves the Euclidean norm (up to scaling) and $\frac{F}{\sqrt{N}}$ is a unitary matrix. Therefore, Parseval's equality holds \cite{page 258, FSP}:
 \begin{align*}
-\|x\|^2 = \sum_{n=0}^{N-1} |x[n]|^2 = \dfrac{1}{N} \sum_{k=0}^{N-1} |X[k]|^2 = \dfrac{1}{N} \|X[k]\|^2 = \dfrac{1}{N} \|Fx\|^2
+\|\textbf{x}\|^2 = \sum_{n=0}^{N-1} |x[n]|^2 = \dfrac{1}{N} \sum_{k=0}^{N-1} |X[k]|^2 = \dfrac{1}{N} \|X[k]\|^2 = \dfrac{1}{N} \|F\textbf{x}\|^2
 \end{align*}
 
-This leads to the definition of the DFT \cite{page 253, FSP}.
+This is the analog of Parseval's equalities stated in theorem \ref{theo:Plancherel} \cite{page 371, FSP}. This leads to the definition of the DFT \cite{page 253, FSP}.
 
 \begin{definition}[The Discrete Fourier Transform]
-The discrete Fourier transform of a length-$N$ sequence $x$ is an invertible and linear transform $\mathcal{F}: \mathbb{C}^N \to \mathbb{C}^N$ defined as
+The discrete Fourier transform of a length-$N$ sequence $x$ is an invertible and linear transform $F: \mathbb{C}^N \to \mathbb{C}^N$ defined as
 \begin{align} \label{eq:def_DFT}
-	X[k] = (Fx)[k] = \sum_{n=0}^{N-1} x[n] W_N^{kn}, \quad k\in \{0, 1, \dots, N-1\},
+	X[k] = Fx[k] = \sum_{n=0}^{N-1} x[n] W_N^{kn}, \quad k\in \{0, 1, \dots, N-1\},
 \end{align}
+
 where $X[k]$ is the discrete Fourier transform of $x[n]$. This is called the spectrum of $x$. \\
 The inverse DFT of a length-$N$ sequence $X$ is
 \begin{align*}
-	x[n] = \dfrac{1}{N}(\overline{F}X)[n] = \dfrac{1}{N}\sum_{k=0}^{N-1} X[k] W_N^{-kn}, \, n \in \{0,1,\dots,N-1\}.
+	x[n] = F^{-1}X[n] = \dfrac{1}{N} F^*X[n] = \dfrac{1}{N}\sum_{k=0}^{N-1} X[k] W_N^{-kn}, \, n \in \{0,1,\dots,N-1\}.
 \end{align*}
 
 The DFT and the inverse DFT can be denoted as a pair as
 \begin{align*}
-	x_n \xleftrightarrow{\text{DFT}} X_k.
+	x[n] \xleftrightarrow{\text{DFT}} X[k].
 \end{align*}
 \end{definition}
 
 Plancherel's equation holds since for $\textbf{X} = F\textbf{x}$ and $\textbf{Y} = F\textbf{y}$:
 \begin{align*}
-\sum_{n=0}^{N-1} x[n] \overline{y}[n] = \langle \textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle \overline{F}F\textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle \textbf{X},\textbf{Y} \rangle = \dfrac{1}{N} \sum_{k=0}^{N-1} X[k] \overline{Y}[k]
+\sum_{n=0}^{N-1} x[n] \overline{y}[n] = \langle \textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle F^*F\textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle \textbf{X},\textbf{Y} \rangle = \dfrac{1}{N} \sum_{k=0}^{N-1} X[k] \overline{Y}[k]
 \end{align*}
 
 One of the reasons the Fourier transform plays an important role in mathemathics is simply because they are based on eigen sequences of a linear shift-invariant system (the discrete equivalent of time-invariant system).
