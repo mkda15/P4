@@ -10,7 +10,7 @@ from windowfunctions import Hamming, Hanning
 import matplotlib.pyplot as plt
 import scipy.signal as ss
 import scipy.io.wavfile as siw
-import winsound
+#import winsound
 #==============================================================================
 # Variable
 #==============================================================================
@@ -109,10 +109,10 @@ plt.plot(np.abs(SIGNAL_FILT[:6500]))
 
 #winsound.PlaySound('Lydfiler/forsoeg_nopeak/skala/forsoeg_skala_hurtig.wav', winsound.SND_FILENAME)
 
-siw.write('Lydfiler/forsoeg_nopeak/output/out_signal_filt.wav',freq,signal_filt)
-siw.write('Lydfiler/forsoeg_nopeak/output/out_data.wav',freq,data)
-siw.write('Lydfiler/forsoeg_nopeak/output/out_noise.wav',freq,noise)
-siw.write('Lydfiler/forsoeg_nopeak/output/out_signal.wav',freq,signal)
+#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal_filt.wav',freq,signal_filt)
+#siw.write('Lydfiler/forsoeg_nopeak/output/out_data.wav',freq,data)
+#siw.write('Lydfiler/forsoeg_nopeak/output/out_noise.wav',freq,noise)
+#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal.wav',freq,signal)
 
 
 

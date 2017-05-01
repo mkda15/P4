@@ -6,14 +6,14 @@ The Fourier transform is a way of expanding functions on all of $\mathbb{R}$ in 
 \begin{definition}[The Fourier transform] \label{def:Fourier_trans}
 For a function $f \in \mathcal{L}^1$ the Fourier transform of $f$ is defined as follows:
 \begin{align*}
-\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^\infty f(t) \text{e}^{-j \omega t} dt
+\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^\infty f(t) \text{e}^{-j \omega t} dt.
 \end{align*}
 \end{definition}
 
 \begin{definition}[The inverse Fourier transform] \label{def:InverseFourier_trans}
 For $F \in \mathcal{L}^1$, the inverse Fourier transform of $F(\omega)$ is:
 \begin{align*}
-\mathcal{F}^{-1}\{F(\omega)\}(t) = f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty F(\omega) \text{e}^{j \omega t} d\omega
+\mathcal{F}^{-1}\{F(\omega)\}(t) = f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty F(\omega) \text{e}^{j \omega t} d\omega.
 \end{align*}
 \end{definition}
 
@@ -112,12 +112,10 @@ Note that $t \text{e}^{-j \omega t} = j \dfrac{d}{d\omega} \text{e}^{-j\omega t}
 \begin{align*}
 \mathcal{F}\{f*g\}(\omega) &= \int_{-\infty}^\infty \int_{-\infty}^\infty \text{e}^{-j \omega t} f(t - \tau) g(\tau) d\tau dt \\
 &= \int_{-\infty}^\infty \int_{-\infty}^\infty \text{e}^{-j\omega(t-\tau)} f(t-\tau) \text{e}^{-j\omega \tau} g(\tau) dt d\tau \\
-&= \int_{-\infty}^\infty \int_{-\infty}^\infty \text{e}^{-j\omega z} f(z) \text{e}^{-j\omega \tau} g(\tau) dz d\tau \\
+&= \int_{-\infty}^\infty \int_{-\infty}^\infty \text{e}^{-j\omega z} f(z) \text{e}^{-j\omega \tau} g(\tau) dz d\tau, \quad z = t - \tau \\
 &= \int_{-\infty}^\infty \text{e}^{-j\omega z} f(z) dz \int_{-\infty}^\infty \text{e}^{-j\omega \tau} g(\tau) d\tau \\
-&= F(\omega) \cdot G(\omega),
+&= F(\omega) \cdot G(\omega).
 \end{align*}
-
-where $z = t - \tau$.
 \end{enumerate}
 \end{proof}
 
@@ -157,7 +155,7 @@ In the general case it is possible to find a sequence $\{f_n\}, f \in \mathcal{L
 \int_{-\infty}^\infty |f_n(t) - f(t)| dt \to 0.
 \end{align*}
 
-When $f$ is Riemann integrable this is simply a restatement of the fact that the integral of $f$ is the limit of Riemann sums. When $f$ is Lebesgue integrable the proof requires results from integration theory, which are omitted in this project. Since $|e^j\omega t| = 1$, the integral in the Fourier transform converges absolutely for all $\omega$ and defines a bounded function of $\omega$:
+When $f$ is Riemann integrable this is simply a restatement of the fact that the integral of $f$ is the limit of Riemann sums. When $f$ is Lebesgue integrable the proof requires results from integration theory, which are omitted in this project. Since $|e^{j\omega t}| = 1$, the integral in the Fourier transform converges absolutely for all $\omega$ and defines a bounded function of $\omega$:
 \begin{align*}
 |F(\omega)| \leq \int_{-\infty}^\infty |f(t)| dt,
 \end{align*}
@@ -175,27 +173,25 @@ Moreover, the Fourier transform $F(\omega)$ is well-defined for $f \in \mathcal{
 |F(\omega)| \leq \int_{-\infty}^\infty |f(t)| \cdot |\text{e}^{j \omega t}| dt = \|f\|_{\mathcal{L}^1} < \infty.
 \end{align*}
 
-However, $F$ is not guaranteed to be in $\mathcal{L}^1$, which means the inverse Fourier transform might not be applicable. This is the reason why the space $\mathcal{L}^2$ also plays a significant role for Fourier transforms. If $f, g, F, G \in \mathcal{L}^1$ then $f$, $g$, $F$ and $G$ are also in $\mathcal{L}^2$ \cite{page 219, FAA}. By the definitions in chapter \ref{ch4} it follows that
+However, $F$ is not guaranteed to be in $\mathcal{L}^1$, which means the inverse Fourier transform might not be applicable. This is the reason why the space $\mathcal{L}^2$ also plays a significant role for Fourier transforms. If $f, g, F, G \in \mathcal{L}^1$ then $f$, $g$, $F$ and $G$ are also in $\mathcal{L}^2$ \cite{page 219, FAA}. By the definitions of the dot product and the inverse Fourier transform it follows that
 \begin{align*}
 2\pi \langle f,g \rangle = 2\pi \int_{-\infty}^\infty f(t) \overline{g(t)} dt &= \int_{-\infty}^\infty \int_{-\infty}^\infty f(t) \overline{\text{e}^{j\omega t} G(\omega)} d\omega dt \\
 &= \int_{-\infty}^\infty \int_{-\infty}^\infty f(t) \text{e}^{-j\omega t} \overline{G(\omega)} dt d\omega \\
 &= \int_{-\infty}^\infty F(\omega) \overline{G(\omega)} d\omega = \langle F,G \rangle.
 \end{align*}
 
-Therefore, the Fourier transform preserves inner products up to a factor of $2\pi$. By taking $f = g$ it is seen that:
+This is the analog of Parseval's equation in theorem \ref{theo:Fourier_series_Parseval} \cite{page 221, FAA}. Therefore, the Fourier transform preserves inner products up to a factor of $2\pi$. By taking $f = g$ it is seen that:
 \begin{align*}
 2\pi \langle f,f \rangle = \langle F,F \rangle \Rightarrow 2\pi \|f\|^2 = \|F\|^2.
 \end{align*}
 
 If $f$ is an arbitrary function in $\mathcal{L}^2$ it is possible to find a sequence $\{f_n\}$ such that $f_n$ and $F_n$ are in $\mathcal{L}^1$ and $f_n$ converges to $f$ in $\mathcal{L}^2$ \cite{page 82, FAA}. Since $\|F_n - F_m\|^2 = 2\pi\|f_n - f_m\|^2$, which converges to 0 as $m,n$ converges to $\infty$, $\{F_n\}$ is a Cauchy sequence in $\mathcal{L}^2$, which has a limit since $\mathcal{L}^2$ is complete. This limit only depends on $f$ and not on $\{f_n\}$, and it is simply defined to be the Fourier transform $F$. The domain of the Fourier transform is thus extended to include all of $\mathcal{L}^2$. This extension still preserves the norm and inner product up to a factor of $2\pi$, and it also satisfies the basic properties of the Fourier transform stated in theorem \ref{theorem:fund_sym_Fourier}. These results are stated below \cite{page 222, FAA}.
 
-\begin{theorem}[The Plancherel Theorem] \label{Plancherel}
+\begin{theorem}[The Plancherel Theorem] \label{theo:Plancherel}
 The Fourier Transform, defined originally on $\mathcal{L}^1 \cap \mathcal{L}^2$, extends uniquely to the invertible map $\mathcal{F}: \mathcal{L}^2 \to \mathcal{L}^2$, where $F = \mathcal{F}\{f\}, G = \mathcal{F}\{g\}$, that satisfies:
 \begin{align*}
-\langle F, G \rangle = 2\pi \langle f,g \rangle \\
-\|F\|^2  = 2\pi \|f\|^2
+\langle F, G \rangle = 2\pi \langle f,g \rangle, \\
+\|F\|^2  = 2\pi \|f\|^2.
 \end{align*}
-for all $f,g \in \mathcal{L}^2$.
+for all $f,g \in \mathcal{L}^2$ \martin{Disse ligninger kaldes også Parsevals ligninger. Er det tydeligt nok, hvad der menes? \textregistered}.
 \end{theorem}
-
-\martin{Mangler i dette afsnit: der skal ryddes lidt op i dette afsnit, da nogle af sætningerne sandsynligvis hører til under afsnittet om Fourier-rækker.}
