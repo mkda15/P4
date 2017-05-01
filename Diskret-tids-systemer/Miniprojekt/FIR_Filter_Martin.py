@@ -28,16 +28,16 @@ for i in range(len(t)):
     if t[i] >= o2:
         y[i] = 1
 
-plt.plot(t,y)
-plt.axis([0,np.pi,0,2])
-plt.axvline(o1, color='yellow')
-plt.axvline(o2, color='yellow')
-plt.axvline(np.pi/2, color='red')
-plt.axvline(np.pi/3, color='green')
-plt.axvline(3*np.pi/4, color='green')
-plt.title('Den ideelle amplituderespons for filteret')
-plt.xlabel('Frekvens [rad / s]')
-plt.ylabel('Amplitude')
+#plt.plot(t,y)
+#plt.axis([0,np.pi,0,2])
+#plt.axvline(o1, color='yellow')
+#plt.axvline(o2, color='yellow')
+#plt.axvline(np.pi/2, color='red')
+#plt.axvline(np.pi/3, color='green')
+#plt.axvline(3*np.pi/4, color='green')
+#plt.title('Den ideelle amplituderespons for filteret')
+#plt.xlabel('Frekvens [rad / s]')
+#plt.ylabel('Amplitude')
 
 #==============================================================================
 # Definitioner (filterorden, -længde, indeks, knækfrekvenser og impulsrespons)
@@ -102,46 +102,55 @@ def fft(x,n):
 
 h = hd * w
 
+def sig(x):
+    return np.sin(np.pi/3.*x) + np.sin(np.pi/2.*x+2*np.pi/3.) + np.sin(3*np.pi/4.*x+4*np.pi/3.)
+
+s = sig(t)
+
+s_f = np.convolve(h,s)
+
+plt.plot(np.abs(np.fft.fft(s)[:200]))
+plt.plot(np.abs(np.fft.fft(s_f)[:200]))
 
 H = np.abs(fft(h,n))
-plt.figure(2)
-plt.plot(20*np.log10(np.abs(np.fft.fft(np.pad(w,(0,1000),'constant',constant_values=0))))[:400])
-plt.gca().xaxis.set_major_locator(plt.NullLocator())
-plt.gca().yaxis.set_major_locator(plt.NullLocator())
+#plt.figure(2)
+#plt.plot(20*np.log10(np.abs(np.fft.fft(np.pad(w,(0,1000),'constant',constant_values=0))))[:400])
+#plt.gca().xaxis.set_major_locator(plt.NullLocator())
+#plt.gca().yaxis.set_major_locator(plt.NullLocator())
 
 #==============================================================================
 # Graf over amplituderesponsen
 #==============================================================================
 
-plt.figure(3)
-plt.plot(x, H)
-plt.axis([0,np.pi,0,2])
-plt.title('Amplituderespons for filteret, Hamming-vinduet, $M = %d$' %(M))
-plt.xlabel('Frekvens [rad / s]')
-plt.ylabel('Amplitude')
-plt.axvline(o1, color='yellow') # Nedre knækfrekvens
-plt.axvline(o2, color='yellow') # Øvre knækfrekvens
-plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
-plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
-plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
+#plt.figure(3)
+#plt.plot(x, H)
+#plt.axis([0,np.pi,0,2])
+#plt.title('Amplituderespons for filteret, Hamming-vinduet, $M = %d$' %(M))
+#plt.xlabel('Frekvens [rad / s]')
+#plt.ylabel('Amplitude')
+#plt.axvline(o1, color='yellow') # Nedre knækfrekvens
+#plt.axvline(o2, color='yellow') # Øvre knækfrekvens
+#plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
+#plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
+#plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
 
 #==============================================================================
 # Filteret i Scipy til sammenligning 
 #==============================================================================
 
-N = [o1,o2]
-plt.figure(4)
-b, a = signal.butter(10, N, 'bandstop', analog=True)
-w, h = signal.freqs(b, a)
-plt.plot(w, abs(h), "b-")
-plt.title('Amplitude for Scipys baandstop-filter')
-plt.xlabel('Frekvens [rad / s]')
-plt.ylabel('Amplitude')
-plt.margins(0, 0.1)
-plt.axis([0,np.pi,0,2])
-plt.axvline(o1, color='yellow') # Nedre knækfrekvens
-plt.axvline(o2, color='yellow') # Øvre knækfrekvens
-plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
-plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
-plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
-plt.show()
+#N = [o1,o2]
+#plt.figure(4)
+#b, a = signal.butter(10, N, 'bandstop', analog=True)
+#w, h = signal.freqs(b, a)
+#plt.plot(w, abs(h), "b-")
+#plt.title('Amplitude for Scipys baandstop-filter')
+#plt.xlabel('Frekvens [rad / s]')
+#plt.ylabel('Amplitude')
+#plt.margins(0, 0.1)
+#plt.axis([0,np.pi,0,2])
+#plt.axvline(o1, color='yellow') # Nedre knækfrekvens
+#plt.axvline(o2, color='yellow') # Øvre knækfrekvens
+#plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
+#plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
+#plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
+#plt.show()
