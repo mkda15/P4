@@ -1,8 +1,8 @@
 \section{Test specification}\label{sec:testspec}
-In this section test specifications will be determined in order to validate the final system. This will be done upon the concept of the V-model\cite{vmodel}, illustrated in figure \ref{fig:vmodel}.         
+In this section test specifications will be determined in order to validate the final system. This will be done upon the concept of the V-model \cite{vmodel} illustrated in figure \ref{fig:vmodel}.         
 The V-model is a simple multiple-phase model used to describe phases in the development process. \\
-The left side of the V, is decomposition of the problem, and the right side is the creation and integration and test of system.
-\begin{figure}[h]
+The left side of the V is decomposition of the problem, and the right side is the creation, integration, and test of the system.
+\begin{figure}[H]
 \centering
 \tikzstyle{block} = [rectangle, draw,thick,fill=white, 
     text width=7em, text centered, minimum height=3.3em]
@@ -35,9 +35,10 @@ The left side of the V, is decomposition of the problem, and the right side is t
 \caption{Concept of the V-model}
 \label{fig:vmodel}
 \end{figure}
-In the previous synthesis section, the left part of the V-model is described, and hence the next step in the V-model is the creation of the test specifications for the different parts. Along with this phase a list of test specifications are created, starting from the smallest unit, and working up to the system as a hole. Later on these test will be conducted.\\
-\\
-The system will be tested from the bottom up, starting with the smallest components (a unit). This validation phase is called the Unit testing. The test should checks each of the "units" individually and verify, that they are working according to expectations. Next up the coherence of the system is tested, and finally the full system as a single unit is tested. Units in the model are as follows
+
+In the previous synthesis section, the left part of the V-model was described, and hence the next step in the V-model is the creation of the test specifications for the different parts. Along with this phase a list of test specifications are created, starting from the smallest unit, and working up to the system as a whole. These tests are described in chapter \ref{ch10}.
+\\ \\
+The system will be tested from the bottom up, starting with the smallest components (a unit). This validation phase is called the ``Unit Testing''. The test checks each of the ``units'' individually and verifies that they are working according to the expectations. Next up the coherence of the system is tested, and finally the full system as a single unit is tested. Units in the model are as follows:
 \subparagraph{Physical components}  
 \begin{itemize}
 	\item Microphone
@@ -50,15 +51,13 @@ The system will be tested from the bottom up, starting with the smallest compone
 	\item Fourier transformation
 	\item Spectrogram
 \end{itemize}
-Note that test on the physical components will not be carried out in this project, because pretested hardware and corresponding software are used. Tests will thereby focus on the units of the application.\\ 
+Note that tests on the physical components will not be carried out in this project because pretested hardware and corresponding software is used. Tests will thereby focus on the units of the application.\\ 
  
 \subsubsection{Unit test of the Fourier transformation}
-This test will be done by comparing the Fourier algorithm used, with a pre-existence algorithm from matlab or python.
-By feeding the algorithms the same data set and comparing the output int. 
-In addition to this, the algorithm will be tested on data with a known result like a simple sinusoidal.
+This test will be done by comparing an implementation of the FFT described in chapter \ref{ch6} and the pre-existing FFT function from the Numpy-package in Python. These are compared by computing the time it takes for each function to compute different amounts of the same random numbers.
 
 \subsubsection{Unit test of filter}
-To validate the filter it will be tested whether the filter fulfil the specifications that will be defined during the design process. In order to clarify the effect of the filter it will be tested on a simple known signal where a noise signal is digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal to noise ratio. Hence it is possible to verify whether the filter succeed to remove the specified frequencies in order to reduce the noise. The verification will be made by analysing the frequency spectrum of the filtered signal - by plotting amplitude to frequency - compared to the original pure signal. 
+To validate the filter it will be tested whether the filter fulfil the specifications that are be defined during the design process in chapter \ref{ch10}. In order to clarify the effect of the filter it will be tested on a simple known signal, where a noise signal has been digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal to noise-ratio. Hence it is possible to verify whether the filter succeed to remove the specified frequencies in order to reduce the noise. The verification will be made by analysing the frequency spectrum of the filtered signal - by plotting amplitude to frequency - compared to the original pure signal. 
 
 \subsubsection{Unit test of spectrogram}
 As with verification of the Fourier transform, the spectrogram algorithm will be tested against an existing algorithm on the same data set.
@@ -77,5 +76,4 @@ This is a minor step in creating the final product.
 The music used for testing the algorithm will be simple melodies containing one note at a time (no chords) from one instrument at a time. This will allow insight into the methods used without complicating the recognition of notes by blending together different instruments and different sound frequencies.
 
 \subsubsection{System test of the final product}
-The final design, will be tested by giving the final system a recording with a known result and comparing the difference between the products result and the know result. The design can be further tested to see if all the wanted characteristics of the system comply to the wanted criteria of the system.
-
+The final design will be tested by giving the final system a recording with a known result and comparing the difference between the product's result and the known result. The design can be further tested to see if all the wanted characteristics of the system comply to the wanted criteria of the system.
