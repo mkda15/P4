@@ -1,6 +1,6 @@
 \section{The Fast Fourier Transform} \label{sec:FFT}
 This section describes \textit{The Fast Fourier Transform}, also known as the FFT. The section is inspired by \cite{pages 750, 755-763, DTSP} and \cite{page 303, FSP}.
-\\ \\
+\section{Algorithm}
 The Fast Fourier Transform is a special algorithm for fast computation of the DFT. In section \ref{sec:DFT} the DFT of length $N$ was defined as:
 \begin{align*}
 X[k] = \sum_{n=0}^{N-1} x[n] \text{e}^{-j(2\pi/N)kn} = \sum_{n=0}^{N-1} x[n] W_N^{kn}, \quad k = 0, 1, \dots, N-1
@@ -36,38 +36,70 @@ X[k] = E[\langle k\rangle_{N/2}] + W_N^k O[\langle k\rangle_{N/2}], \quad k = 0,
 
 with the modulo function $\langle k \rangle_N$ as defined in section \ref{sec:DFT}. $E[k]$ and $O[k]$ are thus extended periodically even though they are only computed for $k = 0, 1, \dots, N/2-1$. Hence, this periodic extension does not require any additional computation. Figure \ref{fig:4} is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $8$-point DFT into two $4$-point DFTs as described in \eqref{FFT_DIT}. Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the nodes.
 
-\begin{figure}[h]
+\begin{figure}
 \centering
-\begin{circuitikz}[c/.style={circle,fill, minimum size=4pt, 
-                    inner sep=0pt, outer sep=0pt}]
-\foreach \i [count=\xe from 0, count=\xo from 4, 
-        evaluate={\ni=int(2*\i)}, evaluate={\nii=int(\ni+1)} ] in {0,1,2,3}{%
-    \draw[-] (0,-\xe*1cm) coordinate (xe-\xe) -- 
-              node [above]{$E[\xe]$} ++(0:3cm) coordinate[c] (xe-\xe-1);
-    \draw[-] (xe-\xe-1)--++(0:3cm) coordinate[c, label=right:{$X[\xe]$},
-              label={[font=\scriptsize]above:{$W_N^\xe$}}] (xe-\xe-2);
-    \draw[-] (-2cm,-\xe*1cm) coordinate (xe-\xe-0)--
-              ++(0:-1cm)node[circ]{}node[left]{$x[\ni]$};
-    \begin{scope}[yshift=-4cm]
-      \draw[-] (0,-\xe*1cm) coordinate (xo-\xe)--node [above]{$O[\xe]$} 
-               ++(0:3cm) coordinate[c] (xo-\xe-1);
-      \draw[-] (xo-\xe-1)--++(0:3cm) coordinate[c, label=right:{$X[\xo]$}, 
-               label={[font=\scriptsize]below:{$W_N^\xo$}}] (xo-\xe-2);
-    \draw[-] (-2cm,-\xe*1cm) coordinate (xo-\xe-0)--
-               ++(0:-1cm)node[circ]{}node[left]{$x[\nii]$};
-    \end{scope}
-}
-\node[fit=(xe-0-0) (xe-3), draw, inner ysep=3mm, inner xsep=0pt, align=center]
-          {$N/2$-point\\ DFT};
-\node[fit=(xo-0-0) (xo-3), draw, inner ysep=3mm, inner xsep=0pt, align=center]
-          {$N/2$-point \\ DFT};
+\begin{tikzpicture}
+\node at (0,8){$x[0]$};
+\node at (0,7){$x[2]$};
+\node at (0,6){$x[4]$};
+\node at (0,5){$x[6]$};
+\node at (0,4){$x[1]$};
+\node at (0,3){$x[5]$};
+\node at (0,2){$x[3]$};
+\node at (0,1){$x[7]$};
 
-\foreach \i in {0,1,2,3}{
-    \draw (xe-\i -1) -- (xo-\i-2);
-    \draw (xo-\i -1) -- (xe-\i-2);
+\node at (11,8){$X[0]$};
+\node at (11,7){$X[1]$};
+\node at (11,6){$X[2]$};
+\node at (11,5){$X[3]$};
+\node at (11,4){$X[4]$};
+\node at (11,3){$X[5]$};
+\node at (11,2){$X[6]$};
+\node at (11,1){$X[7]$};
+
+\foreach \y in {1,...,8}
+{
+\draw[->-=0.5]{(0.5,\y)--(1.5,\y)};
+\draw[->-=0.5]{(3.5,\y)--(6.5,\y)};
+\draw[->-=0.5]{(9.5,\y)--(10.5,\y)};
 }
-\end{circuitikz}
-\caption{Flow graph of an $8$-point DFT decomposed into two $4$-point DFTs.}
+
+\foreach \y in {1,...,4}
+{
+\draw[->-=0.92]{(6.5,\y)--(9.5,\y+4)};
+\draw[->-=0.1]{(6.5,\y+4)--(9.5,\y)};
+\draw[->-=0.92]{(6.5,\y)--(9.5,\y)};
+\draw[->-=0.1]{(6.5,\y+4)--(9.5,\y+4)};
+}
+
+\draw[-]{(1.5,8.3)--(1.5,4.7)};
+\draw[-]{(1.5,4.7)--(3.5,4.7)};
+\draw[-]{(3.5,4.7)--(3.5,8.3)};
+\draw[-]{(3.5,8.3)--(1.5,8.3)};
+
+\draw[-]{(1.5,4.3)--(1.5,0.7)};
+\draw[-]{(1.5,0.7)--(3.5,0.7)};
+\draw[-]{(3.5,0.7)--(3.5,4.3)};
+\draw[-]{(3.5,4.3)--(1.5,4.3)};
+
+\foreach \y in {7,...,0}
+{
+\node at (9.6,7-\y+0.5){$W^{\text{\y}}_N$};
+}
+
+\foreach \y in {3,...,0}
+{
+\node at (5,4-\y+0.3){$O[$\y $]$};
+\node at (5,8-\y+0.3){$E[$\y $]$};
+}
+
+\node at (2.5,6.7){$N/2$-point};
+\node at (2.5,6.3){DFT};
+\node at (2.5,2.7){$N/2$-point};
+\node at (2.5,2.3){DFT};
+
+\end{tikzpicture}
+\caption{Flow graph of an $8$-point DFT decomposed into two $4$-point DFTs. Intersections symbolize a summation of the lines meeting.}
 \label{fig:4}
 \end{figure}
 
@@ -80,11 +112,11 @@ E[k] &= \sum_{n=0}^{N/2-1} e[n] W_{N/2}^{nk} = \sum_{l=0}^{N/4-1} e[2l] W_{N/2}^
 O[k] &= \sum_{l=0}^{N/4-1} o[2l] W_{N/4}^{lk} + W_{N/2}^k \sum_{l=0}^{N/4-1} o[2l+1] W_{N/4}^{lk}.
 \end{align*}
 
-The expression for $O[k]$ is obviously quite similar to that of $E[k]$, and its derivation has therefore not been elaborated. Notice also that in general $W_N^{2k} = W_{N/2}^k$. Figure 5 in \cite{page 760, DTSP} shows the flow graph of the decomposition of a single $N/2$-point DFT into two $N/4$-point DFTs, and figure 6 shows the flow graph of figure 5 substituted  into figure 4. The computation of the 8-point DFT is eventually reduced to a computation of  2-point DFTs. The substitution of these 2-point DFTs into figure 6 is shown in figure 9. The general idea is thus to succesively decompose the $N$-point DFT until only 2-point DFTs are left \martin{Skal sandsynligvis skrives om. Det bør også overvejes, om vi skal lave disse figurer selv eller om vi bare skal lave de vigtigste og så referere til de øvrige i bogen. \textregistered}.
-\\ \\
+The expression for $O[k]$ is obviously quite similar to that of $E[k]$, and its derivation has therefore not been elaborated. Notice also that in general $W_N^{2k} = W_{N/2}^k$. The process of decimating the DFT into smaller DFTs can be continued until $N/2$ DFTs of length $N/2$ is obtained.
+\section{Computational complexity}
 Equation \eqref{FFT_modulo} requires the computation of two $N/2$-point DFTs, which requires $2(N/2)^2$ complex multiplications and $2(N/2)^2$ complex additions. The two $N/2$-point DFTs are then combined, which requires $N$ complex multiplications (since the second sum is multiplied by $W_N^k$) and $N$ complex additions (since the product needs to be added to the first sum). Therefore, for all values of $k$, equation \eqref{FFT_modulo} requires $N + 2(N/2)^2 = N + N^2/2$ complex multiplications and complex additions. $N + N^2/2$ is smaller than $N^2$ for $N > 2$ and much smaller for large $N$.
-\\
-When the $N/2$-point DFTs are decomposed into twice as many $N/4$-point DFTs, the factor $(N/2)^2$ above is replaced by $N/2 + 2(N/2)^2$ so that the number of computations required is $N + 2(N/2+2(N/4)^2) = N + N + 4(N/4)^2$. For $N = 2^\nu$ this can be done at most $\nu = \log_2 N$ times, and hence the number of complex multiplications and additions is $N \nu = N \log_2 (N)$ which is also the number of branches and transmittances of the form $W_N^r$ in figure 9 \martin{Kan måske godt gøres pænere og mere overskueligt. \textregistered}.
+\\\\
+When the $N/2$-point DFTs are decomposed into twice as many $N/4$-point DFTs, the factor $(N/2)^2$ above is replaced by $N/2 + 2(N/2)^2$ so that the number of computations required is $N + 2(N/2+2(N/4)^2) = N + N + 4(N/4)^2$. For $N = 2^\nu$ the partition into smaller DFTs can be done at most $\nu = \log_2 N$ times, and hence the number of complex multiplications and additions is $N \nu = N \log_2 (N)$.
 \\ \\
 The number of computations discussed above can be reduced even further by exploiting the periodicity and symmetry of the coefficients $W_N^r$ shown in figure 8 \cite{DTSP}. Each computation in figure 9 involves obtaining a pair of values from a pair of values in the preceding stage with coefficients that are always powers of $W_N$ and exponents that are separated by $N/2$. This computation is called a \textit{butterfly} due to the shape of the flow graph shown in figure 8. Since 
 \begin{align*}
@@ -96,6 +128,89 @@ the factor $W_N^{r+N/2}$ in figure 8 can be written as
 W_N^{r+N/2} = W_N^{N/2} W_N^r = -W_N^r.
 \end{align*}
 
-Thus, the computation shown in figure 8 may be simplified to the form shown in figure 10, which requires one complex addition, one complex subtraction and only one complex multiplication. The number of complex multiplications has thus been reduced to one half of the previous number. The final flow graph of an 8-point DFT using the butterfly computation and the decimation-in-time decomposition into 4 2-point DFTs described above is shown in figure (insert reference). The complex multipliers $W_N^r$ are multiplied between the sets of the 2-point DFTs.
+Thus, the computation shown in figure 8 may be simplified to the form shown in figure 10, which requires one complex addition, one complex subtraction and only one complex multiplication. The number of complex multiplications has thus been reduced to one half of the previous number. The final flow graph of an 8-point DFT using the butterfly computation and the decimation-in-time decomposition into 4 2-point DFTs described above is shown in figure \ref{fig:fft_flow}. The complex multipliers $W_N^r$ are multiplied between the sets of the 2-point DFTs.
 \\
-In general, there are $\log_2(N)$ stages of computation (which is 3 in figure (insert reference)), and each of these involves a set of $N/2$ 2-point DFTs (the so-called butterflies). Notice that in figure (insert reference) these butterflies does not intersect at the first stage, at the second stage the butterflies intersect pairwise and at the last stage all of the butterflies intersect \martin{Mangler at lave figurer. Dette gælder primært figur 4 og 11 fra Oppenheim og Schafer.  \textregistered}.
+In general, there are $\log_2(N)$ stages of computation (which is 3 in figure \ref{fig:fft_flow}), and each of these involves a set of $N/2$ 2-point DFTs (the so-called butterflies). Notice that in figure \ref{fig:fft_flow} these butterflies does not intersect at the first stage, at the second stage the butterflies intersect pairwise and at the last stage all of the butterflies intersect.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+
+\node at (0,8){$x[0]$};
+\node at (0,7){$x[4]$};
+\node at (0,6){$x[2]$};
+\node at (0,5){$x[6]$};
+\node at (0,4){$x[1]$};
+\node at (0,3){$x[5]$};
+\node at (0,2){$x[3]$};
+\node at (0,1){$x[7]$};
+
+\node at (11,8){$X[0]$};
+\node at (11,7){$X[1]$};
+\node at (11,6){$X[2]$};
+\node at (11,5){$X[3]$};
+\node at (11,4){$X[4]$};
+\node at (11,3){$X[5]$};
+\node at (11,2){$X[6]$};
+\node at (11,1){$X[7]$};
+
+\node at (7,1.3){$W^3_N$};
+\node at (7,2.3){$W^2_N$};
+\node at (7,3.3){$W^1_N$};
+\node at (7,4.3){$W^0_N$};
+
+\node at (4,1.3){$W^2_N$};
+\node at (4,2.3){$W^0_N$};
+\node at (4,5.3){$W^2_N$};
+\node at (4,6.3){$W^0_N$};
+
+\foreach \y in {1,...,8}
+{
+\draw[->-=0.5]{(0.5,\y)--(1.5,\y)};
+\draw[->-=0.5]{(1.5,\y)--(3.5,\y)};
+\draw[->-=0.5]{(3.5,\y)--(4.5,\y)};
+\draw[->-=0.9]{(4.5,\y)--(6.5,\y)};
+\draw[->-=0.5]{(6.5,\y)--(7.5,\y)};
+\draw[->-=0.9]{(7.5,\y)--(9.5,\y)};
+\draw[->-=0.5]{(9.5,\y)--(10.5,\y)};
+}
+\foreach \y in {1,3,5,7}
+{
+\draw[->-=0.9]{(1.5,\y)--(3.5,\y+1)};
+\draw[->-=0.9]{(1.5,\y+1)--(3.5,\y)};
+\node at (2.5,\y-0.3){$-1$};
+\node at (1,\y+0.3){$W^0_N$};
+}
+\foreach \y in {1,2,5,6}
+{
+\draw[->-=0.9]{(4.5,\y)--(6.5,\y+2)};
+\draw[->-=0.9]{(4.5,\y+2)--(6.5,\y)};
+\node at (6.4,\y-0.3){$-1$};
+}
+\foreach \y in {1,2,3,4}
+{
+\draw[->-=0.95]{(7.5,\y)--(9.5,\y+4)};
+\draw[->-=0.95]{(7.5,\y+4)--(9.5,\y)};
+\node at (9.4,\y-0.3){$-1$};
+}
+\end{tikzpicture}
+\caption{Flow diagram of an 8-point DFT decomposed into 4 2-point DFTs with the FFT. Intersections symbolize a summation of the lines meeting.}
+\label{fig:fft_flow}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

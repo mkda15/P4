@@ -218,6 +218,11 @@
 \usepackage{todonotes}
 \usepackage{listings} 
 \usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\tikzset{->-/.style={decoration={
+  markings,
+  mark=at position #1 with {\arrow{latex}}},postaction={decorate}}}
+
 \usepackage{pgfplots}
 
 \usetikzlibrary{shapes,arrows}
