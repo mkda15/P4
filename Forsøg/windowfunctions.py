@@ -5,6 +5,7 @@ Created on Fri Apr 21 08:46:36 2017
 @author: cht15
 """
 import numpy as np
+import scipy as sc
 
 #==============================================================================
 # Window function, for implementing filters or the STFT.
