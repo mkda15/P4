@@ -28,8 +28,8 @@ else:
     noise = noise[0:len(signal)]
     #data1 = np.lib.pad(data1,(0,len(data2)-len(data1)),'constant',constant_values=0)
 
-signal = signal/1000  #normalized data
-noise = noise/1000
+signal = signal/1000.  #normalized data
+noise = noise/1000.
 
 #==============================================================================
 # Filter specifications
@@ -117,7 +117,7 @@ freq_inter1 = 100
 freq_inter2 = 20000
 
 h_d = bp(n,M1,ft1,ft2)  #   ideal impulse response
-w = rect(n,M1)      #   window
+w = ha(n,M1,0.5)      #   window
 
 h = h_d * w         #   windowed impulse response  
 

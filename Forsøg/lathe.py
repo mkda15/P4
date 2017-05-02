@@ -20,16 +20,16 @@ freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_random_1.wav')
 #freq3, signal = siw.read('Lydfiler/noise_pc.wav')
 noise = noise
 data = data
-cut  = 350./freq
+cut  = 400./freq
 cut1 = 50./freq
 cut2 = 500./freq
-
+sampels = len(data)
 #==============================================================================
 # Filter funktion defineres
 #==============================================================================
 """ Filte koefficenter med filter orden M = 1000 genereres"""
 M = 1000
-
+freq_axis = np.linspace(0,freq/2,sampels/2)
 n = np.linspace(0,M,M+1)
 #x = np.linspace(-np.pi,np.pi,len(n))
 #==============================================================================
@@ -38,7 +38,7 @@ n = np.linspace(0,M,M+1)
 noise = noise[:len(data)]
 signal = impuls.add_noise(data,noise,c = 0.50)
 
-w = Hanning(n,M) #Hanning eller Hamming for nu
+w = Hamming(n,M) #Hanning eller Hamming for nu
 #hd = impuls.ImpulsresponsBS(n,M,cut1,cut2)
 #hd = impuls.ImpulsresponsHP(n,M,cut)
 hd = impuls.ImpulsresponsLP(n,M,cut)
@@ -59,11 +59,11 @@ signal_filt = np.real(signal_filt)
 # Plt
 #==============================================================================
 
-plt.plot(np.abs(DATA)[:5500])
+plt.plot(freq_axis[:5500],np.abs(DATA)[:5500])
 plt.show()
-plt.plot(np.abs(H)[:5500])
+plt.plot(freq_axis[:5500],np.abs(H)[:5500])
 plt.show()
-plt.plot(np.abs(NOISE)[:6500])
+plt.plot(freq_axis[:6500],np.abs(NOISE)[:6500])
 plt.show()
 plt.plot(data)
 plt.show()
@@ -73,7 +73,7 @@ plt.plot(signal)
 plt.show()
 plt.plot(signal_filt)
 plt.show()
-plt.plot(np.abs(SIGNAL_FILT[:6500]))
+plt.plot(freq_axis[:6500],np.abs(SIGNAL_FILT[:6500]))
 
 #winsound.PlaySound('Lydfiler/forsoeg_nopeak/skala/forsoeg_skala_hurtig.wav', winsound.SND_FILENAME)
 
