@@ -9,6 +9,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 #from scipy import signal
 import scipy.io.wavfile as siw
+import scipy as sc
+from windowfunctions import Hamming, Hanning, Blackman
 
 #==============================================================================
 # impotere data 
@@ -32,6 +34,7 @@ else:
 signal = signal/1000.  #normalized data
 noise = noise/1000.
 
+
 t = len(signal)/freq
 lin = np.linspace(0,t,len(signal)) # time axis 
 
@@ -51,16 +54,17 @@ data = add_noise(signal,noise)
 #==============================================================================
 # Plot in time domain   
 #==============================================================================
-start = 0 # start udsnit
-slut = start+len(n) # slut udsnit
-plt.plot(lin[start:slut],data[start:slut], label='data')
-#plt.plot(lin[start:slut],signal[start:slut], label='signal')
-#plt.plot(lin[start:slut],noise[start:slut], label='noise')
+#start = 0 # start udsnit
+#slut = start+len(signal) # slut udsnit
+#plt.plot(lin[start:slut],data[start:slut], label='data')
+##plt.plot(lin[start:slut],signal[start:slut], label='signal')
+##plt.plot(lin[start:slut],noise[start:slut], label='noise')
+#
+#plt.xlabel('Time[Seconds]')
+#plt.ylabel('Amplitude [Voltages]')
+#plt.legend(loc= "lower right")
+#plt.show()
 
-plt.xlabel('Time[Seconds]')
-plt.ylabel('Amplitude [Voltages]')
-plt.legend(loc= "lower right")
-plt.show()
 
 #==============================================================================
 # Filter specifications
@@ -68,7 +72,7 @@ plt.show()
 #N = len(signal) #lenght of input 
 #if N % 2 > 0:
 #    raise ValueError('Brug N = potenser af 2')
-N = 1000  #tjek om ovenstående er bedre altså længde af signal
+N = 1001  #tjek om ovenstående er bedre altså længde af signal
 
 fs = 44100.         # sampling frequency
          
@@ -78,12 +82,13 @@ if not type(fs) == float:
 ft1 = 75 / fs      # cut off 1 
 ft2 = 500 / fs     # cut off 2 
 
-delta = 0.1 # peak approximation error in amplitude 
+delta_1 = 0.05 # peak approximation error in amplitude 
+delta_2 = 0.6 # max transition width is 2*delta_2
 
 M1 = N-1 #selvvalgt filter orden 
     
 sampels = len(signal)
-n = np.linspace(0,N,sampels) 
+n = np.linspace(0,M1,N) 
 freq_ax = np.linspace(0,fs/2,sampels/2)   # normalised frequency axis
 #==============================================================================
 # Ideal impulse response
@@ -111,22 +116,69 @@ def rect(n,M): # Det rektangulaere vindue
             w[i] = 0
     return w
 
+
+def Kaiser( d1, d2, fs):                                        # Kaiservindue
+    M = 0
+    beta = 0
+    # defining Beta 
+    A = int(-20*np.log10(d1))
+    
+    if A > 50:
+        beta = 0.1102 * (A - 8.7)
+    elif A <= 50 and A >= 21:
+        beta = 0.5842 * (A - 21) ** 0.4 + 0.07886 * (A - 21)
+    else:
+        beta = 0
+        
+    tw = ((2*d2)/fs)*2*np.pi
+    M = int(np.ceil((A - 8) / (2.285 * tw)))
+    print M
+    
+    n = np.linspace(0,M,M+1) 
+    w = np.zeros(len(n))
+    for i in range(len(n)):
+        if n[i] >= 0 and n[i] <= M:
+            variabel = beta*np.sqrt(1-((n[i]-(M/2))/(M/2))**2)
+            w[i] = sc.special.i0(variabel)/sc.special.i0(beta)
+        else:
+            w[i] = 0
+    return w,M,beta,A,n
+
+
 #==============================================================================
 # impulse and frequency response
 #==============================================================================
 freq_inter1 = 100           # frequency inverval
 freq_inter2 = 20000
 
-h_d = bp(n,M1,ft1,ft2)    #   ideal impulse response
-w = rect(n,M1)            #   window
+#h_d = bp(n,M1,ft1,ft2)
+#w = Blackman(n,M1)
+#h = h_d * w
+#
 
-h = h_d * w               #   windowed impulse response  
+##########    kaiser window   ##########
+w = Kaiser(delta_1,delta_2,fs)[0]             # window
+M = Kaiser(delta_1,delta_2,fs)[1]             # order 
+beta = Kaiser(delta_1,delta_2,fs)[2]
+A = Kaiser(delta_1,delta_2,fs)[3]
+n = Kaiser(delta_1,delta_2,fs)[4]
 
-H = np.abs(np.fft.fft(h))
-#plt.plot(freq_ax,np.abs(H)[:sampels/2])
-#plt.axis([0,4000,0,1.2])
-#plt.xlabel("frequency [Hz]")
-#plt.show()
+h_d = bp(n,M,ft1,ft2)    #   ideal impulse response
+h = h_d * w              #   windowed impulse response  
+
+########################################
+plt.plot(n,h_d)
+plt.show()
+
+plt.plot(n,w)
+#plt.axis([0,1500,-0.5,1.2])
+plt.show()
+
+H = np.abs(np.fft.fft(h,len(signal)))
+plt.plot(freq_ax,np.abs(H)[:sampels/2])
+plt.axis([0,4000,0,1.2])
+plt.xlabel("frequency [Hz]")
+plt.show()
 
 # Pure signal in frequency domain
 SIGNAL = 2/float(len(signal))*np.abs(np.fft.fft(signal)) #normaliseret
@@ -142,15 +194,14 @@ DATA = 2/float(len(data))*np.abs(np.fft.fft(data))
 #==============================================================================
 filt_DATA = H * DATA
 
-#plt.plot(freq_ax[freq_inter1:freq_inter2],DATA[freq_inter1:freq_inter2], label='Data')
-#plt.show()
-#
-#plt.plot(freq_ax[freq_inter1:freq_inter2],filt_DATA[freq_inter1:freq_inter2], label='Filteret data')
-#plt.show()
+plt.plot(freq_ax[freq_inter1:freq_inter2],DATA[freq_inter1:freq_inter2], label='Data')
+plt.show()
 
-##inverse Fourier of filtered data.
-filt_data = np.fft.ifft(filt_DATA)
-plt.plot(lin,filt_data)
+plt.plot(freq_ax[freq_inter1:freq_inter2],filt_DATA[freq_inter1:freq_inter2], label='Filteret data')
+plt.axis([0,4000,0,0.12])
+plt.show()
+
+
 #==============================================================================
 # save signal
 #==============================================================================
