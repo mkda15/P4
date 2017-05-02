@@ -78,8 +78,8 @@ else:
 print('vindue generet 3/9')
 
 #hd = impuls.ImpulsresponsBS(n,M,cut1,cut2)
-#hd = impuls.ImpulsresponsHP(n,M,cut)
-hd = impuls.ImpulsresponsLP(n,M,cut)    # Desired impulsrespons
+hd = impuls.ImpulsresponsHP(n,M,cut)
+#hd = impuls.ImpulsresponsLP(n,M,cut)    # Desired impulsrespons
 
 h = hd * w                              # The final impulsrespons
 H = np.fft.fft(h,(len(signal)))         # The fourier transformed of the final impulsrespons zero padded to fit the signal
