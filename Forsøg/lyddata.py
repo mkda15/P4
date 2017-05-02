@@ -40,7 +40,7 @@ else:
 
 freq = freq1
 data1 = data1/1000  #normalized data
-data2 = (data2/1000)*10
+data2 = (data2/1000)
 data = data1
 N = len(data)
 if N % 2 > 0:
@@ -135,7 +135,7 @@ def add_noise(data,noise,c = 0.5): #kilde side 229 i DTSP
 #==============================================================================
 # Printer signal 
 #==============================================================================
-## Lav udsnit af signal   
+# Lav udsnit af signal   
 #start = 100000 # start udsnit
 #slut = start+1000 # slut udsnit
 #data1 = data1[start:slut]
@@ -145,12 +145,12 @@ def add_noise(data,noise,c = 0.5): #kilde side 229 i DTSP
 #signal = add_noise(data1,data2)
 #
 #plt.plot(lin,signal, label='signal')
-#plt.plot(lin,data2, label='noise')
-#plt.plot(lin,data1, label='data')
-#plt.xlabel('Time[Seconds]')
-#plt.ylabel('Amplitude [Voltages]')
-#plt.legend(loc= "lower right")
-#plt.show()
+plt.plot(lin,data2, label='noise')
+plt.plot(lin,data1, label='data')
+plt.xlabel('Time[Seconds]')
+plt.ylabel('Amplitude [Voltages]')
+plt.legend(loc= "lower right")
+plt.show()
 
 ##==============================================================================
 ## Printer frekvens plot af ren data

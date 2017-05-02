@@ -63,12 +63,29 @@ def Blackman(n,M):
     return w
 
 """ Kaiser vindue"""
-def Kaiser(n, M, B):                                        # Kaiservindue
+def Kaiser( d1, d2, fs):                                        # Kaiservindue
+    M = 0
+    beta = 0
+    # defining Beta 
+    A = int(-20*np.log10(d1))
+    
+    if A > 50:
+        beta = 0.1102 * (A - 8.7)
+    elif A <= 50 and A >= 21:
+        beta = 0.5842 * (A - 21) ** 0.4 + 0.07886 * (A - 21)
+    else:
+        beta = 0
+        
+    tw = ((2*d2)/fs)*2*np.pi
+    M = int(np.ceil((A - 8) / (2.285 * tw)))
+    print M
+    
+    n = np.linspace(0,M,M+1) 
     w = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] >= 0 and n[i] <= M:
-            variabel = B*np.sqrt(1-((n[i]-(M/2))/(M/2))**2)
-            w[i] = sc.special.i0(variabel)/sc.special.i0(B)
+            variabel = beta*np.sqrt(1-((n[i]-(M/2))/(M/2))**2)
+            w[i] = sc.special.i0(variabel)/sc.special.i0(beta)
         else:
             w[i] = 0
-    return w
+    return w,M,beta,A,n
