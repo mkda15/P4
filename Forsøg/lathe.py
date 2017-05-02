@@ -10,7 +10,7 @@ Created on Fri Apr 21 08:31:00 2017
 #==============================================================================
 
 from short_time_fourier_transform import stft , db
-from windowfunctions import Hamming#, Hanning
+from windowfunctions import Hamming, Hanning, Kaiser
 import numpy as np
 import impulsrespons as impuls
 import matplotlib.pyplot as plt
@@ -32,12 +32,18 @@ elif len(data) > len(noise):
     data = data[:len(noise)]
 
 """ Variabler til filter """
-M    = 1000         # Filter order
+window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
+M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
 cut1 = 50./freq     # Cut off frequency for band
 cut2 = 500./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/2) # Length for plotting (arbitrary)
+
+
+""" Til Kaiser vinduet """
+delta_1 = 0.05 # peak approximation error in amplitude 
+delta_2 = 20. # max transition width is 2*delta_2
 
 """ Aksis og linspaces """
 t   = sampels/float(freq)                   # The time for howlong the system runs (for making the time axis)
@@ -61,7 +67,13 @@ print('støj adderet 2/9')
 # Filter koefficenter udregnes og filtere anvendes
 #==============================================================================
 """ Vindue funktion og impuls respons udregnes """
-w = Hamming(n,M)        #Hanning eller Hamming for nu andre kan vælge impoteret i starten
+
+if window == Kaiser:                                # What to be returned for different windowfunctions
+    w,M,beta,A,n = window(delta_1,delta_2,freq)
+    w = w[:-1]
+    n = n[:-1]
+else:
+    w = window(n,M)
 
 print('vindue generet 3/9')
 
