@@ -52,28 +52,42 @@ ymax=5.5]
 \label{fig:spec_Hd}
 \end{figure}
 
-Due to the method of the Kaiser window described in section \ref{subsec:FIR} the shape parameter $\beta$ and the order of the filter $M$ is determined on behalf of the specified $\delta_1$ end $\delta_2$, as  
-\begin{align}
-A=&-20\log_{10}(\delta_1) = 40 \\ 
-\beta =& \ 0.5824(A-21)^{0.4} + 0.07886(A-21)  \approx 3.4 \\
-M =& \ \frac{A-8}{2.285 \cdot \Delta f_t  2\pi}\approx 98294
-\end{align}
-
-Note that $M$ is rounded up to nearest even integer.
-
 \subsection{Implementation of the filter}
-The implementation of the filter basically follows algorithm \ref{alg:FIR}. Firstly, the filter specifications are defined, and then one function defines the ideal impulse response as the inverse Fourier transformation of the ideal filter specified on figure \ref{fig:spec_Hd}. For derivation of the ideal impulse response of a bandpass filter consult appendix \ref{appC}. Another function defines the Kaiser window from the given inputs $\beta$ and $M$. Then the filter is defined by multiplying the ideal impulse response and the Kaiser window to get a realizable impulse response. By the FFT the frequency response of the filter is obtained. Figure \ref{fig:freq_filt1} illustrates a plot of the amplitude response corresponding to the filter in the frequency domain. At \ref{fig:freq_filt2} illustrate a close up view of the left transition band, showing the ripples at in stop- and passband  the boundaries from the specifications are marked by the green lines. It is seen that the specifications are fulfilled, with only one minimal exceeding of the limit.        
+The implementation of the filter basically follows algorithm \ref{alg:FIR}. The ideal impulse response is defined as the inverse Fourier transformation of the ideal filter specified on figure \ref{fig:spec_Hd}. For derivation of the ideal impulse response of a bandpass filter consult appendix \ref{appC}. Figure \ref{fig:freq_filt1} illustrates a plot of the amplitude response corresponding to the filter in the frequency domain. At \ref{fig:freq_filt2} illustrate a close up view of the left transition band, showing the ripples at in stop- and passband  the boundaries from the specifications are marked by the green lines. It is seen that the specifications are fulfilled, with only one minimal exceeding of the limit.        
+\begin{figure}[h]
+\centering
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/filtertest/freq_response1.pdf}
+\caption{}
+\label{fig:freq_filt1}
+\end{subfigure}
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/filtertest/freq_response2.pdf}
+\caption{}
+\label{fig:freq_filt2}
+\end{subfigure}
+\caption{(a) Amplitude response of filter. (b) Close up amplitude response of filter, showing top and bottom of one transitionband.}
+\label{fig:freq_filt}
+\end{figure}
+
 
 \begin{algorithm}[H]
 \caption{Compute type I FIR filter}
 \label{alg:FIR}
 \begin{algorithmic}[1] 
 \State $f_s= 44100$ \Comment {Sampling frequency}
-\State $M = 98294$ \Comment {Order of filter} 
-\State $\beta = 3.4$ \Comment {Shape parameter}
-\State $N = M+1$ \Comment {Lenght of filter}
 \State $f_{t1} = 75/f_s$ \Comment {Transition frequency $1$}
 \State $f_{t2} = 1000/f_s$ \Comment {Transition frequency $2$}
+\State $\delta_1 = 0.01$  \Comment {Max. amplitude error }
+\State $\delta_2 = 0.5 $ 
+\State $\Delta f_t = 2 \cdot \delta_2 / f_s$  \Comment {Transition width}
+\\
+\State $A=-20\log_{10}(\delta_1)$ \Comment{$21 \leq A \leq 50$}
+\State $\beta = 0.5824(A-21)^{0.4} + 0.07886(A-21)$ \Comment {Shape parameter}
+\State $M = (A-8)/(2.285 \cdot \Delta f_t  2\pi)$ \Comment {Filter order, round to upper even int.}
+\State $N = M+1$ \Comment {Lenght of filter}
 \\
 \Procedure{Compute ideal impulse response}{$h_d$}
     \For {each integer $i$ in $h_d$}
@@ -105,24 +119,6 @@ The implementation of the filter basically follows algorithm \ref{alg:FIR}. Firs
 
 \end{algorithmic}
 \end{algorithm}
-
-\begin{figure}[H]
-\centering
-\begin{subfigure}{0.49\textwidth}
-\centering
-\includegraphics[width=\textwidth]{figures/filtertest/freq_response1.pdf}
-\caption{}
-\label{fig:freq_filt1}
-\end{subfigure}
-\begin{subfigure}{0.49\textwidth}
-\centering
-\includegraphics[width=\textwidth]{figures/filtertest/freq_response2.pdf}
-\caption{}
-\label{fig:freq_filt2}
-\end{subfigure}
-\caption{(a) Amplitude response of filter. (b) Close up amplitude response of filter, showing top and bottom of one transitionband.}
-\label{fig:freq_filt}
-\end{figure}
 
 \subsection{Validation of the filter}
 The implemented filter is tested according to the test specifications described in section \ref{sec:testspec}. Figure \ref{fig:SIGNAL} show the frequency spectrum of the single low E note with additive noise in form of a beat of hands clapping. Figure \ref{fig:filt_SIGNAL} show the filtered signal. Note that the frequency spectrum are only showed from 0 to approximately 2200 $[Hz]$.  
