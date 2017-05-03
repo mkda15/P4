@@ -1,36 +1,36 @@
 \section{Properties and types of discrete-time systems}\label{sec:properties_DTS}
 Discrete-time systems can have multiple properties that are important to consider when working with them. The following definitions will cover the need in this project.
 \begin{definition}[Linear system]\label{def:linear_system}
-A discrete-time system $T$ is called linear when, for any inputs $x$ and $y$ and any $\alpha,\beta\in\mathbb{C}$,
+A discrete-time system $T$ is called linear when, for any inputs $x[n]$ and $y[n]$ and any $\alpha,\beta\in\mathbb{C}$,
 \begin{align}
-T(\alpha x + \beta y) = \alpha T(x) + \beta T(x).
+T(\alpha x[n] + \beta y[n]) = \alpha T(x[n]) + \beta T(x[n]).
 \end{align}
 \end{definition}
 
 \begin{definition}[Memoryless system]\label{def:memoryless_system}
-A discrete-time system $T$ is called memoryless when, for any $k\in\mathbb{Z}$ and any inputs $x$ and $\tilde{x}$,
+A discrete-time system $T$ is called memoryless when, for any $k\in\mathbb{Z}$ and any inputs $x[n]$ and $\tilde{x}[n]$,
 \begin{align}
-\mathbf{1}_{\{k\}}x = \mathbf{1}_{\{k\}}\tilde{x} \, \Rightarrow \, \mathbf{1}_{\{k\}} T(x) = \mathbf{1}_{\{k\}}T(\tilde{x}),
+\mathbf{1}_{\{k\}}x[n] = \mathbf{1}_{\{k\}}\tilde{x}[n] \, \Rightarrow \, \mathbf{1}_{\{k\}} T(x[n]) = \mathbf{1}_{\{k\}}T(\tilde{x}),
 \end{align}
 
-where $\mathbf{1}_{\{k\}}$ is the indicator function such that $\mathbf{1}_{\{k\}}(x)=1$ for $x=k$ and $\mathbf{1}_{\{k\}}=0$ for $x \neq k$.
+where $\mathbf{1}_{\{k\}}$ is the indicator function such that $\mathbf{1}_{\{k\}}x[n]=1$ for $x=k$ and $\mathbf{1}_{\{k\}}x[n]=0$ for $n \neq k$.
 \end{definition}
 
 Therefore, memoryless systems are instantaneous and depend solely on current input.
 
 \begin{definition}[Causal system]\label{def:causal_system}
-A discrete-time system $T$ is called causal when, for any $k\in\mathbb{Z}$ and inputs $x$ and $\tilde{x}$,
+A discrete-time system $T$ is called causal when, for any $k\in\mathbb{Z}$ and inputs $x[n]$ and $\tilde{x[n]}$,
 \begin{align}
-\mathbf{1}_{\{-\infty,\ldots,k\}} x = \mathbf{1}_{\{-\infty,\ldots,k\}} \tilde{x} \, \Rightarrow \, \mathbf{1}_{\{-\infty,\ldots,k\}} T(x) = \mathbf{1}_{\{-\infty,\ldots,k\}} T(\tilde{x}).
+\mathbf{1}_{\{-\infty,\ldots,k\}} x[n] = \mathbf{1}_{\{-\infty,\ldots,k\}} \tilde{x[n]} \, \Rightarrow \, \mathbf{1}_{\{-\infty,\ldots,k\}} T(x[n]) = \mathbf{1}_{\{-\infty,\ldots,k\}} T(\tilde{x}[n]).
 \end{align}
 \end{definition}
 
-As such the output of a causal system at time index $k$ depends solely on the input up to time index $k$.
+As such the output of a causal system at time index $k$ depends solely on the inputs up to time index $k$.
 
 \begin{definition}[Time-invariant system]\label{def:time_invariant_system}
-A discrete-time system $T$ is called time-invariant when, for any $k\in\mathbb{Z}$ and input $x$,
+A discrete-time system $T$ is called time-invariant when, for any $k\in\mathbb{Z}$ and input $x[n]$,
 \begin{align}
-y = T(x) \, \Rightarrow \, \tilde{y} = T(\tilde{x}),
+y = T(x[n]) \, \Rightarrow \, \tilde{y} = T(\tilde{x}[n]),
 \end{align}
 
 where $\tilde{x}[n] = x[n-k]$ and $\tilde{y}[n] = y[n-k]$.
@@ -41,7 +41,7 @@ As such a time-invariant system does not depend on the time at which it operates
 \begin{definition}[BIBO-stable system]\label{def:BIBO_stable_system}
 A discrete-time system $T$ is called bounded-input, bounded-output stable (BIBO-stable) when
 \begin{align}
-x\in\ell^{\infty}(\mathbb{Z})\,\Rightarrow\,y\in\ell^{\infty}(\mathbb{Z}),
+x[n]\in\ell^{\infty}(\mathbb{Z})\,\Rightarrow\,y[n]\in\ell^{\infty}(\mathbb{Z}),
 \end{align}
 
 where $\ell^{\infty}(\mathbb{Z})$ is the space of bounded sequences.$^[$\footnote{See chapter \ref{ch5}.}$^]$
@@ -76,11 +76,36 @@ h=T(\delta),
 where $\delta[t] = 1$ for $t = 0$ and $\delta[t] = 0$ otherwise.
 \end{definition}
 
-Therefore, the impulse response $h$ of a causal linear system always satisfies that $h[n] = 0$ for all $n < 0$. An impulse response of the LTI system described by \eqref{eq:LTI_diff_equation_finite} is an otuput that results from the input $x = \delta$:
+Therefore, the impulse response $h$ of a causal linear system always satisfies that $h[n] = 0$ for all $n < 0$. An impulse response of the LTI system described by \eqref{eq:LTI_diff_equation_finite} is an output that results from the input $x = \delta$:
 \begin{align*}
 h[n] = \sum_{k=0}^M b[k] \delta[n-k] - \sum_{k=1}^N a[k] h[n-k] = b[n] - \sum_{k=1}^N a[k] h[n-k],
 \end{align*}
 
 where the first sum reduces to $b[n]$ for $n = k$.
-\\ \\
-The impulse response will be of importance in chapter \ref{ch8} when designing filters, which are discrete-time systems \martin{Kapitlet slutter lidt brat. Kan vi udvide det? \textregistered}.
+\subsection{Convolution}
+The concept of convolution is of importance when dealing with discrete time systems and impulse responses and will be defined in this section.\\\\
+By writing $x[n]$ in \eqref{eq:DTS} as a sum and by linearity and using the definition of the impulse response we get:
+\begin{align}
+y[n]&=Tx[n]=T\sum_{k\in\mathbb{Z}}x[n]\delta[n-k]
+=\sum_{k\in\mathbb{Z}}x[n]T\delta[n-k]\nonumber\\
+&=\sum_{k\in\mathbb{Z}}x[n]h[n-k].\label{eq:convolution}
+\end{align}
+\eqref{eq:convolution} is defined as a convolution.
+\begin{definition}\label{def:convolution}
+The convolution between sequences $h$ and $x$ is defined as
+\begin{equation}
+(h*x)_n=\sum_{k\in\mathbb{Z}}x[n]h[n-k]=\sum_{k\in\mathbb{Z}}x[n-k]h[k],
+\end{equation}
+where the subscript $_n$ specifies the argument of the convolution.
+\end{definition}
+This means that, given an impulse response for a discrete LTI system, the output to a specific input can be calculated by convoluting the input with the impulse response. An impulse response is sometimes called a filter and convoluting an input with the impulse response is sometimes called filtering. The convolution is of importance in chapter \ref{ch8} which covers filter theory and design in depth. The convolution is furthermore of importance in chapter \ref{ch6} where the Fourier transform is treated. \martin{Kapitlet slutter lidt brat. Kan vi udvide det? \textregistered}
+
+
+
+
+
+
+
+
+
+
