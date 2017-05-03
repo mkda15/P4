@@ -9,9 +9,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-w_range = np.linspace(-np.pi, np.pi, 1000)
-n = np.linspace(-10,10,(len(w_range)*2)+1)
-
+w_range = np.linspace(-np.pi, np.pi, 8)
+n = np.linspace(-10,10,(len(w_range)))
+M = len(n)-1
 
 # plot at ideal lavpas filter w_range(10000), og n(11)
 def h(n,w_c):
@@ -23,7 +23,7 @@ def h(n,w_c):
             h[i]=(np.sin(n[i]*w_c))/((np.pi*n[i]))
     return h 
 
-n = range(11)
+#n = range(11)
 cutoff = np.pi/2 
 
 def H(w):
@@ -35,7 +35,24 @@ def H(w):
             H[i] = 0
     return H
 
+def w1(n,M):
+    w = np.zeros(len(n))
+    for i in range(len(n)):
+        if n[i] <= M:     
+            w[i]=1
+    return w
 
+
+
+plt.plot(freq,W)
+plt.axis([-0.1,0.1,0,2.5])
+plt.show()
+
+
+#plt.plot(20*np.log10(np.abs(np.fft.fft(np.pad(w,(0,10000),'constant',constant_values=0))))[:400])
+#plt.show()
+plt.plot(np.abs(np.fft.fft(np.pad(w,(0,10000),'constant',constant_values=0)))[:400])
+plt.show()
 
 #plt.stem(n,h(n,cutoff))
 #plt.xlabel("n", fontsize=15)

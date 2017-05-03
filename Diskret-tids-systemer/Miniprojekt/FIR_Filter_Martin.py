@@ -125,17 +125,17 @@ H = np.abs(fft(h,n))
 # Graf over amplituderesponsen
 #==============================================================================
 
-#plt.figure(3)
-#plt.plot(x, H)
-#plt.axis([0,np.pi,0,2])
-#plt.title('Amplituderespons for filteret, Hamming-vinduet, $M = %d$' %(M))
-#plt.xlabel('Frekvens [rad / s]')
-#plt.ylabel('Amplitude')
-#plt.axvline(o1, color='yellow') # Nedre knækfrekvens
-#plt.axvline(o2, color='yellow') # Øvre knækfrekvens
-#plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
-#plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
-#plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
+plt.figure(3)
+plt.plot(x, H)
+plt.axis([0,np.pi,0,2])
+plt.title('Amplituderespons for filteret, Hamming-vinduet, $M = %d$' %(M))
+plt.xlabel('Frekvens [rad / s]')
+plt.ylabel('Amplitude')
+plt.axvline(o1, color='yellow') # Nedre knækfrekvens
+plt.axvline(o2, color='yellow') # Øvre knækfrekvens
+plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
+plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
+plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
 
 #==============================================================================
 # Filteret i Scipy til sammenligning 
