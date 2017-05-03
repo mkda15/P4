@@ -168,11 +168,11 @@ For $\textbf{x} = [x_0 \dots x_{N-1}]^T$ and $\textbf{y} = [y_0 \dots y_{N-1}]^T
 \end{theorem}
 
 \begin{proof}
-The following sums are finite and may be therefore be interchanged:
+The following sums are finite and may therefore be interchanged:
 \begin{align*}
 Z[k] &= \sum_{n=0}^{N-1} z[n] \text{e}^{-j\frac{2\pi}{N}kn} = \sum_{n=0}^{N-1} \left( \sum_{m=0}^{N-1} x[m] y[\langle n-m\rangle_N] \right) \text{e}^{-j\frac{2\pi}{N}kn} \\
 &= \sum_{m=0}^{N-1} x[m] \left( \sum_{n=0}^{N-1} y[\langle n-m\rangle_N]\text{e}^{-j\frac{2\pi}{N}kn} \right) = \sum_{m=0}^{N-1} x[m] \left( \text{e}^{-j\frac{2\pi}{N}km}Y[k] \right) \\
-&= \left( \sum_{m=0}^{N-1} x[m] \text{e}^{-j\frac{2\pi}{N}km} \right)Y[k] = X[k] Y[k]
+&= \left( \sum_{m=0}^{N-1} x[m] \text{e}^{-j\frac{2\pi}{N}km} \right)Y[k] = X[k] Y[k].
 \end{align*}
 \end{proof}
 
