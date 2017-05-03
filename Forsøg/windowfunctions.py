@@ -20,7 +20,7 @@ def Rectangular(n,M):
             w[i] = 0
     return w
 
-""" BArtlett vindue """
+""" Bartlett vindue """
 def Bartlett(n, M):                                         # Bartlett vindue
     w = np.zeros(len(n))
     for i in range(len(n)):
@@ -78,12 +78,12 @@ def Kaiser( d1, d2, fs):                                        # Kaiservindue
         
     tw = ((2*d2)/fs)*2*np.pi
     M = int(np.ceil((A - 8) / (2.285 * tw)))
-    print M
+    print('The filter order calculated by Kaiser window: \n M = %.0f' %M)
     
     n = np.linspace(0,M,M+1) 
     w = np.zeros(len(n))
     for i in range(len(n)):
-        if n[i] >= 0 and n[i] <= M:
+        if n[i] >= 0 and n[i] < M:
             variabel = beta*np.sqrt(1-((n[i]-(M/2))/(M/2))**2)
             w[i] = sc.special.i0(variabel)/sc.special.i0(beta)
         else:

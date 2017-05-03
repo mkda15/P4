@@ -1,35 +1,53 @@
 \chapter{Derivation of ideal impulse response}\label{appC}
-In \trine{Dette er udledning af båndstop, skal laves om til bandpass!!!}order to derive the ideal impulse response the ideal frequency response is defined as follows on behave of figure \ref{fig:spec_Hd}
+In order to derive the ideal impulse response for the bandpass filter described in chapter \ref{ch10} the ideal frequency response is defined as follows on behalf of figure \ref{fig:spec_Hd}:
+%\begin{align*}
+% H_d(\text{e}^{j\omega}) = \begin{cases}
+% 0, \ \ \ & |\omega| \leq \omega_{c_1} \\
+%  \text{e}^{-j\omega\frac{M}{2}}, \ \ \ & \omega_{c_1} \leq | \omega | \leq \omega_{c_2} \\
+%  0, \ \ \ & \omega_{c_2} \leq |\omega| \leq \pi 
+%\end{cases}
+%\end{align*}
+
 \begin{align*}
- H_d(\text{e}^{j\omega})= \begin{cases}
- 0, \ \ \ & |\omega| \leq \omega_{c_1} \\
-  \text{e}^{-j\omega\frac{M}{2}}, \ \ \ & \omega_{c1} \leq | \omega | \leq \omega_{c2} \\
-  0, \ \ \ & \omega_{c_2} \leq |\omega| \leq \pi 
+H_d(\text{e}^{j\omega}) = \begin{cases}
+\text{e}^{-j\omega\frac{M}{2}}, \quad &\begin{cases}
+-\omega_{c_2} \leq \omega \leq -\omega_{c_1} \\
+\omega_{c_1} \leq \omega \leq \omega_{c_2}
+\end{cases} \\
+0, \quad &Otherwise
 \end{cases}
 \end{align*}
-From this the ideal impulse response is determined by the inverse Fourier transformation 
+
+From this the ideal impulse response is determined by the inverse Fourier transformation described in definition \ref{def:InverseFourier_trans}:
 \begin{align*}
-h_d[n] &= \frac{1}{2\pi} \left(  \int_{-\omega_{c2}}^{-\omega_{c_1}} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega + \int_{\omega_{c_1}}^{\omega_{c_2}} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega	\right) \\
-&= \frac{1}{2\pi} \left(  \int_{-\omega_{c2}}^{-\omega_{c_1}} \text{e}^{j\omega \left(n- \frac{M}{2} \right) } d\omega + \int_{\omega_{c_1}}^{\omega_{c_2}} \text{e}^{j\omega \left(n- \frac{M}{2} \right) }  d\omega \right).
+h_d[n] &= \dfrac{1}{2\pi} \int_{-\pi}^\pi H_d(\text{e}^{j\omega}) \text{e}^{j\omega n} d\omega = \dfrac{1}{2\pi} \left(  \int_{-\omega_{c_2}}^{-\omega_{c_1}} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega + \int_{\omega_{c_1}}^{\omega_{c_2}} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega \right) \\
+&= \frac{1}{2\pi} \left( \int_{-\omega_{c_2}}^{-\omega_{c_1}} \text{e}^{j\omega \left(n - \frac{M}{2} \right) } d\omega + \int_{\omega_{c_1}}^{\omega_{c_2}} \text{e}^{j\omega \left(n- \frac{M}{2} \right)} d\omega \right).
 \end{align*}
-Then one use that the following is true
+
+Euler's formula says that $\text{e}^{j\omega t} = \cos(\omega t) + j\sin(\omega t)$. For the first integral above it follows that
 \begin{align*}
-\int_{-\pi}^{\pi} \text{e}^{j\omega \left(n- \frac{M}{2} \right) }  d\omega =& \int_{-\pi}^{\pi} \cos\left( \omega \left(n-\frac{M}{2}\right)\right)+j \sin \left( \omega \left(n-\frac{M}{2}\right) \right) d\omega \\
-=& \left[ \sin\left(\omega \left(n-\frac{M}{2}\right)\right) \right]_{-\pi}^{\pi} \cdot \frac{1}{n- \frac{M}{2}}.
+\int_{-\omega_{c_2}}^{-\omega_{c_1}} \text{e}^{j\omega \left(n- \frac{M}{2} \right)} d\omega &= \int_{-\omega_{c_2}}^{-\omega_{c_1}} \cos \left( \omega \left(n-\dfrac{M}{2}\right)\right) + j \sin \left( \omega \left(n-\dfrac{M}{2}\right) \right) d\omega \\
+&= \left[ \sin\left(\omega \left(n-\dfrac{M}{2}\right)\right) \right]_{\omega=-\omega_{c_2}}^{-\omega_{c_1}} \cdot \dfrac{1}{n - \frac{M}{2}}
 \end{align*}
-Hence
+
+since the integral of the second term evaluates to 0. Since $\sin(-\omega\cdot t) = - \sin(\omega \cdot t)$ the impulse response may be written as \martin{Gør det noget, at det går ud over margen, når det nu er i appendix? \textregistered}
 \begin{align*}
-h_d[n]= \frac{1}{\pi \left(n-\frac{M}{2}\right)} \left(\sin\left(\omega_{c_2} \left(n-\frac{M}{2}\right)\right) - \sin\left(\omega_{c_1} \left(n-\frac{M}{2}\right)\right) - \sin\left( \pi\left( n + \frac{M}{2} \right) \right) \right).
+h_d[n] &= \dfrac{1}{2\pi} \left( \dfrac{1}{n - \frac{M}{2}} \left( \sin \left( - \omega_{c_1} \left( n - \frac{M}{2} \right) \right) - \sin \left( - \omega_{c_2} \left( n - \frac{M}{2} \right) \right) + \sin \left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) \right) \right) \\
+&= \dfrac{1}{2\pi} \left( \dfrac{1}{n - \frac{M}{2}} \left( - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) + \sin \left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) + \sin \left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) \right) \right) \\
+&= \dfrac{1}{2\pi} \left( \dfrac{2}{n - \frac{M}{2}} \left( - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) + \sin \left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) \right) \right) \\
+&= \dfrac{1}{\pi \left( n - \frac{M}{2}\right)} \left( \sin\left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) \right).
 \end{align*}
-The last part must by $0$ hence the ideal impulse response is defined as
+
+This is only true for $n \neq \frac{M}{2}$, and $h_d[M/2]$ must be defined separately. In order to do so l'Hôspital's rule$^[$\footnote{A more detailed version of l'Hôpital's rule may be found at \url{http://tutorial.math.lamar.edu/Classes/CalcI/LHospitalsRule.aspx}.}$^]$, which says that $\lim \frac{f(x)}{g(x)} = \lim \frac{f'(x)}{g'(x)}$, is used. Thus:
 \begin{align*}
-h_d[n]= \frac{1}{\pi \left(n-\frac{M}{2}\right)} \left(\sin\left(\omega_{c_2} \left(n-\frac{M}{2}\right)\right) - \sin\left(\omega_{c_1} \left(n-\frac{M}{2}\right)\right)\right)
+h_d[M/2] &= \dfrac{d}{dn} \left[ \dfrac{1}{\pi \left( n - \frac{M}{2}\right)} \left( \sin\left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) \right) \right]_{\frac{M}{2} = n} \\
+&= \dfrac{1}{\pi} (\cos (\omega_{c_2} \cdot 0) \omega_{c_2} - \cos (\omega_{c_1} \cdot 0) \omega_{c_1}) = \dfrac{1}{\pi} ( \omega_{c_2} - \omega_{c_1})
 \end{align*}
-This is only true for $n \neq 0$ and $h_d[0]$ must be defined separately. For this l'Hôspitals rule $\lim \frac{f(x)}{g(x)}=\lim \frac{f'(x)}{g'(x)}$ is used. Thus
+
+Collectively, the ideal impulse response is:
 \begin{align*}
-h_d[0]=& \frac{1}{\pi} \left( \cos\left( \omega_{c_1} \left(n-\frac{M}{2}\right) \right)\omega_{c_1} - \cos\left( \omega_{c_2} \left(n-\frac{M}{2}\right) \right)\omega_{c_2} +  \cos\left(\pi \left( n- \frac{M}{2}\right) \right) \pi \right) \\
-=& \frac{1}{\pi}\left( \omega_{c_1} - \omega_{c_2} + \pi \right) \\
-=& 1 - \frac{\omega_{c_2}-\omega_{c_1}}{\pi}
+h_d[n] = \begin{cases}
+\dfrac{1}{\pi \left( n - \frac{M}{2}\right)} \left( \sin\left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) \right), \quad &n \neq \dfrac{M}{2} \\
+\dfrac{1}{\pi} ( \omega_{c_2} - \omega_{c_1}), \quad &n = \dfrac{M}{2}
+\end{cases}
 \end{align*}
- 
- 

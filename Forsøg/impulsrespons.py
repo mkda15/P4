@@ -40,7 +40,7 @@ def ImpulsresponsLP(n, M, f):     # Den ønskværdige impulsrespons for et lavpa
             hd[i] = (np.sin(2 * np.pi * f*(n[i] - (M/2))))/(np.pi * (n[i] - (M/2)))
     return hd 
 """ Impulserespons Band pass """
-def ImpulseresponseBP(n,M,ft1,ft2): # Den ønskværdige impulsrespons for et bandpass filter
+def ImpulsresponsBP(n,M,ft1,ft2): # Den ønskværdige impulsrespons for et bandpass filter
     h = np.zeros(len(n))
     for i in range(len(n)):
         if i == M/2:
