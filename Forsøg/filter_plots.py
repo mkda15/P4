@@ -62,7 +62,7 @@ print('støj adderet 2/9')
 #==============================================================================
 """ Vindue funktion og impuls respons udregnes """
 w = Hamming(n,M)        #Hanning eller Hamming for nu andre kan vælge impoteret i starten
-hd = impuls.ImpulseresponseBP(n,M,cut1,cut2)
+hd = impuls.ImpulsresponsBP(n,M,cut1,cut2)
 ##########    kaiser window   ##########
 delta_1= 0.01
 delta_2 = float(0.5)         # half transition width in Hz
@@ -73,7 +73,7 @@ w1,M,beta,A,n = Kaiser(delta_1,delta_2,freq)            # window
 
 print('vindue generet 3/9')
 
-hd1 = impuls.ImpulseresponseBP(n,M,cut1,cut2)
+hd1 = impuls.ImpulsresponsBP(n,M,cut1,cut2)
 #hd = impuls.ImpulsresponsHP(n,M,cut)
 #hd = impuls.ImpulsresponsLP(n,M,cut)    # Desired impulsrespons
 
@@ -104,47 +104,47 @@ signal_filt = np.real(signal_filt)      # Cast to real, to remove the 0j from if
 #==============================================================================
 
 plt.style.use('classic')
-
-plt.plot(freq_axis[:plotlength],np.abs(H1)[:plotlength],'r') 
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Amplitude')
-#plt.axis([0,5000,0,1.05])
-plt.savefig("figures/filter_test/freq_response1.pdf")
-plt.show()
-
-f, axarr = plt.subplots(2, sharex=True)
-
-axarr[0].plot(freq_axis[:plotlength], np.abs(H1)[:plotlength],'r')
-axarr[0].axis([70,80,0.975,1.025])
-axarr[0].set_ylabel('Amplitude')
-axarr[0].axvline((75-delta_2), color='green') # Nedre transitionsgrænse
-axarr[0].axvline((75+delta_2), color='green') # Øvre transitionsgrænse
-axarr[0].axhline((1+delta_1), color='green') # Nedre knækfrekvens
-axarr[0].axhline((1-delta_1), color='green') # Nedre knækfrekvens 
- 
-plt.plot(freq_axis[:plotlength],np.abs(H1)[:plotlength],'r')  
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Amplitude')
-plt.axvline((75-delta_2), color='green') # Nedre transitionsgrænse
-plt.axvline((75+delta_2), color='green') # Øvre transitionsgrænse
-plt.axhline((0+delta_1), color='green') # Nedre knækfrekvens
-plt.axis([70,80,0,0.05])
-plt.savefig("figures/filter_test/freq_response2.pdf")
-plt.show()
-
-plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength],'b')          # FFT of clean data
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Amplitude')
-plt.axis([60,80, 0,200])
-#plt.savefig("figures/filter_test/SIGNAL.pdf")
-plt.show()
-
-plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]),'b')   # FFT of the filtered data
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Amplitude')
-plt.axis([60,80, 0,200])
-#plt.savefig("figures/filter_test/filt_SIGNAL.pdf")
-plt.show()
+#
+#plt.plot(freq_axis[:plotlength],np.abs(H1)[:plotlength],'r') 
+#plt.xlabel('Frequency [Hz]')
+#plt.ylabel('Amplitude')
+##plt.axis([0,5000,0,1.05])
+#plt.savefig("figures/filter_test/freq_response1.pdf")
+#plt.show()
+#
+#f, axarr = plt.subplots(2, sharex=True)
+#
+#axarr[0].plot(freq_axis[:plotlength], np.abs(H1)[:plotlength],'r')
+#axarr[0].axis([70,80,0.975,1.025])
+#axarr[0].set_ylabel('Amplitude')
+#axarr[0].axvline((75-delta_2), color='green') # Nedre transitionsgrænse
+#axarr[0].axvline((75+delta_2), color='green') # Øvre transitionsgrænse
+#axarr[0].axhline((1+delta_1), color='green') # Nedre knækfrekvens
+#axarr[0].axhline((1-delta_1), color='green') # Nedre knækfrekvens 
+# 
+#plt.plot(freq_axis[:plotlength],np.abs(H1)[:plotlength],'r')  
+#plt.xlabel('Frequency [Hz]')
+#plt.ylabel('Amplitude')
+#plt.axvline((75-delta_2), color='green') # Nedre transitionsgrænse
+#plt.axvline((75+delta_2), color='green') # Øvre transitionsgrænse
+#plt.axhline((0+delta_1), color='green') # Nedre knækfrekvens
+#plt.axis([70,80,0,0.05])
+#plt.savefig("figures/filter_test/freq_response2.pdf")
+#plt.show()
+#
+#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength],'b')          # FFT of clean data
+#plt.xlabel('Frequency [Hz]')
+#plt.ylabel('Amplitude')
+#plt.axis([60,80, 0,200])
+##plt.savefig("figures/filter_test/SIGNAL.pdf")
+#plt.show()
+#
+#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]),'b')   # FFT of the filtered data
+#plt.xlabel('Frequency [Hz]')
+#plt.ylabel('Amplitude')
+#plt.axis([60,80, 0,200])
+##plt.savefig("figures/filter_test/filt_SIGNAL.pdf")
+#plt.show()
 
 #plt.plot(freq_axis[:plotlength],np.abs(NOISE)[:plotlength])         # FFT of the noise
 #plt.title('frequency response of noise')           # FFT of impuls respons   
@@ -170,6 +170,13 @@ plt.show()
 #plt.title('Filtreret signal over time ')           # FFT of impuls respons   
 #plt.xlabel('Time [sec.]')
 #plt.show()
+
+#==============================================================================
+# kaiser plot til teori afsnit
+#==============================================================================
+plt.plot(n,w1)
+
+
 
 
 #""" Data gemmes """
