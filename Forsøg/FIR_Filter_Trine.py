@@ -83,7 +83,7 @@ ft1 = 75 / fs      # cut off 1
 ft2 = 500 / fs     # cut off 2 
 
 delta_1 = 0.05 # peak approximation error in amplitude 
-delta_2 = 0.6 # max transition width is 2*delta_2
+delta_2 = 1  # max transition width in Hz is 2*delta_2
 
 M1 = N-1 #selvvalgt filter orden 
     
@@ -132,7 +132,6 @@ def Kaiser( d1, d2, fs):                                        # Kaiservindue
         
     tw = ((2*d2)/fs)*2*np.pi
     M = int(np.ceil((A - 8) / (2.285 * tw)))
-    print M
     
     n = np.linspace(0,M,M+1) 
     w = np.zeros(len(n))
@@ -142,7 +141,10 @@ def Kaiser( d1, d2, fs):                                        # Kaiservindue
             w[i] = sc.special.i0(variabel)/sc.special.i0(beta)
         else:
             w[i] = 0
-    return w,M,beta,A,n
+    if (M%2 == 1):
+        M=M+1
+    
+    return w,M,beta,A,n,tw
 
 
 #==============================================================================
@@ -150,11 +152,11 @@ def Kaiser( d1, d2, fs):                                        # Kaiservindue
 #==============================================================================
 freq_inter1 = 100           # frequency inverval
 freq_inter2 = 20000
-
-#h_d = bp(n,M1,ft1,ft2)
-#w = Blackman(n,M1)
-#h = h_d * w
 #
+#h_d = bp(n,M1,ft1,ft2)
+#w = rect(n,M1)
+#h = h_d * w
+
 
 ##########    kaiser window   ##########
 w = Kaiser(delta_1,delta_2,fs)[0]             # window
@@ -162,9 +164,15 @@ M = Kaiser(delta_1,delta_2,fs)[1]             # order
 beta = Kaiser(delta_1,delta_2,fs)[2]
 A = Kaiser(delta_1,delta_2,fs)[3]
 n = Kaiser(delta_1,delta_2,fs)[4]
+tw = Kaiser(delta_1,delta_2,fs)[5]
+
+w1 = np.kaiser(M,beta)
 
 h_d = bp(n,M,ft1,ft2)    #   ideal impulse response
-h = h_d * w              #   windowed impulse response  
+h = h_d * w
+h1 = h_d[:len(w1)] * w1              #   windowed impulse response  
+
+h = h[:len(h)-1]
 
 ########################################
 plt.plot(n,h_d)
@@ -175,8 +183,11 @@ plt.plot(n,w)
 plt.show()
 
 H = np.abs(np.fft.fft(h,len(signal)))
-plt.plot(freq_ax,np.abs(H)[:sampels/2])
-plt.axis([0,4000,0,1.2])
+H1 = np.abs(np.fft.fft(h1,len(signal)))
+
+plt.plot(freq_ax,np.abs(H)[:sampels/2],'r')
+plt.plot(freq_ax,np.abs(H1)[:sampels/2],'b')
+plt.axis([0,100,0,1.1])
 plt.xlabel("frequency [Hz]")
 plt.show()
 
@@ -201,13 +212,24 @@ plt.plot(freq_ax[freq_inter1:freq_inter2],filt_DATA[freq_inter1:freq_inter2], la
 plt.axis([0,4000,0,0.12])
 plt.show()
 
-
 #==============================================================================
-# save signal
+# plots til rapport
 #==============================================================================
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal_.wav',freq,signal)
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_data.wav',freq,data)
 
+#W = np.abs(np.fft.fft(np.pad(w,(0,sampels-N),'constant',constant_values=0)))
+#W_dB= 20 * np.log10(np.abs(W))
+
+#W = np.abs(np.fft.fft(w,len(signal)))
+#W_dB= (20 * np.log10(np.abs(W)))-60
+#
+#omega = np.linspace(0,np.pi,len(freq_ax)/2)
+#
+#plt.plot(omega,W[:len(omega)])
+##plt.axis([0,2000,0,1100])
+#plt.show()
+#
+#plt.plot(omega,W_dB[:len(omega)])
+#plt.axis([0,0.5,-100,1])
 
 
 

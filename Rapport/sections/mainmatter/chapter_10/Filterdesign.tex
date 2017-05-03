@@ -1,16 +1,16 @@
 The filter design process is documented in this section, which includes test and optimization. As stated in section \ref{sec:filtervalg} a FIR filter of type I designed by the Kaiser window is wanted.
 
 \subsection{Specifications of the filter} \label{sec:FIRspec} 
-By the aim of letting a limited frequency band though the filter - as found in the frequency analysis in chapter \ref{ch9} - the filter is to be designed as a bandpass filter. It is essential to note that the filter to be designed in this project is not an adaptive filter, meaning that the filter specifications will be chosen on behalf of a specific signal includning a known noise signal. During tests the filter is adapted to other signals only by chancing the specifications for the cut-off frequencies. \\ \\
-This filter is determined to remove noise in the form of background speaking from a signal representing a low E note. \\
+By the aim of letting a limited frequency band though the filter - as found in the frequency analysis in chapter \ref{ch9} - the filter is to be designed as a bandpass filter. It is essential to note that the filter to be designed in this project is not an adaptive filter, meaning that the filter specifications will be chosen on behalf of a specific signal including a known noise signal. During final tests the filter is adapted to other signals only by chancing the specifications for the cut off frequencies. \\ \\
+This filter is determined to remove noise in the form of clapping hands from a signal representing a low E note. \\
 Due to the frequency analysis of single tones described in section \ref{sec:single} the energy in the signal is located within a frequency band from 75 Hz to 1000 Hz.  
-By letting the cut-off frequencies of the filter be respectively 75 Hz and 1000 Hz, this makes the passband of the filter. Note that the cut-off frequencies is given in $[Hz]$ instead of $[rad./sec.]$. To convert between the two the frequencies has to be relative to the sampling frequency $f_s$ such that $f_s = 2\pi$. Thus the normalized transition frequency $f_t$ is defined relatively to the sampling frequency as
+By letting the cut off frequencies of the filter be respectively 75 Hz and 1000 Hz, this makes the passband of the filter. Note that the cut off frequencies is given in $[Hz]$ instead of $[rad./sec.]$. To convert between the two the frequencies has to be relative to the sampling frequency $f_s$ such that $f_s = 2\pi$. Thus the normalized transition frequency $f_t$ is defined relatively to the sampling frequency as
 \begin{align}
 f_t = \frac{\textit{Cut-off frequency}}{\textit{Sampling frequency}}
 \end{align}
-\trine{Something about the analysis of the noise, maybe}
+By the frequency analysis of the specific noise showed by figure \ref{fig:clapping} it is seen that the frequencies of the noise are completely adjacent to the desired passband which verifies the need narrow the  transition band. The narrower transitionband the higher order of filter is need which gives more computer computations. \\  
 
-The peak approximation error $\delta_1$\trine{bør delta være forskellige?} is determined as $\delta_1=0.05$. Further, the width of the transition band is determined by another $\delta_2$ as $\Delta \omega = ((f_t + \delta_2)-(f_t - \delta_2))2\pi= 0.05$.\\
+The peak approximation error $\delta_1$is determined as $\delta_1=0.01$. Further, the maximum allowed width of the transition band is determined by another $\delta_2 = 0.5$ given in $[Hz]$. This gives a transition width at $1 [Hz]$ for each transitionband, normalized this gives $\Delta f_t = \frac{1 }{f_s} \approx 2.26 \cdot 10^{-5}$.\\
 The magnitude response of the ideal filter is sketched in figure \ref{fig:spec_Hd}, along with the boundaries for the real filter, provided by the defined specifications.      
 
 \begin{figure}[H]
@@ -48,31 +48,46 @@ ymax=5.5]
 %\node at (axis cs:5.0,1.5) {Stopband};
 \end{axis}
 \end{tikzpicture}
-\caption{Ideal magnitude response of filter within the boundaries for the magnitude response of the final filter, given by the defined specifications.}
+\caption{Ideal magnitude response of filter within the boundaries for the amplitude response of the final filter, given by the defined specifications.}
 \label{fig:spec_Hd}
 \end{figure}
 
-Due to the method of the Kaiser window described in section \ref{subsec:FIR} the shape parameter $\beta$ and the order of the filter $M$ is determined on behalf of $A=-20\log_{10}(\delta_1) \approx 26 $ as  
-\begin{align}
-\beta =& \ 0.5824(26-21)^{0.4} + 0.07886(26-21)  \approx 1.5 \\
-M =& \ \frac{26-8}{2.285 \cdot 0.05\cdot 2\pi}\approx 26 
-\end{align}
-
-Note that $M$ is rounded up to nearest even integer.
-
 \subsection{Implementation of the filter}
-The implementation of the filter basically follows algorithm \ref{alg:FIR}. Firstly, the filter specifications are defined, and then one function defines the ideal impulse response as the inverse Fourier transformation of the ideal filter specified on figure \ref{fig:spec_Hd}. For derivation of the ideal impulse response of a bandpass filter consult appendix \ref{appC}. Another function defines the Kaiser window from the given inputs $\beta$ and $M$. Then the filter is defined by multiplying the ideal impulse response and the Kaiser window to get a realizable impulse response. By the FFT the frequency response of the filter is obtained. Figure \ref{??} \martin{Figur mangler. \textregistered} illustrates a plot of the magnitude response corresponding to the filter in the frequency domain.   
+The implementation of the filter basically follows algorithm \ref{alg:FIR}. The ideal impulse response is defined as the inverse Fourier transformation of the ideal filter specified on figure \ref{fig:spec_Hd}. For derivation of the ideal impulse response of a bandpass filter consult appendix \ref{appC}. Figure \ref{fig:freq_filt1} illustrates a plot of the amplitude response corresponding to the filter in the frequency domain. At \ref{fig:freq_filt2} illustrate a close up view of the left transition band, showing the ripples at in stop- and passband  the boundaries from the specifications are marked by the green lines. It is seen that the specifications are fulfilled, with only one minimal exceeding of the limit.        
+\begin{figure}[h]
+\centering
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/filtertest/freq_response1.pdf}
+\caption{}
+\label{fig:freq_filt1}
+\end{subfigure}
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/filtertest/freq_response2.pdf}
+\caption{}
+\label{fig:freq_filt2}
+\end{subfigure}
+\caption{(a) Amplitude response of filter. (b) Close up amplitude response of filter, showing top and bottom of one transitionband.}
+\label{fig:freq_filt}
+\end{figure}
+
 
 \begin{algorithm}[H]
 \caption{Compute type I FIR filter}
 \label{alg:FIR}
 \begin{algorithmic}[1] 
 \State $f_s= 44100$ \Comment {Sampling frequency}
-\State $M = 26$ \Comment {Order of filter} 
-\State $\beta = 1.5$ \Comment {Shape parameter}
-\State $N = M+1$ \Comment {Lenght of filter}
 \State $f_{t1} = 75/f_s$ \Comment {Transition frequency $1$}
 \State $f_{t2} = 1000/f_s$ \Comment {Transition frequency $2$}
+\State $\delta_1 = 0.01$  \Comment {Max. amplitude error }
+\State $\delta_2 = 0.5 $ 
+\State $\Delta f_t = 2 \cdot \delta_2 / f_s$  \Comment {Transition width}
+\\
+\State $A=-20\log_{10}(\delta_1)$ \Comment{$21 \leq A \leq 50$}
+\State $\beta = 0.5824(A-21)^{0.4} + 0.07886(A-21)$ \Comment {Shape parameter}
+\State $M = (A-8)/(2.285 \cdot \Delta f_t  2\pi)$ \Comment {Filter order, round to upper even int.}
+\State $N = M+1$ \Comment {Lenght of filter}
 \\
 \Procedure{Compute ideal impulse response}{$h_d$}
     \For {each integer $i$ in $h_d$}
@@ -106,12 +121,26 @@ The implementation of the filter basically follows algorithm \ref{alg:FIR}. Firs
 \end{algorithm}
 
 \subsection{Validation of the filter}
-%//////// section fra test specificationer ////////\\
-To validate the filter it will be tested whether the filter fulfil the specifications that has been defined during the design process. In order to clarify the effect of the filter it will be tested on a simple known signal to which a noise signal is digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal to noise-ratio. Hence it is possible to verify whether the filter succeed to remove the specified frequencies in order to reduce the noise. The verification will be made by analysing the frequency spectrum of the filtered signal - by plotting amplitude to frequency - compared to the original pure signal. \\ \\
-%/////////////////////////////////////////////////\\
-The implemented filter will be tested according to the test specifications described in section\ref{sec:testspec}. Figure \ref{??} \martin{Figurer mangler. \textregistered} show the frequency spectrum of the single low E note with additive noise in form of a beat of hands clapping. Figure \ref{??} show the filtered signal.
-%/// indsæt figure ////
-\\ \\
-As described in the specifications the filter is designed to remove all frequencies outside the frequency band from 75 Hz to 1000 Hz. It is seen by the figures that ...... \\
-By this the filter of order ?? fulfil the specifications. However, by comparing the filtered signal with the pure music signal it seen that noise occurs in between the three significant frequencies that lays in the passband.  \\
+The implemented filter is tested according to the test specifications described in section \ref{sec:testspec}. Figure \ref{fig:SIGNAL} show the frequency spectrum of the single low E note with additive noise in form of a beat of hands clapping. Figure \ref{fig:filt_SIGNAL} show the filtered signal. Note that the frequency spectrum are only showed from 0 to approximately 2200 $[Hz]$.  
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/filtertest/SIGNAL.pdf}
+\caption{}
+\label{fig:SIGNAL}
+\end{subfigure}
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/filtertest/filt_SIGNAL.pdf}
+\caption{}
+\label{fig:filt_SIGNAL}
+\end{subfigure}
+\caption{(a) Frequency spectrum of signal with noise (b) frequency spectrum of filtered signal}
+\label{fig:test_res}
+\end{figure}
+As described in the specifications the filter is designed to remove all frequencies outside the frequency band from 75 Hz to 1000 Hz. It is seen by the figures that frequencies outside the passband appears to be zero and that the amplitude of the remaining frequencies are the same. \\
+By this the designed filter of order 98294 fulfil the specifications.\\
+However, by comparing the filtered signal with the pure music signal, cp. figure \ref{fig:single_low}, it seen that noise occurs in between the significant frequencies that lays in the passband. To remove this noise a multiple bandpass filter is required. \\
 On behalf of this test it is assumed that by changing the cut off frequencies the filter can be modified to fit other music signals.  
