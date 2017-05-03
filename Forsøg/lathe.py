@@ -36,7 +36,7 @@ window = Kaiser     # The wanted window is named (Has to be capitalised and has 
 M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
 cut1 = 50./freq     # Cut off frequency for band
-cut2 = 500./freq    # Cut off frequency for band 
+cut2 = 1000./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/2) # Length for plotting (arbitrary)
 
@@ -77,8 +77,8 @@ else:
 
 print('vindue generet 3/9')
 
-#hd = impuls.ImpulsresponsBS(n,M,cut1,cut2)
-hd = impuls.ImpulsresponsHP(n,M,cut)
+hd = impuls.ImpulsresponsBP(n,M,cut1,cut2)
+#hd = impuls.ImpulsresponsHP(n,M,cut)
 #hd = impuls.ImpulsresponsLP(n,M,cut)    # Desired impulsrespons
 
 h = hd * w                              # The final impulsrespons
