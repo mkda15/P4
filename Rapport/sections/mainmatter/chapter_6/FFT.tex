@@ -1,6 +1,6 @@
 \section{The Fast Fourier Transform} \label{sec:FFT}
 This section describes \textit{The Fast Fourier Transform}, also known as the FFT. The section is inspired by \cite{pages 750, 755-763, DTSP} and \cite{page 303, FSP}.
-\section{Algorithm}
+\subsection{Algorithm}
 The Fast Fourier Transform is a special algorithm for fast computation of the DFT. In section \ref{sec:DFT} the DFT of length $N$ was defined as:
 \begin{align*}
 X[k] = \sum_{n=0}^{N-1} x[n] \text{e}^{-j(2\pi/N)kn} = \sum_{n=0}^{N-1} x[n] W_N^{kn}, \quad k = 0, 1, \dots, N-1
@@ -113,7 +113,7 @@ O[k] &= \sum_{l=0}^{N/4-1} o[2l] W_{N/4}^{lk} + W_{N/2}^k \sum_{l=0}^{N/4-1} o[2
 \end{align*}
 
 The expression for $O[k]$ is obviously quite similar to that of $E[k]$, and its derivation has therefore not been elaborated. Notice also that in general $W_N^{2k} = W_{N/2}^k$. The process of decimating the DFT into smaller DFTs can be continued until $N/2$ DFTs of length $N/2$ is obtained.
-\section{Computational complexity}
+\subsection{Computational complexity}
 Equation \eqref{FFT_modulo} requires the computation of two $N/2$-point DFTs, which requires $2(N/2)^2$ complex multiplications and $2(N/2)^2$ complex additions. The two $N/2$-point DFTs are then combined, which requires $N$ complex multiplications (since the second sum is multiplied by $W_N^k$) and $N$ complex additions (since the product needs to be added to the first sum). Therefore, for all values of $k$, equation \eqref{FFT_modulo} requires $N + 2(N/2)^2 = N + N^2/2$ complex multiplications and complex additions. $N + N^2/2$ is smaller than $N^2$ for $N > 2$ and much smaller for large $N$.
 \\\\
 When the $N/2$-point DFTs are decomposed into twice as many $N/4$-point DFTs, the factor $(N/2)^2$ above is replaced by $N/2 + 2(N/2)^2$ so that the number of computations required is $N + 2(N/2+2(N/4)^2) = N + N + 4(N/4)^2$. For $N = 2^\nu$ the partition into smaller DFTs can be done at most $\nu = \log_2 N$ times, and hence the number of complex multiplications and additions is $N \nu = N \log_2 (N)$.
