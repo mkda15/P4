@@ -150,12 +150,16 @@ Figure \ref{fig:FIR1} illustrates the convolution process referred to as windowi
 
 The aim is to approximate the desired frequency response as good as possible. For $w[n]=1 \ \forall \ n$, $W(\omega)$ becomes a periodic impulse, which implies that $H(\omega) = H_d(\omega)$ though the needed truncations are not performed. The impulse train is best approximated by letting the main lobe of $W(\omega)$ be as narrow as possible and the side lobes as small as possible. This corresponds respectively to minimizing the width of the transitionband and the ripples in pass- and stopband, though it is not possible to achieve both at ones.\\
 By increasing the filter order $M$, the width of the main lope is decreased, but the peak amplitude of the side lopes also increases, which results in ripples. This indicates a trade-off between the main width of the main lope and the amplitude of the side lopes. \\
-Figure \ref{?} illustrates the main and side lopes by a plot of the amplitude response corresponding to the rectangular window \trine{indsæt figur}.
-
+Figure \ref{fig:rect_db} illustrates the main and side lobes by a decibel plot of the amplitude response corresponding to the rectangular window.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/dbplots/rect.png}
+\caption{dB amplitude response of rectangular window of order $M=100$.}
+\label{fig:rect_db}
+\end{figure}
 \subsubsection{Different types of windows}
 The rectangular window is one out of many windows that have different properties. The oscillations in the frequency response is a result of Gibbs phenomenon. According to convergence of Fourier series this can be improved by convolving the desired frequency response with a less abrupt window. By narrowing each end of the rectangle smoothly towards zero, the amplitude peak of the side lopes are remarkably decreased, though this will still result in a wider main lope. \\
-In table \ref{tab:window} some commonly used windows are defined. Furthermore, the windows and the corresponding amplitude response in dB are illustrated on figure \ref{fig:window_types} and \ref{?}\trine{figur} .
-
+In table \ref{tab:window} some commonly used windows are defined. Furthermore, the windows and the corresponding amplitude response in dB are illustrated in figures \ref{fig:window_types} and \vref{fig:windows_db}.
 \begin{table}[H]
 \centering
 \caption{Definition of different types of windows}
@@ -169,7 +173,7 @@ Rectangular & $w[n] =
 Bartlett    & $w[n] =
 \left\{ \begin{matrix}
 \frac{2n}{M}, &\ 0 \leq n \leq \frac{M}{2} \\
-\frac{2-2n}{M}, &\ \frac{M}{2} \leq n \leq M \\
+2-\frac{2n}{M}, &\ \frac{M}{2} \leq n \leq M \\
 0, &\ Otherwise
 \end{matrix}\right.$ \\ \hline
 Hanning     & $w[n] =
@@ -197,6 +201,32 @@ Blackman    &  $w[n] =
     \label{fig:window_types}
 \end{figure}  
 
+\begin{figure}
+\centering
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/dbplots/bartlett.png}
+\caption{Bartlett}
+\label{fig:bartlett_db}
+\includegraphics[width=\textwidth]{figures/dbplots/hamming.png}
+\caption{Hamming}
+\label{fig:hamming_db}
+\end{subfigure}
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/dbplots/hann.png}
+\caption{Hann}
+\label{fig:hann_db}
+\includegraphics[width=\textwidth]{figures/dbplots/hamming.png}
+\caption{Hamming}
+\label{fig:hamming_db}
+\end{subfigure}
+\caption{dB amplitude of frequency response of different windows of order $M=100$.}
+\label{fig:windows_db}
+\end{figure}
+
+
+
 The defined windows all have the property of being symmetric around the point $\frac{M}{2}$. Hence, if the ideal impulse response is also symmetric the windowed impulse will be symmetric, which results in a frequency response with generalized linear phase. \\
 To conclude this section it is seen that in order to design a FIR filter by the window method one can vary the chosen window and the order of the system until the desired specifications are achieved.
 
@@ -205,7 +235,7 @@ The Kaiser window design method considers the Kaiser window as the near-optimal 
 \begin{align}
 w[n]=\left\{\begin{matrix}
  \frac{I_0[\beta (1-[\frac{n-\alpha}{\alpha}]^2)^{\frac{1}{2}}]}{I_0(\beta)} , &\ 0 \leq n \leq M  \\ 
-0, &\ Otherwise
+0, &\ \text{Otherwise}
 \end{matrix}\right.
 \end{align}
 
