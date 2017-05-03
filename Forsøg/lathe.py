@@ -21,8 +21,8 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/akkorder/forsoeg_akkord_lys_nospeak.wav')  # Data signal
-freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')                  # Noise signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/test_enkelt_440_220hz.wav')  # Data signal
+freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/stoej_fra_omraadet_rent.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
 """ Length of data and noise alings"""
@@ -35,15 +35,15 @@ elif len(data) > len(noise):
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
 M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
-cut1 = 50./freq     # Cut off frequency for band
-cut2 = 1000./freq    # Cut off frequency for band 
+cut1 = 180./freq     # Cut off frequency for band
+cut2 = 500./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/2) # Length for plotting (arbitrary)
 
 
 """ Til Kaiser vinduet """
 delta_1 = 0.05 # peak approximation error in amplitude 
-delta_2 = 20. # max transition width is 2*delta_2
+delta_2 = 4. # max transition width is 2*delta_2
 
 """ Aksis og linspaces """
 t   = sampels/float(freq)                   # The time for howlong the system runs (for making the time axis)
@@ -114,7 +114,7 @@ plt.plot(freq_axis[:plotlength],np.abs(H)[:plotlength])             # FFT of imp
 plt.xlabel('Ren stoej freq')
 plt.show()
 
-plt.plot(freq_axis[:plotlength],np.abs(NOISE)[:plotlength])         # FFT of the noise
+plt.plot(freq_axis[:2000],np.abs(NOISE)[:2000])         # FFT of the noise
 plt.xlabel('Stoej og data freq')
 plt.show()
 
@@ -156,6 +156,37 @@ print('Data gemt 8/9')
 X = stft(signal_filt,fftsize = 2500,overlap = 2)     # STFT calculated
 
 print('stft udregnet 9/9')
+
+X = db(np.abs(X).T)                             # Calculated to dB
+
+x = np.linspace(0,tid[-1],np.shape(X)[1])       
+y = np.linspace(0,freq_axis[-1],np.shape(X)[0]) 
+
+
+spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],cmap='hot')
+cb   = plt.colorbar(spec)
+cb.set_label(label = 'Amplitude (dB)', fontsize=fontsize)
+plt.xlabel('Time (sec)', fontsize = fontsize)
+plt.ylabel('Frequency (Hz)', fontsize = fontsize)
+plt.show()
+
+X = stft(signal,fftsize = 2500,overlap = 2)     # STFT calculated
+
+
+X = db(np.abs(X).T)                             # Calculated to dB
+
+x = np.linspace(0,tid[-1],np.shape(X)[1])       
+y = np.linspace(0,freq_axis[-1],np.shape(X)[0]) 
+
+
+spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],cmap='hot')
+cb   = plt.colorbar(spec)
+cb.set_label(label = 'Amplitude (dB)', fontsize=fontsize)
+plt.xlabel('Time (sec)', fontsize = fontsize)
+plt.ylabel('Frequency (Hz)', fontsize = fontsize)
+plt.show()
+X = stft(data,fftsize = 2500,overlap = 2)     # STFT calculated
+
 
 X = db(np.abs(X).T)                             # Calculated to dB
 
