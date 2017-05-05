@@ -53,13 +53,13 @@ The sine waves are then with frequencies of 1, 3 and 3.25 Hz, respectively, and 
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=0.9\textwidth]{figures/validation/stft/1.png}
-\caption{Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with window of length 100 and overlap of 2. The clear transition from one frequency to another in time and the low resolution in frequency follow from a narrow window used in the STFT.}
+\caption{Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with window of length 100 and overlap of 2. The low spectral and high temporal resolutions follow from a narrow window used in the STFT.}
 \label{fig:test_stft1}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=0.9\textwidth]{figures/validation/stft/2.png}
-\caption{Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with window of length 10000 and overlap of 2. The clearly visible frequencies in the signal and bad transition from one frequency to another in time follows from a wide window used in the STFT.}
+\caption{Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with window of length 10000 and overlap of 2. The high spectral and low temporal resolutions follows from a wide window used in the STFT.}
 \label{fig:test_stft2}
 \end{subfigure}
 \caption{Spectrograms of the signal in \eqref{eq:SPECTROsignal} with a narrow and wide window, respectively.}
@@ -74,8 +74,8 @@ From figure \ref{fig:test_stft} it is clearly seen how the length of the window 
 \end{figure}
 From the above it is concluded that the implementation of the STFT and spectrogram work as intended.
 \subsection{Variation of windows in STFT}
-The STFT uses a window function to taper the segment of the data to be transformed. As with filters the different windows produce different results for the STFT. These results are seen in figures *Insert figures*
-\begin{figure}
+The STFT uses a window function to taper the segment of the data to be transformed and different windows produce different results from the STFT. In figure \ref{fig:stft_windows_10000} is seen spectrograms of the test signal generated from different windows of length 10000. Similarly, in figure \ref{fig:stft_windows_100} is seen spectrograms from STFTs with windows of length 100.
+\begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
@@ -85,6 +85,9 @@ The STFT uses a window function to taper the segment of the data to be transform
 \includegraphics[width=\textwidth]{figures/stft_windows/hamming_10000.png}
 \caption{Hamming}
 \label{fig:stft_hamming}
+\includegraphics[width=\textwidth]{figures/stft_windows/kaiser/10000/4.png}
+\caption{Kaiser, $\beta=4$}
+\label{fig:stft_kaiser_10000_4}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
@@ -94,11 +97,42 @@ The STFT uses a window function to taper the segment of the data to be transform
 \includegraphics[width=\textwidth]{figures/stft_windows/blackman_10000.png}
 \caption{Blackman}
 \label{fig:stft_blackman}
+\includegraphics[width=\textwidth]{figures/stft_windows/kaiser/10000/10.png}
+\caption{Kaiser, $\beta=10$}
+\label{fig:stft_kaiser_10000_10}
 \end{subfigure}
 \caption{Spectrograms generated with different windows of length 10000 and with overlap of 2.}
-\label{fig:stft_windows}
+\label{fig:stft_windows_10000}
 \end{figure}
-
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/stft_windows/100/hanning.png}
+\caption{Hanning}
+\label{fig:stft_hanning_100}
+\includegraphics[width=\textwidth]{figures/stft_windows/100/hamming.png}
+\caption{Hamming}
+\label{fig:stft_hamming_100}
+\includegraphics[width=\textwidth]{figures/stft_windows/100/kaiser_4.png}
+\caption{Kaiser, $\beta=4$}
+\label{fig:stft_kaiser_100_4}
+\end{subfigure}
+\begin{subfigure}{0.49\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/stft_windows/100/bartlett.png}
+\caption{Bartlett}
+\label{fig:stft_bartlett_100}
+\includegraphics[width=\textwidth]{figures/stft_windows/100/blackman.png}
+\caption{Blackman}
+\label{fig:stft_blackman_100}
+\includegraphics[width=\textwidth]{figures/stft_windows/100/kaiser_10.png}
+\caption{Kaiser, $\beta=10$}
+\label{fig:stft_kaiser_100_10}
+\end{subfigure}
+\caption{Spectrograms generated with different windows of length 100 and with overlap of 2.}
+\label{fig:stft_windows_100}
+\end{figure}
 
 
 
