@@ -1,5 +1,5 @@
 \section{Test specification}\label{sec:testspec}
-In this section test specifications will be determined in order to validate the final system. This will be done upon the concept of the V-model illustrated in figure \ref{fig:vmodel} \cite{vmodel}. The V-model is a simple multiple-phase model used to describe phases in the development process. The left side of the V is decomposition of the problem, and the right side is the creation, integration, and test of the system.
+In this section test specifications will be determined in order to validate the final system. This will be done upon the concept of the V-model illustrated in figure \ref{fig:vmodel} \cite{vmodel}. The V-model is a simple multiple-phase model used to describe phases in the development process. The left side of the V is decomposition of the problem - \textit{synthesising} , and the right side is the creation, integration, and test of the system - \textit{abstracting}.
 \begin{figure}[H]
 \centering
 \tikzstyle{block} = [rectangle, draw,thick,fill=white, 
@@ -34,37 +34,42 @@ In this section test specifications will be determined in order to validate the 
 \label{fig:vmodel}
 \end{figure}
 
-In the previous synthesis section, the left part of the V-model was described, and hence the next step in the V-model is the creation of the test specifications for the different parts. Along with this phase a list of test specifications are created, starting from the smallest unit, and working up to the system as a whole. These tests are described in chapter \ref{ch10}.
-\\ \\
-The system will be tested from the bottom up, starting with the smallest components (single units). This validation phase is called the ``Unit Testing''. The test checks each of the ``units'' individually and verifies that they are working according to the expectations. Next up the coherence of the system is tested, and finally the full system as a whole unit is tested. Units in the model are as follows:
+In the previous synthesis section requirements of the system was established. This section describes test specifications of each phase starting from the smallest unit, and working up to the system as a whole. \\
+Detailed design, implementation and tests are described in chapter \ref{ch10}. \\
+\\
+The system will be tested from the bottom up, starting with the smallest components (single units). This validation phase is called the ``Unit Testing''. The test checks each of the units individually and verifies that they are working according to the expectations. Next up the coherence of the system is tested, and finally the full system as a whole unit is tested. Units in the model are as follows:
+\begin{multicols}{2}
 \subparagraph{Physical components}  
 \begin{itemize}
 	\item Microphone
 	\item ADC
 	\item Storage
 \end{itemize}
-\subparagraph{Application}
+\columnbreak
+\subparagraph{Algorithm}
 \begin{itemize}
 	\item Filter
 	\item Fourier transformation
 	\item Spectrogram
 \end{itemize}
+\end{multicols}
 Note that tests on the physical components will not be carried out in this project because pretested hardware and corresponding software is used. Tests will thereby focus on the units of the application.
  
 \subsubsection{Unit test of the Fourier transformation}
-This test will be done by comparing an implementation of the Fast Fourier Transform described in section \ref{sec:FFT} and the pre-existing FFT function from the Numpy-package in Python. These are compared by computing the time it takes for each function to compute different amounts of the same random numbers.
+The Fourier transformation will be done by implementing the Fast Fourier Transformation described in section \ref{sec:FFT} 
+To test the implementation it will be compared to the pre-existing FFT function from the Numpy-package in Python. These are compared by computing the time it takes for each function to compute different amounts of the same random numbers. Further this will be compared to an straight  implementation of the Discrete Fourier Transformation to see the effect of the Fast Fourier Transformation.
 
 \subsubsection{Unit test of filter}
-To validate the filter it will be tested whether the filter fulfil the specifications that are defined during the design process in chapter \ref{ch9}. In order to clarify the effect of the filter it will be tested on a simple known signal, where a noise signal has been digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal to noise-ratio. Hence, it is possible to verify whether the filter succeeds to remove the specified frequencies in order to reduce the noise. The verification will be made by analysing the frequency spectrum of the filtered signal compared to the original pure signal. 
+To validate the filter it will be tested whether the filter fulfil the specifications that are defined during the design process in chapter \ref{ch9}\trine{9 eller 10?}. In order to clarify the effect of the filter it will be tested on a simple known signal, where a noise signal has been digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal to noise ratio. Hence, it is possible to verify whether the filter succeeds to remove the specified frequencies in order to reduce the noise. The verification will be made by analysing the frequency spectrum of the filtered signal compared to the original pure signal. 
 
 \subsubsection{Unit test of spectrogram and STFT algorithm}
 The spectrogram is considered the output of the algorithm and is made by the Short-Time Fourier Transform described in section \ref{sec:STFT}. As with the verification of the Fourier transform described above, the spectrogram algorithm will be tested against an existing algorithm on the same data set.
 The algorithm will then be tested on a fixed data set with a known output such as a sine wave with a certain frequency or several frequencies. By doing so, the output of the algorithm can hence be compared.
 \frede{Her skal nok specificeres mere. Hvad er det præcis for noget data der er input/output? F.eks. en sinus i tid som bliver til en Dirac i frekvens \texttrademark}
-%\subsubsection{Unit test of note sheet creation}
-%\trine{kan vel udelades helt?}This test will be done by creating a spektrogram from a known note sheet, and trying to recreate the note sheet.
-%\chr{Evt. give dette en under element der beskriver mere specifikt hvordan spektrogrammet kreeres }
-%\chr{Note, not all of the components will be tested  as they are outside of the scope of the project - Afgrænsinger her ved beskrivelse af testende?? (Aka. her)}
+
+\subsubsection{Unit test of the peak detection algorithm}
+
+
 \subsubsection{Integration validation}
 The next step is to test the units as they are integrated into a single system. This test is done by taking the output of the previous unit and feeding it into the next unit of the algorithm. This is a minor step in creating the final product.
 \\ \\
