@@ -1,6 +1,6 @@
 \section{The Fast Fourier Transform} \label{sec:FFT}
 This section describes \textit{The Fast Fourier Transform}, also known as the FFT. The section is inspired by \cite{pages 750, 755-763, DTSP} and \cite{page 303, FSP}.
-\subsection{Algorithm}
+\\ \\
 The Fast Fourier Transform is a special algorithm for fast computation of the DFT. In section \ref{sec:DFT} the DFT of length $N$ was defined as:
 \begin{align*}
 X[k] = \sum_{n=0}^{N-1} x[n] \text{e}^{-j(2\pi/N)kn} = \sum_{n=0}^{N-1} x[n] W_N^{kn}, \quad k = 0, 1, \dots, N-1
@@ -8,17 +8,18 @@ X[k] = \sum_{n=0}^{N-1} x[n] \text{e}^{-j(2\pi/N)kn} = \sum_{n=0}^{N-1} x[n] W_N
 
 with the twiddle factor $W_N = \text{e}^{-j(2\pi/N)}$. The computation of each value of the DFT requires $N$ complex multiplications and $N-1$ complex additions, and the computation of all of the $N$ values therefore requires $N^2$ complex multiplications and $N(N-1)$ complex additions. Furthermore, the DFT in terms of operations on real numbers may be expressed as:
 \begin{align*}
-X[k] = \sum_{n=0}^{N-1} \left( \operatorname{Re}\{x[n]\} \operatorname{Re} \{W_N^{kn}\} - \operatorname{Im}\{x[n]\}\operatorname{Im} \{W_N^{kn}\} \right) \\ + j \left( \operatorname{Re} \{x[n]\}\operatorname{Im} \{W_N^{kn}\} + \operatorname{Im} \{x[n]\} \operatorname{Re}\{W_N^{kn}\}\right)
+X[k] = \sum_{n=0}^{N-1} \left( \operatorname{Re}\{x[n]\} \operatorname{Re} \{W_N^{kn}\} - \operatorname{Im}\{x[n]\}\operatorname{Im} \{W_N^{kn}\} \right) \\ + j \left( \operatorname{Re} \{x[n]\}\operatorname{Im} \{W_N^{kn}\} + \operatorname{Im} \{x[n]\} \operatorname{Re}\{W_N^{kn}\}\right).
 \end{align*}
 
-This shows that each of the complex multiplications $x[n] \cdot W_N^{kn}$ requires 4 real multiplications and 2 additions, and each complex addition requires 2 real additions. Collectively, the computation of each $X[k]$ requires $4N$ real multiplications and $(4N-2)$ real additions. Finally, computation of all of the $N$ values therefore requires $4N^2$ real multiplications and $N(4N-2)$ real additions. These numbers of computations may only be approximate as multiplication by $W_N^0$ doesn't actually require a multiplication but for large $N$ the estimations of the numbers of computations are sufficiently accurate. Such computations also requires provision for storing and accessing the $N$ values of the input sequence $x[n]$ and the values of the complex coefficients $W_N^{kn}$. Evidently, for large values of $N$, the number of arithmetic operations required to compute the DFT by the sum defined in (insert reference to definition of the DFT) is $N^2$. This is the motivation for the FFT that reduces the number of these multiplications and additions. There are several different FFT algorithms with different numbers of computations. Examples are the Goertzel Algorithm \cite{page 751, DTSP}, decimation-in-time FFT algorithms \cite{page 755, DTSP} and several other algorithms mentioned on \cite{pages 306-307, FSP}.
-\\ \\
-The FFT algorithm in this project is based on the decimation-in-time (DIT) FFT algorithms as they are the most efficient FFT algorithms. The idea is to decompose the computation into successively smaller DFT computations while exploiting both the symmetry and the periodicity of the complex exponential $W_N^{kn}$ \cite{page 755, DTSP}. It is assumed that $N$ is an integer power of 2, i.e. $N = 2^\nu$.
+This shows that each of the complex multiplications $x[n] \cdot W_N^{kn}$ requires 4 real multiplications and 2 additions, and each complex addition requires 2 real additions. Collectively, the computation of each $X[k]$ requires $4N$ real multiplications and $(4N-2)$ real additions. Finally, computation of all of the $N$ values therefore requires $4N^2$ real multiplications and $N(4N-2)$ real additions. These numbers of computations may only be approximate as multiplication by $W_N^0$ does not actually require a multiplication but for large $N$ the estimations of the numbers of computations are sufficiently accurate. Such computations also require storing and access to the $N$ values of the input sequence $x[n]$ and the values of the complex coefficients $W_N^{kn}$. Evidently, for large values of $N$, the number of arithmetic operations required to compute the DFT by the sum defined in definition \ref{def:DFT} is $N^2$. This is the motivation for the FFT that reduces the number of these multiplications and additions. There are several different FFT algorithms with different numbers of computations. Examples are the Goertzel Algorithm \cite{page 751, DTSP}, decimation-in-time FFT algorithms \cite{page 755, DTSP}, and several other algorithms mentioned on \cite{pages 306-307, FSP}.
+
+\subsection{Algorithm}
+The FFT algorithm in this project is based on the decimation-in-time (DIT) FFT algorithms as they are the most efficient FFT algorithms. The idea is to decompose the computation into successively smaller DFT computations while exploiting both the symmetry and the periodicity of the complex exponential $W_N^{kn}$ \cite{page 755, DTSP}. It is assumed that $N$ is an integer power of 2, i.e. $N = 2^\nu$ for $\nu \in \mathbb{N}$.
 \\ \\
 In order to compute the Fourier transform $X[k]$, the input sequence $x[n]$ is divided into sequences consisting of the even-numbered points $e[n] = x[2n]$ and the odd-numbered points $o[n] = x[2n+1]$. Therefore, the DFT of $e[n]$ and $o[n]$ is
 \begin{align*}
-E[k] &= \sum_{n=0}^{N/2-1} x[2n] W_{N/2}^kn, \quad k = 0, 1, \dots, N/2-1, \\
-O[k] &= \sum_{n=0}^{N/2-1} x[2n+1] W_{N/2}^kn, \quad k = 0, 1, \dots, N/2-1.
+E[k] &= \sum_{n=0}^{N/2-1} x[2n] W_{N/2}^{kn}, \quad k = 0, 1, \dots, N/2-1, \\
+O[k] &= \sum_{n=0}^{N/2-1} x[2n+1] W_{N/2}^{kn}, \quad k = 0, 1, \dots, N/2-1.
 \end{align*}
 
 Furthermore:
@@ -26,17 +27,17 @@ Furthermore:
 X[k] &= \sum_{n=0}^{N-1} x[n] \text{e}^{-j(2\pi/N)kn} \nonumber \\
 &= \sum_{n=0}^{N/2-1} x[2n] \text{e}^{-j(2\pi/N)k2n} + \sum_{n=0}^{N/2-1} x[2n+1] \text{e}^{-j(2\pi/N)k(2n+1)} \nonumber \\
 &= \sum_{n=0}^{N/2-1} e[n] \text{e}^{-j(2\pi/(N/2))kn} + \text{e}^{-j(2\pi/N)k} \sum_{n=0}^{N/2-1} o[n] \text{e}^{-j(2\pi/(N/2))kn} \nonumber \\
-&= E[k] + W_N^k O[k] \label{FFT_DIT}
+&= E[k] + W_N^k O[k], \label{FFT_DIT}
 \end{align}
 
-Notice that here it has been used that $e[n] = x[2n]$, $o[n] = x[2n+1]$ and that $\frac{2\pi}{N} k2n = \frac{2\pi}{N/2} kn$ in the exponents. $E[k]$ and $O[k]$ are $N/2$-point transforms, which are implicitly periodic with period $N/2$, and they can thus be evaluated over $k = 0, 1, \dots, N-1$ instead of $k = 0, 1, \dots, N/2-1$. Therefore, the $X[k]$ may be written as:
+where it has been used that $e[n] = x[2n]$, $o[n] = x[2n+1]$ and that $\frac{2\pi}{N} k2n = \frac{2\pi}{N/2} kn$ in the exponents. $E[k]$ and $O[k]$ are $N/2$-point transforms, which are implicitly periodic with period $N/2$, and they can thus be evaluated over $k = 0, 1, \dots, N-1$ instead of $k = 0, 1, \dots, N/2-1$. Therefore, the $X[k]$ may be written as:
 \begin{align} \label{FFT_modulo}
 X[k] = E[\langle k\rangle_{N/2}] + W_N^k O[\langle k\rangle_{N/2}], \quad k = 0, 1, \dots, N-1
 \end{align}
 
-with the modulo function $\langle k \rangle_N$ as defined in section \ref{sec:DFT}. $E[k]$ and $O[k]$ are thus extended periodically even though they are only computed for $k = 0, 1, \dots, N/2-1$. Hence, this periodic extension does not require any additional computation. Figure \ref{fig:4} is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $8$-point DFT into two $4$-point DFTs as described in \eqref{FFT_DIT}. Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the nodes.
+with the modulo function $\langle k \rangle_N$ as defined in section \ref{sec:DFT}. $E[k]$ and $O[k]$ are thus extended periodically even though they are only computed for $k = 0, 1, \dots, N/2-1$. Hence, this periodic extension does not require any additional computation. Figure \ref{fig:4} is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $8$-point DFT into two $4$-point DFTs as described in \eqref{FFT_DIT}. Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the arrows.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \node at (0,8){$x[0]$};
@@ -103,7 +104,7 @@ with the modulo function $\langle k \rangle_N$ as defined in section \ref{sec:DF
 \label{fig:4}
 \end{figure}
 
-According to \eqref{FFT_modulo} and figure \ref{fig:4}, $X[0]$ is obtained by multiplying $O[0]$ with $W_N^0$ and adding this product to $E[0]$. Likewise, $X[4]$ is obtained by multiplying $O[\langle 4\rangle_4] = O[0]$ with $W_N^4$ and adding this result to $E[\langle 4\rangle_4] = E[0]$.
+According to \eqref{FFT_modulo} and figure \ref{fig:4}, $X[0]$ is obtained by multiplying $O[0]$ with $W_8^0$ and adding this product to $E[0]$. Likewise, $X[4]$ is obtained by multiplying $O[\langle 4\rangle_4] = O[0]$ with $W_8^4$ and adding this result to $E[\langle 4\rangle_4] = E[0]$.
 \\ \\
 Furthermore, each of the $N/2$-point DFTs may each be broken into two $N/4$-point DFTs. Combining these yields the $N/2$-point DFTs from before, whose combination yields the original $N$-point DFT. Therefore, $E[k]$ and $O[k]$ may be represented as:
 \begin{align*}
@@ -112,25 +113,25 @@ E[k] &= \sum_{n=0}^{N/2-1} e[n] W_{N/2}^{nk} = \sum_{l=0}^{N/4-1} e[2l] W_{N/2}^
 O[k] &= \sum_{l=0}^{N/4-1} o[2l] W_{N/4}^{lk} + W_{N/2}^k \sum_{l=0}^{N/4-1} o[2l+1] W_{N/4}^{lk}.
 \end{align*}
 
-The expression for $O[k]$ is obviously quite similar to that of $E[k]$, and its derivation has therefore not been elaborated. Notice also that in general $W_N^{2k} = W_{N/2}^k$. The process of decimating the DFT into smaller DFTs can be continued until $N/2$ DFTs of length $N/2$ is obtained.
-\subsection{Computational complexity}
+The expression for $O[k]$ is obviously quite similar to that of $E[k]$, and its derivation has therefore not been elaborated. Notice also that in general $W_N^{2k} = W_{N/2}^k$. The process of decimating the DFT into smaller DFTs can be continued until $N/2$ DFTs of length $2$ are obtained. For $N = 8$ this process of obtaining $4$ DFTs of length $2$ is illustrated in \cite{figures 4-9, page 758-761, DTSP}.
+\\ \\
 Equation \eqref{FFT_modulo} requires the computation of two $N/2$-point DFTs, which requires $2(N/2)^2$ complex multiplications and $2(N/2)^2$ complex additions. The two $N/2$-point DFTs are then combined, which requires $N$ complex multiplications (since the second sum is multiplied by $W_N^k$) and $N$ complex additions (since the product needs to be added to the first sum). Therefore, for all values of $k$, equation \eqref{FFT_modulo} requires $N + 2(N/2)^2 = N + N^2/2$ complex multiplications and complex additions. $N + N^2/2$ is smaller than $N^2$ for $N > 2$ and much smaller for large $N$.
-\\\\
+\\ \\
 When the $N/2$-point DFTs are decomposed into twice as many $N/4$-point DFTs, the factor $(N/2)^2$ above is replaced by $N/2 + 2(N/2)^2$ so that the number of computations required is $N + 2(N/2+2(N/4)^2) = N + N + 4(N/4)^2$. For $N = 2^\nu$ the partition into smaller DFTs can be done at most $\nu = \log_2 N$ times, and hence the number of complex multiplications and additions is $N \nu = N \log_2 (N)$.
 \\ \\
-The number of computations discussed above can be reduced even further by exploiting the periodicity and symmetry of the coefficients $W_N^r$ shown in figure 8 \cite{DTSP}. Each computation in figure 9 involves obtaining a pair of values from a pair of values in the preceding stage with coefficients that are always powers of $W_N$ and exponents that are separated by $N/2$. This computation is called a \textit{butterfly} due to the shape of the flow graph shown in figure 8. Since 
+The number of computations discussed above can be reduced even further by exploiting the periodicity and symmetry of the coefficients $W_N^r$ shown in \cite{figure 8, DTSP}. Each computation in \cite{figure 9, DTSP} involves obtaining a pair of values from a pair of values in the preceding stage with coefficients that are always powers of $W_N$ and exponents that are separated by $N/2$. This computation is called a \textit{butterfly} due to the shape of the flow graph shown in figure 8. Since 
 \begin{align*}
-W_N^{N/2} = e^{-j(2\pi/N)N/2} = e^{-j\pi} = -1
+W_N^{N/2} = \text{e}^{-j(2\pi/N)N/2} = \text{e}^{-j\pi} = -1
 \end{align*}
 
-the factor $W_N^{r+N/2}$ in figure 8 can be written as
+the factor $W_N^{r+N/2}$ in \cite{figure 8, DTSP} can be written as
 \begin{align*}
 W_N^{r+N/2} = W_N^{N/2} W_N^r = -W_N^r.
 \end{align*}
 
-Thus, the computation shown in figure 8 may be simplified to the form shown in figure 10, which requires one complex addition, one complex subtraction and only one complex multiplication. The number of complex multiplications has thus been reduced to one half of the previous number. The final flow graph of an 8-point DFT using the butterfly computation and the decimation-in-time decomposition into 4 2-point DFTs described above is shown in figure \ref{fig:fft_flow}. The complex multipliers $W_N^r$ are multiplied between the sets of the 2-point DFTs.
+Thus, the computation shown in \cite{figure 8, DTSP} may be simplified to the form shown in \cite{figure 10, DTSP}, which requires one complex addition, one complex subtraction and only one complex multiplication. The number of complex multiplications has thus been reduced to one half of the previous number. The final flow graph of an 8-point DFT using the butterfly computation and the decimation-in-time decomposition into 4 2-point DFTs described above is shown in figure \ref{fig:fft_flow}, which is inspired by \cite{figure 11, DTSP}. The complex multipliers $W_N^r$ are multiplied between the sets of the 2-point DFTs.
 \\
-In general, there are $\log_2(N)$ stages of computation (which is 3 in figure \ref{fig:fft_flow}), and each of these involves a set of $N/2$ 2-point DFTs (the so-called butterflies). Notice that in figure \ref{fig:fft_flow} these butterflies does not intersect at the first stage, at the second stage the butterflies intersect pairwise and at the last stage all of the butterflies intersect.
+In general, there are $\log_2(N)$ stages of computation (which is 3 in figure \ref{fig:fft_flow}), and each of these involves a set of $N/2$ 2-point DFTs (the so-called butterflies). Notice that in figure~\ref{fig:fft_flow} these butterflies does not intersect at the first stage, at the second stage the butterflies intersect pairwise and at the last stage all of the butterflies intersect.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}

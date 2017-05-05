@@ -1,7 +1,5 @@
 \section{The Continuous-Time Fourier Transform} \label{sec:cont_Fourier_Transform}
-This section deals with the continuous Fourier transform. In this project the Fourier transform will be the background for transforming a signal $f(t)$ represented in the time domain to a signal $F(\omega)$ represented in the frequency domain, which will be useful when making the spectrograms mentioned in chapter \ref{ch1}. The section is inspired by \cite{FourierTrans} and \cite{FAA}.
-\\ \\
-The Fourier transform is a way of expanding functions on all of $\mathbb{R}$ in the same way that the Fourier series are used to expand functions on a finite interval.
+This section deals with the continuous Fourier transform and is inspired by \cite{FourierTrans} and \cite{page 204-224, FAA}. In this project the Fourier transform will be the background for transforming a signal $f(t)$ represented in the time domain to a signal $F(\omega)$ represented in the frequency domain, which will be useful when making the spectrograms mentioned in chapter \ref{ch1}.
 
 \begin{definition}[The Fourier transform] \label{def:Fourier_trans}
 For a function $f \in \mathcal{L}^1$ the Fourier transform of $f$ is defined as follows:
@@ -43,6 +41,7 @@ Let $f \in \mathcal{L}^1$. Then:
 \end{align*}
 
 \item If $\delta > 0$ and $f_\delta(t)=\delta^{-1}f(t/\delta)$, then
+\label{theorem:fund_sym_Fourier_b}
 \begin{align*}
 \mathcal{F}\{f_\delta(t)\}(\omega) = F(\delta\omega), \\
 \mathcal{F}\{f(\delta t)\}(\omega) = F_\delta(\omega).
@@ -129,7 +128,7 @@ If $f \in \mathcal{L}^1$, then $F(\omega) \to 0$ as $\omega \to \pm \infty$.
 \end{theorem}
 
 \begin{proof}
-$f$ is supposed to be a step function such that $f(t) = \sum_{j=1}^k c_j \phi_j(t)$. $\phi(t)$ is defined as:
+$f$ is assumed to be a step function such that $f(t) = \sum_{i=1}^k c_i \phi_i(t)$. $\phi(t)$ is defined as:
 \begin{align*}
 \phi(t) =
 	\begin{cases}
@@ -138,14 +137,14 @@ $f$ is supposed to be a step function such that $f(t) = \sum_{j=1}^k c_j \phi_j(
 	\end{cases}
 \end{align*}
 
-Hence, each $\phi_j$ equals 1 on a bounded interval $|t - t_j| < a_j$ and 0 elsewhere. The Fourier transform of $\phi(t)$ is:
+Hence, each $\phi_i$ equals 1 on a bounded interval $|t - t_i| < a_i$ and 0 elsewhere. The Fourier transform of $\phi(t)$ is:
 \begin{align*}
 \mathcal{F}\{\phi(t)\}(\omega) = \int_{-a}^a \text{e}^{-j\omega t} dt = \dfrac{e^{-ja\omega} - \text{e}^{ja\omega}}{-j\omega} = 2\dfrac{\sin(a\omega)}{\omega}.
 \end{align*}
 
-By theorem \ref{theorem:fund_sym_Fourier}\ref{theorem:fund_sym_Fourier_a}, the Fourier transform of $\phi_j(t)$ is:
+By theorem \ref{theorem:fund_sym_Fourier}\ref{theorem:fund_sym_Fourier_a}, the Fourier transform of $\phi_i(t)$ is:
 \begin{align*}
-\mathcal{F}\{\phi_j(t)\}(\omega) = 2 \omega^{-1} \text{e}^{-jt_j\omega} \sin(a_j\omega),
+\mathcal{F}\{\phi_i(t)\}(\omega) = 2 \omega^{-1} \text{e}^{-jt_i\omega} \sin(a_i\omega),
 \end{align*}
 
 which vanishes when $\omega \to \infty$, and hence so does $F(\omega)$.
@@ -191,7 +190,8 @@ If $f$ is an arbitrary function in $\mathcal{L}^2$ it is possible to find a sequ
 The Fourier Transform, defined originally on $\mathcal{L}^1 \cap \mathcal{L}^2$, extends uniquely to the invertible map $\mathcal{F}: \mathcal{L}^2 \to \mathcal{L}^2$, where $F = \mathcal{F}\{f\}, G = \mathcal{F}\{g\}$, that satisfies:
 \begin{align*}
 \langle F, G \rangle = 2\pi \langle f,g \rangle, \\
-\|F\|^2  = 2\pi \|f\|^2.
+\|F\|^2  = 2\pi \|f\|^2
 \end{align*}
-for all $f,g \in \mathcal{L}^2$ \martin{Disse ligninger kaldes også Parsevals ligninger. Er det tydeligt nok, hvad der menes? \textregistered}.
+
+for all $f,g \in \mathcal{L}^2$.
 \end{theorem}

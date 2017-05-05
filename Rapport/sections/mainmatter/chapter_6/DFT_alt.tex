@@ -1,6 +1,5 @@
 \section{The Discrete Fourier Transform} \label{sec:DFT}
-\martin{Denne fil indeholder et alternativ til det oprindelige. \textregistered}
-The discrete Fourier transform (DFT) is the discrete time variant of the Fourier transform and can be used to transform samples from the time domain into the frequency domain. Multiple parts of the DFT are analog to the continuous version. This section is inspired by the lecture notes from the course \textit{Anvendt Harmonisk Analyse} and \cite{page 252-264, FSP}.
+The discrete Fourier transform (DFT) is the discrete-time variant of the continuous Fourier transform and can be used to transform samples from the time domain into the frequency domain. Multiple parts of the DFT are analogue to the continuous version. This section is inspired by the lecture notes from the course \textit{Anvendt Harmonisk Analyse} and \cite{page 252-264, FSP}.
 \\ \\
 Let a function in time $x(t)$ be a continuous signal. As defined in section \ref{sec:cont_Fourier_Transform}, the Fourier transform of $x(t)$ is:
 \begin{align*}
@@ -9,7 +8,7 @@ Let a function in time $x(t)$ be a continuous signal. As defined in section \ref
 
 If the function is sampled $N$ times then the samples may be denoted $x[0],x[1],\dots,x[N-1]$. The discrete version is then:
 \begin{align} \label{eq:DFT_vectors}
-X[k] = \sum_{n=0}^{N-1} x[k]\text{e}^{-j\frac{2\pi}{N}kn} = W_N^{kn}, \quad k = 0, 1, \dots, N-1,
+X[k] = \sum_{n=0}^{N-1} x[k]\text{e}^{-j\frac{2\pi}{N}kn} = \sum_{n=0}^{N-1} x[k] W_N^{kn}, \quad k = 0, 1, \dots, N-1,
 \end{align}
 
 where $W_N$ is the twiddle factor, which is defined as:
@@ -40,9 +39,9 @@ With the column vectors $\textbf{X} = [X[0] \ X[1] \ \dots \ X[N-1]]^T$ and $\te
 
 where $F$ is the $N \times N$ matrix containing the twiddle factors.
 \\ \\
-Since $W_N^N = \text{e}^{-j2\pi} = 1$ then $W_N$ is a unit root of order $N$. Let $F^*$ be the adjoint matrix of $F$, that is $(F^*)_{in} = \overline{F}_{ni}$. Then:
+Since $W_N^N = \text{e}^{-j2\pi} = 1$ then $W_N$ is a unit root of order $N$. Let $F^*$ be the adjoint matrix of $F$, that is $(F^*)_{in} = \overline{F_{ni}}$. Then:
 \begin{align*}
-\sum_{i=0}^{N-1} F_{mi} (F^*)_{in} &= \sum_{i=0}^{N-1} W_N^{mi} (\overline{W}_N)^{ni} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}mi} \text{e}^{j\frac{2\pi}{N}ni} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}(m-n)i} \\ &=
+\sum_{i=0}^{N-1} F_{mi} (F^*)_{in} &= \sum_{i=0}^{N-1} W_N^{mi} (\overline{W_N})^{ni} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}mi} \text{e}^{j\frac{2\pi}{N}ni} = \sum_{i=0}^{N-1} \text{e}^{-j\frac{2\pi}{N}(m-n)i} \\ &=
 \begin{cases}
 N, &m = n \\
 \dfrac{\text{e}^{-j\frac{2\pi}{N}(m-n)N}-1}{1-\text{e}^{-j\frac{2\pi}{N}(m-n)}}, \quad &m \neq n
@@ -53,7 +52,7 @@ N, &m = n \\
 \end{cases},
 \end{align*}
 
-which follows from that $|W_N^k| = 1$ for all $k$ and that the sum is a geometric sum:
+which follows that the sum is a geometric sum:
 \begin{align*}
 \sum_{i=0}^{N-1} r^i = \dfrac{r^N-1}{1-r}.
 \end{align*}
@@ -63,14 +62,14 @@ Therefore, $F^*F = N \cdot I$, where $I$ is the identity matrix. Hence
 F^{-1} = \dfrac{1}{N} F^*.
 \end{align*}
 
-$F$ is thus a unitary operator (up to scaling) known as the DFT operator, which preserves the Euclidean norm (up to scaling) and $\frac{F}{\sqrt{N}}$ is a unitary matrix. Therefore, Parseval's equality holds \cite{page 258, FSP}:
+$F$ is thus a unitary operator (up to scaling) known as the DFT operator, which preserves the Euclidean norm (up to scaling) and $\frac{F}{\sqrt{N}}$ is a unitary matrix. Therefore, Plancherel's equality holds \cite{page 258, FSP}:
 \begin{align*}
 \|\textbf{x}\|^2 = \sum_{n=0}^{N-1} |x[n]|^2 = \dfrac{1}{N} \sum_{k=0}^{N-1} |X[k]|^2 = \dfrac{1}{N} \|\textbf{X}\|^2 = \dfrac{1}{N} \|F\textbf{x}\|^2.
 \end{align*}
 
-This is the analog of Parseval's equalities stated in theorem \ref{theo:Plancherel} \cite{page 371, FSP}. This leads to the definition of the DFT \cite{page 253, FSP}.
+This is the analogue of Plancherel's equality stated in theorem \ref{theo:Plancherel}. This leads to the definition of the DFT \cite{page 253, FSP}.
 
-\begin{definition}[The Discrete Fourier Transform]
+\begin{definition}[The Discrete Fourier Transform] \label{def:DFT}
 The discrete Fourier transform $X[k]$ of a length-$N$ sequence $x$ is an invertible and linear transform $\mathcal{F}: \mathbb{C}^N \to \mathbb{C}^N$ defined as
 \begin{align} \label{eq:def_DFT}
 \mathcal{F}\{\textbf{x}\}[k] = X[k] = \sum_{n=0}^{N-1} x[n] \text{e}^{-j\frac{2 \pi}{N}kn} = \sum_{n=0}^{N-1} x[n] W_N^{kn}, \quad k \in \mathbb{Z},
@@ -98,7 +97,7 @@ The DFT has to take into consideration that it is only fed a finite number of in
 
 Plancherel's equation holds since for $\textbf{X} = F\textbf{x}$ and $\textbf{Y} = F\textbf{y}$:
 \begin{align*}
-\sum_{n=0}^{N-1} x[n] \overline{y}[n] = \langle \textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle F^*F\textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle \textbf{X},\textbf{Y} \rangle = \dfrac{1}{N} \sum_{k=0}^{N-1} X[k] \overline{Y}[k]
+\sum_{n=0}^{N-1} x[n] \overline{y[n]} = \langle \textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle F^*F\textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle \textbf{X},\textbf{Y} \rangle = \dfrac{1}{N} \sum_{k=0}^{N-1} X[k] \overline{Y[k]}
 \end{align*}
 
 One of the reasons the Fourier transform plays an important role in mathemathics is simply because they are based on eigen sequences of a linear shift-invariant system (the discrete equivalent of time-invariant system).
@@ -112,7 +111,7 @@ It treats all finite-length sequences as a period of an infinite-length periodic
 The circular convolution operator is the appropriate description of LSI systems on circularly extended finite-length input, as in the case of DFT. \chr{Ikke glad for denne sætning}\frede{Det forstår jeg godt, da jeg ikke forstår den \texttrademark}
 %". As we haveseen in Section 3.3.3, the circular convolution operator (3.71) is the appropriate description of LSI systems operating on circularly extended finite-length inputs"
 
-The DFT is closely connected to circular convolution, which uses the modulo function $\langle k\rangle_N$. It is possible to write $k = LN+r$ for $0 \leq r < N$ and $L \in \mathbb{Z}$ in a unique way, and the modulo function finds the remainder $r$ from division of $N$ by $k$ \martin{Har vi en kilde på ``division of $N$ by $k$''? Synes ikke helt, at det passer ind. \textregistered}:
+The DFT is closely connected to circular convolution, which uses the modulo function $\langle k\rangle_N$. It is possible to write $k = LN+r$ for $0 \leq r < N$ and $L \in \mathbb{Z}$ in a unique way, and the modulo function finds the remainder $r$ from division of $k$ by $N$:
 \begin{align*}
 \langle k \rangle_N = r.
 \end{align*}
@@ -122,7 +121,7 @@ Examples are that $\langle 12 \rangle_{10} = 2$ since $12 = 1 \cdot 10 + 2$ and 
 \begin{definition}[Circular convolution]
  	The circular convolution between length-$N$ sequences $h$ 		and $x$ is defined as
 	\begin{align*}
-	(Hx)_n = (h \circledast x)_n = \sum_{k = 0}^{N-1} x[k] 			h[\langle n-k\rangle_N] =\sum_{k = 0}^{N-1} x[\langle n-k		\rangle_N] h[k]
+	(Hx)[n] = (h \circledast x)[n] = \sum_{k = 0}^{N-1} x[k] 		h[\langle n-k\rangle_N] =\sum_{k = 0}^{N-1} x[\langle n-k		\rangle_N] h[k]
 	\end{align*}
 	where $H$ is the circular convolution operator associated 		with $h$.
 \end{definition}
@@ -140,6 +139,7 @@ y[n]  = x[\langle n-L\rangle_N] \xleftrightarrow{\text{DFT}} Y[k] = X[k] \text{e
 \end{lemma}
 
 \begin{proof}
+The DFT of $y[n] = x[\langle n-L\rangle_N]$ is written as two sums, which utilizes the properties of the modulo function:
 \begin{align*}
 Y[k] = \sum_{n=0}^{N-1} x[\langle n-L\rangle_N] \text{e}^{-j\frac{2\pi}{N} kn} &= \sum_{n=0}^{L-1} x[\langle n-L\rangle_N]\text{e}^{-j\frac{2\pi}{N} kn} + \sum_{n=L}^{N-1} x[n-L]\text{e}^{-j\frac{2\pi}{N} kn} \\
 &= \sum_{n=0}^{L-1} x[N-L+n]\text{e}^{-j\frac{2\pi}{N} kn} + \sum_{n=L}^{N-1} x[n-L]\text{e}^{-j\frac{2\pi}{N} kn} \\
@@ -153,7 +153,7 @@ with $m = N - L + n$ so that $n = m + L - N$ in the last equation. Since the las
 
 with $m = n - L$ so that $n = m + L$, the two sums above may be gathered into one sum:
 \begin{align*}
-Y_k &= \sum_{m=N-L}^{N-1} x[m]\text{e}^{-j\frac{2\pi}{N} k(m+L)} + \sum_{m=0}^{N-1-L} x[m] \text{e}^{-j\frac{2\pi}{N}k(m+L)}  \\
+Y[k] &= \sum_{m=N-L}^{N-1} x[m]\text{e}^{-j\frac{2\pi}{N} k(m+L)} + \sum_{m=0}^{N-1-L} x[m] \text{e}^{-j\frac{2\pi}{N}k(m+L)}  \\
 &= \sum_{m=0}^{N-1} x[m] \text{e}^{-j\frac{2\pi}{N}k(m+L)} = \sum_{m=0}^{N-1} x[m] \text{e}^{-j\frac{2\pi}{N}kL}\text{e}^{-j\frac{2\pi}{N}km} = X[k] \text{e}^{-j\frac{2\pi}{N}kL}.
 \end{align*}
 \end{proof}
@@ -163,7 +163,7 @@ This result is used to prove the following main theorem, which shows that the ci
 \begin{theorem}
 For $\textbf{x} = [x_0 \dots x_{N-1}]^T$ and $\textbf{y} = [y_0 \dots y_{N-1}]^T$, then:
 \begin{align*}
-\textbf{z} = \textbf{x} \circledast \textbf{y} \xleftrightarrow{\text{DFT}} Z_k = X[k] Y[k].
+\textbf{z} = \textbf{x} \circledast \textbf{y} \xleftrightarrow{\text{DFT}} Z[k] = X[k] Y[k].
 \end{align*}
 \end{theorem}
 
@@ -178,15 +178,15 @@ Z[k] &= \sum_{n=0}^{N-1} z[n] \text{e}^{-j\frac{2\pi}{N}kn} = \sum_{n=0}^{N-1} \
 
 The following definition is the background for an important property of the DFT \cite{Eigenfunctions}.
 
-\begin{definition}[Eigen function]
-If $D$ is a linear operator on a function space then $f$ is an eigenfunction for $D$ and $\lambda$ is the associated eigenvalue, whenever $Df = \lambda f$.
+\begin{definition}[Eigenfunction]
+If $D$ is a linear operator on a function space then $f \not\equiv 0$ is an eigenfunction for $D$ and $\lambda$ is the associated eigenvalue, whenever $Df = \lambda f$.
 \end{definition}
 
 A property of LSI systems is that they as eigen sequences $v[n]$ all have complex exponential sequences with modulus being unit length on the form $v[n] = \text{e}^{j \omega n}$ \cite{FSP}.\\ The same follows from Linear Time Invariant (LTI) systems \cite{DTSP}.
 %Egenskaver ved eigenfunctioner:
 The eigenfunction property of the complex exponential function for an LSI system can thus be demonstrated as follows. Consider a complex sequence of radian frequency $v[n] = \text{e}^{j\omega n} \text{ for } -\infty < n < \infty$.
 \\\\
-The corresponding output of a LTI system with impulse response $h[n]$ is
+The corresponding output of an LTI system with impulse response $h[n]$ is
 \begin{align*}
 y[n] 
 &= \sum_{k=-\infty}^{\infty} h[k]\text{e}^{j\omega(n-k)} \nonumber \\ 
@@ -220,12 +220,12 @@ v[n] = e^{j\frac{2\pi}{N} kn} = W_N^{-kn}.
 
 The twiddle factor can be shown to be an eigensequence for the circular convolution operator.
 \begin{align*}
-	(h\circledast v)_n 
-	= \sum_{k=0}^{N-1} v[\langle n-1\rangle_N	]h[i] 
-	= \sum_{k=0}^{N-1} W_N^{-k\langle n-i\rangle_N}h[i]
-	&= \sum_{k=0}^{N-1} W_N^{-k(n-i)}h[i]\\
-	&= \sum_{k=0}^{N-1} h[i] W_n^{ki} \, W_N^{-kn}
-	= \lambda[k] v[n]
+	(h\circledast v)[n] 
+	= \sum_{i=0}^{N-i} v[\langle n-i \rangle_N ]h[i] 
+	= \sum_{i=0}^{N-1} W_N^{-k\langle n-i\rangle_N}h[i]
+	&= \sum_{i=0}^{N-1} W_N^{-k(n-i)}h[i]\\
+	&= \sum_{i=0}^{N-1} h[i] W_n^{ki} \, W_N^{-kn}
+	= \lambda[n] v[n]
 \end{align*}\frede{Hvad er indeks $i$?}
 
-This shows that a circular convolution operator $H$ has an eigensequence that is the twiddle factor. \martin{Mangler for dette afsnit: vi skal være enige om notationen for indekser ved cirkulær foldning i for eksempel definition 6.2.5. Derudover skal delene om LSI-systemer og sidste del af afsnittet om egenfunktioner omformuleres og kobles bedre sammen med resten af afsnittet. Endelig bør der angives sider ved kildehenvisningerne, hvor det er muligt. \textregistered}.
+This shows that a circular convolution operator $H$ has an eigensequence that is the twiddle factor. \martin{Mangler for dette afsnit: delene om LSI-systemer og sidste del af afsnittet om egenfunktioner omformuleres og kobles bedre sammen med resten af afsnittet (eller eventuelt slettes, hvis det ikke er relevant). Derudover bør der angives sider ved kildehenvisningerne, hvor det er muligt. \textregistered}.

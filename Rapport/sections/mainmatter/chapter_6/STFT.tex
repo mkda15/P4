@@ -30,16 +30,16 @@ The idea in the STFT is to obtain properties of a local frequency spectrum of $f
 \begin{definition}[The Short-Time Fourier Transform]\label{def:stft}
 Let $f,g \in \mathcal{L}^2(\mathbb{R}^d)$. For a fixed window function $g \neq 0$ the short-time Fourier transform of a function $f$ with respect to $g$ is defined as:
 \begin{align}
-V_gf(\tau,\omega) = \int_{\mathbb{R}^d} f(t) g(t - \tau) \text{e}^{-j \omega t} dt \quad \textnormal{for} \quad \tau,\omega \in \mathbb{R}^d.
+V_gf(\tau,\omega) = \int_{\mathbb{R}^d} f(t) g(t - \tau) \text{e}^{-j \omega \cdot t} dt \quad \textnormal{for} \quad \tau,\omega \in \mathbb{R}^d.
 \end{align}
 \end{definition}
 
-$V_gf(\tau,\omega)$ can be thought of as a measure for the amplitude of the frequency band near $\omega$ at time $\tau$. The window function $g$ is usually kept fixed, and $V_gf$ is considered to be a linear mapping from functions on $\mathbb{R}^d$ to functions on $\mathbb{R}^{2d}$, which is known as the \textit{time-frequency plane} for $d=1$ in signal analysis \cite{page 38, FTFA}. Definition \ref{def:stft} can be formulated for discrete-time systems.
+However, in this project the STFT is used only for $d = 1$. $V_gf(\tau,\omega)$ can be thought of as a measure for the amplitude of the frequency band near $\omega$ at time $\tau$. The window function $g$ is usually kept fixed, and $V_gf$ is considered to be a linear mapping from functions on $\mathbb{R}^d$ to functions on $\mathbb{R}^{2d}$, which is known as the \textit{time-frequency plane} for $d=1$ in signal analysis \cite{page 38, FTFA}. Definition \ref{def:stft} can be formulated for discrete-time systems.
 
 \begin{definition}[The discrete Short-Time Fourier Transform]\label{def:stft_discrete}
 Let $f,g\in\ell^2$. For a fixed window sequence $g\neq0$ the discrete short time Fourier transform of a sequence $f$ with respect to $g$ is defined as
 \begin{align}
-V_gf[n,\omega]=\sum_{m=-\infty}^{\infty}f[n+m]g[m]\mathrm{e}^{-j\omega t}.
+V_gf[n,\omega]=\sum_{m=-\infty}^{\infty}f[n+m]g[m]\mathrm{e}^{-j\omega m}.
 \end{align}
 \end{definition}
 Figure \ref{fig:sliding_stft} illustrates how the STFT windows a signal.
@@ -63,7 +63,7 @@ legend style={at={(axis cs:10.1,1.5)},anchor=north west}]
 \draw[->,line width=0.5mm]{(axis cs:2,1.2)--(axis cs:2.8,1.2)};
 \end{axis}
 \end{tikzpicture}
-\caption{Illustration of the discrete STFT windowing a signal. In this figure only a single window is shown, but the STFT windows and Fourier transforms the signal at several dicrete points in time.}
+\caption{Illustration of the discrete STFT windowing a signal. In this figure only a single window is shown, but the discrete STFT windows and Fourier transforms the signal at several dicrete points in time.}
 \label{fig:sliding_stft}
 \end{figure}
 Clearly, the STFT depends on how wide the window is:
@@ -72,31 +72,9 @@ Clearly, the STFT depends on how wide the window is:
 This apparent tradeoff is due to the fact that it is fundamentally impossible to simultaneously have the complete information of a signal in both the time and frequency domain. This is a consequence of the Heisenberg uncertainty principle \cite{Wang}.
 
 \subsection{The Heisenberg uncertainty principle}\label{sec:heisenberg}
-The Heisenberg uncertainty principle comes from quantum physics, where it is impossible to simultaneously measure both the position and the momentum of a particle accurately since higher precision in one quantity implies lower precision in the other. This is also the case in the time and frequency domain, which the following lemma shows \cite{page 123, Wang}.
-
-\begin{lemma}
+The Heisenberg uncertainty principle comes from quantum mechanics, where it is impossible to simultaneously measure both the position and the momentum of a particle accurately since higher precision in one quantity implies lower precision in the other. This is also the case in the time and frequency domain, which is expressed by theorem \ref{theorem:fund_sym_Fourier}  \ref{theorem:fund_sym_Fourier_b}. If a time function $x(t)$ is dilated, then its spectrum $X(\omega)$ is compressed, and if $x(t)$ is compressed, then $X(\omega)$ is conversely dilated \cite{page 135, Wang}. A rather extreme example is an impulse, which is concentrated within a short time range, and its Fourier transform is a constant, $\mathcal{F}\{\delta(t)\}(\omega) = 1$. Conversely, a constant, which is spread in time, has an impulse as its Fourier transform, $\mathcal{F}\{1\}(\omega) = \delta(t)$. This is the background for the Heisenberg uncertainty principle, which is stated with some concepts from probability theory. The function 
 \begin{align*}
-\mathcal{F}\{x(at)\}(\omega) = \dfrac{1}{|a|}F\left(\dfrac{\omega}{a}\right)
-\end{align*}
-\end{lemma}
-
-\begin{proof}
-First, it is assumed that $a > 0$:
-\begin{align*}
-\mathcal{F}\{x(at)\}(\omega) = \int_{-\infty}^\infty x(at)e^{-j\omega t} dt = \int_{-\infty}^\infty x(u) e^{-j\omega \frac{u}{a}} d\left(\dfrac{u}{a}\right) = \dfrac{1}{a} \int_{-\infty}^\infty x(u) e^{-j\frac{\omega}{a} u} du = \dfrac{1}{a} F\left(\dfrac{\omega}{a}\right),
-\end{align*}
-
-where $u = at$, which means that $t = \frac{u}{a}$. Likewise, $\mathcal{F}\{x(-at)\}(\omega) = \dfrac{1}{a} X \left(- \dfrac{\omega}{a}\right)$, and therefore, if $a' = -a < 0$ then:
-\begin{align*}
-\mathcal{F}\{x(a't)\}(\omega) = \dfrac{1}{-a'} X\left(\dfrac{\omega}{a'}\right)
-\end{align*}
-
-with $u = a't$.
-\end{proof}
-
-Therefore, this lemma shows that if a time function $x(t)$ is expanded, then its spectrum $F(\omega)$ is compressed, and if $x(t)$ is compressed, then $F(\omega)$ is conversely expanded. A rather extreme example is an impulse, which is concentrated within a short time range, and its Fourier transform is a constant, $\mathcal{F}\{\delta(t)\}(\omega) = 1$. Conversely, a constant, which is spread in time, has an impulse as its Fourier transform, $\mathcal{F}\{1\}(\omega) = \delta(t)$. This is the background for the Heisenberg uncertainty principle, which is stated with some concepts from probability theory. The function $p_x(t)$
-\begin{align*}
-p_x(t) = \dfrac{|x(t)|^2}{\|x(t)\|^2} = \dfrac{|x(t)|^2}{\int_{-\infty}^\infty |x(t)|^2 dt}
+p_x(t) = \dfrac{|x(t)|^2}{\|x(t)\|^2} = \dfrac{|x(t)|^2}{\int_{-\infty}^\infty |x(t)|^2 dt}, \quad x \in \mathcal{L}^2
 \end{align*}
 
 is a probability density function since it satisfies the conditions
@@ -106,7 +84,7 @@ p_x(t) > 0 \quad \text{and} \quad \int_{-\infty}^\infty p_x(t) dt = 1.
 
 The variance of $p_x(t)$, $\sigma_t^2$, is a measure of the dispersion of $x(t)$:
 \begin{align*}
-\sigma_t^2 = \int_{-\infty}^\infty (t - \mu_t)^2 p_x(t) dt = \dfrac{1}{\|x(t)\|^2} \int_{-\infty}^\infty (t - \mu_t)^2 |x(t)|^2 dt,
+\sigma_t^2 = \int_{-\infty}^\infty (t - \mu_t)^2 p_x(t) dt = \dfrac{1}{\|x(t)\|^2} \int_{-\infty}^\infty (t - \mu_t)^2 |x(t)|^2 dt, \quad tx \in \mathcal{L}^2
 \end{align*}
 
 where $\mu_t$ is the mean of $p_x(t)$:
