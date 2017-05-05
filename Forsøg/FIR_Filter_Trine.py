@@ -190,6 +190,9 @@ plt.plot(freq_ax,np.abs(H1)[:sampels/2],'b')
 plt.axis([0,100,0,1.1])
 plt.xlabel("frequency [Hz]")
 plt.show()
+plt.plot(freq_ax,np.unwrap(np.angle(np.fft.fft(h1,len(signal))[:sampels/2])))
+#plt.axis([0,100,-100,100])
+plt.show()
 
 # Pure signal in frequency domain
 SIGNAL = 2/float(len(signal))*np.abs(np.fft.fft(signal)) #normaliseret
