@@ -1,5 +1,5 @@
 \chapter{Fourier Series} \label{appA:Fourierseries}
-Periodic functions can be represented as a linear combination of oscillating functions such as sines, cosines or the equivalent complex exponentials.
+Periodic functions can be represented as a linear combination of oscillating functions such as sines, cosines or the equivalently complex exponentials.
 \\ \\
 It can be an advantage to decompose functions as a series or integral of ``simpler'' functions to retrieve information:
 \begin{align*}
@@ -23,7 +23,7 @@ The second part holds per Euler's formula:
 It can be simpler to work with the complex exponential function, but working with the trigonometric functions cosine and sine have their advantages such as being real-valued and also odd and even for the sine and cosine functions, respectively.
 
 \section{The coefficient $c_n$}
-The $c_n$ coefficient is determined by the assumption that it is possible to integrate the fourier series by parts.
+The $c_n$ coefficient is determined by the assumption that it is possible to integrate the Fourier series by parts.
 \\ \\
 To determine $c_n$ in the equation $f(t)= \sum_{n=-\infty}^{\infty} c_n \text{e}^{j n t}$ first multiply both sides by $\text{e}^{-j k t}$ for $k\in \mathbb{Z}$ and integrate both sides from $-\pi$ to $\pi$:
 \begin{align} \label{eq:firststep_fouriercoefficient}
@@ -60,7 +60,7 @@ The integral can be concluded to yield either $2\pi$ or $0$:
 
 Therefore, for $n = k$:
 \begin{align*}
-\int_{-\pi}^\pi f(t)\text{e}^{-j k t} = 2\pi c_k.
+\int_{-\pi}^\pi f(t)\text{e}^{-j k t} dt = 2\pi c_k.
 \end{align*}
 
 Changing the index to $n$ gives the coefficient $c_n$'s general equation:
@@ -150,7 +150,7 @@ From this definition follows the definition of piecewise smooth functions:
 The space of piecewise smooth functions on $[a,b]$ is denoted as $PS(a,b)$. $f\in PS(a,b)$ iff
 \begin{enumerate}
 	\item $f \in PC(a,b)$.
-	\item $f'$ exists and is also piecewise continuous on $[a,b]$. This means that $f'$ is continuous on except perhaps at finitely many points $x_1, \dots, x_K$ (which includes the points where $f$ is discontinuous), and that the limits $f'(x_j-)$, $f'(x_j+)$, $f'(a+)$ and $f'(b-)$ exist (for $j = 1,\dots, K$).
+	\item $f'$ exists and is also piecewise continuous on $[a,b]$. This means that $f'$ is continuous except perhaps at finitely many points $x_1, \dots, x_K$ (which includes the points where $f$ is discontinuous), and that the limits $f'(x_j-)$, $f'(x_j+)$, $f'(a+)$ and $f'(b-)$ exist (for $j = 1,\dots, K$).
 \end{enumerate}
 \end{definition}
 
@@ -181,14 +181,14 @@ By lemma \ref{lemma:2pi-periodic_function} the above equation can be expressed a
 where $D_N(\tau) = \dfrac{1}{2\pi}\sum_{n=-N}^{N}\text{e}^{j n \tau}$ is called the $N$'th Dirichlet kernel. The following lemma is inspired by \cite{page 30, FAA}.
 
 \begin{lemma}[Bessel's Inequality] \label{lemma:Bessel1}
-If $f$ is $2\pi$-periodic and Riemann integrable $[-\pi,\pi]$, and the Fourier coefficients $c_n$ as defined in definition \ref{def:fourier_definition}, then
+If $f$ is $2\pi$-periodic and Riemann integrable on $[-\pi,\pi]$, and the Fourier coefficients $c_n$ as defined in definition \ref{def:fourier_definition}, then
 \begin{align*}
 \sum_{n=-\infty}^\infty |c_n|^2 \leq \dfrac{1}{2\pi} \int_{-\pi}^\pi |f(t)|^2 dt.
 \end{align*}
 \end{lemma}
 
 \begin{proof}
-For $z \in \mathbb{C}$ is $|z|^2 = z \overline{z}$. For $N \in \mathbb{N}$
+For $z \in \mathbb{C}$ then $|z|^2 = z \overline{z}$. For $N \in \mathbb{N}$
 \begin{align*}
 0 &\leq \left| f(t) - \sum_{n=-N}^N c_n \text{e}^{jnt} \right|^2 = \left( f(t) - \sum_{n=-N}^N c_n \text{e}^{jnt} \right) \left( \overline{f(t)} - \sum_{n=-N}^N \overline{c_n} \text{e}^{-jnt} \right) \\
 &= |f(t)|^2 - \sum_{n=-N}^N \left[ c_n \overline{f(t)} \text{e}^{jnt} + \overline{c_n} f(t) \text{e}^{-jnt} \right] + \sum_{m,n=-N}^N c_m\overline{c_n} \text{e}^{j(m-n)t}.
@@ -290,13 +290,12 @@ For $\textbf{x},\textbf{y} \in \mathbb{C}^N$ the dot product is
 \langle \textbf{x},\textbf{y} \rangle = \sum_{i=1}^N x_i \overline{y_i},
 \end{align*}
 
-and the vectors $\textbf{x},\textbf{y}$ are orthogonal if and only if $\langle \textbf{x},\textbf{y} \rangle = 0$. The norm on $\mathbb{C}^N$ is:
+and the vectors $\textbf{x},\textbf{y}$ are said to be orthogonal if $\langle \textbf{x},\textbf{y} \rangle = 0$. The norm on $\mathbb{C}^N$ is:
 \begin{align*}
 \|\textbf{x}\|^2 = \langle \textbf{x},\textbf{x} \rangle
 \end{align*}
 
-A basis $\{\textbf{b}_\textbf{j}\}_{j=1}^N$ is an ortonormal basis for 
-$\mathbb{C}^N$ if it is ortogonal and normalized:
+A basis $\{\textbf{b}_\textbf{j}\}_{j=1}^N$ is an orthonormal basis for $\mathbb{C}^N$ if it is orthogonal and normalized:
 \begin{align*}
 \langle \textbf{b}_\textbf{i}, \textbf{b}_\textbf{j} \rangle =
 \begin{cases}
@@ -311,16 +310,16 @@ The decomposition of a vector $\textbf{x} \in \mathbb{C}^N$ is:
 \end{align*}
 
 The Fourier series fits into this theory formation. For
-$f,g \in PC(a,b)$ the dot product and norm is defined as
+$f,g \in PC(a,b)$ the inner product and norm is defined as
 \begin{align*}
 \langle f,g \rangle = \int_a^b f(x) \overline{g(x)} dx,
 \|f\| = \left( \int_a^b |f(x)|^2 dx \right)^{\frac{1}{2}} = \sqrt{\langle f,f \rangle}.
 \end{align*}
 
-Furthermore, for $f,g \in PC(a,b)$, the Cauchy-Schwarz inequality and the triangle inequality holds:
+Furthermore, for $f,g \in PC(a,b)$, the Cauchy-Schwarz inequality and the triangle inequality holds for all norms an inner products:
 \begin{align*}
 |\langle f,g \rangle| &\leq \|f\| \|g\|, \\
-\|f+g\| &= \|f\| + \|g\|.
+\|f+g\| &\leq \|f\| + \|g\|.
 \end{align*}
 
 Consider the function $\phi(t) = \frac{1}{\sqrt{2\pi}} \text{e}^{jnt}$ defined on $[-\pi,\pi]$. Since
@@ -332,7 +331,7 @@ Consider the function $\phi(t) = \frac{1}{\sqrt{2\pi}} \text{e}^{jnt}$ defined o
 \end{cases}
 \end{align*}
 
-$\{\phi_n\}_{n\in\mathbb{Z}}$ is an ortonormal family of functions. The Fourier coefficient $c_n$ is
+$\{\phi_n\}_{n\in\mathbb{Z}}$ is an orthonormal family of functions. The Fourier coefficient $c_n$ is
 \begin{align*}
 c_n = \dfrac{1}{2\pi} \int_{-\pi}^\pi f(t) \overline{\text{e}^{jnt}} dt = \dfrac{1}{\sqrt{2\pi}} \langle f,\phi_n \rangle.
 \end{align*}
@@ -342,7 +341,7 @@ Therefore, the Fourier series for $f$ is
 f(t) = \sum_{n=-\infty}^\infty c_n \text{e}^{jnt} = \sum_{n=-\infty}^\infty \langle f, \phi_n \rangle \phi_n,
 \end{align}
 
-which is the decomposition of a vector in $\mathbb{C}^N$ with an ortonormal basis.
+which is the decomposition of a vector in $\mathbb{C}^N$ with an orthonormal basis.
 \\ \\
 For a sequence $\{f_n\}_{n=1}^\infty \in PC(a,b)$ it is said that $f_n \to f$ in norm if
 \begin{align*}
@@ -364,9 +363,9 @@ This is the reason why $\mathcal{L}^2(a,b)$ is a Hilbert space (see also chapter
 The following lemma is a generalization of the special case of Bessel's inequality in lemma \ref{lemma:Bessel1} \cite{page 75, FAA}.
 
 \begin{lemma}[Bessel's inequality] \label{lemma:Bessel2}
-Let $\{\phi_n\}_{n=1}^\infty$ be a ortonormal family in $\mathcal{L}^2(a,b)$, and let $f \in \mathcal{L}^2(a,b)$. Then
+Let $\{\phi_n\}_{n=1}^\infty$ be an orthonormal family in $\mathcal{L}^2(a,b)$, and let $f \in \mathcal{L}^2(a,b)$. Then
 \begin{align*}
-\sum_{n=1}^\infty |\langle f,\phi_n\rangle|^2 \leq \|f\|^2
+\sum_{n=1}^\infty |\langle f,\phi_n\rangle|^2 \leq \|f\|^2.
 \end{align*}
 \end{lemma}
 
@@ -390,7 +389,7 @@ Since $\|a + b\|^2 = \|a\|^2 + 2 \operatorname{Re} \langle a,b  \rangle + \|b\|^
 
 This result entails the following lemma.
 \begin{lemma}
-For $f \in \mathcal{L}^2(a,b)$ and an ortonormal family $\{\phi_n\}_{n=1}^\infty$ the sum $\sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n$ converges in norm and $\left\| \sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n \right\| \leq \|f\|$.
+For $f \in \mathcal{L}^2(a,b)$ and an orthonormal family $\{\phi_n\}_{n=1}^\infty$ the sum $\sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n$ converges in norm and $\left\| \sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n \right\| \leq \|f\|$.
 \end{lemma}
 
 \begin{proof}
@@ -399,13 +398,13 @@ According to Bessel's inequality the sum $\sum_{n=1}^\infty | \langle f,\phi_n \
 \left\|\sum_{n=M}^N \langle f, \phi_n \rangle \phi_n \right\|^2 = \sum_{n=M}^N |\langle f, \phi_n \rangle |^2 \to 0 \ \text{for} \ M,N \to \infty,
 \end{align*}
 
-where the equality follows from Pythagora's theorem. Therefore, $\sum_{n=1}^\infty \langle f,\phi_n \rangle \phi_n$ is a Cauchy-sequence in the complete space $\mathcal{L}^2(a,b)$, which means that the sequence converges in $\mathcal{L}^2(a,b)$. Furthermore:
+where the equality follows from Pythagora's theorem. Therefore, $\left\{ \sum_{n=1}^N \langle f,\phi_n \rangle \phi_n \right\}_{N=1}^\infty$ is a Cauchy-sequence in the complete space $\mathcal{L}^2(a,b)$, which means that the sequence converges in $\mathcal{L}^2(a,b)$. Furthermore:
 \begin{align*}
 \left\|\sum_{n=1}^\infty \langle f, \phi_n \rangle \phi_n \right\|^2 = \lim_{N\to \infty} \left\|\sum_{n=1}^N \langle f, \phi_n \rangle \phi_n \right\|^2 = \lim_{N\to\infty} \sum_{n=1}^N | \langle f,\phi_n \rangle |^2 = \sum_{n=1}^\infty | \langle f,\phi_n \rangle |^2 \leq \|f\|^2.
 \end{align*}
 \end{proof}
 
-The final question in this section is when an ortonormal family in $\mathcal{L}^2(a,b)$ actually is an ortonormal basis for $\mathcal{L}^2(a,b)$. An ortonormal family $\{\phi_n\}_{n=1}^\infty$ satisfies $f = \sum_{n=-\infty}^\infty \langle f, \phi_n \rangle \phi_n \ \forall f \in \mathcal{L}^2(a,b)$ as in \eqref{eq:ort_fam}. The following theorem is inspired by \cite{page 77, FAA}.
+The final question in this section is when an orthonormal family in $\mathcal{L}^2(a,b)$ actually is an orthonormal basis for $\mathcal{L}^2(a,b)$. An orthonormal basis $\{\phi_n\}_{n=1}^\infty$ satisfies $f = \sum_{n=-\infty}^\infty \langle f, \phi_n \rangle \phi_n \ \forall f \in \mathcal{L}^2(a,b)$ as in \eqref{eq:ort_fam}. The following theorem is inspired by \cite{page 77, FAA}.
 
 \begin{theorem} \label{theo:Fourier_series_Parseval}
 Let $\{\phi_n\}_{n=1}^\infty$ be an orthonormal family in $\mathcal{L}^2(a,b)$. The following conditions are equivalent.
