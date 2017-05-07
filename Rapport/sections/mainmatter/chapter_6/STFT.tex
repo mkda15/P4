@@ -103,20 +103,28 @@ Note that
 \|x(t)\|^2 = \int_{-\infty}^\infty |x(t)|^2 dt = \dfrac{1}{2\pi} \int_{-\infty}^\infty |X(\omega)|^2 d\omega = \dfrac{1}{2\pi} \|X(\omega)\|^2
 \end{align*}
 
-due to theorem \ref{theo:Plancherel} \martin{Ikke helt sikker på, at dette gælder, og det er vigtigt i forhold til beviset (se også næste kommentar). \textregistered}. Now the uncertainty principle can be stated as the following theorem.
-
-\begin{theorem}
-Let $\mathcal{F}\{x(t)\}(\omega) = X(\omega)$ be the spectrum of a given function $x(t)$ with variances $\sigma_\omega^2$ and $\sigma_t^2$, respectively. Then:
+due to theorem \ref{theo:Plancherel}. The proof of the uncertainty principle also uses Hölders inequality \cite{page 19, FSE2010}.
+\begin{theorem}[Hölder's inequality] \label{theo:Hölder}
+Let $I \subseteq \mathbb{R}$ and consider functions $f,g: I \to \mathbb{C}$. Then for any numbers $p,q \in (1,\infty)$ with $\frac{1}{p} + \frac{1}{q} = 1$:
 \begin{align*}
-\sigma_t^2 \sigma_\omega^2 \geq \dfrac{1}{16 \pi^2}.
+\int_I |f(x) g(x)| dx \leq \left( \int_I |f(x)|^p dx \right)^{1/p} \left( \int_I |g(x)|^q dx \right)^{1/q}.
+\end{align*}
+\end{theorem}
+
+Now the uncertainty principle can be stated as the following theorem.
+
+\begin{theorem}[Heisenberg's Uncertainty Principle]
+Let $\mathcal{F}\{x(t)\}(\omega) = X(\omega)$ be the spectrum of a given function $x(t)$ with $x, \ tx, \ \omega X \in \mathcal{L}^2$ and with variances $\sigma_\omega^2$ and $\sigma_t^2$ for $X(\omega)$ and $x(t)$, respectively. Then:
+\begin{align*}
+\sigma_t^2 \sigma_\omega^2 \geq \dfrac{1}{4}.
 \end{align*}
 \end{theorem}
 
 \begin{proof}
 It is assumed that $\mu_t = \mu_\omega = 0$ without loss of generality, and then
 \begin{align} \label{eq:Heis_proof}
-\sigma_t^2 \sigma_\omega^2 &= \dfrac{1}{\|x(t)\|^2 \|X(\omega)\|^2} \int_{-\infty}^\infty |tx(t)|^2 dt \int_{-\infty}^\infty |\omega X(\omega)|^2 d\omega \\
-&= \dfrac{2\pi}{\|x(t)\|^4} \int_{-\infty}^\infty |tx(t)|^2 dt \int_{-\infty}^\infty |\omega X(\omega)|^2 d\omega.
+\sigma_t^2 \sigma_\omega^2 &= \dfrac{1}{\|x(t)\|^2 \|X(\omega)\|^2} \int_{-\infty}^\infty |tx(t)|^2 dt \int_{-\infty}^\infty |\omega X(\omega)|^2 d\omega \nonumber \\
+&= \dfrac{1}{2\pi\|x(t)\|^4} \int_{-\infty}^\infty |tx(t)|^2 dt \int_{-\infty}^\infty |\omega X(\omega)|^2 d\omega.
 \end{align}
 
 Due to property (c) in theorem \ref{theorem:fund_sym_Fourier} and Parseval's equation it is seen that
@@ -124,25 +132,25 @@ Due to property (c) in theorem \ref{theorem:fund_sym_Fourier} and Parseval's equ
 \dfrac{1}{j} \mathcal{F}\{x'(t)\}(\omega) = \omega X(\omega)
 \end{align*}
 
-and \martin{Dette holder ikke helt på grund af vores definition af Fourier-transformationen, og jeg kan ikke helt gennemskue, hvordan ligningen skal skrives rigtigt. \textregistered}
+and
 \begin{align*}
-\int_{-\infty}^\infty |\omega X(\omega)|^2 d\omega = \dfrac{1}{4\pi^2} \int_{-\infty}^\infty |x'(t)|^2 dt.
+\int_{-\infty}^\infty |\omega X(\omega)|^2 d\omega = 2\pi \int_{-\infty}^\infty |x'(t)|^2 dt.
 \end{align*}
 
 Therefore, \eqref{eq:Heis_proof} becomes:
 \begin{align} \label{eq:Heis_proof2}
-\sigma_t^2 \sigma_\omega^2 &= \dfrac{1}{4\pi^2 \|x(t)\|^4} \int_{-\infty}^\infty |tx(t)|^2 dt \int_{-\infty}^\infty | x'(t)|^2 dt \nonumber \\
-&\geq \dfrac{1}{4\pi^2 \|x(t)\|^4} \left[ \int_{-\infty}^\infty t \overline{x}(t)x'(t) dt \right]^2,
+\sigma_t^2 \sigma_\omega^2 &= \dfrac{1}{2\pi \|x(t)\|^4} \int_{-\infty}^\infty |tx(t)|^2 dt 2\pi \int_{-\infty}^\infty | x'(t)|^2 dt \nonumber \\
+&\geq \dfrac{1}{\|x(t)\|^4} \left[ \int_{-\infty}^\infty \left| t \overline{x(t)} x'(t) \right| dt \right]^2,
 \end{align}
 
-where the last inequality follows from the Cauchy-Schwarz inequality and $\overline{x}(t)$ is the complex conjugate of $x(t)$. Since
+where $\overline{x(t)}$ is the complex conjugate of $x(t)$ and the last inequality follows from Hölder's inequality (theorem \ref{theo:Hölder}). Since
 \begin{align*}
-\left[ |x(t)|^2 \right]' = \left[ x(t) \overline{x}(t) \right]' = x'(t) \overline{x}(t) + \overline{x}'(t) x(t) = 2 \operatorname{Re} \left[ x'(t) \overline{x}(t) \right] \leq 2 x'(t) \overline{x}(t)
+\left[ |x(t)|^2 \right]' = \left[ x(t) \overline{x(t)} \right]' = x'(t) \overline{x(t)} + \overline{x'(t)} x(t) = 2 \operatorname{Re} \left[ x'(t) \overline{x(t)} \right] \leq 2 \left| x'(t) \overline{x(t)} \right|
 \end{align*}
 
-then $\overline{x}(t) x'(t)$ in the integrand in \eqref{eq:Heis_proof2} can be replaced by $\left[ |x(t)|^2 \right]'/2$:
+then $\left| \overline{x(t)} x'(t) \right|$ in the integrand in \eqref{eq:Heis_proof2} can be replaced by $\left[ |x(t)|^2 \right]'/2$:
 \begin{align} \label{eq:Heis_proof3}
-\sigma_t^2 \sigma_\omega^2 \geq \dfrac{1}{4\pi^2 \|x(t)\|^4} \left[ \int_{-\infty}^\infty \dfrac{t \left[ |x(t)|^2 \right]'}{2} dt \right]^2 = \dfrac{1}{4 \cdot 4\pi^2 \|x(t)\|^4} \left[ \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt \right]^2.
+\sigma_t^2 \sigma_\omega^2 \geq \dfrac{1}{\|x(t)\|^4} \left[ \int_{-\infty}^\infty \dfrac{t \left[ |x(t)|^2 \right]'}{2} dt \right]^2 = \dfrac{1}{4 \cdot \|x(t)\|^4} \left[ \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt \right]^2.
 \end{align}
 
 The integral is integrated by parts:
@@ -150,13 +158,13 @@ The integral is integrated by parts:
 \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt = \left[ t |x(t)|^2 \right]_{t=-\infty}^\infty - \int_{-\infty}^\infty |x(t)|^2 dt = - \int_{-\infty}^\infty |x(t)|^2 dt
 \end{align*}
 
-where it has been assumed that $\lim_{|t| \to \infty} t |x(t)|^2 = 0$. This result is substituted into \eqref{eq:Heis_proof3}, which then yields:
+where it has been used that $t|x|^2 = tx\overline{x}$, so it follows that according to Hölder's inequality $\|t|x|^2\|_{\mathcal{L}^1} = \|tx\overline{x}\|_{\mathcal{L}^1} \leq \|tx\|_{\mathcal{L}^2} \|x\|_{\mathcal{L}^2} < \infty$ as $x,tx \in \mathcal{L}^2$. Thus $t|x|^2 \in \mathcal{L}^1$ so $\lim_{|t| \to \infty} t |x(t)|^2 = 0$. This result is substituted into \eqref{eq:Heis_proof3}, which then yields:
 \begin{align*}
-\sigma_t^2 \sigma_\omega^2 &\geq \dfrac{1}{4 \cdot 4\pi^2 \|x(t)\|^4} \left[ \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt \right]^2 \\
-&= \dfrac{1}{4 \cdot 4\pi^2 \|x(t)\|^4} \left[ - \int_{-\infty}^\infty |x(t)|^2 dt \right]^2 \\
-&= \dfrac{1}{4 \cdot 4\pi^2 \|x(t)\|^4} \left[ \int_{-\infty}^\infty |x(t)|^2 dt \right]^2 \\
-&= \dfrac{\|x(t)\|^4}{16\pi^2 \|x(t)\|^4} = \dfrac{1}{16\pi^2}.
+\sigma_t^2 \sigma_\omega^2 &\geq \dfrac{1}{4 \cdot \|x(t)\|^4} \left[ \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt \right]^2 \\
+&= \dfrac{1}{4 \cdot \|x(t)\|^4} \left[ - \int_{-\infty}^\infty |x(t)|^2 dt \right]^2 \\
+&= \dfrac{1}{4 \cdot \|x(t)\|^4} \left[ \int_{-\infty}^\infty |x(t)|^2 dt \right]^2 \\
+&= \dfrac{\|x(t)\|^4}{4 \cdot \|x(t)\|^4} = \dfrac{1}{4}.
 \end{align*}
 \end{proof}
 
-Therefore, the optimal variance in time and frequency satifies the relation $\sigma_t^2\sigma_\omega^2 = \frac{1}{16\pi^2}$ \martin{Mangler i dette afsnit: beviset skal tilpasses vores definition af Fourier-transformationen. Derudover mangler vi minimum én figur, der illustrerer STFT'en. \textregistered}.
+Therefore, the optimal variance in time and frequency satifies the relation $\sigma_t^2\sigma_\omega^2 = \frac{1}{4}$.
