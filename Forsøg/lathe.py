@@ -21,15 +21,18 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/skala/forsoeg_5skala_langsom_cut.wav')  # Data signal
-freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/stoej_fra_omraadet_rent.wav')                  # Noise signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/akkorder/forsoeg_akkord_lys_nospeak.wav')  # Data signal
+freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
 """ Length of data and noise alings"""
+
+
+if len(data) > len(noise):
+    while len(data) > len(noise):
+        noise = np.append(noise,noise)
 if len(data) < len(noise):
-    noise = noise[:len(data)]
-elif len(data) > len(noise):
-    data = data[:len(noise)]
+        noise = noise[:len(data)]
 
 """ Variabler til filter """
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
