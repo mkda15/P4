@@ -21,7 +21,7 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/test_enkelt_440_220hz.wav')  # Data signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/skala/forsoeg_5skala_langsom_cut.wav')  # Data signal
 freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/stoej_fra_omraadet_rent.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
@@ -35,20 +35,21 @@ elif len(data) > len(noise):
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
 M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
-cut1 = 180./freq     # Cut off frequency for band
-cut2 = 500./freq    # Cut off frequency for band 
+cut1 = 70./freq     # Cut off frequency for band
+cut2 = 600./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/2) # Length for plotting (arbitrary)
 
 
 """ Til Kaiser vinduet """
 delta_1 = 0.05 # peak approximation error in amplitude 
-delta_2 = 4. # max transition width is 2*delta_2
+delta_2 = 10. # max transition width is 2*delta_2
 
 """ Aksis og linspaces """
 t   = sampels/float(freq)                   # The time for howlong the system runs (for making the time axis)
 tid = np.linspace(0,t,sampels)              # Axis for time domain
 freq_axis = np.linspace(0,freq/2,sampels/2) # Axis for frequency domain
+freq_axis_norm = np.linspace(0,1,sampels/2)
 n   = np.linspace(0,M,M+1)                  # Integer numbers for making window and impulsrespons
 
 """ Variabler til spektogram """
@@ -169,33 +170,23 @@ cb.set_label(label = 'Amplitude (dB)', fontsize=fontsize)
 plt.xlabel('Time (sec)', fontsize = fontsize)
 plt.ylabel('Frequency (Hz)', fontsize = fontsize)
 plt.show()
+#
+#plt.plot(freq_axis,np.angle(H)[:sampels/2])
+#plt.axis([0,500,-10,10])
+#plt.show()
+#
+#Hdb =  db(np.abs(H).T)
+#
+#plt.plot(freq_axis,Hdb[:sampels/2])
+#plt.axis([0,500,-100,2])
 
-X = stft(signal,fftsize = 2500,overlap = 2)     # STFT calculated
-
-
-X = db(np.abs(X).T)                             # Calculated to dB
-
-x = np.linspace(0,tid[-1],np.shape(X)[1])       
-y = np.linspace(0,freq_axis[-1],np.shape(X)[0]) 
-
-
-spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],cmap='hot')
-cb   = plt.colorbar(spec)
-cb.set_label(label = 'Amplitude (dB)', fontsize=fontsize)
-plt.xlabel('Time (sec)', fontsize = fontsize)
-plt.ylabel('Frequency (Hz)', fontsize = fontsize)
-plt.show()
-X = stft(data,fftsize = 2500,overlap = 2)     # STFT calculated
-
-
-X = db(np.abs(X).T)                             # Calculated to dB
-
-x = np.linspace(0,tid[-1],np.shape(X)[1])       
-y = np.linspace(0,freq_axis[-1],np.shape(X)[0]) 
-
-
-spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],cmap='hot')
-cb   = plt.colorbar(spec)
-cb.set_label(label = 'Amplitude (dB)', fontsize=fontsize)
-plt.xlabel('Time (sec)', fontsize = fontsize)
-plt.ylabel('Frequency (Hz)', fontsize = fontsize)
+X = X.T
+max_freq_pos = np.zeros(len(X))
+for i in range(len(X)):
+    a = np.where(X[i][:] == np.max(X[i])) 
+    max_freq_pos[i] = a[0][0]
+    
+max_freq_t = np.zeros(len(X))
+for i in range(len(X)):
+    max_freq_t[i] = y[int(max_freq_pos[i])] 
+plt.stem(x,max_freq_t)
