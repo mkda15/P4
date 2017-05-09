@@ -61,6 +61,7 @@ freq_inter1 = 0
 freq_inter2 = 100
 
 fontsize = 13
+dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
                  
 print("variabler og data importeret 1/9")
 
@@ -94,8 +95,7 @@ print('impuls respons udregnet 4/9')
 
 signal = signal / float((np.max(signal))) # Reduktion of amplitude
 data = data / float((np.max(data)))
-signal = signal / float(1000) # Reduktion of amplitude
-data = data / float(1000)
+
 """ Dataen fourier transformeres """
 DATA = np.fft.fft(data)     # Pure signal in fourier
 NOISE = np.fft.fft(noise)   # Noise in fourier
@@ -196,13 +196,64 @@ plt.show()
 #plt.show()
 
 X = X.T
-max_freq_pos = np.zeros(len(X))
+sortedX = np.zeros(len(X),dtype = object)
 for i in range(len(X)):
-    a = np.where(X[i][:] == np.max(X[i])) 
-    max_freq_pos[i] = a[0][0]
-    
-max_freq_t = np.zeros(len(X))
-for i in range(len(X)):
-    max_freq_t[i] = y[int(max_freq_pos[i])] 
-plt.stem(x,max_freq_t)
-plt.show()
+
+    sortedX[i] = np.sort(X[i])
+if dataType == "Tabs": #Tjeck if data is in single tabs or chords
+    max_freq_pos = np.zeros(len(X))
+    for i in range(len(X)):
+        a = np.where(X[i][:] == np.max(X[i]))
+        max_freq_pos[i] = a[0][0]
+
+    max_freq_t = np.zeros(len(X))
+    for i in range(len(X)):
+        max_freq_t[i] = y[int(max_freq_pos[i])]
+    plt.stem(x,max_freq_t)
+    print(max_freq_t[6])
+elif dataType == "Chords":
+    max_freq_pos1 = np.zeros(len(X))
+    max_freq_pos2 = np.zeros(len(X))
+    max_freq_pos3 = np.zeros(len(X))
+
+    for i in range(len(X)):
+        if sortedX[i][-1] > 10:
+            a = np.where(X[i][:] == sortedX[i][-1])
+        else:
+            a = [[0]]
+        if sortedX[i][-2] > 10:
+            b = np.where(X[i][:] == sortedX[i][-2])
+        else:
+            b = [[0]]
+        if sortedX[i][-3] > 10:
+            c = np.where(X[i][:] == sortedX[i][-3])
+        else:
+            c = [[0]]
+        max_freq_pos1[i] = a[0][0]
+        max_freq_pos2[i] = b[0][0]
+        max_freq_pos3[i] = c[0][0]
+
+    max_freq_t1 = np.zeros(len(X))
+    max_freq_t2 = np.zeros(len(X))
+    max_freq_t3 = np.zeros(len(X))
+    for i in range(len(X)):
+        if max_freq_pos1[i] == 0:
+            max_freq_t1[i] = 0
+        else:
+            max_freq_t1[i] = y[int(max_freq_pos1[i])]
+        if max_freq_pos2[i] == 0:
+            max_freq_t2[i] = 0
+        else:
+            max_freq_t2[i] = y[int(max_freq_pos2[i])]
+        if max_freq_pos3[i] == 0:
+            max_freq_t3[i] = 0
+        else:
+            max_freq_t3[i] = y[int(max_freq_pos3[i])]
+    plt.plot(max_freq_t1)
+    plt.plot(max_freq_t2)
+    plt.plot(max_freq_t3)
+
+    sted = 55
+    print(max_freq_t1[sted])
+    print(max_freq_t2[sted])
+    print(max_freq_t3[sted])
