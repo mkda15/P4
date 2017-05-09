@@ -69,7 +69,7 @@ legend style={at={(axis cs:10.1,1.5)},anchor=north west}]
 Clearly, the STFT depends on how wide the window is:
 \paragraph{A rather wide window} leads to good \textit{frequency resolutions}, and e.g. constant frequencies are thus clearly visible in the time-frequency plane. However, a spike will be blurred in the time-frequency plane as a wide window can't exactly determine at what time the spike occurs.
 \paragraph{A rather narrow window} leads to good \textit{time resolutions}, which means that a spike is clearly visible at a given time, but constant frequencies are on the other hand blurred \cite{Davis}. \\ \\
-This apparent tradeoff is due to the fact that it is fundamentally impossible to simultaneously have the complete information of a signal in both the time and frequency domain. This is a consequence of the Heisenberg uncertainty principle \cite{Wang}.
+This apparent tradeoff is due to the fact that it is fundamentally impossible to simultaneously have the complete information of a signal in both the time and frequency domain. This is a consequence of the Heisenberg uncertainty principle \cite{page 409, Wang}.
 
 \subsection{The Heisenberg uncertainty principle}\label{sec:heisenberg}
 The Heisenberg uncertainty principle comes from quantum mechanics, where it is impossible to simultaneously measure both the position and the momentum of a particle accurately since higher precision in one quantity implies lower precision in the other. This is also the case in the time and frequency domain, which is expressed by theorem \ref{theorem:fund_sym_Fourier}  \ref{theorem:fund_sym_Fourier_b}. If a time function $x(t)$ is dilated, then its spectrum $X(\omega)$ is compressed, and if $x(t)$ is compressed, then $X(\omega)$ is conversely dilated \cite{page 135, Wang}. A rather extreme example is an impulse, which is concentrated within a short time range, and its Fourier transform is a constant, $\mathcal{F}\{\delta(t)\}(\omega) = 1$. Conversely, a constant, which is spread in time, has an impulse as its Fourier transform, $\mathcal{F}\{1\}(\omega) = \delta(t)$. This is the background for the Heisenberg uncertainty principle, which is stated with some concepts from probability theory. The function 
@@ -111,9 +111,9 @@ Let $I \subseteq \mathbb{R}$ and consider functions $f,g: I \to \mathbb{C}$. The
 \end{align*}
 \end{theorem}
 
-Now the uncertainty principle can be stated as the following theorem.
+Now the uncertainty principle can be stated as the following theorem \cite{pages 135-136, Wang}.
 
-\begin{theorem}[Heisenberg's Uncertainty Principle]
+\begin{theorem}[Heisenberg's Uncertainty Principle] \label{theo:Heisenberg}
 Let $\mathcal{F}\{x(t)\}(\omega) = X(\omega)$ be the spectrum of a given function $x(t)$ with $x, \ tx, \ \omega X \in \mathcal{L}^2$ and with variances $\sigma_\omega^2$ and $\sigma_t^2$ for $X(\omega)$ and $x(t)$, respectively. Then:
 \begin{align*}
 \sigma_t^2 \sigma_\omega^2 \geq \dfrac{1}{4}.
