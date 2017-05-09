@@ -1,7 +1,7 @@
 This section documents the integration of each unit into one algorithm that makes the application of the final system. The integration is validated according to the test specifications, section \ref{sec:testspec}, by feeding each output into the next unit and checking the results. 
 
 \subsection{Implementation}
-Each unit is integrated into one algorithm on behalf of the system specification in chapter \ref{ch3}. Algorithm \ref{alg:final} show the basic implementation of the final application. Note that each unit are imported as a functions to be called and fed with their respective inputs in the final script, as showed in line 1. Further from the Scipy-package \textit{scipy.io.wavfile} is importet as \textit{siw} 
+Each unit is integrated into one algorithm on behalf of the system specification in chapter \ref{ch3}. Algorithm \ref{alg:final} show the basic implementation of the final application. Note that each unit are imported as a function to be called and fed with their respective inputs in the final script, as showed in line 1.
 \begin{algorithm}[H]
 \caption{STFT algorithm}
 \label{STFTalg}
@@ -9,7 +9,7 @@ Each unit is integrated into one algorithm on behalf of the system specification
 \State \textbf{import functions} FFT, Filter, STFT, Spectrogram, Peak\_dec  
 \\
 \Procedure{Import datafiles}{}
-\State \textbf{Return} signal, freq \Comment{List of signal, sampling frequency}
+\State Return signal, freq \Comment{List of signal, sampling frequency}
 \EndProcedure 
 \\
 \State $sampels = len(signal)$ 

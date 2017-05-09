@@ -11,6 +11,7 @@ Created on Fri Apr 21 08:31:00 2017
 
 from short_time_fourier_transform import stft , db
 from windowfunctions import Hamming, Hanning, Kaiser
+import Filter
 import numpy as np
 import impulsrespons as impuls
 import matplotlib.pyplot as plt
@@ -38,10 +39,10 @@ if len(data) < len(noise):
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
 M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
-cut1 = 70./freq     # Cut off frequency for band
-cut2 = 600./freq    # Cut off frequency for band 
+cut1 = 75./freq     # Cut off frequency for band
+cut2 = 1000./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
-plotlength = int(sampels/2) # Length for plotting (arbitrary)
+plotlength = int(sampels/20) # Length for plotting (arbitrary)
 
 
 """ Til Kaiser vinduet """
@@ -86,12 +87,15 @@ hd = impuls.ImpulsresponsBP(n,M,cut1,cut2)
 #hd = impuls.ImpulsresponsLP(n,M,cut)    # Desired impulsrespons
 
 h = hd * w                              # The final impulsrespons
+#h = Filter.bp_filter(delta_1,delta_2,freq,cut1,cut2)
 H = np.fft.fft(h,(len(signal)))         # The fourier transformed of the final impulsrespons zero padded to fit the signal
 
 print('impuls respons udregnet 4/9')
 
 signal = signal / float((np.max(signal))) # Reduktion of amplitude
-
+data = data / float((np.max(data)))
+signal = signal / float(1000) # Reduktion of amplitude
+data = data / float(1000)
 """ Dataen fourier transformeres """
 DATA = np.fft.fft(data)     # Pure signal in fourier
 NOISE = np.fft.fft(noise)   # Noise in fourier
@@ -110,37 +114,44 @@ print('Data filtreret 6/9')
 # Plt plots af alt det intresante og data gemmes
 #==============================================================================
 
-plt.plot(freq_axis[:plotlength],np.abs(DATA)[:plotlength])          # FFT of clean data
-plt.xlabel('Ren Data freq')
+plt.plot(tid,data, 'g-',label = "ren signal")  
+plt.plot(tid,signal, 'r-', label = "signal")                                               # Original data with noise added 
+plt.legend(loc = 'upper right')
+plt.xlabel('Time [sec.]')
+#plt.axis([1,1.05,-0.1,0.1])
 plt.show()
 
-plt.plot(freq_axis[:plotlength],np.abs(H)[:plotlength])             # FFT of impuls respons   
-plt.xlabel('Ren stoej freq')
+plt.plot(tid,signal_filt, 'b-', label = "filt signal")                                               # Original data with noise added 
+plt.legend(loc = 'upper right')
+plt.xlabel('Time [sec.]')
+#plt.axis([1,1.05,-0.1,0.1])
 plt.show()
 
-plt.plot(freq_axis[:2000],np.abs(NOISE)[:2000])         # FFT of the noise
-plt.xlabel('Stoej og data freq')
+plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          # FFT of clean data
+plt.xlabel('Frequency [Hz]')
+plt.title('Signal')
 plt.show()
 
-plt.plot(tid,data)                                                  # Original data
-plt.xlabel('Ren Data tid')
-plt.show()
-
-plt.plot(tid,noise)                                                 # Original noise
-plt.xlabel('Ren Stoej tid')
-plt.show()
-
-plt.plot(tid,signal)                                                # Original data with noise added 
-plt.xlabel('Stoej og data tid')
-plt.show()
-
-plt.plot(tid,signal_filt)                                           # The filtered data
-plt.xlabel('Filtreret signal')
-plt.show()
+#plt.plot(freq_axis[:plotlength],np.abs(H)[:plotlength])             # FFT of impuls respons   
+#plt.xlabel('Frequency [Hz]')
+#plt.title('Filter')
+#plt.show()
 
 plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   # FFT of the filtered data
 plt.xlabel('Freq af Filtreret signal')
+plt.title('Filtreret signal')
 plt.show()
+
+#plt.plot(tid,signal, 'r-', label = "signal")
+#plt.plot(tid,signal_filt, 'b-', label = "filt") 
+##plt.plot(tid,data, 'g-',label = "ren signal")                                                 # Original data with noise added 
+#plt.legend(loc = 'upper right')
+#plt.xlabel('Time [sec.]')
+#plt.axis([1.0,1.05,-0.1,0.1])
+#plt.show()
+
+
+                                        
 
 print('plot plotteret 7/9')
 
@@ -174,15 +185,15 @@ plt.xlabel('Time (sec)', fontsize = fontsize)
 plt.ylabel('Frequency (Hz)', fontsize = fontsize)
 plt.show()
 
-plt.plot(freq_axis,np.angle(H)[:sampels/2])
-plt.axis([0,500,-4,4])
-plt.show()
-
-Hdb =  db(np.abs(H).T)
-
-plt.plot(freq_axis,Hdb[:sampels/2])
-plt.axis([0,500,-100,2])
-plt.show()
+#plt.plot(freq_axis,np.angle(H)[:sampels/2])
+#plt.axis([0,1075,-4,4])
+#plt.show()
+#
+#Hdb =  db(np.abs(H).T)
+#
+#plt.plot(freq_axis,Hdb[:sampels/2])
+#plt.axis([0,1300,-100,2])
+#plt.show()
 
 X = X.T
 max_freq_pos = np.zeros(len(X))
