@@ -4,7 +4,7 @@ Wavelet theory provides a way of constructing orthonormal bases in $\mathcal{L}^
 f = \sum_{k\in\mathbb{Z}}^N c_k \textbf{e}_k
 \end{align*}
 
-for suitable coefficients $c_k$. The index set of the sum is generally infinite but in order for the representation to be of practical use the functions $f$ must be able to be approximated well by finite partial sums.
+for suitable coefficients $c_k$. The index set of the sum is generally infinite but in order for the representation to be of practical use, the functions $f$ must be able to be approximated well by finite partial sums \cite{page 160, FSE2010}.
 
 \begin{definition}[Wavelet]
 Let $\psi \in \mathcal{L}^2(\mathbb{R})$.
@@ -17,7 +17,7 @@ Let $\psi \in \mathcal{L}^2(\mathbb{R})$.
 \end{enumerate}
 \end{definition}
 
-Therefore, $\psi_{j,k}$ is a dilation and translation \martin{Vildt forslag: udbyg kapitel 5 til et kapitel med det matematiske fundament, som indeholder begreber såsom Banach-rum, Hilbert-rum, definitioner af kravene for disse samt definitioner af disse lineære operatorer (translationen $T_a$, modulationen $E_b$ og udvidelsen $D_c$ defineret på side 120). \textregistered}. A simple wavelet is the Haar wavelet.
+Therefore, $\psi_{j,k}$ is a dilation and translation \martin{Forslag: udbyg kapitel 5 til et kapitel med det matematiske fundament, som indeholder begreber såsom Banach-rum, Hilbert-rum, definitioner af kravene for disse samt definitioner af disse lineære operatorer (translationen $T_a$, modulationen $E_b$ og udvidelsen $D_c$ defineret på side 120). Dette kan findes i FSE2010. \textregistered}. A simple wavelet is the Haar wavelet.
 
 \begin{definition}[Haar Wavelet] \label{HaarWave}
 The \textit{Haar function} is defined by
@@ -31,7 +31,7 @@ The \textit{Haar function} is defined by
 \end{align*}
 \end{definition}
 
-The proof that the functions $\{\psi_{j,k}\}_{j,k\in\mathbb{Z}}$ constitute an orthonormal basis for $\mathcal{L}^2$ is quite technical and will therefore be skipped as the purpose of this chapter is merely an appliance of the wavelet analysis \cite{page 161, FSE2010} \martin{Overvej dette. \textregistered}.
+The proof that the functions $\{\psi_{j,k}\}_{j,k\in\mathbb{Z}}$ constitute an orthonormal basis for $\mathcal{L}^2$ is quite technical and will therefore be skipped as the purpose of this chapter is merely to introduce and apply wavelet analysis as an alternative to the Fourier transform \cite{page 161, FSE2010} \martin{Overvej dette. \textregistered}.
 
 The following definition is the background for a main theorem of this section \cite{page 170, FSE2010}.
 
@@ -42,7 +42,7 @@ Let $N \in \mathbb{N}$. A function $\psi$ has $N$ vanishing moments if
 \end{align*}
 \end{definition}
 
-The Haar wavelet defined in definition \ref{HaarWave} has only one vanishing moment. If $\psi$ has a large number of vanishing moments, the following result shows that only relatively few coefficients $\langle f, \psi_{j,k} \rangle$ will be large and therefore only a small number of wavelets are needed in the expansion \martin{Vi skal definere hvad der menes med kompakt støtte. \textregistered}.
+The Haar wavelet defined in definition \ref{HaarWave} has only one vanishing moment. If $\psi$ has a large number of vanishing moments, the following result shows that only relatively few coefficients $\langle f, \psi_{j,k} \rangle$ will be large and therefore only a small number of wavelets are needed in the expansion \martin{Vi skal lige definere hvad der menes med kompakt støtte (kun forskellig fra 0 inden for et begrænset interval). \textregistered}.
 
 \begin{theorem}[Decay of wavelet coefficients]
 Assume that the function $\psi \in \mathcal{L}^2(\mathbb{R})$ is compactly supported and has $N$ vanishing moments. Then, for any $N$ times differentiable function $f \in \mathcal{L}^2(\mathbb{R})$ for which the $N$th derivative $f^{(N)}$ is bounded, there exists a constant $C > 0$ such that
@@ -51,4 +51,16 @@ Assume that the function $\psi \in \mathcal{L}^2(\mathbb{R})$ is compactly suppo
 \end{align}
 \end{theorem}
 
-\eqref{eq:decay_wave_coeff} suggests that a high number of vanishing moments $N$ implies that the numbers $\langle f, \psi_{j,k} \rangle$ decay quickly as $j \to \infty$. Therefore, the higher the number of vanishing moments a wavelet has, the fewer coefficients $\{ \langle f, \psi_{j,k} \rangle \}_{j\in\mathbb{N},k\in\mathbb{Z}}$ are needed in the expansion.
+\eqref{eq:decay_wave_coeff} suggests that a high number of vanishing moments $N$ implies that the numbers $\langle f, \psi_{j,k} \rangle$ decay quickly as $j \to \infty$. Therefore, the higher the number of vanishing moments a wavelet has, the fewer coefficients $\{ \langle f, \psi_{j,k} \rangle \}_{j\in\mathbb{N},k\in\mathbb{Z}}$ are needed in the expansion \cite{page 170, FSE2010}.
+\\ \\
+As described in \ref{ch6}, the STFT is limited by Heisenberg's uncertainty principle. Even though a window with a certain width that satisfies the relation $\sigma_t^2 \sigma_\omega^2 = \frac{1}{4}$ is chosen, the width of the window cannot be changed during the analysis, which means that the Fourier transform is unsuitable to describe signals with both low and high frequencies. The wavelet transform is a different kind of transform, which is used to gain localized information in both frequency and time domains. While the Fourier transform converts a signal between the time and frequency domains, the coefficients of the wavelet transform represent details of the signal at different scale levels and their corresponding temporal location.
+\\
+This is summarized by figure \martin{Lav figur og indsæt reference. \textregistered}, which shows 4 \textit{Heisenberg boxes}, where the area of each cell in each box are similar. The first box shows the signal in time with full time resolution but no frequency resolution; the second box shows the frequency spectrum achieved by the Fourier transform of the signal with full frequency resolution but no time resolution; the third box shows the STFT of the signal with a fixed window size and with equally (but not arbitrarily) good resolutions in time and frequency; and finally, the fourth box shows the wavelet transform of the signal with varying scale levels and their corresponding time resolution. At a low scale level the window is wide, which gives a good frequency resolution but poor time resolution, and at a high scale level the window is narrow, which conversely gives poor frequency resolution but good time resolution. Furthermore, the area of each cell in the boxes for the STFT and the wavelet transform are determined by the width of the window and the particular wavelet being used, respectively \cite{pages 409-410, Wang} \cite{page 43-44, wave_tut}.
+\\ \\
+Mere teori til dette kapitel (ikke nødvendigvis det hele):
+\begin{enumerate}
+\item Continuous-Time Wavelet Transform (CTWT).
+\item Discrete-Time Wavelet Transform (DTWT).
+\item Filtrering ved hjælp af wavelets.
+\item ``Multiresolution Analysis and Discrete Wavelet Transform'' (kapitel 10 i R. Wang).
+\end{enumerate}
