@@ -11,7 +11,6 @@ Created on Fri Apr 21 08:31:00 2017
 
 from short_time_fourier_transform import stft , db
 from windowfunctions import Hamming, Hanning, Kaiser
-import Filter
 import numpy as np
 import impulsrespons as impuls
 import matplotlib.pyplot as plt
@@ -42,7 +41,7 @@ cut  = 1000./freq   # Cut off frequency
 cut1 = 75./freq     # Cut off frequency for band
 cut2 = 1000./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
-plotlength = int(sampels/20) # Length for plotting (arbitrary)
+plotlength = int(sampels/30) # Length for plotting (arbitrary)
 
 
 """ Til Kaiser vinduet """
@@ -93,8 +92,9 @@ H = np.fft.fft(h,(len(signal)))         # The fourier transformed of the final i
 
 print('impuls respons udregnet 4/9')
 
+data = data / float((np.max(signal)))
 signal = signal / float((np.max(signal))) # Reduktion of amplitude
-data = data / float((np.max(data)))
+
 
 """ Dataen fourier transformeres """
 DATA = np.fft.fft(data)     # Pure signal in fourier
@@ -114,32 +114,38 @@ print('Data filtreret 6/9')
 # Plt plots af alt det intresante og data gemmes
 #==============================================================================
 
-plt.plot(tid,data, 'g-',label = "ren signal")  
-plt.plot(tid,signal, 'r-', label = "signal")                                               # Original data with noise added 
-plt.legend(loc = 'upper right')
+#plt.plot(tid,signal, 'r-', label = "signal")  
+#plt.plot(tid,signal_filt, 'b-', label = "filt signal")
+#plt.plot(tid,data, 'g-',label = "ren signal")  # Original data with noise added 
+#plt.legend(loc = 'upper right')
+#plt.xlabel('Time [sec.]')
+#plt.axis([1,1.02,-0.1,0.1])
+#plt.show()
+
+plt.plot(tid,signal)  # Original data with noise added 
 plt.xlabel('Time [sec.]')
-#plt.axis([1,1.05,-0.1,0.1])
+plt.ylabel('Amplitude')
+#plt.savefig("figures/integrationstest/signal.pdf")
 plt.show()
 
-plt.plot(tid,signal_filt, 'b-', label = "filt signal")                                               # Original data with noise added 
-plt.legend(loc = 'upper right')
+plt.plot(tid,signal_filt)  # Original data with noise added 
 plt.xlabel('Time [sec.]')
-#plt.axis([1,1.05,-0.1,0.1])
+plt.ylabel('Amplitude')
+plt.axis([0,6,-1.5,1])
+#plt.savefig("figures/integrationstest/signal_filt.pdf")
 plt.show()
 
 plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          # FFT of clean data
 plt.xlabel('Frequency [Hz]')
-plt.title('Signal')
+plt.ylabel('Amplitude')
+plt.axis([200,270,0,1000])
+#plt.savefig("figures/integrationstest/f_signal.pdf")
 plt.show()
 
-#plt.plot(freq_axis[:plotlength],np.abs(H)[:plotlength])             # FFT of impuls respons   
-#plt.xlabel('Frequency [Hz]')
-#plt.title('Filter')
-#plt.show()
-
 plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   # FFT of the filtered data
-plt.xlabel('Freq af Filtreret signal')
-plt.title('Filtreret signal')
+plt.xlabel('Frequency [Hz]')
+plt.ylabel('Amplitude')
+#plt.savefig("figures/integrationstest/f_signal_filt.pdf")
 plt.show()
 
 #plt.plot(tid,signal, 'r-', label = "signal")
@@ -149,7 +155,6 @@ plt.show()
 #plt.xlabel('Time [sec.]')
 #plt.axis([1.0,1.05,-0.1,0.1])
 #plt.show()
-
 
                                         
 
@@ -180,9 +185,10 @@ y = np.linspace(0,freq_axis[-1],np.shape(X)[0])
 
 spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],cmap='hot')
 cb   = plt.colorbar(spec)
-cb.set_label(label = 'Amplitude (dB)', fontsize=fontsize)
-plt.xlabel('Time (sec)', fontsize = fontsize)
-plt.ylabel('Frequency (Hz)', fontsize = fontsize)
+cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
+plt.xlabel('Time [sec]', fontsize = fontsize)
+plt.ylabel('Frequency [Hz]', fontsize = fontsize)
+#plt.savefig("figures/integrationstest/spectrogram.pdf")
 plt.show()
 
 #plt.plot(freq_axis,np.angle(H)[:sampels/2])
@@ -210,7 +216,11 @@ if dataType == "Tabs": #Tjeck if data is in single tabs or chords
     for i in range(len(X)):
         max_freq_t[i] = y[int(max_freq_pos[i])]
     plt.stem(x,max_freq_t)
+    plt.xlabel('time [sec]')
+    plt.ylabel('Max. frekvens [Hz]')
+    #plt.savefig("figures/integrationstest/peak_dec.pdf")
     print(max_freq_t[6])
+    
 elif dataType == "Chords":
     max_freq_pos1 = np.zeros(len(X))
     max_freq_pos2 = np.zeros(len(X))
