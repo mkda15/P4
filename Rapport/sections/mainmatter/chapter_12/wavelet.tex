@@ -1,0 +1,54 @@
+\section{Definition of wavelets}
+Wavelet theory provides a way of constructing orthonormal bases in $\mathcal{L}^2(\mathbb{R})$, which is a concrete Hilbert space consisting of functions. These functions must be scaled and translated versions of a fixed function. For an orthonormal basis $\{\textbf{e}_k\}$ for $\mathcal{L}^2(\mathbb{R})$ then all functions $f \in \mathcal{L}^2(\mathbb{R})$ have an expansion
+\begin{align*}
+f = \sum_{k\in\mathbb{Z}}^N c_k \textbf{e}_k
+\end{align*}
+
+for suitable coefficients $c_k$. The index set of the sum is generally infinite but in order for the representation to be of practical use the functions $f$ must be able to be approximated well by finite partial sums.
+
+\begin{definition}[Wavelet]
+Let $\psi \in \mathcal{L}^2(\mathbb{R})$.
+\begin{enumerate}
+\item For $j,k \in \mathbb{Z}$, define the function $\psi_{j,k}$ by
+\begin{align*}
+\psi_{j,k}(x) = 2^{j/2} \psi(2^jx-k), \quad x \in \mathbb{R}.
+\end{align*}
+\item The function $\psi$ is called a wavelet if the functions $\{\psi_{j,k}\}_{j,k\in\mathbb{Z}}$ form an orthonormal basis for $\mathcal{L}^2(\mathbb{R})$.
+\end{enumerate}
+\end{definition}
+
+Therefore, $\psi_{j,k}$ is a dilation and translation \martin{Vildt forslag: udbyg kapitel 5 til et kapitel med det matematiske fundament, som indeholder begreber såsom Banach-rum, Hilbert-rum, definitioner af kravene for disse samt definitioner af disse lineære operatorer (translationen $T_a$, modulationen $E_b$ og udvidelsen $D_c$ defineret på side 120). \textregistered}. A simple wavelet is the Haar wavelet.
+
+\begin{definition}[Haar Wavelet] \label{HaarWave}
+The \textit{Haar function} is defined by
+\begin{align*}
+\psi(x) =
+\begin{cases}
+1 \quad &\textnormal{if } 0 \leq x < \frac{1}{2} \\
+-1 \quad &\textnormal{if } \frac{1}{2} \leq x  < 1 \\
+0 \quad &\textnormal{otherwise}
+\end{cases}
+\end{align*}
+\end{definition}
+
+The proof that the functions $\{\psi_{j,k}\}_{j,k\in\mathbb{Z}}$ constitute an orthonormal basis for $\mathcal{L}^2$ is quite technical and will therefore be skipped as the purpose of this chapter is merely an appliance of the wavelet analysis \cite{page 161, FSE2010} \martin{Overvej dette. \textregistered}.
+
+The following definition is the background for a main theorem of this section \cite{page 170, FSE2010}.
+
+\begin{definition}[Vanishing moments]
+Let $N \in \mathbb{N}$. A function $\psi$ has $N$ vanishing moments if
+\begin{align*}
+\int_{-\infty}^\infty x^\ell \psi(x) dx = 0 \quad for \quad \ell = 0, 1, \dots, N-1.
+\end{align*}
+\end{definition}
+
+The Haar wavelet defined in definition \ref{HaarWave} has only one vanishing moment. If $\psi$ has a large number of vanishing moments, the following result shows that only relatively few coefficients $\langle f, \psi_{j,k} \rangle$ will be large and therefore only a small number of wavelets are needed in the expansion \martin{Vi skal definere hvad der menes med kompakt støtte. \textregistered}.
+
+\begin{theorem}[Decay of wavelet coefficients]
+Assume that the function $\psi \in \mathcal{L}^2(\mathbb{R})$ is compactly supported and has $N$ vanishing moments. Then, for any $N$ times differentiable function $f \in \mathcal{L}^2(\mathbb{R})$ for which the $N$th derivative $f^{(N)}$ is bounded, there exists a constant $C > 0$ such that
+\begin{align} \label{eq:decay_wave_coeff}
+|\langle f, \psi_{j,k} \rangle| \leq C 2^{-jN} 2^{-j/2}, \quad \forall \ j \geq 1, \quad k \in \mathbb{Z}.
+\end{align}
+\end{theorem}
+
+\eqref{eq:decay_wave_coeff} suggests that a high number of vanishing moments $N$ implies that the numbers $\langle f, \psi_{j,k} \rangle$ decay quickly as $j \to \infty$. Therefore, the higher the number of vanishing moments a wavelet has, the fewer coefficients $\{ \langle f, \psi_{j,k} \rangle \}_{j\in\mathbb{N},k\in\mathbb{Z}}$ are needed in the expansion.
