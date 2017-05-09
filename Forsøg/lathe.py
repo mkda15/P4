@@ -21,8 +21,8 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/akkorder/forsoeg_akkord_lys_nospeak.wav')  # Data signal
-freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')                  # Noise signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')  # Data signal
+freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
 """ Length of data and noise alings"""
