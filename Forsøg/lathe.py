@@ -21,7 +21,7 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/akkorder/forsoeg_akkord_lys_nospeak.wav')  # Data signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/melodi/akkorder/forsoeg_lillepeteredderkop_langsom.wav')  # Data signal
 freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
@@ -39,7 +39,7 @@ window = Kaiser     # The wanted window is named (Has to be capitalised and has 
 M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
 cut1 = 70./freq     # Cut off frequency for band
-cut2 = 600./freq    # Cut off frequency for band 
+cut2 = 1000./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/2) # Length for plotting (arbitrary)
 
@@ -60,6 +60,7 @@ freq_inter1 = 0
 freq_inter2 = 100
 
 fontsize = 13
+dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
                  
 print("variabler og data importeret 1/9")
 
@@ -110,7 +111,7 @@ print('Data filtreret 6/9')
 # Plt plots af alt det intresante og data gemmes
 #==============================================================================
 
-plt.plot(freq_axis[:plotlength],np.abs(DATA)[:plotlength])          # FFT of clean data
+plt.plot(freq_axis[:plotlength-50000],np.abs(DATA)[:plotlength-50000])          # FFT of clean data
 plt.xlabel('Ren Data freq')
 plt.show()
 
@@ -182,14 +183,64 @@ plt.show()
 #
 #plt.plot(freq_axis,Hdb[:sampels/2])
 #plt.axis([0,500,-100,2])
-
 X = X.T
-max_freq_pos = np.zeros(len(X))
+sortedX = np.zeros(len(X),dtype = object)
 for i in range(len(X)):
-    a = np.where(X[i][:] == np.max(X[i])) 
-    max_freq_pos[i] = a[0][0]
+    sortedX[i] = np.sort(X[i])
+if dataType == "Tabs": #Tjeck if data is in single tabs or chords
+    max_freq_pos = np.zeros(len(X))
+    for i in range(len(X)):
+        a = np.where(X[i][:] == np.max(X[i])) 
+        max_freq_pos[i] = a[0][0]
     
-max_freq_t = np.zeros(len(X))
-for i in range(len(X)):
-    max_freq_t[i] = y[int(max_freq_pos[i])] 
-plt.stem(x,max_freq_t)
+    max_freq_t = np.zeros(len(X))
+    for i in range(len(X)):
+        max_freq_t[i] = y[int(max_freq_pos[i])] 
+    plt.stem(x,max_freq_t)
+    print(max_freq_t[6])
+elif dataType == "Chords":
+    max_freq_pos1 = np.zeros(len(X))
+    max_freq_pos2 = np.zeros(len(X))
+    max_freq_pos3 = np.zeros(len(X))
+    
+    for i in range(len(X)):
+        if sortedX[i][-1] > 10:
+            a = np.where(X[i][:] == sortedX[i][-1])
+        else:
+            a = [[0]]
+        if sortedX[i][-2] > 10:
+            b = np.where(X[i][:] == sortedX[i][-2])
+        else:
+            b = [[0]]
+        if sortedX[i][-3] > 10:
+            c = np.where(X[i][:] == sortedX[i][-3])
+        else:
+            c = [[0]]
+        max_freq_pos1[i] = a[0][0]
+        max_freq_pos2[i] = b[0][0]
+        max_freq_pos3[i] = c[0][0]
+        
+    max_freq_t1 = np.zeros(len(X))
+    max_freq_t2 = np.zeros(len(X))
+    max_freq_t3 = np.zeros(len(X))
+    for i in range(len(X)):
+        if max_freq_pos1[i] == 0:
+            max_freq_t1[i] = 0
+        else:
+            max_freq_t1[i] = y[int(max_freq_pos1[i])]
+        if max_freq_pos2[i] == 0:
+            max_freq_t2[i] = 0
+        else:
+            max_freq_t2[i] = y[int(max_freq_pos2[i])] 
+        if max_freq_pos3[i] == 0:
+            max_freq_t3[i] = 0
+        else:
+            max_freq_t3[i] = y[int(max_freq_pos3[i])] 
+    plt.plot(max_freq_t1)
+    plt.plot(max_freq_t2)
+    plt.plot(max_freq_t3)
+
+    sted = 55
+    print(max_freq_t1[sted])
+    print(max_freq_t2[sted])
+    print(max_freq_t3[sted])
