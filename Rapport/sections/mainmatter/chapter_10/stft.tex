@@ -1,7 +1,7 @@
-In this section the STFT will be implemented and tested to check that it fulfils the test criteria specified in chapter \ref{ch3}. This includes creating a spectrogram from the results of the STFT and check if this is consistent with the expected results.
+In this section an STFT will be implemented in Python and tested to check that it fulfils the test criteria specified in chapter \ref{ch3}. This includes creating a spectrogram from the results of the STFT and check if this is consistent with the expected results. The implementation is based on the theory of the discrete STFT described in section \ref{sec:STFT}.
 
 \subsection{Implementation of the STFT and spectrogram}
-The implementation of the STFT requieres an FFT algorithm and will use the algorithm described in algorithm \ref{FFTalg}.
+The implementation of the STFT requires an FFT algorithm and will use the algorithm described in algorithm \ref{FFTalg}.
 \\ \\
 The STFT will be implemented in Python, and the algorithm for the implementation is seen below in algorithm \ref{STFTalg}.
 \begin{algorithm}[H]
@@ -9,7 +9,7 @@ The STFT will be implemented in Python, and the algorithm for the implementation
 \label{STFTalg}
 \begin{algorithmic}[1]
 \State $FFTsize=2**N$ \Comment{Length of window and FFT in STFT}
-\State $overlap=2$ \Comment{Number of overlaps of every FFT - 2 is 50\%}
+\State $overlap=2$ \Comment{Number of overlaps of every FFT - 2 is 50\% overlap of adjacent windows}
 \State $data=$ import of recording \Comment{Recording imported as .wav file}\\
 \Procedure{Compute STFT}{}
 \State $step=FFTsize/overlap$
@@ -133,8 +133,8 @@ The STFT uses a window function to taper the segment of the data to be transform
 \caption{Spectrograms generated with different windows of length 100 and with overlap of 2.}
 \label{fig:stft_windows_100}
 \end{figure}
-The above figures together with figures *Insert reference* in chapter *Insert reference* with plots of the dB amplitude of the windows are used to determine which window is optimal for the purpose of this project in conjunction with the paper of *Insert name of author*. It is assessed that the window most useful for the purpose of the STFT in this project is the Kaiser window, which is the favourite of the source and the bestperforming in the creatioj of spectrograms. This window will be used in the STFT from now on.
-
+\subsection{Conclusion}
+Fredric J. Harris wrote an article \cite{fredric_harris} in 1978 analysing the different windows and their effect in signal processing with the discrete Fourier transform. His analysis included quantative and qualitative arguments and he ends the article concluding that the Kaiser window and the Blackman-Harris windows are the best choices for this kind of signal processing - his favourite being the Kaiser window. It is furthermore assessed from the above spectrograms, which allow for a visual (and qualitative) analysis, that the Kaiser window produces the best looking spectrograms. Together with the conclusion from Harris, it is decided that the Kaiser window will be used for the implementation of the STFT in this project. \frede{Vi skal bestemme os for orden og $\beta$ \texttrademark}
 
 
 
