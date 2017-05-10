@@ -22,7 +22,7 @@ import scipy.io.wavfile as siw
 #==============================================================================
 """ Data import """
 
-freq , data  = siw.read('Lydfiler/forsoeg_lillepeteredderkop_langsom2.wav')  # Data signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')  # Data signal
 freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')                  # Noise signal
 #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
@@ -201,7 +201,7 @@ for i in range(len(X)):
 if dataType == "Tabs": #Tjeck if data is in single tabs or chords
     max_freq_pos = np.zeros(len(X))
     for i in range(len(X)):
-        if np.max(X[i]) > 0:
+        if np.max(X[i]) > 17:
             a = np.where(X[i][:] == np.max(X[i]))
             max_freq_pos[i] = a[0][0]
         else:

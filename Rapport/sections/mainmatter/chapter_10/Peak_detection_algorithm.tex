@@ -11,6 +11,13 @@ This will hold as long as the signal to noise ratio of the signal isn't smaller 
 \\
 A visualization of this, is finding the peaks in the output spectrogram.
 Due to Heisenbergs inequality \ref{Heis??} \chr{Heisenberg} a compromise between the time and frequency resolution has to be made and an approximation of the notes being played is a possibility.
+For a final detection, the calculated frequency would need to be compared with the frequency of the tones a guitar would play. 
+This will make an approximation of the note a possibility even with a lower resolution in frequency.
+\\
+With the signal short time Fourier transformed, each segmented data set corresponding to a FFT of at a given time, and hence finding the peak amplitude and the corresponding frequency gives the tone being played at a given time.
+\\\\
+To make sure the the amplitude is from a note being played, and not from noise in the signal, a check can be implemented in the algorithm, such that the amplitude is set to $0$ if the amplitude isn't larger than a given limit.
+This i turn will reduce the amount of noise slipping through the algorithm for signals with a low $SNR$
 
 An algorithm for locating the frequency with the largest amplitude  is implemented in python 
 \begin{algorithm}[H]
@@ -22,8 +29,16 @@ An algorithm for locating the frequency with the largest amplitude  is implement
 \State $Y =$ linspace($0,$ Nyquist, length W) \Comment Generate linear spaced vectors with len($W$) points.
 	\For {each integer $i$ in length of $X$}
 		\State $A = max(X[i])$ \Comment {Maximum amplitude for each FFT}
-		\State freq\_pos = where in $X$[i], $(A == max(X[i]))$ \Comment {The location of the max amplitude is located}
-		\State max\_freq\_time = $Y$[freq\_pos]
+		\If {$A >$ limit} \Comment {Check if the amplitude is larger than a given limit}
+			\State freq\_pos[i] = where in $X$[i], $(A == max(X[i]))$ \Comment {The location of the max amplitude is located}
+		\Else
+			\State freq\_pos[i] = 0	\Comment {Returns $0$ for every frequency under given amplitude}
+		\EndIf
+		\If {freq[i] == 0}
+			\State max\_freq\_time = 0
+		\Else
+			\State max\_freq\_time = $Y$[freq\_pos]
+		\EndIf
 	\EndFor
 	\State Return max\_freq\_time
 \EndProcedure
@@ -32,11 +47,9 @@ An algorithm for locating the frequency with the largest amplitude  is implement
 
 
 
-
-With the signal STFT, each segmented data set corresponding to a FFT of at a given time, and hence finding the peak amplitude and the corresponding frequency gives the tone being played at a given time.
-\\\\
-To make sure the the amplitude is from a note being played, and not from noise in the signal, a check can be implemented in the algorithm, such that the amplitude is set to $0$ if the amplitude isn't larger than a given limit.
-This i turn will reduce the amount of noise slipping through the algorithm for signals with a low $SNR$
 \\
 %An argument coud be made for looking at the 3+ higest frequencies in the signal.
+
+To test this algorithm, it is feed a STFT of a noise filled audio fill containing an "$E_2$" tone being played on a guitar. 
+The expected result of this test is either the fundamental of the $E_2$ = $82.41$ Hz. or an overtone of this as explained in \ref{ch2} exampled given: $\{82.41 \cdot 2 = 164.82, 82.41 \cdot 3 = 247.23, \dots \}$ 
 
