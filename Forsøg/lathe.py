@@ -177,15 +177,15 @@ plt.ylabel('Frequency (Hz)', fontsize = fontsize)
 plt.show()
 
 
-plt.plot(freq_axis,np.angle(H)[:sampels/2])
-plt.axis([0,500,-4,4])
-plt.show()
-
-Hdb =  db(np.abs(H).T)
-
-plt.plot(freq_axis,Hdb[:sampels/2])
-plt.axis([0,500,-100,2])
-plt.show()
+#plt.plot(freq_axis,np.angle(H)[:sampels/2])
+#plt.axis([0,500,-4,4])
+#plt.show()
+#
+#Hdb =  db(np.abs(H).T)
+#
+#plt.plot(freq_axis,Hdb[:sampels/2])
+#plt.axis([0,500,-100,2])
+#plt.show()
 
 
 X = X.T
@@ -210,15 +210,15 @@ elif dataType == "Chords":
     max_freq_pos3 = np.zeros(len(X))
 
     for i in range(len(X)):
-        if sortedX[i][-1] > 10:
+        if sortedX[i][-1] > 20:
             a = np.where(X[i][:] == sortedX[i][-1])
         else:
             a = [[0]]
-        if sortedX[i][-2] > 10:
+        if sortedX[i][-2] > 20:
             b = np.where(X[i][:] == sortedX[i][-2])
         else:
             b = [[0]]
-        if sortedX[i][-3] > 10:
+        if sortedX[i][-3] > 20:
             c = np.where(X[i][:] == sortedX[i][-3])
         else:
             c = [[0]]
@@ -246,7 +246,7 @@ elif dataType == "Chords":
     plt.plot(max_freq_t2)
     plt.plot(max_freq_t3)
 
-    sted = 55
+    sted = 75
     print(max_freq_t1[sted])
     print(max_freq_t2[sted])
     print(max_freq_t3[sted])
