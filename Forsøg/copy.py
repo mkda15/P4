@@ -21,8 +21,8 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/skala/forsoeg_skala_hurtig.wav')  # Data signal
-freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')                  # Noise signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/akkorder/forsoeg_akkord_dyb2.wav')  # Data signal
+freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
 """ Length of data and noise alings"""
@@ -38,7 +38,7 @@ if len(data) < len(noise):
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
 M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
-cut1 = 75./freq     # Cut off frequency for band
+cut1 = 80./freq     # Cut off frequency for band
 cut2 = 1000./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/30) # Length for plotting (arbitrary)
@@ -60,7 +60,7 @@ freq_inter1 = 0
 freq_inter2 = 100
 
 fontsize = 13
-dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
+dataType = "Chords" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
                  
 print("variabler og data importeret 1/9")
 
@@ -131,14 +131,14 @@ plt.show()
 plt.plot(tid,signal_filt)  # Original data with noise added 
 plt.xlabel('Time [sec.]')
 plt.ylabel('Amplitude')
-plt.axis([0,6,-1.5,1])
+#plt.axis([0,6,-1.5,1])
 #plt.savefig("figures/integrationstest/signal_filt.pdf")
 plt.show()
 
 plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          # FFT of clean data
 plt.xlabel('Frequency [Hz]')
 plt.ylabel('Amplitude')
-plt.axis([200,270,0,1000])
+#plt.axis([200,270,0,1000])
 #plt.savefig("figures/integrationstest/f_signal.pdf")
 plt.show()
 
@@ -162,10 +162,10 @@ print('plot plotteret 7/9')
 
 
 """ Data gemmes """
-siw.write('Lydfiler/forsoeg_nopeak/output/out_signal_filt.wav',freq,signal_filt)    # The filtered data is saved
-siw.write('Lydfiler/forsoeg_nopeak/output/out_data.wav',freq,data)                  # Original noise is saved with same length as data
-siw.write('Lydfiler/forsoeg_nopeak/output/out_noise.wav',freq,noise)                # Original data is saved with same length as noise
-siw.write('Lydfiler/forsoeg_nopeak/output/out_signal.wav',freq,signal)              # The signal with noise is saved
+#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal_filt.wav',freq,signal_filt)    # The filtered data is saved
+#siw.write('Lydfiler/forsoeg_nopeak/output/out_data.wav',freq,data)                  # Original noise is saved with same length as data
+#siw.write('Lydfiler/forsoeg_nopeak/output/out_noise.wav',freq,noise)                # Original data is saved with same length as noise
+#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal.wav',freq,signal)              # The signal with noise is saved
 
 print('Data gemt 8/9')
 
@@ -189,6 +189,7 @@ cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
 plt.xlabel('Time [sec]', fontsize = fontsize)
 plt.ylabel('Frequency [Hz]', fontsize = fontsize)
 #plt.savefig("figures/integrationstest/spectrogram.pdf")
+plt.savefig("figures/systemtest/final_spec2.pdf")
 plt.show()
 
 #plt.plot(freq_axis,np.angle(H)[:sampels/2])
@@ -219,6 +220,7 @@ if dataType == "Tabs": #Tjeck if data is in single tabs or chords
     plt.xlabel('time [sec]')
     plt.ylabel('Max. frekvens [Hz]')
     #plt.savefig("figures/integrationstest/peak_dec.pdf")
+    plt.savefig("figures/systemtest/final_peak2.pdf")
     print(max_freq_t[6])
     
 elif dataType == "Chords":
