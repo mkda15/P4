@@ -22,8 +22,8 @@ import scipy.io.wavfile as siw
 #==============================================================================
 """ Data import """
 
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')  # Data signal
-freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')                  # Noise signal
+freq , data  = siw.read('Lydfiler/forsoeg_lillepeteredderkop_langsom2.wav')  # Data signal
+freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')                  # Noise signal
 #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
 """ Length of data and noise alings"""
@@ -40,7 +40,7 @@ window = Kaiser     # The wanted window is named (Has to be capitalised and has 
 M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
 cut1 = 70./freq     # Cut off frequency for band
-cut2 = 1000./freq    # Cut off frequency for band
+cut2 = 600./freq    # Cut off frequency for band
 sampels = len(data) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/2) # Length for plotting (arbitrary)
 
@@ -188,7 +188,12 @@ plt.show()
 #plt.show()
 
 
+#==============================================================================
+# Peak analysis
+#==============================================================================
+
 X = X.T
+# kan laves til en definition og placeres i et andet dokument.
 sortedX = np.zeros(len(X),dtype = object)
 for i in range(len(X)):
 
@@ -196,12 +201,18 @@ for i in range(len(X)):
 if dataType == "Tabs": #Tjeck if data is in single tabs or chords
     max_freq_pos = np.zeros(len(X))
     for i in range(len(X)):
-        a = np.where(X[i][:] == np.max(X[i]))
-        max_freq_pos[i] = a[0][0]
-
+        if np.max(X[i]) > 0:
+            a = np.where(X[i][:] == np.max(X[i]))
+            max_freq_pos[i] = a[0][0]
+        else:
+            max_freq_pos[i] = 0
     max_freq_t = np.zeros(len(X))
     for i in range(len(X)):
-        max_freq_t[i] = y[int(max_freq_pos[i])]
+        if max_freq_pos[i] == 0:
+            max_freq_t[i] = 0
+        else:
+            max_freq_t[i] = y[int(max_freq_pos[i])]
+            
     plt.stem(x,max_freq_t)
     print(max_freq_t[6])
 elif dataType == "Chords":

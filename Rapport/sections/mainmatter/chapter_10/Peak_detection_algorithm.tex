@@ -1,13 +1,12 @@
-In this section a Note locating algorithm will be implemented as note location by Peak amplitude detection.
+In this section a tone locating algorithm will be implemented as tone location by Peak amplitude detection.
 %The integration is validated according to the test specifications in \ref{ch3}
-
+\subsection{Note location}
 To figure out which stand alone tone is being played in a given song/audio fill, to a given time, the STFT is analyzed, and the peak amplitude of the given time is located.\\
 \\
-
 %It can be expected that 
 The frequency with the highest amplitude, and henceforth the largest amount of energy, is the most represented frequency. 
 In an audio file, this will be the frequency of the tone being played or one of the overtones of this frequency \ref{ch2} \chr{ref chapter 2}.
-This will hold as long as the signal to noise ratio of the signal isn't smaller than a given lower limit further explained in \ref{snr??}. \chr{ref snr afsnit og er det efter Peak detection}
+This will hold as long as the signal to noise ratio of the signal isn't smaller than a given lower limit further explained in \ref{snr??}. \chr{ref snr afsnit? og er det efter Peak detection?}
 \\
 \\
 A visualization of this, is finding the peaks in the output spectrogram.
@@ -34,5 +33,10 @@ An algorithm for locating the frequency with the largest amplitude  is implement
 
 
 
-With the signal STFT, each segmented data set corresponding to a FFT of at a given time 
-The frequency in an audio file, 
+With the signal STFT, each segmented data set corresponding to a FFT of at a given time, and hence finding the peak amplitude and the corresponding frequency gives the tone being played at a given time.
+\\\\
+To make sure the the amplitude is from a note being played, and not from noise in the signal, a check can be implemented in the algorithm, such that the amplitude is set to $0$ if the amplitude isn't larger than a given limit.
+This i turn will reduce the amount of noise slipping through the algorithm for signals with a low $SNR$
+\\
+%An argument coud be made for looking at the 3+ higest frequencies in the signal.
+
