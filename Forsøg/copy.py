@@ -21,8 +21,8 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')  # Data signal
-freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')                  # Noise signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/skala/forsoeg_skala_hurtig.wav')  # Data signal
+freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
 """ Length of data and noise alings"""
@@ -148,13 +148,13 @@ plt.ylabel('Amplitude')
 #plt.savefig("figures/integrationstest/f_signal_filt.pdf")
 plt.show()
 
-#plt.plot(tid,signal, 'r-', label = "signal")
-#plt.plot(tid,signal_filt, 'b-', label = "filt") 
-##plt.plot(tid,data, 'g-',label = "ren signal")                                                 # Original data with noise added 
-#plt.legend(loc = 'upper right')
-#plt.xlabel('Time [sec.]')
-#plt.axis([1.0,1.05,-0.1,0.1])
-#plt.show()
+plt.plot(tid,signal, 'r-', label = "signal")
+plt.plot(tid,signal_filt, 'b-', label = "filt") 
+plt.plot(tid,data, 'g-',label = "ren signal")                                                 # Original data with noise added 
+plt.legend(loc = 'upper right')
+plt.xlabel('Time [sec.]')
+plt.axis([1.03,1.06,-0.1,0.1])
+plt.show()
 
                                         
 
@@ -162,10 +162,10 @@ print('plot plotteret 7/9')
 
 
 """ Data gemmes """
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal_filt.wav',freq,signal_filt)    # The filtered data is saved
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_data.wav',freq,data)                  # Original noise is saved with same length as data
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_noise.wav',freq,noise)                # Original data is saved with same length as noise
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal.wav',freq,signal)              # The signal with noise is saved
+siw.write('Lydfiler/forsoeg_nopeak/output/out_signal_filt.wav',freq,signal_filt)    # The filtered data is saved
+siw.write('Lydfiler/forsoeg_nopeak/output/out_data.wav',freq,data)                  # Original noise is saved with same length as data
+siw.write('Lydfiler/forsoeg_nopeak/output/out_noise.wav',freq,noise)                # Original data is saved with same length as noise
+siw.write('Lydfiler/forsoeg_nopeak/output/out_signal.wav',freq,signal)              # The signal with noise is saved
 
 print('Data gemt 8/9')
 

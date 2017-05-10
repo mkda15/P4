@@ -41,7 +41,7 @@ Each unit is integrated into one algorithm on behalf of the system specification
 \end{algorithm}      
 
 \subsection{Integration test}
-During the implementation the output of each step is printed and verified before implementing the next step. This is illustrated by figure \ref{fig:inte_validation} whit a input signal consisting of a low E tone with noise in form of clapping hands.  
+During the implementation the output of each step is printed and verified before implementing the next step. This is illustrated by figure \ref{fig:inte_validation}. The input signal consisting of a low E tone with noise in form of clapping hands.  
 
 \begin{figure}[H]
 \centering
@@ -77,7 +77,7 @@ During the implementation the output of each step is printed and verified before
 \label{fig:inte_validation}
 \end{figure}
 Figure \ref{fig:inte_signal} and \ref{fig:inte_SIGNAL} show the input signal in time and frequency domain respectively. The FFT used is verified as the frequencies with highest amplitude is seen to correspond the known frequencies of an low E tone (82.41 [Hz]) and two corresponding overtones (164.82 [Hz] and 247.23[Hz])\trine{kan vi blot referere til frekvens analysen?}.Further noise appears similar to white noise across all frequencies.\\
-Figure \ref{fig:inte_SIGNAL} and \ref{fig:inte_SIGNAL_filt} show the filtered signal in time and frequency domain respectively. Comparing this to the results of the unit test of the filter the result is the same hence the filtering is integrated as intended. Figure \ref{fig:inte_spec} show a valid spectrogram computed from the filtered signal. From the information in the spectrogram figure \ref{fig:inte_peak} show the frequency with the highest amplitude over time, which is seen to.\\
+Figure \ref{fig:inte_SIGNAL} and \ref{fig:inte_SIGNAL_filt} show the filtered signal in time and frequency domain respectively. Comparing this to the results of the unit test of the filter the result is the same hence the filtering is integrated as intended. Figure \ref{fig:inte_spec} show a valid spectrogram computed from the filtered signal. From the information in the spectrogram figure \ref{fig:inte_peak} show the frequency with the highest amplitude over time, which is seen to match the lightest point in the spectrogram.\\
 \\
 From this the implementation of each unit integrated into one script - forming the final application - is validated. \\
-One can conclude that the final application is working corresponding to the level of the theory implemented. Whether this is fulfil the practical purpose of the application when then input gets more complex is tested in the next section.              
+One can conclude that the final application is working as intended - corresponding to the level of the theory implemented. Whether this fulfil the practical purpose of the application when then input gets more complex is tested in the next section.              
