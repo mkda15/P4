@@ -1,4 +1,4 @@
-\section{Note location and Peak detection}
+Note location and Peak detection
 
 To figure out which stand alone tone is being played in a given song/audio fill, to a given time, the STFT is analyzed, and the peak amplitude of the given time is located.\\
 \\
@@ -12,26 +12,26 @@ This will hold as long as the signal to noise ratio of the signal isn't smaller 
 A visualization of this, is finding the peaks in the output spectrogram.
 Due to Heisenbergs inequality \ref{Heis??} \chr{Heisenberg} a compromise between the time and frequency resolution has to be made and an approximation of the notes being played is a possibility.'
 
-\begin{algorithm}[H]
-\caption{Amplitude peak detection of short time Fourier transfrom}
-\label{alg:FIR}
-\begin{algorithmic}[1] 
-\Procedure{Compute peak amplitude}{}
-\State  Calculated STFT> $X$ \Comment {Given STFT calculation in an array $X$}
-\State $Y =$ linspace $0,$ Nyquist, length W \Comment Generate linear spaced vectors with as many points as in the window for the STFT.
-
-	\For {each integer $i$ in length of $X$}
-		\State $A = max(X[i])$ \Comment {A is set to the maximum amplitude for each FFT}
-		\State max_freq_pos = where in X[I], $(A = max(X[I]))$ \Comment {the location of the max amplitude is located}
-		\State max_freq_time = 
-	\EndFor
-	\State Return max_freq_time
-\EndProcedure
-\Procedure{Locate the associated frequency}
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-
+%\begin{algorithm}[H]
+%\caption{Amplitude peak detection of short time Fourier transfrom}
+%\label{alg:FIR}
+%\begin{algorithmic}[1] 
+%\Procedure{Compute peak amplitude}{}
+%\State  Calculated STFT> $X$ \Comment {Given STFT calculation in an array $X$}
+%\State $Y =$ linspace $0,$ Nyquist, length W \Comment Generate linear spaced vectors with as many points as in the window for the STFT.
+%	\For {each integer $i$ in length of $X$}
+%		\State $A = max(X[i])$ \Comment {A is set to the maximum amplitude for each FFT}
+%		\State max\_freq\_pos = where in X[i], $(A = max(X[i]))$ \Comment {the location of the max amplitude is located}
+%		\State max\_freq\_time = 
+%	\EndFor
+%	\State Return max\_freq\_time
+%\EndProcedure
+%\Procedure{Locate the associated frequency}
+%\State A
+%\EndProcedure
+%\end{algorithmic}
+%\end{algorithm}
+%
 
 
 
