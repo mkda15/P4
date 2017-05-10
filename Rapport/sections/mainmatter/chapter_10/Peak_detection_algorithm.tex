@@ -1,0 +1,39 @@
+\section{Note location and Peak detection}
+
+To figure out which stand alone tone is being played in a given song/audio fill, to a given time, the STFT is analyzed, and the peak amplitude of the given time is located.\\
+\\
+
+%It can be expected that 
+The frequency with the highest amplitude, and henceforth the largest amount of energy, is the most represented frequency. 
+In an audio file, this will be the frequency of the tone being played or one of the overtones of this frequency \ref{ch2} \chr{ref chapter 2}.
+This will hold as long as the signal to noise ratio of the signal isn't smaller than a given lower limit further explained in \ref{ch:snr?}. \chr{ref snr afsnit og er det efter Peak detection}
+\\
+\\
+A visualization of this, is finding the peaks in the output spectrogram.
+Due to Heisenbergs inequality \ref{Heis??} \chr{Heisenberg} a compromise between the time and frequency resolution has to be made and an approximation of the notes being played is a possibility.'
+
+\begin{algorithm}[H]
+\caption{Amplitude peak detection of short time Fourier transfrom}
+\label{alg:FIR}
+\begin{algorithmic}[1] 
+\Procedure{Compute peak amplitude}{}
+\State  Calculated STFT> $X$ \Comment {Given STFT calculation in an array $X$}
+\State $Y =$ linspace $0,$ Nyquist, length W \Comment Generate linear spaced vectors with as many points as in the window for the STFT.
+
+	\For {each integer $i$ in length of $X$}
+		\State $A = max(X[i])$ \Comment {A is set to the maximum amplitude for each FFT}
+		\State max_freq_pos = where in X[I], $(A = max(X[I]))$ \Comment {the location of the max amplitude is located}
+		\State max_freq_time = 
+	\EndFor
+	\State Return max_freq_time
+\EndProcedure
+\Procedure{Locate the associated frequency}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+With the signal STFT, each segmented data set corresponding to a FFT of at a given time 
+The frequency in an audio file, 
