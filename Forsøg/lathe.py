@@ -61,7 +61,7 @@ freq_inter1 = 0
 freq_inter2 = 100
 
 fontsize = 13
-dataType = "Chords" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
+dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
 
 print("variabler og data importeret 1/9")
 
