@@ -1,11 +1,11 @@
-\section{Specifikationer}
-FIR-filteret vælges til at være af type 1, altså er filterordenen $M$ lige og impulsresponsen $h[n]$ er symmetrisk, så $h[n] = h[M - n]$. Filteret har 2 knækfrekvenser $\omega_{c_1}$ og $\omega_{c_2}$ i rad/s, som vælges til at ligge symmetrisk omkring $\omega_2$, der skal elimineres ved hjælp af filteret.
+\section{Specifikationer} \label{ch4_specs}
+FIR-filteret vælges til at være af type 1, altså er filterordenen $M$ lige og impulsresponsen $h[n]$ er symmetrisk, så $h[n] = h[M - n]$. Filteret har 2 knækfrekvenser $\omega_{c_1}$ og $\omega_{c_2}$ i rad/s, som vælges til at ligge symmetrisk omkring $\omega_2$, der skal elimineres ved hjælp af filteret:
 \begin{align*}
 \omega_{c_1} &= \omega_2 - \delta, \\
-\omega_{c_2} &= \omega_2 + \delta, \\
+\omega_{c_2} &= \omega_2 + \delta,
 \end{align*}
 
-hvor $\delta$ vælges til at være $\frac{\pi}{15}$. Filteret designes dermed som et båndstopfilter med ovenstående knækfrekvenser. Den ideelle amplituderespons $H_d(\text{e}^{j\omega}$ er skitseret på figur \ref{fig:ideel_amp_respons} ud fra de opstillede specifikationer.   
+hvor $\delta$ vælges til at være $\frac{\pi}{15}$. Filteret designes dermed som et båndstopfilter med ovenstående knækfrekvenser. Den ideelle amplituderespons $H_d(\text{e}^{j\omega})$ er skitseret på figur \ref{fig:ideel_amp_respons} ud fra de opstillede specifikationer.   
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.6\textwidth]{figures/ideel_amp_respons.PNG}
