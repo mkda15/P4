@@ -60,9 +60,10 @@ freq_inter1 = 0
 freq_inter2 = 100
 
 fontsize = 13
-dataType = "Chords" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
+dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
                  
 print("variabler og data importeret 1/9")
+
 
 signal = impuls.add_noise(data,noise,c = 1.0)   # Noise and data conjoined
 
@@ -147,14 +148,14 @@ plt.xlabel('Frequency [Hz]')
 plt.ylabel('Amplitude')
 #plt.savefig("figures/integrationstest/f_signal_filt.pdf")
 plt.show()
-
-plt.plot(tid,signal, 'r-', label = "signal")
-plt.plot(tid,signal_filt, 'b-', label = "filt") 
-plt.plot(tid,data, 'g-',label = "ren signal")                                                 # Original data with noise added 
-plt.legend(loc = 'upper right')
-plt.xlabel('Time [sec.]')
-plt.axis([1.03,1.06,-0.1,0.1])
-plt.show()
+#
+#plt.plot(tid,signal, 'r-', label = "signal")
+#plt.plot(tid,signal_filt, 'b-', label = "filt") 
+#plt.plot(tid,data, 'g-',label = "ren signal")                                                 # Original data with noise added 
+#plt.legend(loc = 'upper right')
+#plt.xlabel('Time [sec.]')
+#plt.axis([1.03,1.06,-0.1,0.1])
+#plt.show()
 
                                         
 
@@ -203,6 +204,8 @@ plt.show()
 #plt.show()
 
 X = X.T
+p = 17 # lower limit for amplitude to be detected, below p -> 0 
+# kan laves til en definition og placeres i et andet dokument.
 sortedX = np.zeros(len(X),dtype = object)
 for i in range(len(X)):
 
@@ -210,34 +213,39 @@ for i in range(len(X)):
 if dataType == "Tabs": #Tjeck if data is in single tabs or chords
     max_freq_pos = np.zeros(len(X))
     for i in range(len(X)):
-        a = np.where(X[i][:] == np.max(X[i]))
-        max_freq_pos[i] = a[0][0]
-
+        if np.max(X[i]) > p:
+            a = np.where(X[i][:] == np.max(X[i]))
+            max_freq_pos[i] = a[0][0]
+        else:
+            max_freq_pos[i] = 0
     max_freq_t = np.zeros(len(X))
     for i in range(len(X)):
-        max_freq_t[i] = y[int(max_freq_pos[i])]
+        if max_freq_pos[i] == 0:
+            max_freq_t[i] = 0
+        else:
+            max_freq_t[i] = y[int(max_freq_pos[i])]
+            
     plt.stem(x,max_freq_t)
-    plt.xlabel('time [sec]')
-    plt.ylabel('Max. frekvens [Hz]')
+    plt.xlabel('Time [sec.]')
+    plt.ylabel('Frequency [Hz]')
     #plt.savefig("figures/integrationstest/peak_dec.pdf")
     plt.savefig("figures/systemtest/final_peak2.pdf")
     print(max_freq_t[6])
-    
 elif dataType == "Chords":
     max_freq_pos1 = np.zeros(len(X))
     max_freq_pos2 = np.zeros(len(X))
     max_freq_pos3 = np.zeros(len(X))
 
     for i in range(len(X)):
-        if sortedX[i][-1] > 10:
+        if sortedX[i][-1] > 20:
             a = np.where(X[i][:] == sortedX[i][-1])
         else:
             a = [[0]]
-        if sortedX[i][-2] > 10:
+        if sortedX[i][-2] > 20:
             b = np.where(X[i][:] == sortedX[i][-2])
         else:
             b = [[0]]
-        if sortedX[i][-3] > 10:
+        if sortedX[i][-3] > 20:
             c = np.where(X[i][:] == sortedX[i][-3])
         else:
             c = [[0]]
@@ -265,7 +273,7 @@ elif dataType == "Chords":
     plt.plot(max_freq_t2)
     plt.plot(max_freq_t3)
 
-    sted = 55
+    sted = 75
     print(max_freq_t1[sted])
     print(max_freq_t2[sted])
     print(max_freq_t3[sted])
