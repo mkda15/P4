@@ -3,8 +3,8 @@ from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = 2**6
-inter = 2*np.pi
+N = 2**15
+inter = 11*np.pi
 
 def f(x):
     return np.sin(np.pi/3*x)

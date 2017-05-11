@@ -1,4 +1,4 @@
-\section{Design} \label{ch4_design}
+\section{Design af filter} \label{ch4_design}
 I dette afsnit dokumenteres designprocessen samt væsentlige dele af Python-koden, der anvendes til at filtrere signalet.\\
 Først defineres henholdsvis filterordenen $M$, længden af filteret $l = M + 1$, en vektor $n$ med $l+1$ heltal mellem 0 og $l$ samt en vektor $x$ med $l+1$ værdier mellem $-\pi$ og $\pi$.
 \\ \\
@@ -23,7 +23,7 @@ def hd(n,M,f1,f2):
 \end{lstlisting}
 Fordi impulsresponsen er endelig skal den ideelle impulsrespons ganges med en vinduesfunktion, og dette Fourier-transformeres herefter for at opnå en realiserbar frekvens- og amplituderespons. Der er forskellige muligheder for denne vinduesfunktion såsom det rektangulære vindue, Hamming-vinduet, Hann-vinduet og Blackman-vinduet.$^[$\footnote{Disse vinduer er beskrevet på side 559-560 i \textit{Discrete-Time Signal Processing}, Oppenheim \& Schafer (2014).}$^]$ Implementeringen af vinduerne i koden er ganske simpel, og som eksempel ses implementeringen af Hann- og Hamming-vinduet herunder:
 \begin{lstlisting}
-def ha(n,M,a): # Hann-vindue hvis a = 0.5. Hamming-vindue hvis a = 0.54.
+def ha(n,M,a): # Hann-vindue, hvis a = 0.5. Hamming-vindue, hvis a = 0.54.
     w = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] >= 0 and n[i] <= M:
@@ -36,7 +36,7 @@ def ha(n,M,a): # Hann-vindue hvis a = 0.5. Hamming-vindue hvis a = 0.54.
 Grafen for et Hamming-vindue af orden 50 er vist på figur \ref{fig:Hamming}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width = 0.6\textwidth]{figures/Hamming-vindue.PNG}
+    \includegraphics[width = 0.6\textwidth]{figures/Filter/Hamming-vindue.PNG}
     \caption{Eksempel på Hamming-vinduet.}
     \label{fig:Hamming}
 \end{figure}
@@ -45,10 +45,10 @@ Efter implementeringen af vinduerne kaldes funktionerne for den ideelle impulsre
 
 \begin{figure}[H]
 \begin{minipage}{0.49\textwidth}
-\includegraphics[width=0.9\textwidth]{figures/Filter_rekt_30.PNG}
+\includegraphics[width=0.9\textwidth]{figures/Filter/Filter_rekt_50.PNG}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
-\includegraphics[width=0.9\textwidth]{figures/Filter_rekt_100.PNG}
+\includegraphics[width=0.9\textwidth]{figures/Filter/Filter_rekt_100.PNG}
 \end{minipage}
 \caption{Eksempler på båndstopfilteret under anvendelse af det rektangulære vindue og med forskellige filterordener $M$.}
 \label{fig:filter_rekt}

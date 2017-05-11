@@ -13,37 +13,37 @@ from scipy import signal
 # Plot af den ideelle impulsrespons
 #==============================================================================
 
-t = np.linspace(0,1000,10000)
+t = np.linspace(0,np.pi,10000)
 y = np.zeros(len(t))
 
 delta = np.pi/15.
-o1 = np.pi/2 - delta
-o2 = np.pi/2 + delta
+f1 = np.pi/2 - delta
+f2 = np.pi/2 + delta
 
 for i in range(len(t)):
-    if o1 >= t[i]:
+    if f1 >= t[i]:
         y[i] = 1
 
 for i in range(len(t)):
-    if t[i] >= o2:
+    if t[i] >= f2:
         y[i] = 1
 
-#plt.plot(t,y)
-#plt.axis([0,np.pi,0,2])
-#plt.axvline(o1, color='yellow')
-#plt.axvline(o2, color='yellow')
-#plt.axvline(np.pi/2, color='red')
-#plt.axvline(np.pi/3, color='green')
-#plt.axvline(3*np.pi/4, color='green')
-#plt.title('Den ideelle amplituderespons for filteret')
-#plt.xlabel('Frekvens [rad / s]')
-#plt.ylabel('Amplitude')
+plt.plot(t,y)
+plt.axis([0,np.pi,0,2])
+plt.axvline(f1, color='yellow')
+plt.axvline(f2, color='yellow')
+plt.axvline(np.pi/2, color='red')
+plt.axvline(np.pi/3, color='green')
+plt.axvline(3*np.pi/4, color='green')
+plt.title('Den ideelle amplituderespons for filteret')
+plt.xlabel('Frekvens [rad / s]')
+plt.ylabel('Amplitude')
 
 #==============================================================================
 # Definitioner (filterorden, -længde, indeks, knækfrekvenser og impulsrespons)
 #==============================================================================
 
-M = 92
+M = 100
 l = M+1
 
 n = np.linspace(0,l,l+1)
@@ -53,10 +53,10 @@ def hd(n,M,f1,f2):
     hd = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] == M/2:
-            hd[i] = 1 - (o2 - o1)/np.pi
+            hd[i] = 1 - (f2 - f1)/np.pi
         else:
-            hd[i] = (np.sin(o1*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.))) \
-            - (np.sin(o2*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.)))
+            hd[i] = (np.sin(f1*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.))) \
+            - (np.sin(f2*(n[i] - M/2.)) / (np.pi*(n[i] - M/2.)))
     return hd
 
 #==============================================================================
@@ -94,8 +94,8 @@ def blackman(n,M): # Blackman-vinduet
 # Beregning af impuls- og amplituderespons
 #==============================================================================
 
-w = ha(n,M,0.54)
-hd = hd(n,M,o1,o2)
+w = rect(n,M)
+hd = hd(n,M,f1,f2)
 
 def fft(x,n):
     return np.fft.fft(x)
@@ -103,13 +103,13 @@ def fft(x,n):
 h = hd * w
 
 def sig(x):
-    return np.sin(2*np.pi*np.pi/3.*x) + np.sin(2*np.pi*np.pi/2.*x+2*np.pi/3.) + np.sin(2*np.pi*3*np.pi/4.*x+4*np.pi/3.)
+    return np.sin((np.pi/3.)*x) + np.sin((np.pi/2.)*x+2*np.pi/3.) + np.sin((3*np.pi/4.)*x+4*np.pi/3.)
 
 s = sig(t)
 
 s_f = np.convolve(h,s)
 
-freq_inter = 3000
+freq_inter = 500
 
 plt.plot(np.abs(np.fft.fft(s)[:freq_inter]))
 plt.plot(np.abs(np.fft.fft(s_f)[:freq_inter]))
@@ -131,8 +131,8 @@ plt.axis([0,np.pi,0,2])
 plt.title('Amplituderespons for filteret, Hamming-vinduet, $M = %d$' %(M))
 plt.xlabel('Frekvens [rad / s]')
 plt.ylabel('Amplitude')
-plt.axvline(o1, color='yellow') # Nedre knækfrekvens
-plt.axvline(o2, color='yellow') # Øvre knækfrekvens
+plt.axvline(f1, color='yellow') # Nedre knækfrekvens
+plt.axvline(f2, color='yellow') # Øvre knækfrekvens
 plt.axvline(np.pi/2, color='red') # Frekvens, der skal elimineres
 plt.axvline(np.pi/3, color='green') # Frekvens, der skal beholdes
 plt.axvline(3*np.pi/4, color='green') # Frekvens, der skal beholdes
