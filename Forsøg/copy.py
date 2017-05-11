@@ -21,7 +21,7 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/akkorder/forsoeg_akkord_dyb2.wav')  # Data signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/melodi/alene/forsoeg_lillepeteredderkop_hurtig2.wav')  # Data signal
 freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
@@ -60,7 +60,7 @@ freq_inter1 = 0
 freq_inter2 = 100
 
 fontsize = 13
-dataType = "Chords" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
+dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
                  
 print("variabler og data importeret 1/9")
 
@@ -109,25 +109,6 @@ signal_filt = np.fft.ifft(SIGNAL_FILT)  # Filtered data
 signal_filt = np.real(signal_filt)      # Cast to real, to remove the 0j from ifft.
 
 print('Data filtreret 6/9')
-
-#==============================================================================
-# Signal to noise ratio
-#==============================================================================
-def power(data):
-    N=len(data)    
-    a=0
-    for i in range(N):
-        a = np.abs(data[i])**2
-    return (1/N)*a
-
-P_n = power(noise)
-P_sn = power(signal)
-
-def snr(Pn,Ps):
-    return 10*np.log10((Ps-Pn)/Pn)
-
-SNR = snr(P_n,P_sn)
-
 
 
 #==============================================================================
