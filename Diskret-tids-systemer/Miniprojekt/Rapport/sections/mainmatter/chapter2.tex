@@ -21,7 +21,7 @@ I figur \ref{fig:signal} ses signalet.
 \end{figure}
 \section{Sampling}
 For at kunne simulere signalet \eqref{eq:signal} i Python og efterfølgende lave frekvensanalyse og filtrering af det, kræves det at signalet samples. 
-For at undgå spejling som følge af for langsom samplingsfrekvens $f_s$ bruges Nyquist-Shannos samplingsteorem, som siger, at et signal kan fuldstændigt bestemmes ud fra dets samples, hvis det samples med en samplingsfrekvens $f_s$ således, at
+For at undgå aliasing som følge af for langsom samplingsfrekvens $f_s$ bruges Nyquist-Shannons samplingsteorem, som siger, at et signal kan fuldstændigt bestemmes ud fra dets samples, hvis det samples med en samplingsfrekvens $f_s$ således, at
 \begin{align}
 f_s>2B,
 \end{align}
@@ -35,7 +35,7 @@ Det ses, at $f_3=\frac{3}{8}$ Hz er den højeste frekvens i signalet. Altså hav
 \begin{align}
 f_s>\frac{3}{4}\text{ Hz}
 \end{align}
-vil medføre, at der ikke sker spejling, når $s(n)$ samples. I figur \ref{fig:s_sampled} ses $s(n)$ samplet ved $f_s=1$ Hz.\todo{Den her frekvens skal nok tilpasses, således filtreringen går nemmere.}
+vil medføre, at der ikke sker aliasing, når $s(n)$ samples. I figur \ref{fig:s_sampled} ses $s(n)$ samplet ved $f_s=1$ Hz.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/signal_1hz}
