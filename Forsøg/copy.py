@@ -21,7 +21,7 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/akkorder/forsoeg_akkord_dyb2.wav')  # Data signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/melodi/alene/forsoeg_lillepeteredderkop_hurtig2.wav')  # Data signal
 freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
@@ -38,7 +38,7 @@ if len(data) < len(noise):
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
 M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
-cut1 = 80./freq     # Cut off frequency for band
+cut1 = 100./freq     # Cut off frequency for band
 cut2 = 1000./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/30) # Length for plotting (arbitrary)
@@ -174,7 +174,7 @@ print('Data gemt 8/9')
 # Spectrogram
 #==============================================================================
 
-X = stft(signal_filt,fftsize = 2500,overlap = 2)     # STFT calculated
+X = stft(signal_filt,fftsize = 2048 ,overlap = 2)     # STFT calculated
 
 print('stft udregnet 9/9')
 
@@ -190,7 +190,7 @@ cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
 plt.xlabel('Time [sec]', fontsize = fontsize)
 plt.ylabel('Frequency [Hz]', fontsize = fontsize)
 #plt.savefig("figures/integrationstest/spectrogram.pdf")
-plt.savefig("figures/systemtest/final_spec2.pdf")
+#plt.savefig("figures/systemtest/final_spec.pdf")
 plt.show()
 
 #plt.plot(freq_axis,np.angle(H)[:sampels/2])
@@ -229,7 +229,7 @@ if dataType == "Tabs": #Tjeck if data is in single tabs or chords
     plt.xlabel('Time [sec.]')
     plt.ylabel('Frequency [Hz]')
     #plt.savefig("figures/integrationstest/peak_dec.pdf")
-    plt.savefig("figures/systemtest/final_peak2.pdf")
+    #plt.savefig("figures/systemtest/final_peak.pdf")
     print(max_freq_t[6])
 elif dataType == "Chords":
     max_freq_pos1 = np.zeros(len(X))
@@ -278,6 +278,17 @@ elif dataType == "Chords":
     print(max_freq_t2[sted])
     print(max_freq_t3[sted])
 
-l=np.zeros(len(max_freq_t))
-for i in len(max_freq_t)-1:
-    if max_freq_t[i+1] ==    
+#
+k = max_freq_t
+l =np.zeros(len(k))
+l[0]=k[0]
+for i in range(len(k)-1):
+    if k[i+1] == k[i] :
+        l[i+1]= k[i+1]
+    elif k[i+1] == k[i+2]:
+        l[i+1]= k[i+2]
+    else :
+        l[i+1]=0
+        
+    
+    
