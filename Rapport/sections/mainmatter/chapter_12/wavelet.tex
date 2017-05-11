@@ -11,7 +11,7 @@ Let $\psi \in \mathcal{L}^2(\mathbb{R})$.
 \begin{enumerate}
 \item For $j,k \in \mathbb{Z}$, define the function $\psi_{j,k}$ by
 \begin{align*}
-\psi_{j,k}(x) = 2^{j/2} \psi(2^jx-k), \quad x \in \mathbb{R}.
+\psi_{j,k}(t) = 2^{j/2} \psi(2^jt-k), \quad x \in \mathbb{R}.
 \end{align*}
 \item The function $\psi$ is called a wavelet if the functions $\{\psi_{j,k}\}_{j,k\in\mathbb{Z}}$ form an orthonormal basis for $\mathcal{L}^2(\mathbb{R})$.
 \end{enumerate}
@@ -22,17 +22,24 @@ Therefore, $\psi_{j,k}$ is a dilation and translation \martin{Forslag: udbyg kap
 \begin{definition}[Haar Wavelet] \label{HaarWave}
 The \textit{Haar function} is defined by
 \begin{align*}
-\psi(x) =
+\psi(t) =
 \begin{cases}
-1 \quad &\textnormal{if } 0 \leq x < \frac{1}{2} \\
--1 \quad &\textnormal{if } \frac{1}{2} \leq x  < 1 \\
+1 \quad &\textnormal{if } 0 \leq t < \frac{1}{2} \\
+-1 \quad &\textnormal{if } \frac{1}{2} \leq t < 1 \\
 0 \quad &\textnormal{otherwise}
 \end{cases}
 \end{align*}
 \end{definition}
 
 The proof that the functions $\{\psi_{j,k}\}_{j,k\in\mathbb{Z}}$ constitute an orthonormal basis for $\mathcal{L}^2$ is quite technical and will therefore be skipped as the purpose of this chapter is merely to introduce and apply wavelet analysis as an alternative to the Fourier transform \cite{page 161, FSE2010} \martin{Overvej dette. \textregistered}.
+\\ \\
+In general, $\psi(t)$ is compactly supported, which means that $\psi(t) \neq 0$ only inside a bounded range $a < t < b$. Furthermore, $\psi(t)$ has zero mean, which means that it takes both positive and negative values:
+\begin{align*}
+\int_{-\infty}^\infty \psi(t) dt = 0.
+\end{align*}
 
+Therefore, since a wavelet is nonzero only within a finite range and the mean is zero, then $\psi(t)$ has the form of a wave, which is the reason why $\psi(t)$ is called a wavelet \cite{page 411, Wang}. The Haar wavelet is discontinuous at $t = 0, \frac{1}{2}, 1$. Examples of other wavelets that are continuous are the Shannon, Mortlet, and Marr wavelets \cite{page 417-420, Wang}.
+\\ \\
 The following definition is the background for a main theorem of this section \cite{page 170, FSE2010}.
 
 \begin{definition}[Vanishing moments]
