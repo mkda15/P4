@@ -277,3 +277,7 @@ elif dataType == "Chords":
     print(max_freq_t1[sted])
     print(max_freq_t2[sted])
     print(max_freq_t3[sted])
+
+l=np.zeros(len(max_freq_t))
+for i in len(max_freq_t)-1:
+    if max_freq_t[i+1] ==    
