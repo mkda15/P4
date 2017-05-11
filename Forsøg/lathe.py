@@ -201,7 +201,7 @@ for i in range(len(X)):
 if dataType == "Tabs": #Tjeck if data is in single tabs or chords
     max_freq_pos = np.zeros(len(X))
     for i in range(len(X)):
-        if np.max(X[i]) > 17:
+        if np.max(X[i]) > -3:
             a = np.where(X[i][:] == np.max(X[i]))
             max_freq_pos[i] = a[0][0]
         else:
@@ -214,6 +214,9 @@ if dataType == "Tabs": #Tjeck if data is in single tabs or chords
             max_freq_t[i] = y[int(max_freq_pos[i])]
             
     plt.stem(x,max_freq_t)
+    plt.xlabel('Time (sec)', fontsize = fontsize)
+    plt.ylabel('Frequency (Hz)', fontsize = fontsize)
+    plt.show()
     print(max_freq_t[6])
 elif dataType == "Chords":
     max_freq_pos1 = np.zeros(len(X))
