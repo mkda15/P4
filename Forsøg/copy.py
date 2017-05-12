@@ -21,7 +21,7 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/melodi/alene/forsoeg_lillepeteredderkop_hurtig2.wav')  # Data signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')  # Data signal
 freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
@@ -33,6 +33,7 @@ if len(data) > len(noise):
         noise = np.append(noise,noise)
 if len(data) < len(noise):
         noise = noise[:len(data)]
+
 
 """ Variabler til filter """
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
@@ -57,7 +58,7 @@ n   = np.linspace(0,M,M+1)                  # Integer numbers for making window 
 
 """ Variabler til spektogram """
 freq_inter1 = 0    
-freq_inter2 = 100
+freq_inter2 = 2000
 
 fontsize = 13
 dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
@@ -175,10 +176,11 @@ print('Data gemt 8/9')
 #==============================================================================
 
 X = stft(signal_filt,fftsize = 2048 ,overlap = 2)     # STFT calculated
-
+#G = stft(data,fftsize = 2048 ,overlap = 2)
 print('stft udregnet 9/9')
 
-X = db(np.abs(X).T)                             # Calculated to dB
+X = db(np.abs(X).T) 
+#G = db(np.abs(G).T)                            # Calculated to dB
 
 x = np.linspace(0,tid[-1],np.shape(X)[1])       
 y = np.linspace(0,freq_axis[-1],np.shape(X)[0]) 
@@ -187,8 +189,10 @@ y = np.linspace(0,freq_axis[-1],np.shape(X)[0])
 spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],cmap='hot')
 cb   = plt.colorbar(spec)
 cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
-plt.xlabel('Time [sec]', fontsize = fontsize)
-plt.ylabel('Frequency [Hz]', fontsize = fontsize)
+plt.xlabel('Time', fontsize = fontsize)
+plt.ylabel('Frequency', fontsize = fontsize)
+plt.axis([0,5,0,1500])
+#plt.savefig("figures/eks_ch2.png")
 #plt.savefig("figures/integrationstest/spectrogram.pdf")
 #plt.savefig("figures/systemtest/final_spec.pdf")
 plt.show()
@@ -226,8 +230,8 @@ if dataType == "Tabs": #Tjeck if data is in single tabs or chords
             max_freq_t[i] = y[int(max_freq_pos[i])]
             
     plt.stem(x,max_freq_t)
-    plt.xlabel('Time [sec.]')
-    plt.ylabel('Frequency [Hz]')
+    plt.xlabel('Time (sec.)')
+    plt.ylabel('Frequency (Hz)')
     #plt.savefig("figures/integrationstest/peak_dec.pdf")
     #plt.savefig("figures/systemtest/final_peak.pdf")
     print(max_freq_t[6])

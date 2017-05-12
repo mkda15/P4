@@ -78,10 +78,12 @@ def db(x):
 # Funktion som foretager FFT, generere Frekvensplot og spektrogram med scipy.signal
 #==============================================================================
 
-def Freq_plot(lin,data):
+def Freq_plot(lin,data,noise):
     
     start = time.time()
     F = 2/float(len(data))*np.abs(np.fft.fft(data)[:len(data)/2])
+    F2 = 2/float(len(noise))*np.abs(np.fft.fft(noise)[:len(noise)/2])
+   
     end = time.time()
     FFT_time = end - start
 
@@ -92,6 +94,7 @@ def Freq_plot(lin,data):
         plt.xlabel('Time (sec)')
     elif plot == 1:
         plt.plot(bins[freq_inter1:freq_inter2],F[freq_inter1:freq_inter2])
+        plt.plot(bins[freq_inter1:freq_inter2],F2[freq_inter1:freq_inter2])
         plt.legend('Fourier transform of signal')
         plt.xlabel('Frequency (Hz)')
         plt.ylabel('Amplitude')
@@ -155,11 +158,13 @@ plt.show()
 ##==============================================================================
 ## Printer frekvens plot af ren data
 ##==============================================================================
-freq_plot = Freq_plot(lin, data)
+freq_plot = Freq_plot(lin, data, data2)
+
 print 'Mest betydende frekvens:',freq_plot[1]
 print 'Beregningstid for numpy.fft:',freq_plot[2]
 print 'Længde af data:',freq_plot[3]
 print 'Samplingsfrkvens:',freq_plot[4]
+
 
 #==============================================================================
 # Printer frekvensplot af data med støj

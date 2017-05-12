@@ -8,7 +8,7 @@ T(\alpha x[n] + \beta y[n]) = \alpha T(x[n]) + \beta T(x[n]).
 \end{definition}
 
 \begin{definition}[Memoryless system]\label{def:memoryless_system}
-A discrete-time system $T$ is called memoryless when, for any $k\in\mathbb{Z}$ and any inputs $x[n]$ and $\tilde{x}[n]$,
+A discrete-time system $T$ is called memoryless when, for any $k\in\mathbb{Z}$ and any inputs $x[n]$ and $\tilde{x[n]}$,
 \begin{align}
 \mathbf{1}_{\{k\}}x[n] = \mathbf{1}_{\{k\}}\tilde{x}[n] \, \Rightarrow \, \mathbf{1}_{\{k\}} T(x[n]) = \mathbf{1}_{\{k\}}T(\tilde{x}),
 \end{align}
@@ -65,7 +65,7 @@ y[n] = \sum_{k=0}^M b[k] x[n-k] - \sum_{k=1}^N a[k] y[n-k].
 
 This project will focus on systems described by \eqref{eq:LTI_diff_equation_finite}.
 
-\subsubsection{Impulse response}
+\subsection{Impulse response}
 An important characteristic of LTI systems is the unique specification of the system by its \textit{impulse response}.
 \begin{definition}[Impulse response]\label{def:impulse_response}
 A sequence h is called the impulse response of a discrete LTI system T when
@@ -83,20 +83,20 @@ h[n] = \sum_{k=0}^M b[k] \delta[n-k] - \sum_{k=1}^N a[k] h[n-k] = b[n] - \sum_{k
 
 where the first sum reduces to $b[n]$ for $n = k$.
 \subsection{Convolution}
-The concept of convolution is of importance when dealing with discrete time systems and impulse responses and will be defined in this section.\\\\
+The concept of convolution is of importance when dealing with discrete-time systems and impulse responses and will be defined in this section.\\\\
 By writing $x[n]$ in \eqref{eq:DTS} as a sum and by linearity and using the definition of the impulse response we get:
 \begin{align}
 y[n]&=Tx[n]=T\sum_{k\in\mathbb{Z}}x[n]\delta[n-k]
 =\sum_{k\in\mathbb{Z}}x[n]T\delta[n-k]\nonumber\\
 &=\sum_{k\in\mathbb{Z}}x[n]h[n-k].\label{eq:convolution}
 \end{align}
-\eqref{eq:convolution} is defined as a convolution.
-\begin{definition}\label{def:convolution}
+\eqref{eq:convolution} is defined as a convolution sum.
+\begin{definition}[Convolution sum]\label{def:convolution}
 The convolution between sequences $h$ and $x$ is defined as
 \begin{equation}
 (h*x)_n=\sum_{k\in\mathbb{Z}}x[n]h[n-k]=\sum_{k\in\mathbb{Z}}x[n-k]h[k],
 \end{equation}
-where the subscript $_n$ specifies the argument of the convolution.
+where $n$ specifies the argument of the convolution sum.
 \end{definition}
 This means that, given an impulse response for a discrete LTI system, the output to a specific input can be calculated by convoluting the input with the impulse response. An impulse response is sometimes called a filter and convoluting an input with the impulse response is sometimes called filtering. The convolution is of importance in chapter \ref{ch8} which covers filter theory and design in depth. The convolution is furthermore of importance in chapter \ref{ch6} where the Fourier transform is treated. \martin{Kapitlet slutter lidt brat. Kan vi udvide det? \textregistered}
 
