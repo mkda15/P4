@@ -47,7 +47,7 @@ x[n]\in\ell^{\infty}(\mathbb{Z})\,\Rightarrow\,y[n]\in\ell^{\infty}(\mathbb{Z}),
 where $\ell^{\infty}(\mathbb{Z})$ is the space of bounded sequences.$^[$\footnote{See chapter \ref{ch5}.}$^]$
 \end{definition}
 
-\subsection{Linear and time-invariant systems}
+\section{Linear and time-invariant systems}\label{sec:LTI}
 Some discrete-times systems can be described by \textit{linear difference equations} \cite{page 202, FSP}:
 \begin{align} \label{eq:linear_diff_equation}
 y[n] = \sum_{k=-\infty}^{\infty} b^{(n)} [k] x[n-k] - \sum_{k=1}^{\infty} a^{(n)} [k] y[n-k],
@@ -82,7 +82,7 @@ h[n] = \sum_{k=0}^M b[k] \delta[n-k] - \sum_{k=1}^N a[k] h[n-k] = b[n] - \sum_{k
 \end{align*}
 
 where the first sum reduces to $b[n]$ for $n = k$.
-\subsection{Convolution}
+\subsection{Convolution}\label{sec:convol}
 The concept of convolution is of importance when dealing with discrete-time systems and impulse responses and will be defined in this section.\\\\
 By writing $x[n]$ in \eqref{eq:DTS} as a sum and by linearity and using the definition of the impulse response we get:
 \begin{align}

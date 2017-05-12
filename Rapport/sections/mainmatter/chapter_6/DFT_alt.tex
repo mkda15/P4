@@ -102,12 +102,10 @@ Plancherel's equation holds since for $\textbf{X} = F\textbf{x}$ and $\textbf{Y}
 
 The DFT is the Fourier transform designed for a finite-length sequence.
 It treats all finite-length sequences as a period of an infinite-length periodic sequence.
-For this the circular convolution operator is defined.  
+For this case the \textit{circular convolution operator} is defined - closely related to the convolution sum defined in section \ref{sec:convol}.  \trine{jeg har skrevet lidt om og fjernet eigen.. tjek evt udkommentering, og kan man lave den referense til ch 4?} \\
 %The circular convolution operator is the appropriate description of LSI systems on circularly extended finite-length input, as in the case of DFT. 
-
-\chr{Ikke glad for denne sætning}\frede{Det forstår jeg godt, da jeg ikke forstår den \texttrademark}
+%\chr{Ikke glad for denne sætning}\frede{Det forstår jeg godt, da jeg ikke forstår den \texttrademark}
 %". As we haveseen in Section 3.3.3, the circular convolution operator (3.71) is the appropriate description of LSI systems operating on circularly extended finite-length inputs"
-
 The circular convolution use the modulo function $\langle k\rangle_N$. It is possible to write $k = LN+r$ for $0 \leq r < N$ and $L \in \mathbb{Z}$ in a unique way, and the modulo function finds the remainder $r$ from division of $k$ by $N$:
 \begin{align*}
 \langle k \rangle_N = r.
@@ -172,57 +170,57 @@ Z[k] &= \sum_{n=0}^{N-1} z[n] \text{e}^{-j\frac{2\pi}{N}kn} = \sum_{n=0}^{N-1} \
 &= \left( \sum_{m=0}^{N-1} x[m] \text{e}^{-j\frac{2\pi}{N}km} \right)Y[k] = X[k] Y[k].
 \end{align*}
 \end{proof}
-
-The following definition is the background for an important property of the DFT \cite{Eigenfunctions}.
-
-\begin{definition}[Eigenfunction]
-If $D$ is a linear operator on a function space then $f \not\equiv 0$ is an eigenfunction for $D$ and $\lambda$ is the associated eigenvalue, whenever $Df = \lambda f$.
-\end{definition}
-
-A property of LSI systems is that they as eigen sequences $v[n]$ all have complex exponential sequences with modulus being unit length on the form $v[n] = \text{e}^{j \omega n}$ \cite{FSP}.\\ The same follows from Linear Time Invariant (LTI) systems \cite{DTSP}.
-%Egenskaver ved eigenfunctioner:
-The eigenfunction property of the complex exponential function for an LSI system can thus be demonstrated as follows. Consider a complex sequence of radian frequency $v[n] = \text{e}^{j\omega n} \text{ for } -\infty < n < \infty$.
-\\\\
-The corresponding output of an LTI system with impulse response $h[n]$ is
-\begin{align*}
-y[n] 
-&= \sum_{k=-\infty}^{\infty} h[k]\text{e}^{j\omega(n-k)} \nonumber \\ 
-&= \text{e}^{j\omega n} \left(\sum_{k=-\infty}^{\infty} h[k]\text{e}^{-j\omega k} \right).
-\end{align*}
-
-This leads to
-\begin{align}\label{eq:eigenfunction}
-y[n] = H(\text{e}^{j \omega}) \text{e}^{j\omega n}
-\end{align}
-
-for
-\begin{align*}
-H(\text{e}^{j\omega}) = \sum_{k=-\infty}^{\infty} h[k]\text{e}^{-j\omega k}.
-\end{align*}
-
-This follows from the properties of eigenfunctions. Consequently, this leads to $\text{e}^{j\omega n}$ being an eigenfunction of the system with the associated eigenvalue $H(\text{e}^{j\omega})$.
-\\\\
-From \eqref{eq:eigenfunction} it can be noted that $H(\text{e}^{j\omega})$ will describe the change in the complex amplitude of a complex exponential input signal as a function of the frequency $\omega$ \cite{DTSP}. \chr{Might like this sentence rewritten., og dette bliver gentaget i filter sektionen (ved ikke hvad sammenhængen det er brugt til der)}
-%The eigenvalue $H(e^{j\omega})$ is called the frequency response of the system.
-\\
-Since the represented sequence is $N$-periodic, the eigensequence should also be periodic with period $N$, which leads to the following:
-\begin{align*}
-v[n+N] = \text{e}^{j\omega (n+N)} = v[n] \Rightarrow \text{e}^{j\omega N} = 1
-\end{align*}
-
-with $\omega = \dfrac{2 \pi k}{N}$ for $k \in \mathbb{Z}$. From this the previously mentioned twiddle factor can be seen \cite{FSP}:
-\begin{align*}
-v[n] = e^{j\frac{2\pi}{N} kn} = W_N^{-kn}.
-\end{align*}
-
-The twiddle factor can be shown to be an eigensequence for the circular convolution operator.
-\begin{align*}
-	(h\circledast v)[n] 
-	= \sum_{i=0}^{N-i} v[\langle n-i \rangle_N ]h[i] 
-	= \sum_{i=0}^{N-1} W_N^{-k\langle n-i\rangle_N}h[i]
-	&= \sum_{i=0}^{N-1} W_N^{-k(n-i)}h[i]\\
-	&= \sum_{i=0}^{N-1} h[i] W_n^{ki} \, W_N^{-kn}
-	= \lambda[n] v[n]
-\end{align*}\frede{Hvad er indeks $i$?}
-
-This shows that a circular convolution operator $H$ has an eigensequence that is the twiddle factor. \martin{Mangler for dette afsnit: delene om LSI-systemer og sidste del af afsnittet om egenfunktioner omformuleres og kobles bedre sammen med resten af afsnittet (eller eventuelt slettes, hvis det ikke er relevant). Derudover bør der angives sider ved kildehenvisningerne, hvor det er muligt. \textregistered}.
+\trine{den sidste del med eigen er udkommenteret}
+%The following definition is the background for an important property of the DFT \cite{Eigenfunctions}.
+%
+%\begin{definition}[Eigenfunction]
+%If $D$ is a linear operator on a function space then $f \not\equiv 0$ is an eigenfunction for $D$ and $\lambda$ is the associated eigenvalue, whenever $Df = \lambda f$.
+%\end{definition}
+%
+%A property of LSI systems is that they as eigen sequences $v[n]$ all have complex exponential sequences with modulus being unit length on the form $v[n] = \text{e}^{j \omega n}$ \cite{FSP}.\\ The same follows from Linear Time Invariant (LTI) systems \cite{DTSP}.
+%%Egenskaver ved eigenfunctioner:
+%The eigenfunction property of the complex exponential function for an LSI system can thus be demonstrated as follows. Consider a complex sequence of radian frequency $v[n] = \text{e}^{j\omega n} \text{ for } -\infty < n < \infty$.
+%\\\\
+%The corresponding output of an LTI system with impulse response $h[n]$ is
+%\begin{align*}
+%y[n] 
+%&= \sum_{k=-\infty}^{\infty} h[k]\text{e}^{j\omega(n-k)} \nonumber \\ 
+%&= \text{e}^{j\omega n} \left(\sum_{k=-\infty}^{\infty} h[k]\text{e}^{-j\omega k} \right).
+%\end{align*}
+%
+%This leads to
+%\begin{align}\label{eq:eigenfunction}
+%y[n] = H(\text{e}^{j \omega}) \text{e}^{j\omega n}
+%\end{align}
+%
+%for
+%\begin{align*}
+%H(\text{e}^{j\omega}) = \sum_{k=-\infty}^{\infty} h[k]\text{e}^{-j\omega k}.
+%\end{align*}
+%
+%This follows from the properties of eigenfunctions. Consequently, this leads to $\text{e}^{j\omega n}$ being an eigenfunction of the system with the associated eigenvalue $H(\text{e}^{j\omega})$.
+%\\\\
+%From \eqref{eq:eigenfunction} it can be noted that $H(\text{e}^{j\omega})$ will describe the change in the complex amplitude of a complex exponential input signal as a function of the frequency $\omega$ \cite{DTSP}. \chr{Might like this sentence rewritten., og dette bliver gentaget i filter sektionen (ved ikke hvad sammenhængen det er brugt til der)}
+%%The eigenvalue $H(e^{j\omega})$ is called the frequency response of the system.
+%\\
+%Since the represented sequence is $N$-periodic, the eigensequence should also be periodic with period $N$, which leads to the following:
+%\begin{align*}
+%v[n+N] = \text{e}^{j\omega (n+N)} = v[n] \Rightarrow \text{e}^{j\omega N} = 1
+%\end{align*}
+%
+%with $\omega = \dfrac{2 \pi k}{N}$ for $k \in \mathbb{Z}$. From this the previously mentioned twiddle factor can be seen \cite{FSP}:
+%\begin{align*}
+%v[n] = e^{j\frac{2\pi}{N} kn} = W_N^{-kn}.
+%\end{align*}
+%
+%The twiddle factor can be shown to be an eigensequence for the circular convolution operator.
+%\begin{align*}
+%	(h\circledast v)[n] 
+%	= \sum_{i=0}^{N-i} v[\langle n-i \rangle_N ]h[i] 
+%	= \sum_{i=0}^{N-1} W_N^{-k\langle n-i\rangle_N}h[i]
+%	&= \sum_{i=0}^{N-1} W_N^{-k(n-i)}h[i]\\
+%	&= \sum_{i=0}^{N-1} h[i] W_n^{ki} \, W_N^{-kn}
+%	= \lambda[n] v[n]
+%\end{align*}\frede{Hvad er indeks $i$?}
+%
+%This shows that a circular convolution operator $H$ has an eigensequence that is the twiddle factor. \martin{Mangler for dette afsnit: delene om LSI-systemer og sidste del af afsnittet om egenfunktioner omformuleres og kobles bedre sammen med resten af afsnittet (eller eventuelt slettes, hvis det ikke er relevant). Derudover bør der angives sider ved kildehenvisningerne, hvor det er muligt. \textregistered}.
