@@ -100,18 +100,15 @@ Plancherel's equation holds since for $\textbf{X} = F\textbf{x}$ and $\textbf{Y}
 \sum_{n=0}^{N-1} x[n] \overline{y[n]} = \langle \textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle F^*F\textbf{x},\textbf{y} \rangle = \dfrac{1}{N} \langle \textbf{X},\textbf{Y} \rangle = \dfrac{1}{N} \sum_{k=0}^{N-1} X[k] \overline{Y[k]}
 \end{align*}
 
-One of the reasons the Fourier transform plays an important role in mathemathics is simply because they are based on eigen sequences of a linear shift-invariant system (the discrete equivalent of time-invariant system).
-Properties of eigen sequences lead to the following property of convolving:
-There is an equivalence between multiplying Fourier transforms of sequences and convolving the sequences.
-\\ \\
-A fundamental property of linear shift invariant (LSI) systems is that they all have unit-modulus complex exponential sequences as eigensequence \cite{FSP} \martin{Det her med LSI-systemer skal som minimum omformuleres. Har vi et sidetal på det? \textregistered}.
-\\ \\
-The DFT is the Fourier transform designed for a finite length sequence.
+The DFT is the Fourier transform designed for a finite-length sequence.
 It treats all finite-length sequences as a period of an infinite-length periodic sequence.
-The circular convolution operator is the appropriate description of LSI systems on circularly extended finite-length input, as in the case of DFT. \chr{Ikke glad for denne sætning}\frede{Det forstår jeg godt, da jeg ikke forstår den \texttrademark}
+For this the circular convolution operator is defined.  
+%The circular convolution operator is the appropriate description of LSI systems on circularly extended finite-length input, as in the case of DFT. 
+
+\chr{Ikke glad for denne sætning}\frede{Det forstår jeg godt, da jeg ikke forstår den \texttrademark}
 %". As we haveseen in Section 3.3.3, the circular convolution operator (3.71) is the appropriate description of LSI systems operating on circularly extended finite-length inputs"
 
-The DFT is closely connected to circular convolution, which uses the modulo function $\langle k\rangle_N$. It is possible to write $k = LN+r$ for $0 \leq r < N$ and $L \in \mathbb{Z}$ in a unique way, and the modulo function finds the remainder $r$ from division of $k$ by $N$:
+The circular convolution use the modulo function $\langle k\rangle_N$. It is possible to write $k = LN+r$ for $0 \leq r < N$ and $L \in \mathbb{Z}$ in a unique way, and the modulo function finds the remainder $r$ from division of $k$ by $N$:
 \begin{align*}
 \langle k \rangle_N = r.
 \end{align*}
