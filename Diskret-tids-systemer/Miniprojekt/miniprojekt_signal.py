@@ -6,7 +6,7 @@ import matplotlib.axes as axes
 import scipy.fftpack
 
 
-M = 100
+M = 92
 N = 2**15
 fs = 2**5
 t = N/fs
@@ -78,13 +78,13 @@ omega = np.linspace(0,np.pi,M/2)
 #plt.plot(n,sf[M/2:len(sf)-M/2+1])
 
 #plt.plot(S[:len(SF)/2.])
-plt.plot(omega,SF[:len(SF)/2.])
+#plt.plot(omega,SF[:len(SF)/2.])
 
 #plt.plot(S[:1000]/np.max(S))
 #plt.plot(SF[:1000]/np.max(SF))
 
 #plt.plot(S[:100]/np.max(S))
-#plt.plot(H[:100])
+plt.plot(omega,H[:M/2])
 
 plt.xlabel('Frekvens (rad/s)',fontsize=13)
 plt.ylabel('Amplitude',fontsize=13)

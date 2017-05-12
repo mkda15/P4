@@ -13,8 +13,8 @@ from scipy import signal
 #==============================================================================
 # Generer data
 #==============================================================================
-N = 1000 # Antal samples og laengde af FFT
-f_s = 2**1   # Samplingsfrekvens
+N = 2**10 # Antal samples og laengde af FFT
+f_s = 2**5   # Samplingsfrekvens
 td = 1/float(f_s) # Samplingsperiode
 t = td*N
 
@@ -101,7 +101,7 @@ Y2 = 2/float(N)*np.abs(Y2[:N/2])
 #==============================================================================
 # Plots
 #==============================================================================
-plt.style.use('ggplot')
+#plt.style.use('ggplot')
 plt.plot(x[:10],y[:10])
 #plt.plot(xf,Y)
 #plt.plot(xf,Y2)
