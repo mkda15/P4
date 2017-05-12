@@ -5,7 +5,7 @@ Created on Thu May 11 22:25:23 2017
 @author: Frederik Vardinghus
 """
 
-from __future__ import division
+#from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy as sc
@@ -32,41 +32,42 @@ def F(x):
 # Plot af signal i tid og frekvens ved forskellige
 #   samplingsfrekvenser og antal samples
 #==============================================================================
-
-fig = 0
-
-for f in range(len(fs)):
-    for n in range(len(N)):
-        plt.figure(fig)
-        t = np.linspace(0,N[n]/float(fs[f]),N[n])
-        bins = 2*np.pi*np.linspace(0,fs[f]/2.,N[n]/2.)
-        S = F(sig(t))
-        if f == 0:
-            plt.plot(bins,S[:len(S)/2])
-            plt.title('Samples N = %s og samplingsfrekvens fs = %s' %(N[n],fs[f]),fontsize=fontsize)
-            plt.xlabel('Frekvens (rad/s)',fontsize=fontsize)
-            plt.ylabel('Amplitude',fontsize=fontsize)
-            fig += 1
-            if N[n]==N[2]:
-                plt.figure(fig)
-                plt.plot(t[:32],sig(t)[:32])
-                plt.title('Signal samplet ved fs = 1 Hz',fontsize=fontsize)
-                plt.xlabel('Tid (sek)',fontsize=fontsize)
-                plt.ylabel('Amplitude',fontsize=fontsize)
-                fig += 1
-        else:
-            plt.plot(bins[:len(bins)/32.],S[:len(S)/64.])
-            plt.title('Samples N = %s og samplingsfrekvens fs = %s' %(N[n],fs[f]),fontsize=fontsize)
-            plt.xlabel('Frekvens (rad/s)',fontsize=fontsize)
-            plt.ylabel('Amplitude',fontsize=fontsize)
-            fig += 1
-            if N[n]==N[2]:
-                plt.figure(fig)
-                plt.plot(t[:1000],sig(t)[:1000])
-                plt.title('Signal samplet ved fs = 32 Hz',fontsize=fontsize)
-                plt.xlabel('Tid (sek)',fontsize=fontsize)
-                plt.ylabel('Amplitude',fontsize=fontsize)
-                fig += 1
+#
+#fig = 0
+#
+#for f in range(len(fs)):
+#    for n in range(len(N)):
+#        plt.figure(fig)
+#        t = np.linspace(0,N[n]/float(fs[f]),N[n])
+#        bins = 2*np.pi*np.linspace(0,fs[f]/2.,N[n]/2.)
+#        S = F(sig(t))
+#        if f == 0:
+#            plt.plot(bins,S[:len(S)/2])
+#            plt.title('Samples N = %s og samplingsfrekvens fs = %s' %(N[n],fs[f]),fontsize=fontsize)
+#            plt.xlabel('Frekvens (rad/s)',fontsize=fontsize)
+#            plt.ylabel('Amplitude',fontsize=fontsize)
+#            fig += 1
+#            if N[n]==N[2]:
+#                plt.figure(fig)
+#                plt.plot(t[:32],sig(t)[:32])
+#                plt.title('Signal samplet ved fs = 1 Hz',fontsize=fontsize)
+#                plt.xlabel('Tid (sek)',fontsize=fontsize)
+#                plt.ylabel('Amplitude',fontsize=fontsize)
+#                fig += 1
+#        else:
+#            plt.plot(bins[:len(bins)/16.],S[:len(S)/32.])
+#            plt.title('Samples N = %s og samplingsfrekvens fs = %s' %(N[n],fs[f]),fontsize=fontsize)
+#            plt.xlabel('Frekvens (rad/s)',fontsize=fontsize)
+#            plt.axis([0,np.pi,0,1])
+#            plt.ylabel('Amplitude',fontsize=fontsize)
+#            fig += 1
+#            if N[n]==N[2]:
+#                plt.figure(fig)
+#                plt.plot(t[:1000],sig(t)[:1000])
+#                plt.title('Signal samplet ved fs = 32 Hz',fontsize=fontsize)
+#                plt.xlabel('Tid (sek)',fontsize=fontsize)
+#                plt.ylabel('Amplitude',fontsize=fontsize)
+#                fig += 1
 
 #==============================================================================
 # Filtrering
@@ -104,51 +105,30 @@ def ha(n,M,a):
             w[i] = 0
     return w
 
+cut = np.pi/2 # Frekvens som ønskes frafiltreret
+delta = np.pi/15 # Bredde af stopbåndet
+cut1 = (cut - delta)/(2*np.pi) # Første knækfrekvens
+cut2 = (cut + delta)/(2*np.pi) # Anden knækfrekvens
+
 w = ha(t,M,0.54) # Vindue
-h = bs(t,M,cut1,cut2) # Båndstopfilter
-h = h*w # Windowing af båndstopfilter
+hd = bs(t,M,cut1,cut2) # Båndstopfilter
+h = hd*w # Windowing af båndstopfilter
 
 bins = np.linspace(0,M/2,M/2)
 s = sig(t) # Sampling af signal
 s_ideal = s - np.sin(t*np.pi/2+2*np.pi/3)
-       
-sf = np.convolve(s,h) # Filtrering af signal
+
+sf = np.convolve(s,h) # Filtrering af signal gennem foldning
 SF = F(s)*F(h)
-                
-plt.figure(fig)
+
+plt.figure(1)
 plt.plot(bins,SF[:len(SF)/2])
-plt.title('Frekvensspektrum af filtreret signal',fontsize=fontsize)
-plt.xlabel('Frekvens (rad/s)',fontsize=fontsize)
-plt.ylabel('Amplitude',fontsize=fontsize)
-fig +=1 
-plt.figure(fig)
+plt.title("Frekvensspektrum af filtreret signal")
+plt.xlabel("Frekvens [rad / s]")
+plt.ylabel("Amplitude")
+
+plt.figure(2)
 plt.plot(t,s_ideal)
 plt.plot(t,sf[M/2:len(sf)-M/2+1])
-plt.xlabel('Tid (sek)',fontsize=fontsize)
-plt.ylabel('Amplitude',fontsize=fontsize)
-plt.title('Filtrerede og ideelle signal',fontsize=fontsize)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-
-
-
+plt.xlabel("Tid [s]")
+plt.ylabel("Amplitude")

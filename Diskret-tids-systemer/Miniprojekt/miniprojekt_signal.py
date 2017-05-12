@@ -88,6 +88,7 @@ plt.plot(omega,H[:M/2])
 
 plt.xlabel('Frekvens (rad/s)',fontsize=13)
 plt.ylabel('Amplitude',fontsize=13)
+plt.axis([0,3.5,0,1.2])
 
 
 
