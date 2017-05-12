@@ -1,11 +1,34 @@
 \chapter{Frekvensanalyse}
-I dette kapitel foretages der frekvensanalyse af det samplede signal $s[n]$. Dette gøres for at undersøge signalets frekvensmæssige indhold og fortsætte det videre arbejde med modifikation af signalets indhold.\\\\
-Frekvensanalysen gøres mulig med den diskrete Fouriertransformation (DFT), som beregnes ved hjælp af en \textit{fast Fourier transform}-algoritme (FFT) baseret på Cooley-Tukey algoritmen. Algoritmen er implementeret i Python og udnytter DFT-summens symmetri til at lave en rekursiv opdeling af summen, således den beregningsmæssige kompleksitet nedbringes fra $O(N^2)$ (naiv implementering af DFT) til $O(N\log N)$ for store $N$, hvor $N$ er datalængden.
+I dette kapitel foretages der frekvensanalyse af det samplede signal $s[n]$. Dette gøres for at undersøge signalets frekvensmæssige indhold og fortsætte det videre arbejde med modifikation af signalets indhold.
 
 \section{Dokumentation af algoritmer}
-Herunder ses implementeringen af DFT og FFT i et Pythonscript.
-\begin{lstinputlisting}{FFT.py}
-\end{lstinputlisting}
+Frekvensanalysen gøres mulig med den diskrete Fouriertransformation (DFT), som beregnes ved hjælp af en \textit{fast Fourier transform}-algoritme (FFT) baseret på Cooley-Tukey algoritmen. Algoritmen er implementeret i Python og udnytter DFT-summens symmetri til at lave en rekursiv opdeling af summen, således den beregningsmæssige kompleksitet nedbringes fra $O(N^2)$ (naiv implementering af DFT) til $O(N\log N)$ for store $N$, hvor $N$ er datalængden. Herunder ses implementeringen af DFT og FFT i et Pythonscript.
+\begin{lstlisting}
+def DFT(x,c):
+    X = np.zeros(c,dtype=complex)
+    for k in range(len(x)):
+        a = 0+0*1j
+        for n in range(c):
+            a += x[n]*np.exp(-2*np.pi*1j*k*n/float(c))
+            X[k] = a
+    return X
+
+def is_power2(num): # Checks if a number is a power of 2
+	return num != 0 and ((num & (num - 1)) == 0)
+
+def FFT(x):
+    N_new = len(x)
+    if is_power2(N_new) == False:
+        raise ValueError("N skal vaere en potens af 2.")
+    elif N_new == 2:
+        return DFT(x,N_new) # Returnerer DFT naar data ikke kan deles mere op
+    else:
+        X_even = FFT(x[::2]) # Deler rekursivt input op - lige dele
+        X_odd = FFT(x[1::2]) # Deler rekursivt input op - ulige dele
+        factor = np.exp(-2j * np.pi * np.arange(N_new) / N_new) # Twiddlefaktor
+        return np.concatenate([X_even + factor[:int(N_new / 2)] * X_odd,
+                               X_even + factor[int(N_new / 2):] * X_odd])
+\end{lstlisting}
 
 \section{Tids- og frekvensplot}
 I dette afsnit undersøges signalets frekvensspektrum og hvordan dette afhænger af antallet af samples $N$ og samplingsfrekvensen $f_s$. Det vides, at opløsningen i tid afhænger af $f_s$ og at opløsningen i frekvens afhænger af $f_s$ og $N$, således
@@ -19,11 +42,11 @@ På figur \ref{fig:1} ses signalet i tids- og frekvensdomænet samplet med $f_s=
 \begin{figure}[H]
 \begin{minipage}{0.49\textwidth}
 \includegraphics[width=\textwidth]{figures/signal_1hz.png}
-\includegraphics[width=\textwidth]{figures/frekvensanalyse/1hz_freq2}
+\includegraphics[width=\textwidth]{figures/frekvensanalyse/freq_1hz_N256}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
-\includegraphics[width=\textwidth]{figures/frekvensanalyse/1hz_freq1.png}
-\includegraphics[width=\textwidth]{figures/frekvensanalyse/1hz_freq3.png}
+\includegraphics[width=\textwidth]{figures/frekvensanalyse/freq_1hz_N4096.png}
+\includegraphics[width=\textwidth]{figures/frekvensanalyse/freq_1hz_N262144.png}
 \end{minipage}
 \caption{Plot af signal samplet ved $f_s=1$ Hz i tidsdomænet og plot af de tilhørende frekvensdomæner for antal af samples $N = 2^8, 2^{12}, 2^{18}$.}
 \label{fig:1}
@@ -34,11 +57,11 @@ På figur \ref{fig:1} ses signalet ligeledes i tids- og frekvensdomænet samplet
 \begin{figure}[H]
 \begin{minipage}{0.49\textwidth}
 \includegraphics[width=\textwidth]{figures/signal_32hz.png}
-\includegraphics[width=\textwidth]{figures/frekvensanalyse/32hz_freq2}
+\includegraphics[width=\textwidth]{figures/frekvensanalyse/freq_32hz_N256}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
-\includegraphics[width=\textwidth]{figures/frekvensanalyse/32hz_freq1.png}
-\includegraphics[width=\textwidth]{figures/frekvensanalyse/32hz_freq3.png}
+\includegraphics[width=\textwidth]{figures/frekvensanalyse/freq_32hz_N4096.png}
+\includegraphics[width=\textwidth]{figures/frekvensanalyse/freq_32hz_N262144.png}
 \end{minipage}
 \caption{Plot af signal samplet ved $f_s=32$ Hz i tidsdomænet og plot af udsnit af de tilhørende frekvensdomæner for antal af samples $N=2^8, 2^{12}, 2^{18}$.}
 \label{fig:2}
@@ -53,19 +76,3 @@ Det ses i figur \ref{fig:1} og \ref{fig:2}, at amplituderne for de tre frekvense
 
 \section{Delkonklusion}
 Frekvensanalysen af signalet afslørede tydeligt de tre frekvenser, som optræder i signalet, og det blev vist, hvordan opløsningen af signalet i tid og frekvens afhænger af $f_s$ og $N$ - bedre opløsning i tid betyder generelt ringere opløsning i frekvens og omvendt. At lade $N$ være arbitrært stor er ikke en mulighed, da den beregningsmæssige kompleksitet afhænger af $N$ og der ikke haves uendelig regnekraft. På baggrund af disse overvejelser skal der træffes en beslutning om fastlæggelsen af $f_s$ og $N$.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
