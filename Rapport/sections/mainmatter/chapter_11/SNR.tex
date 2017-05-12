@@ -4,9 +4,24 @@ It is further used to analyze the additive noise, on the recorded audio.
 Signal-to-noise ratio (SNR) is a measure of the amount of noise in a signal. 
 The SNR is defined as
 \begin{equation}\label{eq:SNR}
-SNR=\frac{\sigma_{signal}^2}{\sigma_{noise}^2}
+	SNR=\frac{\sigma_{signal}^2}{\sigma_{noise}^2}
 \end{equation}
-where $\sigma_{signal}^2$ is the variance of the wanted signal and $\sigma_{noise}^2$ is the variance of the noise.
+where $\sigma_{signal}^2$ is the variance of the wanted signal and $\sigma_{noise}^2$ is the variance of the noise [\textbf{page 228}\cite{DTSP}].
 
 To try and determine how small the SNR is allowed to be, the recorded music will be added noise in various level such that the SNR is changed. 
 The peak detection algorithm is then used to find peaks, and it is observed when it does not manage to find the right peak as a consequence of the excessive noise in the signal.
+
+To calculated the variance $\sigma^2$ of the signal and noise, the standard deviation $\sigma$ of the signal can be calculated. 
+If the input signal is zero mean, the standard deviation of the signal, can be calculated by the root mean scare of the signal [\textbf{page 228}\cite{DTSP}].
+
+The root mean scare (RMS) is defined as
+\begin{align*}
+	x_{rms} 
+	&=\sqrt{\dfrac{1}{n} \sum_{i=1}^n x_i^2}\\
+	&= \sqrt{\dfrac{x_1^2 + x_2^2 + \dots + x_n^2}{n}},
+\end{align*}
+where $\sigma = x_{rms}$ in the previous mentioned instance with zero mean.\\
+%SNR=\frac{\sigma_{signal}^2}{\sigma_{noise}^2}
+An algorithm to calculating the SNR of the audio signal is implemented in python.
+
+
