@@ -22,7 +22,7 @@ import scipy.io.wavfile as siw
 #==============================================================================
 """ Data import """
 
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')  # Data signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/skala/forsoeg_skala_langsom_cut.wav')  # Data signal
 freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')                  # Noise signal
 #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
@@ -62,10 +62,9 @@ freq_inter2 = 100
 
 fontsize = 13
 dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
-
+noise = noise * 10
 print("variabler og data importeret 1/9")
-
-signal = impuls.add_noise(data,noise,c = 1.0)   # Noise and data conjoined
+signal = impuls.add_noise(data,noise, 1)   # Noise and data conjoined
 
 print('støj adderet 2/9')
 
@@ -265,3 +264,19 @@ elif dataType == "Chords":
     print(max_freq_t2[sted])
     print(max_freq_t3[sted])
 
+#==============================================================================
+# SNR
+#==============================================================================
+
+def RMS(x):
+    x = x**2
+    RMS = np.sqrt((np.sum(x))) / (len(x))
+    return RMS
+
+def SNR(signal,noise):
+    SNR = ((RMS(signal))**2 / (RMS(noise))**2)
+    return SNR
+
+SNR = SNR(data,noise)
+SNRdB = 10*np.log10(SNR)
+print(SNRdB)
