@@ -58,7 +58,7 @@ Efter implementeringen af vinduerne kaldes funktionerne for den ideelle impulsre
 
 Ud fra figur \ref{fig:filter_rekt} ses det, at filteret til en vis grad overholder specifikationerne for begge værdier af $M$, at transitionsbåndet bliver smallere for højere $M$, at stopbåndet kommer tættere mod 0 for højere $M$ samt at der dog er såkaldte ``ripples'' i pasbåndet. Disse ``ripples'' skyldes diskontinuiteterne ved det rektangulære vindue, der pludselig skifter fra $0$ til $1$ og tilbage igen. For at undgå dette kan man bruge et glattere vindue som for eksempel Hamming-vinduet illustreret på figur \ref{fig:Hamming}.
 
-\section{Filtrering}
+\section{Filtrering}\label{sec_filtering}
 Filtreringen af signalet foregår ved at folde signalet med impulsresponsen. Ved Fourier-transformationen svarer foldning i tidsdomænet til multiplikation i frekvensdomænet, og frekvensspektret for det filtrerede signal kan derfor findes ved at Fourier-tranformere signalet og filteret hver for sig og herefter gange disse to sammen. Figur \ref{fig:resultat_rekt} viser henholdsvis frekvensspektret for det filtrerede signal og en sammenligning mellem det filtrerede signal og det ideelle signal ved anvendelse af det rektangulære vindue.
 
 \begin{figure}[H]
@@ -73,3 +73,4 @@ Filtreringen af signalet foregår ved at folde signalet med impulsresponsen. Ved
 \caption{Frekvensspektrum for det filtrerede signal under anvendelse af filter med det rektangulære vindue af orden $M=128$ (venstre) og sammenligning af det filtrerede signal og det ønskede signal (højre).}
 \label{fig:resultat_rekt}
 \end{figure}
+Af frekvensspektret på figur \ref{fig:resultat_rekt} ses det, at $\omega_2$ fremgår, men dog med væsentlig minimeret amplitude. Dette skyldes, at stopbåndet i det anvendte filter ikke er identisk 0.
