@@ -30,7 +30,7 @@ Euler's formula says that $\text{e}^{j\omega t} = \cos(\omega t) + j\sin(\omega 
 &= \left[ \sin\left(\omega \left(n-\dfrac{M}{2}\right)\right) \right]_{\omega=-\omega_{c_2}}^{-\omega_{c_1}} \cdot \dfrac{1}{n - \frac{M}{2}}
 \end{align*}
 
-since the integral of the second term evaluates to 0. Since $\sin(-\omega\cdot t) = - \sin(\omega \cdot t)$ the impulse response may be written as \martin{Gør det noget, at det går ud over margen, når det nu er i appendix? \textregistered}
+since the integral of the second term evaluates to 0. Since $\sin(-\omega\cdot t) = - \sin(\omega \cdot t)$ the impulse response may be written as
 \begin{align*}
 h_d[n] &= \dfrac{1}{2\pi} \left( \dfrac{1}{n - \frac{M}{2}} \left( \sin \left( - \omega_{c_1} \left( n - \frac{M}{2} \right) \right) - \sin \left( - \omega_{c_2} \left( n - \frac{M}{2} \right) \right) + \sin \left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) \right) \right) \\
 &= \dfrac{1}{2\pi} \left( \dfrac{1}{n - \frac{M}{2}} \left( - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) + \sin \left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) + \sin \left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) \right) \right) \\

@@ -58,7 +58,7 @@ n   = np.linspace(0,M,M+1)                  # Integer numbers for making window 
 
 """ Variabler til spektogram """
 freq_inter1 = 0    
-freq_inter2 = 2000
+freq_inter2 = 100
 
 fontsize = 13
 dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
@@ -191,7 +191,7 @@ cb   = plt.colorbar(spec)
 cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
 plt.xlabel('Time', fontsize = fontsize)
 plt.ylabel('Frequency', fontsize = fontsize)
-plt.axis([0,5,0,1500])
+#plt.axis([0,5,0,1500])
 #plt.savefig("figures/eks_ch2.png")
 #plt.savefig("figures/integrationstest/spectrogram.pdf")
 #plt.savefig("figures/systemtest/final_spec.pdf")

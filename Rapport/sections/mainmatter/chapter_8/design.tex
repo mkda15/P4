@@ -1,15 +1,15 @@
 \section{Filter design}
-In this section the process of designing digital filters is described. There will be a distinguished between techniques for IIR and FIR filters.\\ The section is concluded by a comparison of FIR and IIR filters.\\  
+In this section the process of designing digital filters is described. There will be distinguished between techniques for IIR and FIR filters.\\ The section is concluded by a comparison of FIR and IIR filters.\\  
 As described ideal filters are not computable. Hence the process of designing a filter is based on approximation of the frequency response - made by computable polynomials - based on a set of specification for the filter. There exist different design methods to achieve this.   
 \subsection{IIR filter}
-One common way of designing an IIR-filter is to design the discrete time filter from a corresponding continuous time system. The method described in this section follows three main steps. 
+One common way of designing an IIR filter is to design the discrete-time filter from a corresponding continuous-time system. The method follows three main steps. 
 \begin{itemize}
-\item[1.] Specify the properties desired for the filter.
-\item[2.] Hereby compute a "prototype" by a continuous time system $H_c(\Omega)$ that approximates the given properties. In this project, this is done as a \textit{Butterworth filter}  
-\item[3.] Transform the "prototype" into the discrete time filter $H(\omega)$. In this project, this is done with the \textit{Bilinear transformation}. 
+\item[1.] Specify the properties desired for the filter as filter specifications.
+\item[2.] Hereby compute a "prototype" by a continuous-time system $H_c(\Omega)$ that approximates the given properties. In this rapport it is done as a \textit{Butterworth filter}.  
+\item[3.] Transform the "prototype" into the discrete-time filter $H(\omega)$. In this rapport this is done with the \textit{Bilinear transformation}. 
 \end{itemize}
 The properties of a system are specified based on the desired application, considering what frequencies are to pass the filter ideally. Furthermore, it is important to specify how much the filter is allowed to vary from the ideal properties as an ideal filter is not a possibility. \\
-Properties for an approximation to a lowpass filter could be defined by bounding the magnitude within $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$. \\
+Properties for an approximation to a lowpass filter is defined by bounding the amplitude within $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$. \\
 The tolerance scheme based on the specifications of the continuous time filter is illustrated on figure \ref{fig:scheme}.
 The transition of non zero width between the cut off frequency of passband and stopband is necessary in order for the system to be realizable.
 
@@ -43,11 +43,11 @@ ymax=4.6]
 \label{fig:scheme}
 \end{figure}
 
-The predefined Butterworth filter is a lowpass filter approximation used to fit the filter to the requirements . For the Butterworth filter the squared amplitude response is defined as follows.
+The predefined Butterworth filter is a lowpass filter approximation used to fit the filter to the requirements. For the Butterworth filter the squared amplitude response is defined as follows:
 \begin{align}\label{eq:butter}
-|H_c(\Omega)|^2=\frac{1}{1+\left( \frac{j\Omega}{j\Omega_c}\right)^{2N}}
+|H_c(\Omega)|^2=\frac{1}{1+\left( \frac{j\Omega}{j\Omega_c}\right)^{2N}}.
 \end{align} 
-Further the filter is characterised by the following three properties.
+Further the filter is characterised by the following three properties:
 \begin{align}
 1.& \ \ \ |H_c(\Omega)|^2 = 1 \  \ \left|\begin{matrix}
 \\ 
@@ -68,7 +68,7 @@ As the order $N$ of the filter increases the characteristics become sharper and 
 \end{figure} 
 In order to obtain stability in the system representation in the $s$-domain is wanted. By substituting $s=j\Omega$ the following relation is true
 \begin{align}
-|H_c(s)|^2 = H_c(s)H_c(-s)= \frac{1}{1+\left( \frac{s}{j\Omega_c}\right)^{2N}}
+|H_c(s)|^2 = H_c(s)H_c(-s)= \frac{1}{1+\left( \frac{s}{j\Omega_c}\right)^{2N}}.
 \end{align} 
 By letting the denominator in \eqref{eq:butter} equal zero it is possible to determine the poles $s_k$ of the system
 \begin{align}
@@ -80,17 +80,17 @@ s_k = (-1)^{\frac{1}{2N}}\left(j\Omega_c\right)=\Omega_c\text{e}^{\left(\frac{j\
 \end{align}   
 The poles will be placed equally along the circle of radius $\Omega_c$ in the $s$-plane. By only considering the poles in the left half plane, $H_c(s)$ can be construed as a stable system:
 \begin{align}
-H_c(s)=\frac{1}{\prod_{k=1}^{N}(s-s_k)}
+H_c(s)=\frac{1}{\prod_{k=1}^{N}(s-s_k)}.
 \end{align}    
 When the continuous time filter $H_c(s)$ is defined the next step is the digitalization of the filter.  The Bilinear transformation is a method that allows a direct transformation between the s- and z-domain . The principal of the transformation is that the imaginary axis $j\Omega$ of the s-plane is mapped onto the z-plane as the unit circle. The bilinear transformation is defined by 
 \begin{align}
-s=\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right) 
+s=\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right), 
 \end{align}
 such that 
 \begin{align}
-H_c\left[\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right)\right]=H_c(z), 
+H_c\left[\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right)\right]=H_c(z). 
 \end{align}  
-Because $-\infty \leq \Omega \leq \infty $ is mapped to $-\pi \leq \omega \leq \pi$ the transformation most be non linear which involves some frequency distortion. Because of this the method is restricted to situations where this is acceptable or can be compensated. Compensation can be done by the concept of pre wrapping, that uses the relation 
+Because $-\infty \leq \Omega \leq \infty $ is mapped to $-\pi \leq \omega \leq \pi$ the transformation most be non-linear which involves some frequency distortion. Because of this the method is restricted to situations where this is acceptable or can be compensated. Compensation can be done by the concept of pre wrapping, that uses the relation 
 \begin{align}
 \Omega_{c_{new}}=\frac{2}{T_d}\tan\frac{\omega_c}{2}.
 \end{align}
@@ -99,11 +99,11 @@ An important property of the bilinear transformation is that stability is preser
 \subsection{FIR filter}\label{subsec:FIR}
 Design of FIR filters are in contrast to IIR filters based on approximating the desired discrete-time frequency response directly. By this method it is possible to guarantee a general linear phase of the system. The method also uses the window method, which is described in the following section.
 \subsubsection{The window method}
-The window method is considered a simple method for designing FIR filters. The method takes off from the idealized desired frequency response $H_d$, defined to be equal to one in passbands and zero in stopbands corresponding to desired cutoff frequencies. Hereby the idealized impulse response $h_d[n]$ is obtained by the inverse Fourier transformation of the desired frequency response
+The window method is considered a simple method for designing FIR filters. The method takes off from the idealized desired frequency response $H_d$, defined to be equal to one in passbands and zero in stopbands corresponding to desired cutoff frequencies. Hereby the idealized impulse response $h_d[n]$ is obtained by the inverse Fourier transform of the desired frequency response
 \begin{align}
 h_d[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi} H_d(\omega)\text{e}^{j\omega} d\omega.
 \end{align}
-$H_d(\omega)$ usually results in a impulse response of infinite length caused by the discontinuities at the boundaries between pass- and stopband. To compute a finite causal system as a FIR filter on behalf of the desired impulse response the realisable impulse response $h[n]$ of the FIR filter is determined as a product of the idealised impulse response $h_d[n]$ and a finite duration \textit{window} $w[n]$ 
+$H_d(\omega)$ usually results in a impulse response of infinite length caused by the discontinuities at the boundaries between pass- and stopband. To compute a finite causal system as a FIR filter on behalf of the desired impulse response $h_d[n]$ the realisable impulse response $h[n]$ of the FIR filter is determined as a product of the idealised impulse response $h_d[n]$ and a finite duration \textit{window} $w[n]$ 
 \begin{align}
 h[n]=h_d[n]w[n], \ \ w[n] =
 \left\{ \begin{matrix}
@@ -112,7 +112,7 @@ f[n], &\ 0 \leq n \leq M \\
 \end{matrix}\right.
 \end{align}
 
-By this truncation the impulse response of a finite filter of order $M$ is determined such that \trine{må man det?}
+By this truncation the impulse response of a finite filter of order $M$ is determined such that
 \begin{align}
 h[n]= 
 \left\{ \begin{matrix}
@@ -120,11 +120,6 @@ h_d[n]w[n], &\ 0 \leq n \leq M \\
 0, &\ Otherwise
 \end{matrix}\right.
 \end{align}
-By Fourier transformation the frequency response of the filter becomes the periodic convolution 
-\begin{align}
-H(\omega)=\frac{1}{2\pi}\int_{-\pi}^{\pi} X(\theta)W(\omega-\theta)d\theta.
-\end{align}
-
 This is illustrated by an example of the simple \textit{rectangular window} defined as 
 \begin{align}
 w[n] =
@@ -133,34 +128,32 @@ w[n] =
 0, &\ Otherwise
 \end{matrix}\right.
 \end{align}
-
-which by Fourier transformation gives 
+By Fourier transformation this gives the following expression. Figure \ref{fig:rect_db} illustrates the main and side lobes by a decibel plot of the amplitude response corresponding to the rectangular window.
 \begin{align}
 W \left(\omega\right)=\sum_{n=0}^{M} \text{e}^{j\omega n} = \frac{1- \text{e}^{-j\omega(M+1)}}{1- \text{e}^{-j\omega}} = \text{e}^{-j\omega \frac{M}{2}} \frac{ \sin \left( \frac{\omega \left( M+1 \right)}{2} \right)}{\sin \left( \frac{\omega}{2} \right)}.
 \end{align}
 
-Figure \ref{fig:FIR1} illustrates the convolution process referred to as windowing\trine{lav selv præcis figur}. Note that ripples appear in both pass and stopband.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.4]{figures/FIR1.png}
-    \caption{a) Frequency response $H(\omega)$ and Fourier transformation of window $W(\omega)$ b) Approximation of $H(\omega)$ resulting from windowing the desired impulse response.}
-    \label{fig:FIR1}
-\end{figure}
-
-The aim is to approximate the desired frequency response as good as possible. For $w[n]=1 \ \forall \ n$, $W(\omega)$ becomes a periodic impulse, which implies that $H(\omega) = H_d(\omega)$ though the needed truncations are not performed. The impulse train is best approximated by letting the main lobe of $W(\omega)$ be as narrow as possible and the side lobes as small as possible. This corresponds respectively to minimizing the width of the transitionband and the ripples in pass- and stopband, though it is not possible to achieve both at ones.\\
-By increasing the filter order $M$, the width of the main lope is decreased, but the peak amplitude of the side lopes also increases, which results in ripples. This indicates a trade-off between the main width of the main lope and the amplitude of the side lopes. \\
-Figure \ref{fig:rect_db} illustrates the main and side lobes by a decibel plot of the amplitude response corresponding to the rectangular window.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/dbplots/rect.png}
 \caption{dB amplitude response of rectangular window of order $M=100$.}
 \label{fig:rect_db}
 \end{figure}
+
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[scale=0.4]{figures/filter_teori/W_rect.pdf}
+%\caption{Absolute amplitude response of the rectangular window of order $M=8$.}
+%\label{fig:W_rect}
+%\end{figure}
+The aim is to approximate the desired frequency response as good as possible. For $w[n]=1 \ \forall \ n$, $W(\omega)$ becomes a periodic impulse, which implies that $H(\omega) = H_d(\omega)$ though the needed truncations are not performed. The impulse train is best approximated by letting the main lobe of $W(\omega)$ be as narrow as possible and the side lobes as small as possible. This corresponds respectively to minimizing the width of the transitionband and the ripples in pass- and stopband, though it is not possible to achieve both at ones.\\
+By increasing the filter order $M$, the width of the main lope is decreased, but the peak amplitude of the side lopes also increases, which results in ripples. This indicates a trade-off between the width of the main lope and the amplitude of the side lopes. \\
+
 \subsubsection{Different types of windows}
-The rectangular window is one out of many windows that have different properties. The oscillations in the frequency response is a result of Gibbs phenomenon. According to convergence of Fourier series this can be improved by convolving the desired frequency response with a less abrupt window. By narrowing each end of the rectangle smoothly towards zero, the amplitude peak of the side lopes are remarkably decreased, though this will still result in a wider main lope. \\
-In table \ref{tab:window} some commonly used windows are defined. Furthermore, the windows and the corresponding amplitude response in dB are illustrated in figures \ref{fig:window_types} and \vref{fig:windows_db}.
-\begin{table}[H]
+The rectangular window is one out of many windows that have different properties. The oscillations in the $H(\omega)$ is a result of Gibbs phenomenon. According to convergence of Fourier series this can be improved by convolving the desired frequency response with a less abrupt window. By narrowing each end of the rectangle smoothly towards zero, the amplitude peak of the side lopes are remarkably decreased, though this will still result in a wider main lope. \\
+In table \ref{tab:window} some commonly used windows are defined. Furthermore, the windows and the corresponding amplitude response in dB of three different windows are illustrated by figure \ref{fig:windows}.
+\begin{table}[H]\small
 \centering
 \caption{Definition of different types of windows}
 \label{tab:window}
@@ -192,40 +185,31 @@ Blackman    &  $w[n] =
 0, &\ Otherwise
 \end{matrix}\right.$  \\ \hline
 \end{tabular}
-\end{table}   
+\end{table}    
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.8]{figures/filter_teori/window_types.pdf}
-    \caption{Graphs of windows from table \ref{tab:window} of order $M = 8$.}
-    \label{fig:window_types}
-\end{figure}  
-
-\begin{figure}
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figures/dbplots/bartlett.png}
-\caption{Bartlett}
-\label{fig:bartlett_db}
+\includegraphics[width=\textwidth]{figures/filter_teori/window_types.pdf}
+\caption{Window functions in time domain}
+\label{fig:win_type}
 \includegraphics[width=\textwidth]{figures/dbplots/blackman.png}
 \caption{Blackman}
 \label{fig:blackman_db}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figures/dbplots/hann.png}
+\includegraphics[width=\textwidth]{figures/dbplots/bartlett.png}
 \caption{Hann}
 \label{fig:hann_db}
 \includegraphics[width=\textwidth]{figures/dbplots/hamming.png}
 \caption{Hamming}
 \label{fig:hamming_db}
 \end{subfigure}
-\caption{dB amplitude of frequency response of different windows of order $M=100$.}
-\label{fig:windows_db}
+\caption{(a) Different window functions in time domain of order $M=100$ (b, c, d) dB amplitude of frequency response of chosen windows of order $M=100$.}
+\label{fig:windows}
 \end{figure}
-
-
 
 The defined windows all have the property of being symmetric around the point $\frac{M}{2}$. Hence, if the ideal impulse response is also symmetric the windowed impulse will be symmetric, which results in a frequency response with generalized linear phase. \\
 To conclude this section it is seen that in order to design a FIR filter by the window method one can vary the chosen window and the order of the system until the desired specifications are achieved.
@@ -239,7 +223,7 @@ w[n]=\left\{\begin{matrix}
 \end{matrix}\right.
 \end{align}
 
-where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ is the zero'th order modified Bessel function of the first kind \cite{DTSP, p.474-476}. Increasing $\beta$ tapers the window in the time domain, which results in smaller side lopes of the Fourier transform. Increasing $M$ causes the width of the main lope to increase but without changing the peak amplitude of the side lopes. This is illustrated in figures \ref{fig:kaiser_beta} and \ref{fig:kaiser_order}, respectively.\\
+where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ is the zero'th order modified Bessel function of the first kind \cite{DTSP, page 474-476}. Increasing $\beta$ tapers the window in the time domain, which results in smaller side lopes of the Fourier transform. Increasing $M$ causes the width of the main lope to increase but without changing the peak amplitude of the side lopes. This is illustrated in figures \ref{fig:kaiser_beta} and \ref{fig:kaiser_order}, respectively.\\
 
 \begin{figure}[H]
 \centering
