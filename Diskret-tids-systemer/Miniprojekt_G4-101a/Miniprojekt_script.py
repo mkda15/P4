@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May 11 09:42:06 2017
-
-@author: Martin Kamp Dalgaard
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -78,15 +73,14 @@ def FFT(x):
 
 N = np.array([2**8,2**12,2**18])
 fs = np.array([1,32])
-fontsize = 13
 
 fig = 3
 
 def fft(x):
-    return np.fft.fft(x)
+    return FFT(x)
 
 def F(x):
-    return np.abs(fft(x))/np.max(np.abs(fft(x)))
+    return np.abs(FFT(x))/np.max(np.abs(FFT(x)))
 
 for f in range(len(fs)):
     for n in range(len(N)):
@@ -156,11 +150,11 @@ plt.ylabel("Amplitude")
 plt.savefig("Figures/ideel_amp_respons.png")
 
 #==============================================================================
-# Kapitel 4: Design af filter
+# Kapitel 4: Design af filter - eksempel på anvendelse af vindue
 #==============================================================================
 
-M = 50 # Orden
-l = M+1 # Længde af filter
+M = 64 # Orden
+l = M-1 # Længde af filter
 
 n = np.linspace(0,l,l+1)
 x = np.linspace(-np.pi,np.pi,len(n))
@@ -205,27 +199,27 @@ def blackman(n,M): # Blackman-vinduet
             w[i] = 0
     return w, "Blackman-vinduet", "Blackman"
 
-w, s, q = ha(n,M,0.54)
+w, q, z = ha(n,M,0.54)
 
 plt.figure(11)
 plt.stem(n,w)
-plt.title("%s, M = %d" %(s, M))
-plt.axis([0,52,0,1.1])
+plt.title("%s, M = %d" %(q, M))
+plt.axis([-2,M+2,0,1.1])
 plt.xlabel(r"$n$")
 plt.ylabel(r"$w[n]$")
-plt.savefig("Figures/%s_%d.png" %(q, M))
+plt.savefig("Figures/%s_%d.png" %(z, M))
 
 #==============================================================================
-# Kapitel 4: Amplituderespons for filteret
+# Kapitel 4: Amplituderespons for filteret ved forskellige vinduer
 #==============================================================================
 
-M2 = 50 # Orden
-l2 = M2+1 # Længde af filter
+M2 = 64 # Orden
+l2 = M2-1 # Længde af filter
 
 n2 = np.linspace(0,l2,l2+1)
 x2 = np.linspace(-np.pi,np.pi,len(n2))
 
-w2, s2, q2 = rect(n2,M2) # Det rektangulære vindue
+w2, q2, z2 = rect(n2,M2) # Det rektangulære vindue
 hd2 = bs_rad(n2,M2,cut1_rad,cut2_rad) # Ideel impulsrespons
 
 h2 = hd2 * w2 # Den faktiske impulsrespons
@@ -235,7 +229,7 @@ H2 = np.abs(np.fft.fft(h2))
 plt.figure(12)
 plt.plot(x2, H2)
 plt.axis([0,np.pi,0,2])
-plt.title("Amplituderespons, %s, M = %d" %(s2, M2))
+plt.title("Amplituderespons, %s, M = %d" %(q2, M2))
 plt.xlabel("Frekvens [rad / s]")
 plt.ylabel("Amplitude")
 plt.axvline(cut1_rad, color="yellow")
@@ -243,25 +237,25 @@ plt.axvline(cut2_rad, color="yellow")
 plt.axvline(np.pi/2, color="red")
 plt.axvline((np.pi/3), color="green")
 plt.axvline(3*np.pi/4, color="green")
-plt.savefig("Figures/Filter_%s_%d.png" %(q2,M2))
+plt.savefig("Figures/Filter_%s_%d.png" %(z2,M2))
 
-M3 = 100 # Orden
-l3 = M3+1 # Længde af filter
+M3 = 128 # Orden
+l3 = M3-1 # Længde af filter
 
 n3 = np.linspace(0,l3,l3+1)
 x3 = np.linspace(-np.pi,np.pi,len(n3))
 
-w3, s3, q3 = rect(n3,M3) # Det rektangulære vindue
+w3, q3, z3 = rect(n3,M3) # Det rektangulære vindue
 hd3 = bs_rad(n3,M3,cut1_rad,cut2_rad) # Ideel impulsrespons
 
 h3 = hd3 * w3 # Den faktiske impulsrespons
 
-H3 = np.abs(np.fft.fft(h3))
+H3 = np.abs(FFT(h3))
 
 plt.figure(13)
 plt.plot(x3, H3)
 plt.axis([0,np.pi,0,2])
-plt.title("Amplituderespons, %s, M = %d" %(s3, M3))
+plt.title("Amplituderespons, %s, M = %d" %(q3, M3))
 plt.xlabel("Frekvens [rad / s]")
 plt.ylabel("Amplitude")
 plt.axvline(cut1_rad, color="yellow")
@@ -269,25 +263,25 @@ plt.axvline(cut2_rad, color="yellow")
 plt.axvline(np.pi/2, color="red")
 plt.axvline((np.pi/3), color="green")
 plt.axvline(3*np.pi/4, color="green")
-plt.savefig("Figures/Filter_%s_%d.png" %(q3,M3))
+plt.savefig("Figures/Filter_%s_%d.png" %(z3,M3))
 
-M4 = 92 # Orden
-l4 = M4+1 # Længde af filter
+M4 = 64 # Orden
+l4 = M4-1 # Længde af filter
 
 n4 = np.linspace(0,l4,l4+1)
 x4 = np.linspace(-np.pi,np.pi,len(n4))
 
-w4, s4, q4 = ha(n4,M4,0.54) # Hamming-vinduet
+w4, q4, z4 = ha(n4,M4,0.54) # Hamming-vinduet
 hd4 = bs_rad(n4,M4,cut1_rad,cut2_rad) # Ideel impulsrespons
 
 h4 = hd4 * w4 # Den faktiske impulsrespons
 
-H4 = np.abs(np.fft.fft(h4))
+H4 = np.abs(FFT(h4))
 
 plt.figure(14)
 plt.plot(x4, H4)
 plt.axis([0,np.pi,0,2])
-plt.title("Amplituderespons, %s, M = %d" %(s4, M4))
+plt.title("Amplituderespons, %s, M = %d" %(q4, M4))
 plt.xlabel("Frekvens [rad / s]")
 plt.ylabel("Amplitude")
 plt.axvline(cut1_rad, color="yellow")
@@ -295,7 +289,33 @@ plt.axvline(cut2_rad, color="yellow")
 plt.axvline(np.pi/2, color="red")
 plt.axvline((np.pi/3), color="green")
 plt.axvline(3*np.pi/4, color="green")
-plt.savefig("Figures/Filter_%s_%d.png" %(q4,M4))
+plt.savefig("Figures/Filter_%s_%d.png" %(z4,M4))
+
+M5 = 128 # Orden
+l5 = M5-1 # Længde af filter
+
+n5 = np.linspace(0,l5,l5+1)
+x5 = np.linspace(-np.pi,np.pi,len(n5))
+
+w5, q5, z5 = ha(n5,M5,0.54) # Hamming-vinduet
+hd5 = bs_rad(n5,M5,cut1_rad,cut2_rad) # Ideel impulsrespons
+
+h5 = hd5 * w5 # Den faktiske impulsrespons
+
+H5 = np.abs(FFT(h5))
+
+plt.figure(15)
+plt.plot(x5, H5)
+plt.axis([0,np.pi,0,2])
+plt.title("Amplituderespons, %s, M = %d" %(q5, M5))
+plt.xlabel("Frekvens [rad / s]")
+plt.ylabel("Amplitude")
+plt.axvline(cut1_rad, color="yellow")
+plt.axvline(cut2_rad, color="yellow")
+plt.axvline(np.pi/2, color="red")
+plt.axvline((np.pi/3), color="green")
+plt.axvline(3*np.pi/4, color="green")
+plt.savefig("Figures/Filter_%s_%d.png" %(z5,M5))
 
 #==============================================================================
 # Filtrering af signal
@@ -313,35 +333,61 @@ def bs_hz(n,M,f1,f2): # Ideel impulsrespons for båndstopfilteret i hertz
 
 cut = np.pi/2 # Frekvens som ønskes frafiltreret
 delta = np.pi/15 # Bredde af stopbåndet
-cut1_hz = (cut - delta)/(2*np.pi) # Første knækfrekvens
-cut2_hz = (cut + delta)/(2*np.pi) # Anden knækfrekvens
+cut1_hz = (cut - delta)/(2*np.pi) # Første knækfrekvens (herts)
+cut2_hz = (cut + delta)/(2*np.pi) # Anden knækfrekvens (hertz)
 
-M = 92 # Orden af filter
+M = 128 # Orden af filter
 
 t = np.arange(M) # Samplingstidspunkter
-
-w, q, s = ha(t,M,0.54) # Vindue
-hd = bs_hz(t,M,cut1_hz,cut2_hz) # Båndstopfilter
-h = hd*w
 
 bins = np.linspace(0,np.pi,M/2)
 s = sig(t) # Sampling af signal
 s_ideal = s - np.sin(t*np.pi/2+2*np.pi/3)
 
-sf = np.convolve(s,h) # Filtrering af signal gennem foldning
-SF = F(s)*F(h)
+w1, q1, z1 = rect(t,M) # Vindue
+hd1 = bs_hz(t,M,cut1_hz,cut2_hz) # Båndstopfilter
+h1 = hd1*w1
 
-plt.figure(15)
-plt.plot(bins,SF[:len(SF)/2])
-plt.title("Frekvensspektrum af filtreret signal")
-plt.xlabel("Frekvens [rad / s]")
-plt.ylabel("Amplitude")
-plt.savefig("Figures/freq_filt_signal.png")
+sf1 = np.convolve(s,h1) # Filtrering af signal gennem foldning
+SF1 = F(s)*F(h1)
 
 plt.figure(16)
+plt.plot(bins,SF1[:len(SF1)/2])
+plt.title("Frekvensspektrum af filtreret signal, %s" %(q1))
+plt.xlabel("Frekvens [rad / s]")
+plt.ylabel("Amplitude")
+plt.savefig("Figures/freq_filt_signal_%s.png" %(z1))
+
+plt.figure(17)
 plt.plot(t,s_ideal,label = "Det ideelle signal")
-plt.plot(t,sf[M/2:len(sf)-M/2+1], label = "Det filtrerede signal")
+plt.plot(t,sf1[M/2:len(sf1)-M/2+1], label = "Det filtrerede signal")
 plt.legend(loc = "upper right")
 plt.xlabel("Tid [s]")
 plt.ylabel("Amplitude")
-plt.savefig("Figures/signal_compare.png")
+plt.axis([0,140,-2,3.1])
+plt.title("Sammenligning, %s, M = %d" %(q1,M))
+plt.savefig("Figures/signal_compare_%s.png" %(z1))
+
+w2, q2, z2 = ha(t,M,0.54) # Vindue
+hd2 = bs_hz(t,M,cut1_hz,cut2_hz) # Båndstopfilter
+h2 = hd2*w2
+
+sf2 = np.convolve(s,h2) # Filtrering af signal gennem foldning
+SF2 = F(s)*F(h2)
+
+plt.figure(18)
+plt.plot(bins,SF2[:len(SF2)/2])
+plt.title("Frekvensspektrum af filtreret signal, %s" %(q2))
+plt.xlabel("Frekvens [rad / s]")
+plt.ylabel("Amplitude")
+plt.savefig("Figures/freq_filt_signal_%s.png" %(z2))
+
+plt.figure(19)
+plt.plot(t,s_ideal,label = "Det ideelle signal")
+plt.plot(t,sf2[M/2:len(sf2)-M/2+1], label = "Det filtrerede signal")
+plt.legend(loc = "upper right")
+plt.xlabel("Tid [s]")
+plt.ylabel("Amplitude")
+plt.axis([0,140,-2,3.1])
+plt.title("Sammenligning, %s, M = %d" %(q2,M))
+plt.savefig("Figures/signal_compare_%s.png" %(z2))

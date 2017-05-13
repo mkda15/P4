@@ -1,5 +1,5 @@
 \section{Design af filter} \label{ch4_design}
-I dette afsnit dokumenteres designprocessen samt væsentlige dele af Python-koden, der anvendes til at filtrere signalet.\\
+I dette afsnit dokumenteres designprocessen samt væsentlige dele af Python-scriptet, der anvendes til at filtrere signalet.\\
 Først defineres henholdsvis filterordenen $M$, som på grund af implementeringen af FFT-algorimten skal være en potens af 2, længden af filteret $l = M - 1$, en vektor $n$ med $l+1$ heltal mellem 0 og $l$ samt en vektor $x$ med $l+1$ værdier mellem $-\pi$ og $\pi$.
 \\ \\
 Den ideelle impulsrespons $h_d$ defineres nu som en funktion på baggrund af den ideelle amplituderespons $|H_d(\text{e}^{j\omega})|$, jf. figur \ref{fig:ideel_amp_respons}. Udledning af $h_d[n]$ findes i bilag \ref{app1}. \\
@@ -10,7 +10,7 @@ h_d[n] = \begin{cases} \dfrac{\sin\left(\omega_{c_1}\left(n - \frac{M}{2}\right)
 \end{cases}
 \end{align*}
 
-Dette er implementeret i koden således:
+Dette er implementeret i Python-scriptet således:
 \begin{lstlisting}
 def hd(n,M,f1,f2): 
     hd = np.zeros(len(n))
@@ -23,7 +23,7 @@ def hd(n,M,f1,f2):
     return hd
 \end{lstlisting}
 
-Fordi impulsresponsen er endelig skal den ideelle impulsrespons ganges med en vinduesfunktion, og dette Fourier-transformeres herefter for at opnå en realiserbar frekvens- og amplituderespons. Der er forskellige muligheder for denne vinduesfunktion såsom det rektangulære vindue, Hamming-vinduet, Hann-vinduet og Blackman-vinduet.$^[$\footnote{Disse vinduer er beskrevet på side 559-560 i \textit{Discrete-Time Signal Processing}, Oppenheim \& Schafer (2014).}$^]$ Implementeringen af vinduerne i koden er ganske simpel, og som eksempel ses implementeringen af Hann- og Hamming-vinduet herunder:
+Fordi impulsresponsen er endelig skal den ideelle impulsrespons ganges med en vinduesfunktion, og dette Fourier-transformeres herefter for at opnå en realiserbar frekvens- og amplituderespons. Der er forskellige muligheder for denne vinduesfunktion såsom det rektangulære vindue, Hamming-vinduet, Hann-vinduet og Blackman-vinduet.$^[$\footnote{Disse vinduer er beskrevet på side 559-560 i \textit{Discrete-Time Signal Processing}, Oppenheim \& Schafer (2014).}$^]$ Implementeringen af vinduerne i scriptet er ganske simpel, og som eksempel ses implementeringen af Hann- og Hamming-vinduet herunder:
 \begin{lstlisting}
 def ha(n,M,a): # Hann-vindue, hvis a = 0.5. Hamming-vindue, hvis a = 0.54.
     w = np.zeros(len(n))
@@ -43,7 +43,7 @@ Grafen for et Hamming-vindue af orden 64 er vist på figur \ref{fig:Hamming}.
     \label{fig:Hamming}
 \end{figure}
 
-Efter implementeringen af vinduerne kaldes funktionerne for den ideelle impulsrespons og det ønskede vindue, som herefter ganges sammen. Dette resultat Fourier-transformeres ved hjælp af den implementerede FFT beskrevet under frekvensanalysen. Hermed opnås frekvensresponsen $H(\text{e}^{j\omega})$ og amplituderesponsen $|H(\text{e}^{j\omega})|$, hvoraf sidstnævnte (ideelt set) er 0 mellem $\omega_{c_1}$ og $\omega_{c_2}$ og 1 ellers. Dette afhænger dog især af valget af vinduet og filterordenen $M$. Figur \ref{fig:filter_rekt} viser eksempler på anvendelsen af det rektangulære vindue for $M = 32$ og $M = 128$.
+Efter implementeringen af vinduerne kaldes funktionerne for den ideelle impulsrespons og det ønskede vindue, som herefter ganges sammen. Dette resultat Fourier-transformeres ved hjælp af den implementerede FFT beskrevet under frekvensanalysen. Hermed opnås frekvensresponsen $H(\text{e}^{j\omega})$ og amplituderesponsen $|H(\text{e}^{j\omega})|$, hvoraf sidstnævnte (ideelt set) er 0 mellem $\omega_{c_1}$ og $\omega_{c_2}$ og 1 ellers. Dette afhænger dog især af valget af vinduet og filterordenen $M$. Figur \ref{fig:filter_rekt} viser eksempler på anvendelsen af det rektangulære vindue for $M = 64$ og $M = 128$.
 
 \begin{figure}[H]
 \begin{minipage}{0.49\textwidth}

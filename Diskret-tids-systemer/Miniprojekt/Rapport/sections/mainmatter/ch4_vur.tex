@@ -14,11 +14,11 @@ Forsøg har vist, at der opnås en god filtrering ved hjælp af Hamming-vinduet 
 \centering
 \includegraphics[width=\textwidth]{figures/Filter/signal_compare_Hamming.png}
 \end{minipage}
-\caption{Frekvensspektrum for det filtrerede signal under anvendelse af filter af orden $M=126$ (venstre) og sammenligning af det filtrerede signal og det ønskede signal (højre).}
+\caption{Frekvensspektrum for det filtrerede signal under anvendelse af filter af orden $M=128$ (venstre) og sammenligning af det filtrerede signal og det ønskede signal (højre).}
 \label{fig:resultat}
 \end{figure}
 
 Amplituderesponser for Hamming-vinduet med $M = 64$ og $M = 128$ ses desuden på figur \ref{fig:amplituderespons_Hamming} i bilag \ref{app2}. Af disse figurer fremgår det, at et filter med Hamming-vinduet med $M = 128$ er tæt på den ideelle amplituderespons.
 
 \section{Samlet konklusion}
-I dette miniprojekt er et signal indeholdende 3 sinus-komponenter blevet genereret og samplet, hvorefter det er blevet analyseret for dets frekvensmæssige indhold ved hjælp af en implementering af DFT'en i form af en FFT-algoritme. Afslutningsvis er signalet blevet filtreret ved hjælp af et båndstopfilter med endelig impulsrespons og et Hamming-vindue af orden 128, som i vid udstrækning har formået at eliminere frekvensen på $\pi/2$ uden at påvirke de øvrige de øvrige frekvenser som ønsket. Resultatet af denne filtrering ses på figur \ref{fig:resultat}.
+I dette miniprojekt er et signal indeholdende 3 sinus-komponenter blevet genereret og samplet, hvorefter det er blevet analyseret for dets frekvensmæssige indhold ved hjælp af en implementering af DFT'en i form af en FFT-algoritme. Afslutningsvis er signalet blevet filtreret ved hjælp af et båndstopfilter med endelig impulsrespons og et Hamming-vindue af orden 128, som i vid udstrækning har formået at eliminere frekvensen på $\pi/2$ uden at påvirke de øvrige frekvenser. Resultatet af denne filtrering ses på figur \ref{fig:resultat}.
