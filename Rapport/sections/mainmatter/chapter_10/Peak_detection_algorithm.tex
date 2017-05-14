@@ -7,12 +7,12 @@ To figure out which stand alone tone is being played in a given song/audio fill,
 \\
 %It can be expected that 
 The frequency with the highest amplitude, and henceforth the largest amount of energy, is the most represented frequency. 
-In an audio file, this will be the frequency of the tone being played or one of the overtones of this frequency \ref{ch2} \chr{ref chapter 2}.
-This will hold as long as the signal to noise ratio of the signal isn't smaller than a given lower limit further explained in \ref{snr??}. \chr{ref snr afsnit? og er det efter Peak detection?}
+In an audio file, this will be the frequency of the tone being played or one of the overtones of this frequency , cf. chapter\ref{ch2}.
+This will hold as long as the signal to noise ratio of the signal isn't smaller than a given lower limit which is further explored in chapter \ref{ch11}.
 \\
 \\
 A visualization of this, is finding the peaks in the output spectrogram.
-Due to Heisenbergs inequality \ref{Heis??} \chr{Heisenberg} a compromise between the time and frequency resolution has to be made and an approximation of the notes being played is a possibility.
+Due to Heisenbergs inequality, definition \ref{theo:Heisenberg}, a compromise between the time and frequency resolution has to be made and an approximation of the notes being played is a possibility.
 For a final detection, the calculated frequency would need to be compared with the frequency of the tones a guitar would play. 
 This will make an approximation of the note a possibility even with a lower resolution in frequency.
 \\
@@ -48,7 +48,7 @@ An algorithm for locating the frequency with the largest amplitude  is implement
 \end{algorithm}
 
 %An argument coud be made for looking at the 3+ higest frequencies in the signal.
-The algorithm is tested as stated in \ref{ch3} \chr{Bør nok være section 3.3 med unit test og ikke kun kapitel 3} by feeding  a STFT of a noise filled audio fill containing an "$E_2$" tone being played on a guitar. 
+The algorithm is tested as stated by the specifications section\ref{sec:testspec} by feeding a STFT of a noise filled audio file containing an "$E_2$" tone being played on a guitar. 
 The expected result of this test is either the fundamental of the $E_2$ = $82.41$ Hz. or an overtone of this as explained in \ref{ch2} exampled given: $\{82.41 \cdot 2 = 164.82, 82.41 \cdot 3 = 247.23, \dots \}$ 
 
 \begin{figure}[H]

@@ -8,7 +8,7 @@ T(\alpha x[n] + \beta y[n]) = \alpha T(x[n]) + \beta T(x[n]).
 \end{definition}
 
 \begin{definition}[Memoryless system]\label{def:memoryless_system}
-A discrete-time system $T$ is called memoryless when, for any $k\in\mathbb{Z}$ and any inputs $x[n]$ and $\tilde{x[n]}$,
+A discrete-time system $T$ is called memoryless when, for any $k\in\mathbb{Z}$ and any inputs $x[n]$ and $\tilde{x}[n]$,
 \begin{align}
 \mathbf{1}_{\{k\}}x[n] = \mathbf{1}_{\{k\}}\tilde{x}[n] \, \Rightarrow \, \mathbf{1}_{\{k\}} T(x[n]) = \mathbf{1}_{\{k\}}T(\tilde{x}),
 \end{align}
@@ -19,9 +19,9 @@ where $\mathbf{1}_{\{k\}}$ is the indicator function such that $\mathbf{1}_{\{k\
 Therefore, memoryless systems are instantaneous and depend solely on current input.
 
 \begin{definition}[Causal system]\label{def:causal_system}
-A discrete-time system $T$ is called causal when, for any $k\in\mathbb{Z}$ and inputs $x[n]$ and $\tilde{x[n]}$,
+A discrete-time system $T$ is called causal when, for any $k\in\mathbb{Z}$ and inputs $x[n]$ and $\tilde{x}[n]$,
 \begin{align}
-\mathbf{1}_{\{-\infty,\ldots,k\}} x[n] = \mathbf{1}_{\{-\infty,\ldots,k\}} \tilde{x[n]} \, \Rightarrow \, \mathbf{1}_{\{-\infty,\ldots,k\}} T(x[n]) = \mathbf{1}_{\{-\infty,\ldots,k\}} T(\tilde{x}[n]).
+\mathbf{1}_{\{-\infty,\ldots,k\}} x[n] = \mathbf{1}_{\{-\infty,\ldots,k\}} \tilde{x}[n] \, \Rightarrow \, \mathbf{1}_{\{-\infty,\ldots,k\}} T(x[n]) = \mathbf{1}_{\{-\infty,\ldots,k\}} T(\tilde{x}[n]).
 \end{align}
 \end{definition}
 
@@ -94,11 +94,11 @@ y[n]&=Tx[n]=T\sum_{k\in\mathbb{Z}}x[n]\delta[n-k]
 \begin{definition}[Convolution sum]\label{def:convolution}
 The convolution between sequences $h$ and $x$ is defined as
 \begin{equation}
-(h*x)_n=\sum_{k\in\mathbb{Z}}x[n]h[n-k]=\sum_{k\in\mathbb{Z}}x[n-k]h[k],
+(h*x)[n]=\sum_{k\in\mathbb{Z}}x[n]h[n-k]=\sum_{k\in\mathbb{Z}}x[n-k]h[k],
 \end{equation}
 where $n$ specifies the argument of the convolution sum.
 \end{definition}
-This means that, given an impulse response for a discrete LTI system, the output to a specific input can be calculated by convoluting the input with the impulse response. An impulse response is sometimes called a filter and convoluting an input with the impulse response is sometimes called filtering. The convolution is of importance in chapter \ref{ch8} which covers filter theory and design in depth. The convolution is furthermore of importance in chapter \ref{ch6} where the Fourier transform is treated. \martin{Kapitlet slutter lidt brat. Kan vi udvide det? \textregistered}
+This means that, given an impulse response for a discrete LTI system, the output to a specific input can be calculated by convoluting the input with the impulse response. An impulse response is sometimes called a filter and convoluting an input with the impulse response is sometimes called filtering. The convolution is of importance in chapter \ref{ch8} which covers filter theory and design in depth. The convolution is furthermore of importance in chapter \ref{ch6} where the Fourier transform is treated. \martin{Kapitlet slutter lidt brat. Kan vi udvide det? \textregistered Jeg syntes det er fint \smiley}
 
 
 
