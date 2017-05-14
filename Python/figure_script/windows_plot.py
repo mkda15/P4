@@ -73,7 +73,7 @@ plt.axis([0,M,0,1.2])
 plt.legend(loc= "upper right", bbox_to_anchor=(1., 1))
 plt.xlabel("n")
 plt.ylabel("w [n]")
-plt.savefig("figures/window_types.pdf")
+#plt.savefig("figures/window_types.pdf")
 plt.show()
 
 #W = np.abs(np.fft.fft(np.pad(w,(0,sampels-N),'constant',constant_values=0)))

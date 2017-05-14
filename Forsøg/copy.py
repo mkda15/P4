@@ -9,7 +9,7 @@ Created on Fri Apr 21 08:31:00 2017
 # Imports
 #==============================================================================
 
-from short_time_fourier_transform import stft , db
+from short_time_fourier_transform import stft , db , stft_h
 from windowfunctions import Hamming, Hanning, Kaiser
 import numpy as np
 import impulsrespons as impuls
@@ -26,6 +26,7 @@ freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')        
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
 """ Length of data and noise alings"""
+data = data[:len(data)/2.]
 
 
 if len(data) > len(noise):
@@ -39,7 +40,7 @@ if len(data) < len(noise):
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
 M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
-cut1 = 100./freq     # Cut off frequency for band
+cut1 = 75./freq     # Cut off frequency for band
 cut2 = 1000./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/30) # Length for plotting (arbitrary)
@@ -116,49 +117,49 @@ print('Data filtreret 6/9')
 # Plt plots af alt det intresante og data gemmes
 #==============================================================================
 
-#plt.plot(tid,signal, 'r-', label = "signal")  
-#plt.plot(tid,signal_filt, 'b-', label = "filt signal")
-#plt.plot(tid,data, 'g-',label = "ren signal")  # Original data with noise added 
-#plt.legend(loc = 'upper right')
-#plt.xlabel('Time [sec.]')
-#plt.axis([1,1.02,-0.1,0.1])
-#plt.show()
-
-plt.plot(tid,signal)  # Original data with noise added 
-plt.xlabel('Time [sec.]')
-plt.ylabel('Amplitude')
-#plt.savefig("figures/integrationstest/signal.pdf")
-plt.show()
-
-plt.plot(tid,signal_filt)  # Original data with noise added 
-plt.xlabel('Time [sec.]')
-plt.ylabel('Amplitude')
-#plt.axis([0,6,-1.5,1])
-#plt.savefig("figures/integrationstest/signal_filt.pdf")
-plt.show()
-
-plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          # FFT of clean data
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Amplitude')
-#plt.axis([200,270,0,1000])
-#plt.savefig("figures/integrationstest/f_signal.pdf")
-plt.show()
-
-plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   # FFT of the filtered data
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Amplitude')
-#plt.savefig("figures/integrationstest/f_signal_filt.pdf")
-plt.show()
+##plt.plot(tid,signal, 'r-', label = "signal")  
+##plt.plot(tid,signal_filt, 'b-', label = "filt signal")
+##plt.plot(tid,data, 'g-',label = "ren signal")  # Original data with noise added 
+##plt.legend(loc = 'upper right')
+##plt.xlabel('Time [sec.]')
+##plt.axis([1,1.02,-0.1,0.1])
+##plt.show()
 #
-#plt.plot(tid,signal, 'r-', label = "signal")
-#plt.plot(tid,signal_filt, 'b-', label = "filt") 
-#plt.plot(tid,data, 'g-',label = "ren signal")                                                 # Original data with noise added 
-#plt.legend(loc = 'upper right')
+#plt.plot(tid,signal)  # Original data with noise added 
 #plt.xlabel('Time [sec.]')
-#plt.axis([1.03,1.06,-0.1,0.1])
+#plt.ylabel('Amplitude')
+##plt.savefig("figures/integrationstest/signal.pdf")
 #plt.show()
-
-                                        
+#
+#plt.plot(tid,signal_filt)  # Original data with noise added 
+#plt.xlabel('Time [sec.]')
+#plt.ylabel('Amplitude')
+##plt.axis([0,6,-1.5,1])
+##plt.savefig("figures/integrationstest/signal_filt.pdf")
+#plt.show()
+#
+#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          # FFT of clean data
+#plt.xlabel('Frequency [Hz]')
+#plt.ylabel('Amplitude')
+##plt.axis([200,270,0,1000])
+##plt.savefig("figures/integrationstest/f_signal.pdf")
+#plt.show()
+#
+#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   # FFT of the filtered data
+#plt.xlabel('Frequency [Hz]')
+#plt.ylabel('Amplitude')
+##plt.savefig("figures/integrationstest/f_signal_filt.pdf")
+#plt.show()
+##
+##plt.plot(tid,signal, 'r-', label = "signal")
+##plt.plot(tid,signal_filt, 'b-', label = "filt") 
+##plt.plot(tid,data, 'g-',label = "ren signal")                                                 # Original data with noise added 
+##plt.legend(loc = 'upper right')
+##plt.xlabel('Time [sec.]')
+##plt.axis([1.03,1.06,-0.1,0.1])
+##plt.show()
+#
+#                                        
 
 print('plot plotteret 7/9')
 
@@ -176,8 +177,13 @@ print('Data gemt 8/9')
 #==============================================================================
 
 X = stft(signal_filt,fftsize = 2048 ,overlap = 2)     # STFT calculated
-#G = stft(data,fftsize = 2048 ,overlap = 2)
-print('stft udregnet 9/9')
+v_w = np.var(X)
+#X,v_w,v_t,t = stft_h(signal_filt,overlap = 2)
+print('stft udregnet 9/9') 
+#print v_w
+#print X
+#print t
+
 
 X = db(np.abs(X).T) 
 #G = db(np.abs(G).T)                            # Calculated to dB
@@ -207,92 +213,114 @@ plt.show()
 #plt.axis([0,1300,-100,2])
 #plt.show()
 
-X = X.T
-p = 17 # lower limit for amplitude to be detected, below p -> 0 
-# kan laves til en definition og placeres i et andet dokument.
-sortedX = np.zeros(len(X),dtype = object)
-for i in range(len(X)):
-
-    sortedX[i] = np.sort(X[i])
-if dataType == "Tabs": #Tjeck if data is in single tabs or chords
-    max_freq_pos = np.zeros(len(X))
-    for i in range(len(X)):
-        if np.max(X[i]) > p:
-            a = np.where(X[i][:] == np.max(X[i]))
-            max_freq_pos[i] = a[0][0]
-        else:
-            max_freq_pos[i] = 0
-    max_freq_t = np.zeros(len(X))
-    for i in range(len(X)):
-        if max_freq_pos[i] == 0:
-            max_freq_t[i] = 0
-        else:
-            max_freq_t[i] = y[int(max_freq_pos[i])]
-            
-    plt.stem(x,max_freq_t)
-    plt.xlabel('Time (sec.)')
-    plt.ylabel('Frequency (Hz)')
-    #plt.savefig("figures/integrationstest/peak_dec.pdf")
-    #plt.savefig("figures/systemtest/final_peak.pdf")
-    print(max_freq_t[6])
-elif dataType == "Chords":
-    max_freq_pos1 = np.zeros(len(X))
-    max_freq_pos2 = np.zeros(len(X))
-    max_freq_pos3 = np.zeros(len(X))
-
-    for i in range(len(X)):
-        if sortedX[i][-1] > 20:
-            a = np.where(X[i][:] == sortedX[i][-1])
-        else:
-            a = [[0]]
-        if sortedX[i][-2] > 20:
-            b = np.where(X[i][:] == sortedX[i][-2])
-        else:
-            b = [[0]]
-        if sortedX[i][-3] > 20:
-            c = np.where(X[i][:] == sortedX[i][-3])
-        else:
-            c = [[0]]
-        max_freq_pos1[i] = a[0][0]
-        max_freq_pos2[i] = b[0][0]
-        max_freq_pos3[i] = c[0][0]
-
-    max_freq_t1 = np.zeros(len(X))
-    max_freq_t2 = np.zeros(len(X))
-    max_freq_t3 = np.zeros(len(X))
-    for i in range(len(X)):
-        if max_freq_pos1[i] == 0:
-            max_freq_t1[i] = 0
-        else:
-            max_freq_t1[i] = y[int(max_freq_pos1[i])]
-        if max_freq_pos2[i] == 0:
-            max_freq_t2[i] = 0
-        else:
-            max_freq_t2[i] = y[int(max_freq_pos2[i])]
-        if max_freq_pos3[i] == 0:
-            max_freq_t3[i] = 0
-        else:
-            max_freq_t3[i] = y[int(max_freq_pos3[i])]
-    plt.plot(max_freq_t1)
-    plt.plot(max_freq_t2)
-    plt.plot(max_freq_t3)
-
-    sted = 75
-    print(max_freq_t1[sted])
-    print(max_freq_t2[sted])
-    print(max_freq_t3[sted])
-
+#X = X.T
+#p = 17 # lower limit for amplitude to be detected, below p -> 0 
+## kan laves til en definition og placeres i et andet dokument.
+#sortedX = np.zeros(len(X),dtype = object)
+#for i in range(len(X)):
 #
-k = max_freq_t
-l =np.zeros(len(k))
-l[0]=k[0]
-for i in range(len(k)-1):
-    if k[i+1] == k[i] :
-        l[i+1]= k[i+1]
-    elif k[i+1] == k[i+2]:
-        l[i+1]= k[i+2]
-    else :
-        l[i+1]=0
+#    sortedX[i] = np.sort(X[i])
+#if dataType == "Tabs": #Tjeck if data is in single tabs or chords
+#    max_freq_pos = np.zeros(len(X))
+#    for i in range(len(X)):
+#        if np.max(X[i]) > p:
+#            a = np.where(X[i][:] == np.max(X[i]))
+#            max_freq_pos[i] = a[0][0]
+#        else:
+#            max_freq_pos[i] = 0
+#    max_freq_t = np.zeros(len(X))
+#    for i in range(len(X)):
+#        if max_freq_pos[i] == 0:
+#            max_freq_t[i] = 0
+#        else:
+#            max_freq_t[i] = y[int(max_freq_pos[i])]
+#            
+#    plt.stem(x,max_freq_t)
+#    plt.xlabel('Time (sec.)')
+#    plt.ylabel('Frequency (Hz)')
+#    #plt.savefig("figures/integrationstest/peak_dec.pdf")
+#    #plt.savefig("figures/systemtest/final_peak.pdf")
+#  #  print(max_freq_t[6])
+#elif dataType == "Chords":
+#    max_freq_pos1 = np.zeros(len(X))
+#    max_freq_pos2 = np.zeros(len(X))
+#    max_freq_pos3 = np.zeros(len(X))
+#
+#    for i in range(len(X)):
+#        if sortedX[i][-1] > 20:
+#            a = np.where(X[i][:] == sortedX[i][-1])
+#        else:
+#            a = [[0]]
+#        if sortedX[i][-2] > 20:
+#            b = np.where(X[i][:] == sortedX[i][-2])
+#        else:
+#            b = [[0]]
+#        if sortedX[i][-3] > 20:
+#            c = np.where(X[i][:] == sortedX[i][-3])
+#        else:
+#            c = [[0]]
+#        max_freq_pos1[i] = a[0][0]
+#        max_freq_pos2[i] = b[0][0]
+#        max_freq_pos3[i] = c[0][0]
+#
+#    max_freq_t1 = np.zeros(len(X))
+#    max_freq_t2 = np.zeros(len(X))
+#    max_freq_t3 = np.zeros(len(X))
+#    for i in range(len(X)):
+#        if max_freq_pos1[i] == 0:
+#            max_freq_t1[i] = 0
+#        else:
+#            max_freq_t1[i] = y[int(max_freq_pos1[i])]
+#        if max_freq_pos2[i] == 0:
+#            max_freq_t2[i] = 0
+#        else:
+#            max_freq_t2[i] = y[int(max_freq_pos2[i])]
+#        if max_freq_pos3[i] == 0:
+#            max_freq_t3[i] = 0
+#        else:
+#            max_freq_t3[i] = y[int(max_freq_pos3[i])]
+#    plt.plot(max_freq_t1)
+#    plt.plot(max_freq_t2)
+#    plt.plot(max_freq_t3)
+#
+#    sted = 75
+#    print(max_freq_t1[sted])
+#    print(max_freq_t2[sted])
+#    print(max_freq_t3[sted])
+#
+##
+#k = max_freq_t
+#l =np.zeros(len(k))
+#l[0]=k[0]
+#for i in range(len(k)-1):
+#    if k[i+1] == k[i] :
+#        l[i+1]= k[i+1]
+#    elif k[i+1] == k[i+2]:
+#        l[i+1]= k[i+2]
+#    else :
+#        l[i+1]=0
         
-    
-    
+#==============================================================================
+# SNR
+#==============================================================================
+
+def RMS(x):
+    x = x**2
+    RMS = np.sqrt((np.sum(x))) / (len(x))
+    return RMS
+
+def SNR(signal,noise):
+    SNR = ((RMS(signal))**2 / (RMS(noise))**2)
+    return SNR
+
+SNR = SNR(data,noise)
+SNRdB = 10*np.log10(SNR)
+print(SNRdB)   
+
+#==============================================================================
+# Heisenberg 
+#==============================================================================
+
+
+
+            
