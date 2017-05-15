@@ -12,10 +12,12 @@ import scipy.signal as sc
 #==============================================================================
 # STFT
 #==============================================================================
-def stft(x, fftsize = 101, overlap = 2):   
+def stft(signal, fftsize = 101, overlap = 2):   
     hop = fftsize / overlap
     w = np.kaiser(fftsize+1,4)[:-1]      # better reconstruction with this trick +1)[:-1] 
-    return np.array([np.fft.rfft(w*x[i:i+fftsize]) for i in range(0, len(x)-fftsize, hop)])
+    x =  np.array([w*signal[i:i+fftsize] for i in range(0, len(signal)-fftsize, hop)])
+    X =  np.array([np.fft.rfft(w*signal[i:i+fftsize]) for i in range(0, len(signal)-fftsize, hop)])
+    return X,x,w
 
 #==============================================================================
 # STFT - optize lenght by Heisenberg
@@ -24,29 +26,31 @@ def stft_h(signal, overlap = 2):
     fftsize = 100
     wlist = [0]
     tlist = [0]
-    for k in range(1000):
+    for k in range(100):
         hop = fftsize / overlap
         w = np.kaiser(fftsize+1,4)[:-1]      # better reconstruction with this trick +1)[:-1]  
     
         x =  np.array([w*signal[i:i+fftsize] for i in range(0, len(signal)-fftsize, hop)])
         X =  np.array([np.fft.rfft(w*signal[i:i+fftsize]) for i in range(0, len(signal)-fftsize, hop)])    
         
-        v_w = np.var(X)
-        v_t = np.var(x) 
+        v_w = np.var(np.fft.fft(w))
+        v_t = np.var(w) 
         
         wlist = np.append(wlist,[v_w]) 
         tlist = np.append(tlist,[v_t])
 
-        if v_t*v_w < 1/4.:
-            break         
+#        if v_t*v_w < 1/4.:
+#            break         
         
-        elif v_t*v_w > 1/4.:
+        if v_t*v_w > 1/4.:
             fftsize += 10
         
     
     print fftsize         
     return X,wlist,tlist,x 
   
+def variance (n,a,signal):
+    return 
 
 #==============================================================================
 # DFT
