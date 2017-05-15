@@ -1,11 +1,9 @@
-This chapter is inspired by \cite{FAA}, \cite{FSP} and \cite{FTFA}.
-\\ \\
-This project deals with functions and sequences in the so-called $\mathcal{L}^p$ and $\ell^p$ spaces, respectively. These spaces are introduced in the following and used later to show the convergence of the Fourier series and transforms used in the project. The following definitions are inspired by \cite{page 31, FSP}.
+This project deals with functions and sequences in the so-called $\mathcal{L}^p$ and $\ell^p$ spaces, respectively. The following definitions are inspired by \cite{chapter 5-6, FSE2010} and \cite{chapter 2, FSP} \martin{Forslag: udbyg dette kapitel til at indeholde det matematiske fundament vedrørende begreber såsom Banach-rum, Hilbert-rum, definitioner af kravene for disse og desuden definitionen af de lineære operatorer nederst i kapitel 4. \textregistered}.
 
 \begin{definition}[The $\mathcal{L}^p$ spaces]
-Let $D \subset \mathbb{R}^n$ be a subset. $\mathcal{L}^p(D)$ is the set of absolutely Lebesgues-integrable functions over $D$ for any $p \in [1,\infty)$:
+Let $D \subset \mathbb{R}$ be a subset. $\mathcal{L}^p(D)$ is the set of absolutely Lebesgue-integrable functions over $D$ for any $p \in [1,\infty)$:
 \begin{align*}
-\mathcal{L}^p(D) = \left\{ f: D \subset \mathbb{R} \to \mathbb{C}: \int_D |f(t)|^p dt < \infty \right\}.
+\mathcal{L}^p(D) = \left\{ f: D \to \mathbb{C}: \int_D |f(t)|^p dt < \infty \right\}.
 \end{align*}
 
 The normed vector space $\mathcal{L}^p(D)$ is the subspace consisting of vectors with finite $\mathcal{L}^p$ norm:
@@ -20,8 +18,8 @@ It is furthermore required that the function $f$ is measureable. This will not b
 
 A specific case of interest in this project is for $p = 2$.
 
-\begin{definition}[The $\mathcal{L}^2$ space]
-Let $D \subset \mathbb{R}^n$ be a subset. $\mathcal{L}^2(D)$ is the set of all functions on $D$ whose squares are absolutely Lebesgue-integrable over $D$:
+\begin{definition}[The $\mathcal{L}^2$ space] \label{def:L2space}
+Let $D \subset \mathbb{R}$ be a subset. $\mathcal{L}^2(D)$ is the set of all functions on $D$ whose squares are absolutely Lebesgue-integrable over $D$:
 \begin{align*}
 \mathcal{L}^2(D) = \left\{ f: D \to \mathbb{C}: \int_D |f(t)|^2 dt < \infty \right\}.
 \end{align*}
