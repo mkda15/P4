@@ -626,4 +626,22 @@ The music used in this project will therefore be recorded in an anechoic room be
 \frede{Tilføj matematisk beskrivelse af støj.}
 
 \subsection{SNR}
-\trine{lav mini afsnit om SNR}
+Signal-to-noise ratio is a measure of the amount of noise in a signal.
+\begin{definition}
+The signal-to-noise ratio (SNR) of a signal and noise is defined as
+\begin{equation}\label{def:SNR}
+	SNR=10\log_{10}\left(\frac{\sigma_{signal}^2}{\sigma_{noise}^2}\right)
+\end{equation}
+where $\sigma_{signal}^2$ is the variance of the signal and $\sigma_{noise}^2$ is the variance of the noise [\textbf{page 229}\cite{DTSP}].
+\end{definition}
+To calculated the variances of the signal and noise the standard deviation $\sigma$ can be calculated and if the input signal has mean = 0 the standard deviation of the signal can be calculated by the root mean square (RMS) of the signal [\textbf{page 228}\cite{DTSP}] which is defined as
+\begin{align}\label{eq:RMS}
+	x_{rms} 
+	&=\sqrt{\frac{1}{n} \sum_{i=1}^n x_i^2}\\
+	&= \sqrt{\frac{x_1^2 + x_2^2 + \dots + x_n^2}{n}}.
+\end{align}
+
+
+
+
+
