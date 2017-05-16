@@ -61,8 +61,10 @@ freq_inter1 = 0
 freq_inter2 = 150
 
 fontsize = 13
+dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
                  
 print("variabler og data importeret 1/9")
+
 
 signal = impuls.add_noise(data,noise,c = 1.0)   # Noise and data conjoined
 
@@ -161,14 +163,6 @@ print('Data filtreret 6/9')
 print('plot plotteret 7/9')
 
 
-""" Data gemmes """
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal_filt.wav',freq,signal_filt)    # The filtered data is saved
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_data.wav',freq,data)                  # Original noise is saved with same length as data
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_noise.wav',freq,noise)                # Original data is saved with same length as noise
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal.wav',freq,signal)              # The signal with noise is saved
-
-print('Data gemt 8/9')
-
 #==============================================================================
 # Spectrogram
 #==============================================================================
@@ -209,13 +203,19 @@ plt.plot(freq_axis,Hdb[:sampels/2])
 plt.axis([0,1300,-100,2])
 plt.show()
 
+
+#==============================================================================
+# Peak Dectection
+#==============================================================================
+
 X = X.T
-p = 17 # lower limit for amplitude to be detected, below p -> 0 
+p = 20 # lower limit for amplitude to be detected, below p -> 0 
 # kan laves til en definition og placeres i et andet dokument.
 sortedX = np.zeros(len(X),dtype = object)
 for i in range(len(X)):
 
     sortedX[i] = np.sort(X[i])
+if dataType == "Tabs": #Tjeck if data is in single tabs or chords
     max_freq_pos = np.zeros(len(X))
     for i in range(len(X)):
         if np.max(X[i]) > p:
@@ -236,6 +236,53 @@ for i in range(len(X)):
     #plt.savefig("figures/integrationstest/peak_dec.pdf")
     #plt.savefig("figures/systemtest/final_peak.pdf")
   #  print(max_freq_t[6])
+elif dataType == "Chords":
+    max_freq_pos1 = np.zeros(len(X))
+    max_freq_pos2 = np.zeros(len(X))
+    max_freq_pos3 = np.zeros(len(X))
+
+    for i in range(len(X)):
+        if sortedX[i][-1] > 20:
+            a = np.where(X[i][:] == sortedX[i][-1])
+        else:
+            a = [[0]]
+        if sortedX[i][-2] > 20:
+            b = np.where(X[i][:] == sortedX[i][-2])
+        else:
+            b = [[0]]
+        if sortedX[i][-3] > 20:
+            c = np.where(X[i][:] == sortedX[i][-3])
+        else:
+            c = [[0]]
+        max_freq_pos1[i] = a[0][0]
+        max_freq_pos2[i] = b[0][0]
+        max_freq_pos3[i] = c[0][0]
+
+    max_freq_t1 = np.zeros(len(X))
+    max_freq_t2 = np.zeros(len(X))
+    max_freq_t3 = np.zeros(len(X))
+    for i in range(len(X)):
+        if max_freq_pos1[i] == 0:
+            max_freq_t1[i] = 0
+        else:
+            max_freq_t1[i] = y[int(max_freq_pos1[i])]
+        if max_freq_pos2[i] == 0:
+            max_freq_t2[i] = 0
+        else:
+            max_freq_t2[i] = y[int(max_freq_pos2[i])]
+        if max_freq_pos3[i] == 0:
+            max_freq_t3[i] = 0
+        else:
+            max_freq_t3[i] = y[int(max_freq_pos3[i])]
+    plt.plot(max_freq_t1)
+    plt.plot(max_freq_t2)
+    plt.plot(max_freq_t3)
+
+    sted = 75
+    print(max_freq_t1[sted])
+    print(max_freq_t2[sted])
+    print(max_freq_t3[sted])
+
 ##
 #k = max_freq_t
 #l =np.zeros(len(k))
