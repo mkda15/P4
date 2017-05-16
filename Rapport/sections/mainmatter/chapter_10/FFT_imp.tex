@@ -7,8 +7,9 @@ Firstly, the implementation of the DFT is described in the following algorithm.
 \caption{DFT algorithm}
 \label{DFTalg}
 \begin{algorithmic}[1]
-\Procedure{DFT}{x, c}
-	\State{$X = np.zeros(c,dtype=complex)$}
+\State $N = $ \Comment{Number of samples to be computed}
+\Procedure{Compute DFT}{}
+	\State{$X = np.zeros(N,dtype=complex)$}
 	\For{k between 0 and length of signal}
 		\State{$a = 0 + 0\cdot j$} \Comment{a is zero but of 			type complex}
 		\For{n between 0 and c}
@@ -16,6 +17,7 @@ Firstly, the implementation of the DFT is described in the following algorithm.
 			\State{$X[k] = a$}
 		\EndFor
 	\EndFor
+	\State {Return $X$}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -25,17 +27,17 @@ The implementation of the FFT shown in the following algorithm uses a function t
 \caption{FFT algorithm}
 \label{FFTalg}
 \begin{algorithmic}[1]
-\State $N = $ \Comment{Number of samples to be computed}
+
 \Procedure{Power of 2}{N}
 	\State{Return $N != 0$ and $((N \& (N - 1)) == 0$}
 \EndProcedure
 
-\Procedure{FFT}{x}
-	\State $N_{new}$ = length of signal x
-	\If{Power of 2(N) == False:}
+\Procedure{Compute FFT}{}
+	\State $N_{new}$ = length of signal 
+	\If{Power of 2(N) == False }
 		\State{Raise Valueerror(``N should be a power of 2.'')}
 	\ElsIf{$N_{new}$ == 2}
-		\State{Return DFT(x,$N_{new}$)}
+		\State{Return DFT(signal x,$N_{new}$)}
 	\Else
 		\State{$X_{even} = FFT(x[::2])$} \Comment{The even 				samples}
 		\State{$X_{odd} = FFT(x[1::2])$} \Comment{The odd 				samples}

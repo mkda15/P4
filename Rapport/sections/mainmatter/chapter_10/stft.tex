@@ -66,34 +66,34 @@ The sine waves are then with frequencies of 1, 3 and 3.25 Hz, respectively, and 
 \label{fig:test_stft}
 \end{figure}
 From figure \ref{fig:test_stft} it is clearly seen how the length of the window in the STFT used for generating the spectrogram affects the resolution in time and frequency. This agrees with Heisenberg's uncertanity principle described in section \ref{sec:heisenberg}, and so there must be made a tradeoff between the two resolutions. For the purpose of this project it is decided to use a window lenght of $2^{11}=2048$ as compromise between the to extreme cases illustrated by figure \ref{fig:test_stft}. \trine{evt. input mht. optimering af fftsize?? heisenberg??\smiley } \\
-By figure \ref{fig:test_stft} it is concluded that the implementations of the STFT and spectrogram work as intended. Further optimization is possible through of window used in the STFT.
+By figure \ref{fig:test_stft} it is concluded that the implementations of the STFT and spectrogram work as intended. Further optimization is possible through the type window used in the STFT.
 
 \subsection{Variation of windows in STFT}
-The STFT uses a window function to taper the segment of the data to be transformed and different windows produce different results from the STFT. In figure \ref{fig:stft_windows_10000} is seen spectrograms of the test signal generated from different windows of length $2^{13}=8192$. Similarly, in figure \ref{fig:stft_windows_100} is seen spectrograms from STFTs with windows of length $2^6=64$.
+The STFT uses a window function to taper the segment of the data to be transformed, and different windows produce different results from the STFT. Figure \ref{fig:stft_windows_10000} shows spectrograms of the test signal generated from different windows of length $2^{13}=8192$. Similarly, figure \ref{fig:stft_windows_100} shows spectrograms from STFTs with windows of length $2^6=64$.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/stft_windows/hanning_10000.png}
-\caption{Hanning}
+\caption{Hanning window.}
 \label{fig:stft_hanning}
 \includegraphics[width=\textwidth]{figures/stft_windows/hamming_10000.png}
-\caption{Hamming}
+\caption{Hamming window.}
 \label{fig:stft_hamming}
 \includegraphics[width=\textwidth]{figures/stft_windows/kaiser/10000/4.png}
-\caption{Kaiser, $\beta=4$}
+\caption{Kaiser window, $\beta=4$.}
 \label{fig:stft_kaiser_10000_4}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/stft_windows/bartlett_10000.png}
-\caption{Bartlett}
+\caption{Bartlett window.}
 \label{fig:stft_bartlett}
 \includegraphics[width=\textwidth]{figures/stft_windows/blackman_10000.png}
-\caption{Blackman}
+\caption{Blackman window.}
 \label{fig:stft_blackman}
 \includegraphics[width=\textwidth]{figures/stft_windows/kaiser/10000/10.png}
-\caption{Kaiser, $\beta=10$}
+\caption{Kaiser window, $\beta=10$.}
 \label{fig:stft_kaiser_10000_10}
 \end{subfigure}
 \caption{Spectrograms generated with different windows of length $2^{13}$ and with overlap of 2.}
@@ -107,49 +107,33 @@ The STFT uses a window function to taper the segment of the data to be transform
 \caption{Hanning}
 \label{fig:stft_hanning_100}
 \includegraphics[width=\textwidth]{figures/stft_windows/100/hamming.png}
-\caption{Hamming}
+\caption{Hamming window.}
 \label{fig:stft_hamming_100}
 \includegraphics[width=\textwidth]{figures/stft_windows/100/kaiser_4.png}
-\caption{Kaiser, $\beta=4$}
+\caption{Kaiser window, $\beta=4$.}
 \label{fig:stft_kaiser_100_4}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/stft_windows/100/bartlett.png}
-\caption{Bartlett}
+\caption{Bartlett window.}
 \label{fig:stft_bartlett_100}
 \includegraphics[width=\textwidth]{figures/stft_windows/100/blackman.png}
-\caption{Blackman}
+\caption{Blackman window.}
 \label{fig:stft_blackman_100}
 \includegraphics[width=\textwidth]{figures/stft_windows/100/kaiser_10.png}
-\caption{Kaiser, $\beta=10$}
+\caption{Kaiser window, $\beta=10$.}
 \label{fig:stft_kaiser_100_10}
 \end{subfigure}
 \caption{Spectrograms generated with different windows of length $2^6$ and with overlap of 2.}
 \label{fig:stft_windows_100}
 \end{figure}
 \subsection{Conclusion}
-Fredric J. Harris wrote an article \cite{fredric_harris} in 1978 analysing the different windows and their effect in signal processing with the discrete Fourier transform. His analysis included quantative and qualitative arguments and he ends the article concluding that the Kaiser window and the Blackman-Harris windows are the best choices for this kind of signal processing - his favourite being the Kaiser window. It is furthermore assessed from the above spectrograms, which allow for a visual (and qualitative) analysis, that the Kaiser window produces the best looking spectrograms. Together with the conclusion from Harris, it is decided that the Kaiser window with shape coefficient $\beta = 4$ will be used for the implementation of the STFT in this project. \\
-In figure \ref{fig:STFT_test_signal} is seen the resulting STFT of an octatonic scale played on a guitar one string at a time - with use of a Kaiser window of order $2*{11}$ and $\beta = 4$  
+Fredric J. Harris wrote an article in 1978 analysing the different windows and their effects in signal processing with the discrete Fourier transform \cite{fredric_harris}. His analysis included quantative and qualitative arguments, and he ends the article concluding that the Kaiser window and the Blackman-Harris windows are the best choices for this kind of signal processing - his favourite being the Kaiser window. It is furthermore assessed from the above spectrograms, which allow for a visual (and qualitative) analysis, that the Kaiser window produces the best looking spectrograms. Together with the conclusion from Harris it is decided that the Kaiser window with shape coefficient $\beta = 4$ will be used for the implementation of the STFT in this project. \\
+Figure \ref{fig:STFT_test_signal} shows the resulting STFT of an octatonic scale played on a guitar one string at a time with the use of a Kaiser window of order $2^{11}$ and $\beta = 4$  
 \begin{figure}[H]
 \centering
 \includegraphics[scale = 0.6]{figures/validation/stft/scale.png}
-\caption{Spectrogram of octatonic scale, plucking only one string at a time. STFT computed by use of Kaiser window of order $2^{11}$ and $\beta = 4$.}
+\caption{Spectrogram of octatonic scale plucking only one string at a time. STFT computed by use of Kaiser window of order $2^{11}$ and $\beta = 4$.}
 \label{fig:STFT_test_signal}
 \end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
