@@ -20,7 +20,7 @@ def stft(signal, fftsize = 101, overlap = 2):
     return X,x,w
 
 #==============================================================================
-# STFT - optize lenght by Heisenberg
+# STFT - optize lenght by Heisenberg .. no
 #==============================================================================
 def stft_h(signal, overlap = 2):   
     fftsize = 100
@@ -49,8 +49,19 @@ def stft_h(signal, overlap = 2):
     print fftsize         
     return X,wlist,tlist,x 
   
-def variance (n,a,signal):
-    return 
+        
+def variance_t(signal): #svarende til np.var()
+    s=0    
+    n=0   
+    for k in range(len(signal)):
+        s += signal[k]
+    
+    mean = s/len(signal)
+    
+    for i in range(len(signal)):
+        n += ((signal[i]-mean)**2)
+    return n/len(signal)
+
 
 #==============================================================================
 # DFT

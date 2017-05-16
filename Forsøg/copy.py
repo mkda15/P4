@@ -9,7 +9,7 @@ Created on Fri Apr 21 08:31:00 2017
 # Imports
 #==============================================================================
 
-from short_time_fourier_transform import stft , db , stft_h
+from short_time_fourier_transform import stft , db , stft_h, variance_t
 from windowfunctions import Hamming, Hanning, Kaiser
 import numpy as np
 import impulsrespons as impuls
@@ -21,12 +21,11 @@ import scipy.io.wavfile as siw
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/skala/forsoeg_skala_hurtig.wav')  # Data signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')  # Data signal
 freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')                  # Noise signal
                     #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
 """ Length of data and noise alings"""
-noise = noise*0
 
 
 if len(data) > len(noise):
@@ -40,8 +39,8 @@ if len(data) < len(noise):
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
 M    = 1000.        # Filter order
 cut  = 1000./freq   # Cut off frequency
-cut1 = 1./freq     # Cut off frequency for band
-cut2 = 5000./freq    # Cut off frequency for band 
+cut1 = 75./freq     # Cut off frequency for band
+cut2 = 1000./freq    # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/30) # Length for plotting (arbitrary)
 
@@ -176,15 +175,11 @@ print('Data gemt 8/9')
 # Spectrogram
 #==============================================================================
 
-X,o,w = stft(signal_filt,fftsize = 2048 ,overlap = 2)     # STFT calculated
-v_w = np.var(np.fft.fft(w))
-v_t = np.var(w)
+X,o,ws = stft(signal_filt,fftsize = 2048 ,overlap = 2)     # STFT calculated
 
+W = np.abs(np.fft.fft(ws))
 #X,v_w,v_t,t = stft_h(signal_filt,overlap = 2)
 
-print v_w
-print X
-print o
 
 print('stft udregnet 9/9') 
 
@@ -197,11 +192,11 @@ y = np.linspace(0,freq_axis[-1],np.shape(X)[0])
 
 spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],cmap='hot')
 cb   = plt.colorbar(spec)
-cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
+cb.set_label(label = 'Amplitude (dB)', fontsize=fontsize)
 plt.xlabel('Time (sec.)', fontsize = fontsize)
 plt.ylabel('Frequency (Hz)', fontsize = fontsize)
-plt.axis([0,25,0,3000])
-plt.savefig("figures/skala.png")
+#plt.axis([0,25,0,3000])
+#plt.savefig("figures/skala.png")
 #plt.savefig("figures/integrationstest/spectrogram.pdf")
 #plt.savefig("figures/systemtest/final_spec.pdf")
 plt.show()
