@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 \section{Varying signal-to-noise ratio}
 To measure the varying amount noise in the signal the SNR as defined in definition \ref{def:SNR} is used. The peak detection alogrithm will be tested by gradually increasing the amount of noise in the signal and thereby decreasing the SNR of the signal. The evaluation of the peak detection alogrithm is then based upon the SNR at the time of failure of the algorithm.
 \subsection{Single tone}
@@ -65,4 +66,41 @@ From the above tests of the peak detection algorithm under varying amounts of di
 \item If the noise lies in the pass band and the energy is concentrated in few frequencies the algorithm does not work well.
 \end{itemize}
 For the purpose of the algorithm in this project - filtering background noise - the algorithm is concluded to work well as it can detect peaks at very low levels of SNR.
+=======
+\section{Signal-to-noise ratio}
+In this section the term SNR introduced in chapter \ref{ch10} is described, and it is further used to analyze the additive noise on the recorded audio.
+SNR is a measure of the amount of noise in a signal. 
+The SNR is defined as
+\begin{align} {eq:SNR}
+	SNR=\frac{\sigma_{signal}^2}{\sigma_{noise}^2}
+\end{align}
+where $\sigma_{signal}^2$ is the variance of the wanted signal, and $\sigma_{noise}^2$ is the variance of the noise \cite{page 228, DTSP}.
+
+To try and determine how small the SNR is allowed to be the recorded music will be added noise in various level such that the SNR gradually changes.
+The peak detection algorithm is then used to find peaks, and it is observed when it does no longer manage to find the right peak as a consequence of the excessive noise in the signal.
+
+To calculate the variance $\sigma^2$ of the signal and noise the standard deviation $\sigma$ of the signal can be calculated. 
+If the input signal is zero mean, the standard deviation of the signal can be calculated by the root mean scare of the signal \cite{page 228, DTSP}.
+
+The root mean scare (RMS) is defined as
+\begin{align*}
+	x_{rms} 
+	&=\sqrt{\dfrac{1}{n} \sum_{i=1}^n x_i^2}\\
+	&= \sqrt{\dfrac{x_1^2 + x_2^2 + \dots + x_n^2}{n}},
+\end{align*}
+where $\sigma = x_{rms}$ in the previous mentioned instance with zero mean. An algorithm calculating the SNR of the audio signal is implemented in Python.
+
+%\begin{algorithmic}
+%
+%\end{algorithmic}
+
+
+
+
+
+
+
+
+
+>>>>>>> 34f2db644df819083085b150138666a7e2fb3182
 

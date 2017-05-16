@@ -1,7 +1,7 @@
 \section{Definition of wavelets}
-Wavelet theory provides a way of constructing orthonormal bases in $\mathcal{L}^2(\mathbb{R})$, which is a concrete Hilbert space consisting of functions. These functions must be scaled and translated versions of a fixed function. For an orthonormal basis $\{\textbf{e}_k\}$ for $\mathcal{L}^2(\mathbb{R})$ then all functions $f \in \mathcal{L}^2(\mathbb{R})$ have an expansion
+Wavelet theory provides a way of constructing orthonormal bases in $\mathcal{L}^2(\mathbb{R})$, which is a concrete Hilbert space consisting of functions. These functions are scaled and translated versions of a fixed function. For an orthonormal basis $\{\textbf{e}_k\}$ of $\mathcal{L}^2(\mathbb{R})$ all functions $f \in \mathcal{L}^2(\mathbb{R})$ have an expansion
 \begin{align*}
-f = \sum_{k\in\mathbb{Z}}^N c_k \textbf{e}_k
+f = \sum_{k\in\mathbb{Z}}^\infty c_k \textbf{e}_k
 \end{align*}
 
 for suitable coefficients $c_k$. The index set of the sum is generally infinite but in order for the representation to be of practical use, the functions $f$ must be able to be approximated well by finite partial sums \cite{page 160, FSE2010}.
@@ -11,13 +11,18 @@ Let $\psi \in \mathcal{L}^2(\mathbb{R})$.
 \begin{enumerate}
 \item For $j,k \in \mathbb{Z}$, define the function $\psi_{j,k}$ by
 \begin{align*}
-\psi_{j,k}(t) = 2^{j/2} \psi(2^jt-k), \quad x \in \mathbb{R}.
+\psi_{j,k}(t) = 2^{j/2} \psi(2^jt-k), \quad t \in \mathbb{R}.
 \end{align*}
 \item The function $\psi$ is called a wavelet if the functions $\{\psi_{j,k}\}_{j,k\in\mathbb{Z}}$ form an orthonormal basis for $\mathcal{L}^2(\mathbb{R})$.
 \end{enumerate}
 \end{definition}
 
-Therefore, $\psi_{j,k}$ is a dilation and translation \martin{Forslag: udbyg kapitel 5 til et kapitel med det matematiske fundament, som indeholder begreber såsom Banach-rum, Hilbert-rum, definitioner af kravene for disse samt definitioner af disse lineære operatorer (translationen $T_a$, modulationen $E_b$ og udvidelsen $D_c$ defineret på side 120). Dette kan findes i FSE2010. \textregistered}. A simple wavelet is the Haar wavelet.
+Therefore, $\psi_{j,k}$ is a dilation and translation as defined in definition \ref{def:TMD} and may be written in terms of the translation operator $T_k$ and the dilation operator $D$ as \cite{page 160, FSE2010}
+\begin{align*}
+\psi_{j,k} = D^j T_k \psi, \quad j,k \in \mathbb{Z}.
+\end{align*}
+
+A simple wavelet is the Haar wavelet.
 
 \begin{definition}[Haar Wavelet] \label{HaarWave}
 The \textit{Haar function} is defined by
@@ -49,7 +54,7 @@ Let $N \in \mathbb{N}$. A function $\psi$ has $N$ vanishing moments if
 \end{align*}
 \end{definition}
 
-The Haar wavelet defined in definition \ref{HaarWave} has only one vanishing moment. If $\psi$ has a large number of vanishing moments, the following result shows that only relatively few coefficients $\langle f, \psi_{j,k} \rangle$ will be large and therefore only a small number of wavelets are needed in the expansion \martin{Vi skal lige definere hvad der menes med kompakt støtte (kun forskellig fra 0 inden for et begrænset interval). \textregistered}.
+The Haar wavelet defined in definition \ref{HaarWave} has only one vanishing moment. If $\psi$ has a large number of vanishing moments, the following result shows that only relatively few coefficients $\langle f, \psi_{j,k} \rangle$ will be large and therefore only a small number of wavelets are needed in the expansion.
 
 \begin{theorem}[Decay of wavelet coefficients]
 Assume that the function $\psi \in \mathcal{L}^2(\mathbb{R})$ is compactly supported and has $N$ vanishing moments. Then, for any $N$ times differentiable function $f \in \mathcal{L}^2(\mathbb{R})$ for which the $N$th derivative $f^{(N)}$ is bounded, there exists a constant $C > 0$ such that
@@ -59,11 +64,11 @@ Assume that the function $\psi \in \mathcal{L}^2(\mathbb{R})$ is compactly suppo
 \end{theorem}
 
 \eqref{eq:decay_wave_coeff} suggests that a high number of vanishing moments $N$ implies that the numbers $\langle f, \psi_{j,k} \rangle$ decay quickly as $j \to \infty$. Therefore, the higher the number of vanishing moments a wavelet has, the fewer coefficients $\{ \langle f, \psi_{j,k} \rangle \}_{j\in\mathbb{N},k\in\mathbb{Z}}$ are needed in the expansion \cite{page 170, FSE2010}.
-\\ \\
-Mere teori til dette kapitel (ikke nødvendigvis det hele):
-\begin{enumerate}
-\item Continuous-Time Wavelet Transform (CTWT).
-\item Discrete-Time Wavelet Transform (DTWT).
-\item Filtrering ved hjælp af wavelets.
-\item ``Multiresolution Analysis and Discrete Wavelet Transform'' (kapitel 10 i R. Wang).
-\end{enumerate}
+%\\ \\
+%Mere teori til dette kapitel (ikke nødvendigvis det hele):
+%\begin{enumerate}
+%\item Continuous-Time Wavelet Transform (CTWT).
+%\item Discrete-Time Wavelet Transform (DTWT).
+%\item Filtrering ved hjælp af wavelets.
+%\item ``Multiresolution Analysis and Discrete Wavelet Transform'' (kapitel 10 i R. Wang).
+%\end{enumerate}

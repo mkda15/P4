@@ -34,20 +34,28 @@ The following statement shows the symmetry between $f(t)$ and $F(\omega)$ and is
 Let $f \in \mathcal{L}^1$. Then:
 
 \begin{enumerate}[label=(\alph*)]
-\item For any $a \in \mathbb{R}$: \label{theorem:fund_sym_Fourier_a}
+\item For any $a \in \mathbb{R}$, the Fourier transform of a translation is a modulation as defined in definition \ref{def:TMD}: \label{theorem:fund_sym_Fourier_a}
 \begin{align*}
-\mathcal{F}\{f(t-a)\}(\omega) = \text{e}^{-ja\omega} F(\omega), \\
+\mathcal{F}\{f(t-a)\}(\omega) = \text{e}^{-ja\omega} F(\omega).
+\end{align*}
+
+Conversely, a modulation in time is a translation in frequency:
+\begin{align*}
 \mathcal{F}\{\text{e}^{jat}f(t)\}(\omega) = F(\omega - a).
 \end{align*}
 
-\item If $\delta > 0$ and $f_\delta(t)=\delta^{-1}f(t/\delta)$, then
+\item A dilation by $\delta > 0$ as defined in definition \ref{def:TMD} in the time domain is a dilation by $\frac{1}{\delta}$ in the frequency domain:
 \label{theorem:fund_sym_Fourier_b}
 \begin{align*}
-\mathcal{F}\{f_\delta(t)\}(\omega) = F(\delta\omega), \\
-\mathcal{F}\{f(\delta t)\}(\omega) = F_\delta(\omega).
+\mathcal{F}\{D_c f(t)\}(\omega) = F(\delta\omega).
 \end{align*}
 
-\item If $f$ is continuous and piecewise smooth and $f' \in L^1$, then
+Conversely, the Fourier transform of a dilation by $\frac{1}{\delta}$ is a dilation by $\delta$:
+\begin{align*}
+\mathcal{F}\{f(\delta t)\}(\omega) = D_c F(\omega).
+\end{align*}
+
+\item If $f$ is continuous and piecewise smooth and $f' \in \mathcal{L}^1$, then
 \begin{align*}
 \mathcal{F}\{f'(t)\}(\omega) = j\omega F(\omega).
 \end{align*}
@@ -57,7 +65,7 @@ On the other hand, if $t\cdot f(t)$ is integrable, then
 \mathcal{F}\{tf(t)\} = j F'(\omega).
 \end{align*}
 
-\item If also $g \in L^1$, then
+\item If also $g \in \mathcal{L}^1$, then
 \begin{align*}
 \mathcal{F}\{f*g\}(\omega) = F(\omega) \cdot G(\omega).
 \end{align*}
@@ -118,9 +126,9 @@ Note that $t \text{e}^{-j \omega t} = j \dfrac{d}{d\omega} \text{e}^{-j\omega t}
 \end{enumerate}
 \end{proof}
 
-\noindent
-In all simplicity, part (a) of this theorem shows that translating a function (that is, a delay) corresponds to multiplying its Fourier transform by an exponential (which is equivalent to a phase shift since $F$ may be written in the polar coordinates $F = |F|\text{e}^{j\theta}$) and vice versa; part (b) shows that dilating a function by $\delta$ corresponds to dilating its Fourier transform by $1/\delta$ and vice versa; part (c) shows that differentiating a function corresponds to multiplying its Fourier transform by the coordinate variable and vice versa; and by definition \ref{def:Convol} it is shown that a convolution in the time domain is equivalent to multiplying in the frequency domain and vice versa \cite{page 215, FAA}.
-\\ \\
+%\noindent
+%In all simplicity, part (a) of this theorem shows that translating a function corresponds to multiplying its Fourier transform by an exponential (which is equivalent to a phase shift since $F$ may be written in the polar coordinates $F = |F|\text{e}^{j\theta}$) and vice versa; part (b) shows that dilating a function by $\delta$ corresponds to dilating its Fourier transform by $1/\delta$ and vice versa; part (c) shows that differentiating a function corresponds to multiplying its Fourier transform by the coordinate variable and vice versa; and by definition \ref{def:Convol} it is shown that a convolution in the time domain is equivalent to multiplying in the frequency domain and vice versa \cite{page 215, FAA}.
+%\\ \\
 A main result with regards to the Fourier transform is the following theorem, which is closely related to corollary \ref{coro:conv_Fourier_coeff} from the Fourier series \cite{page 217, FAA}.
 
 \begin{theorem}[The Riemann-Lebesgue Lemma]
