@@ -8,19 +8,15 @@ Each unit is integrated into one algorithm on behalf of the system specification
 \State \textbf{import functions} FFT, Filter, STFT, Spectrogram, Peak\_dec  
 \\
 \Procedure{Import datafiles}{}
-\State Return signal, freq \Comment{List of signal, sampling frequency}
+\State Return $signal$, $freq$ \Comment{List of signal, sampling frequency}
 \EndProcedure 
 \\
 \State $sampels = len(signal)$ 
 \State $time   = sampels/float(freq)$
-\State $cut1 = f_{c1}/freq$ \Comment {Filter specifications}
-\State $cut2 = f_{c2}/freq$
-\State $delta = \delta$
-\State $tw = f_{tw}/freq$
 \\
 \Procedure  {Filtering of signal in frequency domain}{}
 \State $SIGNAL = FFT(signal) $
-\State $H = FFT(Filter(cut1,cut2,freq))$
+\State $H = FFT(Filter(f_{c1},f_{c2},freq))$
 \State $filt\_SIGNAL = SIGNAL \cdot H$
 \State $filt\_signal = IFFT(filt\_SIGNAL)$ \Comment {Filtered signal in time domain} 
 \EndProcedure 
@@ -28,7 +24,7 @@ Each unit is integrated into one algorithm on behalf of the system specification
 \Procedure {Generate spectrogram and detect peaks}{} 
 \State $X = STFT(filt\_signal)$
 \State $spec = Spectrogram(X,time,freq)$
-\State $peaks = Peak\_dec(?,?)$
+\State $peaks = Peak\_dec(X)$
 \EndProcedure
 \\
 \Procedure {Generate output}{}
