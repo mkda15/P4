@@ -10,7 +10,7 @@ The STFT will be implemented in Python, and the algorithm for the implementation
 \begin{algorithmic}[1]
 \State $FFTsize=2**N$ \Comment{Length of window and FFT in STFT}
 \State $overlap=2$ \Comment{Number of overlaps of every FFT - 2 is 50\% overlap of adjacent windows}
-\State $data=$ import of recording \Comment{Recording imported as .wav file}\\
+\State $data = filename.wav$ \Comment{Recording imported as .wav file}\\
 \Procedure{Compute STFT}{}
 \State $step=FFTsize/overlap$
 \State $w=hanning(FFTsize)$ \Comment{Hanning window of length $=FFTsize$}
@@ -65,8 +65,8 @@ The sine waves are then with frequencies of 1, 3 and 3.25 Hz, respectively, and 
 \caption{Spectrograms of the signal in \eqref{eq:SPECTROsignal} with a narrow and wide window, respectively.}
 \label{fig:test_stft}
 \end{figure}
-From figure \ref{fig:test_stft} it is clearly seen how the length of the window in the STFT used for generating the spectrogram affects the resolution in time and frequency. This agrees with Heisenberg's uncertanity principle described in section \ref{sec:heisenberg}, and so there must be made a tradeoff between the two resolutions. For the purpose of this project it is decided, to use a window lenght of $2^{11}=2048$ as compromise between the to extreme cases illustrated by figure \ref{fig:test_stft}. \trine{evt. input mht. optimering af fftsize?? heisenberg??\smiley } \\
-By figure \ref{fig:test_stft} it is concluded that the implementation of the STFT and spectrogram work as intended. Further optimization is possible through of window used in the STFT. 
+From figure \ref{fig:test_stft} it is clearly seen how the length of the window in the STFT used for generating the spectrogram affects the resolution in time and frequency. This agrees with Heisenberg's uncertanity principle described in section \ref{sec:heisenberg}, and so there must be made a tradeoff between the two resolutions. For the purpose of this project it is decided to use a window lenght of $2^{11}=2048$ as compromise between the to extreme cases illustrated by figure \ref{fig:test_stft}. \trine{evt. input mht. optimering af fftsize?? heisenberg??\smiley } \\
+By figure \ref{fig:test_stft} it is concluded that the implementations of the STFT and spectrogram work as intended. Further optimization is possible through of window used in the STFT.
 
 \subsection{Variation of windows in STFT}
 The STFT uses a window function to taper the segment of the data to be transformed and different windows produce different results from the STFT. In figure \ref{fig:stft_windows_10000} is seen spectrograms of the test signal generated from different windows of length $2^{13}=8192$. Similarly, in figure \ref{fig:stft_windows_100} is seen spectrograms from STFTs with windows of length $2^6=64$.
