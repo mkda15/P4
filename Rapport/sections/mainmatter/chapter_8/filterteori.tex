@@ -41,7 +41,7 @@ The corresponding impulse response are determined by the inverse Fourier transfo
 \begin{align}\label{eq:low_im}
 h_{lp}[n]= \frac{1}{2\pi}\int_{-\pi}^{\pi}\text{e}^{j\omega n} d\omega =\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}\text{e}^{j\omega n} d\omega = \frac{1}{2\pi j n}\left[\text{e}^{j\omega n} \right]_{-\omega_c}^{\omega_c} = \frac{\sin \omega_c n}{\pi n }, \ \  -\infty < n < \infty.
 \end{align} 
-Note that the first equality is true because by \eqref{eq:low} the integral is zero outside the interval $[-\omega_c, \omega_c]$. \eqref{eq:low} is only true for $n \neq 0$ and $h_{lp}[0]$ must be defined separately. For this l'Hôspitals rule $\lim \frac{f(x)}{g(x)}=\lim \frac{f'(x)}{g'(x)}$ is used. Thus
+Note that the first equality is true because by \eqref{eq:low} the integral is zero outside the interval $[-\omega_c, \omega_c]$. \eqref{eq:low} is only holds for values $n \neq 0$ and $h_{lp}[0]$ must be defined separately. For this l'Hôspitals rule $\lim \frac{f(x)}{g(x)}=\lim \frac{f'(x)}{g'(x)}$ is used. Thus
 \begin{align}
 h_{lp}[0]=& \frac{1}{\pi} \left( \cos\left( \omega_{c} n \right)\omega_{c}\right)
 = \frac{1}{\pi}\left( \omega_{c} \right).
