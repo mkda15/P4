@@ -10,38 +10,41 @@ Created on Fri Apr 21 08:31:00 2017
 #==============================================================================
 
 from short_time_fourier_transform import stft , db , stft_h, variance_t
-from windowfunctions import Hamming, Hanning, Kaiser
+from windowfunctions import Kaiser
 import numpy as np
 import impulsrespons as impuls
 import matplotlib.pyplot as plt
-#import scipy.signal as ss
 import scipy.io.wavfile as siw
 
 #==============================================================================
 # Variable og data import 
 #==============================================================================
 """ Data import """
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')  # Data signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')     # Data signal
 freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/klap_takt_2.wav')                  # Noise signal
-                    #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
+                                  
 
 """ Length of data and noise alings"""
-
-
 if len(data) > len(noise):
     while len(data) > len(noise):
         noise = np.append(noise,noise)
 if len(data) < len(noise):
         noise = noise[:len(data)]
 
+print("variabler og data importeret 1/9")
+
+""" Generate signal with noise """
+signal = impuls.add_noise(data,noise,c = 1.0)   # Noise and data conjoined
+
+print('støj adderet 2/9')
 
 """ Variabler til filter """
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
-M    = 1000.        # Filter order
-cut  = 1000./freq   # Cut off frequency
 cut1 = 75./freq     # Cut off frequency for band
-cut2 = 1000./freq    # Cut off frequency for band 
+cut2 = 1000./freq   # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
+M    = 1000.        # Filter order
+
 plotlength = int(sampels/30) # Length for plotting (arbitrary)
 
 
@@ -54,7 +57,7 @@ t   = sampels/float(freq)                   # The time for howlong the system ru
 tid = np.linspace(0,t,sampels)              # Axis for time domain
 freq_axis = np.linspace(0,freq/2,sampels/2) # Axis for frequency domain
 freq_axis_norm = np.linspace(0,1,sampels/2)
-n   = np.linspace(0,M,M+1)                  # Integer numbers for making window and impulsrespons
+n   = np.linspace(0,M,M+1) 
 
 """ Variabler til spektogram """
 freq_inter1 = 0    
@@ -63,12 +66,6 @@ freq_inter2 = 150
 fontsize = 13
 dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
                  
-print("variabler og data importeret 1/9")
-
-
-signal = impuls.add_noise(data,noise,c = 1.0)   # Noise and data conjoined
-
-print('støj adderet 2/9')
 
 #==============================================================================
 # Filter koefficenter udregnes og filtere anvendes
@@ -76,35 +73,36 @@ print('støj adderet 2/9')
 """ Vindue funktion og impuls respons udregnes """
 
 if window == Kaiser:                                # What to be returned for different windowfunctions
-    w,M,beta,A,n = window(delta_1,delta_2,freq)
-    w = w[:-1]
-    n = n[:-1]
+    w,M,n = window(delta_1,delta_2,freq)
+#    w = w[:-1] ?
+#    n = n[:-1]
 else:
     w = window(n,M)
 
 print('vindue generet 3/9')
 
 hd = impuls.ImpulsresponsBP(n,M,cut1,cut2)
-#hd = impuls.ImpulsresponsHP(n,M,cut)
-#hd = impuls.ImpulsresponsLP(n,M,cut)    # Desired impulsrespons
 
 h = hd * w                              # The final impulsrespons
-#h = Filter.bp_filter(delta_1,delta_2,freq,cut1,cut2)
-H = np.fft.fft(h,(len(signal)))         # The fourier transformed of the final impulsrespons zero padded to fit the signal
+
 
 print('impuls respons udregnet 4/9')
 
-data = data / float((np.max(signal)))
-signal = signal / float((np.max(signal))) # Reduktion of amplitude
+data = data / float((np.max(signal)))       # Reduktion of amplitude
+signal = signal / float((np.max(signal))) 
 
-
+#==============================================================================
+# Fourier Transformation of Filter and Data
+#==============================================================================
 """ Dataen fourier transformeres """
+H = np.fft.fft(h,(len(signal)))         # The fourier transformed of the final impulsrespons zero padded to fit the signal
 DATA = np.fft.fft(data)     # Pure signal in fourier
 NOISE = np.fft.fft(noise)   # Noise in fourier
 SIGNAL = np.fft.fft(signal) # Signal with noise in fourier
 
 print('Data fourier transformeret 5/9')
-                   
+
+""" Filtering af signal i frekvens domænet """                  
 SIGNAL_FILT = H * SIGNAL                # Convolution between the filter H and the noise SIGNALx
 signal_filt = np.fft.ifft(SIGNAL_FILT)  # Filtered data
 signal_filt = np.real(signal_filt)      # Cast to real, to remove the 0j from ifft.
@@ -116,6 +114,7 @@ print('Data filtreret 6/9')
 # Plt plots af alt det intresante og data gemmes
 #==============================================================================
 
+""" Close-up all data in time domain  """
 ##plt.plot(tid,signal, 'r-', label = "signal")  
 ##plt.plot(tid,signal_filt, 'b-', label = "filt signal")
 ##plt.plot(tid,data, 'g-',label = "ren signal")  # Original data with noise added 
@@ -123,20 +122,23 @@ print('Data filtreret 6/9')
 ##plt.xlabel('Time [sec.]')
 ##plt.axis([1,1.02,-0.1,0.1])
 ##plt.show()
-#
+
+""" Signal with noise in time domain """
 #plt.plot(tid,signal)  # Original data with noise added 
 #plt.xlabel('Time [sec.]')
 #plt.ylabel('Amplitude')
 ##plt.savefig("figures/integrationstest/signal.pdf")
 #plt.show()
-#
+
+""" Filtered signal in time domain """
 #plt.plot(tid,signal_filt)  # Original data with noise added 
 #plt.xlabel('Time [sec.]')
 #plt.ylabel('Amplitude')
 ##plt.axis([0,6,-1.5,1])
 ##plt.savefig("figures/integrationstest/signal_filt.pdf")
 #plt.show()
-#
+
+
 #plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          # FFT of clean data
 #plt.xlabel('Frequency [Hz]')
 #plt.ylabel('Amplitude')

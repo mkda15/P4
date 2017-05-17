@@ -9,7 +9,7 @@ The STFT will be implemented in Python, and the algorithm for the implementation
 \label{STFTalg}
 \begin{algorithmic}[1]
 \State $FFTsize=2**N$ \Comment{Length of window and FFT in STFT}
-\State $overlap=2$ \Comment{Number of overlaps of every FFT - 2 is 50\% overlap of adjacent windows}
+\State $overlap=2$ \Comment{Overlaps of every FFT - 2 is 50\% overlap of adjacent windows}
 \State $data = filename.wav$ \Comment{Recording imported as .wav file}\\
 \Procedure{Compute STFT}{}
 \State $step=FFTsize/overlap$
@@ -27,7 +27,7 @@ The algorithm for generating a spectrogram from the STFT is likewise implemented
 \caption{Generate spectrogram}
 \label{SPECTROalg}
 \begin{algorithmic}[1]
-\State $freq=$ sampling frequency of data
+\State $freq=f_s$ \Comment {Sets sampling frequency of data}
 \State $stft=STFT(data)$ \Comment{Perform STFT on $data$}
 \State $time=len(data)/freq$ \Comment{Length of data in seconds.}
 \State $stft=20\cdot log_{10}(abs(stft.T))$ \Comment{dB gain of transposed $stft$}\\
