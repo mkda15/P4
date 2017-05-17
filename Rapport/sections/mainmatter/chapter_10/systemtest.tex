@@ -6,13 +6,13 @@ In each test the same noise is added to the signal with a maximum SNR at ---- \t
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figures/validation/systemtest/final_spec.pdf}
+\includegraphics[width=\textwidth]{figures/validation/systemtest/final_spec.png}
 \caption{Spectrogram of scale.}
 \label{fig:final_spec1}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figures/validation/systemtest/final_peak.pdf}
+\includegraphics[width=\textwidth]{figures/validation/systemtest/final_peak.png}
 \caption{Significant frequencies of scale.}
 \label{fig:final_peak1}
 \end{subfigure}
@@ -28,13 +28,13 @@ It is clear that the lowest frequencies lay closer as expected, and hence it is 
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figures/validation/systemtest/final_spec3.pdf}
+\includegraphics[width=\textwidth]{figures/validation/systemtest/final_spec3.png}
 \caption{Spectrogram of melody.}
 \label{fig:final_spec2}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figures/validation/systemtest/final_peak3.pdf}
+\includegraphics[width=\textwidth]{figures/validation/systemtest/final_peak3.png}
 \caption{Significant frequencies of melody.}
 \label{fig:final_peak3}
 \end{subfigure}
@@ -50,13 +50,13 @@ By this one can conclude that the melody is recognisable on behalf of the result
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figures/validation/systemtest/final_spec2.pdf}
+\includegraphics[width=\textwidth]{figures/validation/systemtest/final_spec2.png}
 \caption{Spectrogram of $E$ chord.}
 \label{fig:final_spec2}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figures/validation/systemtest/final_peak2.pdf}
+\includegraphics[width=\textwidth]{figures/validation/systemtest/final_peak2.png}
 \caption{Significant frequencies of $E$ chord.}
 \label{fig:final_peak2}
 \end{subfigure}
@@ -72,7 +72,7 @@ From this the implementation of each unit and the integration of these into one 
 \\
 Within the limit of the presented theory the quality of the output is sought optimized through the decisions made primarily upon filter type and the resolution of time and frequency, respectively, in the spectrogram.
 The quality of the output is evaluated upon the possibility of recognising the correct significant frequency at a specific time. \\
-The results of the final tests indicate that it is possible to detect the significant frequency in the case of a single tone within an approximate range of $\pm 10$ Hz. This accuracy is found as sufficient under the assumption that only the standard tones are used. The exactness in time are not fully obtained but visually it appears sufficient. \\        
+The results of the final tests indicate that it is possible to detect the significant frequency in the case of a single tone within an approximate range of $\pm 10$ Hz. This accuracy is found to be sufficient under the assumption that only the standard tones are used. The exactness in time are not fully obtained but visually it appears sufficient. \\        
 Test 1 and test 2 indicates further that when the input signal gets more complicated with respect to speed and shifts between tones it is more difficult to detect the right tones. \\
 By test 3 it is concluded that the application is not capable of determining a specific chord. \\   
 \\

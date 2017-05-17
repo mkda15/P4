@@ -6,9 +6,7 @@ Created on Mon May 01 13:22:16 2017
 """
 
 import numpy as np
-#==============================================================================
-# 
-#==============================================================================
+
 """ Impulsrespons Band Stop """
 def ImpulsresponsBS(n,M,cut1,cut2): # Den ønskværdige impulsrespons for et båndstop filter
     hd = np.zeros(len(n))
