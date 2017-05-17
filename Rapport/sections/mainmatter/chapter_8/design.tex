@@ -103,7 +103,7 @@ The window method is considered a simple method for designing FIR filters. The m
 \begin{align}
 h_d[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi} H_d(\omega)\text{e}^{j\omega} d\omega.
 \end{align}
-$H_d(\omega)$ usually results in a impulse response of infinite length caused by the discontinuities at the boundaries between pass- and stopband. To compute a finite causal system as a FIR filter on behalf of the desired impulse response $h_d[n]$ the realisable impulse response $h[n]$ of the FIR filter is determined as a product of the idealised impulse response $h_d[n]$ and a finite duration \textit{window} $w[n]$ 
+$H_d(\omega)$ usually results in a impulse response of infinite length caused by the discontinuities at the boundaries between pass- and stopband. To compute a finite causal system as a FIR filter, on behalf of the desired impulse response $h_d[n]$, the realisable impulse response $h[n]$ of the FIR filter is determined as a product of the idealised impulse response $h_d[n]$ and a finite duration \textit{window} $w[n]$ 
 \begin{align}
 h[n]=h_d[n]w[n], \ \ w[n] =
 \left\{ \begin{matrix}
