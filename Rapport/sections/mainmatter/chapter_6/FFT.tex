@@ -119,7 +119,7 @@ Equation \eqref{FFT_modulo} requires the computation of two $N/2$-point DFTs, wh
 \\ \\
 When the $N/2$-point DFTs are decomposed into twice as many $N/4$-point DFTs, the factor $(N/2)^2$ above is replaced by $N/2 + 2(N/2)^2$ so that the number of computations required is $N + 2(N/2+2(N/4)^2) = N + N + 4(N/4)^2$. For $N = 2^\nu$ the partition into smaller DFTs can be done at most $\nu = \log_2 N$ times, and hence the number of complex multiplications and additions is $N \nu = N \log_2 (N)$.
 \\ \\
-The number of computations discussed above can be reduced even further by exploiting the periodicity and symmetry of the coefficients $W_N^r$ shown in\trine{skulle vi ikke fjerne henvisninger til figurer i bøger?} \cite{figure 8, DTSP}. Each computation in \cite{figure 9, DTSP} involves obtaining a pair of values from a pair of values in the preceding stage with coefficients that are always powers of $W_N$ and exponents that are separated by $N/2$. This computation is called a \textit{butterfly} due to the shape of the flow graph shown in \cite{figure 8, DTSP}. Since 
+The number of computations discussed above can be reduced even further by exploiting the periodicity and symmetry of the coefficients $W_N^r$ shown in\trine{skulle vi ikke fjerne henvisninger til figurer i bøger?} \cite{figure 8, DTSP}. Each computation in \cite{figure 9, DTSP} involves obtaining a pair of values from a pair of values in the preceding stage, with coefficients that are always powers of $W_N$ and exponents that are separated by $N/2$. This computation is called a \textit{butterfly} due to the shape of the flow graph shown in \cite{figure 8, DTSP}. Since 
 \begin{align*}
 W_N^{N/2} = \text{e}^{-j(2\pi/N)N/2} = \text{e}^{-j\pi} = -1
 \end{align*}
