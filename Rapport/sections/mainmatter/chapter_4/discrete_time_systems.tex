@@ -84,7 +84,7 @@ h[n] = \sum_{k=0}^M b[k] \delta[n-k] - \sum_{k=1}^N a[k] h[n-k] = b[n] - \sum_{k
 where the first sum reduces to $b[n]$ for $n = k$.
 \subsection{Convolution}\label{sec:convol}
 The concept of convolution is of importance when dealing with discrete-time systems and impulse responses and will be defined in this section.\\\\
-By writing $x[n]$ in \eqref{eq:DTS} as a sum and by linearity and using the definition of the impulse response we get:
+Writing $x[n]$ in \eqref{eq:DTS} as a sum using the definition of the impulse response and by linearity, it follows that \chr{Har lavet en mindre omskrivning da vi brugte "vi" tidligere.}:
 \begin{align}
 y[n]&=Tx[n]=T\sum_{k\in\mathbb{Z}}x[n]\delta[n-k]
 =\sum_{k\in\mathbb{Z}}x[n]T\delta[n-k]\nonumber\\
@@ -98,4 +98,5 @@ The convolution between sequences $h$ and $x$ is defined as
 \end{equation}
 where $n$ specifies the argument of the convolution sum.
 \end{definition}
-This means that, given an impulse response for a discrete LTI system, the output to a specific input can be calculated by convoluting the input with the impulse response. An impulse response is sometimes called a filter and convoluting an input with the impulse response is sometimes called filtering. The convolution is of importance in chapter \ref{ch8} which covers filter theory and design in depth. The convolution is furthermore of importance in chapter \ref{ch6} where the Fourier transform is treated. \martin{Kapitlet slutter lidt brat. Kan vi udvide det? \textregistered Jeg syntes det er fint \smiley}
+Given an impulse response for a discrete LTI system, the output to a specific input can be calculated by convolving the input with the impulse response. 
+An impulse response is sometimes called a filter and convolving an input with the impulse response is sometimes called filtering. The convolution is of importance in chapter \ref{ch8} which covers filter theory and design in depth. The convolution is furthermore of importance in chapter \ref{ch6} where the Fourier transform is treated. \martin{Kapitlet slutter lidt brat. Kan vi udvide det? \textregistered Jeg syntes det er fint \smiley}
