@@ -147,11 +147,11 @@ W \left(\omega\right)=\sum_{n=0}^{M} \text{e}^{j\omega n} = \frac{1- \text{e}^{-
 %\caption{Absolute amplitude response of the rectangular window of order $M=8$.}
 %\label{fig:W_rect}
 %\end{figure}
-The aim is to approximate the desired frequency response as good as possible. For $w[n]=1 \ \forall \ n$, $W(\omega)$ becomes a periodic impulse, which implies that $H(\omega) = H_d(\omega)$ though the needed truncations are not performed. The impulse train is best approximated by letting the main lobe of $W(\omega)$ be as narrow as possible and the side lobes as small as possible. This corresponds respectively to minimizing the width of the transitionband and the ripples in pass- and stopband, though it is not possible to achieve both at ones.\\
+The aim is to approximate the desired frequency response. For $w[n]=1 \ \forall \ n$, $W(\omega)$ becomes a periodic impulse, which implies that $H(\omega) = H_d(\omega)$ though the needed truncations are not performed. The impulse train is best approximated by letting the main lobe of $W(\omega)$ be as narrow as possible and the side lobes as small as possible. This corresponds respectively to minimizing the width of the transitionband and the ripples in pass- and stopband, though it is not possible to achieve both at ones.\\
 By increasing the filter order $M$, the width of the main lope is decreased, but the peak amplitude of the side lopes also increases, which results in ripples. This indicates a trade-off between the width of the main lope and the amplitude of the side lopes. \\
 
 \subsubsection{Different types of windows}
-The rectangular window is one out of many windows that have different properties. The oscillations in the $H(\omega)$ is a result of Gibbs phenomenon. According to convergence of Fourier series this can be improved by convolving the desired frequency response with a less abrupt window. By narrowing each end of the rectangle smoothly towards zero, the amplitude peak of the side lopes are remarkably decreased, though this will still result in a wider main lope. \\
+The rectangular window is one out of many windows that have different properties \chr{Har de ikke alle det en underlig formulering i min verden}. The oscillations in the $H(\omega)$ is a result of Gibbs phenomenon. According to convergence of Fourier series this can be improved by convolving the desired frequency response with a less abrupt window. By narrowing each end of the rectangle smoothly towards zero, the amplitude peak of the side lopes are remarkably decreased, though this will still result in a wider main lope. \\
 In table \ref{tab:window} some commonly used windows are defined. Furthermore, the windows and the corresponding amplitude response in dB of three different windows are illustrated by figure \ref{fig:windows}.
 \begin{table}[H]\small
 \centering
@@ -185,7 +185,7 @@ Blackman    &  $w[n] =
 0, &\ Otherwise
 \end{matrix}\right.$  \\ \hline
 \end{tabular}
-\end{table}    
+\end{table}   \chr{Kan formateringen af tabbellen laves lidt om} 
 
 \begin{figure}[H]
 \centering
