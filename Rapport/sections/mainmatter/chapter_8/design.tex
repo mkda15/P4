@@ -212,10 +212,10 @@ Blackman    &  $w[n] =
 \end{figure}
 
 The defined windows all have the property of being symmetric around the point $\frac{M}{2}$. Hence, if the ideal impulse response is also symmetric the windowed impulse will be symmetric, which results in a frequency response with generalized linear phase. \\
-To conclude this section it is seen that in order to design a FIR filter by the window method one can vary the chosen window and the order of the system until the desired specifications are achieved.
+To conclude this section it is seen that in order to design a FIR filter by the window method one can vary the chosen window and the order of the system until the desired specifications are achieved. \chr{Genlæs konklution}.
 
 \subsubsection{The Kaiser window method}
-The Kaiser window design method considers the Kaiser window as the near-optimal window which - compared to the other windows - has two parameters; the length $M+1$ and a shape parameter $\beta$. This results in \textit{one} window where changing the parameters adjusts shape and length of the window in order to achieve the optimal trade-off between amplitude of side lopes and width of main lope. The Kaiser window is defined as 
+The Kaiser window design method considers the Kaiser window as the near-optimal window which - compared to the other windows - has two parameters; the length $M+1$ and a shape parameter $\beta$. This results in \textit{one} window where changing the parameters adjusts shape and length of the window, this is done in order to achieve the optimal trade-off between amplitude of side lopes and width of main lope. The Kaiser window is defined as 
 \begin{align}
 w[n]=\left\{\begin{matrix}
  \frac{I_0[\beta (1-[\frac{n-\alpha}{\alpha}]^2)^{\frac{1}{2}}]}{I_0(\beta)} , &\ 0 \leq n \leq M  \\ 
@@ -223,7 +223,7 @@ w[n]=\left\{\begin{matrix}
 \end{matrix}\right.
 \end{align}
 
-where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ is the zero'th order modified Bessel function of the first kind \cite{DTSP, page 474-476}. Increasing $\beta$ tapers the window in the time domain, which results in smaller side lopes of the Fourier transform. Increasing $M$ causes the width of the main lope to increase but without changing the peak amplitude of the side lopes. This is illustrated in figures \ref{fig:kaiser_beta} and \ref{fig:kaiser_order}, respectively.\\
+where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ is the zero'th order modified Bessel function of the first kind \cite{DTSP, page 474-476}. Increasing $\beta$ tapers the window in the time domain, which results in smaller side lopes of the Fourier transform. Increasing $M$ causes the width of the main lope to increase, without changing the peak amplitude of the side lopes. This is illustrated in figures \ref{fig:kaiser_beta} and \ref{fig:kaiser_order}, respectively.\\
 
 \begin{figure}[H]
 \centering
@@ -239,7 +239,7 @@ where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ is the zero'th order modified Bessel
 \caption{dB amplitude response of Kaiser windows with $\beta=6$ and order $M=50,100$ and 150 for blue, orange and green respectively. As $M$ increases the main lobe becomes narrower.}
 \label{fig:kaiser_order}
 \end{minipage}
-\end{figure}
+\end{figure} \chr{formatering.}
  
 In order to determine values for $\beta$ and $M$ according to  satisfying the desired specifications the following formulas are defined. Considering a lowpass filter with a fixed peak approximation error $\delta$ this gives a cutoff frequency of the passband $\omega_p$ defined by $|H(\omega)| \geq 1-\delta$ and cutoff frequency of the stopband $\omega_s$ defined by $|H(\omega)| \leq \delta$. This gives a transitionband of width $\Delta \omega = \omega_s - \omega_p$. Defining $\delta$ in $[dB]$ by $A=-20\log_{10} \delta$ it is possible to determine the value of $\beta$ on behalf of a specific value of $A$ as 
 \begin{align}
