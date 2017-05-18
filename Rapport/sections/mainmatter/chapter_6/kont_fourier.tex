@@ -28,31 +28,31 @@ provided that the integral exists.
 \end{definition}
 
 \noindent
-The following statement shows the symmetry between $f(t)$ and $F(\omega)$ and is inspired by \cite{page 214, FAA}.
+The following statement shows the symmetry between $f(t)$ and $F(\omega)$. It is inspired by \cite{page 214, FAA} but is adjusted according to the translation, modulation, and dilation in definition \ref{def:TMD}.
 
 \begin{theorem} \label{theorem:fund_sym_Fourier}
 Let $f \in \mathcal{L}^1$. Then:
 
 \begin{enumerate}[label=(\alph*)]
-\item For any $a \in \mathbb{R}$, the Fourier transform of a translation is a modulation as defined in definition \ref{def:TMD}: \label{theorem:fund_sym_Fourier_a}
+\item For any $a \in \mathbb{R}$, a translation in the time domain is a modulation in the frequency domain: \label{theorem:fund_sym_Fourier_a}
 \begin{align*}
-\mathcal{F}\{f(t-a)\}(\omega) = \text{e}^{-ja\omega} F(\omega).
+\mathcal{F}\{T_a f(t)\} = E_{-a} F(\omega).
 \end{align*}
 
-Conversely, a modulation in time is a translation in frequency:
+Conversely, a modulation in the time domain is a translation in the frequency domain:
 \begin{align*}
-\mathcal{F}\{\text{e}^{jat}f(t)\}(\omega) = F(\omega - a).
+\mathcal{F}\{E_a f(t)\} = T_a F(\omega).
 \end{align*}
 
-\item A dilation by $\delta > 0$ as defined in definition \ref{def:TMD} in the time domain is a dilation by $\frac{1}{\delta}$ in the frequency domain:
+\item A dilation by $\delta > 0$ in the time domain is a dilation by $\frac{1}{\delta}$ in the frequency domain:
 \label{theorem:fund_sym_Fourier_b}
 \begin{align*}
-\mathcal{F}\{D_\delta f(t)\}(\omega) = F(\delta\omega).
+\mathcal{F}\{D_\delta f(t)\}(\omega) = D_{1/\delta} F(\omega).
 \end{align*}
 
-Conversely, the Fourier transform of a dilation by $\frac{1}{\delta}$ is a dilation by $\delta$:
+Conversely, a dilation by $\frac{1}{\delta}$ in the time domain is a dilation by $\delta$ in the frequency domain:
 \begin{align*}
-\mathcal{F}\{f(\delta t)\}(\omega) = D_\delta F(\omega).
+\mathcal{F}\{D_{1/\delta} f(t)\}(\omega) = D_\delta F(\omega).
 \end{align*}
 
 \item If $f$ is continuous and piecewise smooth and $f' \in \mathcal{L}^1$, then
@@ -78,25 +78,26 @@ On the other hand, if $t\cdot f(t)$ is integrable, then
 \item
 By definitions \ref{def:Fourier_trans} and \ref{def:InverseFourier_trans} it follows that:
 \begin{align*}
-\mathcal{F}\{f(t-a)\}(\omega) = \int_{-\infty}^\infty \text{e}^{-j\omega t} f(t - a) dt = \int_{-\infty}^\infty \text{e}^{-j\omega t - j\omega a} f(t) dt = \text{e}^{-ja \omega} F(\omega).
+\mathcal{F}\{T_a f(t)\} &= \mathcal{F}\{f(t-a)\}(\omega) = \int_{-\infty}^\infty \text{e}^{-j\omega t} f(t - a) dt \\
+&= \int_{-\infty}^\infty \text{e}^{-j \omega t - j a \omega} f(t) dt = \text{e}^{-j a \omega} F(\omega) = E_{-a} F(\omega).
 \end{align*}
 
-Hence, $\mathcal{F}\{T_a f(t)\} = E_{-a} F(\omega)$. For the second equation:
+For the second equation:
 \begin{align*}
-\mathcal{F}\{\text{e}^{jat} f(t)\}(\omega) = \int_{-\infty}^\infty f(t) \text{e}^{jat} \text{e}^{-j \omega t} dt = \int_{-\infty}^\infty f(t) \text{e}^{j(a- \omega)t} dt = F(\omega - a).
+\mathcal{F}\{E_a f(t)\} &= \mathcal{F}\{\text{e}^{jat} f(t)\}(\omega) = \int_{-\infty}^\infty f(t) \text{e}^{jat} \text{e}^{-j \omega t} dt \\
+&= \int_{-\infty}^\infty f(t) \text{e}^{j(a- \omega)t} dt = F(\omega - a) = T_a F(\omega).
 \end{align*}
-
-Hence, $\mathcal{F}\{E_a f(t)\} = T_a F(\omega)$.
 
 \item For the first equation, let $\tau = t/\delta$. Hence, $t = \delta \tau$ and $dt = \delta d\tau$, which yields:
 \begin{align*}
-\mathcal{F}\{D_\delta f(t)\}(\omega) &= \int_{-\infty}^\infty \delta^{-1} f\left( \dfrac{t}{\delta} \right) \text{e}^{-j \omega t} dt = \int_{-\infty}^\infty \delta^{-1} f(\tau) \text{e}^{-j \omega \delta \tau} \delta d\tau \\
-&= \int_{-\infty}^\infty f(\tau) \text{e}^{-j \omega \delta\tau} d\tau = F(\delta\omega).
+\mathcal{F}\{D_\delta f(t)\}(\omega) &= \int_{-\infty}^\infty \delta^{-1/2} f \left( \dfrac{t}{\delta} \right) \text{e}^{-j \omega t} dt = \int_{-\infty}^\infty \delta^{-1/2} f(\tau) \text{e}^{-j \omega \delta \tau} \delta d\tau \\
+&= \delta^{1/2} \int_{-\infty}^\infty f(\tau) \text{e}^{-j \omega \delta\tau} d\tau = \delta^{1/2} F(\delta\omega) = D_{1/\delta} F(\omega).
 \end{align*}
 
 For the second equation, let $\tau = \delta t$. Hence, $t = \delta^{-1}\tau$ and $dt = \delta^{-1} d\tau$, which yields:
 \begin{align*}
-\mathcal{F}\{f(\delta t)\}(\omega) &= \int_{-\infty}^\infty f(\delta t) \text{e}^{-j \omega t} dt = \int_{-\infty}^\infty f(\tau) \text{e}^{-j \omega \delta^{-1}\tau} \delta^{-1} d\tau = \dfrac{1}{\delta} F \left( \dfrac{\omega}{\delta} \right) = D_\delta F(\omega).
+\mathcal{F}\{D_{1/\delta} f(t)\}(\omega) &= \int_{-\infty}^\infty \dfrac{1}{\sqrt{\frac{1}{\delta}}} f \left( \dfrac{t}{\frac{1}{\delta}} \right) \text{e}^{-j \omega t} dt = \int_{-\infty}^\infty \delta^{1/2} f( \delta t) \text{e}^{-j \omega t} dt \\
+&= \int_{-\infty}^\infty \delta^{1/2} f(\tau) \text{e}^{-j \omega \delta^{-1} \tau} \delta^{-1} d\tau = \dfrac{1}{\sqrt{\delta}} F \left( \dfrac{\omega}{\delta} \right) = D_\delta F(\omega).
 \end{align*}
 
 \item Since $f' \in L^1$, the integral in the limit
