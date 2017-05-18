@@ -1,0 +1,44 @@
+\chapter{Discussion}
+The following chapter, will take to consideration the choices made doing the different process of the project.
+On this basis a discussion will be stated about the different choices and what could have been done differently.
+\\\\
+The sampling frequency used in this project is $44.1$ kHz the standard sampling frequency for audio signals.
+The choice is made to make sure every frequency, within the audible frequency range, is able to be recreated per the sampling theorem \chr{ref til sampling?}
+One of the highest frequency of an acoustic guitar, as the one used in this projects recording, without overtones is E$_5 = 659.26$ Hz.
+Since this is well withing the range of the frequency that can be recreated, an argument could be made for using a lower sampling frequency.
+This will lead to fewer data points, and would enable faster data processing or an eventual real time implementation. 
+A reason the higher sampling frequency is chosen rather than lower sampling frequency, is that every frequency in the audible specter is of interest including the overtones of the played frequency and that the calculation aren't being done in real time.
+Furthermore a lower sampling frequency will make the signal more susceptible to aliasing. 
+\\\\
+
+The choice of not implementing the algorithms in real time yadeyadeyada not relevant to be done live. \chr{Skal lige have en ide til hvordan man skal skrive det.}
+\\\\
+In the scripts/algorithms implemented in this project the chose of using  a predefined algorithm for the FFT (as described in \chr{ref fft}) rather than hard coded FFT, is made due to the superior speed of the predefined function. 
+Even though the algorithms isn't implemented in real time, the faster predefined numpy FFT drastically reduces a bottle neck in the algorithms.
+\\\\
+Filters
+\\\\
+Recording
+ 
+valg om simple peak detection over real symbolbehandling
+Ingen optagelse af tid - hvad føre det til
+(endelig output er spektrogram)
+Valg kun at kigge på E_2 og E_4 og ikke andre toner andet end i en skala.
+Kan genkende skala men ikke se præcis tids punkt.
+
+Vindues længde og samplings frekvens ikke noget vi har arbejdet med for at finde det bedste
+
+
+What did we choose to do? Is there a better way to do it? / What could have been done.
+
+
+Vælger keiser vindue og fir filter
+over iir filter.
+Adaptive filter. (den forventede ønskede værdi bliver sammenlignet med output signalet og en fejl bliver fundet, som kan minimeres.)
+
+Valg om at det ikke køre reel tid
+
+
+Valg af stft over andre metoder til frekvens genkendelse (wavelet ref til perspektivering.)
+
+
