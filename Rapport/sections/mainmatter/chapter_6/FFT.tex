@@ -99,6 +99,12 @@ with the modulo function $\langle k \rangle_N$ as defined in section \ref{sec:DF
 \node at (2.5,2.7){$N/2$-point};
 \node at (2.5,2.3){DFT};
 
+% sum circels
+\foreach \y in {1,...,8}
+{
+\filldraw[fill= white, draw= black] (9.5,\y) circle (0.1cm);
+}
+
 \end{tikzpicture}
 \caption{Flow graph of an $8$-point DFT decomposed into two $4$-point DFTs. Intersections symbolize a summation of the lines meeting.}
 \label{fig:4}
@@ -193,6 +199,22 @@ In general, there are $\log_2(N)$ stages of computation (which is 3 in figure \r
 \draw[->-=0.95]{(7.5,\y+4)--(9.5,\y)};
 \node at (9.4,\y-0.3){$-1$};
 }
+% sum circles
+\foreach \y in {1,...,8}
+{
+\filldraw[fill= white, draw= black] (9.5,\y) circle (0.1cm);
+}
+
+\foreach \y in {1,...,8}
+{
+\filldraw[fill= white, draw= black] (6.5,\y) circle (0.1cm);
+}
+
+\foreach \y in {1,...,8}
+{
+\filldraw[fill= white, draw= black] (3.5,\y) circle (0.1cm);
+}
+
 \end{tikzpicture}
 \caption{Flow diagram of an 8-point DFT decomposed into 4 2-point DFTs with the FFT. Intersections symbolize a summation of the lines meeting.}
 \label{fig:fft_flow}
