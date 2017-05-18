@@ -55,32 +55,9 @@ E_b f(t) = \text{e}^{j b t} f(t), \quad t \in \mathbb{R}.
 
 \item For $c > 0$, the operator $D_c$, called dilation by $c$, is defined by
 \begin{align*}
-D_c f(t) = \dfrac{1}{\sqrt{c}} f\left( \dfrac{t}{c} \right), \quad t \in \mathbb{R}.
+D_c f(t) = \dfrac{1}{c} f\left( \dfrac{t}{c} \right), \quad t \in \mathbb{R}.
 \end{align*}
 \end{enumerate}
-\end{definition}
-
-A definition similar to definition \ref{def:Lpspace} is given for $\ell^p$, which deals with sequences:
-\begin{definition}[The $\ell^p$ spaces]
-For any $p \in [1,\infty)$, the normed vector space $\ell^p(\mathbb{Z})$ is the subspace of $\mathbb{C}^N$ consisting of vectors with finite $\ell^p$ norm:
-\begin{align*}
-\|x\|_p = \left( \sum_{n\in\mathbb{Z}} |x[n]|^p \right)^{1/p}
-\end{align*}
-
-$\ell^2(\mathbb{Z})$ is the space of square-summable sequences. The inner product is defined as:
-\begin{align*}
-\langle x,y \rangle = \sum_{n\in\mathbb{Z}} x[n] \overline{y[n]},
-\end{align*}
-
-and the norm is defined as:
-\begin{align*}
-\|x\| = \left( \sum_{n\in\mathbb{Z}} |x[n]|^2 \right)^{1/2}.
-\end{align*}
-
-Furthermore, the $\ell^\infty$ norm is defined as:
-\begin{align*}
-\|x\|_\infty = \sup_{n\in\mathbb{Z}}|x[n]|.
-\end{align*}
 \end{definition}
 
 It should be noted that $\mathcal{L}^1$ is not a subspace of $\mathcal{L}^2$ and vice versa. However, these facts are useful \cite{page 205, FAA}:
@@ -104,3 +81,26 @@ For all $f,g \in \mathcal{L}^2(\mathbb{R})$,
 \left| \int_{-\infty}^\infty f(t) \overline{g(t)} dt \right| \leq \left( \int_{-\infty}^\infty |f(t)|^2 dt \right)^{1/2} \left( \int_{-\infty}^\infty |g(t)|^2 dt \right)^{1/2}.
 \end{align*}
 \end{theorem}
+
+A definition similar to definition \ref{def:Lpspace} is given for $\ell^p$, which deals with sequences:
+\begin{definition}[The $\ell^p$ spaces]
+For any $p \in [1,\infty)$, the normed vector space $\ell^p(\mathbb{Z})$ is the subspace of $\mathbb{C}^N$ consisting of vectors with finite $\ell^p$ norm:
+\begin{align*}
+\|x\|_p = \left( \sum_{n\in\mathbb{Z}} |x[n]|^p \right)^{1/p}.
+\end{align*}
+
+$\ell^2(\mathbb{Z})$ is the space of square-summable sequences. The inner product is defined as:
+\begin{align*}
+\langle x,y \rangle = \sum_{n\in\mathbb{Z}} x[n] \overline{y[n]},
+\end{align*}
+
+and the norm is defined as:
+\begin{align*}
+\|x\| = \left( \sum_{n\in\mathbb{Z}} |x[n]|^2 \right)^{1/2}.
+\end{align*}
+
+Furthermore, the $\ell^\infty$ norm is defined as:
+\begin{align*}
+\|x\|_\infty = \sup_{n\in\mathbb{Z}}|x[n]|.
+\end{align*}
+\end{definition}
