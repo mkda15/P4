@@ -1,5 +1,5 @@
 \section{Test specification}\label{sec:testspec}
-In this section test specifications will be determined in order to validate the final system. This will be done upon the concept of the V-model illustrated in figure \ref{fig:vmodel}. \cite{vmodel} The V-model is a simple multiple-phase model used to describe phases in the development process. The left side of the V is decomposition of the problem - \textit{synthesising} , and the right side is the creation, integration, and test of the system - \textit{abstracting}.
+In this section test specifications will be determined in order to test and evaluate the system. This will be done upon the concept of the V-model illustrated in figure \ref{fig:vmodel}. \cite{vmodel} The V-model is a simple multiple-phase model used to describe phases in the development process. The left side of the V is decomposition of the problem - \textit{synthesising} , and the right side is the creation, integration, and test of the system - \textit{abstracting}.
 \begin{figure}[H]
 \centering
 \tikzstyle{block} = [rectangle, draw,thick,fill=white, 
@@ -62,18 +62,18 @@ The Fourier transformation will be done by implementing the Fast Fourier Transfo
 To test the implementation it will be compared to the pre-existing FFT function from the Numpy-package in Python. These are compared by computing the time it takes for each function to compute different amounts of the same random numbers. Further this will be compared to an straight  implementation of the Discrete Fourier Transformation to see the effect of the Fast Fourier Transformation.\\
 \\
 \textbf{Filter}\\
-To validate the filter it will be tested whether the filter fulfil the specifications that are defined during the filter design process in chapter \ref{ch10}. In order to clarify the effect of the filter it will be tested on a simple known signal, where a noise signal has been digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal to noise ratio. Hence, it is possible to verify whether the filter succeeds to remove the specified frequencies in order to reduce the noise. The verification will be made by analysing the frequency spectrum of the filtered signal compared to the original pure signal. \\
+The filter has to fulfil certain specifications that will be defined during the filter design process in chapter \ref{ch10}. The filter will be tested on a simple known signal, where a noise signal has been digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal-to-noise ratio. Hence, it is possible to verify whether the filter succeeds to remove the specified frequencies in order to reduce the noise. The verification will be made by analysing the frequency spectrum of the filtered signal compared to the original pure signal. \\
 \\
 \textbf{STFT algorithm and spectrogram}\\
 The spectrogram is made by the Short-Time Fourier Transform described in section \ref{sec:STFT}. As the verification of the Fourier Transformation described above, the spectrogram algorithm will be tested against an existing algorithm from the Numpy-package in Python on the same data set.
 The algorithm will then be tested on a fixed data set with a known output. It will be a sine wave with three different frequencies. By doing so, the output of the algorithm can hence be compared.
-Secondary the algorithm will be tested on a recorded signal to validate the implementation according to the data type that will act as the input in the final system. 
+Secondary the algorithm will be tested on a recorded signal to test the implementation according to the data type that will act as the input in the final system. 
 \frede{Her skal nok specificeres mere. Hvad er det præcis for noget data der er input/output? F.eks. en sinus i tid som bliver til en Dirac i frekvens \texttrademark}\\
 \\
 \textbf{Peak detection algorithm}\\
-To validate the peak amplitude detector it will be tested on a recorded signal with a known single ton. By table \ref{tab:tone} in chapter \ref{ch2} it is given that the significant frequency of a specific tone is defined. Thus the wanted output is known for comparison.         
+The peak amplitude detector will be tested on a recorded signal with a known single tone. By table \ref{tab:tone} in chapter \ref{ch2} it is given that the significant frequency of a specific tone is defined. Thus the wanted output is known for comparison.         
 
-\subsection{Integration validation}
+\subsection{Integration test}
 When each unit is working according to the specifications the next step is to test the units as they are integrated into a single system. This test is done by taking the output of the previous unit and feeding it into the next unit of the algorithm. Hence focus of this test is the technical aspect not the level of performers according to problem statement. This is the last step in creating the final system.
 
 \subsection{System test of the final application}

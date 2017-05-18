@@ -1,6 +1,6 @@
 \section{Frequency analysis of music}
-In this section the recordings of music will undergo frequency analysis, and the goal is to be able to express which frequencies the tones played in the recordings are generally found at.
-\subsection{Single tones}\label{sec:single}
+In this section the recordings of music will undergo frequency analysis, and the goal is to be able to express which frequencies the tones played in the recordings are generally found at. It is expected that both the significant tone and its corresponding harmonics will appear in the frequency spectrum. Considering specifications for the filter it is important to preserve the frequencies that contain the most energy but it is not necessary to include all the harmonics that appears in the spectrum.\trine{sidste del med harmoncis er nyligt tilføjet}     
+\subsection{Single tone}\label{sec:single}
 Firstly, the tuning of guitar is checked for consistency. The low and high E strings on the guitar should vibrate and emit sounds frequencies of 82.41 Hz and 329.63 Hz, respectively, as seen in table \ref{fig:guitar_frequencies}. Figures \ref{fig:single_low} and \ref{fig:single_high} show the frequency spectra for the recordings of the two tones.
 \begin{figure}[H]
 \centering
@@ -20,7 +20,7 @@ Firstly, the tuning of guitar is checked for consistency. The low and high E str
 \label{fig:single}
 \end{figure}
 With a peak detection algorithm implementet in Python the most significant frequencies in the two recordings are registered to be 163.82 Hz and 329.83 for the low and high E's, respectively. As $163.82$ Hz $\approx 2\cdot82.41$ Hz this is regarded as a harmonic of the low E. The harmonics are moreover observable in the figures as reduced peaks at integer multiples of the fundamental frequencies of the tones. It is furthermore seen from the figures, that the energy in the signals is mainly located at frequencies above 75 Hz and below 1000 Hz for the low E and above 100 Hz and below 2000 Hz for the high E.
-\subsection{Chords}
+\subsection{Chord}
 Figures \ref{fig:chord_low} and \ref{fig:chord_high} show the frequency spectra of the recordings of low and high E chords, respectively.
 \begin{figure}[H]
 \centering
@@ -59,15 +59,6 @@ Figures \ref{fig:melody_single} show the frequency spectrum for a melody consist
 \label{fig:melody_single}
 \end{figure}
 The majority of energy in the signal is located above 100 Hz and below 2000 Hz.
-\subsection{Melody with chords}
-In figures \ref{fig:melody_chords} is seen the frequency spectrum for a melody consisting of chords played slowly.
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{figures/freqanal/melody_chords.png}
-\caption{Frequency spectrum of melody played with chords.}
-\label{fig:melody_chords}
-\end{figure}
-The majority of energy in the signal is located above 90 Hz and below 800 Hz.
 
 \section{Frequency analysis of noise}
 In this section the recordings of noise will undergo frequency analysis, and the goal is to be able to express which frequencies the recorded noise is generally found at.
@@ -89,28 +80,28 @@ Figure \ref{fig:clapping} and \ref{fig:folding} show the frequency spectrum of c
 \end{subfigure}
 \caption{Frequency spectra of different noises.}
 \end{figure}
-The majority of the energy in both noises is located between 0 and 15000 Hz.
-\subsection{Singing and talking}
-Figures \ref{fig:talk} and \ref{fig:song} show the frequency spectrum of recorded talking and singing respectively.
-\begin{figure}[H]
-\centering
-\begin{subfigure}{0.49\textwidth}
-\centering
-\includegraphics[width=\textwidth]{figures/freqanal/talk.png}
-\caption{Person talking}
-\label{fig:talk}
-\end{subfigure}
-\begin{subfigure}{0.49\textwidth}
-\centering
-\includegraphics[width=\textwidth]{figures/freqanal/song.png}
-\caption{Person singing}
-\label{fig:song}
-\end{subfigure}
-\caption{Frequency spectra of a person talking and signing.}
-\end{figure}
-The majority of the energy is located between 100 and 5000 Hz for talking and 0 and 5000 Hz for singing.
+The majority of the energy in both noises is located between 0 and 15000 Hz.\trine{jeg har udkommenteret singing and talking e}
+%\subsection{Singing and talking}
+%Figures \ref{fig:talk} and \ref{fig:song} show the frequency spectrum of recorded talking and singing respectively.
+%\begin{figure}[H]
+%\centering
+%\begin{subfigure}{0.49\textwidth}
+%\centering
+%\includegraphics[width=\textwidth]{figures/freqanal/talk.png}
+%\caption{Person talking}
+%\label{fig:talk}
+%\end{subfigure}
+%\begin{subfigure}{0.49\textwidth}
+%\centering
+%\includegraphics[width=\textwidth]{figures/freqanal/song.png}
+%\caption{Person singing}
+%\label{fig:song}
+%\end{subfigure}
+%\caption{Frequency spectra of a person talking and signing.}
+%\end{figure}
+%The majority of the energy is located between 100 and 5000 Hz for talking and 0 and 5000 Hz for singing.
 \subsection{Ambient noise}
-Figure \ref{fig:ambient} shows the frequency spectrum of the abient noise recorded in a parking lot at the campus of AAU.
+Figure \ref{fig:ambient} shows the frequency spectrum of the ambient noise recorded in a parking lot at the campus of AAU.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/freqanal/ambient.png}
