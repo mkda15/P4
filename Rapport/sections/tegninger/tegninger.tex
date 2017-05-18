@@ -36,48 +36,62 @@
   output/.style   = {coordinate} % Output
 }
 
-%definerer labels 
-\newcommand{\suma}{\Large$+$}
-\newcommand{\inte}{$\displaystyle \int$}
-\newcommand{\derv}{\huge$\frac{d}{dt}$}
+%%definerer labels 
+%\newcommand{\suma}{\Large$+$}
+%\newcommand{\inte}{$\displaystyle \int$}
+%\newcommand{\derv}{\huge$\frac{d}{dt}$}
 
 
 \begin{figure}
 \centering
-
-\tikzstyle{block} = [rectangle, draw,thick,fill=white, 
-    text width=7em, text centered, minimum height=3.3em]
-\tikzstyle{myarrows}=[line width=1mm,draw=blue,-triangle 45,postaction={draw, line width=3mm, shorten >=4mm, -}]
-\begin{tikzpicture}[auto, node distance=1.6cm, >=triangle 45,font=\sffamily ]
-
-\draw [myarrows](-2,1.5)--(5.5,-6.5);
-\draw [myarrows](5.8,-6)--(13,1.5);
-\draw 
-	node [block](1){Conpect of System}
-	node [block, below of=1, right=0.9mm](2){Requierments and Architecture}
-	node [block, below of=2, right=0.9mm](3){Detaild Design}
-	node [block, below of=3, right=5mm](4){Implementation}
-	node [block, above of=4, right=5mm](5){Unit Testing}
-	node [block, above of=5, right=0.9mm](6){Integration Test}
-	node [block, above of=6, right=0.9mm](7){System Test}
-	node at (-2.8,0) (11) {}
-	node at (3.3,-6.5) (22) {}
-	node at (13.9,0) (33)  {}
-	node at (7.5,-6.5) (44) {}
-;
-\draw [<->, dashed](1)--(7);
-\draw [<->, dashed](2)--(6);
-\draw [<->, dashed](3)--(5);
-\draw [decoration={text along path,
-    text={\textsf{Project definition}},text align={center}},decorate]  (11) -- (22);
-\draw [decoration={text along path,
-    text={Project Test and Integration},text align={center}},decorate]  (44) -- (33);
-
-
+\begin{tikzpicture}[scale=1]
+\draw (0,0) ractangle (10,0);
 \end{tikzpicture}
-\caption{Concept of the V-model}
-\label{fig:synth}
+\caption{caption}
+\label{fig:wave}
 \end{figure}
+
+
+
+
+
+%
+%\begin{figure}
+%\centering
+%
+%\tikzstyle{block} = [rectangle, draw,thick,fill=white, 
+%    text width=7em, text centered, minimum height=3.3em]
+%\tikzstyle{myarrows}=[line width=1mm,draw=blue,-triangle 45,postaction={draw, line width=3mm, shorten >=4mm, -}]
+%\begin{tikzpicture}[auto, node distance=1.6cm, >=triangle 45,font=\sffamily ]
+%
+%\draw [myarrows](-2,1.5)--(5.5,-6.5);
+%\draw [myarrows](5.8,-6)--(13,1.5);
+%\draw 
+%	node [block](1){Conpect of System}
+%	node [block, below of=1, right=0.9mm](2){Requierments and Architecture}
+%	node [block, below of=2, right=0.9mm](3){Detaild Design}
+%	node [block, below of=3, right=5mm](4){Implementation}
+%	node [block, above of=4, right=5mm](5){Unit Testing}
+%	node [block, above of=5, right=0.9mm](6){Integration Test}
+%	node [block, above of=6, right=0.9mm](7){System Test}
+%	node at (-2.8,0) (11) {}
+%	node at (3.3,-6.5) (22) {}
+%	node at (13.9,0) (33)  {}
+%	node at (7.5,-6.5) (44) {}
+%;
+%\draw [<->, dashed](1)--(7);
+%\draw [<->, dashed](2)--(6);
+%\draw [<->, dashed](3)--(5);
+%\draw [decoration={text along path,
+%    text={\textsf{Project definition}},text align={center}},decorate]  (11) -- (22);
+%\draw [decoration={text along path,
+%    text={Project Test and Integration},text align={center}},decorate]  (44) -- (33);
+%
+%
+%\end{tikzpicture}
+%\caption{Concept of the V-model}
+%\label{fig:synth}
+%\end{figure}
 
 
 
