@@ -3,6 +3,7 @@ The purpose of this chapter is merely to introduce the concept of wavelet analys
 \\ \\
 As described in section \ref{sec:STFT}, the STFT is limited by Heisenberg's uncertainty principle. Moreover, even though a window with a certain width that satisfies the relation $\sigma_t^2 \sigma_\omega^2 = \frac{1}{4}$ is chosen, the width of the window cannot be changed during the analysis, which means that the Fourier transform is unsuitable to describe signals with both low and high frequencies. The wavelet transform is a different kind of transform, which is used to gain localized information in both frequency and time domains. While the Fourier transform converts a signal between the time and frequency domains, the coefficients of the wavelet transform represent details of the signal at different scale levels and their corresponding temporal location.
 \begin{figure}[H]
+\hspace*{-0.7cm}
 \centering
 \begin{tikzpicture}[scale = 0.19]
 \draw (0,0) rectangle (16,16);
@@ -28,11 +29,11 @@ As described in section \ref{sec:STFT}, the STFT is limited by Heisenberg's unce
 \node at (48,18) {STFT};
 \node at (48,-1.5) {Time};
 
-\draw (60,0) rectangle (76,16);
-\foreach \y in {0.5,2,4,8}
+\draw (60,0.5) rectangle (76,16);
+\foreach \y in {1,2,4,8}
 	\draw (60,\y) -- (76,\y);
 \foreach \x in {68}
-	\draw (\x,0.5) -- (\x,16);
+	\draw (\x,1) -- (\x,16);
 \foreach \x in {64,72}
 	\draw (\x,2) -- (\x,16);	
 \foreach \x in {62,66,70,74}
