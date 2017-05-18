@@ -1,4 +1,4 @@
-This chapter describes the mathematical tools necessary to describe and understand the theory described in the following chapters. This project deals with functions and sequences in the so-called $\mathcal{L}^p$ and $\ell^p$ spaces, respectively. The following definitions are inspired by \cite{chapter 5-6, FSE2010} and \cite{chapter 2, FSP} and only considers a subset $D \subset \mathbb{R}$ due to the focus of this project. However, similar definitions also hold for all of $\mathbb{R}$.
+This chapter describes the mathematical tools necessary to describe and understand the theory described in the following chapters. This project deals with functions and sequences in the so-called $\mathcal{L}^p$ and $\ell^p$ spaces, respectively. The following definitions are inspired by \cite{chapter 5-6, FSE2010} and \cite{chapter 2, FSP} and only considers a subset $D \subset \mathbb{R}$ due to the focus of this project. However, similar definitions also hold for all of $\mathbb{R}$ \martin{Overvejelser til dette kapitel: denne fil indeholder et alternativ til den anden fil i mappen. Overskriften kan måske ændres til noget i retning af ``Mathematical tools'', så det er lidt mere generelt og beskrivende. Man kan eventuelt også inkludere definitioner af Banach- og Hilbert-rum ud fra Cauchy-følger, norm og så videre (side 48 + 65, FSE2010). Derudover er definition 5.0.5 tilføjet, da vi egentlig bruger begreberne heri i løbet af rapporten, men den er tilpasset rapporten i forhold til kilden, og vi skal spørge Henrik, om det er i orden. Endelig er det lidt usikkert, hvor relevante alle begreberne i definition 5.0.6 er. \textregistered}.
 
 \begin{definition}[The $\mathcal{L}^p$ spaces] \label{def:Lpspace}
 Let $D \subset \mathbb{R}$ be a subset. $\mathcal{L}^p(D)$ is the set of absolutely Lebesgue-integrable functions over $D$ for any $p \in [1,\infty)$:
@@ -26,19 +26,19 @@ Let $D \subset \mathbb{R}$ be a subset. $\mathcal{L}^2(D)$ is the set of all fun
 
 $\mathcal{L}^2(D)$ is the normed vector space of square-integrable complex-valued functions. The inner product is:
 \begin{align*}
-\langle f,g \rangle =  \int_D f(t) \overline{g(t)} dt
+\langle f,g \rangle =  \int_D f(t) \overline{g(t)} dt,
 \end{align*}
 
 where $\overline{g(t)}$ is the complex conjugate of $g(t)$. The norm is:
 \begin{align*}
-\|f\| = \left( \int_D |f(t)|^2 dt \right)^{1/2}.
+\|f\|_2 = \left( \int_D |f(t)|^2 dt \right)^{1/2}.
 \end{align*}
 
 The $\mathcal{L}^2$ space is a complete and normed space with an inner product and is therefore a Hilbert space.
 
 \end{definition}
 
-The following definition defines linear operators on $\mathcal{L}^2(\mathbb{R})$ \cite{page 120, FSE2010} \martin{Vi bruger egentlig begreberne i denne definition igennem rapporten, og henvisning til denne definition i løbet af rapporten vil derfor binde rapporten bedre sammen. Bemærk: punkt nummer 2 og henvisningerne til denne definition rundt omkring i rapporten er tilpasset rapporten, og vi skal spørge Henrik, om det er i orden. \textregistered}.
+The following definition defines linear operators on $\mathcal{L}^2(\mathbb{R})$ \cite{page 120, FSE2010}.
 
 \begin{definition}[Translation, modulation, dilation] \label{def:TMD}
 Consider the following classes of linear operators on $\mathcal{L}^2(\mathbb{R})$:
@@ -55,32 +55,9 @@ E_b f(t) = \text{e}^{j b t} f(t), \quad t \in \mathbb{R}.
 
 \item For $c > 0$, the operator $D_c$, called dilation by $c$, is defined by
 \begin{align*}
-D_c f(t) = \dfrac{1}{\sqrt{c}} f\left( \dfrac{t}{c} \right), \quad t \in \mathbb{R}.
+D_c f(t) = \dfrac{1}{c} f\left( \dfrac{t}{c} \right), \quad t \in \mathbb{R}.
 \end{align*}
 \end{enumerate}
-\end{definition}
-
-A definition similar to definition \label{def:Lpspace} is given for $\ell^p$ which deals with sequences:
-\begin{definition}[The $\ell^p$ spaces]
-For any $p \in [1,\infty)$, the normed vector space $\ell^p(\mathbb{Z})$ is the subspace of $\mathbb{C}^N$ consisting of vectors with finite $\ell^p$ norm:
-\begin{align*}
-\|x\|_p = \left( \sum_{n\in\mathbb{Z}} |x[n]|^p \right)^{1/p}
-\end{align*}
-
-$\ell^2(\mathbb{Z})$ is the space of square-summable sequences. The inner product is defined as:
-\begin{align*}
-\langle x,y \rangle = \sum_{n\in\mathbb{Z}} x[n] \overline{y[n]},
-\end{align*}
-
-and the norm is defined as:
-\begin{align*}
-\|x\| = \left( \sum_{n\in\mathbb{Z}} |x[n]|^2 \right)^{1/2}.
-\end{align*}
-
-Furthermore, the $\ell^\infty$ norm is defined as:
-\begin{align*}
-\|x\|_\infty = \sup_{n\in\mathbb{Z}}|x[n]|.
-\end{align*}
 \end{definition}
 
 It should be noted that $\mathcal{L}^1$ is not a subspace of $\mathcal{L}^2$ and vice versa. However, these facts are useful \cite{page 205, FAA}:
@@ -105,4 +82,25 @@ For all $f,g \in \mathcal{L}^2(\mathbb{R})$,
 \end{align*}
 \end{theorem}
 
-Eventuelt: definition af Banach- og Hilbert-rum ud fra Cauchy-følger, norm og så videre (side 48 + 65, FSE2010).
+A definition similar to definition \ref{def:Lpspace} is given for $\ell^p$, which deals with sequences:
+\begin{definition}[The $\ell^p$ spaces]
+For any $p \in [1,\infty)$, the normed vector space $\ell^p(\mathbb{Z})$ is the subspace of $\mathbb{C}^N$ consisting of vectors with finite $\ell^p$ norm:
+\begin{align*}
+\|x\|_p = \left( \sum_{n\in\mathbb{Z}} |x[n]|^p \right)^{1/p}.
+\end{align*}
+
+$\ell^2(\mathbb{Z})$ is the space of square-summable sequences. The inner product is defined as:
+\begin{align*}
+\langle x,y \rangle = \sum_{n\in\mathbb{Z}} x[n] \overline{y[n]},
+\end{align*}
+
+and the norm is defined as:
+\begin{align*}
+\|x\| = \left( \sum_{n\in\mathbb{Z}} |x[n]|^2 \right)^{1/2}.
+\end{align*}
+
+Furthermore, the $\ell^\infty$ norm is defined as:
+\begin{align*}
+\|x\|_\infty = \sup_{n\in\mathbb{Z}}|x[n]|.
+\end{align*}
+\end{definition}

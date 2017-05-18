@@ -128,9 +128,11 @@ The STFT uses a window function to taper the segment of the data to be transform
 \caption{Spectrograms generated with different windows of length $2^6$ and with overlap of 2.}
 \label{fig:stft_windows_100}
 \end{figure}
-\subsection{Conclusion}
-Fredric J. Harris wrote an article in 1978 analysing the different windows and their effects in signal processing with the discrete Fourier transform \cite{fredric_harris}. His analysis included quantative and qualitative arguments, and he ends the article concluding that the Kaiser window and the Blackman-Harris windows are the best choices for this kind of signal processing - his favourite being the Kaiser window. It is furthermore assessed from the above spectrograms, which allow for a visual (and qualitative) analysis, that the Kaiser window produces the best looking spectrograms. Together with the conclusion from Harris it is decided that the Kaiser window with shape coefficient $\beta = 4$ will be used for the implementation of the STFT in this project. \\
-Figure \ref{fig:STFT_test_signal} shows the resulting STFT of an octatonic scale played on a guitar one string at a time with the use of a Kaiser window of order $2^{11}$ and $\beta = 4$  
+
+\subsection{Summary}
+Fredric J. Harris wrote an article in 1978 analysing the different windows and their effects in signal processing with the discrete Fourier transform \cite{page 82, fredric_harris}. His analysis included quantative and qualitative arguments, and he ends the article concluding that the Kaiser and Blackman windows are the best choices for this kind of signal processing - his favourite being the Kaiser window. It is furthermore assessed from the above spectrograms, which allow for a visual (and qualitative) analysis, that the Kaiser window produces the best looking spectrograms. Together with the conclusion from Harris it is decided that the Kaiser window with shape coefficient $\beta = 4$ will be used for the implementation of the STFT in this project. \\
+Figure \ref{fig:STFT_test_signal} shows the resulting STFT of an octatonic scale played on a guitar one string at a time with the use of a Kaiser window of order $2^{11}$ and $\beta = 4$.
+
 \begin{figure}[H]
 \centering
 \includegraphics[scale = 0.6]{figures/validation/stft/scale.png}
