@@ -68,7 +68,7 @@ hd = impuls.ImpulsresponsBP(n,M,cut1,cut2)
 delta_1= 0.05
 delta_2 = float(10)         # half transition width in Hz
 
-w1,M,beta,A,n = Kaiser(delta_1,delta_2,freq)            # window
+w1,M,n = Kaiser(delta_1,delta_2,freq)            # window
 
 ########################################
 

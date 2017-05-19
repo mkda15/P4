@@ -21,8 +21,8 @@ import scipy.io.wavfile as siw
 #==============================================================================
 """ Data import """
 # Enkelt tone
-#freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
-#freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
+freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
+freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
 
 # TEST 1 
 #freq , data  = siw.read('Lydfiler/skala/forsoeg_skala_hurtig.wav')     # Data signal
@@ -33,8 +33,8 @@ import scipy.io.wavfile as siw
 #freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                                   # Noise signal
 
 # TEST 3                                  
-freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
-freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
+#freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
+#freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
 
 """ Length of data and noise alings"""
 if len(data) > len(noise):
@@ -52,12 +52,12 @@ print('støj adderet 2/9')
 
 """ Variabler til filter """
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
-cut1 = 80./freq     # Cut off frequency for band
+cut1 = 75./freq     # Cut off frequency for band
 cut2 = 1000./freq   # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 
 
-plotlength = int(sampels/30) # Length for plotting (arbitrary)
+plotlength = int(sampels/20) # Length for plotting (arbitrary)
 
 
 """ Til Kaiser vinduet """
@@ -82,7 +82,7 @@ fontsize = 13
 """ Vindue funktion og impuls respons udregnes """
 
 if window == Kaiser:                        # If Kaiser window is chosen do this
-    w,M,n = window(delta_1,delta_2,freq)    # Retuns window funcion(time), order M and linspace n of length M+1  
+    w,M,n,beta = window(delta_1,delta_2,freq)    # Retuns window funcion(time), order M and linspace n of length M+1  
 #    w = w[:-1] 
 #    n = n[:-1]
 else:                                       # If other window is chosen
@@ -107,7 +107,7 @@ signal = signal / float((np.max(signal)))
 """ Dataen fourier transformeres """
 H = np.fft.fft(h,(len(signal)))         # The fourier transformed of the final impulsrespons zero padded to fit the signal
 Hdb =  db(np.abs(H).T)                  # Frequency response of filter in dB representation
-DATA = np.fft.fft(data)                 # Pure signal in fourier
+DATA = np.fft.fft(data)/len(signal)                 # Pure signal in fourier
 NOISE = np.fft.fft(noise)               # Noise in fourier
 SIGNAL = np.fft.fft(signal)             # Signal with noise in fourier
 
@@ -124,9 +124,41 @@ print('Data filtreret 6/9')
 #==============================================================================
 # Plt plots af alt det intresante og data gemmes
 #==============================================================================
+""" Impulse respose of filter """
+plt.plot(h[:sampels/2])
+plt.xlabel('Sampels [n]')
+plt.ylabel('Amplitude')
+plt.axis([0,M+100,-0.015,0.046])
+#plt.savefig("figures/filter_test/impulse.png")
+plt.show()
+
+
 """ Frequency respose of filter """
-#plt.plot(freq_axis,np.abs(H)[:sampels/2])
-#plt.axis([0,1500,0,1.2])
+#plt.plot(freq_axis,np.abs(H)[:sampels/2],'r')
+#plt.xlabel('Frequency [Hz]')
+#plt.ylabel('Amplitude')
+#plt.axis([0,2500,0,1.1])
+#plt.savefig("figures/filter_test/freq_response1.png")
+#plt.show()
+##close up
+#f, axarr = plt.subplots(2, sharex=True)
+#
+#axarr[0].plot(freq_axis[:plotlength], np.abs(H)[:plotlength],'r')
+#axarr[0].axis([20,130,0.9,1.1])
+#axarr[0].set_ylabel('Amplitude')
+#axarr[0].axvline((75-delta_2), color='green') # Nedre transitionsgrænse
+#axarr[0].axvline((75+delta_2), color='green') # Øvre transitionsgrænse
+#axarr[0].axhline((1+delta_1), color='green') # Nedre knækfrekvens
+#axarr[0].axhline((1-delta_1), color='green') # Nedre knækfrekvens 
+# 
+#plt.plot(freq_axis[:plotlength],np.abs(H)[:plotlength],'r')  
+#plt.xlabel('Frequency [Hz]')
+#plt.ylabel('Amplitude')
+#plt.axvline((75-delta_2), color='green') # Nedre transitionsgrænse
+#plt.axvline((75+delta_2), color='green') # Øvre transitionsgrænse
+#plt.axhline((0+delta_1), color='green') # Nedre knækfrekvens
+#plt.axis([20,130,0,0.2])
+#plt.savefig("figures/filter_test/freq_response2.png")
 #plt.show()
 
 """ dB representation of frequency response of filter """
@@ -158,15 +190,14 @@ print('Data filtreret 6/9')
 #plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          
 #plt.xlabel('Frequency [Hz]')
 #plt.ylabel('Amplitude')
-##plt.axis([200,270,0,1000])
-##plt.savefig("figures/integrationstest/f_signal.pdf")
+#plt.savefig("figures/filter_test/SIGNAL.png")
 #plt.show()
 
 """ Filtered signal in frequency domain """
 #plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   
 #plt.xlabel('Frequency [Hz]')
 #plt.ylabel('Amplitude')
-##plt.savefig("figures/integrationstest/f_signal_filt.pdf")
+#plt.savefig("figures/filter_test/filt_SIGNAL.png")
 #plt.show()
 
 """ Close-up all data in time domain  """
@@ -202,7 +233,7 @@ cb   = plt.colorbar(spec)
 cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
 plt.xlabel('Time [s]', fontsize = fontsize)
 plt.ylabel('Frequency [Hz]', fontsize = fontsize)
-plt.axis([0,8,0,1600])
+#plt.axis([0,8,0,1600])
 #plt.savefig("figures/skala.png")
 #plt.savefig("figures/integrationstest/spectrogram.png")
 plt.savefig("figures/systemtest/final_spec3.png")

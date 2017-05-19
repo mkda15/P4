@@ -90,4 +90,4 @@ def Kaiser( d1, d2, fs):                                        # Kaiservindue
             w[i] = 0
     if (M%2 == 1):
         M=M+1
-    return w,M,n
+    return w,M,n,beta
