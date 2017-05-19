@@ -39,15 +39,7 @@ The algorithm for generating a spectrogram from the STFT is likewise implemented
 \end{algorithm}
 
 \subsection{Validation of the STFT and spectogram}
-The validation of the STFT and spectrograms will be done as a whole entity, and the test specification consists of generating a spectrogram from a signal containing a single sinusoidal wave, which changes frequency once during the sampling interval. The signal is defined as
-\begin{align}\label{eq:SPECTROsignal}
-sig(x)=\begin{cases}\sin(1000\pi x)&\text{for }x<\frac{t}{3}\\
-\sin(3000\pi x)&\text{for }\frac{t}{3}\leq x < \frac{2t}{3}\\
-\sin(1500\pi x)+\sin(1625\pi x)&\text{for }x\geq\frac{2t}{3}
-\end{cases}
-\end{align}
-
-The sine waves are then with frequencies of 1, 3 and 3.25 Hz, respectively, and the signal is sampled for $t=75$ seconds at $f_s=4000$ Hz. Figure \ref{fig:test_stft} shows spectrograms of the signal generated with windows of different lengths.
+The validation of the STFT and spectrograms will be done as a whole entity, and the test specification consists of generating a spectrogram from the signal specified in section \ref{sec:STFT_spec}. Figure \ref{fig:test_stft} shows spectrograms of the signal generated with windows of different lengths.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
