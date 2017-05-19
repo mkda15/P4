@@ -177,10 +177,9 @@ Equivalently, the frequency response $H(\omega)$ equals the convolution of $W(\o
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/filter_teori/lowpass_real.pdf}
-\caption{The actual amplitude response of a FIR filter with the rectangular window and $M = 50$.}
+\caption{The amplitude response $h[n]$ of a FIR filter with the rectangular window, $M = 50$ and $\omega_c = \frac{\pi}{2}$.}
 \label{fig:lowpass_real}
 \end{figure}
-
 
 \subsubsection{Different types of windows}
 The rectangular window is one out of many windows, all of which have different properties. The oscillations in $H(\omega)$ is a result of Gibbs phenomenon. Due to the convergence of the Fourier series this can be improved by convolving the desired frequency response with the Fourier transform of a less abrupt window. By narrowing each end of the window smoothly towards zero, the peak amplitude of the side lopes are remarkably decreased, although this will still result in a wider main lope. \\
@@ -234,7 +233,7 @@ Blackman    &  $w[n] =
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/dbplots/hann.png}
-\caption{The Hann window.}
+\caption{The Hanning window.}
 \label{fig:hann_db}
 \includegraphics[width=\textwidth]{figures/dbplots/hamming.png}
 \caption{The Hamming window.}
