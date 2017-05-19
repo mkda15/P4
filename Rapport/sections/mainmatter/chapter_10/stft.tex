@@ -44,17 +44,17 @@ The validation of the STFT and spectrograms will be done as a whole entity, and 
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=0.9\textwidth]{figures/validation/stft/1.png}
-\caption{Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with window of length $2^6=64$ and overlap of 2. The low spectral and high temporal resolutions follow from a narrow window used in the STFT.}
+\includegraphics[width=\textwidth]{figures/validation/stft/1.png}
+\caption{}
 \label{fig:test_stft1}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=0.9\textwidth]{figures/validation/stft/2.png}
-\caption{Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with window of length $2^{13}=8192$ and overlap of 2. The high spectral and low temporal resolutions follows from a wide window used in the STFT.}
+\includegraphics[width=\textwidth]{figures/validation/stft/2.png}
+\caption{}
 \label{fig:test_stft2}
 \end{subfigure}
-\caption{Spectrograms of the signal in \eqref{eq:SPECTROsignal} with a narrow and wide window, respectively.}
+\caption{\textbf{(a)} Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with window of length $2^{13}=8192$ and overlap of 2. The high spectral and low temporal resolutions follows from a wide window used in the STFT. \textbf{(b)} Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with window of length $2^6=64$ and overlap of 2. The low spectral and high temporal resolutions follow from a narrow window used in the STFT.}
 \label{fig:test_stft}
 \end{figure}
 From figure \ref{fig:test_stft} it is clearly seen how the length of the window in the STFT used for generating the spectrogram affects the resolution in time and frequency. This agrees with Heisenberg's uncertanity principle described in section \ref{sec:heisenberg}, and so there must be made a tradeoff between the two resolutions. For the purpose of this project it is decided to use a window lenght of $2^{11}=2048$ as compromise between the to extreme cases illustrated by figure \ref{fig:test_stft}. \trine{evt. input mht. optimering af fftsize?? heisenberg??\smiley } \\
