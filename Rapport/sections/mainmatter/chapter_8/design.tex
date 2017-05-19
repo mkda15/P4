@@ -85,13 +85,13 @@ s_k = (-1)^{\frac{1}{2N}} \left( j\Omega_c \right) = \Omega_c\text{e}^{ \left( \
 
 The poles are placed equally along the circle of radius $\Omega_c$ in the $s$-plane. By only considering the poles in the left half plane, $H_c(s)$ can be constructed as a stable system:
 \begin{align*}
-H_c(s)=\frac{G}{\prod_{k=1}^{N}(s-s_k)}.
+H_c(s)=\dfrac{G}{\prod_{k=1}^{N}(s-s_k)},
 \end{align*}
 
-After the continuous-time filter $H_c(s)$ been constructed, the next step is the digitalization of the filter. The Bilinear transformation is a method that allows a direct transformation between the $s$- and $z$-domains. The principle of the transformation is that the entire imaginary axis $j\Omega$ of the $s$-plane is mapped onto the $z$-plane as the unit circle. The bilinear transformation is defined by 
-\begin{align}
+where $G$ is the gain constant determined as the 0 dB DC-gain, that is the value satisfying that $|H(0)| = 1$. After the continuous-time filter $H_c(s)$ been constructed, the next step is the digitalization of the filter. The Bilinear transformation is a method that allows a direct transformation between the $s$- and $z$-domains. The principle of the transformation is that the entire imaginary axis $j\Omega$ of the $s$-plane is mapped onto the $z$-plane as the unit circle. The bilinear transformation is defined by 
+\begin{align*}
 s=\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right)
-\end{align}
+\end{align*}
 
 such that 
 \begin{align} \label{eq:bilinear}
@@ -102,6 +102,7 @@ Because $-\infty \leq \Omega \leq \infty $ is mapped to $-\pi \leq \omega \leq \
 \begin{align*}
 \Omega_{c_{new}} = \dfrac{2}{T_d} \tan \left( \dfrac{\omega_c}{2} \right).
 \end{align*}
+
 Hereby it is possible to determine a new $\Omega_c$ to the continuous-time filter, which ensures that the discrete $\omega_c$ fits the specifications. \\
 An important property of the bilinear transformation is that stability is preserved if the continuous-time filter is stable.
 
