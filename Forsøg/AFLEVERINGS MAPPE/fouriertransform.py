@@ -12,9 +12,9 @@ import scipy.signal as sc
 #==============================================================================
 # STFT
 #==============================================================================
-def stft(signal, fftsize = 101, overlap = 2):   
+def stft(signal, fftsize = 2**12, overlap = 2):   
     hop = fftsize / overlap
-    w = np.kaiser(fftsize+1,4)[:-1]      # better reconstruction with this trick +1)[:-1] 
+    w = np.kaiser(fftsize+1,6)[:-1]      # better reconstruction with this trick +1)[:-1] 
     x =  np.array([w*signal[i:i+fftsize] for i in range(0, len(signal)-fftsize, hop)])
     X =  np.array([np.fft.rfft(w*signal[i:i+fftsize]) for i in range(0, len(signal)-fftsize, hop)])
     return X,x,w
