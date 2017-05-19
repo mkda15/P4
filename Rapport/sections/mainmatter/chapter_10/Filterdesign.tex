@@ -1,13 +1,12 @@
-The filter design process is documented in this section, which includes determination of filter specifications, implementation and validation. As stated in section \ref{sec:filtervalg} a bandpass FIR filter of type I designed with use of a Kaiser window is wanted.\\
-It is essential to note that the filter to be designed in this project is not an adaptive filter, meaning that the filter specifications will be chosen on behalf of a specific  input signal including a known noise signal. During final tests the filter is adapted to other signals only by changing the specifications for the cut off frequencies \martin{Kunne måske godt formuleres bedre. \textregistered}.
+The filter design process is documented in this section, which includes determination of filter specifications, implementation and test. As stated in section \ref{sec:filtervalg} a bandpass FIR filter of type I designed with use of a Kaiser window is wanted.
 
-\subsection{Specifications of the filter} \label{sec:FIRspec} 
-The purpose of this filter is to remove noise in the form of clapping hands from a signal representing a low E tone. \\
-Due to the frequency analysis of single tones described in section \ref{sec:single} the energy in the signal is located within a frequencyband from 75 Hz to 1000 Hz.  
-By letting the cut off frequencies $f_c$ of the filter be respectively 75 Hz and 1000 Hz, this makes the passband of the filter. \\ 
+\subsection{Specifications of filter} \label{sec:FIRspec} 
+The purpose of this filter is to remove all frequencies outside the passband of the filter.  \\
+Due to the frequency analysis in section ~\ref{sec:single} the main energy in the analysed signals is located within a frequencyband from 75 Hz to 1000 Hz.  
+By letting the cut-off frequencies $f_c$ of the filter be respectively 75 Hz and 1000 Hz, this makes the passband of the filter. \\ 
 According to section \ref{subsec:FIR} the Kaiser window can be determined from specifications of the allowed transition width $tw$ and peak approximation error $\delta$ of the amplitude in the pass- and stopbands. \\ 
-By the frequency analysis of the specific noise showed in figure \ref{fig:clapping} it is seen that the frequencies of the noise are completely adjacent to the desired passband, which verifies the need of a narrow transitionband. However, the narrower transitionband means the higher order of filter is needed, which gives more computations, and hence it is not realistic to let the width of the transitionband go toward zero.  \\
-The maximum allowed width of the transitionband $tw$ and peak approximation error in amplitude $\delta$ determined as
+By the frequency analysis of different types of noise it is found that the frequency spectrum of the music signal leis within the frequency spectrum of the noise which verifies the need of a narrow transitionband. However, the narrower transitionband means the higher order of filter is needed, which gives more computations, and hence it is not realistic to let the width of the transitionband go toward zero.  \\
+The maximum allowed width of the transitionband $tw$ and peak approximation error in amplitude $\delta$ is determined as
 \begin{align}
 tw = 20 \ Hz, \ \ \ \ \  \delta = 0.05. 
 \end{align}
@@ -54,7 +53,7 @@ ymax=5.5]
 \label{fig:spec_Hd}
 \end{figure}
 
-\subsection{Implementation of the filter}
+\subsection{Implementation of filter}
 The implementation of the filter basically follows algorithm \ref{alg:FIR}. The ideal impulse response is defined as the inverse Fourier transformation of the ideal filter specified in figure \ref{fig:spec_Hd}. The derivation of the ideal impulse response of a bandpass filter is shown in appendix \ref{appC}. Figure \ref{fig:freq_filt1} illustrates a plot of the amplitude response corresponding to the filter in the frequency domain. Figure \ref{fig:freq_filt2} illustrates a close-up view of the left transitionband, showing the ripples in the stop- and passband. The boundaries from the specifications are marked by the green lines. It is seen that the specifications are fulfilled.        
 \begin{figure}[h]
 \centering
@@ -112,7 +111,7 @@ The implementation of the filter basically follows algorithm \ref{alg:FIR}. The 
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Validation of the filter}
+\subsection{Test of the filter}
 The implemented filter is tested according to the test specifications described in section \ref{sec:testspec}. Figure \ref{fig:SIGNAL} shows the frequency spectrum of the single low E tone with additive noise in form of a beat of hands clapping. Figure \ref{fig:filt_SIGNAL} shows the filtered signal. Note that the frequency spectrum are only showed from 0 to approximately 2200 Hz.  
 
 \begin{figure}[H]
