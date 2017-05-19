@@ -13,11 +13,14 @@ import scipy as sc
 import matplotlib.pyplot as plt
 
 N = 2**20
-M = 2**13
+M = 100
 p = N-M
 beta = 6
-yaxis_max = 0.012
+yaxis_max = 1.2
 bins = 2*np.pi*np.linspace(0,0.5,N/2)
+
+def rect(M):
+    return np.array([1 for i in range(M)])
 
 def fft(x):
     return np.abs(np.fft.fft(x))/np.max(np.abs(np.fft.fft(x)))
@@ -36,13 +39,14 @@ hann = pad(sc.hanning(M),p)
 bartlett= pad(sc.bartlett(M),p)
 blackman = pad(sc.blackman(M),p)
 kaiser = k(M,beta)
+rectangular = pad(rect(M),p)
 
 i = 0
 while bins[i] < yaxis_max:
     inter = i
     i += 1
 
-plt.plot(bins[:inter],db(fft(k(M,10))[:inter]))
+plt.plot(bins[:inter],db(fft(rectangular)[:inter]))
 plt.xlabel('Frequency [rad/s]',fontsize=13)
 plt.ylabel('Amplitude [dB]',fontsize=13)
 plt.axis([0,bins[inter-1],-100,0])

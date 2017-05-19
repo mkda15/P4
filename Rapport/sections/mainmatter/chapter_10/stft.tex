@@ -60,17 +60,17 @@ The validation of the STFT and spectrograms will be done as a whole entity, and 
 From figure \ref{fig:test_stft} it is clearly seen how the length of the window in the STFT used for generating the spectrogram affects the resolution in time and frequency. This agrees with Heisenberg's uncertanity principle described in section \ref{sec:heisenberg}, and so there must be made a tradeoff between the two resolutions. For the purpose of this project it is decided to use a window lenght of $2^{11}=2048$ as compromise between the to extreme cases illustrated by figure \ref{fig:test_stft}. \trine{evt. input mht. optimering af fftsize?? heisenberg??\smiley } \\
 By figure \ref{fig:test_stft} it is concluded that the implementations of the STFT and spectrogram work as intended. Further optimization is possible through the type window used in the STFT.
 
-\subsection{Variation of windows in STFT}
+\subsection{Variation of windows in STFT}\label{sec:STFT_variation}
 The STFT uses a window function to taper the segment of the data to be transformed, and different windows produce different results from the STFT. Figure \ref{fig:stft_windows_10000} shows spectrograms of the test signal generated from different windows of length $2^{13}=8192$. Similarly, figure \ref{fig:stft_windows_100} shows spectrograms from STFTs with windows of length $2^6=64$.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/stft_windows/hanning_10000.png}
-\caption{Hanning window.}
+\caption{Hanning window}
 \label{fig:stft_hanning}
 \includegraphics[width=\textwidth]{figures/stft_windows/hamming_10000.png}
-\caption{Hamming window.}
+\caption{Hamming window}
 \label{fig:stft_hamming}
 \includegraphics[width=\textwidth]{figures/stft_windows/kaiser/10000/4.png}
 \caption{Kaiser window, $\beta=4$.}
@@ -79,10 +79,10 @@ The STFT uses a window function to taper the segment of the data to be transform
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/stft_windows/bartlett_10000.png}
-\caption{Bartlett window.}
+\caption{Bartlett window}
 \label{fig:stft_bartlett}
 \includegraphics[width=\textwidth]{figures/stft_windows/blackman_10000.png}
-\caption{Blackman window.}
+\caption{Blackman window}
 \label{fig:stft_blackman}
 \includegraphics[width=\textwidth]{figures/stft_windows/kaiser/10000/10.png}
 \caption{Kaiser window, $\beta=10$.}
