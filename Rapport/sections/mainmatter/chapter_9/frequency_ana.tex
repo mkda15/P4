@@ -1,5 +1,5 @@
 \section{Frequency analysis of music}
-In this section the recordings of music will undergo frequency analysis, and the goal is to be able to express which frequencies the tones played in the recordings are generally found at. It is expected that both the significant tone and its corresponding harmonics will appear in the frequency spectrum. Considering specifications for the filter it is important to preserve the frequencies that contain the most energy but it is not necessary to include all the harmonics that appears in the spectrum.\trine{sidste del med harmoncis er nyligt tilføjet}     
+In this section the recordings of music will undergo frequency analysis, and the goal is to be able to express which frequencies the tones played in the recordings are generally found at. It is expected that both the significant tone and its corresponding harmonics will appear in the frequency spectrum\trine{sidste del med harmoncis er nyligt tilføjet}.     
 \subsection{Single tone}\label{sec:single}
 Firstly, the tuning of guitar is checked for consistency. The low and high E strings on the guitar should vibrate and emit sounds frequencies of 82.41 Hz and 329.63 Hz, respectively, as seen in table \ref{fig:guitar_frequencies}. Figures \ref{fig:single_low} and \ref{fig:single_high} show the frequency spectra for the recordings of the two tones.
 \begin{figure}[H]
@@ -19,7 +19,8 @@ Firstly, the tuning of guitar is checked for consistency. The low and high E str
 \caption{Frequency spectra of low and high E strings on a guitar. The harmonics are clearly visible.}
 \label{fig:single}
 \end{figure}
-With a peak detection algorithm implementet in Python the most significant frequencies in the two recordings are registered to be 163.82 Hz and 329.83 for the low and high E's, respectively. As $163.82$ Hz $\approx 2\cdot82.41$ Hz this is regarded as a harmonic of the low E. The harmonics are moreover observable in the figures as reduced peaks at integer multiples of the fundamental frequencies of the tones. It is furthermore seen from the figures, that the energy in the signals is mainly located at frequencies above 75 Hz and below 1000 Hz for the low E and above 100 Hz and below 2000 Hz for the high E.
+With a peak detection algorithm implemented in Python the most significant frequencies in the two recordings are registered to be 163.82 Hz and 329.83 Hz for the low and high E's, respectively. As $163.82$ Hz $\approx 2\cdot82.41$ Hz this is regarded as a harmonic of the low E. The harmonics are moreover observable in the figures as reduced peaks at integer multiples of the fundamental frequencies of the tones. It is furthermore seen from the figures, that the energy in the signals is mainly located at frequencies above 75 Hz and below 1000 Hz for the low E and above 100 Hz and below 2000 Hz for the high E.\\ 
+
 \subsection{Chord}
 Figures \ref{fig:chord_low} and \ref{fig:chord_high} show the frequency spectra of the recordings of low and high E chords, respectively.
 \begin{figure}[H]

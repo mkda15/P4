@@ -1,17 +1,18 @@
 \section{Filter design}
-In this section the process of designing digital filters is described. There will be distinguished between techniques for IIR and FIR filters.\\ The section is concluded by a comparison of FIR and IIR filters.\\  
-As described ideal filters are not computable. Hence the process of designing a filter is based on approximation of the frequency response - made by computable polynomials - based on a set of specification for the filter. There exist different design methods to achieve this.   
+In this section the process of designing digital filters is described. There will be distinguished between techniques for IIR and FIR filters. The section is concluded by a comparison of FIR and IIR filters. \\  
+As described, ideal filters are not computable. Hence, the process of designing a filter is based on an approximation of the frequency response, which is based on computable polynomials and on a set of specifications for the filter. There exists different design methods to achieve this.
+
 \subsection{IIR filter}
 One common way of designing an IIR filter is to design the discrete-time filter from a corresponding continuous-time system. The method follows three main steps. 
 \begin{itemize}
 \item[1.] Specify the properties desired for the filter as filter specifications.
-\item[2.] Hereby compute a "prototype" by a continuous-time system $H_c(\Omega)$ that approximates the given properties. In this rapport it is done as a \textit{Butterworth filter}.  
-\item[3.] Transform the "prototype" into the discrete-time filter $H(\omega)$. In this rapport this is done with the \textit{Bilinear transformation}. 
+\item[2.] Hereby compute a ``prototype'' by a continuous-time system $H_c(j\Omega)$ that approximates the given properties. In this rapport it is done as a \textit{Butterworth filter}.  
+\item[3.] Transform the ``prototype'' into the discrete-time filter $H(\omega)$. In this rapport this is done with the \textit{Bilinear transformation}. 
 \end{itemize}
-The properties of a system are specified based on the desired application, considering what frequencies are to pass the filter ideally. Furthermore, it is important to specify how much the filter is allowed to vary from the ideal properties as an ideal filter is not a possibility. \\
-Properties for an approximation to a lowpass filter is defined by bounding the amplitude within $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$. \\
-The tolerance scheme based on the specifications of the continuous time filter is illustrated on figure \ref{fig:scheme}.
-The transition of non zero width between the cut off frequency of passband and stopband is necessary in order for the system to be realizable.
+
+The properties of a system are specified based on the desired application by considering what frequencies ideally are to pass the filter. Furthermore, it is important to specify how much the filter is allowed to vary from the ideal properties since an ideal filter is not a possibility. \\
+Properties for an approximation to a lowpass filter is defined by bounding the amplitude response within $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$ as illustrated in the tolerance scheme shown in figure \ref{fig:scheme}. \\
+Since the filter needs to be realizable, the transition band cannot be of non-zero width as it is for the ideal filter.
 
 \begin{figure}[H]
 \centering
@@ -28,7 +29,7 @@ xmin=0,
 xmax=8,
 ymin=0,
 ymax=4.6]
-\node at (axis cs:1,4.3) {$|H_c(\Omega)|$};
+\node at (axis cs:1,4.3) {$|H_c(j\Omega)|$};
 \draw[line width=0.5mm](axis cs:0,3.7)--(axis cs:2,3.7);
 \draw[line width=0.5mm](axis cs:0,3)--(axis cs:2,3);
 \draw[line width=0.5mm, dashed](axis cs:2,3)--(axis cs:2,0);
@@ -44,66 +45,76 @@ ymax=4.6]
 \end{figure}
 
 The predefined Butterworth filter is a lowpass filter approximation used to fit the filter to the requirements. For the Butterworth filter the squared amplitude response is defined as follows:
-\begin{align}\label{eq:butter}
-|H_c(\Omega)|^2=\frac{1}{1+\left( \frac{j\Omega}{j\Omega_c}\right)^{2N}}.
-\end{align} 
-Further the filter is characterised by the following three properties:
-\begin{align}
-1.& \ \ \ |H_c(\Omega)|^2 = 1 \  \ \left|\begin{matrix}
-\\ 
+\begin{align} \label{eq:butter}
+|H_c(j\Omega)|^2=\frac{1}{1+\left( \frac{j\Omega}{j\Omega_c}\right)^{2N}}.
+\end{align}
+
+The filter is characterised by the following three properties:
+\begin{align*}
+1.& \ \ \ |H_c(j\Omega)|^2 \left|\begin{matrix}
+\\
 \Omega=0
-\end{matrix}\right. , \textit{ for all }N. \\
-2.& \ \ \ |H_c(\Omega)|^2 = \frac{1}{2} \  \ \left|\begin{matrix}
+\end{matrix}\right. = 1 \ \  \forall \ N. \\
+2.& \ \ \ |H_c(j\Omega)|^2 \left|\begin{matrix}
 \\ 
 \Omega=\Omega_c
-\end{matrix}\right. , \textit{ for all }N. \\
-3.& \ \ \ \textit{Amplitude response is monotonic in pass- and stopband.}
-\end{align}
-As the order $N$ of the filter increases the characteristics become sharper and the filter approximates the ideal lowpass filter. This is illustrated on figure \ref{fig:butter}. By \eqref{eq:butter} it is possible to compute the order necessary for the system to fulfil the specifications.            
+\end{matrix}\right. = \dfrac{1}{2} \ \ \forall \ N. \\
+3.& \ \ \ \text{The amplitude response is monotonic in the pass- and stopbands.}
+\end{align*}
+
+As the order $N$ of the filter increases, the characteristics become sharper and the filter approximates the ideal lowpass filter. This is illustrated in figure \ref{fig:butter}. By \eqref{eq:butter} it is possible to compute the order necessary for the system to fulfil the specifications.            
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.6\textwidth]{figures/butterworth.png}
-    \caption{Magnitude of Butterworth filter depending on order $N$ }
+    \caption{Amplitude response of Butterworth filter depending on the order $N$.}
     \label{fig:butter}
-\end{figure} 
-In order to obtain stability in the system representation in the $s$-domain is wanted. By substituting $s=j\Omega$ the following relation is true
-\begin{align}
-|H_c(s)|^2 = H_c(s)H_c(-s)= \frac{1}{1+\left( \frac{s}{j\Omega_c}\right)^{2N}}.
-\end{align} 
-By letting the denominator in \eqref{eq:butter} equal zero it is possible to determine the poles $s_k$ of the system
-\begin{align}
-1+\left( \frac{s}{j\Omega_c}\right)^{2N} = 0 \ \  \Rightarrow  \ \ \frac{s}{j \Omega_c} = \sqrt[2N]{-1} \ \
-\Rightarrow 
+\end{figure}
+
+An important remark is that $|H_c(j\Omega_c)| = \frac{1}{\sqrt{2}}$ corresponds to $20\cdot \log\left(\frac{1}{\sqrt{2}}\right) = -3$ dB. \\
+\eqref{eq:butter} is transformed to the $s$-domain by substituting $s = j\Omega$:
+\begin{align} \label{eq:Butter_trans}
+|H_c(s)|^2 = \dfrac{1}{1+\left( \frac{s}{j\Omega_c}\right)^{2N}}.
 \end{align}
-\begin{align}
-s_k = (-1)^{\frac{1}{2N}}\left(j\Omega_c\right)=\Omega_c\text{e}^{\left(\frac{j\pi}{2N}\right)\left(2k+N-1\right)}, \ \ k=0,1,\ ... \ , 2N-1.
-\end{align}   
-The poles will be placed equally along the circle of radius $\Omega_c$ in the $s$-plane. By only considering the poles in the left half plane, $H_c(s)$ can be construed as a stable system:
-\begin{align}
-H_c(s)=\frac{1}{\prod_{k=1}^{N}(s-s_k)}.
-\end{align}    
-When the continuous time filter $H_c(s)$ is defined the next step is the digitalization of the filter.  The Bilinear transformation is a method that allows a direct transformation between the s- and z-domain . The principal of the transformation is that the imaginary axis $j\Omega$ of the s-plane is mapped onto the z-plane as the unit circle. The bilinear transformation is defined by 
+
+By letting the denominator in \eqref{eq:Butter_trans} equal zero it is possible to determine the poles $s_k$ of the system:
+\begin{align*}
+1+\left( \dfrac{s}{j\Omega_c}\right)^{2N} = 0 \ \  \Rightarrow  \ \ \frac{s}{j \Omega_c} = \sqrt[2N]{-1} \ \
+\Rightarrow \\
+s_k = (-1)^{\frac{1}{2N}} \left( j\Omega_c \right) = \Omega_c\text{e}^{ \left( \frac{j\pi}{2N} \right) \left( 2k+ N-1 \right) }, \ \ k=0,1,\ ... \ , 2N-1.
+\end{align*}
+
+The poles are placed equally along the circle of radius $\Omega_c$ in the $s$-plane. By only considering the poles in the left half plane, $H_c(s)$ can be constructed as a stable system:
+\begin{align*}
+H_c(s)=\frac{G}{\prod_{k=1}^{N}(s-s_k)}.
+\end{align*}
+
+After the continuous-time filter $H_c(s)$ been constructed, the next step is the digitalization of the filter. The Bilinear transformation is a method that allows a direct transformation between the $s$- and $z$-domains. The principle of the transformation is that the entire imaginary axis $j\Omega$ of the $s$-plane is mapped onto the $z$-plane as the unit circle. The bilinear transformation is defined by 
 \begin{align}
 s=\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right), 
 \end{align}
+
 such that 
-\begin{align}
+\begin{align} \label{eq:bilinear}
 H_c\left[\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right)\right]=H_c(z). 
-\end{align}  
-Because $-\infty \leq \Omega \leq \infty $ is mapped to $-\pi \leq \omega \leq \pi$ the transformation most be non-linear which involves some frequency distortion. Because of this the method is restricted to situations where this is acceptable or can be compensated. Compensation can be done by the concept of prewarping, that uses the relation 
-\begin{align}
-\Omega_{c_{new}}=\frac{2}{T_d}\tan\frac{\omega_c}{2}.
 \end{align}
-Hereby it is possible to determine a new $\Omega_c$ to the continuous-time filter in order to ensure the discrete $\omega_c$ to fit the specification.\\
-An important property of the bilinear transformation is that stability is preserved if the continuous-time filter i stable.
-\subsection{FIR filter}\label{subsec:FIR}
-Design of FIR filters are in contrast to IIR filters based on approximating the desired discrete-time frequency response directly. By this method it is possible to guarantee a general linear phase of the system. The method also uses the window method, which is described in the following section.
+
+Because $-\infty \leq \Omega \leq \infty $ is mapped to $-\pi \leq \omega \leq \pi$ the transformation is non-linear. This can also be seen from \eqref{eq:bilinear}, and the non-linearity necessarily involves some frequency distortion. Therefore, the use of this method is restricted to situations where this is acceptable or can be compensated. Compensation can be done by the concept of prewarping, which uses the relation
+\begin{align*}
+\Omega_{c_{new}} = \dfrac{2}{T_d} \tan \left( \dfrac{\omega_c}{2} \right).
+\end{align*}
+Hereby it is possible to determine a new $\Omega_c$ to the continuous-time filter, which ensures that the discrete $\omega_c$ fits the specifications. \\
+An important property of the bilinear transformation is that stability is preserved if the continuous-time filter is stable.
+
+\subsection{FIR filter} \label{subsec:FIR}
+Design of FIR filters are in contrast to IIR filters based on approximating the desired discrete-time frequency response directly. By this method it is possible to guarantee a general linear phase of the system. The method also uses the window method, which is described below.
+
 \subsubsection{The window method}
-The window method is considered a simple method for designing FIR filters. The method takes off from the idealized desired frequency response $H_d$, defined to be equal to one in passbands and zero in stopbands corresponding to desired cutoff frequencies. Hereby the idealized impulse response $h_d[n]$ is obtained by the inverse Fourier transform of the desired frequency response
-\begin{align}
+The window method is considered a simple method for designing FIR filters. The method takes off from the idealized desired frequency response $H_d$, which is defined to be equal to one in passbands and zero in stopbands corresponding to the desired cut-off frequencies as in section \ref{sec:basic_filter}. Hereby the idealized impulse response $h_d[n]$ is obtained by the inverse Fourier transform of the desired frequency response:
+\begin{align*}
 h_d[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi} H_d(\omega)\text{e}^{j\omega} d\omega.
-\end{align}
-$H_d(\omega)$ usually results in a impulse response of infinite length caused by the discontinuities at the boundaries between pass- and stopband. To compute a finite causal system as a FIR filter, on behalf of the desired impulse response $h_d[n]$, the realisable impulse response $h[n]$ of the FIR filter is determined as a product of the idealised impulse response $h_d[n]$ and a finite duration \textit{window} $w[n]$ 
+\end{align*}
+
+$H_d(\omega)$ usually results in a impulse response of infinite length caused by the discontinuities at the boundaries between the pass- and stopbands. To compute a finite causal system as a FIR filter, on behalf of the desired impulse response $h_d[n]$, the realisable impulse response $h[n]$ of the FIR filter is determined as a product of the idealised impulse response $h_d[n]$ and a finite duration \textit{window} $w[n]$ such that
 \begin{align}
 h[n]=h_d[n]w[n], \ \ w[n] =
 \left\{ \begin{matrix}
@@ -207,7 +218,7 @@ Blackman    &  $w[n] =
 \caption{Hamming}
 \label{fig:hamming_db}
 \end{subfigure}
-\caption{(a) Different window functions in time domain of order $M=100$ (b, c, d) dB amplitude of frequency response of chosen windows of order $M=100$.}
+\caption{\textbf{(a)} Different window functions in time domain of order $M=100$. \textbf{(b)}, \textbf{(c)} and \textbf{(d)} dB amplitude of frequency response of chosen windows of order $M=100$.}
 \label{fig:windows}
 \end{figure}
 
