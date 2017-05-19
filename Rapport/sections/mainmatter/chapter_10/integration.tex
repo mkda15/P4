@@ -1,7 +1,7 @@
 This section documents the integration of each unit into one algorithm that makes the application of the final system. The integration is validated according to the test specifications specified in section \ref{sec:testspec} by feeding each output into the next unit and checking the results. 
 
 \subsection{Implementation}
-Each unit is integrated into one algorithm on behalf of the system specifications described in chapter \ref{ch3}. Algorithm \ref{alg:final} show the basic implementation of the final application. Note that each unit are imported as a function to be called and fed with their respective inputs in the final script as showed in line 1.
+Each unit is integrated into one algorithm on behalf of the system specifications described in chapter \ref{ch3}. Algorithm \ref{alg:final} shows the basic implementation of the final application. Note that each unit are imported as a function to be called and fed with their respective inputs in the final script as showed in line 1.
 \begin{algorithm}[H]
 \caption{Final algorithm}
 \begin{algorithmic}[1]
@@ -36,7 +36,7 @@ Each unit is integrated into one algorithm on behalf of the system specification
 \end{algorithm}          
 
 \subsection{Integration test}
-During the implementation the output of each step is printed and verified before implementing the next step. This is illustrated by figure \ref{fig:inte_validation}, where the input signal consists of a low E tone with noise in form of clapping hands.  
+During the implementation the output of each step is printed and verified before implementing the next step. This is illustrated by figure \ref{fig:inte_validation}, where the input signal consists of a low E tone with noise in form of clapping hands.
 
 \begin{figure}[H]
 \centering
@@ -74,8 +74,8 @@ During the implementation the output of each step is printed and verified before
 \caption{Results of integration of each unit into one application }
 \label{fig:inte_validation}
 \end{figure}
-Figure \ref{fig:inte_signal} and \ref{fig:inte_SIGNAL} show the input signal in the time and frequency domains, respectively. The FFT used is verified as the frequencies with the highest amplitudes are seen to correspond to the known frequencies of an low E tone (82.41 Hz) and two corresponding overtones (164.82 Hz and 247.23 Hz) \trine{kan vi blot referere til frekvens analysen?}. Furthermore, noise appears similar to white noise across all frequencies.\\
-Figure \ref{fig:inte_SIGNAL} and \ref{fig:inte_SIGNAL_filt} show the filtered signal in the time and frequency domains respectively. Comparing this to the results of the unit test of the filter, the result is the same, and hence the filtering is integrated as intended. Figure \ref{fig:inte_spec} shows a valid spectrogram computed from the filtered signal. Figure \ref{fig:inte_peak} shows the frequency with the highest amplitude over time, which is seen to match the lightest point in the spectrogram. \\
+Figure \ref{fig:inte_signal} and \ref{fig:inte_SIGNAL} show the input signal in the time and frequency domains, respectively. The FFT used is verified as the frequencies with the highest amplitudes are seen to correspond to the known frequencies of an low E tone (82.41 Hz) and two corresponding harmonics (164.82 Hz and 247.23 Hz) \trine{kan vi blot referere til frekvens analysen?}. Furthermore, noise appears similar to white noise across all frequencies.\\
+Figure \ref{fig:inte_SIGNAL} and \ref{fig:inte_SIGNAL_filt} show the filtered signal in the time and frequency domains, respectively. Comparing this to the results of the unit test of the filter, the result is the same, and hence the filtering is integrated as intended. Figure \ref{fig:inte_spec} shows a valid spectrogram computed from the filtered signal. Figure \ref{fig:inte_peak} shows the frequency with the highest amplitude over time, which is seen to match the lightest point in the spectrogram. \\
 \\
 From this the implementation of each unit integrated into one single script, which forms the final application, is validated. \\
-One can conclude that the final application is working as intended corresponding to the level of the theory implemented. Whether this fulfil the practical purpose of the application when then input gets more complex is tested in the next section.
+One can conclude that the final application is working as intended corresponding to the level of the theory implemented. Whether this fulfil the practical purpose of the application when the input gets more complicated is tested in the next section.

@@ -4,7 +4,7 @@ In this chapter an introduction will lead to a discussion of problems encountere
 \section{Introduction}
 Some musicians are capable of playing without reading music written on a note sheet, and they invent new music through a creative process where they play by ear and do not have the need to write down their compositions. Creative thinking and processes are however interruptable, and this can be problematic when the need for transcribing a composition - so as to remember or convey it to others - to a note sheet arises. This may ruin the creative process by interrupting it because one needs to concentrate on the transcription instead. \\ \\
 To ease the creative process of a musician it is possible that some kind of automatic real time transcription of music to a note sheet may be developed which will eliminate the problem of having to interrupt the aforementioned process.
-
+\chr{En meget creative process (Står en del gange)}
 \section{Problem analysis}
 Although the first system of musical notation is the Sumerian system created 3,500 years ago music has existed for much longer \cite{origins}. This means that people have been playing music without any form of written music until then. Even with the creation of standardised musical notation, musicianship on high level is possible without any form of education and/or skills in reading and writing music. As such there continue to exist musicians without the aforementioned skills. \\ \\
 Inability to read or write music poses no problem in itself, as it does not necessarily hinder musical creativity. Problems, however, arise when the need to convey or remember musical compositions present themselves. Just as standardised languages make everyday communication and tasks easier, a standardised musical notation is needed to convey compositions to others without anyone having to remember the compositions in their entirety. Standard musical notation has been created but has to be learned, and research suggests that the ability to read and write music varies considerably from person to person and might even be affected by dyslexia \cite{dyslexia}. In short people are genetically diverse when it comes to learning to read music.\\\\
@@ -13,11 +13,16 @@ If musical transcription in the middle of a creative process potentially interru
 \subsection{Existing and possible new solutions}
 There has been undertaken plenty of research regarding automatic transcription of music to a note sheet which can be found in both books and articles. 
 \\\\
-\textit{Signal Processing Methods for Music Transcription} \cite{sol1} treats different methods relevant when transcribing music. The book considers various perspectives on musics transcription including analysis of brain activity when transcribing music and studying different human strategies for music transcription both of which can be inspiration when developing an algorithm for the same purpose. Described methods for signal processing and spectrum estimation include harmonic analysis with the Fourier transform for frequency and time-frequency representations and various statistical models to recognize patterns in music. To recognize percussion in and tempo of a piece of music a measure of musical stress is suggested.
+\textit{Signal Processing Methods for Music Transcription} \cite{sol1} treats different methods relevant when transcribing music. 
+The book considers various perspectives on musics transcription including analysis of brain activity when transcribing music and studying different human strategies for music transcription both of which can be inspiration when developing an algorithm for the same purpose. 
+Described methods for signal processing and spectrum estimation include harmonic analysis with the Fourier transform for frequency and time-frequency representations and various statistical models to recognize patterns in music. 
+To recognize percussion in and tempo of a piece of music a measure of musical stress is suggested.
 
 The book tests the algorithms in small scale tests and further work with the presented algorithms is encouraged.
 \\\\
-Camgil, Kappen and Barber have written an article \cite{sol2} describing an inference to solve the music transcription problem incorporating a Dynamical Bayesian Network and Kalman filtering. These tools are used to create a time-domain method suitable for polyphonic signals (music consisting of multiple sounds). The algorithm described in the article is non suitable for percussive instruments and the authors point to computational complexity as a major disadvantage of their algorithm and suggest further work using a fast Fourier transform.
+Camgil, Kappen and Barber have written an article \cite{sol2} describing an inference to solve the music transcription problem incorporating a Dynamical Bayesian Network and Kalman filtering.
+These tools are used to create a time-domain method suitable for polyphonic signals (music consisting of multiple sounds). 
+The algorithm described in the article is non suitable for percussive instruments and the authors point to computational complexity as a major disadvantage of their algorithm and suggest further work using a fast Fourier transform.
 \\\\
 Transcribe! \cite{transcribe!} is an online downloadable software which helps transcription by hand by analyzing and visualizing the spectrum of recorded music. The software has recieved acclaim and has been recommended from many different people and organizations underlining the need for this type of solution.
 \\\\
@@ -27,7 +32,7 @@ As the above sources suggest there are many different ways to grasp this problem
 This project will focus on creating a solution with the use of mathematical tools to extract signal information from a digitalized analog signal of music so as to transcribe it automatically to a note sheet.  
 This imply a theoretical study - followed by implementation - within discrete-time signal processing and frequency analysis including the transformation between time and frequency representation of a signal.\\    
 The viability of a solution in form of an algorithm based on the mathematical tools will be tested under controlled circumstances to illustrate the possibilities and limitations of said algorithm. \frede{Her skal uddybes, når vi ved mere. \texttrademark
-\\ Jeg har forsøg at udbybe lidt \smiley}
+\\ Jeg har forsøg at udbybe lidt \smiley (y)}
 
 \subsection{Problem statement}
 The above analysis is summarized.\\

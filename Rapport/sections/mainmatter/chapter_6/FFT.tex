@@ -35,7 +35,7 @@ where it has been used that $e[n] = x[2n]$, $o[n] = x[2n+1]$ and that $\frac{2\p
 X[k] = E[\langle k\rangle_{N/2}] + W_N^k O[\langle k\rangle_{N/2}], \quad k = 0, 1, \dots, N-1
 \end{align}
 
-with the modulo function $\langle k \rangle_N$ as defined in section \ref{sec:DFT}. $E[k]$ and $O[k]$ are thus extended periodically even though they are only computed for $k = 0, 1, \dots, N/2-1$. Hence, this periodic extension does not require any additional computation. Figure \ref{fig:4} is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $8$-point DFT into two $4$-point DFTs as described in \eqref{FFT_DIT}. Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the arrows \martin{Der skal laves cirkler, så man kan se, hvor linjerne samles. \textregistered}.
+with the modulo function $\langle k \rangle_N$ as defined in section \ref{sec:DFT}. $E[k]$ and $O[k]$ are thus extended periodically even though they are only computed for $k = 0, 1, \dots, N/2-1$. Hence, this periodic extension does not require any additional computation. Figure \ref{fig:4} is inspired by \cite{figure 4, DTSP} and shows a flow graph of the decimation-in-time decomposition of an $8$-point DFT into two $4$-point DFTs as described in \eqref{FFT_DIT}. Branches entering a node is summed to produce the node variable, and if the transmittance of a branch is different from unity it is an integer power of $W_N$ as indicated next to the arrows.
 
 \begin{figure}[H]
 \centering
@@ -99,6 +99,12 @@ with the modulo function $\langle k \rangle_N$ as defined in section \ref{sec:DF
 \node at (2.5,2.7){$N/2$-point};
 \node at (2.5,2.3){DFT};
 
+% sum circels
+\foreach \y in {1,...,8}
+{
+\filldraw[fill= white, draw= black] (9.5,\y) circle (0.1cm);
+}
+
 \end{tikzpicture}
 \caption{Flow graph of an $8$-point DFT decomposed into two $4$-point DFTs. Intersections symbolize a summation of the lines meeting.}
 \label{fig:4}
@@ -119,7 +125,7 @@ Equation \eqref{FFT_modulo} requires the computation of two $N/2$-point DFTs, wh
 \\ \\
 When the $N/2$-point DFTs are decomposed into twice as many $N/4$-point DFTs, the factor $(N/2)^2$ above is replaced by $N/2 + 2(N/2)^2$ so that the number of computations required is $N + 2(N/2+2(N/4)^2) = N + N + 4(N/4)^2$. For $N = 2^\nu$ the partition into smaller DFTs can be done at most $\nu = \log_2 N$ times, and hence the number of complex multiplications and additions is $N \nu = N \log_2 (N)$.
 \\ \\
-The number of computations discussed above can be reduced even further by exploiting the periodicity and symmetry of the coefficients $W_N^r$ shown in\trine{skulle vi ikke fjerne henvisninger til figurer i bøger?} \cite{figure 8, DTSP}. Each computation in \cite{figure 9, DTSP} involves obtaining a pair of values from a pair of values in the preceding stage with coefficients that are always powers of $W_N$ and exponents that are separated by $N/2$. This computation is called a \textit{butterfly} due to the shape of the flow graph shown in figure 8. Since 
+The number of computations discussed above can be reduced even further by exploiting the periodicity and symmetry of the coefficients $W_N^r$ shown in\trine{skulle vi ikke fjerne henvisninger til figurer i bøger?} \cite{figure 8, DTSP}. Each computation in \cite{figure 9, DTSP} involves obtaining a pair of values from a pair of values in the preceding stage, with coefficients that are always powers of $W_N$ and exponents that are separated by $N/2$. This computation is called a \textit{butterfly} due to the shape of the flow graph shown in \cite{figure 8, DTSP}. Since 
 \begin{align*}
 W_N^{N/2} = \text{e}^{-j(2\pi/N)N/2} = \text{e}^{-j\pi} = -1
 \end{align*}
@@ -131,7 +137,7 @@ W_N^{r+N/2} = W_N^{N/2} W_N^r = -W_N^r.
 
 Thus, the computation shown in \cite{figure 8, DTSP} may be simplified to the form shown in \cite{figure 10, DTSP}, which requires one complex addition, one complex subtraction and only one complex multiplication. The number of complex multiplications has thus been reduced to one half of the previous number. The final flow graph of an 8-point DFT using the butterfly computation and the decimation-in-time decomposition into 4 2-point DFTs described above is shown in figure \ref{fig:fft_flow}, which is inspired by \cite{figure 11, DTSP}. The complex multipliers $W_N^r$ are multiplied between the sets of the 2-point DFTs.
 \\
-In general, there are $\log_2(N)$ stages of computation (which is 3 in figure \ref{fig:fft_flow}), and each of these involves a set of $N/2$ 2-point DFTs (the so-called butterflies). Notice that in figure~\ref{fig:fft_flow} these butterflies does not intersect at the first stage, at the second stage the butterflies intersect pairwise and at the last stage all of the butterflies intersect \martin{Der skal laves cirkler, så man kan se, hvor linjerne samles. Har erstattet $N$ med 8 i denne figur, fordi det er et specifikt eksempel på FFT'en, hvorimod den anden figur er mere generel. \textregistered}.
+In general, there are $\log_2(N)$ stages of computation (which is 3 in figure \ref{fig:fft_flow}), and each of these involves a set of $N/2$ 2-point DFTs (the so-called butterflies). Notice that in figure~\ref{fig:fft_flow} these butterflies does not intersect at the first stage, at the second stage the butterflies intersect pairwise and at the last stage all of the butterflies intersect \martin{Har erstattet $N$ med 8 i denne figur, fordi det er et specifikt eksempel på FFT'en, hvorimod den anden figur er mere generel. \textregistered}.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -193,6 +199,22 @@ In general, there are $\log_2(N)$ stages of computation (which is 3 in figure \r
 \draw[->-=0.95]{(7.5,\y+4)--(9.5,\y)};
 \node at (9.4,\y-0.3){$-1$};
 }
+% sum circles
+\foreach \y in {1,...,8}
+{
+\filldraw[fill= white, draw= black] (9.5,\y) circle (0.1cm);
+}
+
+\foreach \y in {1,...,8}
+{
+\filldraw[fill= white, draw= black] (6.5,\y) circle (0.1cm);
+}
+
+\foreach \y in {1,...,8}
+{
+\filldraw[fill= white, draw= black] (3.5,\y) circle (0.1cm);
+}
+
 \end{tikzpicture}
 \caption{Flow diagram of an 8-point DFT decomposed into 4 2-point DFTs with the FFT. Intersections symbolize a summation of the lines meeting.}
 \label{fig:fft_flow}

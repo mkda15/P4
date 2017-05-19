@@ -6,7 +6,6 @@ Created on Fri Apr 21 08:46:36 2017
 """
 import numpy as np
 import scipy as sc
-import matplotlib.pyplot as plt
 
 #==============================================================================
 # Window function, for implementing filters or the STFT.
@@ -91,16 +90,4 @@ def Kaiser( d1, d2, fs):                                        # Kaiservindue
             w[i] = 0
     if (M%2 == 1):
         M=M+1
-    return w,M,beta,A,n
-
-#plt.style.use('classic')
-#
-#M=50
-#n = np.linspace(0,M+1,M+2)
-#
-#w = Rectangular(n,M)
-#plt.plot(n,w)
-#plt.show()
-#
-#W = np.fft.fft(w,len(n))
-#plt.plot(n,W)
+    return w,M,n

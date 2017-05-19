@@ -1,32 +1,32 @@
 \label{sec:peak_detection}
-In this section a tone-locating algorithm will be implemented as tone location by peak amplitude detection.
-This is further tested with the specifications given in section \ref{sec:testspec}
+In this section a tone-locating algorithm will be implemented by peak amplitude detection.
+This is further tested with the specifications given in section \ref{sec:testspec}.
 %The integration is validated according to the test specifications in \ref{ch3}
 \subsection{Implementation of peak detection}
-To figure out which single tone is being played in a given audio file, to a given time, the STFT is analyzed, and the peak amplitude of a given time is detected.
-The visualization of this is a plot of the peaks in the output spectrogram over time.\\
-\\
+To figure out which single tone is being played in a given audio file at a given time, the STFT is analyzed, and the peak amplitude of a given time is detected.
+The visualization of this is a plot of the peaks in the output spectrogram over time.
+\\ \\
 The frequency with the highest amplitude, and henceforth the largest amount of energy, is the most represented frequency. 
 In an audio file this will be the frequency of the tone being played or one of the harmonics of this frequency, cf. chapter \ref{ch2}.
-This assumption will hold as long as the signal-to-noise ratio of the signal is not smaller than a given lower limit which is further explored in chapter \ref{ch11}.\\
-With the signal transformed by the STFT each segmented data set corresponds to a FFT of a given time, hence finding the peak amplitude and the corresponding frequency makes it possible to determine the tone being played at a given time. Due to the trade-off between time and frequency resolution stated in theorem \ref{theo:Heisenberg} the found frequency is an approximation, hence the detected frequency would need to be compared with the frequency of the tones a guitar would play. 
-This will make an approximation of the note a possibility even though the resolution in frequency is rather low. \\
-\\
-To make sure that the amplitude actually is from a note being played and not from noise in the signal, a check can be implemented in the algorithm such that the amplitude is set to $0$ if the amplitude is not larger than a given limit.
-This in turn will reduce the amount of noise slipping through the algorithm for signals with a low signal-to-noise ratio, SNR.
+This assumption will hold as long as the signal-to-noise ratio, SNR, of the signal is not smaller than a given lower limit, which is further explored in chapter \ref{ch11}. \\
+With the signal transformed by the STFT each segmented data set corresponds to a FFT of a given time, and hence finding the peak amplitude and the corresponding frequency makes it possible to determine the tone being played at a given time. Due to the trade-off between time and frequency resolution stated in theorem \ref{theo:Heisenberg} the located frequency is an approximation, and hence the frequency needs to be compared with the expected frequency. 
+This will make an approximation of the tone a possibility even though the resolution in frequency is rather low.
+\\ \\
+To make sure that the amplitude actually is from a tone being played and not from noise in the signal, a check can be implemented in the algorithm such that the amplitude is set to $0$ if the amplitude is not larger than a given limit.
+This in turn will reduce the amount of noise slipping through the algorithm for signals with a low SNR.
 
 An algorithm for locating the frequency with the largest amplitude is implemented in Python as described in algorithm \ref{alg:FIR}.
 \begin{algorithm}[H]
-\caption{Amplitude peak detection of STFT}
+\caption{Peak amplitude detection of the STFT}
 \label{alg:FIR}
-\begin{algorithmic}[1] 
+\begin{algorithmic}[1]
 \Procedure{Compute peak amplitude}{}
 \State  $X$ = STFT($signal$) \Comment {STFT calculation in an array $X$}
 \State $Y =$ linspace($0,$ Nyquist, FFTsize/2) \Comment {Array of length $FFTsize/2$}
 	\For {each $i$ in length of $X$}
-		\State $A = $max$(X[i])$ \Comment {Maximum amplitude for each FFT}
+		\State $A = \max(X[i])$ \Comment {Maximum amplitude for each FFT}
 		\If {$A >$ limit} \Comment {Check if the amplitude is larger than a given limit}
-			\State $freq\_pos[i]$ = where in $X$[i], $(A == $max$(X[i]))$ \Comment { Location of the max amplitude}
+			\State $freq\_pos[i]$ = where in $X$[i], $(A == \max(X[i]))$ \Comment { Location of the max amplitude}
 		\Else
 			\State $freq\_pos$[i] = 0	
 		\EndIf
@@ -43,7 +43,7 @@ An algorithm for locating the frequency with the largest amplitude is implemente
 
 %An argument coud be made for looking at the 3+ higest frequencies in the signal.
 \subsection{Validation of peak detection algorithm}
-The algorithm is tested as stated by the specifications in section \ref{sec:testspec} by feeding a STFT of a noise filled audio file containing an "$E_2$" tone being played on a guitar. 
+The algorithm is tested as stated by the specifications in section \ref{sec:testspec} by feeding a STFT of a noise filled audio file containing an $E_2$ tone being played on a guitar.
 The expected result of this test is either the fundamental frequency of $82.41$ Hz or an harmonic of this as explained in chapter \ref{ch2}. The first 2 harmonics of the tone $E_2$ are $82.41 \cdot 2 = 164.82$ Hz and $82.41 \cdot 3 = 247.23$ Hz.
 
 \begin{figure}[H]
@@ -51,22 +51,22 @@ The expected result of this test is either the fundamental frequency of $82.41$ 
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/peak_detection/20170511_-3.png}
-\caption{Peak amplitude plotted with minimum amplitude representation of -3 dB}
+\caption{Peak amplitude plotted with minimum amplitude representation of -3 dB.}
 \label{fig:freq_-3dB_Amp_pass}
 
 \includegraphics[width=\textwidth]{figures/peak_detection/20170511_10.png}
-\caption{Peak amplitude plotted with minimum amplitude representation of 10 dB}
+\caption{Peak amplitude plotted with minimum amplitude representation of 10 dB.}
 \label{fig:freq_10dB_Amp_pass}
 
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/peak_detection/20170511_15.png}
-\caption{Peak amplitude plotted with minimum amplitude representation of 15 dB}
+\caption{Peak amplitude plotted with minimum amplitude representation of 15 dB.}
 \label{fig:freq_15dB_Amp_pass}
 
 \includegraphics[width=\textwidth]{figures/peak_detection/20170511_25.png}
-\caption{Peak amplitude plotted with minimum amplitude representation of 25 dB}
+\caption{Peak amplitude plotted with minimum amplitude representation of 25 dB.}
 \label{fig:freq_25dB_Amp_pass}
 
 \end{subfigure}
@@ -74,13 +74,12 @@ The expected result of this test is either the fundamental frequency of $82.41$ 
 \label{fig:valdation_peak_detection}
 \end{figure}
 
-The most represented frequencies in figure  \ref{fig:freq_-3dB_Amp_pass} are $158.76$ Hz, followed by $246.96$ Hz and $88.2$ Hz. 
-Knowing that the tone being played is E$_2$ with the previously mentioned fundamental frequency and harmonics, an error margin of around $6$ Hz between the expected output and the actual output can be seen.
-This can be due to either the guitar not playing a clean E$_2$ or previously mentioned lack of resolution in frequency. From this the implementation of the peak detection is found to work as intendant.\\
-
-In figure \ref{fig:valdation_peak_detection}b, c, d, the effect of the chosen cut-off limit can be seen.
-With a low enough amplitude limit as seen in \ref{fig:freq_-3dB_Amp_pass} none of the maximum amplitudes are removed.
-This in turn makes any noise in the system able to be represented as a peak even though nothing is being played by the guitar.
-Figure \ref{fig:freq_25dB_Amp_pass} is more akin to an expected result with only harmonics of the $E_2$.
-On the other hand, if the limit is too large,the tone being played is cut short when the amplitude of the tone descends as the tone lingers.
-Therefore, a compromise between letting noise pass the peak detection and cutting the note short has to be made in order to make sure that the correct frequencies are  located and the length of the tone is maintained.
+Figure \ref{fig:valdation_peak_detection} shows the effect of different cut-off limits. The most represented frequencies in figure \ref{fig:freq_-3dB_Amp_pass} are $158.76$ Hz followed by $246.96$ Hz and $88.2$ Hz. 
+Knowing that the tone being played is $E_2$ with the previously mentioned fundamental frequency and harmonics, an error margin of around $6$ Hz between the expected output and the actual output can be seen.
+This can be due to either the guitar not playing a clean $E_2$ or the previously mentioned lack of resolution in frequency.
+\\
+With a low amplitude limit as shown in figure \ref{fig:freq_-3dB_Amp_pass} none of the maximum amplitudes are removed. This in turn makes any noise in the system able to be represented as a peak even though nothing is being played by the guitar.
+Figure \ref{fig:freq_25dB_Amp_pass} is more akin to an expected result as it does not show any spikes but the figure also only shows the harmonics of the $E_2$ tone.
+Therefore, if the limit is too large, the tone being played is cut short when the amplitude of the tone descends as the tone lingers.
+\\
+To summarize, a compromise between letting noise pass the peak detection and cutting the tone short has to be made in order to make sure that the correct frequencies are located and the length of the tone is maintained. From this the implementation of the peak detection is found to work as intended.
