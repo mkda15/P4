@@ -57,7 +57,7 @@ ymax=5.5]
 The implementation of the filter basically follows algorithm \ref{alg:FIR}. The ideal impulse response is defined as the inverse Fourier transformation of the ideal filter specified in figure \ref{fig:spec_Hd}. The derivation of the ideal impulse response of a bandpass filter is shown in appendix \ref{appC}. From the given specifications the shape parametere of the kaiser window becomes $\beta \approx 1.5$ which gives a filter order of 2766. Figure \ref{fig:FIRimpulse} show the impulse response of the filter. Figure \ref{fig:freq_filt1} illustrates a plot of the amplitude response corresponding to the filter in the frequency domain. Figure \ref{fig:freq_filt2} illustrates a close-up view of the left transitionband, showing the ripples in the stop- and passband. The boundaries from the specifications are marked by the green lines. It is seen that the specifications are fulfilled. 
 \begin{figure}[h]
 \centering 
-\includegraphics[scale=0.4]{figures/filtertest/impulse.png}
+\includegraphics[scale=0.5]{figures/filtertest/impulse.png}
 \caption{Impulse response of filter with order $M=2766$}
 \label{fig:FIRimpulse}
 \end{figure}
@@ -118,7 +118,7 @@ The implementation of the filter basically follows algorithm \ref{alg:FIR}. The 
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Test of the filter}
+\subsection{Test of filter}
 The implemented filter is tested according to the test specifications described in section \ref{sec:testspec}. Figure \ref{fig:SIGNAL} shows the frequency spectrum of the single low E tone with additive noise in form of a beat of hands clapping. Figure \ref{fig:filt_SIGNAL} shows the filtered signal. Note that the frequency spectrum are only showed from 0 to approximately 2200 Hz.  
 
 \begin{figure}[H]
