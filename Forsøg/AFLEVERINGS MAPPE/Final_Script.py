@@ -21,10 +21,9 @@ import scipy.io.wavfile as siw
 #==============================================================================
 """ Data import """
 # Enkelt tone
-freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
-freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
+#freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
+#freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
 
-noise = noise*0
 
 # TEST 1 
 #freq , data  = siw.read('Lydfiler/skala/forsoeg_skala_hurtig.wav')     # Data signal
@@ -35,8 +34,8 @@ noise = noise*0
 #freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                                   # Noise signal
 
 # TEST 3                                  
-#freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
-#freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
+freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
+freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
 
 """ Length of data and noise alings"""
 if len(data) > len(noise):
@@ -74,7 +73,7 @@ freq_axis_norm = np.linspace(0,1,sampels/2)
 
 """ Variabler til spektogram """
 freq_inter1 = 0    
-freq_inter2 = 150
+freq_inter2 = 200
 
 fontsize = 13
 
@@ -177,29 +176,30 @@ print('Data filtreret 6/9')
 #plt.plot(tid,signal)  # Original data with noise added 
 #plt.xlabel('Time [sec.]')
 #plt.ylabel('Amplitude')
-##plt.savefig("figures/integrationstest/signal.pdf")
+#plt.axis([0,6,-1,1])
+#plt.savefig("figures/integrationstest/signal.png")
 #plt.show()
 
 """ Filtered signal in time domain """
 #plt.plot(tid,signal_filt)  # Original data with noise added 
 #plt.xlabel('Time [sec.]')
 #plt.ylabel('Amplitude')
-##plt.axis([0,6,-1.5,1])
-##plt.savefig("figures/integrationstest/signal_filt.pdf")
+#plt.axis([0,6,-1,1])
+#plt.savefig("figures/integrationstest/f_signal.png")
 #plt.show()
 
 """ Pure signal with noise i frekvency domain"""
 #plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          
 #plt.xlabel('Frequency [Hz]')
 #plt.ylabel('Amplitude')
-#plt.savefig("figures/filter_test/SIGNAL.png")
+#plt.savefig("figures/integrationstest/FSIGNAL.png")
 #plt.show()
 
 """ Filtered signal in frequency domain """
 #plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   
 #plt.xlabel('Frequency [Hz]')
 #plt.ylabel('Amplitude')
-#plt.savefig("figures/filter_test/filt_SIGNAL.png")
+#plt.savefig("figures/integrationstest/f_FSIGNAL.png")
 #plt.show()
 
 """ Close-up all data in time domain  """
@@ -235,7 +235,7 @@ cb   = plt.colorbar(spec)
 cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
 plt.xlabel('Time [s]', fontsize = fontsize)
 plt.ylabel('Frequency [Hz]', fontsize = fontsize)
-#plt.axis([0,8,0,1600])
+plt.axis([0,7.8,0,2000])
 #plt.savefig("figures/skala.png")
 #plt.savefig("figures/integrationstest/spectrogram.png")
 plt.savefig("figures/systemtest/final_spec3.png")
@@ -245,13 +245,13 @@ plt.show()
 # Peak Dectection
 #==============================================================================
 
-max_freq_t = peak_dec(X,-3,y)
+max_freq_t = peak_dec(X,15,y)
 
 """ plot peak dection """
 plt.plot(x,max_freq_t,'o')
 plt.xlabel('Time [s]')
 plt.ylabel('Frequency [Hz]')
-#plt.savefig("figures/integrationstest/peak_dec.pdf")
+#plt.savefig("figures/integrationstest/peak_dec.png")
 plt.savefig("figures/systemtest/final_peak3.png")
     
 #==============================================================================
