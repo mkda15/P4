@@ -64,8 +64,20 @@ To test the implementation it will be compared to the pre-existing FFT function 
 \textbf{Filter}\\
 The filter has to fulfil certain specifications that will be defined during the filter design process in chapter \ref{ch10}. The filter will be tested on a simple known signal, where a noise signal has been digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal-to-noise ratio. Hence, it is possible to verify whether the filter succeeds to remove the specified frequencies in order to reduce the noise. The verification will be made by analysing the frequency spectrum of the filtered signal compared to the original pure signal. \\
 \\
-\textbf{STFT algorithm and spectrogram}\\
-The spectrogram is made by the Short-Time Fourier Transform described in section \ref{sec:STFT}. As the verification of the Fourier Transformation described above, the spectrogram algorithm will be tested against an existing algorithm from the Numpy-package in Python on the same data set.
+\textbf{STFT algorithm and spectrogram}\label{sec:STFT_spec}\\
+The spectrogram is made by the Short-Time Fourier Transform described in section \ref{sec:STFT}. As the verification of the Fourier Transformation described above, the spectrogram algorithm will be tested against an existing algorithm from the Numpy-package in Python on the same data set. The algorithm will then be tested on a fixed data set with a known output which illustrates the usability of the spectrogram. The discrete signal to be used is
+\begin{align}\label{eq:SPECTROsignal}
+sig[n]=\begin{cases}\sin(1000\pi n)&\text{for }0\leq n<\frac{t}{3}\\
+\sin(3000\pi n)&\text{for }\frac{t}{3}\leq n < \frac{2t}{3}\\
+\sin(1500\pi n)+\sin(1625\pi n)&\text{for }\frac{2t}{3}\leq n\geq\frac{2t}{3}
+\end{cases}.
+\end{align}
+The sine waves are then with frequencies of 1, 3 and 3.25 Hz, respectively, and the signal is sampled for $t=75$ seconds at $f_s=4000$ Hz.\\
+Secondarily the algorithm will be tested on a recorded signal to validate the implementation according to the data type that will act as the input in the final system.\\\\
+\textbf{Peak detection algorithm}\\
+To validate the peak amplitude detector it will be tested on a recorded signal with a known single ton. By table \ref{tab:tone} in chapter \ref{ch2} it is given that the significant frequency of a specific tone is defined. Thus the wanted output is known for comparison.         
+\frede{Alle de ovenstående afsnit skal have testspecifikationerne så de ikke står i kapitel 10.}
+\subsection{Integration validation}
 The algorithm will then be tested on a fixed data set with a known output. It will be a sine wave with three different frequencies. By doing so, the output of the algorithm can hence be compared.
 Secondary the algorithm will be tested on a recorded signal to test the implementation according to the data type that will act as the input in the final system. 
 \frede{Her skal nok specificeres mere. Hvad er det præcis for noget data der er input/output? F.eks. en sinus i tid som bliver til en Dirac i frekvens \texttrademark}\\

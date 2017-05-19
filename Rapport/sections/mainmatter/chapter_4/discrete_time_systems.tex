@@ -98,5 +98,27 @@ The convolution between sequences $h$ and $x$ is defined as
 \end{equation}
 where $n$ specifies the argument of the convolution sum.
 \end{definition}
-Given an impulse response for a discrete LTI system, the output to a specific input can be calculated by convolving the input with the impulse response. 
-An impulse response is sometimes called a filter and convolving an input with the impulse response is sometimes called filtering. The convolution is of importance in chapter \ref{ch8} which covers filter theory and design in depth. The convolution is furthermore of importance in chapter \ref{ch6} where the Fourier transform is treated. \martin{Kapitlet slutter lidt brat. Kan vi udvide det? \textregistered Jeg syntes det er fint \smiley}
+This means that, given an impulse response for a discrete LTI system, the output to a specific input can be calculated by convoluting the input with the impulse response. An impulse response is sometimes called a filter and convoluting an input with the impulse response is sometimes called filtering. The convolution is of importance in chapter \ref{ch8} which covers filter theory and design in depth. The convolution is furthermore of importance in chapter \ref{ch6} where the Fourier transform is treated.
+
+\subsection{Linear Operators}
+The following definition defines linear operators on the concrete Hilbert space $\mathcal{L}^2(\mathbb{R})$ as defined in definition \ref{def:L2space} \cite{page 120, FSE2010} \martin{Vi bruger egentlig begreberne i denne definition igennem rapporten, og henvisning til denne definition i løbet af rapporten vil derfor binde rapporten bedre sammen. Det bør dog overvejes, om definitionen skal være et andet sted (så der ikke henvises fremad til kapitel 5). Bemærk: punkt nummer 2 og henvisningerne til denne definition rundt omkring i rapporten er tilpasset rapporten, og vi skal spørge Henrik, om det er i orden. \textregistered}.
+
+\begin{definition}[Translation, modulation, dilation] \label{def:TMD}
+Consider the following classes of linear operators on $\mathcal{L}^2(\mathbb{R})$:
+\begin{enumerate}
+\item For $a \in \mathbb{R}$, the operator $T_a$, called translation by $a$, is defined by
+\begin{align*}
+T_a f(t) = f(t-a), \quad t \in \mathbb{R}.
+\end{align*}
+
+\item For $b \in \mathbb{R}$, the operator $E_b$, called modulation by $b$, is defined by
+\begin{align*}
+E_b f(t) = \text{e}^{j b t} f(t), \quad t \in \mathbb{R}.
+\end{align*}
+
+\item For $c > 0$, the operator $D_c$, called dilation by $c$, is defined by
+\begin{align*}
+D_c f(t) = \dfrac{1}{\sqrt{c}} f\left( \dfrac{t}{c} \right), \quad t \in \mathbb{R}.
+\end{align*}
+\end{enumerate}
+\end{definition}
