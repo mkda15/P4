@@ -65,7 +65,7 @@ The corresponding impulse response is determined by the inverse Fourier transfor
 h_{lp}[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi} H_{lp}(\omega) \text{e}^{j\omega n} d\omega =\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}\text{e}^{j\omega n} d\omega = \frac{1}{2\pi j n}\left[\text{e}^{j\omega n} \right]_{-\omega_c}^{\omega_c} = \frac{\sin(\omega_c n)}{\pi n}, \ \  -\infty < n < \infty.
 \end{align}
 
-Note that the second equality is true since the integral is zero outside the interval $[-\omega_c, \omega_c]$ according to \eqref{eq:low}. \eqref{eq:low_im} only holds for values $n \neq 0$, and thus $h_{lp}[0]$ must be defined separately. Thus
+Note that the second equality is true since the integral is zero outside the interval $[-\omega_c, \omega_c]$ according to \eqref{eq:low}. \eqref{eq:low_im} only holds for values $n \neq 0$, and thus $h_{lp}[0]$ must be defined separately. Thus \martin{Følgende ligning stod i rettelserne fra Henrik, men det virker lidt som magi. \textregistered}
 \begin{align*}
 h_{lp}[0] &= \dfrac{1}{2\pi} \int_{-\pi}^\pi H_{lp}(\omega) d\omega = \dfrac{\omega_c}{\pi}.
 \end{align*}
@@ -146,7 +146,7 @@ ymax=2.6]
 As stated in section \ref{sec:LTI} a non-causal LTI system is not realizable. Furthermore, zero phase is not possible for a causal system.
 Thus an approximation of an ideal filter needs to be computed by a causal system with generalized linear phase.
 
-\section{FIR and IIR filter} \label{sec:FIR_IIR}
+\section{FIR and IIR filters} \label{sec:FIR_IIR}
 Two classes of filters are essential to identify. For all ideal filters discussed in the previous section the impulse response is defined for $-\infty < n < \infty$. Such a filter is specified as an \textit{infinite impulse response (IIR)} filter. In the case of the impulse response being zero outside a finite interval the filter is referred to as a \textit{finite impulse response (FIR)} filter.
 
 \subsection{FIR filters}
