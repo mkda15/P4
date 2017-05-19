@@ -1,4 +1,3 @@
-\chapter{Discussion}
 The following chapter, will take to consideration the choices made doing the different process of the project.
 On this basis a discussion will be stated about the different choices and what could have been done differently.
 \\\\
@@ -11,14 +10,16 @@ A reason the higher sampling frequency is chosen rather than lower sampling freq
 Furthermore a lower sampling frequency will make the signal more susceptible to aliasing. %Kunne være sjovt at nedsample
 %To test the signal and sampling frequency, the signal could be down sampled in an attempt to figure out a possible lower sampling frequency 
 \chr{Noget af det syntes jeg måske passer bedre i perspektivering.}
+%\\\\
+%The choice of not implementing the algorithms in real time yadeyadeyada not relevant to be done live. \chr{Skal lige have en ide til hvordan man skal skrive det. og igen måske lidt mere perspektivering. og ikke så meget en diskution over valg i rapport}
 \\\\
-The choice of not implementing the algorithms in real time yadeyadeyada not relevant to be done live. \chr{Skal lige have en ide til hvordan man skal skrive det. og igen måske lidt mere perspektivering. og ikke så meget en diskution over valg i rapport}
-\\\\
-In the scripts/algorithms implemented in this project the chose of using  a predefined algorithm for the FFT (as described in \chr{ref fft}) rather than hard coded FFT, is made due to the superior speed of the predefined function. 
+In the scripts/algorithms implemented in this project the chose of using a predefined algorithm for the FFT (as described in \chr{ref fft}) rather than hard coded FFT, is made due to the superior speed of the predefined function. 
 Even though the algorithms isn't implemented in real time, the faster predefined numpy FFT drastically reduces a bottle neck in the algorithms.
 \\\\
-
-Filters
+Using a FIR filter as in this project insures a fast implementation and a general linear phase.
+The linear phase can be a wanted characteristic of filters to prevent phase distortion, but the higher order and more calculations of a fir filter, makes it worse for computer run time or a real time implementation. 
+A possibility could be to implemented a IIR filter, for fewer calculation, but since the run time isn't a focus, the faster implementation of a FIR is an ideal choice as discussed in \ref{ch8}.
+The 
 \\\\
 The Recording of music and noise 
 In the recording of guitar tones, in this project, different choices was made to insure diversity and a wide range of frequencies.
@@ -30,28 +31,12 @@ This could have been done to see how every tone behaves according to each other,
 The peak detection algorithm is implemented over a final creation of a note sheet.
 This algorithm is a close approximation to a note sheet, and the final symbol management is left out as described in \ref{ch3}.
 The symbol management is decided to be left .
-During the recording of the test audio, a timer between each note being played 
- 
-valg om simple peak detection over real symbolbehandling
-Ingen optagelse af tid - hvad føre det til
-(endelig output er spektrogram)
-
-Kan genkende skala men ikke se præcis tids punkt.
-
-Vindues længde og samplings frekvens ikke noget vi har arbejdet med for at finde det bedste
+During the recording of the test audio, a timer between each note being played.
+This makes the final product, the peak detection, unreliable in time and a multiple of the same note being played consecutive is indistinguishably from a long note of the same frequency.
+This could have been circumvented by either using the previously mentioned timer, or theoretically using the audio file, timing each keystroke on the guitar.
+Comparing this with the output time of the algorithm will be a necessity to create a final note sheet.
 
 
-What did we choose to do? Is there a better way to do it? / What could have been done.
-
-
-Vælger keiser vindue og fir filter
-over iir filter.
-Adaptive filter. (den forventede ønskede værdi bliver sammenlignet med output signalet og en fejl bliver fundet, som kan minimeres.)
-
-Valg om at det ikke køre reel tid
-
-
-Valg af stft over andre metoder til frekvens genkendelse (wavelet ref til perspektivering.)
 
 
 
