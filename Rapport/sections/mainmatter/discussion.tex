@@ -8,7 +8,7 @@ One of the highest frequency of an acoustic guitar, as the one used in this proj
 Since this is well withing the range of the frequency that can be recreated, an argument could be made for using a lower sampling frequency.
 This will lead to fewer data points, and would enable faster data processing or an eventual real time implementation. 
 A reason the higher sampling frequency is chosen rather than lower sampling frequency, is that every frequency in the audible specter is of interest including the overtones of the played frequency and that the calculation aren't being done in real time.
-Furthermore a lower sampling frequency will make the signal more susceptible to aliasing. 
+Furthermore a lower sampling frequency will make the signal more susceptible to aliasing. %Kunne være sjovt at nedsample
 \\\\
 
 The choice of not implementing the algorithms in real time yadeyadeyada not relevant to be done live. \chr{Skal lige have en ide til hvordan man skal skrive det.}
@@ -16,6 +16,7 @@ The choice of not implementing the algorithms in real time yadeyadeyada not rele
 In the scripts/algorithms implemented in this project the chose of using  a predefined algorithm for the FFT (as described in \chr{ref fft}) rather than hard coded FFT, is made due to the superior speed of the predefined function. 
 Even though the algorithms isn't implemented in real time, the faster predefined numpy FFT drastically reduces a bottle neck in the algorithms.
 \\\\
+
 Filters
 \\\\
 Recording
@@ -40,5 +41,6 @@ Valg om at det ikke køre reel tid
 
 
 Valg af stft over andre metoder til frekvens genkendelse (wavelet ref til perspektivering.)
+
 
 
