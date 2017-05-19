@@ -9,9 +9,10 @@ Since this is well withing the range of the frequency that can be recreated, an 
 This will lead to fewer data points, and would enable faster data processing or an eventual real time implementation. 
 A reason the higher sampling frequency is chosen rather than lower sampling frequency, is that every frequency in the audible specter is of interest including the overtones of the played frequency and that the calculation aren't being done in real time.
 Furthermore a lower sampling frequency will make the signal more susceptible to aliasing. %Kunne være sjovt at nedsample
+%To test the signal and sampling frequency, the signal could be down sampled in an attempt to figure out a possible lower sampling frequency 
+\chr{Noget af det syntes jeg måske passer bedre i perspektivering.}
 \\\\
-
-The choice of not implementing the algorithms in real time yadeyadeyada not relevant to be done live. \chr{Skal lige have en ide til hvordan man skal skrive det.}
+The choice of not implementing the algorithms in real time yadeyadeyada not relevant to be done live. \chr{Skal lige have en ide til hvordan man skal skrive det. og igen måske lidt mere perspektivering. og ikke så meget en diskution over valg i rapport}
 \\\\
 In the scripts/algorithms implemented in this project the chose of using  a predefined algorithm for the FFT (as described in \chr{ref fft}) rather than hard coded FFT, is made due to the superior speed of the predefined function. 
 Even though the algorithms isn't implemented in real time, the faster predefined numpy FFT drastically reduces a bottle neck in the algorithms.
@@ -19,12 +20,22 @@ Even though the algorithms isn't implemented in real time, the faster predefined
 
 Filters
 \\\\
-Recording
+The Recording of music and noise 
+In the recording of guitar tones, in this project, different choices was made to insure diversity and a wide range of frequencies.
+Recording the guitar tones E$_2$ and E$_4$ gives insight into how lower and higher tones of the same harmonic behave, and a recording of a scale gives insight into some of the different tones between them.
+In the scale, the different tones are played one after each other in a consecutive recording. 
+An option could be to record each of the tones in the scale in there separate recording, enabling analysis of all the tones individually.
+This could have been done to see how every tone behaves according to each other, but a coherent recording is more in line of a real recording of a song, and is therefore chosen as the given method.
+\\\\
+The peak detection algorithm is implemented over a final creation of a note sheet.
+This algorithm is a close approximation to a note sheet, and the final symbol management is left out as described in \ref{ch3}.
+The symbol management is decided to be left .
+During the recording of the test audio, a timer between each note being played 
  
 valg om simple peak detection over real symbolbehandling
 Ingen optagelse af tid - hvad føre det til
 (endelig output er spektrogram)
-Valg kun at kigge på E_2 og E_4 og ikke andre toner andet end i en skala.
+
 Kan genkende skala men ikke se præcis tids punkt.
 
 Vindues længde og samplings frekvens ikke noget vi har arbejdet med for at finde det bedste
