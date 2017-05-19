@@ -8,7 +8,7 @@ Created on Fri Apr 21 08:31:00 2017
 # Imports
 #==============================================================================
 
-from fouriertransform import stft , db , stft_h, variance_t
+from fouriertransform import stft , db 
 from windowfunctions import Kaiser
 from peak_detection import peak_dec
 import numpy as np
@@ -218,7 +218,7 @@ print('plot plotteret 7/9')
 # Computing Spectrogram
 #==============================================================================
 
-X,o,ws = stft(signal_filt,fftsize = 4096 ,overlap = 2)      # return STFT, stft and used window(time) 
+X,o,ws = stft(signal_filt)      # return STFT, stft and used window(time) 
 
 WS = np.abs(np.fft.fft(ws))                                 # window(frekvenscy) used in STFT  
 #X,v_w,v_t,t = stft_h(signal_filt,overlap = 2)
