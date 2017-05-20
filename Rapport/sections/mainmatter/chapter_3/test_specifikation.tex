@@ -37,7 +37,7 @@ In this section test specifications will be determined in order to test and eval
 In the previous synthesis section requirements of the system was established. This section describes test specifications of each phase starting from the smallest unit, and working up to the system as a whole. \\
 Detailed design, implementation and tests are described in chapter \ref{ch10}. \\
 \\
-The system will be tested from the bottom up, starting with the smallest components (single units). This validation phase is called the ``Unit Testing''. The test checks each of the units individually and verifies that they are working according to the expectations. Next up the coherence of the system is tested, and finally the full system as a whole unit is tested. Units in the model are as follows:
+The system will be tested from the bottom up, starting with the smallest components (single units). This phase is called the ``Unit Testing''. The test checks each of the units individually and verifies that they are working according to the expectations. Next up the coherence of the system is tested, and finally the full system as a whole unit is tested. Units in the model are as follows:
 \begin{multicols}{2}
 \subparagraph{Physical components}  
 \begin{itemize}
@@ -59,20 +59,13 @@ Note that tests on the physical components will not be carried out in this proje
 \subsection{Unit tests} 
 \textbf{Fourier transformation} \\
 The Fourier transformation will be done by implementing the Fast Fourier Transformation described in section \ref{sec:FFT} 
-To test the implementation it will be compared to the pre-existing FFT function from the Numpy-package in Python. These are compared by computing the time it takes for each function to compute different amounts of the same random numbers. Further this will be compared to an straight  implementation of the Discrete Fourier Transformation to see the effect of the Fast Fourier Transformation.\\
+To test the implementation it will be compared to the pre-existing FFT function from the Numpy-package in Python. These are compared by computing the time it takes for each function to compute different amounts of the same random numbers. Further this will be compared to an straight  implementation of the Discrete Fourier Transformation to see the effect of the Fast Fourier Transformation.\trine{mangler at de to resultater skal være ens til en vis grad.}\\
 \\
 \textbf{Filter}\\
 The filter has to fulfil certain specifications that will be defined during the filter design process in chapter \ref{ch10}. The filter will be tested on a simple known signal, where a noise signal has been digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal-to-noise ratio. Hence, it is possible to verify whether the filter succeeds to remove the specified frequencies in order to reduce the noise. The verification will be made by analysing the frequency spectrum of the filtered signal compared to the original pure signal. \\
 \\
 \textbf{STFT algorithm and spectrogram}\label{sec:STFT_spec}\\
-The spectrogram is made by the Short-Time Fourier Transform described in section \ref{sec:STFT}. As the verification of the Fourier Transformation described above, the spectrogram algorithm will be tested against an existing algorithm from the Numpy-package in Python on the same data set. The algorithm will then be tested on a fixed data set with a known output which illustrates the usability of the spectrogram. Secondarily the algorithm will be tested on a recorded signal to validate the implementation according to the data type that will act as the input in the final system.\\\\
-\textbf{Peak detection algorithm}\\
-To validate the peak amplitude detector it will be tested on a recorded signal with a known single ton. By table \ref{tab:tone} in chapter \ref{ch2} it is given that the significant frequency of a specific tone is defined. Thus the wanted output is known for comparison.
-\subsection{Integration validation}
-The algorithm will then be tested on a fixed data set with a known output. It will be a sine wave with three different frequencies. By doing so, the output of the algorithm can hence be compared.
-Secondary the algorithm will be tested on a recorded signal to test the implementation according to the data type that will act as the input in the final system. 
-\frede{Her skal nok specificeres mere. Hvad er det præcis for noget data der er input/output? F.eks. en sinus i tid som bliver til en Dirac i frekvens \texttrademark}\\
-\\
+The spectrogram is made by the Short-Time Fourier Transform described in section \ref{sec:STFT}. As the test of the Fourier Transformation described above, the spectrogram algorithm will be tested against an existing algorithm from the Numpy-package in Python on the same data set. The algorithm will then be tested on a fixed data set with a known output which illustrates the usability of the spectrogram. Secondarily the algorithm will be tested on a recorded signal to validate the implementation according to the data type that will act as the input in the final system\frede{Her skal nok specificeres mere. Hvad er det præcis for noget data der er input/output? F.eks. en sinus i tid som bliver til en Dirac i frekvens \texttrademark}\\.\\\\
 \textbf{Peak detection algorithm}\\
 The peak amplitude detector will be tested on a recorded signal with a known single tone. By table \ref{tab:tone} in chapter \ref{ch2} it is given that the significant frequency of a specific tone is defined. Thus the wanted output is known for comparison.         
 
