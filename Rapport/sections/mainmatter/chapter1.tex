@@ -30,11 +30,11 @@ The extensive research conducted in automatic music transcription stems from the
 \\\\
 As the above sources suggest there are many different ways to grasp this problem.\\
 This project will focus on creating a solution with the use of mathematical tools to extract signal information from a digitalized analog signal of music so as to transcribe it automatically to a note sheet.  
-This imply a theoretical study - followed by implementation - within discrete-time signal processing and frequency analysis including the transformation between time and frequency representation of a signal.\\    
+This imply a theoretical study - followed by implementation - within discrete-time signal processing and time-frequency analysis including the transformation between time and frequency representation of a signal.\\    
 The viability of a solution in form of an algorithm based on the mathematical tools will be tested under controlled circumstances to illustrate the possibilities and limitations of said algorithm. \frede{Her skal uddybes, når vi ved mere. \texttrademark
 \\ Jeg har forsøg at udbybe lidt \smiley (y)}
 
-\subsection{Problem statement}
+\section{Problem statement}
 The above analysis is summarized.\\
 When musicians compose new music they firstly play, but it stunts their creativity when they need to stop to transcribe the music. There is furthermore not necessarily any correlation between musical talent and the ability to transcribe music. This makes it advantageous for many musicians to use a program which automatically transcribes music to a note sheet. This leads to the following problem statement:
 
@@ -42,7 +42,20 @@ When musicians compose new music they firstly play, but it stunts their creativi
 \textit{How can an algorithm through the use of mathematical tools within signal processing  \\
 be designed to automatically transcribe music to a note sheet?}
 \end{center}
-%The music used for testing the algorithm will be simple melodies comtaining one note at a time (no chords) from one instrument at a time. This will allow insight into the methods used without complicating the recognition of notes by blending together different instruments and different sound frequencies.\\\\
+
+From the problem statement the following subquestions will be examined 
+\begin{itemize}
+\item[•] How can the process - from data recording to note representation - be designed as a discrete-time system?
+\item[•] What mathematical tools are necessary and sufficient to perform time-frequency analysis of a music signal, and in what way is a sufficient resolution in both time and frequency achieved?   
+\item[•] How can a filter be designed to reduce additive noise on the signal and how efficient will it be? 
+\end{itemize}
+
+\subsection{Project delimitations}
+The project is primary delimited to include signalprocessing and time-frequency analysis on single tones from a acoustic guitar with known additive noise - recoded under ideal conditions. The system will run in non-real time which makes it possible to neglect computational power and/or efficiency. Focus of the project is the time-frequency analysis above the symbol processing considering the notes.\\
+The end product of this project is limited to an algorithm based on mathematical tools which is capable of transcribing a prerecorded piece of simple music to a spectrogram. The system model is fully established in chapter \ref{ch3}. \trine{har forsøgt at tilføje underspørgsmål og kort afgrænsning, er det noget vi vil have med alligevel?}       
+
+
+%The music used for testing the algorithm will be simple melodies containing one note at a time (no chords) from one instrument at a time. This will allow insight into the methods used without complicating the recognition of notes by blending together different instruments and different sound frequencies.\\\\
 %The music transcription will be done in non-real time - the designed algorithm will be used on a prerecorded piece of music. This makes it possible to run the algorithm without having to play the piece of music every time and furthermore makes it possible to neglect computational power and/or efficiency.\\\\
-%As such the end product of this project will ideally be limited to being an algorithm based on mathematical tools which is capable of transcribing a prerecorded piece of simple music to a spectrogram. 
-%\input{sections/mainmatter/chapter_1/_____.tex}
+
+
