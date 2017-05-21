@@ -5,9 +5,6 @@ Created on Fri May 19 11:40:10 2017
 @author: Frederik Vardinghus
 """
 
-
-
-
 import numpy as np
 import scipy as sc
 import matplotlib.pyplot as plt
