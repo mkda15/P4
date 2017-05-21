@@ -2,14 +2,13 @@ The following chapter, will take to consideration the choices made doing the dif
 On this basis a discussion will be stated about the different choices and what could have been done differently.
 \\\\
 The sampling frequency used in this project is $44.1$ kHz the standard sampling frequency for audio signals.
-The choice is made to make sure every frequency, within the audible frequency range, is able to be recreated per the sampling theorem \chr{ref til sampling?}
-One of the highest frequency of an acoustic guitar, as the one used in this projects recording, without overtones is E$_5 = 659.26$ Hz.
-Since this is well withing the range of the frequency that can be recreated, an argument could be made for using a lower sampling frequency.
-This will lead to fewer data points, and would enable faster data processing or an eventual real time implementation. 
-A reason the higher sampling frequency is chosen rather than lower sampling frequency, is that every frequency in the audible specter is of interest including the overtones of the played frequency and that the calculation aren't being done in real time.
+The choice is made to make sure every frequency, within the audible frequency range, is able to be recreated per the sampling theorem \ref{sampling_theorem}.
+One of the highest frequencies of an acoustic guitar, as the one used in this projects recording, without overtones is E$_5 = 659.26$ Hz. Since this is well withing the range of the frequency that can be recreated, an argument could be made for using a lower sampling frequency.
+This will lead to fewer data points, and would enable faster data processing and would therefore ease the development of an eventual real time implementation. A reason the higher sampling frequency is chosen rather than lower sampling frequency is that every frequency in the audible spectrum is of interest including the overtones of the played frequency and that the calculations are not being done in real time.
 Furthermore a lower sampling frequency will make the signal more susceptible to aliasing. %Kunne være sjovt at nedsample
 %To test the signal and sampling frequency, the signal could be down sampled in an attempt to figure out a possible lower sampling frequency 
-\chr{Noget af det syntes jeg måske passer bedre i perspektivering.}
+\chr{Noget af det syntes jeg måske passer bedre i perspektivering.\\
+Enig \texttrademark}
 %\\\\
 %The choice of not implementing the algorithms in real time yadeyadeyada not relevant to be done live. \chr{Skal lige have en ide til hvordan man skal skrive det. og igen måske lidt mere perspektivering. og ikke så meget en diskution over valg i rapport}
 \\\\

@@ -1,28 +1,5 @@
-\section{Signal-to-noise ratio}
-In this section the term SNR introduced in chapter \ref{ch10} is described, and it is further used to analyze the additive noise on the recorded audio.
-SNR is a measure of the amount of noise in a signal. 
-The SNR is defined as
-\begin{align} \label{eq:SNR}
-	SNR=\frac{\sigma_{signal}^2}{\sigma_{noise}^2},
-\end{align}
-where $\sigma_{signal}^2$ is the variance of the wanted signal, and $\sigma_{noise}^2$ is the variance of the noise \cite{page 228, DTSP}.
-
-To try and determine how small the SNR is allowed to be the recorded music will be added noise in various level such that the SNR gradually changes.
-The peak detection algorithm is then used to find peaks, and it is observed when it does no longer manage to find the right peak as a consequence of the excessive noise in the signal.
-
-To calculate the variance $\sigma^2$ of the signal and noise the standard deviation $\sigma$ of the signal can be calculated. 
-If the input signal is zero mean, the standard deviation of the signal can be calculated by the root mean scare of the signal \cite{page 228, DTSP}.
-
-The root mean scare (RMS) is defined as
-\begin{align*}
-	x_{rms} 
-	&=\sqrt{\dfrac{1}{n} \sum_{i=1}^n x_i^2}\\
-	&= \sqrt{\dfrac{x_1^2 + x_2^2 + \dots + x_n^2}{n}},
-\end{align*}
-where $\sigma = x_{rms}$ in the previous mentioned instance with zero mean. An algorithm calculating the SNR of the audio signal is implemented in Python.
-
 \section{Varying signal-to-noise ratios}
-To measure the varying amount noise in the signal the SNR as defined in definition \ref{def:SNR} is used. The peak detection alogrithm will be tested by gradually increasing the amount of noise in the signal and thereby decreasing the SNR of the signal. The evaluation of the peak detection alogrithm is then based upon the SNR at the time of failure of the algorithm.
+To measure the varying amount noise in the signal the SNR as defined in definition \ref{def:SNR} is used and the RMS is calculated as defined in definition \ref{def:RMS}. The peak detection alogrithm will be tested by gradually increasing the amount of noise in the signal and thereby decreasing the SNR of the signal. The evaluation of the peak detection alogrithm is then based upon the SNR at the time of failure of the algorithm.
 
 \subsection{Single tone}
 The signal of a single tone is added the noise of clapping, singing, folding a piece of paper and ambient noise in varying levels. Figure \ref{fig:single_spectrum} shows the frequency spectrum of the signal, the noise signal and the bandpass filter.
@@ -31,16 +8,16 @@ The signal of a single tone is added the noise of clapping, singing, folding a p
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/SNR/single_spectrum.png}
-\caption{Normalized frequency spectra of single low $E$ tone (blue), the noise signal (green) and the bandpass filter (orange).}
+\caption{}
 \label{fig:single_spectrum}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/SNR/single_stem.png}
-\caption{Stem plot of most significant frequencies of noisy signal at different levels of SNR.}
+\caption{}
 \label{fig:single_stem}
 \end{subfigure}
-\caption{}
+\caption{\textbf{(a)} Normalized frequency spectra of single low $E$ tone (blue), the noise signal (green) and the bandpass filter (orange). \textbf{(b)} Stem plot of most significant frequencies of noisy signal at different levels of SNR.}
 \label{fig:single_noise}
 \end{figure}
 
@@ -75,16 +52,16 @@ Figure \ref{fig:concentrated_noise} shows the results of adding noise concentrat
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/SNR/concentrated_spectrum.png}
-\caption{Normalized frequency spectra of single low E tone (blue), concentrated noise at 300 Hz (green) and bandpass filter (orange)}
+\caption{}
 \label{fig:concentrated_spectrum}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/SNR/concentrated_stem.png}
-\caption{Stem plot of most significant frequencies of noisy signal at different levels of SNR.}
+\caption{}
 \label{fig:concentrated_stem}
 \end{subfigure}
-\caption{}
+\caption{\textbf{(a)} Normalized frequency spectra of single low E tone (blue), concentrated noise at 300 Hz (green) and bandpass filter (orange). \textbf{(b)} Stem plot of most significant frequencies of noisy signal at different levels of SNR.}
 \label{fig:concentrated_noise}
 \end{figure}
 
@@ -93,7 +70,7 @@ As seen in figure \ref{fig:concentrated_stem} the peak detection algorithm no lo
 \section{Summary}
 From the above tests of the peak detection algorithm under varying amounts of different noise the following three points can be made:
 \begin{itemize}
-\item If the energy in the noise signal lies outside the frequency band it is filtered out by the band pass filter.
+\item If the noise signal lies outside the pass band it is filtered out by the band pass filter and the algorithm works well.
 \item If the noise lies in the pass band but the energy is spread in different frequencies the algorithm works well.
 \item If the noise lies in the pass band and the energy is concentrated in few frequencies the algorithm does not work well.
 \end{itemize}
