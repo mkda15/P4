@@ -1,41 +1,24 @@
-The following chapter, will take to consideration the choices made doing the different process of the project.
-On this basis a discussion will be stated about the different choices and what could have been done differently.
-\\\\
-The sampling frequency used in this project is $44.1$ kHz the standard sampling frequency for audio signals.
-The choice is made to make sure every frequency, within the audible frequency range, is able to be recreated per the sampling theorem \chr{ref til sampling?}
-One of the highest frequency of an acoustic guitar, as the one used in this projects recording, without overtones is E$_5 = 659.26$ Hz.
-Since this is well withing the range of the frequency that can be recreated, an argument could be made for using a lower sampling frequency.
-This will lead to fewer data points, and would enable faster data processing or an eventual real time implementation. 
-A reason the higher sampling frequency is chosen rather than lower sampling frequency, is that every frequency in the audible specter is of interest including the overtones of the played frequency and that the calculation aren't being done in real time.
-Furthermore a lower sampling frequency will make the signal more susceptible to aliasing. %Kunne være sjovt at nedsample
+This chapter will consider the choices made during the processes of the project and what could have been done differently.
+\\ \\
+The sampling frequency used in this project is $44.1$ kHz, which is the standard sampling frequency for audio signals.
+This choice has been made to make sure that every frequency within the audible frequency range is able to be recreated per the sampling theorem \chr{ref til sampling?}.
+The tone with the highest fundamental frequency of an acoustic guitar as the one used during the recordings in this project is $E_5$ with a fundamental frequency of $659.26$ Hz.
+Since this is well within the range of the frequencies that can be recreated due to the sampling theorem it should be considered using a lower sampling frequency or downsampling by a number $n$, which means that only the $n$'th data points are being kept. Either way, this would lead to fewer data points and would enable faster data processing and eventually a faster real-time implementation.
+A reason for choosing the higher sampling frequency is that every frequency (including the harmonics of the tone being played) in the audible specter is of interest and that the calculations are not being done in real-time.
+Furthermore, a lower sampling frequency will make the signal more susceptible to aliasing. %Kunne være sjovt at nedsample
 %To test the signal and sampling frequency, the signal could be down sampled in an attempt to figure out a possible lower sampling frequency 
 \chr{Noget af det syntes jeg måske passer bedre i perspektivering.}
 %\\\\
 %The choice of not implementing the algorithms in real time yadeyadeyada not relevant to be done live. \chr{Skal lige have en ide til hvordan man skal skrive det. og igen måske lidt mere perspektivering. og ikke så meget en diskution over valg i rapport}
-\\\\
-In the scripts/algorithms implemented in this project the chose of using a predefined algorithm for the FFT (as described in \chr{ref fft}) rather than hard coded FFT, is made due to the superior speed of the predefined function. 
-Even though the algorithms isn't implemented in real time, the faster predefined numpy FFT drastically reduces a bottle neck in the algorithms.
-\\\\
-Using a FIR filter as in this project insures a fast implementation and a general linear phase.
-The linear phase can be a wanted characteristic of filters to prevent phase distortion, but the higher order and more calculations of a fir filter, makes it worse for computer run time or a real time implementation. 
-A possibility could be to implemented a IIR filter, for fewer calculation, but since the run time isn't a focus, the faster implementation of a FIR is an ideal choice as discussed in \ref{ch8}.
-\\\\
-The Recording of music and noise 
-In the recording of guitar tones, in this project, different choices was made to insure diversity and a wide range of frequencies.
-Recording the guitar tones E$_2$ and E$_4$ gives insight into how lower and higher tones of the same harmonic behave, and a recording of a scale gives insight into some of the different tones between them.
-In the scale, the different tones are played one after each other in a consecutive recording. 
-An option could be to record each of the tones in the scale in there separate recording, enabling analysis of all the tones individually.
-This could have been done to see how every tone behaves according to each other, but a coherent recording is more in line of a real recording of a song, and is therefore chosen as the given method.
-\\\\
-The peak detection algorithm is implemented over a final creation of a note sheet.
-This algorithm is a close approximation to a note sheet, and the final symbol management is left out as described in \ref{ch3}.
-The symbol management is decided to be left .
-During the recording of the test audio, a timer between each note being played.
-This makes the final product, the peak detection, unreliable in time and a multiple of the same note being played consecutive is indistinguishably from a long note of the same frequency.
-This could have been circumvented by either using the previously mentioned timer, or theoretically using the audio file, timing each keystroke on the guitar.
-Comparing this with the output time of the algorithm will be a necessity to create a final note sheet.
-
-
-
-
-
+\\ \\
+In the scripts implemented in this project the choice of using a predefined algorithm for the FFT (as described in \chr{ref fft}) rather than the hard-coded FFT has been made due to the superior speed of the predefined function. Even though the algorithms are not implemented in real time, the faster predefined FFT from Numpy drastically reduces a bottle neck in the algorithms.
+\\ \\
+Using a FIR filter ensures a fast implementation and a generalised linear phase. The linear phase can be a desired characteristic of filters to prevent phase distortion but the higher order and more calculations of a FIR filter makes the computer's run-time longer or a real-time implementation slower. A possibility could be to implement an IIR filter, which would result in fewer calculations. However, since the run time is not a focus in this particular project, the faster implementation of a FIR filter makes it an ideal choice as discussed in chapter \ref{ch8}.
+\\ \\
+In the recording of guitar tones different choices were made to ensure diversity and a wide range of frequencies.
+Recordings of the guitar tones $E_2$ and $E_4$ gives insight into how lower and higher tones behave, and a recording of a scale gives insight into some of the different tones between them. In the scale, the different tones are played one after each other in a consecutive recording. \\
+A different approach could be to record each of the tones in the scale in separate recordings, which would enable individual analyses of the tones. This could have been done to see how each of the tones behave relative to each other but a coherent recording is more in line of a real recording of a song and has therefore been chosen as the method in this project.
+\\ \\
+The purpose of the peak detection algorithm is an approximation  of the creation of a note system. However, the final symbol management is left out as described in chapter \ref{ch3}. As explained in chapter \ref{ch2}, a staff system on a note sheet consists of time on the horizontal axis and frequency on the vertical axis. Creating the correct note on the vertical axis from the detected frequency is a matter of software but to create a note with the correct duration in time is more complicated. It does seem straight forward to implement a timer in the algorithm. However, the same tone being played multiple times would be indistinguishable from a long tone. Moreover, music is played at different speeds (that is, at different beats per minute), and the algorithm would need to account for this as well. Therefore, the final product, the peak detection, is unreliable in time but the problem could have been circumvented.
+%This could have been circumvented by either using the previously mentioned timer, or theoretically using the audio file, timing each keystroke on the guitar.
+%Comparing this with the output time of the algorithm will be a necessity to create a final note sheet.

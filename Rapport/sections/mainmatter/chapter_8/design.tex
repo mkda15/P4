@@ -177,10 +177,10 @@ Equivalently, the frequency response $H(\omega)$ equals the convolution of $W(\o
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/filter_teori/lowpass_real.pdf}
-\caption{The amplitude response $h[n]$ of a FIR filter with the rectangular window, $M = 50$ and $\omega_c = \frac{\pi}{2}$.}
+\caption{The amplitude response $|H(\omega)|$ of a FIR filter with the rectangular window, $M = 50$ and $\omega_c = \frac{\pi}{2}$.}
 \label{fig:lowpass_real}
 \end{figure}
-\trine{$h[n]$ i figurtekst er en fejl ik}
+
 \subsubsection{Different types of windows}
 The rectangular window is one out of many windows, all of which have different properties. The oscillations in $H(\omega)$ is a result of Gibbs phenomenon. Due to the convergence of the Fourier series this can be improved by convolving the desired frequency response with the Fourier transform of a less abrupt window. By narrowing each end of the window smoothly towards zero, the peak amplitude of the side lopes are remarkably decreased, although this will still result in a wider main lope. \\
 In table \ref{tab:window} five commonly used windows are defined. Furthermore, the windows in time and the corresponding amplitude responses in dB of three of the windows are illustrated in figure \ref{fig:windows}.
@@ -290,7 +290,7 @@ Furthermore, $M$ must satisfy the relation
 M = \dfrac{A-8}{2.285\Delta \omega}.
 \end{align}
 
-By this establishment of the Kaiser window method it is possible to design a FIR filter within a desired specification of $\delta$ with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable \martin{Henrik vil gerne have, at vi eventuelt uddyber dette afsnit. Jeg kan dog ikke se hvordan. \textregistered}.       
+By this establishment of the Kaiser window method it is possible to design a FIR filter within a desired specification of $\delta$ with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable \martin{Henrik vil gerne have, at vi eventuelt uddyber dette afsnit. Jeg kan dog ikke se hvordan. Skal vi have et eksempel på amplituderesponsen for lavpasfilteret med Kaiser-vinduet ligesom vi har med det rektangulære vindue længere oppe? \textregistered}.       
    
 \subsection{Comparison of IIR and FIR filters}
 This section considering the design of digital filters concludes with a comparison of IIR and FIR filters by considering the advantages and disadvantages of the two types of filters.
