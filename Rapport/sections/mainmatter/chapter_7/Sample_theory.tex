@@ -553,12 +553,12 @@ ylabel=Voltage]
 \node at(axis cs:5.9342,1.8){$T_s$};
 \end{axis}
 \end{tikzpicture}
-\caption{Voltage of input analogue signal (black) and of output analog signal (blue). The input signal is held by a S\&H circuit for $T_s$.}
+\caption{Voltage of input analogue signal (black) and of output analog signal (blue). The input signal is held by an S\&H circuit for $T_s$.}
 \label{fig:S/H}
 \end{figure}
 The S\&H circuit must sample at a sufficiently high frequency as specified by theorem \ref{sampling_theorem}.
 
-\subsubsection{Quatization}
+\subsubsection{Quantization}
 Quantization is the process of discretizing analog signal values to discrete values and is done with an analog-to-digital converter. Digital processors are incapable of dividing an interval into infinitely many subintervals (points), which means that a finite number of intervals has to be used. When an analog signal is quantized its value is compared to a finite number of analog values, rounded to the nearest value and expressed in digital numbering (binary). The number of digital values therefore depends on the number of bits dedicated to representing a given analog value as a digital number. When rounding the analog value to a digital value a round off error is produced, which can be decreased by increasing the number of possible digital values in the interval \cite{pages 91-98, pelgrom}. Figure \ref{fig:quant} shows the graph of an analog signal alongside the quantization levels.
 \begin{figure}[H]
 \centering
@@ -591,7 +591,6 @@ This project has the purpose of measuring sound signals and process it in an adv
 
 \subsection{Signals}
 A signal is ``[\dots]\textit{a means of conveying information}[\dots]'' \cite{page 1, signal_noise} and is in this project a sound signal consisting of sound waves from a musical instrument propagating in a medium (air) and measured by a membrane in a microphone and thereafter converted to an analog voltage. As sound waves from musical instruments are no different than any other kind of sound waves they will all be measured by the microphone. These other sound waves will be referred to as \textit{noise}.
-
 \subsection{Noise}
 This section is mainly inspired by chapter 2 in \cite{signal_noise}. \\ \\
 Noise is any measured interference of a signal conveying information and is merely another signal measured alongside the wanted signal, where the noise carries information about the source of the noise.  Noise is generally thought of as unwanted as it can be hard to distinguish the signal from it and therefore extract the wanted information. Noise is present in almost all measurements of any signal, and any measurement of a signal must therefore take this into consideration as noise limits the usability of measurements by
