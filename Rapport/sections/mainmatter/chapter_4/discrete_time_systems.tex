@@ -84,14 +84,15 @@ h[n] = \sum_{k=0}^M b[k] \delta[n-k] - \sum_{k=1}^N a[k] h[n-k] = b[n] - \sum_{k
 where the first sum reduces to $b[n]$ for $n = k$.
 \subsection{Convolution}\label{sec:convol}
 The concept of convolution is of importance when dealing with discrete-time systems and impulse responses and will be defined in this section.\\\\
-Writing $x[n]$ in \eqref{eq:DTS} as a sum using the definition of the impulse response and by linearity, it follows that \chr{Har lavet en mindre omskrivning da vi brugte "vi" tidligere.}:
+Writing $x[n]$ in \eqref{eq:DTS} as a sum by using the definition of the impulse response and by linearity, it follows that:
 \begin{align}
 y[n]&=Tx[n]=T\sum_{k\in\mathbb{Z}}x[n]\delta[n-k]
 =\sum_{k\in\mathbb{Z}}x[n]T\delta[n-k]\nonumber\\
 &=\sum_{k\in\mathbb{Z}}x[n]h[n-k].\label{eq:convolution}
 \end{align}
 \eqref{eq:convolution} is defined as a convolution sum.
-\begin{definition}[Convolution sum]\label{def:convolution}
+
+\begin{definition}[Convolution sum] \label{def:convolution}
 The convolution between sequences $h$ and $x$ is defined as
 \begin{equation}
 (h*x)[n]=\sum_{k\in\mathbb{Z}}x[n]h[n-k]=\sum_{k\in\mathbb{Z}}x[n-k]h[k],
