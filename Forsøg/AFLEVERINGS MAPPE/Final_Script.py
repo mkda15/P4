@@ -34,8 +34,8 @@ freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise
 #freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                                   # Noise signal
 
 # TEST 3                                  
-freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
-freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
+#freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
+#freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
 
 """ Length of data and noise alings"""
 if len(data) > len(noise):
@@ -99,8 +99,6 @@ h = hd * w                                  # Actually impulsrespons
 
 print('impuls respons udregnet 4/9')
 
-data = data / float((np.max(signal)))       # Reduktion of amplitude
-signal = signal / float((np.max(signal))) 
 
 #==============================================================================
 # Fourier Transformation of Filter and Data
@@ -173,34 +171,35 @@ print('Data filtreret 6/9')
 #plt.show()  
 
 """ Signal with noise in time domain """
-#plt.plot(tid,signal)  # Original data with noise added 
-#plt.xlabel('Time [s]')
-#plt.ylabel('Amplitude')
+plt.plot(tid,signal)  # Original data with noise added 
+plt.xlabel('Time [s]')
+plt.ylabel('Amplitude')
 #plt.axis([0,6,-1,1])
 #plt.savefig("figures/integrationstest/signal.png")
-#plt.show()
+plt.show()
 
 """ Filtered signal in time domain """
-#plt.plot(tid,signal_filt)  # Original data with noise added 
-#plt.xlabel('Time [s]')
-#plt.ylabel('Amplitude')
+plt.plot(tid,signal_filt)  # Original data with noise added 
+plt.xlabel('Time [s]')
+plt.ylabel('Amplitude')
 #plt.axis([0,6,-1,1])
 #plt.savefig("figures/integrationstest/f_signal.png")
-#plt.show()
+plt.show()
 
 """ Pure signal with noise i frekvency domain"""
-#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          
-#plt.xlabel('Frequency [Hz]')
-#plt.ylabel('Amplitude')
+plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          
+plt.xlabel('Frequency [Hz]')
+plt.ylabel('Amplitude')
 #plt.savefig("figures/integrationstest/FSIGNAL.png")
-#plt.show()
+plt.show()
 
 """ Filtered signal in frequency domain """
-#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   
-#plt.xlabel('Frequency [Hz]')
-#plt.ylabel('Amplitude')
+plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   
+plt.xlabel('Frequency [Hz]')
+plt.ylabel('Amplitude')
 #plt.savefig("figures/integrationstest/f_FSIGNAL.png")
-#plt.show()
+#plt.savefig("figures/integrationstest/f_FSIGNAL.png")
+plt.show()
 
 """ Close-up all data in time domain  """
 ##plt.plot(tid,signal, 'r-', label = "signal")
