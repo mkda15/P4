@@ -187,8 +187,6 @@ In table \ref{tab:window} five commonly used windows are defined. Furthermore, t
 
 \begin{table}[H]\small
 \centering
-\caption{Definitions of different types of windows.}
-\label{tab:window}
 \begin{tabular}{l|l} \hline \\
 Rectangular & $w[n] =
 \left\{ \begin{matrix}
@@ -217,7 +215,9 @@ Blackman    &  $w[n] =
 0, &\ Otherwise
 \end{matrix}\right.$  \\ \\ \hline
 \end{tabular}
-\end{table}   \chr{Christian vil gerne have den øverste og nederste linje slettet. Tabellen fylder en hel side nu. Appendix?}
+\caption{Definitions of different types of windows.}
+\label{tab:window}
+\end{table}
 
 \begin{figure}[H]
 \centering
@@ -274,7 +274,7 @@ where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ is the zero'th order modified Bessel
 \caption{\textbf{(a)} Amplitude responses of Kaiser windows in dB with $M=100$ and with $\beta=0$, $2$ and $4$. As $\beta$ increases the side lobes become smaller. \textbf{(b)} Amplitude responses of Kaiser windows in dB with $\beta=6$ and order $M=50$, $100$ and $150$. As $M$ increases the main lobe becomes narrower.}
 \end{figure}
  
-In order to determine values for $\beta$ and $M$ that satisfies the desired specifications of the filter, the following formulas are defined. Considering a lowpass filter with a fixed peak approximation error $\delta$ this gives a cut-off frequency $\omega_p$ of the passband defined as the highest frequency satisfying $|H(\omega)| \geq 1-\delta$ and a cut-off frequency $\omega_s$ of the stopband defined as the lowest frequency satisfying that $|H(\omega)| \leq \delta$. This gives a transitionband of width $\Delta \omega = \omega_s - \omega_p$ \martin{Skal vi lave en figur med $\delta$, $\omega_p$, $\omega_s$ og $\Delta\omega$? \textregistered}. \\
+In order to determine values for $\beta$ and $M$ that satisfies the desired specifications of the filter, the following formulas are defined. Considering a lowpass filter with a fixed peak approximation error $\delta$ this gives a cut-off frequency $\omega_p$ of the passband defined as the highest frequency satisfying $|H(\omega)| \geq 1-\delta$ and a cut-off frequency $\omega_s$ of the stopband defined as the lowest frequency satisfying that $|H(\omega)| \leq \delta$. This gives a transitionband of width $\Delta \omega = \omega_s - \omega_p$ \martin{Skal vi lave en figur med $\delta$, $\omega_p$, $\omega_s$ og $\Delta\omega$? \textregistered Trine laver en figur.}. \\
 Defining $A$ in [dB] by $\delta$ as $A = -20\log_{10} (\delta)$ it is possible to determine the value of $\beta$ on behalf of a specific value of $A$ as \cite{page 566, DTSP}
 \begin{align}
 \beta =
@@ -291,7 +291,7 @@ M = \dfrac{A-8}{2.285\Delta \omega}.
 \end{align}
 
 By this establishment of the Kaiser window method it is possible to design a FIR filter within a desired specification of $\delta$ with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable \martin{Henrik vil gerne have, at vi eventuelt uddyber dette afsnit. Vi er ikke helt sikre på, hvad han mener, men det handler måske om, at der er nogle begreber, som han ikke kender, og det kan afhjælpes ved hjælp af figuren nævnt ovenfor. Skal vi have et eksempel på amplituderesponsen for lavpasfilteret med Kaiser-vinduet ligesom vi har med det rektangulære vindue længere oppe? \textregistered}.       
-   
+
 \subsection{Comparison of IIR and FIR filters}
 This section considering the design of digital filters concludes with a comparison of IIR and FIR filters by considering the advantages and disadvantages of the two types of filters.
 \\ \\

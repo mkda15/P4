@@ -51,8 +51,8 @@ for all $\omega$. This is a necessary condition but not a sufficient condition, 
 
 \subsection{Ideal filters} \label{sec:ideal_filt}
 When designing filters it is ideal to have constant amplitude and zero phase corresponding to the frequency response. For an ideal selective frequency filter the amplitude response will be constant unity for the frequencies that are wanted to pass the filter and zero for all other frequencies. These bands are referred to as \textit{bandpass} and \textit{bandstop}. An example is an ideal lowpass filter with frequency response 
-\begin{align}\label{eq:low}
-H_{lp}(\omega)=
+\begin{align} \label{eq:low}
+H_{lp}(\omega) =
 \left\{ \begin{matrix}
 1, &\ \left| \omega \right|< \omega_c \\
 0, &\ \omega_c < \left| \omega \right| \leq \pi
@@ -62,14 +62,16 @@ H_{lp}(\omega)=
 where $H_{lp}(\omega)$ is $2\pi$-periodic and $\omega_c$ is referred to as the \textit{cut-off frequency}. The lowpass filter selects the frequencies lower than the cut-off frequency and rejects the higher frequency components of the input signal. By \eqref{eq:low} it is seen that the lowpass filter is real valued, and hence it has zero phase as expected. \\
 The corresponding impulse response is determined by the inverse Fourier transform on the passband interval
 \begin{align} \label{eq:low_im}
-h_{lp}[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi} H_{lp}(\omega) \text{e}^{j\omega n} d\omega =\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}\text{e}^{j\omega n} d\omega = \frac{1}{2\pi j n}\left[\text{e}^{j\omega n} \right]_{-\omega_c}^{\omega_c} = \frac{\sin(\omega_c n)}{\pi n}, \ \  -\infty < n < \infty.
+h_{lp}[n] = \frac{1}{2\pi} \int_{-\pi}^{\pi} H_{lp}(\omega) \text{e}^{j\omega n} d\omega = \dfrac{1}{2\pi}\int_{-\omega_c}^{\omega_c}\text{e}^{j\omega n} d\omega = \dfrac{1}{2\pi j n}\left[\text{e}^{j\omega n} \right]_{-\omega_c}^{\omega_c} = \dfrac{\sin(\omega_c n)}{\pi n}
 \end{align}
 
-Note that the second equality is true since the integral is zero outside the interval $[-\omega_c, \omega_c]$ according to \eqref{eq:low}. \eqref{eq:low_im} only holds for values $n \neq 0$, and thus $h_{lp}[0]$ must be defined separately. Thus \martin{Følgende ligning stod i rettelserne fra Henrik, men det virker lidt som magi. \textregistered}
+for $-\infty < n < \infty$. Note that the second equality is true since the integral is zero outside the interval $[-\omega_c, \omega_c]$ according to \eqref{eq:low}. \eqref{eq:low_im} only holds for values $n \neq 0$, and thus $h_{lp}[0]$ must be defined separately. It follows that
 \begin{align*}
-h_{lp}[0] &= \dfrac{1}{2\pi} \int_{-\pi}^\pi H_{lp}(\omega) d\omega = \dfrac{\omega_c}{\pi}.
+h_{lp}[0] = \dfrac{1}{2\pi} \int_{-\pi}^\pi H_{lp}(\omega) \text{e}^{-j \omega \cdot 0} d\omega = \dfrac{1}{2\pi} \int_{-\omega_c}^{\omega_c} 1 \ d\omega = \dfrac{1}{2\pi} \left[ \omega \right]_{\omega = -\omega_c}^{\omega_c} = \dfrac{\omega_c}{\pi}
 \end{align*}
 
+since $H_{lp}(\omega) = 1$ for $|\omega| < \omega_c$ and $0$ otherwise.
+\\ \\
 By \eqref{eq:low_im} the impulse response is non-zero for all $n<0$, and thus the filter is non-causal according to definition \ref{def:causal_system}.
 The amplitude and impulse responses of the ideal lowpass filter are illustrated on figure \ref{fig:ideal_low}.
 
@@ -158,10 +160,10 @@ As described previously, causal systems with generalized linear phase is a possi
 For a FIR filter to satisfy this relation the following set of conditions has to be fulfilled \cite{page 341, DTSP}:
 \begin{align} \label{eq:FIR_con}
 &\beta = \left\{ \begin{matrix}
-\pi  \\
-0 
+\pi \\
+0
 \end{matrix}\right., \nonumber  \\ 
-&2\alpha = M \text{an integer} \\ 
+&2\alpha = M \ \text{an integer} \\ 
 &h[n]=h[M-n] \ \text{or} \ h[n]=-h[M-n]. \nonumber  
 \end{align}
 
