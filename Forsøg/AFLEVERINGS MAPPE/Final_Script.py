@@ -21,8 +21,8 @@ import scipy.io.wavfile as siw
 #==============================================================================
 """ Data import """
 # Enkelt tone
-#freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
-#freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
+freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
+freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
 
 
 # TEST 1 
@@ -174,7 +174,7 @@ print('Data filtreret 6/9')
 
 """ Signal with noise in time domain """
 #plt.plot(tid,signal)  # Original data with noise added 
-#plt.xlabel('Time [sec.]')
+#plt.xlabel('Time [s]')
 #plt.ylabel('Amplitude')
 #plt.axis([0,6,-1,1])
 #plt.savefig("figures/integrationstest/signal.png")
@@ -182,7 +182,7 @@ print('Data filtreret 6/9')
 
 """ Filtered signal in time domain """
 #plt.plot(tid,signal_filt)  # Original data with noise added 
-#plt.xlabel('Time [sec.]')
+#plt.xlabel('Time [s]')
 #plt.ylabel('Amplitude')
 #plt.axis([0,6,-1,1])
 #plt.savefig("figures/integrationstest/f_signal.png")
@@ -218,28 +218,28 @@ print('plot plotteret 7/9')
 # Computing Spectrogram
 #==============================================================================
 
-X,o,ws = stft(signal_filt)      # return STFT, stft and used window(time) 
+#X,o,ws = stft(signal_filt)      # return STFT, stft and used window(time) 
+#
+#WS = np.abs(np.fft.fft(ws))                                 # window(frekvenscy) used in STFT  
+##X,v_w,v_t,t = stft_h(signal_filt,overlap = 2)
+#
+#print('stft udregnet 9/9') 
 
-WS = np.abs(np.fft.fft(ws))                                 # window(frekvenscy) used in STFT  
-#X,v_w,v_t,t = stft_h(signal_filt,overlap = 2)
+#X = db(np.abs(X).T)                                         # Calculated to dB
+#
+#x = np.linspace(0,tid[-1],np.shape(X)[1])       
+#y = np.linspace(0,freq_axis[-1],np.shape(X)[0]) 
 
-print('stft udregnet 9/9') 
-
-X = db(np.abs(X).T)                                         # Calculated to dB
-
-x = np.linspace(0,tid[-1],np.shape(X)[1])       
-y = np.linspace(0,freq_axis[-1],np.shape(X)[0]) 
-
-spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],cmap='jet')
-cb   = plt.colorbar(spec)
-cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
-plt.xlabel('Time [s]', fontsize = fontsize)
-plt.ylabel('Frequency [Hz]', fontsize = fontsize)
-plt.axis([0,7.8,0,2000])
-#plt.savefig("figures/skala.png")
-#plt.savefig("figures/integrationstest/spectrogram.png")
-plt.savefig("figures/systemtest/final_spec3.png")
-plt.show()
+#spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],cmap='jet')
+#cb   = plt.colorbar(spec)
+#cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
+#plt.xlabel('Time [s]', fontsize = fontsize)
+#plt.ylabel('Frequency [Hz]', fontsize = fontsize)
+#plt.axis([0,7.8,0,2000])
+##plt.savefig("figures/skala.png")
+##plt.savefig("figures/integrationstest/spectrogram.png")
+#plt.savefig("figures/systemtest/final_spec3.png")
+#plt.show()
 
 #==============================================================================
 # Peak Dectection
@@ -248,12 +248,12 @@ plt.show()
 max_freq_t = peak_dec(X,15,y)
 
 """ plot peak dection """
-plt.plot(x,max_freq_t,'o')
-plt.xlabel('Time [s]')
-plt.ylabel('Frequency [Hz]')
-#plt.savefig("figures/integrationstest/peak_dec.png")
-plt.savefig("figures/systemtest/final_peak3.png")
-    
+#plt.plot(x,max_freq_t,'o')
+#plt.xlabel('Time [s]')
+#plt.ylabel('Frequency [Hz]')
+##plt.savefig("figures/integrationstest/peak_dec.png")
+#plt.savefig("figures/systemtest/final_peak3.png")
+#    
 #==============================================================================
 # SNR
 #==============================================================================
