@@ -163,7 +163,7 @@ Figure \ref{fig:rect_db} illustrates the main and side lobes by a decibel plot o
 %\label{fig:W_rect}
 %\end{figure}
 The aim is to approximate the desired frequency response. For $w[n]=1 \ \forall \ n$, $W(\omega)$ becomes a periodic impulse, which implies that $H(\omega) = H_d(\omega)$ although the needed truncations are not performed. The impulse train is best approximated by letting the main lobe of $W(\omega)$ be as narrow as possible and the side lobes as small as possible. This corresponds to minimizing the width of the transitionband and the ripples in the pass- and stopbands, respectively, but it is not possible to achieve both simultaneously. \\
-By increasing the filter order $M$, the width of the main lope is decreased but the peak amplitude of the side lopes also increases. This indicates a trade-off between the width of the main lope and the peak amplitude of the side lopes. Figure \ref{fig:lowpass_real} shows the actual amplitude response $|H(\omega)|$ of a lowpass filter, which is the Fourier transform of the product of the rectangular window and the desired impulse response \martin{Er det fint nok forklaret, hvad det er vi gør? \textregistered}
+By increasing the filter order $M$, the width of the main lope is decreased but the peak amplitude of the side lopes also increases. This indicates a trade-off between the width of the main lope and the peak amplitude of the side lopes. Figure \ref{fig:lowpass_real} shows the actual amplitude response $|H(\omega)|$ of a lowpass filter, which is the Fourier transform of the product of the rectangular window and the desired impulse response
 \begin{align*}
 h_d[n] =
 \begin{cases}
@@ -189,35 +189,35 @@ In table \ref{tab:window} five commonly used windows are defined. Furthermore, t
 \centering
 \caption{Definitions of different types of windows.}
 \label{tab:window}
-\begin{tabular}{l|l} \hline
+\begin{tabular}{l|l} \hline \\
 Rectangular & $w[n] =
 \left\{ \begin{matrix}
 1, &\ 0 \leq n \leq M \\
 0, &\ Otherwise
-\end{matrix}\right. $ \\ \hline
+\end{matrix}\right. $ \\ \\ \hline \\
 Bartlett    & $w[n] =
 \left\{ \begin{matrix}
 \dfrac{2n}{M}, &\ 0 \leq n \leq \dfrac{M}{2} \\
 2-\dfrac{2n}{M}, &\ \dfrac{M}{2} \leq n \leq M \\
 0, &\ Otherwise
-\end{matrix}\right.$ \\ \hline
+\end{matrix}\right.$ \\ \\ \hline \\
 Hanning     & $w[n] =
 \left\{ \begin{matrix}
 0.5-0.5 \cos\left(\dfrac{2\pi n}{M}\right), &\ 0 \leq n \leq M \\
 0, &\ Otherwise
-\end{matrix}\right. $ \\ \hline
+\end{matrix}\right. $ \\ \\ \hline \\
 Hamming     & $w[n] =
 \left\{ \begin{matrix}
 0.54-0.46 \cos\left(\dfrac{2\pi n}{M}\right), &\ 0 \leq n \leq M \\
 0, &\ Otherwise
-\end{matrix}\right. $ \\ \hline
+\end{matrix}\right. $ \\ \\ \hline \\
 Blackman    &  $w[n] =
 \left\{ \begin{matrix}
 0.42-0.5 \cos\left(\dfrac{2\pi n}{M}\right) + 0.08 \cos\left(\dfrac{4\pi n}{M}\right), &\ 0 \leq n \leq M \\
 0, &\ Otherwise
-\end{matrix}\right.$  \\ \hline
+\end{matrix}\right.$  \\ \\ \hline
 \end{tabular}
-\end{table}   \chr{Kan formateringen af tabbellen laves lidt om}
+\end{table}   \chr{Christian vil gerne have den øverste og nederste linje slettet. Tabellen fylder en hel side nu. Appendix?}
 
 \begin{figure}[H]
 \centering
@@ -244,7 +244,7 @@ Blackman    &  $w[n] =
 \end{figure}
 
 The defined windows all have the property of being symmetric around the point $\frac{M}{2}$. Hence, if the ideal impulse response is also symmetric the windowed impulse will be symmetric, which results in a frequency response with generalized linear phase. \\
-To summarize, in this section it is seen that in order to design a FIR filter by the window method, the impulse response of the filter is obtained as the product of the desired impulse response and a window of a certain order, and one can vary the chosen window and the order of the filter until the desired specifications has been achieved \chr{Genlæs konklution}.
+To summarize, in this section it is seen that in order to design a FIR filter by the window method, the impulse response of the filter is obtained as the product of the desired impulse response and a window of a certain order, and one can vary the chosen window and the order of the filter until the desired specifications has been achieved.
 
 \subsubsection{The Kaiser window method}
 The Kaiser window design method considers the Kaiser window as the near-optimal window which - compared to the other windows - has two parameters; the length $M+1$ and a shape parameter $\beta$. This results in \textit{one} window where changing the parameters adjusts shape and length of the window. This is done in order to achieve the optimal trade-off between amplitude of side lopes and width of the main lope \cite{page 566, DTSP}. The Kaiser window is defined as
@@ -290,7 +290,7 @@ Furthermore, $M$ must satisfy the relation
 M = \dfrac{A-8}{2.285\Delta \omega}.
 \end{align}
 
-By this establishment of the Kaiser window method it is possible to design a FIR filter within a desired specification of $\delta$ with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable \martin{Henrik vil gerne have, at vi eventuelt uddyber dette afsnit. Jeg kan dog ikke se hvordan. Skal vi have et eksempel på amplituderesponsen for lavpasfilteret med Kaiser-vinduet ligesom vi har med det rektangulære vindue længere oppe? \textregistered}.       
+By this establishment of the Kaiser window method it is possible to design a FIR filter within a desired specification of $\delta$ with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable \martin{Henrik vil gerne have, at vi eventuelt uddyber dette afsnit. Vi er ikke helt sikre på, hvad han mener, men det handler måske om, at der er nogle begreber, som han ikke kender, og det kan afhjælpes ved hjælp af figuren nævnt ovenfor. Skal vi have et eksempel på amplituderesponsen for lavpasfilteret med Kaiser-vinduet ligesom vi har med det rektangulære vindue længere oppe? \textregistered}.       
    
 \subsection{Comparison of IIR and FIR filters}
 This section considering the design of digital filters concludes with a comparison of IIR and FIR filters by considering the advantages and disadvantages of the two types of filters.

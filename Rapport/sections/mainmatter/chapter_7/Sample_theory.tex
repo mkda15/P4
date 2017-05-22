@@ -1,4 +1,4 @@
-In this chapter sample theory and its importance when converting an analog audio signal to a digital audio signal along with its complications is treated.
+In this chapter sample theory and its importance when converting an analog audio signal to a digital audio signal along with its complications is treated \martin{Generelt for dette kapitel: for vores egen skyld bør vi skrive sidetal ved kildehenvisningerne. \textregistered}.
 %\section{The frequency domain}
 %The following sections look at functions in both the \textit{time}- and \textit{frequency} domains and utilizes the advantages of these different visualizations. To express a function of time as a function of frequency the \textit{Fourier transform} is used. The transform decomposes a periodic function $A$ of time $t$ into an amplitude valued function $\hat{A}$ of frequency $\omega$ and shows which amplitudes of frequencies of different sinusoids are present in the signal. The mathematical background for the Fourier transform is reserved for chapter \ref{ch5} - this chapter will make do with the graphical explanation in figures \ref{fig:time} and \ref{fig:freq}. Notice the both real and imaginary amplitudes of $\hat{A}$.
 %\begin{figure}[H]
@@ -310,7 +310,7 @@ ymax=3]
 \label{fig:copies}
 \end{figure}
 
-It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $X_c$. With an ideal low pass filter  a single isolated copy (centered around the origin) can be picked out, and the inverse Fourier transform used to recreate the time domain representation of the signal. If, however, $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing. When a signal is aliased it is not possible to pick out a single copy of the sampled signal in the frequency domain, which results in $x_c(t)$ not being reconstructable from $x_s(t)$. This makes aliasing unwanted in the context of representing a continuous signal as a discrete set of values \martin{Er ikke så glad for denne sætning. Det lyder lidt som om, at man godt kan ønske spejling. \textregistered}.
+It is clear from figure \ref{fig:copies} that if $\omega_s-\omega_N\geq \omega_N\Rightarrow \omega_s\geq 2\omega_N$ there is no overlap of the copies of $X_c$. With an ideal low pass filter  a single isolated copy (centered around the origin) can be picked out, and the inverse Fourier transform used to recreate the time domain representation of the signal. If, however, $\omega_s-\omega_N\leq \omega_N\Rightarrow \omega_s\leq 2\omega_N$ the copies will overlap as seen in figure \ref{fig:overlap}. This is called aliasing. When a signal is aliased it is not possible to pick out a single copy of the sampled signal in the frequency domain, which results in $x_c(t)$ not being reconstructable from $x_s(t)$.
 
 \begin{figure}[H]
 \centering
@@ -483,10 +483,10 @@ If, however, a signal is not bandlimited, the theorem does not apply and other m
 
 \paragraph{Anti-aliasing filter}
 The purpose of an anti-aliasing filter is to avoid the aliasing phenomenon, which occurs when the sampling theorem \ref{sampling_theorem} is not fulfilled. As stated a signal has to be bandlimited by the Nyquist frequency $\omega_N$, and since a continuous-time signal such as a sound is not guaranteed to have a bandlimited frequency the anti-aliasing filter is designed to eliminate the frequencies that are above the Nyquist frequency such that the signal becomes bandlimited. \\
-An anti-aliasing filter typically form an analogue low pass filter (see section \ref{sec:ideal_filt}) with the Nyquist frequency as the ideal cut off frequency. However, when designing a practical analogue filter a transition band is necessary in which the frequencies can cause aliasing. This causes the passband cut off frequency of the actually filter to be larger than the Nyquist frequency \martin{Hvad? \textregistered}.
+An anti-aliasing filter typically forms an analog lowpass filter (see section \ref{sec:ideal_filt}) with the Nyquist frequency as the ideal cut-off frequency. However, when designing a practical analog filter a transition band is necessary in which the frequencies can cause aliasing. This causes the passband cut off frequency of the actually filter to be larger than the Nyquist frequency \martin{Hvad? Vi forstår ikke denne sætning. \textregistered}.
 
-\section{Analogue-to-digital conversion} \label{ADC}
-An analogue-to-digital converter (ADC) is a device that converts an \textit{amplitude-continuous} signal to an \textit{amplitude-discrete} signal.  The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of analogue-to-digital conversion but not explain the in-depth theory as the conversion and the components used are not a focus points of this project.
+\section{Analog-to-digital conversion} \label{ADC}
+An analog-to-digital converter (ADC) is a device that converts an \textit{amplitude-continuous} signal to an \textit{amplitude-discrete} signal.  The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of analogue-to-digital conversion but not explain the in-depth theory as the conversion and the components used are not a focus points of this project.
 \\ \\
 The process of converting an analogue audio signal to a digital audio signal consists of the following elements:
 \begin{enumerate}
@@ -622,26 +622,26 @@ Any non-white noise; noise which does not have a constant power spectrum.
 As noise reduction is generally wanted, this project will also seek to eliminate it by recording music in an anechoic rum. Playing a pitch alone in an anechoic room is a way of minimizing noise factors. There are many different noise sources from e.g. the surrounding environment, electrical equipment, other people and even the instrument playing itself since it is difficult to make a pure tone by an acoustic sound source such as a guitar. A pure tone is a sinusoidal waveform consisting of a single frequency and may therefore be difficult to play on an instrument \cite{AcousticNoise}. Usually, sound is reflected off the walls in a room which is also a source of noise. This is a form of convolution and is minimized in the anechoic room because sound is absorbed by the walls. Moreover, due to the construction of the anechoic room, noise from e.g. bypassing cars is also minimized, and the sound may be recorded with a minimum of hardware, which otherwise may also produce noise.
 \\ \\
 The music used in this project will therefore be recorded in an anechoic room because the noise is minimized. 
-It is not expected that musicians using the system in the future have access to an anechoic room as well but if the system doesn't work with sounds recorded in the anechoic room then it with most certainty doesn't work at other places neither. \chr{Hvad skal der stå her (utydelig)} However, in order to reproduce the conditions of a typical musician working around other people, background noise can also be made in the anechoic room but should of course not drown the music. This form of noise is additive whereas e.g. noise reflected off walls as mentioned above is a convolution of the noise and the original signal. In general, convolution noise depends on the state of the system whereas additive noise does not.
-\frede{Tilføj matematisk beskrivelse af støj.}
+It is not expected that musicians using the system in the future have access to an anechoic room as well but if the system does not work with sounds recorded in the anechoic room then it with most certainty does not work at other places neither. \chr{Hvad skal der stå her (utydelig). Vi prøver at finde en sætning, der beskriver det bedre.} However, in order to reproduce the conditions of a typical musician working around other people, background noise can also be made in the anechoic room but should of course not drown the music. This form of noise is additive whereas e.g. noise reflected off walls as mentioned above is a convolution of the noise and the original signal. In general, convolution noise depends on the state of the system whereas additive noise does not. For additive noise, the noisy signal $s[n]$ is simply the sum of the noise $a[n]$ and the pure signal $x[n]$:
+\begin{align*}
+s[n] = a[n] + x[n].
+\end{align*}
+
+This project only uses signals with additive noise. A signal with feedback noise is obtained as the convolution sum of the noise and the pure signal as defined in definition \ref{def:convolution}.
 
 \subsection{SNR}
-Signal-to-noise ratio is a measure of the amount of noise in a signal.
+Signal-to-noise ratio is a measure of the amount of noise in a signal \cite{page 229, DTSP}.
 \begin{definition}
 The signal-to-noise ratio (SNR) of a signal and noise is defined as
 \begin{equation}\label{def:SNR}
-	SNR=10\log_{10}\left(\frac{\sigma_{signal}^2}{\sigma_{noise}^2}\right)
+	SNR=10 \cdot \log_{10}\left(\dfrac{\sigma_{signal}^2}{\sigma_{noise}^2}\right)
 \end{equation}
-where $\sigma_{signal}^2$ is the variance of the signal and $\sigma_{noise}^2$ is the variance of the noise [\textbf{page 229}\cite{DTSP}].
+where $\sigma_{signal}^2$ is the variance of the signal, and $\sigma_{noise}^2$ is the variance of the noise.
 \end{definition}
-To calculated the variances of the signal and noise the standard deviation $\sigma$ can be calculated and if the input signal has mean = 0 the standard deviation of the signal can be calculated by the root mean square (RMS) of the signal [\textbf{page 228}\cite{DTSP}] which is defined as\trine{det ser tosset ud med den kilde der, rykkes op til første linje ik?} \martin{Ydermere skal kilderne citeres ligesom i resten af rapporten, altså blot med sidetallet inde i cite-funktionen (og ikke noget med fed skrift). \textregistered}
+
+To calculate the variances of the signal and noise the standard deviation $\sigma$ can be calculated, and if the input signal has mean equal to 0 the standard deviation of the signal can be calculated by the root mean square (RMS) of the signal, which is defined as \cite{page 228, DTSP} \martin{Kan vi gøre dette afsnit lidt mindre, så ligningen på næste side ikke står alene? \textregistered}:
 \begin{align} \label{eq:RMS}
 	x_{rms} 
-	&=\sqrt{\frac{1}{n} \sum_{i=1}^n x_i^2}\\
-	&= \sqrt{\frac{x_1^2 + x_2^2 + \dots + x_n^2}{n}}.
+	=\sqrt{\dfrac{1}{n} \sum_{i=1}^n x_i^2}
+	= \sqrt{\dfrac{x_1^2 + x_2^2 + \dots + x_n^2}{n}}.
 \end{align}
-
-
-
-
-
