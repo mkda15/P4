@@ -3,12 +3,12 @@ The filter design process is documented in this section, which includes determin
 \subsection{Specifications of filter} \label{sec:FIRspec} 
 The purpose of this filter is to remove all frequencies outside the passband of the filter.  \\
 Due to the frequency analysis in section ~\ref{sec:single} the main energy in the analysed signals is located within a frequencyband from 75 Hz to 1000 Hz.  
-By letting the cut-off frequencies $f_c$ of the filter be respectively 75 Hz and 1000 Hz, this makes the passband of the filter. \\ 
-According to section \ref{subsec:FIR} the Kaiser window can be determined from specifications of the allowed transition width $tw$ and peak approximation error $\delta$ of the amplitude in the pass- and stopbands. \\ 
+By letting the cut-off frequencies $f_c$ of the filter be respectively 75 Hz and 1000 Hz, this makes the passband of the filter. \\
+According to section \ref{subsec:FIR} the Kaiser window can be determined from specifications of the allowed transition width $tw$, which is similar to $\Delta \omega$ specified in Hz, and peak approximation error $\delta$ of the amplitude in the pass- and stopbands. \\ 
 By the frequency analysis of different types of noise it is found that the frequency spectrum of the music signal leis within the frequency spectrum of the noise which verifies the need of a narrow transitionband. However, the narrower transitionband means the higher order of filter is needed, which gives more computations, and hence it is not realistic to let the width of the transitionband go toward zero.  \\
-The maximum allowed width of the transitionband $tw$ and peak approximation error in amplitude $\delta$ is determined as
+The maximum allowed width of the transitionband $tw$, which and peak approximation error in amplitude $\delta$ is determined as
 \begin{align}
-tw = 20 \ Hz, \ \ \ \ \  \delta = 0.05. 
+tw = 20 \ \text{Hz}, \ \ \ \ \  \delta = 0.05. 
 \end{align}
 The amplitude response of the ideal filter is sketched in figure \ref{fig:spec_Hd} along with the boundaries for the real filter as provided by the defined specifications.      
 \begin{figure}[H]

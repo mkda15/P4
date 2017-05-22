@@ -43,7 +43,7 @@ The wavelet $\psi(t)$ is usually compactly supported, which means that $\psi(t) 
 \int_{-\infty}^\infty \psi(t) dt = 0.
 \end{align*}
 
-Therefore, since a wavelet is nonzero only within a finite range and the mean is zero, then $\psi(t)$ has the form of a wave, which is the reason why $\psi(t)$ is called a wavelet \cite{page 411, Wang} \martin{Henrik har skrevet som kommentar, at denne sætning nok bør revideres. \textregistered}. The Haar wavelet is discontinuous at $t = 0, \frac{1}{2}, 1$. Examples of other wavelets that are continuous are the Shannon, Mortlet, and Marr wavelets \cite{page 417-420, Wang}.
+Therefore, since a wavelet is nonzero only within a finite range and the mean is zero, then $\psi(t)$ has the form of a wave, which is the reason why $\psi(t)$ is called a wavelet \cite{page 411, Wang}. The Haar wavelet is discontinuous at $t = 0, \frac{1}{2}, 1$. Examples of other wavelets that are continuous are the Shannon, Mortlet, and Marr wavelets \cite{page 417-420, Wang}.
 \\ \\
 The following definition is the background for a main theorem of this section \cite{page 170, FSE2010}.
 
@@ -57,13 +57,11 @@ Let $N \in \mathbb{N}$. A function $\psi$ has $N$ vanishing moments if
 A relevant wavelet function is the Daubechies' wavelet of degree $N$, which has $N$ vanishing moments and is supported on $[0,2N-1]$. The Haar wavelet defined in definition \ref{HaarWave} is a Daubechies' wavelet of degree $1$ \cite{page 174, FSE2010}. If the wavelet $\psi$ has a large number of vanishing moments, the following result shows that only relatively few coefficients $\langle f, \psi_{j,k} \rangle$ will be large and therefore only a small number of wavelets are needed in the expansion.
 
 \begin{theorem}[Decay of wavelet coefficients]
-Assume that the function $\psi \in \mathcal{L}^2(\mathbb{R})$ is compactly supported and has $N$ vanishing moments. Then, for any $N$ times differentiable function $f \in \mathcal{L}^2(\mathbb{R})$ for which the $N$th derivative $f^{(N)}$ is bounded, there exists a constant $C > 0$ such that
+Assume that the function $\psi \in \mathcal{L}^2(\mathbb{R})$ is compactly supported and has $N$ vanishing moments. Then, for any $N$ times differentiable function $f \in \mathcal{L}^2(\mathbb{R})$ for which the $N$'th derivative $f^{(N)}$ is bounded, there exists a constant $C > 0$ such that
 \begin{align} \label{eq:decay_wave_coeff}
 |\langle f, \psi_{j,k} \rangle| \leq C 2^{-jN} 2^{-j/2}, \quad \forall \ j \geq 1, \quad k \in \mathbb{Z}.
 \end{align}
 \end{theorem}
-
-\martin{Henrik har en kommentar til dette, men jeg er ikke sikker på, at det er relevant eller værd at bruge tid på at forstå. \textregistered}
 
 \eqref{eq:decay_wave_coeff} suggests that a high number of vanishing moments $N$ implies that the numbers $\langle f, \psi_{j,k} \rangle$ decay quickly as $j \to \infty$. Therefore, the higher the number of vanishing moments a wavelet has, the fewer coefficients $\{ \langle f, \psi_{j,k} \rangle \}_{j\in\mathbb{N},k\in\mathbb{Z}}$ are needed in the expansion \cite{page 170, FSE2010}.
 \\ \\

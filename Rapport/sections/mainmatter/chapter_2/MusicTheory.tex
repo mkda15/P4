@@ -23,27 +23,30 @@ When a tone is played on an instrument the sound will be the actual tone along w
 
 where the eigenfunction is $\varphi_n(x) = \sin \left(\frac{n \pi x}{L} \right)$, the eigenfrequency is $\lambda_n = -\left( \frac{n\pi}{L} \right)^2$ (both for $n \in \mathbb{Z}$), and $L$ is the length of the string. Hence $\phi(0) = \phi(L) = 0$. \martin{Henrik har uddybet dette i en mail, men hvor meget skal vi gå i dybden med det? \textregistered\\
 Jeg tænker om det overhoved behøves med \smiley\\
-Jeg synes også det er lidt ligegyldigt, men Henrik virkede som om han syntes det var en god idé \texttrademark. \\ Vi skal lige snakke om dette.} \\
-This phenomena is typically reflected through the octave equivalent tones of the original one. However, the tone $A_2$ with fundamental frequency $110$ Hz also has the harmonic $E_3$ ($330$ Hz) along with the octave equivalent tones $A_3$ ($220$ Hz), $A_4$ ($440$ Hz) and $A_5$ ($880$ Hz). If several instruments play at the same time all the original tones and harmonics are mixed, which is one of several reasons why it is difficult to automatically translate music played by several instruments into a single note sheet. On the other hand, if only one instrument is playing, the harmonics are not mixed together, and the fundamental frequency is usually distinguished from the harmonics rather easily since the fundamental frequency will be the lowest of all the frequencies. The harmonics therefore complicate the determination of the original tone, but the determination is not impossible if the tone e.g. is played alone in an anechoic room. This is shown in figure \ref{fig:E_spec} representing an E tone by a spectrogram. Playing a tone alone in an anechoic room is a way of minimizing noise factors which is further described in chapter \ref{ch7}\trine{godt nok spectrogream? \smiley Ja det er fint. Det er lidt tidligt at smide et spektrogram ind, og hvis det er skal akserne opdateres.}.
+Jeg synes også det er lidt ligegyldigt, men Henrik virkede som om han syntes det var en god idé \texttrademark. \\ Martin fjerner det senere.} \\
+This phenomena is typically reflected through the octave equivalent tones of the original one. However, the tone $A_2$ with fundamental frequency $110$ Hz also has the harmonic $E_3$ ($330$ Hz) along with the octave equivalent tones $A_3$ ($220$ Hz), $A_4$ ($440$ Hz) and $A_5$ ($880$ Hz). If several instruments play at the same time all the original tones and harmonics are mixed, which is one of several reasons why it is difficult to automatically translate music played by several instruments into a single note sheet. On the other hand, if only one instrument is playing, the harmonics are not mixed together, and the fundamental frequency is usually distinguished from the harmonics rather easily since the fundamental frequency will be the lowest of all the frequencies. The harmonics therefore complicate the determination of the original tone, but the determination is not impossible if the tone e.g. is played alone in an anechoic room. This is shown in figure \ref{fig:E_spec} representing an E tone by a spectrogram. Playing a tone alone in an anechoic room is a way of minimizing noise factors which is further described in chapter \ref{ch7}\trine{godt nok spectrogream? \smiley Ja det er fint. Det er lidt tidligt at smide et spektrogram ind, og hvis det er skal akserne opdateres. Trine laver et nyt spektrogram med korrekte aksetitler og farver.}.
+
 \begin{table}[H]
 \centering
-\caption{Frequencies of the tones $A_3$-$A_4$ shown in Hz and rounded off to nearest integer.}
 \label{tab:freq}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 Tone & $A_3$ & $A_3$\hashsharp & $B_3$ & $C_3$ & $C_3$\hashsharp & $D_3$ & $D_3$\hashsharp & $E_3$ & $F_3$ & $F_3$\hashsharp & $G_3$ & $G_3$\hashsharp & $A_4$ \\ \hline
 Freq & 220 & 233 & 247 & 262 & 277 & 294 & 311 & 330 & 349 & 370 & 392 & 415 & 440 \\ \hline
 \end{tabular}
+\caption{Frequencies of the tones $A_3$-$A_4$ shown in Hz and rounded off to nearest integer.}
 \label{tab:tone}
 \end{table}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.6\textwidth]{figures/Music/eks_ch2.png}
-    \caption{Example of E tone and its harmonics represented in a spectrogram}
+    \caption{Example of E tone and its harmonics represented in a spectrogram.}
     \label{fig:E_spec}
 \end{figure}
+
 Chords are frequently used in music. A chord consist of three or more different tones being played simultaneously forming an harmonic set of tones. From the discussion in this section a chord would be more complicated to determined on behalf of its frequency representation than a single tone.
+
 \section{Sound}
 Sound is often perceived as waves moving through air with a constant velocity relative to the surrounding material. A music instrument playing a certain tone makes the surrounding particles oscillate with a certain frequency, and the neighbouring particles are set in motion as well with the same frequency. The frequency is specified in hertz which is the number of cycles per second. Therefore, e.g. $440$ Hz corresponds to $440$ oscillations every second. The human audible frequency range generally leis within 20 to 20.000 Hz \cite{Markandeya}.   
 \\ \\
@@ -56,7 +59,7 @@ The pitch of the tone being played is determined by the length, mass and tension
 \centering
 \begin{tabular}{l|cccccc}
 Tone			& E	(low)	& A		& D		& G		& B		& E (high)\\ \hline
-Frequency (Hz)	& 82.41		& 110	& 146.8	& 196	& 246.9	& 329.6
+Frequency [Hz]	& 82.41		& 110	& 146.8	& 196	& 246.9	& 329.6
 \end{tabular}
 \caption{Frequencies of loose strings on a guitar in standard tuning.}
 \label{fig:guitar_frequencies}
