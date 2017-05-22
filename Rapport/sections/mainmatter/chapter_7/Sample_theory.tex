@@ -431,7 +431,7 @@ ytick={-1,1}
 
 As figure \ref{fig:aliasingcol} shows, sampling the signal shown in figure \ref{fig:aliasing2} with $f_s = 9$ Hz could result in the signal being reconstructed as the signal shown in figure \ref{fig:aliasing1}. Therefore, the reconstructability of $x_c$ from $x_s$ depends on the relation between $f_s$ and $\omega_N$, which leads to the central \textit{Sampling Theorem} \cite{page 230, FAA}.
 
-\begin{theorem}[The Sampling Theorem] \label{sampling_theorem}
+\begin{theorem}[The Sampling Theorem] \label{sampling_theorem}\frede{Gør det klart i beviset, at summen ligger i $\ell^{\infty}$
 Let $f \in L^2$ and $F(\omega) = 0$ for $|\omega| \geq \omega_N$ (that is, $f$ is bandlimited). Then $f$ is completely determined by its values at the points $t_n = \frac{n \pi}{\omega_N}$, $n=0,\pm 1,\pm 2,\ldots$:
 \begin{align*}
 f(t) = \sum_{n=-\infty}^{\infty} f \left( \dfrac{n\pi}{\omega_N} \right) \mathrm{sinc}(\omega_N t - n\pi),
