@@ -26,7 +26,7 @@ An algorithm for locating the frequency with the largest amplitude is implemente
 	\For {each $i$ in length of $X$}
 		\State $A = \max(X[i])$ \Comment {Maximum amplitude for each FFT}
 		\If {$A >$ limit} \Comment {Check if the amplitude is larger than a given limit}
-			\State $freq\_pos[i]$ = where in $X$[i], $(A == \max(X[i]))$ \Comment { Location of the max amplitude}
+			\State $freq\_pos[i] = np.where(X[i][:] == \max(X[i]))$ \Comment {Max amplitude}
 		\Else
 			\State $freq\_pos$[i] = 0	
 		\EndIf

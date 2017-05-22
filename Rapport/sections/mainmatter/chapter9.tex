@@ -1,6 +1,7 @@
 \chapter{Frequency analysis and filter design} \label{ch9}
 In this chapter the results from the recordings described in appendix \ref{recordings} will undergo frequency analysis. This will detect the frequency composition of the music and noise signals, which will aid the design of a filter designated to filter out noise. The frequency analysis is furthermore necessary for the creation of spectrograms illustrating the frequency composition of the signals in time. \\ \\
-The project includes an implementation of the Cooley-Tukey FFT algorithm in Python but the results of this algorithm are identical to the FFT included in the Numpy package for Python which is \textit{much} faster than our implementation. The Numpy FFT will therefor be used for the frequency analysis in this chapter. \trine{evt. ref frem der viser de er ens}
+This project includes an implementation of the Cooley-Tukey FFT algorithm in Python but the results of this algorithm are identical to the FFT included in the Numpy-package in Python, which is much faster than the implementation described in algorithm \ref{FFTalg}. The FFT from Numpy will therefore be used for the frequency analysis in this chapter.
+
 \input{sections/mainmatter/chapter_9/frequency_ana.tex}
 
 \input{sections/mainmatter/chapter_9/filter_design.tex}

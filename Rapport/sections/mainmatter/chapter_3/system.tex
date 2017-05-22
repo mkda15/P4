@@ -111,9 +111,11 @@ The produced audio file acts as the \textit{input signal} for the algorithm that
 \subsubsection{Algorithm}
 The main part of the application is an algorithm, which takes an audio file as input and generates a corresponding note sheet as output. This involves signal modification, spectral analysis, a spectral representation over time and generation of a note sheet from the signal:
 \begin{itemize}
-\item[] \textbf{Signal modification} is needed in this project to select which frequencies are wanted for the spectral analysis and remove unwanted frequencies. The modification is done by a digital filter designed to reduce noise in the signal - because noise is expected in a recorded sound signal. Such filter is linear and time invariant.\trine{skal/behøves LTI at nævnes her?} The choice of filter type and definition of desired specifications will be made on behalf of a frequency analysis of recorded music and noise signals that could be representative for the use of the system.             
-\item[] \textbf{Spectral analysis} concerns the spectrum of frequencies corresponding to the signal. This involves transformation of the signal from time domain to frequency domain.     
+\item[] \textbf{Signal modification} is needed in this project to select which frequencies are wanted for the spectral analysis and remove unwanted frequencies. The modification is done by a digital filter designed to reduce noise in the signal - because noise is expected in a recorded sound signal. The choice of filter type and definition of desired specifications will be made on behalf of a frequency analysis of recorded music and noise signals that could be representative for the use of the system.
+
+\item[] \textbf{Spectral analysis} concerns the spectrum of frequencies corresponding to the signal. This involves transformation of the signal from time domain to frequency domain.
 One primary method used for this purpose is the Fourier transformation. Based on the theoretical focus and learning goals for the project this transformation is used in this project. An alternative to the Fourier transformation is the wavelet transform which will be briefly examined in the end of the project in order to discuss eventual advantages by use of wavelet transform.    
+
 \item[] \textbf{Representation of frequency spectrum over time} is done by plotting the frequency spectrum over time, which forms a spectrogram. By the spectrogram it is possible to analyse the frequencies of the filtered signal over time. As described in chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones. To compute a spectrogram the \textit{Short time Fourier transformation} (STFT) is used whereby a trade of between accuracy in time and accuracy in frequency occurs.  
 
 \item[] \textbf{Symbol processing} is required to create a note sheet on behalf of the spectrogram. 
@@ -123,7 +125,7 @@ Hence a visualization of the spectrogram and corresponding significant frequenci
 
 \section{Final system}
 On behalf of the stated specifications to the system, figure \ref{fig:system} illustrates the final system which will form a basis of the further work. \\ \\
-Focus in this project is the development of the algorithm hence the input of the algorithm is delimited to be a prerecorded audio file containing a know signal.
+Focus in this project is the development of the algorithm hence the input of the algorithm is delimited to be a prerecorded audio file containing a known signal.
 This is done under the assumption that the system has to work under ideal conditions before it can work under real circumstances. \\ 
 The algorithm inside the application is bounded to create a spectrogram illustrating the frequencies corresponding the tones on the audio file. The noise is expected to be reduced in such degree that it is possible to identify the significant frequencies by the spectrogram, which will form the output of the system. 
 \begin{figure}[H]

@@ -1,5 +1,5 @@
 In this section the final system is tested with varying input signal in order to evaluate at what level the application fulfils the practical purpose of the system. According to chapter \ref{ch3} the purpose of the system is to create a spectrogram from which the significant frequencies over time are to be recognized by the peak detection algorithm to match the frequencies known to be in the input signal according to the tone or chord played. \\
-In each test the same noise is added to the signal with a maximum SNR at ---- \trine{insæt max SNR}. The noise consists of hands clapping in the background to simulate a realistic situation. Note that all other natural noises are hence minimized. Variation of the noise will not be considered in this system validation but will be further investigated in chapter \ref{ch11}.
+In each test the same noise is added to the signal. The noise consists of hands clapping in the background to simulate a realistic situation. Note that all other natural noises are hence minimized. Variation of the noise will not be considered in this system validation but will be further investigated in chapter \ref{ch11}.
 
 \paragraph{Test 1} Scale with clapping hands.
 \begin{figure}[H]
@@ -66,7 +66,7 @@ By this one can conclude that the melody is recognisable on behalf of the result
 
 Figure \ref{fig:final_2} accounts for the output of test 3. By the detected frequencies shown in figure \label{fig:final_peak2} it seems that it is a single low $E$ tone being played, cf. figure \ref{fig:inte_peak}, rather than the low $E$ chord. As explained in chapter \ref{ch2} a chord is a combination of at least three tones, which in this case is $E$, $B$, $G$\hashsharp and also the harmonics. Hence, the peak detection algorithm is not able to detect chords, and the spectrogram does not provide readable information, neither, because the tones above the significant $E$ tone are difficult to identify. Furthermore, it would require intelligent guessing in order to connect the correct frequencies found to be the most significant.
 
-\subsection{Evaluation}
+\subsection{Summary}
 From the test results of the final application it is seen that the system is capable of computing a spectrogram on behalf of a given input signal in form of a .WAW file containing a recorded sound signal. Noise outside a given passband is successfully removed in order to isolate the frequencies expected within the range of significant frequencies of the signal found by the frequency analysis described in chapter \ref{ch9}. \\
 From this the implementation of each unit and the integration of these into one algorithm making the application work as intended - technically speaking. \\
 \\
