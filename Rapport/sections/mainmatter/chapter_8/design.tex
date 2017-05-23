@@ -1,19 +1,17 @@
 \section{Filter design}
-In this section the process of designing digital filters is described. There will be distinguished between techniques for IIR and FIR filters. The section is concluded by a comparison of FIR and IIR filters. \\  
-As described, ideal filters are not computable. Hence, the process of designing a filter is based on an approximation of the frequency response, which is based on computable polynomials and on a set of specifications for the filter. There exists different design methods to achieve this.
+In this section the process of designing digital filters is described. There will be distinguished between techniques for IIR and FIR filters. The section is concluded by a comparison of FIR and IIR filters. As described, ideal filters are not computable. Hence, the process of designing a filter is based on an approximation of the desired frequency response, which is based on computable polynomials and on a set of specifications for the filter. There exists different design methods to achieve this.
 
 \subsection{IIR filters}
 One common way of designing an IIR filter is to design the discrete-time filter from a corresponding continuous-time system. The method follows three main steps. 
 \begin{itemize}
 \item[1.] Specify the properties desired for the filter as filter specifications.
-\item[2.] Hereby compute a ``prototype'' by a continuous-time system $H_c(j\Omega)$ that approximates the given properties. In this rapport it is done as a \textit{Butterworth filter}.  
-\item[3.] Transform the ``prototype'' into the discrete-time filter $H(\omega)$. In this rapport this is done with the \textit{Bilinear transformation}. 
+\item[2.] Hereby compute a ``prototype'' by a continuous-time system $H_c(j\Omega)$ that approximates the given properties. In this section it is done as a \textit{Butterworth filter}. Alternatives are the \textit{Chebyshev} and \textit{Elliptic} filters.
+\item[3.] Transform the ``prototype'' into the discrete-time filter $H(\omega)$. In this section this is done with the \textit{Bilinear transformation}. An alternative is the \textit{impulse invariant method}.
 \end{itemize}
 
 The properties of a system are specified based on the desired application by considering what frequencies ideally are to pass the filter. Furthermore, it is important to specify how much the filter is allowed to vary from the ideal properties since an ideal filter is not a possibility. \\
-Properties for an approximation to a lowpass filter is defined by bounding the amplitude response within $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$ as illustrated in the tolerance scheme shown in figure \ref{fig:scheme}. \\
-Since the filter needs to be realizable, the transition band cannot be of non-zero width as it is for the ideal filter.
-
+Properties for an approximation to a lowpass filter is defined by a peak approximation error of the amplitude response of $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$ as illustrated in the tolerance scheme shown in figure \ref{fig:scheme}. Since the filter needs to be realizable, the transition band cannot be of zero width as it is for the ideal filter.
+\frede{Trine ændrer positionen af "Stopband" i figuren}
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=1]
@@ -21,8 +19,8 @@ Since the filter needs to be realizable, the transition band cannot be of non-ze
 scale=1.1,
 unit vector ratio*=1 1 1,
 axis lines = middle,
-xtick={0,2,4,7,8},
-xticklabels={$0$,$\Omega_p$,$\Omega_s$,$\frac{\pi}{T_d}$,$\Omega$},
+xtick={0,2,4,8},
+xticklabels={$0$,$\Omega_p$,$\Omega_s$,$\Omega$},
 ytick={0.5,3,3.7},
 yticklabels={$\delta_2$,$1-\delta_1$,$1+\delta_1$},
 xmin=0,
@@ -78,8 +76,9 @@ An important remark is that $|H_c(j\Omega_c)| = \frac{1}{\sqrt{2}}$ corresponds 
 
 By letting the denominator in \eqref{eq:Butter_trans} equal zero it is possible to determine the poles $s_k$ of the system:
 \begin{align*}
-1+\left( \dfrac{s}{j\Omega_c}\right)^{2N} = 0 \ \  \Rightarrow  \ \ \frac{s}{j \Omega_c} = \sqrt[2N]{-1} \ \
-\Rightarrow \\
+1+\left( \dfrac{s}{j\Omega_c}\right)^{2N} &= 0 \ \  \Rightarrow  \ \ \frac{s}{j \Omega_c} = \sqrt[2N]{-1} \ \ \Rightarrow 
+\end{align*}
+\begin{align*}
 s_k = (-1)^{\frac{1}{2N}} \left( j\Omega_c \right) = \Omega_c\text{e}^{ \left( \frac{j\pi}{2N} \right) \left( 2k+ N-1 \right) }, \ \ k=0,1,\ ... \ , 2N-1.
 \end{align*}
 
@@ -88,7 +87,9 @@ The poles are placed equally along the circle of radius $\Omega_c$ in the $s$-pl
 H_c(s)=\dfrac{G}{\prod_{k=1}^{N}(s-s_k)},
 \end{align*}
 
-where $G$ is the gain constant determined as the 0 dB DC-gain, that is the value satisfying that $|H(0)| = 1$. After the continuous-time filter $H_c(s)$ been constructed, the next step is the digitalization of the filter. The Bilinear transformation is a method that allows a direct transformation between the $s$- and $z$-domains. The principle of the transformation is that the entire imaginary axis $j\Omega$ of the $s$-plane is mapped onto the $z$-plane as the unit circle. The bilinear transformation is defined by 
+where $G$ is the gain constant determined as the 0 dB DC-gain, that is the value satisfying that $|H(0)| = 1$. After the continuous-time filter $H_c(s)$ been constructed, the next step is the transformation of the filter to the $z$-domain. The Bilinear transformation is a method that allows a direct transformation between the $s$- and $z$-domains. The principle of the transformation is that the entire imaginary axis $j\Omega$ of the $s$-plane is mapped onto the $z$-plane as the unit circle.
+\\\\
+The bilinear transformation is defined by 
 \begin{align*}
 s=\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right)
 \end{align*}
@@ -100,22 +101,21 @@ H_c\left[\frac{2}{T_d}\left(\frac{1-z^{-1}}{1+z^{-1}}\right)\right]=H_c(z).
 
 Because $-\infty \leq \Omega \leq \infty $ is mapped to $-\pi \leq \omega \leq \pi$ the transformation is non-linear. This can also be seen from \eqref{eq:bilinear}, and the non-linearity necessarily involves some frequency distortion. Therefore, the use of this method is restricted to situations where this is acceptable or can be compensated. Compensation can be done by the concept of prewarping, which uses the relation
 \begin{align*}
-\Omega_{c_{new}} = \dfrac{2}{T_d} \tan \left( \dfrac{\omega_c}{2} \right).
+\Omega_{c_{new}} = \dfrac{2}{T_d} \tan \left( \dfrac{\omega_c}{2} \right),
 \end{align*}
-
-Hereby it is possible to determine a new $\Omega_c$ to the continuous-time filter, which ensures that the discrete $\omega_c$ fits the specifications. \\
-An important property of the bilinear transformation is that stability is preserved if the continuous-time filter is stable.
+where $\omega_c$ is the discrete cut-off frequency. Hereby it is possible to determine a new $\Omega_c$ to the time-continuous filter, which ensures that the discrete $\omega_c$ fits the specifications. \\\\
+An important property of the bilinear transformation is that stability is preserved if the time-continuous filter is stable.
 
 \subsection{FIR filter} \label{subsec:FIR}
-Design of FIR filters are in contrast to IIR filters based on approximating the desired discrete-time frequency response directly. By this method it is possible to guarantee a general linear phase of the system. The method also uses the window method, which is described below.
+Design of FIR filters are in contrast to IIR filters based on approximating the desired time-discrete frequency response directly. By this method it is possible to guarantee a general linear phase of the system. The method uses the window method, which is described below.
 
 \subsubsection{The window method}
-The window method is considered a simple method for designing FIR filters. The method takes off from the idealized desired frequency response $H_d$, which is defined to be equal to one in passbands and zero in stopbands corresponding to the desired cut-off frequencies as in section \ref{sec:basic_filter}. Hereby the idealized impulse response $h_d[n]$ is obtained by the inverse Fourier transform of the desired frequency response:
+The window method is considered a simple method for designing FIR filters. The method takes off from the ideal frequency response $H_d$, which is defined to be equal to one in passbands and zero in stopbands corresponding to the desired cut-off frequencies as in section \ref{sec:basic_filter}. Hereby the idealized impulse response $h_d[n]$ is obtained by the inverse Fourier transform of the desired frequency response:
 \begin{align*}
 h_d[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi} H_d(\omega)\text{e}^{j\omega n} d\omega.
 \end{align*}
 
-$H_d(\omega)$ usually results in an impulse response of infinite length caused by the discontinuities at the boundaries between the pass- and stopbands. To compute a finite causal system as a FIR filter on behalf of the desired impulse response $h_d[n]$, the realisable impulse response $h[n]$ of the FIR filter is determined as a product of the idealised impulse response $h_d[n]$ and a finite duration \textit{window} $w[n]$ such that
+$H_d(\omega)$ usually results in an impulse response of infinite length caused by the discontinuities at the boundaries between the pass- and stopbands. To compute a finite causal system as a FIR filter on behalf of the desired impulse response $h_d[n]$, the realisable impulse response $h[n]$ of the FIR filter is determined as a product of the impulse response $h_d[n]$ and a finite duration window $w[n]$ such that
 \begin{align}
 h[n]=h_d[n]w[n], \ \ w[n] =
 \left\{ \begin{matrix}

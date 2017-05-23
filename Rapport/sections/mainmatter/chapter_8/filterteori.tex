@@ -1,5 +1,5 @@
 \section{Basic principles} \label{sec:basic_filter}
-A digital filter is characterised as an LTI system as previously defined by equation \eqref{eq:LTI_diff_equation_finite}. As described, the system is completely characterised by its corresponding impulse response $h[n]$. In terms of the LTI system as a filter the output $y[n]$ is the part of the signal that comes through the filter. \\
+A digital filter is characterised as an LTI system as previously defined by equation \eqref{eq:LTI_diff_equation_finite}. As described, the system is completely characterised by its corresponding impulse response $h[n]$. In terms of the filter as an LTI the output $y[n]$ is the part of the signal that passes through the filter. \\
 $y[n]$ has previously been defined by \eqref{def:convolution} as the convolution sum of the input signal $x[n]$ and the impulse response of the system:
 \begin{align*}
 y[n] = x[n]*h[n] = \sum_{k=-\infty}^{\infty} x[k]h[n-k].
@@ -15,13 +15,12 @@ $H(\omega)$ can be expressed as the \textit{amplitude response} $|H(\omega)|$ an
 H(\omega) = |H(\omega)| \text{e}^{j\measuredangle H(\omega)}.
 \end{align*}
 
-The amplitude and phase response are both real valued and $2\pi$-periodic.\\
-If $H(\omega)$ is real it is said to have \textit{zero phase}, which is equivalent to the phase response only taking values that are integer multiples of $\pi$, resulting in a straight phase with zero slope. Furthermore, if $H(\omega)$ can be written on the form
+The amplitude and phase response are both real valued and $2\pi$-periodic. If $H(\omega)$ is real it is said to have \textit{zero phase}, which is equivalent to the phase response only taking values that are integer multiples of $\pi$, resulting in a straight phase with zero slope \cite{page 227, FSP}. Furthermore, if $H(\omega)$ can be written on the form
 \begin{align} \label{eq:lin_pha}
 H(\omega) = A(\omega) \text{e}^{j(-\alpha\omega + \beta)},
 \end{align}
 
-where $\alpha$ and $\beta$ are constants and $A(\omega)$ is real, the filter is said to have \textit{generalized linear phase}. This is due the phase response consisting of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resulting from jumps of $2\pi$ caused by the $2\pi$-periodicity. \\
+where $\alpha$ and $\beta$ are constants and $A(\omega)$ is real, the filter is said to have \textit{generalized linear phase}. This is due to the phase response consisting of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resulting from jumps of $2\pi$ caused by the $2\pi$-periodicity. \\
 A generalized linear phase response is characterized by a constant \textit{group delay} $\tau(\omega)$:
 \begin{align*}
 \tau(\omega) = \text{grd}[H(\omega)] = -\frac{d}{d\omega} \left\{ \measuredangle H(\omega) \right\} = \alpha.
@@ -86,17 +85,18 @@ The amplitude and impulse responses of the ideal lowpass filter are illustrated 
 \includegraphics[scale=0.45]{figures/filter_teori/ideal_low1.pdf}
 \caption{}
  \end{subfigure}
-\caption{\textbf{(a)} Amplitude response of ideal lowpass filter with $\omega_c = \frac{\pi}{2}$ and \textbf{(b)} the corresponding impulse response.}
+\caption{\textbf{(a)} Amplitude response of ideal lowpass filter centered around $\alpha=0$ with $\omega_c = \frac{\pi}{2}$ and \textbf{(b)} the corresponding impulse response.}
 \label{fig:ideal_low}
 \end{figure}
 
-Analogues of an ideal highpass or bandpass filter can be defined as illustrated on figure \ref{fig:ideal}.
-
+Ideal highpass and bandpass filters can be defined analogues to a low pass filter as illustrated on figure \ref{fig:ideal}.
+\frede{Trine gør linjer tyndere og gør pilen synlig.}
 \begin{figure}[H]
 \begin{subfigure}[b]{0.50\textwidth}
         \centering
 \begin{tikzpicture}[scale=1]
 \begin{axis}[
+clip=false,
 scale=0.5,
 unit vector ratio*=1 1 1,
 axis lines = middle,
@@ -121,6 +121,7 @@ ymax=2.6]
         \centering  
 \begin{tikzpicture}[scale=1]
 \begin{axis}[
+clip=false,
 scale=0.5,
 unit vector ratio*=1 1 1,
 axis lines = middle,
@@ -145,19 +146,17 @@ ymax=2.6]
 \caption{Amplitude responses of ideal \textbf{(a)} highpass filter and \textbf{(b)} bandpass filter.}
 \label{fig:ideal}
 \end{figure}
-As stated in section \ref{sec:LTI} a non-causal LTI system is not realizable. Furthermore, zero phase is not possible for a causal system.
-Thus an approximation of an ideal filter needs to be computed by a causal system with generalized linear phase.
+An ideal filter with zero phase is non-causal and as stated in section \ref{sec:LTI} a non-causal LTI system is not realizable. Thus an approximation of an ideal filter needs to be computed by a causal system with generalized linear phase.
 
 \section{FIR and IIR filters} \label{sec:FIR_IIR}
-Two classes of filters are essential to identify. For all ideal filters discussed in the previous section the impulse response is defined for $-\infty < n < \infty$. Such a filter is specified as an \textit{infinite impulse response (IIR)} filter. In the case of the impulse response being zero outside a finite interval the filter is referred to as a \textit{finite impulse response (FIR)} filter.
+Two classes of filters are essential to identify. For all ideal filters discussed in the previous section the impulse response is defined for $-\infty < n < \infty$. Such a filter is specified as an \textit{infinite impulse response (IIR)} filter which is not further explained in this section. In the case of the impulse response being zero outside a finite interval the filter is referred to as a \textit{finite impulse response (FIR)} filter which is shown to have generalized linear phase.
 
 \subsection{FIR filters}
 As described previously, causal systems with generalized linear phase is a possible approximation of the ideal filter. This is to be guaranteed by using specific types of FIR filters. A causal system with generalized linear phase has to fulfil the following relation for all $\omega$ as described in section \ref{sec:basic_filter}:
 \begin{align*}
 \sum_{n=0}^{\infty}h[n]\sin\left(\omega \left(n-\alpha \right) + \beta \right) = 0.
 \end{align*}
-
-For a FIR filter to satisfy this relation the following set of conditions has to be fulfilled \cite{page 341, DTSP}:
+The point of symmetry for an FIR filter is moved from $\alpha=0$ to $\alpha=\frac{M}{2}$ such that a filter of length $M+1$ is obtained. For a FIR filter to satisfy this relation the following set of conditions has to be fulfilled \cite{page 341, DTSP}:
 \begin{align} \label{eq:FIR_con}
 &\beta = \left\{ \begin{matrix}
 \pi \\
@@ -167,19 +166,19 @@ For a FIR filter to satisfy this relation the following set of conditions has to
 &h[n]=h[M-n] \ \text{or} \ h[n]=-h[M-n]. \nonumber  
 \end{align}
 
-This implies that $h[n]$ is either symmetric or anti-symmetric and that $\alpha = \frac{M}{2}$ is the symmetry point. \\
-From these conditions four different types of FIR filter with generalized linear phase can be defined \cite{page 343-344, DTSP}. However, only the \textit{type 1 FIR filter} will be elaborated here.
+This implies that $h[n]$ is either symmetric or anti-symmetric. \\
+From these conditions four different types of FIR filter with generalized linear phase can be defined \cite{pages 343-344, DTSP}. However, only the \textit{type 1 FIR filter} will be elaborated here.
 A type 1 FIR filter is characterised by having a symmetric impulse response and $M$ being an even integer. By applying the symmetry condition to the definition of the Fourier transform, $H(\omega)$ is defined as \cite{page 343, DTSP}:
 \begin{align}\label{eq:type1}
-H(\omega) = \text{e}^{-j\omega \frac{M}{2}} \sum_{k=0}^{\frac{M}{2}} a[k] \cos (\omega k),
+H(\omega) = \text{e}^{-j\omega \frac{M}{2}} \sum_{k=0}^{M/2} a[k] \cos (\omega k),
 \end{align}
 
 where 
 \begin{align*}
-a[k]= \left\{ \begin{matrix}
-2h\left[ \frac{M}{2} - k \right], \ \ \ k &= 1,2,... , \frac{M}{2}.   \\
-h[\frac{M}{2}], \ \ \ k &= 0
-\end{matrix}\right.
+a[k]=\begin{cases}
+2h\left[ \frac{M}{2} - k \right], &k= 1,2,... ,\frac{M}{2}\\
+h[\frac{M}{2}], &k=0
+\end{cases}.
 \end{align*}
 
 Therefore, \eqref{eq:type1} has the form of \eqref{eq:lin_pha}, where $A(\omega) = \sum_{k=0}^{\frac{M}{2}} a[k]\cos (\omega k)$ is a real function of $\omega$ and $\beta$ equals either 0 or $\pi$. Hence, a constant group delay has been achieved.
