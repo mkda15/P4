@@ -39,7 +39,7 @@ However, in this project the STFT is used only for $d = 1$. $X(\tau,\omega)$ can
 \begin{definition}[The discrete Short-Time Fourier Transform]\label{def:stft_discrete}
 Let $f,g\in\ell^2$. For a fixed window sequence $w \neq 0$ the discrete short-time Fourier transform of a sequence $f$ with respect to $w$ is defined as
 \begin{align}
-X[n, \omega] = \sum_{m=-\infty}^{\infty} f[n+m]w[m]\mathrm{e}^{-j\omega m}.
+X[n, \omega] = \sum_{m=-\infty}^{\infty} f[n+m]w[m]\text{e}^{-j\omega m}.
 \end{align}
 \end{definition}
 
@@ -69,9 +69,12 @@ legend style={at={(axis cs:10.1,1.5)},anchor=north west}]
 \label{fig:sliding_stft}
 \end{figure}
 
-\martin{Martin beskriver teorien bag spektrogrammer.}
+The discrete STFT is used to produce a spectrogram, which is also known as the energy density spectrum:
+\begin{align*}
+|X[n,\omega]|^2 = \left| \sum_{m=-\infty}^{\infty} f[n+m]w[m]\text{e}^{-j\omega m} \right|^2
+\end{align*}
 
-Clearly, the STFT depends on how wide the window is:
+The spectrogram shows the signal in time and frequency, and the resolutions depend on how wide the window is:
 
 \paragraph{A rather wide window} leads to good \textit{frequency resolutions}, and e.g. constant frequencies are thus clearly visible in the time-frequency plane. However, a spike will be blurred in the time-frequency plane as a wide window can't exactly determine at what time the spike occurs.
 \paragraph{A rather narrow window} leads to good \textit{time resolutions}, which means that a spike is clearly visible at a given time, but constant frequencies are on the other hand blurred \cite{Davis}.
