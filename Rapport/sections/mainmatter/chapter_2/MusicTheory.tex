@@ -1,6 +1,6 @@
 In this chapter basic music theory necessary for the understanding of the report is presented.
 \\ \\
-An example of a staff system with 15 notes is shown in figure \ref{fig:cmajor}. A note in such a system is generally a symbolic representation of a certain tone, which is associated to a particular frequency $f$ (specified in hertz, Hz). Each note thus contains information about the frequency of the associated tone and also about its duration in time $t$ (specified in beats per minute, bpm. A note sheet is therefore actually a symbolic representation of a diagram over time and frequency, which is also called a spectrogram.
+An example of a staff system on a note sheet with 15 notes is shown in figure \ref{fig:cmajor}. A note in such a system is generally a symbolic representation of a certain tone, which is associated to a particular frequency $f$ (specified in hertz, Hz). Each note thus contains information about the frequency of the associated tone and also about its duration in time $t$ (specified in beats per minute, bpm). A note sheet is therefore actually a symbolic representation of a diagram over time and frequency, which is also called a spectrogram.
 
 \begin{figure}[H]
     \centering
@@ -14,7 +14,7 @@ A staff system consists of 5 horizontal lines whereupon the notes are placed. Ba
 \\ \\
 The notes in the staff system are named by the letters $A$-$G$ depending on their vertical position. After $G$ the naming is repeated with the next $A$, which lies an octave above the previous one. Furthermore, between several of these tones lie semitones, which are noted as e.g. $A$\hashsharp{}. Table \ref{tab:freq} shows all tones in the interval $A_3$-$A_4$.
 \\ \\
-To be able to distinguish between octave equivalent tones they are e.g. noted as $A_4$ and $A_5$. $A_4$ is also called the concert pitch and is normally chosen to be $440$ Hz by definition but may vary by $\pm 3$ Hz depending on who's playing. All other tones are set relative to the chosen frequency of $A_4$ since it is the $12^{th}$ key note after $A_3$, whose frequency is half the size of $A_4$'s. The relation in frequency between two neighbouring tones, e.g. $A$ and $A$\hashsharp, is therefore $A$\hashsharp \ $= \sqrt[\leftroot{-2}\uproot{2}12]{2} \cdot A$ \cite{MusicTheory}. The frequencies of the tones in the interval $A_3$-$A_4$ rounded off to the nearest integer is shown in table \ref{tab:freq}. All the tones' frequencies can be found in \cite{FreqsString}.
+To be able to distinguish between octave equivalent tones they are e.g. noted as $A_4$ and $A_5$. $A_4$ is also called the concert pitch and is normally chosen to be $440$ Hz by definition but may vary by $\pm 3$ Hz depending on who is playing. All other tones are set relative to the chosen frequency of $A_4$ since it is the $12^{th}$ key note after $A_3$, whose frequency is half the size of $A_4$'s. The relation in frequency between two neighbouring tones, e.g. $A$ and $A$\hashsharp, is therefore $A$\hashsharp \ $= \sqrt[\leftroot{-2}\uproot{2}12]{2} \cdot A$ \cite{MusicTheory}. The frequencies of the tones in the interval $A_3$-$A_4$ rounded off to the nearest integer is shown in table \ref{tab:freq}. All the tones' frequencies can be found in \cite{FreqsString}.
 \\ \\
 When a tone is played on an instrument the sound will be the actual tone along with the tone's harmonics. The original tone's frequency is referred to as the fundamental frequency. A harmonic is a wave whose frequency is a positive integer multiple of the fundamental frequency, and the tone's harmonics are thus often referred to as overtones. The fact that a wave of a harmonic is a \textit{positive integer multiple} of the fundamental frequency is due the eigenfrequencies of vibration which satisfy the differential equation:
 \begin{align*}
@@ -28,14 +28,13 @@ This phenomena is typically reflected through the octave equivalent tones of the
 
 \begin{table}[H]
 \centering
-\label{tab:freq}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 Tone & $A_3$ & $A_3$\hashsharp & $B_3$ & $C_3$ & $C_3$\hashsharp & $D_3$ & $D_3$\hashsharp & $E_3$ & $F_3$ & $F_3$\hashsharp & $G_3$ & $G_3$\hashsharp & $A_4$ \\ \hline
 Freq & 220 & 233 & 247 & 262 & 277 & 294 & 311 & 330 & 349 & 370 & 392 & 415 & 440 \\ \hline
 \end{tabular}
 \caption{Frequencies of the tones $A_3$-$A_4$ shown in Hz and rounded off to nearest integer.}
-\label{tab:tone}
+\label{tab:freq}
 \end{table}
 
 \begin{figure}[H]
