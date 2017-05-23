@@ -1,5 +1,5 @@
-\section{The Discrete Fourier Transform} \label{sec:DFT}
-The discrete Fourier transform (DFT) is the discrete-time variant of the continuous Fourier transform and can be used to transform samples from the time domain into the frequency domain. Multiple parts of the DFT are analogue to the continuous version. This section is inspired by the lecture notes from the course \textit{Anvendt Harmonisk Analyse} and \cite{page 252-264, FSP}.
+\section{The discrete Fourier transform} \label{sec:DFT}
+The discrete Fourier transform (DFT) is the discrete-time variant of the continuous Fourier transform and can be used to transform samples from the time domain into the frequency domain. Multiple parts of the DFT are analogue to the continuous version. This section is inspired by the lecture notes from the course \textit{Anvendt Harmonisk Analyse} and \cite{pages 252-264, FSP}.
 \\ \\
 Let a function in time $x(t)$ be a continuous signal. As defined in section \ref{sec:cont_Fourier_Transform}, the Fourier transform of $x(t)$ is:
 \begin{align*}
@@ -8,7 +8,7 @@ Let a function in time $x(t)$ be a continuous signal. As defined in section \ref
 
 If the function is sampled $N$ times then the samples may be denoted $x[0],x[1],\dots,x[N-1]$. The discrete version is then:
 \begin{align} \label{eq:DFT_vectors}
-X[k] = \sum_{n=0}^{N-1} x[k]\text{e}^{-j\frac{2\pi}{N}kn} = \sum_{n=0}^{N-1} x[k] W_N^{kn}, \quad k = 0, 1, \dots, N-1,
+X[k] = \sum_{n=0}^{N-1} x[n]\text{e}^{-j\frac{2\pi}{N}kn} = \sum_{n=0}^{N-1} x[n] W_N^{kn}, \quad k = 0, 1, \dots, N-1,
 \end{align}
 
 where $W_N$ is the twiddle factor, which is defined as:
@@ -69,14 +69,14 @@ $F$ is thus a unitary operator (up to scaling) known as the DFT operator, which 
 
 This is the analogue of Plancherel's equality stated in theorem \ref{theo:Plancherel}. This leads to the definition of the DFT \cite{page 253, FSP}.
 
-\begin{definition}[The Discrete Fourier Transform] \label{def:DFT}
-The discrete Fourier transform $X[k]$ of a length-$N$ sequence $x$ is an invertible and linear transform $\mathcal{F}: \mathbb{C}^N \to \mathbb{C}^N$ defined as
+\begin{definition}[The discrete Fourier transform] \label{def:DFT}
+The discrete Fourier transform $X[k]$ of a length-$N$ sequence $x[n]$ is an invertible and linear transform $\mathcal{F}: \mathbb{C}^N \to \mathbb{C}^N$ defined as
 \begin{align} \label{eq:def_DFT}
-\mathcal{F}\{\textbf{x}\}[k] = X[k] = \sum_{n=0}^{N-1} x[n] \text{e}^{-j\frac{2 \pi}{N}kn} = \sum_{n=0}^{N-1} x[n] W_N^{kn}, \quad k \in \mathbb{Z},
+\mathcal{F}\{x[n]\}[k] = X[k] = \sum_{n=0}^{N-1} x[n] \text{e}^{-j\frac{2 \pi}{N}kn} = \sum_{n=0}^{N-1} x[n] W_N^{kn}, \quad k \in \mathbb{Z},
 \end{align}
 
-and such that $\textbf{X} = F\textbf{x}$ with the column vectors $\textbf{X}, \textbf{x} \in \mathbb{C}^N$ and $F$ as the $N\times N$ matrix in \eqref{eq:DFT_matrix}. This is called the spectrum of $x$. \\
-The inverse DFT of a length-$N$ sequence $X$ is $\textbf{x} = F^{-1} \textbf{X} = \frac{1}{N} F^* \textbf{X}$ such that
+and such that $\textbf{X} = F\textbf{x}$ with the column vectors $\textbf{X}, \textbf{x} \in \mathbb{C}^N$ and $F$ as the $N\times N$ matrix in \eqref{eq:DFT_matrix}. $X[k]$ called the spectrum of $x[n]$. \\
+The inverse DFT of a length-$N$ sequence $X[k]$ is $\textbf{x} = F^{-1} \textbf{X} = \frac{1}{N} F^* \textbf{X}$ such that
 \begin{align*}
 x[n] = \dfrac{1}{N}\sum_{k=0}^{N-1} X[k] \text{e}^{j\frac{2 \pi}{N}kn} = \dfrac{1}{N}\sum_{k=0}^{N-1} X[k] W_N^{-kn}, \quad n \in \mathbb{Z}.
 \end{align*}
@@ -87,12 +87,12 @@ x[n] \xleftrightarrow{\text{DFT}} X[k].
 \end{align*}
 \end{definition}
 
-The DFT has to take into consideration that it is only fed a finite number of input data. Since this is the case, the DFT treats the data as if it were periodic. A sequence $x[n]$ can be considered $N$-periodic since:
+A sequence $X[k]$ can be considered $N$-periodic since:
 \begin{align*}
-	X[n+N]
-	&= \sum_{k=0}^{N-1} x[k] \text{e}^{-j \frac{2 \pi}{N}  k (n		+N)} \\
-	&= \sum_{k=0}^{N-1} x[k] \text{e}^{-j \frac{2 \pi k n}{N}}		\text{e}^{\frac{2 \pi}{N} kN} \\
-	&= \sum_{k=0}^{N-1} x[k] \text{e}^{-j \frac{2 \pi}{N} k n} 		= X[n].
+	X[k+N]
+	&= \sum_{n=0}^{N-1} x[n] \text{e}^{-j \frac{2 \pi}{N}  n (k		+N)} \\
+	&= \sum_{n=0}^{N-1} x[n] \text{e}^{-j \frac{2 \pi}{N}kn}		\text{e}^{\frac{2 \pi}{N} nN} \\
+	&= \sum_{n=0}^{N-1} x[n] \text{e}^{-j \frac{2 \pi}{N} k n} 		= X[k].
 \end{align*}
 
 Plancherel's equation holds since for $\textbf{X} = F\textbf{x}$ and $\textbf{Y} = F\textbf{y}$:
@@ -106,7 +106,7 @@ For this case the \textit{circular convolution operator} is defined, which is cl
 %The circular convolution operator is the appropriate description of LSI systems on circularly extended finite-length input, as in the case of DFT. 
 %\chr{Ikke glad for denne sætning}\frede{Det forstår jeg godt, da jeg ikke forstår den \texttrademark}
 %". As we haveseen in Section 3.3.3, the circular convolution operator (3.71) is the appropriate description of LSI systems operating on circularly extended finite-length inputs"
-The circular convolution use the modulo function $\langle k\rangle_N$. It is possible to write $k = LN+r$ for $0 \leq r < N$ and $L \in \mathbb{Z}$ in a unique way, and the modulo function finds the remainder $r$ from division of $k$ by $N$:
+The circular convolution usesx the modulo function $\langle k\rangle_N$. It is possible to write $k = LN+r$ for $0 \leq r < N$ and $L \in \mathbb{Z}$ in a unique way, and the modulo function finds the remainder $r$ from division of $k$ by $N$:
 \begin{align*}
 \langle k \rangle_N = r.
 \end{align*}
@@ -114,20 +114,19 @@ The circular convolution use the modulo function $\langle k\rangle_N$. It is pos
 Examples are that $\langle 12 \rangle_{10} = 2$ since $12 = 1 \cdot 10 + 2$ and that $\langle -12 \rangle_{10} = 8$ since $-12 = -2 \cdot 10 + 8$.
 
 \begin{definition}[Circular convolution]
- 	The circular convolution between length-$N$ sequences $h$ 		and $x$ is defined as
+ 	The circular convolution between length-$N$ sequences $h[n]$ 		and $x[n]$ is defined as
 	\begin{align*}
-	(Hx)[n] = (h \circledast x)[n] = \sum_{k = 0}^{N-1} x[k] 		h[\langle n-k\rangle_N] =\sum_{k = 0}^{N-1} x[\langle n-k		\rangle_N] h[k]
+	(h \circledast x)[n] = \sum_{k = 0}^{N-1} x[k] 		h[\langle n-k\rangle_N] =\sum_{k = 0}^{N-1} x[\langle n-k		\rangle_N] h[k].
 	\end{align*}
-	where $H$ is the circular convolution operator associated 		with $h$.
 \end{definition}
 
 For a general $k\in\mathbb{Z}$ with $k = LN + r, 0 \leq r \leq N$:
 \begin{align*}
 X[k] = \sum_{n=0}^{N-1} x[n] W_N^{kn} = \sum_{n=0}^{N-1} x[n] W_N^{(LN+r)n} = \sum_{n=0}^{N-1} x[n] W_N^{rn} = X[\langle k\rangle_N].
 \end{align*}
-
+The following lemma is used in the proof for theorem \ref{theo:DFT_circ}.
 \begin{lemma}
-For $\textbf{x} = [x[0] \dots x[N-1]]^T$ and $0 \leq L \leq N$, then:
+For an length-$N$ sequence $x[n]$ and $0 \leq L \leq N$, then:
 \begin{align*}
 y[n]  = x[\langle n-L\rangle_N] \xleftrightarrow{\text{DFT}} Y[k] = X[k] \text{e}^{-j\frac{2\pi}{N} kL}.
 \end{align*}
@@ -153,12 +152,12 @@ Y[k] &= \sum_{m=N-L}^{N-1} x[m]\text{e}^{-j\frac{2\pi}{N} k(m+L)} + \sum_{m=0}^{
 \end{align*}
 \end{proof}
 
-This result is used to prove the following main theorem.
+With this result the following main theorem can be proved.
 
 \begin{theorem} \label{theo:DFT_circ}
-For $\textbf{x} = [x_0 \dots x_{N-1}]^T$ and $\textbf{y} = [y_0 \dots y_{N-1}]^T$, then:
+For length-$N$ sequences $x[n]$ and $y[n]$ then:
 \begin{align*}
-\textbf{z} = \textbf{x} \circledast \textbf{y} \xleftrightarrow{\text{DFT}} Z[k] = X[k] Y[k].
+z[n] = (x \circledast y)[n] \xleftrightarrow{\text{DFT}} Z[k] = X[k] Y[k].
 \end{align*}
 \end{theorem}
 

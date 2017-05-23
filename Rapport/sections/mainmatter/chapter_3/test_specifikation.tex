@@ -1,5 +1,5 @@
-\section{Test specification}\label{sec:testspec}
-In this section test specifications is determined in order to test and evaluate the system. This is be done upon the concept of the V-model illustrated in figure \ref{fig:vmodel}. \cite{vmodel} The V-model is a simple multiple-phase model used to describe phases in the development process. The left side of the V is decomposition of the problem - \textit{synthesising} , and the right side is the creation, integration, and test of the system - \textit{abstracting}.
+\section{Test specifications}\label{sec:testspec}
+In this section test specifications are determined in order to test and evaluate the system. This is done upon the concept of the V-model illustrated in figure \ref{fig:vmodel} \cite{vmodel}. The V-model is a simple multiple-phase model used to describe phases in the development process. The left side of the V is a decomposition of the problem called \textit{synthesis}, and the right side is the creation, integration, and test of the system called \textit{abstraction}.
 \begin{figure}[H]
 \centering
 \tikzstyle{block} = [rectangle, draw,thick,fill=white, 
@@ -36,8 +36,7 @@ In this section test specifications is determined in order to test and evaluate 
 %
 %In the previous synthesis section requirements of the system was established. This section describes test specifications of each phase starting from the smallest unit, and working up to the system as a whole. \\
 %\\
-The system is tested from the bottom up, starting with the smallest components (single units). This phase is called the ``Unit Testing''. The test checks each of the units individually and verifies that they are working according to the expectations. Next up the coherence of the system is tested, and finally the full system as a whole unit is tested. Detailed design, implementation and tests are described in chapter \ref{ch10}. \\
-Units in the model are as follows:
+The system is tested from the bottom up, starting with the smallest components (single units). This phase is called the ``Unit Testing''. The test checks each of the units individually and verifies that they are working according to the expectations. Next up the coherence of the system is tested, and finally the full system as a whole unit is tested. Detailed design, implementation and tests are described in chapter \ref{ch10}. Units in the model are as follows:
 \begin{multicols}{2}
 \subparagraph{Physical components}  
 \begin{itemize}
@@ -48,36 +47,35 @@ Units in the model are as follows:
 \columnbreak
 \subparagraph{Algorithm}
 \begin{itemize}
+	\item Fourier transform
 	\item Filter
-	\item Fourier transformation
-	\item Spectrogram
+	\item short-time Fourier transform
 	\item Peak detection
 \end{itemize}
 \end{multicols}
 Note that tests on the physical components will not be carried out in this project because pretested hardware and corresponding software is used. Tests will thereby focus on the units of the application.
  
 \subsection{Unit tests} 
-\textbf{Fourier transformation} \\
-The Fourier transformation is done by implementing the Fast Fourier Transformation described in section \ref{sec:FFT} 
-To test the implementation it is compared to the pre-existing FFT function from the Numpy-package in Python. These are compared by computing the time it takes for each function to compute different amounts of the same random numbers. Further this is compared to a straightforward implementation of the Discrete Fourier Transformation to see the effect of the Fast Fourier Transformation. Furthermore, the outputs of the functions are compared.
+\textbf{Fourier transform} \\
+The Fourier transform is needed for the short-time Fourier transform and is done by implementing the fast Fourier transform (FFT) described in section \ref{sec:FFT} 
+To test the implementation it is compared to the pre-existing FFT function from the Numpy-package in Python. These are compared by computing the time it takes for each function to compute different amounts of the same random numbers. Furthermore, this is compared to a straightforward implementation of the discrete Fourier transform (DFT) to see the effect of the fast Fourier transform. Finally the outputs of the functions are compared.
 \\
 \\
 \textbf{Filter}\\
-The filter has to fulfil certain specifications that is defined as a part of the filter design process in chapter \ref{ch10}. The filter is tested on a known single tone, where a noise signal has been digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal-to-noise ratio. Hence, it is possible to verify whether the filter succeeds to remove the specified frequencies in order to reduce the noise. The verification is made by analysing the frequency spectrum of the filtered signal compared to the original pure signal. \\
+The filter has to fulfil certain specifications that are defined as part of the filter design process in chapter \ref{ch10}. The filter is tested on a known single tone, where a noise signal has been digitally added. By this the frequency spectrum of both the pure signal and the noise is known and so is the signal-to-noise ratio. Hence, it is possible to verify whether the filter succeeds to remove the specified frequencies in order to reduce the noise. The verification is made by analysing the frequency spectrum of the filtered signal compared to the original pure signal. \\
 \\
 \textbf{STFT algorithm and spectrogram}\\
-The spectrogram is made by the Short-Time Fourier Transform described in section \ref{sec:STFT}. As the test of the Fourier Transformation described above, the spectrogram algorithm is tested against an existing algorithm from the Numpy-package in Python on the same data set. The algorithm is tested on a sine wave with a known frequency, which illustrates the usability of the spectrogram. Secondarily the algorithm is tested on a recorded signal to test the implementation according to the data type that will act as the input in the final system.
+The spectrogram is made by the short-time Fourier transform described in section \ref{sec:STFT}. The algorithm is tested on a sine wave with a known frequency, which illustrates the usability of the spectrogram. Secondarily the algorithm is tested on a recorded signal to test the implementation according to the data type that will act as the input in the final system.
 \\ \\
 \textbf{Peak detection algorithm}\\
-The peak amplitude detector is tested on a recorded signal with a known single tone. By table \ref{tab:tone} in chapter \ref{ch2} it is given that the significant frequency of a specific tone is defined. Thus the wanted output is known for comparison.         
+The peak amplitude detector is tested on a recorded signal with a known single tone. By table \ref{tab:freq} in chapter \ref{ch2} the fundamental frequencies of specific tones are given. Thus the wanted output is known for comparison.         
 
 \subsection{Integration test}
-When each unit is working according to the specifications the next step is to test the units as they are integrated into a single system. This test is done by taking the output of the previous unit and feeding it into the next unit of the algorithm. Hence focus of this test is the technical aspect not the level of performers according to the problem statement. This is the last step in creating the final system.
+When each unit is working according to the specifications the next step is to test the units as they are integrated into a single system. This test is done by taking the output of the previous unit and feeding it into the next unit of the algorithm. Hence, focus of this test is the coherence of the algorithm and not the level of performance according to the problem statement. This is the last step in creating the final system.
 
 \subsection{System test of the final application}
-The final system is tested by giving the final application a recording with a known result and comparing the difference between the application's result and the known result. The same test will be performed with different input files containing single tones that vary in complexity - by speed an shift between tones. The aim for the system is to identify the single tones from a simple melody. \\
-When this has been achived it is of further interest to test the system on a single chord in order to find the limitations of the system.
-\\
+The final system is tested by giving the final application a recording with a known result and comparing the difference between the application's result and the known result. The same test is performed with different input files containing single tones that vary in complexity by speed and shifts between tones. The aim of the system is to identify significant frequencies in a recording over time sufficient for recognition of tones in the recording. When this has been achieved it is of further interest to test the system on a single chord in order to find the limitations of the system.
+\\\\
 The music used for testing the application is single tones, single chords, simple melodies containing only a single note at a time. The single tones and melodies without chords will allow insight into the methods used without complicating the recognition of the tones by blending together different instruments and different sound frequencies. Naturally, it will be more difficult to recognize the tones in the single chords and melodies with chords. The recordings are described in appendix \ref{recordings}. \\
 \\
-On behalf of the final test it should be possible to discuss the capabilities and limitations of the system with references to practical use according to the central problem statement of the project.  
+Based upon the final test it is possible to discuss the capabilities and limitations of the system with references to practical use according to the central problem statement of the project.  

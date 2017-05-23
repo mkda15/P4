@@ -1,7 +1,7 @@
-\section{The Short-Time Fourier Transform} \label{sec:STFT}
+\section{The short-time Fourier transform} \label{sec:STFT}
 A signal in time contains information about the amplitude of the signal at specific times but does not hold any explicit informations about the frequencies. On the other hand, the Fourier transform of a signal contains information about a certain frequency but not at which time it appears.
 \\ \\
-From a musical point of view, let $f(t)$ be a piece of music describing the amplitude of the vibration of a speaker membrane in time, $t \in \mathbb{R}$. From this signal one is possibly able to detect the rythmical patterns of the music but probably not the melody or just single tones. On the other hand, the Fourier transform of $f$, $\mathcal{F}\{f(t)\}(\omega)$, will show the dominating frequencies of the piece of music from which one can detect the tones but not the duration of these. Therefore, neither the signal in time $f(t)$ nor the Fourier transform $F(\omega)$ in frequency contains all the relevant information in order to describe the signal.
+From a musical point of view, let $f(t)$ be a piece of music describing the amplitude of the vibration of a speaker membrane in time, $t \in \mathbb{R}$. From the graph this signal one is possibly able to detect the rythmical patterns of the music but probably not the melody or just single tones. On the other hand, the Fourier transform of $f$, $\mathcal{F}\{f(t)\}(\omega)$, will show the dominating frequencies of the piece of music from which one can detect the tones but not the duration of these. Therefore, neither the signal in time $f(t)$ nor the Fourier transform $F(\omega)$ in frequency contains all the relevant information in order to describe the signal.
 \\
 Figure \ref{fig:sine_STFT} is a follow-up from figure \ref{fig:sine_sum} and initially shows a sine wave of the form $f_1(t) = \sin(220\pi\cdot t) + \sin(440\pi\cdot t)$, which is the tone $A_2$ with frequency $110$ Hz and a single harmonic of $A_3$ with frequency $220$ Hz. After approximately 22 milliseconds the sine wave shifts to $f_2(t) = \sin(880\pi\cdot t) + \sin(1760\pi\cdot t)$, which is the tone $A_4$ with frequency $440$ Hz and a single harmonic of $A_5$ with frequency $880$ Hz. From a graph of a signal $f(t)$ similar to figure \ref{fig:sine_time_STFT} it is rather simple to determine the rythmical patterns of the music but one can not determine the frequencies. On the other hand, figure \ref{fig:sine_freq_STFT} shows the frequency spectrum of the sine waves, and it is quite obvious what the frequencies (and hence also tones) are, but no rythmical patterns can be determined from the frequency spectrum alone.
 
@@ -23,23 +23,23 @@ Figure \ref{fig:sine_STFT} is a follow-up from figure \ref{fig:sine_sum} and ini
 	\label{fig:sine_STFT}
 \end{figure}
 
-Amazingly, the human ear and brain is able to perceive the bare signal $f$ and process it into a representation that provides simultaneous information about both time and frequency. This is represented through the staff system shown in figure \ref{fig:cmajor} in chapter \ref{ch2}. The goal of time-frequency analysis (at least in this project) is to create a joint time-frequency representation of a signal \cite{page 22, FTFA}. This is the incentive for the short-time Fourier transform (STFT), which may be thought of as the mathematical analog of the musical score \cite{page 37, FTFA}. The following is inspired by \cite{page 37, FTFA}.
+The human ear and brain is able to perceive the bare signal $f$ and process it into a representation that provides simultaneous information about both time and frequency. This is represented through the staff system shown in figure \ref{fig:cmajor} in chapter \ref{ch2}. The goal of time-frequency analysis (at least in this project) is to create a joint time-frequency representation of a signal \cite{page 22, FTFA}. This is the incentive for the short-time Fourier transform (STFT), which may be thought of as the mathematical analogue of the musical score \cite{page 37, FTFA}. The following is inspired by \cite{page 37, FTFA}.
 \\ \\
 The idea in the STFT is to obtain properties of a local frequency spectrum of $f$ by restricting it to an interval and taking the Fourier transform of this interval. $f$ is restricted on this interval by using a window function, which is close to 1 near the origin and decays towards zero at the edges, which is therefore a smooth cut-off function. The boundaries created by a sharp cut-off function will be interpreted by the Fourier transform as a discontinuity or an abrupt variation of the signal, which is obviously not desirable \cite{Davis}. The following definition of the STFT is inspired by the definition in \cite{page 37, FTFA} but has been adjusted to the definition of the Fourier transform used in this project. Also, $g$ is not assumed to take complex values as in \cite{page 37, FTFA}.
 
-\begin{definition}[The Short-Time Fourier Transform]\label{def:stft}
-Let $f,g \in \mathcal{L}^2(\mathbb{R}^d)$. For a fixed window function $w \neq 0$ the short-time Fourier transform of a function $f$ with respect to $g$ is defined as:
+\begin{definition}[The short-time Fourier transform]\label{def:stft}
+Let $x,w \in \mathcal{L}^2(\mathbb{R}^d)$. For a fixed window function $w \neq 0$ the short-time Fourier transform of a function $x$ with respect to $w$ is defined as:
 \begin{align}
-X(\tau,\omega) = \int_{\mathbb{R}^d} f(t) w(t - \tau) \text{e}^{-j \omega \cdot t} dt \quad \textnormal{for} \quad \tau,\omega \in \mathbb{R}^d.
+X(\tau,\omega) = \int_{\mathbb{R}^d} x(t) w(t - \tau) \text{e}^{-j \omega \cdot t} dt \quad \textnormal{for} \quad \tau,\omega \in \mathbb{R}^d.
 \end{align}
 \end{definition}
 
 However, in this project the STFT is used only for $d = 1$. $X(\tau,\omega)$ can be thought of as a measure for the amplitude of the frequency band near $\omega$ at time $\tau$. The window function $w$ is usually kept fixed, and $X$ is considered to be a linear mapping from functions on $\mathbb{R}^d$ to functions on $\mathbb{R}^{2d}$, which is known as the \textit{time-frequency plane} for $d=1$ in signal analysis \cite{page 38, FTFA}. Definition \ref{def:stft} can be formulated for discrete-time systems as well \cite{page 846, DTSP}.
 
-\begin{definition}[The discrete Short-Time Fourier Transform]\label{def:stft_discrete}
-Let $f,g\in\ell^2$. For a fixed window sequence $w \neq 0$ the discrete short-time Fourier transform of a sequence $f$ with respect to $w$ is defined as
+\begin{definition}[The discrete short-time Fourier transform]\label{def:stft_discrete}
+Let $x[n],w[n]\in\ell^2$. For a fixed window sequence $w[n] \neq 0$ the discrete short-time Fourier transform of a sequence $x[n]$ with respect to $w[n]$ is defined as
 \begin{align}
-X[n, \omega] = \sum_{m=-\infty}^{\infty} f[n+m]w[m]\text{e}^{-j\omega m}.
+X[n, \omega] = \sum_{m=-\infty}^{\infty} x[n+m]w[m]\text{e}^{-j\omega m}.
 \end{align}
 \end{definition}
 
@@ -71,18 +71,18 @@ legend style={at={(axis cs:10.1,1.5)},anchor=north west}]
 
 The discrete STFT is used to produce a spectrogram, which is also known as the energy density spectrum:
 \begin{align*}
-|X[n,\omega]|^2 = \left| \sum_{m=-\infty}^{\infty} f[n+m]w[m]\text{e}^{-j\omega m} \right|^2
+|X[n,\omega]|^2 = \left| \sum_{m=-\infty}^{\infty} x[n+m]w[m]\text{e}^{-j\omega m} \right|^2.
 \end{align*}
 
 The spectrogram shows the signal in time and frequency, and the resolutions depend on how wide the window is:
 
-\paragraph{A rather wide window} leads to good \textit{frequency resolutions}, and e.g. constant frequencies are thus clearly visible in the time-frequency plane. However, a spike will be blurred in the time-frequency plane as a wide window can't exactly determine at what time the spike occurs.
+\paragraph{A rather wide window} leads to good \textit{frequency resolutions}, and e.g. constant frequencies are thus clearly visible in the time-frequency plane. However, a spike will be blurred in the time-frequency plane as a wide window can not exactly determine at what time the spike occurs.
 \paragraph{A rather narrow window} leads to good \textit{time resolutions}, which means that a spike is clearly visible at a given time, but constant frequencies are on the other hand blurred \cite{Davis}.
 \\ \\
 This apparent trade-off is due to the fact that it is fundamentally impossible to simultaneously have the complete information of a signal in both the time and frequency domain. This is a consequence of the Heisenberg uncertainty principle \cite{page 409, Wang}.
 
 \subsection{The Heisenberg uncertainty principle}\label{sec:heisenberg}
-The Heisenberg uncertainty principle comes from quantum mechanics, where it is impossible to simultaneously measure both the position and the momentum of a particle accurately since higher precision in one quantity implies lower precision in the other. This is also the case in the time and frequency domain, which is expressed by theorem \ref{theorem:fund_sym_Fourier}  \ref{theorem:fund_sym_Fourier_b}; if a signal $x(t)$ is stretched by a dilation of $\delta > 1$, then its spectrum $X(\omega)$ is compressed, and if $x(t)$ is compressed by a dilation of $0 < \delta < 1$, then $X(\omega)$ is conversely stretched \cite{page 123-124, Wang} \cite{page 135, Wang}. A rather extreme example is the Dirac delta function $\delta(t)$ defined in definition \ref{def:dirac}, which is concentrated within a short time range, and its Fourier transform is a constant, $\mathcal{F}\{\delta(t)\}(\omega) = 1$. Conversely, a constant, which is spread in time, has an impulse as its Fourier transform, $\mathcal{F}\{1\}(\omega) = \delta(t)$. This is the background for the Heisenberg uncertainty principle, which is stated with some concepts from probability theory. The function 
+The Heisenberg uncertainty principle comes from quantum mechanics, where it is impossible to simultaneously measure both the position and the momentum of a particle accurately since higher precision in one quantity implies lower precision in the other. This is also the case in the time and frequency domain, which is expressed by theorem \ref{theorem:fund_sym_Fourier}  \ref{theorem:fund_sym_Fourier_b}; if a signal $x(t)$ is stretched by a dilation of $\delta > 1$, then its spectrum $X(\omega)$ is compressed, and if $x(t)$ is compressed by a dilation of $0 < \delta < 1$, then $X(\omega)$ is conversely stretched \cite{pages 123-124, 135, Wang}. A rather extreme example is the Dirac delta function $\delta(t)$ defined in definition \ref{def:dirac}, which is concentrated within an infinitesimal time range, and its Fourier transform is a constant, $\mathcal{F}\{\delta(t)\}(\omega) = 1$. Conversely, a constant, which is spread in time, has an impulse as its Fourier transform, $\mathcal{F}\{1\}(\omega) = \delta(\omega)$. This is the background for the Heisenberg uncertainty principle, which is stated with some concepts from probability theory. The function 
 \begin{align*}
 p_x(t) = \dfrac{|x(t)|^2}{\|x(t)\|^2} = \dfrac{|x(t)|^2}{\int_{-\infty}^\infty |x(t)|^2 dt}, \quad x \in \mathcal{L}^2
 \end{align*}
@@ -94,7 +94,7 @@ p_x(t) > 0 \quad \text{and} \quad \int_{-\infty}^\infty p_x(t) dt = 1.
 
 The variance of $p_x(t)$, $\sigma_t^2$, is a measure of the dispersion of $x(t)$:
 \begin{align*}
-\sigma_t^2 = \int_{-\infty}^\infty (t - \mu_t)^2 p_x(t) dt = \dfrac{1}{\|x(t)\|^2} \int_{-\infty}^\infty (t - \mu_t)^2 |x(t)|^2 dt, \quad tx \in \mathcal{L}^2
+\sigma_t^2 = \int_{-\infty}^\infty (t - \mu_t)^2 p_x(t) dt = \dfrac{1}{\|x(t)\|^2} \int_{-\infty}^\infty (t - \mu_t)^2 |x(t)|^2 dt, \quad tx \in \mathcal{L}^2,
 \end{align*}
 
 where $\mu_t$ is the mean of $p_x(t)$:
@@ -137,7 +137,7 @@ It is assumed that $\mu_t = \mu_\omega = 0$ without loss of generality, and then
 &= \dfrac{1}{2\pi\|x(t)\|^4} \int_{-\infty}^\infty |tx(t)|^2 dt \int_{-\infty}^\infty |\omega X(\omega)|^2 d\omega.
 \end{align}
 
-Due to property (c) in theorem \ref{theorem:fund_sym_Fourier} and Parseval's equation it is seen that
+Due to property \ref{theorem:fund_sym_Fourier}\ref{theorem:fund_sym_Fourier_c} and Parseval's equation it is seen that
 \begin{align*}
 \dfrac{1}{j} \mathcal{F}\{x'(t)\}(\omega) = \omega X(\omega)
 \end{align*}
@@ -149,7 +149,7 @@ and
 
 Therefore, \eqref{eq:Heis_proof} becomes:
 \begin{align} \label{eq:Heis_proof2}
-\sigma_t^2 \sigma_\omega^2 &= \dfrac{1}{2\pi \|x(t)\|^4} \int_{-\infty}^\infty |tx(t)|^2 dt 2\pi \int_{-\infty}^\infty | x'(t)|^2 dt \nonumber \\
+\sigma_t^2 \sigma_\omega^2 &= \dfrac{1}{2\pi \|x(t)\|^4} \int_{-\infty}^\infty |tx(t)|^2 dt\,2\pi \int_{-\infty}^\infty | x'(t)|^2 dt \nonumber \\
 &\geq \dfrac{1}{\|x(t)\|^4} \left[ \int_{-\infty}^\infty \left| t \overline{x(t)} x'(t) \right| dt \right]^2,
 \end{align}
 
@@ -168,7 +168,7 @@ The integral is integrated by parts:
 \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt = \left[ t |x(t)|^2 \right]_{t=-\infty}^\infty - \int_{-\infty}^\infty |x(t)|^2 dt = - \int_{-\infty}^\infty |x(t)|^2 dt
 \end{align*}
 
-where it has been used that $t|x|^2 = tx\overline{x}$, so it follows that according to Hölder's inequality $\|t|x|^2\|_{\mathcal{L}^1} = \|tx\overline{x}\|_{\mathcal{L}^1} \leq \|tx\|_{\mathcal{L}^2} \|x\|_{\mathcal{L}^2} < \infty$ as $x,tx \in \mathcal{L}^2$. Thus $t|x|^2 \in \mathcal{L}^1$ so $\lim_{|t| \to \infty} t |x(t)|^2 = 0$. This result is substituted into \eqref{eq:Heis_proof3}, which then yields:
+where it has been used that $t|x|^2 = tx\overline{x}$, so it follows that according to Hölder's inequality $\|t|x|^2\|_1 = \|tx\overline{x}\|_1 \leq \|tx\|_2 \|x\|_2 < \infty$ as $x,tx \in \mathcal{L}^2$$^{[\footnote{See definition \ref{def:Lpspace} for notation of $\mathcal{L}^p$-norms}]}$. Thus $t|x|^2 \in \mathcal{L}^1$ so $\lim_{|t| \to \infty} t |x(t)|^2 = 0$. This result is substituted into \eqref{eq:Heis_proof3}, which then yields:
 \begin{align*}
 \sigma_t^2 \sigma_\omega^2 &\geq \dfrac{1}{4 \cdot \|x(t)\|^4} \left[ \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt \right]^2 \\
 &= \dfrac{1}{4 \cdot \|x(t)\|^4} \left[ - \int_{-\infty}^\infty |x(t)|^2 dt \right]^2 \\
@@ -177,4 +177,4 @@ where it has been used that $t|x|^2 = tx\overline{x}$, so it follows that accord
 \end{align*}
 \end{proof}
 
-Therefore, the optimal variance in time and frequency satifies the relation $\sigma_t^2\sigma_\omega^2 = \frac{1}{4}$.
+Therefore, the minimum product of the variances in time and frequency is gives by the relation $\sigma_t^2\sigma_\omega^2 = \frac{1}{4}$.
