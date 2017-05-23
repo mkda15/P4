@@ -1,4 +1,4 @@
-In this chapter sample theory and its importance when converting an analog audio signal to a digital audio signal along with its complications is treated \martin{Frederik retter ``analogue'' til ``analog''.}.
+In this chapter sample theory and its importance when converting an analog audio signal to a digital audio signal along with its complications is treated.
 %\section{The frequency domain}
 %The following sections look at functions in both the \textit{time}- and \textit{frequency} domains and utilizes the advantages of these different visualizations. To express a function of time as a function of frequency the \textit{Fourier transform} is used. The transform decomposes a periodic function $A$ of time $t$ into an amplitude valued function $\hat{A}$ of frequency $\omega$ and shows which amplitudes of frequencies of different sinusoids are present in the signal. The mathematical background for the Fourier transform is reserved for chapter \ref{ch5} - this chapter will make do with the graphical explanation in figures \ref{fig:time} and \ref{fig:freq}. Notice the both real and imaginary amplitudes of $\hat{A}$.
 %\begin{figure}[H]
@@ -49,7 +49,7 @@ In this chapter sample theory and its importance when converting an analog audio
 \section{Sampling} \label{sec:sampling}
 In this section sampling will be defined mathematically, which allows for a frequency analysis leading to the establishment of the important \textit{Sampling Theorem}.
 \\ \\
-Sampling is the process of representing a time-continuous signal by a sequence of values. Doing so converts the time-continuous signal into a time-discrete signal $x(n)$ \cite{pelgrom}. Sampling is usually done with digitalization of the signal in mind, and this requires the signal to be discretized in amplitude, too.$^[$\footnote{$x(n)$ is merely discrete in time and will be sufficient for the following mathematical representation of sampling.}$^]$ When discretized in both time and amplitude the signal is referred to as $x[n]$. The relation between a continuous function $x_c(t)$ and the discrete funtion $x(n)$ obtained by sampling $x_c(t)$ is described by
+Sampling is the process of representing a time-continuous signal by a sequence of values. Doing so converts the time-continuous signal into a time-discrete signal $x(n)$ \cite{page 5, pelgrom}. Sampling is usually done with digitalization of the signal in mind, and this requires the signal to be discretized in amplitude, too.$^[$\footnote{$x(n)$ is merely discrete in time and will be sufficient for the following mathematical representation of sampling.}$^]$ When discretized in both time and amplitude the signal is referred to as $x[n]$. The relation between a continuous function $x_c(t)$ and the discrete funtion $x(n)$ obtained by sampling $x_c(t)$ is described by
 \begin{align} \label{eq:sampling_principle}
 x(n)=x_c(nT_s),
 \end{align}
@@ -276,7 +276,7 @@ Just as \eqref{eq:sampling} mathematically samples $x_c(t)$ in the time domain, 
 \textit{Aliasing} is a consequence of not sampling at a sufficiently high sampling frequency $f_s$ which results in the continuous signal $x_c(t)$ being non-reconstructable from the sampled signal $x_s(t)$. In this discussion \textit{bandlimited} signals are of interest.
 
 \paragraph{Bandlimited signal}
-A signal is bandlimited if the signal contains no frequencies higher than some frequency $\omega_N$, which means that $F(\omega) = 0$ for $|\omega|>\omega_N$ \cite{FAA}.
+A signal is bandlimited if the signal contains no frequencies higher than some frequency $\omega_N$, which means that $F(\omega) = 0$ for $|\omega|>\omega_N$ \cite{page 230, FAA}.
 \\\\
 From \eqref{eq:samp_freq} it is seen that $X_s(\omega)$ consists of copies of $X_c$ repeated at whole multiples of $\omega_s$ on both sides of the origin, which is shown in figure \ref{fig:copies}.
 \begin{figure}[H]
@@ -468,7 +468,7 @@ f(t) &= \dfrac{1}{2\pi} \int_{-\omega_N}^{\omega_N} F(\omega) \mathrm{e}^{j\omeg
 &= \dfrac{1}{2\omega_N} \int_{-\omega_N}^{\omega_N} \! \lim_{N\to\infty} \sum_{n=-N}^{N} f \left( \dfrac{n\pi}{\omega_N} \right) \mathrm{e}^{-jn\pi\omega/\omega_N} \mathrm{e}^{j\omega t} \, d\omega.
 \end{align}
 
-A linear and bounded operator is continuous. From theorem \ref{theo:Plancherel} it follows that the Fourier transform is bounded, and together with the linearity of the Fourier transform it is continuous on $\mathcal{L}^2$. This means that the limit in \eqref{eq:limit} can be moved outside of the integral and the summation and integral may then be switched \cite{FAA}:
+A linear and bounded operator is continuous. From theorem \ref{theo:Plancherel} it follows that the Fourier transform is bounded, and together with the linearity of the Fourier transform it is continuous on $\mathcal{L}^2$. This means that the limit in \eqref{eq:limit} can be moved outside of the integral and the summation and integral may then be switched:
 \begin{align*}
 f(t) &= \dfrac{1}{2\omega_N} \sum_{n=-\infty}^{\infty} f \left( \dfrac{n\pi}{\omega_N} \right) \dfrac{\mathrm{e}^{j(\omega_N t - n\pi)\omega/\omega_N}}{j(\omega_Nt - n\pi)/\omega_N}\Bigg|_{\omega=-\omega_N}^{\omega_N}
 \\
@@ -486,14 +486,14 @@ The purpose of an anti-aliasing filter is to avoid the aliasing phenomenon, whic
 An anti-aliasing filter typically forms an analog lowpass filter (see section \ref{sec:ideal_filt}) with the Nyquist frequency as the ideal cut-off frequency. However, when designing a practical analog anti-aliasing filter one needs to consider the transitionband with respect to the Nyquist frequency.
 
 \section{Analog-to-digital conversion} \label{ADC}
-An analog-to-digital converter (ADC) is a device that converts an \textit{amplitude-continuous} signal to an \textit{amplitude-discrete} signal.  The analogue signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of analogue-to-digital conversion but not explain the in-depth theory as the conversion and the components used are not a focus points of this project.
+An analog-to-digital converter (ADC) is a device that converts an \textit{amplitude-continuous} signal to an \textit{amplitude-discrete} signal.  The analog signal is in the case of this project voltage from a microphone reacting to sound waves. This section will establish the basic concepts of analog-to-digital conversion but not explain the in-depth theory as the conversion and the components used are not a focus points of this project.
 \\ \\
-The process of converting an analogue audio signal to a digital audio signal consists of the following elements:
+The process of converting an analog audio signal to a digital audio signal consists of the following elements:
 \begin{enumerate}
 \item A \textit{track-} or \textit{sample-and-hold} circuit capable of quantizing the signal in time.
-\item An \textit{analogue-to-digital converter} (ADC) capable of quantizing the signal in amplitude.
+\item An \textit{analog-to-digital converter} (ADC) capable of quantizing the signal in amplitude.
 \end{enumerate}
-If the signal is not completely understood or known, an anti-aliasing filter to filter out unwanted high frequencies may be needed to avoid aliasing. This is done before conversion of the signal from analogue to digital. The placement of an analogue to digital converter (and anti-aliasing filter) in a system to record sound to a digital storage unit is seen in figure \ref{fig:input}.
+If the signal is not completely understood or known, an anti-aliasing filter to filter out unwanted high frequencies may be needed to avoid aliasing. This is done before conversion of the signal from analog to digital. The placement of an analog to digital converter (and anti-aliasing filter) in a system to record sound to a digital storage unit is seen in figure \ref{fig:input}.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=0.5,node distance=2.5cm,auto,>=latex']
@@ -522,13 +522,13 @@ If the signal is not completely understood or known, an anti-aliasing filter to 
 \draw(-0.3,0.5) -- (-0.3,-0.5);
 %\draw (-1.5,0) sin (-1.40,0.5) cos (-1.30,0) sin (-1.20,-0.5) cos (-1.10,0) sin (-1,0.5) cos (-0.9,0) sin (-0.8,-0.5) cos (-0.7,0);
 \end{tikzpicture}
-\caption{Basic block-diagram illustrating an ADC in a system for converting an analogue sound signal to a digital one.} 
+\caption{Basic block-diagram illustrating an ADC in a system for converting an analog sound signal to a digital one.} 
 \label{fig:input}
 \end{figure}
 %\input{sections/mainmatter/chapter_4/_____.tex}
 
 \subsubsection{Sample-and-hold}
-A sample-and-hold (S\&H) circuit is responsible for discretizing a signal from continuous time to discrete time by sampling the signal at discrete points in time. An S\&H circuit measures a varying analogue signal (input) and creates a constant analogue signal (output) by ``holding'' the value of the initial signal for a period of time equal to $T_s$ \cite{pelgrom}. The constant signal can then be used for the whole duration $T_s$. It is worth noting that the output of the S\&H circuit is not strictly discrete in time; it is merely constant in periods of time where the value of $x_c(t)$ is held. This allows the ADC to measure and quantize the amplitude and output as a quantized value $x[n]$ at a discrete point in time. Figure \ref{fig:S/H} shows an example of graphs of input and output of an S\&H circuit.
+A sample-and-hold (S\&H) circuit is responsible for discretizing a signal from continuous time to discrete time by sampling the signal at discrete points in time. An S\&H circuit measures a varying analog signal (input) and creates a constant analog signal (output) by ``holding'' the value of the initial signal for a period of time equal to $T_s$ \cite{page 57, pelgrom}. The constant signal can then be used for the whole duration $T_s$. It is worth noting that the output of the S\&H circuit is not strictly discrete in time; it is merely constant in periods of time where the value of $x_c(t)$ is held. This allows the ADC to measure and quantize the amplitude and output as a quantized value $x[n]$ at a discrete point in time. Figure \ref{fig:S/H} shows an example of graphs of input and output of an S\&H circuit.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -553,13 +553,13 @@ ylabel=Voltage]
 \node at(axis cs:5.9342,1.8){$T_s$};
 \end{axis}
 \end{tikzpicture}
-\caption{Voltage of input analogue signal (black) and of output analogue signal (blue). The input signal is held by a S\&H circuit for $T_s$.}
+\caption{Voltage of input analogue signal (black) and of output analog signal (blue). The input signal is held by an S\&H circuit for $T_s$.}
 \label{fig:S/H}
 \end{figure}
 The S\&H circuit must sample at a sufficiently high frequency as specified by theorem \ref{sampling_theorem}.
 
-\subsubsection{Quatization}
-Quantization is the process of discretizing analogue signal values to discrete values and is done with an analogue-to-digital converter. Digital processors are incapable of dividing an interval into infinitely many subintervals (points), which means that a finite number of intervals has to be used. When an analogue signal is quantized its value is compared to a finite number of analogue values, rounded to the nearest value and expressed in digital numbering (binary). The number of digital values therefore depends on the number of bits dedicated to representing a given analogue value as a digital number. When rounding the analogue value to a digital value a round off error is produced, which can be decreased by increasing the number of possible digital values in the interval \cite{pelgrom}. Figure \ref{fig:quant} shows the graph of an analogue signal alongside the quantization levels.
+\subsubsection{Quantization}
+Quantization is the process of discretizing analog signal values to discrete values and is done with an analog-to-digital converter. Digital processors are incapable of dividing an interval into infinitely many subintervals (points), which means that a finite number of intervals has to be used. When an analog signal is quantized its value is compared to a finite number of analog values, rounded to the nearest value and expressed in digital numbering (binary). The number of digital values therefore depends on the number of bits dedicated to representing a given analog value as a digital number. When rounding the analog value to a digital value a round off error is produced, which can be decreased by increasing the number of possible digital values in the interval \cite{pages 91-98, pelgrom}. Figure \ref{fig:quant} shows the graph of an analog signal alongside the quantization levels.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -584,14 +584,13 @@ ylabel=Voltage]
 \label{fig:quant}
 \end{figure}
 
-There exist different ADCs \cite{pelgrom} all with the purpose of expressing a continuous analogue signal as a discrete and quantized digital signal. These different approaches will  not be described as the above description will make do for now. The process of sampling described in section \ref{sec:sampling} will be done with an ADC in the experiments later in the project.
+There exist different ADCs \cite{pelgrom} all with the purpose of expressing a continuous analog signal as a discrete and quantized digital signal. These different approaches will  not be described as the above description will make do for now. The process of sampling described in section \ref{sec:sampling} will be done with an ADC in the experiments later in the project.
 
 \section{Signals and noise}
 This project has the purpose of measuring sound signals and process it in an advantageous way so as to be able to produce a spectrogram of said signal. It is therefore necessary to clarify what is meant by a signal and which kinds of signals are likely to be encountered.
 
 \subsection{Signals}
-A signal is ``[\dots]\textit{a means of conveying information}[\dots]'' \cite{signal_noise} and is in this project a sound signal consisting of sound waves from a musical instrument propagating in a medium (air) and measured by a membrane in a microphone and thereafter converted to an analogue voltage. As sound waves from musical instruments are no different than any other kind of sound waves they will all be measured by the microphone. These other sound waves will be referred to as \textit{noise}.
-
+A signal is ``[\dots]\textit{a means of conveying information}[\dots]'' \cite{page 1, signal_noise} and is in this project a sound signal consisting of sound waves from a musical instrument propagating in a medium (air) and measured by a membrane in a microphone and thereafter converted to an analog voltage. As sound waves from musical instruments are no different than any other kind of sound waves they will all be measured by the microphone. These other sound waves will be referred to as \textit{noise}.
 \subsection{Noise}
 This section is mainly inspired by chapter 2 in \cite{signal_noise}. \\ \\
 Noise is any measured interference of a signal conveying information and is merely another signal measured alongside the wanted signal, where the noise carries information about the source of the noise.  Noise is generally thought of as unwanted as it can be hard to distinguish the signal from it and therefore extract the wanted information. Noise is present in almost all measurements of any signal, and any measurement of a signal must therefore take this into consideration as noise limits the usability of measurements by

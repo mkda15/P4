@@ -24,6 +24,7 @@ import scipy.io.wavfile as siw
 freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
 freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
 
+noise = noise*0
 
 # TEST 1 
 #freq , data  = siw.read('Lydfiler/skala/forsoeg_skala_hurtig.wav')     # Data signal
@@ -53,8 +54,8 @@ print('støj adderet 2/9')
 
 """ Variabler til filter """
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
-cut1 = 75./freq     # Cut off frequency for band
-cut2 = 1000./freq   # Cut off frequency for band 
+cut1 = 0./freq     # Cut off frequency for band
+cut2 = 2000./freq   # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 
 
@@ -171,36 +172,36 @@ print('Data filtreret 6/9')
 #plt.show()  
 
 """ Signal with noise in time domain """
-plt.plot(tid,signal)  # Original data with noise added 
-plt.xlabel('Time [s]')
-plt.ylabel('Amplitude')
-#plt.axis([0,6,-1,1])
-plt.savefig("figures/integrationstest/signal.png")
-plt.show()
+#plt.plot(tid,signal)  # Original data with noise added 
+#plt.xlabel('Time [s]')
+#plt.ylabel('Amplitude')
+##plt.axis([0,6,-1,1])
+#plt.savefig("figures/integrationstest/signal.png")
+#plt.show()
 
 """ Filtered signal in time domain """
-plt.plot(tid,signal_filt)  # Original data with noise added 
-plt.xlabel('Time [s]')
-plt.ylabel('Amplitude')
-plt.axis([0,6,-6000,6000])
-plt.savefig("figures/integrationstest/f_signal.png")
-plt.show()
+#plt.plot(tid,signal_filt)  # Original data with noise added 
+#plt.xlabel('Time [s]')
+#plt.ylabel('Amplitude')
+#plt.axis([0,6,-6000,6000])
+#plt.savefig("figures/integrationstest/f_signal.png")
+#plt.show()
 
 """ Pure signal with noise i frekvency domain"""
-plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Amplitude')
-#plt.savefig("figures/filter_test/f_SIGNAL.png")
-plt.savefig("figures/integrationstest/FSIGNAL.png")
-plt.show()
+#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          
+#plt.xlabel('Frequency [Hz]')
+#plt.ylabel('Amplitude')
+##plt.savefig("figures/filter_test/f_SIGNAL.png")
+#plt.savefig("figures/integrationstest/FSIGNAL.png")
+#plt.show()
 
 """ Filtered signal in frequency domain """
-plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Amplitude')
-#plt.savefig("figures/filter_test/SIGNAL.png")
-plt.savefig("figures/integrationstest/f_FSIGNAL.png")
-plt.show()
+#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   
+#plt.xlabel('Frequency [Hz]')
+#plt.ylabel('Amplitude')
+##plt.savefig("figures/filter_test/SIGNAL.png")
+#plt.savefig("figures/integrationstest/f_FSIGNAL.png")
+#plt.show()
 
 """ Close-up all data in time domain  """
 ##plt.plot(tid,signal, 'r-', label = "signal")
@@ -235,10 +236,10 @@ cb   = plt.colorbar(spec)
 cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
 plt.xlabel('Time [s]', fontsize = fontsize)
 plt.ylabel('Frequency [Hz]', fontsize = fontsize)
-plt.axis([0,7.8,0,2000])
+plt.axis([0,5,0,2000])
 #plt.savefig("figures/skala.png")
 #plt.savefig("figures/integrationstest/spectrogram.png")
-plt.savefig("figures/systemtest/final_spec3.png")
+plt.savefig("figures/eks_ch2.png")
 plt.show()
 
 #==============================================================================
@@ -248,28 +249,28 @@ plt.show()
 max_freq_t = peak_dec(X,15,y)
 
 """ plot peak dection """
-plt.plot(x,max_freq_t,'o')
-plt.xlabel('Time [s]')
-plt.ylabel('Frequency [Hz]')
-#plt.savefig("figures/integrationstest/peak_dec.png")
-plt.savefig("figures/systemtest/final_peak3.png")
-    
+#plt.plot(x,max_freq_t,'o')
+#plt.xlabel('Time [s]')
+#plt.ylabel('Frequency [Hz]')
+##plt.savefig("figures/integrationstest/peak_dec.png")
+#plt.savefig("figures/systemtest/final_peak3.png")
+#    
 #==============================================================================
 # SNR
 #==============================================================================
 
-def RMS(x):
-    x = x**2
-    RMS = np.sqrt((np.sum(x))) / (len(x))
-    return RMS
-
-def SNR(signal,noise):
-    SNR = ((RMS(signal))**2 / (RMS(noise))**2)
-    return SNR
-
-SNR = SNR(data,noise)
-SNRdB = 10*np.log10(SNR)
-print(SNRdB)   
+#def RMS(x):
+#    x = x**2
+#    RMS = np.sqrt((np.sum(x))) / (len(x))
+#    return RMS
+#
+#def SNR(signal,noise):
+#    SNR = ((RMS(signal))**2 / (RMS(noise))**2)
+#    return SNR
+#
+#SNR = SNR(data,noise)
+#SNRdB = 10*np.log10(SNR)
+#print(SNRdB)   
 
 
 
