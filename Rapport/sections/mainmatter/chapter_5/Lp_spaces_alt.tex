@@ -69,10 +69,10 @@ It should be noted that $\mathcal{L}^1$ is not a subspace of $\mathcal{L}^2$ and
 
 \item If $f \in \mathcal{L}^2$ and vanishes outside a finite interval $[a,b]$, then $f \in \mathcal{L}^1$ since:
 \begin{align*}
-\int_{-\infty}^\infty |f(t)| dt = \int_a^b |f(t)| dt \leq (b - a)^{1/2} \left( \int_a^b |f(t)|^2 dt \right)^{1/2} < \infty.
+\int_{-\infty}^\infty |f(t)| dt = \int_a^b 1 \cdot |f(t)| dt \leq (b - a)^{1/2} \left( \int_a^b |f(t)|^2 dt \right)^{1/2} < \infty.
 \end{align*}
 
-This follows from the Cauchy-Scwharz inequality stated below \cite{page 118, FSE2010}.\frede{Find ud af hvorfor det følger af Cauchy-Schwarz.}
+This follows from the Cauchy-Scwharz inequality stated below \cite{page 118, FSE2010}.\frede{Find ud af hvorfor det følger af Cauchy-Schwarz. - Kan godt uddybe det mundtligt, hvis det er. \textregistered}
 \end{enumerate}
 
 \begin{theorem}[Cauchy-Schwarz' inequality]
@@ -82,7 +82,8 @@ For all $f,g \in \mathcal{L}^2(\mathbb{R})$,
 \end{align*}
 \end{theorem}
 
-A definition similar to definition \ref{def:Lpspace} is given for $\ell^p$, which deals with sequences:
+A definition similar to definition \ref{def:Lpspace} is given for $\ell^p$, which deals with sequences.
+
 \begin{definition}[The $\ell^p$ spaces]
 For any $p \in [1,\infty)$, the normed vector space $\ell^p(\mathbb{Z})$ is the subspace of $\mathbb{C}^N$ consisting of vectors with finite $\ell^p$ norm:
 \begin{align*}
