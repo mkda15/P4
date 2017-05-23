@@ -111,7 +111,7 @@ N=M+1
 
 sampels = 10000
 n = np.linspace(0,N,sampels)
-freq_ax = np.linspace(0,np.pi,sampels/2)
+freq_ax = np.linspace(0,2*np.pi,sampels)
 w,M,n,beta = Kaiser(0.01, 0.5*np.pi-0.4*np.pi)
 #
 #plt.plot(n,w1(n,M), "b-", label = "Rectangular")
@@ -133,7 +133,7 @@ W_dB= 20 * np.log10(np.abs(W))
 hd = ImpulsresponsLP(n,M,np.pi/2.)
 h = hd*w
 
-x = np.linspace(0,np.pi,M)
+x = np.linspace(0,2*np.pi,M)
 H = np.abs(np.fft.fft(h,len(n)))
 
 plt.plot(x[:len(H)/2.],H[:len(H)/2.])
