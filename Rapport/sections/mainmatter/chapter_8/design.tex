@@ -116,37 +116,38 @@ h_d[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi} H_d(\omega)\text{e}^{j\omega n} d\omega.
 \end{align*}
 
 $H_d(\omega)$ usually results in an impulse response of infinite length caused by the discontinuities at the boundaries between the pass- and stopbands. To compute a finite causal system as a FIR filter on behalf of the desired impulse response $h_d[n]$, the realisable impulse response $h[n]$ of the FIR filter is determined as a product of the impulse response $h_d[n]$ and a finite duration window $w[n]$ such that
-\begin{align}
+\begin{align*}
 h[n]=h_d[n]w[n], \ \ w[n] =
-\left\{ \begin{matrix}
+\begin{cases}
 f[n], &\ 0 \leq n \leq M \\
 0, &\ Otherwise
-\end{matrix}\right.
-\end{align}
+\end{cases}.
+\end{align*}
 
-By this truncation the impulse response of a finite filter of order $M$ is determined such that
-\begin{align}
+Hereby the frequency response from \eqref{eq:type1} with the symmetry point at $\frac{M}{2}$ is truncated by the window, which introduces Gibbs phenomenon shown in figure \ref{fig:lowpass_real}. By this truncation the impulse response of a finite filter of order $M$ is determined such that
+\begin{align*}
 h[n]= 
-\left\{ \begin{matrix}
+\begin{cases}
 h_d[n]w[n], &\ 0 \leq n \leq M \\
 0, &\ Otherwise
-\end{matrix}\right.
-\end{align}
+\end{cases}.
+\end{align*}
+
 This is illustrated by an example of the simple \textit{rectangular window} defined as 
-\begin{align}
+\begin{align*}
 w[n] =
-\left\{ \begin{matrix}
+\begin{cases}
 1, &\ 0 \leq n \leq M \\
 0, &\ Otherwise
-\end{matrix}\right.
-\end{align}
+\end{cases}.
+\end{align*}
 
 By the Fourier transform this gives the following expression.
-\begin{align}
+\begin{align*}
 W\left(\omega\right) = \sum_{n=0}^{M} \text{e}^{-j\omega n} = \dfrac{1 - \text{e}^{-j\omega(M+1)}}{1 - \text{e}^{-j\omega}} = \text{e}^{-j\omega \frac{M}{2}} \frac{ \sin \left( \frac{\omega \left( M+1 \right)}{2} \right)}{\sin \left( \frac{\omega}{2} \right)}.
-\end{align}
+\end{align*}
 
-Figure \ref{fig:rect_db} illustrates the main and side lobes by a decibel plot of the amplitude response corresponding to the rectangular window.
+Figure \ref{fig:rect_db} illustrates the so-called main and side lobes by a decibel plot of the amplitude response corresponding to the rectangular window.
 
 \begin{figure}[H]
 \centering
@@ -162,8 +163,10 @@ Figure \ref{fig:rect_db} illustrates the main and side lobes by a decibel plot o
 %\caption{Absolute amplitude response of the rectangular window of order $M=8$.}
 %\label{fig:W_rect}
 %\end{figure}
-The aim is to approximate the desired frequency response. For $w[n]=1 \ \forall \ n$, $W(\omega)$ becomes a periodic impulse, which implies that $H(\omega) = H_d(\omega)$ although the needed truncations are not performed. The impulse train is best approximated by letting the main lobe of $W(\omega)$ be as narrow as possible and the side lobes as small as possible. This corresponds to minimizing the width of the transitionband and the ripples in the pass- and stopbands, respectively, but it is not possible to achieve both simultaneously. \\
-By increasing the filter order $M$, the width of the main lope is decreased but the peak amplitude of the side lopes also increases. This indicates a trade-off between the width of the main lope and the peak amplitude of the side lopes. Figure \ref{fig:lowpass_real} shows the actual amplitude response $|H(\omega)|$ of a lowpass filter, which is the Fourier transform of the product of the rectangular window and the desired impulse response
+The aim is to approximate the ideal frequency response, which is best done by letting the main lobe of $W(\omega)$ be as narrow as possible and the side lobes as small as possible \cite{page 558, DTSP}. This corresponds to minimizing the width of the transitionband and the ripples in the pass- and stopbands, respectively, but it is not possible to achieve both simultaneously. \\
+By increasing the filter order $M$, the width of the main lope is decreased but the peak amplitude of the side lopes also increases. This indicates a trade-off between the width of the main lope and the peak amplitude of the side lopes.
+\\ \\
+Figure \ref{fig:lowpass_real} shows the actual amplitude response $|H(\omega)|$ of a lowpass filter, which is the Fourier transform of the product of the rectangular window and the desired impulse response
 \begin{align*}
 h_d[n] =
 \begin{cases}
@@ -177,55 +180,28 @@ Equivalently, the frequency response $H(\omega)$ equals the convolution of $W(\o
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/filter_teori/lowpass_real.pdf}
-\caption{The amplitude response $|H(\omega)|$ of a FIR filter with the rectangular window, $M = 50$ and $\omega_c = \frac{\pi}{2}$.}
+\caption{The amplitude response $|H(\omega)|$ of a FIR filter with the rectangular window, $M = 50$ and $\omega_c = \frac{\pi}{2}$. The Gibbs phenomenon is manifested through the ripples in the passband.}
 \label{fig:lowpass_real}
 \end{figure}
 
 \subsubsection{Different types of windows}
-The rectangular window is one out of many windows, all of which have different properties. The oscillations in $H(\omega)$ is a result of Gibbs phenomenon. Due to the convergence of the Fourier series this can be improved by convolving the desired frequency response with the Fourier transform of a less abrupt window. By narrowing each end of the window smoothly towards zero, the peak amplitude of the side lopes are remarkably decreased, although this will still result in a wider main lope. \\
-In table \ref{tab:window} five commonly used windows are defined. Furthermore, the windows in time and the corresponding amplitude responses in dB of three of the windows are illustrated in figure \ref{fig:windows}.
+The rectangular window is one out of many windows, all of which have different properties. The oscillations in $|H(\omega)|$ is a result of Gibbs phenomenon. Due to the convergence of the Fourier series this can be improved by convolving the desired frequency response with the Fourier transform of a less abrupt window. By narrowing each end of the window smoothly towards zero, the peak amplitude of the side lopes are remarkably decreased, although this will still result in the trade-off between the main lobe and the side lobes. \\
+In table \ref{tab:window} in appendix \ref{appE} five commonly used windows are defined. Furthermore, the windows in time are shown in figure \ref{fig:win_type}, and the corresponding amplitude responses in dB of four of the windows are shown in figure \ref{fig:windows}.
 
-\begin{table}[H]\small
+\begin{figure}[H]
 \centering
-\begin{tabular}{l|l} \hline \\
-Rectangular & $w[n] =
-\left\{ \begin{matrix}
-1, &\ 0 \leq n \leq M \\
-0, &\ Otherwise
-\end{matrix}\right. $ \\ \\ \hline \\
-Bartlett    & $w[n] =
-\left\{ \begin{matrix}
-\dfrac{2n}{M}, &\ 0 \leq n \leq \dfrac{M}{2} \\
-2-\dfrac{2n}{M}, &\ \dfrac{M}{2} \leq n \leq M \\
-0, &\ Otherwise
-\end{matrix}\right.$ \\ \\ \hline \\
-Hanning     & $w[n] =
-\left\{ \begin{matrix}
-0.5-0.5 \cos\left(\dfrac{2\pi n}{M}\right), &\ 0 \leq n \leq M \\
-0, &\ Otherwise
-\end{matrix}\right. $ \\ \\ \hline \\
-Hamming     & $w[n] =
-\left\{ \begin{matrix}
-0.54-0.46 \cos\left(\dfrac{2\pi n}{M}\right), &\ 0 \leq n \leq M \\
-0, &\ Otherwise
-\end{matrix}\right. $ \\ \\ \hline \\
-Blackman    &  $w[n] =
-\left\{ \begin{matrix}
-0.42-0.5 \cos\left(\dfrac{2\pi n}{M}\right) + 0.08 \cos\left(\dfrac{4\pi n}{M}\right), &\ 0 \leq n \leq M \\
-0, &\ Otherwise
-\end{matrix}\right.$  \\ \\ \hline
-\end{tabular}
-\caption{Definitions of different types of windows.}
-\label{tab:window}
-\end{table}
+\includegraphics[width=0.7\textwidth]{figures/filter_teori/window_types.pdf}
+\caption{Window functions in the time domain.}
+\label{fig:win_type}
+\end{figure}
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figures/filter_teori/window_types.pdf}
-\caption{Window functions in the time domain.}
-\label{fig:win_type}
+\includegraphics[width=\textwidth]{figures/dbplots/bartlett.png}
+\caption{The Bartlett window.}
+\label{fig:bartlett_db}
 \includegraphics[width=\textwidth]{figures/dbplots/blackman.png}
 \caption{The Blackman window.}
 \label{fig:blackman_db}
@@ -233,27 +209,28 @@ Blackman    &  $w[n] =
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/dbplots/hann.png}
-\caption{The Hanning window.}
+\caption{The Hann window.}
 \label{fig:hann_db}
 \includegraphics[width=\textwidth]{figures/dbplots/hamming.png}
 \caption{The Hamming window.}
 \label{fig:hamming_db}
 \end{subfigure}
-\caption{\textbf{(a)} Different window functions in the time domain of order $M=100$. \textbf{(b)}, \textbf{(c)} and \textbf{(d)} Plots of amplitude responses in dB of chosen windows of order $M=100$.}
+\caption{Plots of amplitude responses in dB of chosen windows of order $M=100$.}
 \label{fig:windows}
 \end{figure}
 
 The defined windows all have the property of being symmetric around the point $\frac{M}{2}$. Hence, if the ideal impulse response is also symmetric the windowed impulse will be symmetric, which results in a frequency response with generalized linear phase. \\
-To summarize, in this section it is seen that in order to design a FIR filter by the window method, the impulse response of the filter is obtained as the product of the desired impulse response and a window of a certain order, and one can vary the chosen window and the order of the filter until the desired specifications has been achieved.
+To summarize, in this section it is seen that in order to design a FIR filter by the window method, the impulse response of the filter is obtained as the product of the desired impulse response and a window of a certain order, and one can vary the chosen window and the order of the filter until the desired specifications have been achieved.
 
 \subsubsection{The Kaiser window method}
-The Kaiser window design method considers the Kaiser window as the near-optimal window which - compared to the other windows - has two parameters; the length $M+1$ and a shape parameter $\beta$. This results in \textit{one} window where changing the parameters adjusts shape and length of the window. This is done in order to achieve the optimal trade-off between amplitude of side lopes and width of the main lope \cite{page 566, DTSP}. The Kaiser window is defined as
-\begin{align}
-w[n]=\left\{\begin{matrix}
- \dfrac{I_0[\beta (1-[\frac{n-\alpha}{\alpha}]^2)^{\frac{1}{2}}]}{I_0(\beta)} , &\ 0 \leq n \leq M  \\ 
+The Kaiser window design method considers the Kaiser window as the near-optimal window which -- compared to the other windows -- has two parameters; the length $M+1$ and a shape parameter $\beta$. This results in \textit{one} window where changing the parameters adjusts shape and length of the window. This is done in order to achieve the optimal trade-off between the peak amplitude of the side lopes and the width of the main lope \cite{page 566, DTSP}. The Kaiser window is defined as
+\begin{align*}
+w[n] =
+\begin{cases}
+\dfrac{I_0[\beta (1-[\frac{n-\alpha}{\alpha}]^2)^{\frac{1}{2}}]}{I_0(\beta)} , &\ 0 \leq n \leq M  \\ 
 0, &\ \text{Otherwise}
-\end{matrix}\right.
-\end{align}
+\end{cases},
+\end{align*}
 
 where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ is the zero'th order modified Bessel function of the first kind \cite{page 566, DTSP}. Increasing $\beta$ tapers the window in the time domain, which results in smaller side lopes of the Fourier transform. Increasing $M$ causes the width of the main lope to increase without changing the peak amplitude of the side lopes. This is illustrated in figures \ref{fig:kaiser_beta} and \ref{fig:kaiser_order}, respectively.
 
@@ -271,27 +248,27 @@ where $\alpha=\frac{M}{2}$ and $I_0(\cdot)$ is the zero'th order modified Bessel
 \caption{}
 \label{fig:kaiser_order}
 \end{subfigure}
-\caption{\textbf{(a)} Amplitude responses of Kaiser windows in dB with $M=100$ and with $\beta=0$, $2$ and $4$. As $\beta$ increases the side lobes become smaller. \textbf{(b)} Amplitude responses of Kaiser windows in dB with $\beta=6$ and order $M=50$, $100$ and $150$. As $M$ increases the main lobe becomes narrower.}
+\caption{\textbf{(a)} Amplitude responses of Kaiser windows in dB with $M=100$ and with $\beta=0$, $2$, and $4$. As $\beta$ increases the side lobes become smaller. \textbf{(b)} Amplitude responses of Kaiser windows in dB with $\beta=6$ and order $M=50$, $100$, and $150$. As $M$ increases the main lobe becomes narrower.}
 \end{figure}
  
-In order to determine values for $\beta$ and $M$ that satisfies the desired specifications of the filter, the following formulas are defined. Considering a lowpass filter with a fixed peak approximation error $\delta$ this gives a cut-off frequency $\omega_p$ of the passband defined as the highest frequency satisfying $|H(\omega)| \geq 1-\delta$ and a cut-off frequency $\omega_s$ of the stopband defined as the lowest frequency satisfying that $|H(\omega)| \leq \delta$. This gives a transitionband of width $\Delta \omega = \omega_s - \omega_p$. 
-
-\martin{Skal vi lave en figur med $\delta$, $\omega_p$, $\omega_s$ og $\Delta\omega$? \textregistered Trine laver en figur.} \\
+In order to determine values for $\beta$ and $M$ that satisfies the desired specifications of the filter, the following formulas are defined. Considering a lowpass filter with a fixed peak approximation error $\delta$ this gives a cut-off frequency $\omega_p$ of the passband defined as the highest frequency satisfying $|H(\omega)| \geq 1-\delta$ and a cut-off frequency $\omega_s$ of the stopband defined as the lowest frequency satisfying that $|H(\omega)| \leq \delta$. This gives a transitionband of width $\Delta \omega = \omega_s - \omega_p$. This is illustrated in figure \ref{fig:kaiser_spec}.
+\\
 Defining $A$ in [dB] by $\delta$ as $A = -20\log_{10} (\delta)$ it is possible to determine the value of $\beta$ on behalf of a specific value of $A$ as \cite{page 566, DTSP}
-\begin{align}
+\begin{align*}
 \beta =
-\left\{ \begin{matrix}
+\begin{cases}
 0.1102\left( A-8.7 \right), &\ A \geq 50 \\
 0.5843\left(A-21\right)^{0.4}+0.07886(A-21), &\ 21 \leq A \leq 50 \\
 0.0, &\  A \leq 21 
-\end{matrix}\right.
-\end{align}
+\end{cases}
+\end{align*}
        
 Furthermore, $M$ must satisfy the relation
 \begin{align}
 M = \dfrac{A-8}{2.285\Delta \omega}.
 \end{align}
-Specification for a lowpass filter are illustrated by figure \ref{fig:kaiser_spec}. Figure  \ref{fig:kaiser_H} makes example of the an actual amplitude response computed by use of the kaiser window, to fulfil $\delta=0.01$,$\omega_p = 0.4\pi$ and $\omega_p = 0.5\pi$. This gives gives $M=46$ and $\beta \approx 3.4$.        
+Specifications for a lowpass filter are illustrated in figure \ref{fig:kaiser_spec}. Figure \ref{fig:kaiser_H} shows an example of the actual amplitude response computed by the use of the Kaiser window, which is designed to fulfil $\delta=0.01$, $\omega_p = 0.4\pi$, and $\omega_p = 0.5\pi$. This gives $M=46$ and $\beta \approx 3.4$. It is noted that there are fewer ripples compared to the rectangular window shown in figure \ref{fig:lowpass_real}.
+
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
@@ -329,16 +306,18 @@ ymax=4.6]
 \caption{}
 \label{fig:kaiser_H}
 \end{subfigure}
-\caption{\textbf{(a)} illustration of specifications of a lowpass filter $H(\omega)$. \textbf{(b)} Amplitude response of $H(\omega)$ computed by a kaiser window,   .}
+\caption{\textbf{(a)} illustration of specifications of a lowpass filter $H(\omega)$. \textbf{(b)} Amplitude response of $H(\omega)$ computed by a Kaiser window with $M=46$ and $\beta \approx 3.4$.}
 \end{figure}
-By this establishment of the Kaiser window method it is possible to design a FIR filter within a desired specification of $\delta$ with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable \martin{Henrik vil gerne have, at vi eventuelt uddyber dette afsnit. Vi er ikke helt sikre på, hvad han mener, men det handler måske om, at der er nogle begreber, som han ikke kender, og det kan afhjælpes ved hjælp af figuren nævnt ovenfor. Skal vi have et eksempel på amplituderesponsen for lavpasfilteret med Kaiser-vinduet ligesom vi har med det rektangulære vindue længere oppe? \textregistered}.       
 
-\subsection{Comparison of IIR and FIR filters}
+By this establishment of the Kaiser window method it is possible to design a FIR filter within a desired specification of $\delta$ with almost no iterations or trial and error. By adjusting the shape parameter $\beta$ it is possible to obtain a window equivalent to each of the windows defined in table \ref{tab:window} with a more narrow transition width, which could make the Kaiser window preferable \martin{Trine retter figuren med $\Delta \omega$}.
+
+\section{Comparison of IIR and FIR filters}
 This section considering the design of digital filters concludes with a comparison of IIR and FIR filters by considering the advantages and disadvantages of the two types of filters.
 \\ \\
-The process of designing an IIR filter is rather simple when the desired properties fit a predefined filter such as a Butterworth filter. The required order of the filter is computable, and the transformation to the discrete time domain is done straight forward. Furthermore, considering the implementation, this leads to a recursive algorithm. By this method the amplitude response is the only parameter to be specified, hence specific requirements for e.g. phase response or group delay are not guaranteed to be fulfilled by this kind of filter. \\ \\
-Considering a FIR filter the main advantages - compared to IIR filters - is the possibility of getting a precise generalized linear phase. The generalised linear phase is important in order to preserve the wave form of the original signal.  
-The window method is also straight forward to apply, although it is not pre-defined as an design equation, and iterations are thus often necessary before desired specifications are achieved. \\
-When choosing the right filter design computational speed is often considered, which basically is related to the required order of the system and the amount of iterations with respect to the order. \\
-\\
+The process of designing an IIR filter is rather simple when the desired properties fit a predefined filter such as a Butterworth filter. The required order of the filter is computable, and the transformation to the discrete time domain is done straightforward. Furthermore, considering the implementation, this leads to a recursive algorithm. By this method the amplitude response is the only parameter to be specified, and hence specific requirements for e.g. phase response or group delay are not guaranteed to be fulfilled by this kind of filter.
+\\ \\
+Considering a FIR filter, the main advantages compared to IIR filters is the possibility of getting a precise generalized linear phase. The generalised linear phase is important in order to preserve the wave form of the original signal.  
+The window method is also straightforward to apply, although it is not pre-defined as an design equation, and iterations are thus often necessary before desired specifications are achieved. \\
+When choosing the right filter design computational speed is often considered, which basically is related to the required order of the system and the amount of iterations with respect to the order.
+\\ \\
 By this it is clear that the choice of filter depends on the specific case and how different aspects are weighted. IIR filters have many advantages in implementation and efficiency, which makes it preferable in cases, where the need of generalized linear phase is less significant, but in other cases linear phase by a FIR filter can be worth the extra computations.

@@ -1,0 +1,36 @@
+\chapter{Definitions of common windows} \label{appE}
+Table \ref{tab:window} shows the definitions of five common windows \cite{pages 559-560, DTSP}.
+
+\begin{table}[H]\small
+\centering
+\begin{tabular}{l|l} \\
+Rectangular & $w[n] =
+\begin{cases}
+1, &\ 0 \leq n \leq M \\
+0, &\ Otherwise
+\end{cases} $ \\ \\ \hline \\
+Bartlett    & $w[n] =
+\begin{cases}
+\dfrac{2n}{M}, &\ 0 \leq n \leq \dfrac{M}{2} \\
+2-\dfrac{2n}{M}, &\ \dfrac{M}{2} \leq n \leq M \\
+0, &\ Otherwise
+\end{cases}$ \\ \\ \hline \\
+Hann     & $w[n] =
+\begin{cases}
+0.5-0.5 \cos\left(\dfrac{2\pi n}{M}\right), &\ 0 \leq n \leq M \\
+0, &\ Otherwise
+\end{cases}$ \\ \\ \hline \\
+Hamming     & $w[n] =
+\begin{cases}
+0.54-0.46 \cos\left(\dfrac{2\pi n}{M}\right), &\ 0 \leq n \leq M \\
+0, &\ Otherwise
+\end{cases}$ \\ \\ \hline \\
+Blackman    &  $w[n] =
+\begin{cases}
+0.42-0.5 \cos\left(\dfrac{2\pi n}{M}\right) + 0.08 \cos\left(\dfrac{4\pi n}{M}\right), &\ 0 \leq n \leq M \\
+0, &\ Otherwise
+\end{cases}$  \\ \\
+\end{tabular}
+\caption{Definitions of different types of windows.}
+\label{tab:window}
+\end{table}
