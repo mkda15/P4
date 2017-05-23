@@ -10,10 +10,10 @@ T(\alpha x[n] + \beta y[n]) = \alpha T(x[n]) + \beta T(x[n]).
 \begin{definition}[Memoryless system]\label{def:memoryless_system}
 A discrete-time system $T$ is called memoryless when, for any $k\in\mathbb{Z}$ and any inputs $x[n]$ and $\tilde{x}[n]$,
 \begin{align}
-\mathbf{1}_{\{k\}}x[n] = \mathbf{1}_{\{k\}}\tilde{x}[n] \, \Rightarrow \, \mathbf{1}_{\{k\}} T(x[n]) = \mathbf{1}_{\{k\}}T(\tilde{x}),
+\mathbf{1}_{\{k\}}x[n] = \mathbf{1}_{\{k\}}\tilde{x}[n] \, \Rightarrow \, \mathbf{1}_{\{k\}} T(x[n]) = \mathbf{1}_{\{k\}}T(\tilde{x}[n]),
 \end{align}
 
-where $\mathbf{1}_{\{k\}}$ is the indicator function such that $\mathbf{1}_{\{k\}}x[n]=1$ for $x=k$ and $\mathbf{1}_{\{k\}}x[n]=0$ for $n \neq k$.
+where $\mathbf{1}_{\{k\}}$ is the indicator function such that $\mathbf{1}_{\{k\}}x[n]=x[n]$ for $n=k$ and $\mathbf{1}_{\{k\}}x[n]=0$ for $n \neq k$.
 \end{definition}
 
 Therefore, memoryless systems are instantaneous and depend solely on current input.
@@ -53,7 +53,7 @@ Some discrete-times systems can be described by \textit{linear difference equati
 y[n] = \sum_{k=-\infty}^{\infty} b^{(n)} [k] x[n-k] - \sum_{k=1}^{\infty} a^{(n)} [k] y[n-k],
 \end{align}
 
-where $b^{(n)}$ is the $n$'th derivative of $b$. \eqref{eq:linear_diff_equation} relates the inputs and earlier outputs of a system to the current output in linear fashion. If the difference equation furthermore is with constant coefficients (not dependent on $n$) it becomes a linear \textit{time-invariant} difference equation as seen in \eqref{eq:LTI_diff_equation} and describes a \textit{linear time-invariant system} (LTI system):
+where $b^{(n)}$ is the $n$'th derivative of $b$. \eqref{eq:linear_diff_equation} relates the inputs and earlier outputs of a system to the current output in linear fashion. If the difference equation furthermore is with constant coefficients (not dependent on $n$) it becomes a linear \textit{time-invariant} difference equation and describes a \textit{linear time-invariant system} (LTI system):
 \begin{align}\label{eq:LTI_diff_equation}
 y[n] = \sum_{k=-\infty}^{\infty} b[k] x[n-k] - \sum_{k=1}^{\infty} a[k] y[n-k].
 \end{align}
@@ -70,13 +70,13 @@ An important characteristic of LTI systems is the unique specification of the sy
 \begin{definition}[Impulse response]\label{def:impulse_response}
 A sequence h is called the impulse response of a discrete LTI system T when
 \begin{align}
-h=T(\delta),
+h[n]=T(\delta[n]),
 \end{align}
 
-where $\delta[t] = 1$ for $t = 0$ and $\delta[t] = 0$ otherwise.
+where $\delta[n] = 1$ for $n = 0$ and $\delta[n] = 0$ otherwise.
 \end{definition}
 
-Therefore, the impulse response $h$ of a causal linear system always satisfies that $h[n] = 0$ for all $n < 0$. An impulse response of the LTI system described by \eqref{eq:LTI_diff_equation_finite} is an output that results from the input $x = \delta$:
+Therefore, the impulse response $h$ of a causal linear system always satisfies that $h[n] = 0$ for all $n < 0$. An impulse response of the LTI system described by \eqref{eq:LTI_diff_equation_finite} is an output that results from the input $x[n] = \delta[n]$:
 \begin{align*}
 h[n] = \sum_{k=0}^M b[k] \delta[n-k] - \sum_{k=1}^N a[k] h[n-k] = b[n] - \sum_{k=1}^N a[k] h[n-k],
 \end{align*}
@@ -86,17 +86,17 @@ where the first sum reduces to $b[n]$ for $n = k$.
 The concept of convolution is of importance when dealing with discrete-time systems and impulse responses and will be defined in this section.\\\\
 Writing $x[n]$ in \eqref{eq:DTS} as a sum by using the definition of the impulse response and by linearity, it follows that:
 \begin{align}
-y[n]&=Tx[n]=T\sum_{k\in\mathbb{Z}}x[n]\delta[n-k]
-=\sum_{k\in\mathbb{Z}}x[n]T\delta[n-k]\nonumber\\
+y[n]&=T(x[n])=T\left(\sum_{k\in\mathbb{Z}}x[n]\delta[n-k]\right)
+=\sum_{k\in\mathbb{Z}}x[n]T\left(\delta[n-k]\right)\nonumber\\
 &=\sum_{k\in\mathbb{Z}}x[n]h[n-k].\label{eq:convolution}
 \end{align}
 \eqref{eq:convolution} is defined as a convolution sum.
 
 \begin{definition}[Convolution sum] \label{def:convolution}
-The convolution between sequences $h$ and $x$ is defined as
+The linear convolution between sequences $h[n]$ and $x[n]$ is defined as
 \begin{equation}
 (h*x)[n]=\sum_{k\in\mathbb{Z}}x[n]h[n-k]=\sum_{k\in\mathbb{Z}}x[n-k]h[k],
 \end{equation}
 where $n$ specifies the argument of the convolution sum.
 \end{definition}
-This means that, given an impulse response for a discrete LTI system, the output to a specific input can be calculated by convoluting the input with the impulse response. An impulse response is sometimes called a filter and convoluting an input with the impulse response is sometimes called filtering. The convolution is of importance in chapter \ref{ch8} which covers filter theory and design in depth. The convolution is furthermore of importance in chapter \ref{ch6} where the Fourier transform is treated.
+This means that, given an impulse response for a discrete LTI system, the output to a specific input can be calculated by convoluting the input with the impulse response. An impulse response is often called a filter and then convoluting an input with the impulse response is called filtering. The convolution is of importance in chapter \ref{ch8} which covers filter theory and design in depth. The convolution is furthermore of importance in chapter \ref{ch6} where the Fourier transform is treated.

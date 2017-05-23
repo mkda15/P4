@@ -1,5 +1,5 @@
-\section{The Continuous-Time Fourier Transform} \label{sec:cont_Fourier_Transform}
-This section deals with the continuous Fourier transform and is inspired by \cite{FourierTrans} and \cite{page 204-224, FAA}. In this project the Fourier transform will be the background for transforming a signal $f(t)$ represented in the time domain to a signal $F(\omega)$ represented in the frequency domain, which will be useful when making the spectrograms mentioned in chapter \ref{ch1}.
+\section{The continuous-time Fourier transform} \label{sec:cont_Fourier_Transform}
+This section deals with the continuous Fourier transform and is inspired by \cite{FourierTrans} and \cite{pages 204-224, FAA}. In this project the Fourier transform will be the background for transforming a signal $f(t)$ represented in the time domain to the spectrum $F(\omega)$ represented in the frequency domain, which will be useful when making the spectrograms mentioned in chapter \ref{ch3}.
 
 \begin{definition}[The Fourier transform] \label{def:Fourier_trans}
 For a function $f \in \mathcal{L}^1$ the Fourier transform of $f$ is defined as follows:
@@ -55,7 +55,7 @@ Conversely, a dilation by $\frac{1}{\delta}$ in the time domain is a dilation by
 \mathcal{F}\{D_{1/\delta} f(t)\}(\omega) = D_\delta F(\omega).
 \end{align*}
 
-\item If $f$ is continuous and piecewise smooth and $f' \in \mathcal{L}^1$, then
+\item If $f$ is continuous and piecewise smooth and $f' \in \mathcal{L}^1$, then \label{theorem:fund_sym_Fourier_c}
 \begin{align*}
 \mathcal{F}\{f'(t)\}(\omega) = j\omega F(\omega).
 \end{align*}
@@ -76,7 +76,7 @@ On the other hand, if $t\cdot f(t)$ is integrable, then
 
 \begin{enumerate}[label=(\alph*)]
 \item
-By definitions \ref{def:Fourier_trans} and \ref{def:InverseFourier_trans} it follows that:
+By definitions \ref{def:Fourier_trans}, \ref{def:InverseFourier_trans} and \ref{def:TMD} it follows that:\frede{Tjek det her}
 \begin{align*}
 \mathcal{F}\{T_a f(t)\} &= \mathcal{F}\{f(t-a)\}(\omega) = \int_{-\infty}^\infty \text{e}^{-j\omega t} f(t - a) dt \\
 &= \int_{-\infty}^\infty \text{e}^{-j \omega t - j a \omega} f(t) dt = \text{e}^{-j a \omega} F(\omega) = E_{-a} F(\omega).
@@ -135,7 +135,7 @@ Note that $t \text{e}^{-j \omega t} = j \dfrac{d}{d\omega} \text{e}^{-j\omega t}
 %\\ \\
 A main result with regards to the Fourier transform is the following theorem, which is closely related to corollary \ref{coro:conv_Fourier_coeff} from the Fourier series \cite{page 217, FAA}.
 
-\begin{theorem}[The Riemann-Lebesgue Lemma]
+\begin{theorem}[The Riemann-Lebesgue lemma]
 If $f \in \mathcal{L}^1$, then $F(\omega) \to 0$ as $\omega \to \pm \infty$.
 \end{theorem}
 
@@ -146,17 +146,17 @@ $f$ is assumed to be a step function such that $f(t) = \sum_{i=1}^k c_i \phi_i(t
 	\begin{cases}
 		1 \quad \text{for } |t| < a \\
 		0 \quad \text{elsewhere}
-	\end{cases}
+	\end{cases},
 \end{align*}
 
-Hence, each $\phi_i$ equals 1 on a bounded interval $|t - t_i| < a_i$ and 0 elsewhere. The Fourier transform of $\phi(t)$ is:
+and each $\phi_i$ equals 1 on a bounded interval $|t - t_i| < a_i$ and 0 elsewhere. The Fourier transform of $\phi(t)$ is:
 \begin{align*}
-\mathcal{F}\{\phi(t)\}(\omega) = \int_{-a}^a \text{e}^{-j\omega t} dt = \dfrac{e^{-ja\omega} - \text{e}^{ja\omega}}{-j\omega} = 2\dfrac{\sin(a\omega)}{\omega}.
+\mathcal{F}\{\phi(t)\}(\omega) = \int_{-a}^a \text{e}^{-j\omega t} dt = \dfrac{\text{e}^{-ja\omega} - \text{e}^{ja\omega}}{-j\omega} = 2\dfrac{\sin(a\omega)}{\omega}.
 \end{align*}
 
 By theorem \ref{theorem:fund_sym_Fourier}\ref{theorem:fund_sym_Fourier_a}, the Fourier transform of $\phi_i(t)$ is:
 \begin{align*}
-\mathcal{F}\{\phi_i(t)\}(\omega) = 2 \omega^{-1} \text{e}^{-jt_i\omega} \sin(a_i\omega),
+\mathcal{F}\{\phi_i(t)\}(\omega) = 2 \text{e}^{-jt_i\omega} \frac{\sin(a_i\omega)}{\omega},
 \end{align*}
 
 which vanishes when $\omega \to \infty$, and hence so does $F(\omega)$.
@@ -166,7 +166,7 @@ In the general case it is possible to find a sequence $\{f_n\}, f \in \mathcal{L
 \int_{-\infty}^\infty |f_n(t) - f(t)| dt \to 0.
 \end{align*}
 
-When $f$ is Riemann integrable this is simply a restatement of the fact that the integral of $f$ is the limit of Riemann sums. When $f$ is Lebesgue integrable the proof requires results from integration theory, which are omitted in this project. Since $|e^{j\omega t}| = 1$, the integral in the Fourier transform converges absolutely for all $\omega$ and defines a bounded function of $\omega$:
+When $f$ is Riemann integrable this is simply a restatement of the fact that the integral of $f$ is the limit of Riemann sums. When $f$ is Lebesgue integrable the proof requires results from integration theory, which are omitted in this project. Since $|\text{e}^{j\omega t}| = 1$, the integral in the Fourier transform converges absolutely for all $\omega$ and defines a bounded function of $\omega$:
 \begin{align*}
 |F(\omega)| \leq \int_{-\infty}^\infty |f(t)| dt,
 \end{align*}
@@ -181,10 +181,10 @@ Therefore, $F_n(\omega) \to F$ uniformly, and since each $F_n(\omega)$ vanishes 
 
 Moreover, the Fourier transform $F(\omega)$ is well-defined for $f \in \mathcal{L}^1$ since
 \begin{align*}
-|F(\omega)| \leq \int_{-\infty}^\infty |f(t)| \cdot |\text{e}^{j \omega t}| dt = \|f\|_{\mathcal{L}^1} < \infty.
+|F(\omega)| \leq \int_{-\infty}^\infty |f(t)| \cdot |\text{e}^{j \omega t}| dt = \|f\|_{1} < \infty.
 \end{align*}
 
-However, $F$ is not guaranteed to be in $\mathcal{L}^1$, which means the inverse Fourier transform might not be applicable. This is the reason why the space $\mathcal{L}^2$ also plays a significant role for Fourier transforms. If $f, g, F, G \in \mathcal{L}^1$ then $f$, $g$, $F$ and $G$ are also in $\mathcal{L}^2$ \cite{page 219, FAA}. By the definitions of the dot product and the inverse Fourier transform it follows that
+However, $F$ is not guaranteed to be in $\mathcal{L}^1$, which means that the inverse Fourier transform might not be applicable. This is the reason why the space $\mathcal{L}^2$ also plays a significant role for Fourier transforms. If $f, g, F, G \in \mathcal{L}^1$ then $f$, $g$, $F$ and $G$ are also in $\mathcal{L}^2$ \cite{page 219, FAA}. By the definitions of the dot product and the inverse Fourier transform it follows that
 \begin{align*}
 2\pi \langle f,g \rangle = 2\pi \int_{-\infty}^\infty f(t) \overline{g(t)} dt &= \int_{-\infty}^\infty \int_{-\infty}^\infty f(t) \overline{\text{e}^{j\omega t} G(\omega)} d\omega dt \\
 &= \int_{-\infty}^\infty \int_{-\infty}^\infty f(t) \text{e}^{-j\omega t} \overline{G(\omega)} dt d\omega \\
@@ -198,8 +198,8 @@ This is the analog of Parseval's equation in theorem \ref{theo:Fourier_series_Pa
 
 If $f$ is an arbitrary function in $\mathcal{L}^2$ it is possible to find a sequence $\{f_n\}$ such that $f_n$ and $F_n$ are in $\mathcal{L}^1$ and $f_n$ converges to $f$ in $\mathcal{L}^2$ \cite{page 82, FAA}. Since $\|F_n - F_m\|^2 = 2\pi\|f_n - f_m\|^2$, which converges to 0 as $m,n$ converges to $\infty$, $\{F_n\}$ is a Cauchy sequence in $\mathcal{L}^2$, which has a limit since $\mathcal{L}^2$ is complete. This limit only depends on $f$ and not on $\{f_n\}$, and it is simply defined to be the Fourier transform $F$. The domain of the Fourier transform is thus extended to include all of $\mathcal{L}^2$. This extension still preserves the norm and inner product up to a factor of $2\pi$, and it also satisfies the basic properties of the Fourier transform stated in theorem \ref{theorem:fund_sym_Fourier}. These results are stated below \cite{page 222, FAA}.
 
-\begin{theorem}[The Plancherel Theorem] \label{theo:Plancherel}
-The Fourier Transform, defined originally on $\mathcal{L}^1 \cap \mathcal{L}^2$, extends uniquely to the invertible map $\mathcal{F}: \mathcal{L}^2 \to \mathcal{L}^2$, where $F = \mathcal{F}\{f\}, G = \mathcal{F}\{g\}$, that satisfies:
+\begin{theorem}[The Plancherel theorem] \label{theo:Plancherel}
+The Fourier Transform extends uniquely to the invertible map $\mathcal{F}: \mathcal{L}^2 \to \mathcal{L}^2$, where $F = \mathcal{F}\{f\}, G = \mathcal{F}\{g\}$, that satisfies:
 \begin{align*}
 \langle F, G \rangle = 2\pi \langle f,g \rangle, \\
 \|F\|^2  = 2\pi \|f\|^2
