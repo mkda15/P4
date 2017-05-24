@@ -493,7 +493,7 @@ The process of converting an analog audio signal to a digital audio signal consi
 \item A \textit{track-} or \textit{sample-and-hold} (S\& H) circuit capable of quantizing the signal in time.
 \item An \textit{analog-to-digital converter} (ADC) capable of quantizing the signal in amplitude.
 \end{enumerate}
-If the signal is not completely understood or known, an anti-aliasing filter to filter out unwanted high frequencies may be needed to avoid aliasing. This is done before conversion of the signal from analog to digital. The placement of an analog-to-digital converter (and anti-aliasing filter) in a system to record sound to a digital storage unit is seen in figure \ref{fig:input}.\frede{Trine skal fjerne "app" fra figuren}
+If the signal is not completely understood or known, an anti-aliasing filter to filter out unwanted high frequencies may be needed to avoid aliasing. This is done before conversion of the signal from analog to digital. The placement of an analog-to-digital converter (and anti-aliasing filter) in a system to record sound to a digital storage unit is seen in figure \ref{fig:input}.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=0.5,node distance=2.5cm,auto,>=latex']
@@ -504,9 +504,6 @@ If the signal is not completely understood or known, an anti-aliasing filter to 
 	node [block, right of=anti] (sh) {$S\&H$}
 	node [block, right of=sh] (quant) {$ADC$}
 	node [block, right of=quant] (save) {$Storage$}
-	node [sum, right of=save] (cirk1) {}
-	node at (cirk1) [above=5mm] {App}
-    node [output, name=output1, right of=cirk1]{}
     
     
 ;
@@ -517,7 +514,7 @@ If the signal is not completely understood or known, an anti-aliasing filter to 
 \draw[->](anti) -- node {}(sh);
 \draw[->](sh) -- node {}(quant);
 \draw[->](quant) -- node {}(save);
-\draw[->](save) -- node {}(cirk1);
+
 \filldraw[color=black,fill=white,thick](input1) circle (0.3);
 \draw(-0.3,0.5) -- (-0.3,-0.5);
 %\draw (-1.5,0) sin (-1.40,0.5) cos (-1.30,0) sin (-1.20,-0.5) cos (-1.10,0) sin (-1,0.5) cos (-0.9,0) sin (-0.8,-0.5) cos (-0.7,0);

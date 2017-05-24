@@ -19,6 +19,7 @@ To be able to distinguish between octave equivalent tones they are e.g. noted as
 When a tone is played on an instrument the sound will be the actual tone along with the tone's harmonics. The original tone's frequency is referred to as the fundamental frequency. A harmonic is a wave whose frequency is a positive integer multiple of the fundamental frequency, and the tone's harmonics are thus often referred to as overtones. These harmonics are positive integer multiples of the fundamental frequency. This phenomenon is typically reflected through the octave equivalent tones of the original one. However, the tone $A_2$ with fundamental frequency $110$ Hz also has the harmonic $E_3$ ($330$ Hz) along with the octave equivalent tones $A_3$ ($220$ Hz), $A_4$ ($440$ Hz) and $A_5$ ($880$ Hz). If several instruments play at the same time all the original tones and harmonics are mixed, which is one of several reasons why it is difficult to automatically translate music played by several instruments into a single note sheet. On the other hand, if only one instrument is playing, the harmonics are not mixed together, and the fundamental frequency is usually distinguished from the harmonics rather easily since the fundamental frequency will be the lowest of all the frequencies. The harmonics therefore complicate the determination of the original tone, but the determination is not impossible if the tone e.g. is played alone in an anechoic room. This is shown in figure \ref{fig:E_spec} representing an E tone by a spectrogram. Playing a tone alone in an anechoic room is a way of minimizing noise factors which is further described in chapter \ref{ch7}.
 
 \begin{table}[H]
+\begin{widepage}
 \centering
 \begin{tabular}{l|c|c|c|c|c|c|c|c|c|c|c|c|c}
 Tone & $A_3$ & $A_3$\hashsharp & $B_3$ & $C_3$ & $C_3$\hashsharp & $D_3$ & $D_3$\hashsharp & $E_3$ & $F_3$ & $F_3$\hashsharp & $G_3$ & $G_3$\hashsharp & $A_4$ \\ \hline
@@ -26,6 +27,7 @@ Freq & 220 & 233 & 247 & 262 & 277 & 294 & 311 & 330 & 349 & 370 & 392 & 415 & 4
 \end{tabular}
 \caption{Frequencies of the tones $A_3$-$A_4$ shown in Hz and rounded off to nearest integer.}
 \label{tab:freq}
+\end{widepage}
 \end{table}
 
 \begin{figure}[H]
