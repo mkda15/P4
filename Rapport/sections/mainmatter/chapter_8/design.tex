@@ -11,7 +11,7 @@ One common way of designing an IIR filter is to design the discrete-time filter 
 
 The properties of a system are specified based on the desired application by considering what frequencies ideally are to pass the filter. Furthermore, it is important to specify how much the filter is allowed to vary from the ideal properties since an ideal filter is not a possibility. \\
 Properties for an approximation to a lowpass filter is defined by a peak approximation error of the amplitude response of $\pm \ \delta_1$ of unity in a limited frequency band $0 \leq \Omega \leq \Omega_p $ and less than $\delta_2$ in the frequency band $\Omega_s \leq \Omega$ as illustrated in the tolerance scheme shown in figure \ref{fig:scheme}. Since the filter needs to be realizable, the transition band cannot be of zero width as it is for the ideal filter.
-\frede{Trine ændrer positionen af "Stopband" i figuren}
+
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[scale=1]
@@ -35,7 +35,7 @@ ymax=4.6]
 \draw[line width=0.5mm](axis cs:4,0.5)--(axis cs:7,0.5);
 \node at (axis cs:1,1.5) {Passband};
 \node at (axis cs:3,1.5) {Transition};
-\node at (axis cs:5.0,1.5) {Stopband};
+\node at (axis cs:5.0,1.425) {Stopband};
 \end{axis}
 \end{tikzpicture}
 \caption{Specifications for the amplitude response $|H_c(j\Omega)|$.}
@@ -287,14 +287,15 @@ xmax=8,
 ymin=0,
 ymax=4.6]
 \node at (axis cs:1,4.3) {$|H(\omega)|$};
-\draw[line width=0.5mm](axis cs:0,3.7)--(axis cs:2,3.7);
-\draw[line width=0.5mm](axis cs:0,3)--(axis cs:2,3);
-\draw[line width=0.5mm, dashed](axis cs:2,3)--(axis cs:2,0);
-\draw[line width=0.5mm, dashed](axis cs:4,3.7)--(axis cs:4,0.5);
-\draw[line width=0.5mm](axis cs:4,0.5)--(axis cs:7,0.5);
-\node at (axis cs:1,1.5) {};
-\node at (axis cs:3,1.5) {};
-\node at (axis cs:5.0,1.5) {};
+\draw[line width=0.3mm, dashed](axis cs:0,3.7)--(axis cs:2,3.7);
+\draw[line width=0.3mm, dashed](axis cs:0,3)--(axis cs:2,3);
+\draw[line width=0.3mm](axis cs:2,3)--(axis cs:2,0);
+\draw[line width=0.3mm](axis cs:4,3.7)--(axis cs:4,0.5);
+\draw[line width=0.3mm, dashed](axis cs:4,0.5)--(axis cs:7,0.5);
+
+\node at (axis cs:3,1.5) {$\Delta\omega$};
+\addplot [->,>={}] coordinates {( 2.5,1.5)(2,1.5)};
+
 \end{axis}
 \end{tikzpicture}
 \caption{}

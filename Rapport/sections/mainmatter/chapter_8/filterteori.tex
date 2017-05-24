@@ -90,7 +90,7 @@ The amplitude and impulse responses of the ideal lowpass filter are illustrated 
 \end{figure}
 
 Ideal highpass and bandpass filters can be defined analogues to a low pass filter as illustrated on figure \ref{fig:ideal}.
-\frede{Trine gør linjer tyndere og gør pilen synlig.}
+
 \begin{figure}[H]
 \begin{subfigure}[b]{0.50\textwidth}
         \centering
@@ -100,16 +100,16 @@ clip=false,
 scale=0.5,
 unit vector ratio*=1 1 1,
 axis lines = middle,
-xtick={1.5},
-xticklabels={$\omega_c$},
+xtick={1.5,3},
+xticklabels={$\omega_c$,$\pi$},
 ytick={1.5},
 yticklabels={$1$},
 xmin=0,
-xmax=3,
+xmax=3.5,
 ymin=0,
 ymax=2.6]
-\node at (axis cs:0.7,2.4) {$|H(\omega)|$};
-\draw[line width=0.6mm](axis cs:0,0)--(axis cs:1.5,0);
+\node at (axis cs:0.8,2.4) {$|H(\omega)|$};
+\draw[line width=0.5mm](axis cs:0,0)--(axis cs:1.5,0);
 \draw[line width=0.5mm](axis cs:1.5,1.5)--(axis cs:3,1.5);
 \draw[line width=0.5mm](axis cs:1.5,1.5)--(axis cs:1.5,0);
 \end{axis}
@@ -125,15 +125,15 @@ clip=false,
 scale=0.5,
 unit vector ratio*=1 1 1,
 axis lines = middle,
-xtick={1,2},
-xticklabels={$\omega_a$,$\omega_b$},
+xtick={1,2,3},
+xticklabels={$\omega_a$,$\omega_b$,$\pi$},
 ytick={1.5},
 yticklabels={$1$},
 xmin=0,
-xmax=3,
+xmax=3.5,
 ymin=0,
 ymax=2.6]
-\node at (axis cs:0.7,2.4) {$|H(\omega)|$};
+\node at (axis cs:0.8,2.4) {$|H(\omega)|$};
 \draw[line width=0.5mm](axis cs:1,1.5)--(axis cs:1,0);
 \draw[line width=0.5mm](axis cs:1,1.5)--(axis cs:2,1.5);
 \draw[line width=0.5mm](axis cs:2,1.5)--(axis cs:2,0);
