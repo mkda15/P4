@@ -316,7 +316,7 @@ This chapter concludes with a comparison of IIR and FIR filters by considering t
 \\ \\
 The process of designing an IIR filter is rather complicated because the required order needs to be computed and the filter needs to be transformed as described. This design method leads to a recursive algorithm. By this method the amplitude response is the only parameter to be specified, and hence specific requirements for e.g. phase response or group delay are not guaranteed to be fulfilled by this kind of filter. However, once the filter has been designed, it is efficient and does not require a lot of computations.
 \\ \\
-The main advantages of a FIR filter is the guarantee of getting a precise generalized linear phase, which may be important in order to preserve the wave form of the original signal. The impulse response by the window method is straightforward to implement, although it is not pre-defined as a design equation, and iterations are thus often necessary before desired specifications are achieved.
+The main advantages of a FIR filter is the easy implementation and the guarantee of getting a precise generalized linear phase, which can be important in order to preserve the wave form of the original signal. The impulse response by the window method is straightforward to implement, although it is not pre-defined as a design equation, and iterations are thus often necessary before desired specifications are achieved.
 \\ \\
 When choosing the right filter design computational speed is often considered, which basically is related to the required order of the system and the amount of iterations with respect to the order.
 \\ \\

@@ -11,7 +11,7 @@ The implementation of the STFT requires an FFT algorithm and will use the algori
 \State $data = filename.wav$ \Comment{Recording imported as .wav file}\\
 \Procedure{Compute STFT}{$FFTsize,overlap,data$}
 \State $step=FFTsize/overlap$
-\State $w=hanning(FFTsize)$ \Comment{Hanning window of length $=FFTsize$}
+\State $w=hann(FFTsize)$ \Comment{Hann window of length $=FFTsize$}
 \For{each $i$ at intervals of $step$ in length of $data-FFTsize$}
 \State $stft = array[FFT(w\cdot data[i:i+FFTsize])]$
 \EndFor
