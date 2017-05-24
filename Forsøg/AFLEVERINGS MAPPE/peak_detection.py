@@ -6,10 +6,11 @@ Created on Wed May 17 09:32:06 2017
 """
 import numpy as np
 
-def peak_dec(X, limit, y):
+def peak_dec(X, p, y):
     X = X.T
     sortedX = np.zeros(len(X),dtype = object)
-    
+    maxamp = np.max(X)
+    limit = maxamp*p
     for i in range(len(X)):
         sortedX[i] = np.sort(X[i])
         max_freq_pos = np.zeros(len(X))
