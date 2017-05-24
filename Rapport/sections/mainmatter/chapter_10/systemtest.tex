@@ -1,7 +1,7 @@
-In this section the final system is tested with varying input signal in order to evaluate at what level the application fulfils the practical purpose of the system. According to chapter \ref{ch3} the purpose of the system is to create a spectrogram from which the significant frequencies over time are to be recognized by the peak detection algorithm to match the frequencies known to be in the input signal according to the tone or chord played. \\
+In this section the final system is tested with varying input signals in order to evaluate at what level the application fulfils the purpose of the system. According to chapter \ref{ch3} the purpose of the system is to create a spectrogram from which the significant frequencies over time are to be recognized by the peak detection algorithm to match the frequencies known to be in the input signal according to the tone or chord played. \\
 In each test the same noise is added to the signal. The noise consists of hands clapping in the background to simulate a realistic situation. Note that all other natural noises are hence minimized. Variation of the noise will not be considered in this system validation but will be further investigated in chapter \ref{ch11}.
 
-\paragraph{Test 1} Scale with clapping hands.
+\paragraph{Test 1} Natural minor scale with clapping hands.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
@@ -20,10 +20,10 @@ In each test the same noise is added to the signal. The noise consists of hands 
 \label{fig:final_1}
 \end{figure} 
 
-Figure \ref{fig:final_1} account for the system output of test 1. From the results it is clear that the significant frequencies follows an octatonic scale. However, single incongruous frequencies appears due to a low SNR within the passband at a certain time.
-It is clear that the lowest frequencies lay closer as expected, and hence it is a bit harder to identify the actual frequencies. From the result it is concluded that the scale is recognisable.
+Figure \ref{fig:final_1} accounts for the system output of test 1. From the results it is clear that the significant frequencies follow a natural minor scale. However, single incongruous frequencies appear due to a low SNR within the passband at certain times.
+It is clear that the lowest frequencies lie closer as expected, and hence it is a bit harder to identify the actual frequencies. The scale is known to begin with a tone of frequency 117 Hz and rise to a tone of frequency 554 Hz which the peak detection seems to match. From this result it is concluded that the scale is recognisable.
 
-\paragraph{Test 2} Melody ``Lille Peter edderkop'' by single tones with clapping hands.  
+\paragraph{Test 2} Melody ``Itsy Bitsy Spider'' by single tones with clapping hands.  
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
@@ -38,43 +38,42 @@ It is clear that the lowest frequencies lay closer as expected, and hence it is 
 \caption{Significant frequencies of melody.}
 \label{fig:final_peak3}
 \end{subfigure}
-\caption{Melody ``Lille Peter edderkop'' by single tones with clapping hands.}
+\caption{Melody ``Itsy Bitsy Spider'' by single tones with clapping hands.}
 \label{fig:final_3}
 \end{figure}  
 
-Figure \ref{fig:final_3} accounts for the output of test 2. It is seen compared to the result of the scale that the significant frequencies are not as clear due to several incongruous detected frequencies. However, by ignoring the single peaks in figure \ref{fig:final_peak3} it is possible to sense the pattern of the frequencies. The first three different frequencies detected is approximately 258 Hz, 301 Hz and 322 Hz, which corresponds within a range of $\pm 10$ Hz to the first line of the melody being $C \ C \ C \ D \ E \ E \ E$, and it also corresponds with the time axis. More generally, the melody is recognisable by a person knowing the melody. \\
-By this one can conclude that the melody is recognisable on behalf of the result but a selective algorithm is required to determine the specific tones.                  
+Figure \ref{fig:final_3} accounts for the output of test 2. It is seen compared to the result of the scale that the significant frequencies are not as clear due to several incongruous detected frequencies. However, by ignoring the incongruous peaks in figure \ref{fig:final_peak3} it is possible to sense the pattern of the frequencies. The first three different frequencies detected are approximately 258 Hz, 301 Hz and 322 Hz, which corresponds within a range of $\pm 10$ Hz to the first line of the melody being $C \ C \ C \ D \ E \ E \ E$, and it also visually corresponds with the time axis. More generally, the melody is recognisable by a person knowing the melody. \\
+By this one can conclude that the melody is recognisable based on the result but a selective algorithm is required to determine the specific tones.                  
 
-\paragraph{Test 3} Low $E$ chord with clapping hands.
+\paragraph{Test 3} $E_2$ chord with clapping hands.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/validation/systemtest/final_spec3.png}
-\caption{Spectrogram of $E$ chord.}
+\caption{Spectrogram of $E_2$ chord.}
 \label{fig:final_spec2}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/validation/systemtest/final_peak3.png}
-\caption{Significant frequencies of $E$ chord.}
+\caption{Significant frequencies of $E_2$ chord.}
 \label{fig:final_peak2}
 \end{subfigure}
-\caption{Significant frequencies of low $E$ chord.}
+\caption{Significant frequencies of $E_2$ chord.}
 \label{fig:final_2}
 \end{figure}
 
-Figure \ref{fig:final_2} accounts for the output of test 3. By the detected frequencies shown in figure \label{fig:final_peak2} it seems that it is a single low $E$ tone being played, cf. figure \ref{fig:inte_peak}, rather than the low $E$ chord. As explained in chapter \ref{ch2} a chord is a combination of at least three tones, which in this case is $E$, $B$, $G$\hashsharp and also the harmonics. Hence, the peak detection algorithm is not able to detect chords, and the spectrogram does not provide readable information, neither, because the tones above the significant $E$ tone are difficult to identify. Furthermore, it would require intelligent guessing in order to connect the correct frequencies found to be the most significant.
+Figure \ref{fig:final_2} accounts for the output of test 3. By the detected frequencies shown in figure \ref{fig:final_peak2} it seems that it is a single $E_2$ tone being played, cf. figure \ref{fig:inte_peak}, rather than the $E_2$ chord. As explained in chapter \ref{ch2} a chord is a combination of at least three tones, which in this case is $E_2$, $B_2$, $G_3$\hashsharp and also the harmonics. Hence, the peak detection algorithm is not able to detect chords, and the spectrogram does not provide readable information, neither, because the tones above the significant $E_2$ tone are difficult to identify. Furthermore, it would require intelligent guessing in order to connect the correct frequencies found to be the most significant.
 
 \subsection{Summary}
-From the test results of the final application it is seen that the system is capable of computing a spectrogram on behalf of a given input signal in form of a .WAW file containing a recorded sound signal. Noise outside a given passband is successfully removed in order to isolate the frequencies expected within the range of significant frequencies of the signal found by the frequency analysis described in chapter \ref{ch9}. \\
-From this the implementation of each unit and the integration of these into one algorithm making the application work as intended - technically speaking. \\
+From the test results of the final application it is seen that the system is capable of computing a spectrogram based on a given input signal in form of a .WAV file containing a recorded sound signal. Noise outside a given passband is successfully removed in order to isolate the frequencies expected within the range of significant frequencies of the signal found by the frequency analyses described in chapter \ref{ch9}. \\
+From this the implementation of each unit and the integration of these into one algorithm makes the application work as intended. \\
 \\
-Within the limit of the presented theory the quality of the output is sought optimized through the decisions made primarily upon filter type and the resolution of time and frequency, respectively, in the spectrogram.
+Within the limit of the presented theory the quality of the output is sought optimised through the decisions made primarily upon filter type and the resolution of time and frequency, respectively, in the spectrogram.
 The quality of the output is evaluated upon the possibility of recognising the correct significant frequency at a specific time. \\
-The results of the final tests indicate that it is possible to detect the significant frequency in the case of a single tone within an approximate range of $\pm 10$ Hz. This accuracy is found to be sufficient under the assumption that only the standard tones are used. The exactness in time are not fully obtained but visually it appears sufficient. \\        
-Test 1 and test 2 indicates further that when the input signal gets more complicated with respect to speed and shifts between tones it is more difficult to detect the right tones. \\
-By test 3 it is concluded that the application is not capable of determining a specific chord. \\   
+The results of the final tests indicate that it is possible to detect the significant frequency in the case of a single tone within a range of $\pm 10$ Hz. This accuracy is not sufficient for unique recognition of low tones. The peak detection can be improved with increased spectral resolution of the spectrogram which however lowers the temporal resolution. As this project does not include an assessment of the temporal resolution this trade-off can not be evaluated besides visual enterpretation of the spectrograms.\\        
+Test 1 and test 2 further indicate that when the input signal gets more complicated with respect to speed and shifts between tones it is more difficult to detect the right tones. By test 3 it is concluded that the application is not capable of determining a specific chord. \\   
 \\
-Therefore, the application is found to fulfil the primary purpose when the input signal is limited to consist of single standard tones recorded under controlled circumstances. \\
-The resistance towards varying noise will be investigated in the following chapter.
+Therefore, the application is found to fulfil the primary purpose specified in section \ref{sec:final_test3} but with limited accuracy.\\
+The performance of the algorithm under varying levels of noise will be investigated in the following chapter.

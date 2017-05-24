@@ -1,8 +1,8 @@
 \section{Varying signal-to-noise ratios}
-To measure the varying amount noise in the signal the SNR as defined in definition \ref{def:SNR} is used, and the RMS is calculated as defined in \eqref{eq:RMS}. The peak detection alogrithm will be tested by gradually increasing the amount of noise in the signal and thereby decreasing the SNR of the signal. The evaluation of the peak detection alogrithm is then based upon the SNR at the time of failure of the algorithm.
+To measure the varying amount noise in the signal the SNR as defined in definition \ref{def:SNR} is used, and the RMS is calculated as defined in \eqref{eq:RMS}. The peak detection algorithm will be tested by gradually increasing the amount of noise in the signal and thereby decreasing the SNR of the noisy signal. The evaluation of the peak detection alogrithm is then based upon the SNR at the time of failure of the algorithm.
 
 \subsection{Single tone}
-The signal of a single tone is added the noise of clapping, singing, folding a piece of paper and ambient noise in varying levels. Figure \ref{fig:single_spectrum} shows the frequency spectrum of the signal, the noise signal and the bandpass filter.
+The noise of clapping, singing, folding a piece of paper and ambient noise is added the signal of a single tone in varying levels. Figure \ref{fig:single_spectrum} shows the frequency spectrum of the signal, the noise and the bandpass filter.
 
 \begin{figure}[H]
 \begin{subfigure}{0.49\textwidth}
@@ -17,11 +17,11 @@ The signal of a single tone is added the noise of clapping, singing, folding a p
 \caption{}
 \label{fig:single_stem}
 \end{subfigure}
-\caption{\textbf{(a)} Normalized frequency spectra of single low $E$ tone (blue), the noise signal (green) and the bandpass filter (orange). \textbf{(b)} Stem plot of most significant frequencies of noisy signal at different levels of SNR.}
+\caption{\textbf{(a)} Normalized frequency spectra of single $E_2$ tone (blue), the noise (green) and the bandpass filter (orange). \textbf{(b)} Stem plot of most significant frequencies of noisy signal at different levels of SNR.}
 \label{fig:single_noise}
 \end{figure}
 
-The noise-free signal has a most significant frequency of 167.58 Hz corresponding approximately to a harmonic of an $E$ tone. By letting the SNR decrease and running the peak detection algorithm at each step of different SNRs the stem plot of most significant frequencies in figure \ref{fig:single_stem} is created. This plot shows when the peak detection fails to identify the most significant frequency in the signal. At SNR = -37.83 dB the peak detection algorithm no longer detects the right frequency but another frequency of 105.84 Hz which is assumed to be the most significant frequency of the noise added to the signal.
+The noise-free signal has a most significant frequency of 167.58 Hz which approximately corresponds to a harmonic of $E_2$. By letting the SNR decrease and running the peak detection algorithm at each step of different SNRs the stem plot of most significant frequencies in figure \ref{fig:single_stem} is created. This plot shows when the peak detection fails to identify the most significant frequency in the signal. At SNR = -37.83 dB the peak detection algorithm no longer detects the right frequency but another frequency of 105.84 Hz which is assumed to be the most significant frequency of the noise added to the signal.
 
 \subsection{White noise}
 A generated sampling of white noise is furthermore added to the single tone. Figure \ref{fig:white_spectrum} shows the frequency spectra of the signal, noise and filter.
@@ -30,23 +30,23 @@ A generated sampling of white noise is furthermore added to the single tone. Fig
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/SNR/white_spectrum.png}
-\caption{Normalized frequency spectra of single low $E$ tone (blue), white noise (green) and bandpass filter (orange).}
+\caption{}
 \label{fig:white_spectrum}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/SNR/white_stem.png}
-\caption{Stem plot of most significant frequencies of noisy signal at different levels of SNR.}
+\caption{}
 \label{fig:white_stem}
 \end{subfigure}
-\caption{}
+\caption{\textbf{(a)} Normalized frequency spectra of single $E_2$ (blue), white noise (green) and bandpass filter (orange). \textbf{(b)} Stem plot of most significant frequencies of noisy signal at different levels of SNR.}
 \label{fig:white_noise}
 \end{figure}
 
 In figure \ref{fig:white_stem} it is seen that the peak detection algorithm no longer detects the right frequency from SNR = -62.46 dB but rather detects random frequencies as a result of the overwhelming amount of white noise.
 
 \subsection{Concentrated noise}
-Figure \ref{fig:concentrated_noise} shows the results of adding noise concentrated in a single frequency in the passband to the signal. Concentrating the power of the noise in a single frequency of 300 Hz bypasses the filter and is easily detected by the algorithm.
+Figure \ref{fig:concentrated_noise} shows the results of adding noise, which is concentrated in a single frequency in the passband, to the signal. Concentrating the power of the noise in a single frequency of 300 Hz bypasses the filter and is easily detected by the algorithm.
 
 \begin{figure}[H]
 \begin{subfigure}{0.49\textwidth}
@@ -61,17 +61,17 @@ Figure \ref{fig:concentrated_noise} shows the results of adding noise concentrat
 \caption{}
 \label{fig:concentrated_stem}
 \end{subfigure}
-\caption{\textbf{(a)} Normalized frequency spectra of single low E tone (blue), concentrated noise at 300 Hz (green) and bandpass filter (orange). \textbf{(b)} Stem plot of most significant frequencies of noisy signal at different levels of SNR.}
+\caption{\textbf{(a)} Normalized frequency spectra of single $E_2$ (blue), concentrated noise at 300 Hz (green) and bandpass filter (orange). \textbf{(b)} Stem plot of most significant frequencies of noisy signal at different levels of SNR.}
 \label{fig:concentrated_noise}
 \end{figure}
 
-As seen in figure \ref{fig:concentrated_stem} the peak detection algorithm no longer detects the right frequency at SNR = 13.06 dB. This is in stark contrast with the two above simulations and is because of the concentrated energy in a single frequency lying in the passband.
+As seen in figure \ref{fig:concentrated_stem} the peak detection algorithm no longer detects the right frequency at SNR = 13.06 dB. This is in stark contrast with the above two simulations and is due to the energy being concentrated in a single frequency lying in the passband.
 
 \section{Summary}
-From the above tests of the peak detection algorithm under varying amounts of different noise the following three points can be made:
+From the above tests of the peak detection algorithm under varying amounts of different noises the following three points can be made:
 \begin{itemize}
-\item If the noise signal lies outside the pass band it is filtered out by the band pass filter and the algorithm works well.
+\item If the noise lies outside the pass band it is filtered out by the band pass filter and the algorithm works well.
 \item If the noise lies in the pass band but the energy is spread in different frequencies the algorithm works well.
 \item If the noise lies in the pass band and the energy is concentrated in few frequencies the algorithm does not work well.
 \end{itemize}
-For the purpose of the algorithm in this project - filtering background noise - the algorithm is concluded to work well as it can detect peaks at very low levels of SNR.
+For the purpose of the algorithm in this project, which is filtering background noise, the algorithm is concluded to work well as it can detect peaks at very low levels of SNR.
