@@ -13,7 +13,7 @@ The STFT will be implemented in Python, and the algorithm for the implementation
 \State $data = filename.wav$ \Comment{Recording imported as .wav file}\\
 \Procedure{Compute STFT}{}
 \State $step=FFTsize/overlap$
-\State $w=hanning(FFTsize)$ \Comment{Hanning window of length $=FFTsize$}
+\State $w=hann(FFTsize)$ \Comment{Hann window of length $=FFTsize$}
 \For{each $i$ at intervals of $step$ in length of $data-FFTsize$}
 \State $stft = array[FFT(w\cdot data[i:i+FFTsize])]$
 \EndFor
@@ -75,7 +75,7 @@ The STFT uses a window function to taper the segment of the data to be transform
 \centering
 
 \includegraphics[width=\textwidth]{figures/stft_windows/hanning_10000.png}
-\caption{Hanning window}
+\caption{Hann window}
 \label{fig:stft_hanning}
 \includegraphics[width=\textwidth]{figures/stft_windows/hamming_10000.png}
 \caption{Hamming window}
@@ -108,25 +108,25 @@ The STFT uses a window function to taper the segment of the data to be transform
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/stft_windows/100/hanning.png}
-\caption{Hanning}
+\caption{Hann window.}
 \label{fig:stft_hanning_100}
 \includegraphics[width=\textwidth]{figures/stft_windows/100/hamming.png}
-\caption{Hamming window}
+\caption{Hamming window.}
 \label{fig:stft_hamming_100}
 \includegraphics[width=\textwidth]{figures/stft_windows/100/kaiser_4.png}
-\caption{Kaiser window, $\beta=4$}
+\caption{Kaiser window, $\beta=4$.}
 \label{fig:stft_kaiser_100_4}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/stft_windows/100/bartlett.png}
-\caption{Bartlett window}
+\caption{Bartlett window.}
 \label{fig:stft_bartlett_100}
 \includegraphics[width=\textwidth]{figures/stft_windows/100/blackman.png}
-\caption{Blackman window}
+\caption{Blackman window.}
 \label{fig:stft_blackman_100}
 \includegraphics[width=\textwidth]{figures/stft_windows/100/kaiser_10.png}
-\caption{Kaiser window, $\beta=10$}
+\caption{Kaiser window, $\beta=10$.}
 \label{fig:stft_kaiser_100_10}
 \end{subfigure}
 \caption{Spectrograms generated with different windows of length $2^6$ and with overlap of 2.}
