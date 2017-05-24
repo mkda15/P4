@@ -2,25 +2,25 @@
 In this section the recordings of music will undergo frequency analysis, and the goal is to be able to express which frequencies the tones played in the recordings are generally found at. It is expected that both the significant tone and its corresponding harmonics will appear in the frequency spectrum.
    
 \subsection{Single tone} \label{sec:single}
-Firstly, the tuning of guitar is checked for consistency. The low and high E strings on the guitar should vibrate and emit sounds frequencies of 82.41 Hz and 329.63 Hz, respectively, as seen in table \ref{fig:guitar_frequencies}. Figures \ref{fig:single_low} and \ref{fig:single_high} show the frequency spectra for the recordings of the two tones.
+Firstly, the tuning of guitar is checked for consistency. The $E_2$ and $E_4$ strings on the guitar (low and high $E$ strings on the guitar, repectively) should vibrate and emit sounds of frequencies of 82.41 Hz and 329.63 Hz, respectively, as seen in table \ref{fig:guitar_frequencies}. Figures \ref{fig:single_low} and \ref{fig:single_high} show the frequency spectra for the recordings of the two tones.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/freqanal/single_low.png}
-\caption{Low E string}
+\caption{$E_2$.}
 \label{fig:single_low}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/freqanal/single_high.png}
-\caption{High E string}
+\caption{$E_4$.}
 \label{fig:single_high}
 \end{subfigure}
-\caption{Frequency spectra of low and high E strings on a guitar. The harmonics are clearly visible.}
+\caption{Frequency spectra of $E_2$ and $E_4$ strings on a guitar. The harmonics are clearly visible.}
 \label{fig:single}
 \end{figure}
-With a peak detection algorithm implemented in Python the most significant frequencies in the two recordings are registered to be 163.82 Hz and 329.83 Hz for the low and high E's, respectively. As $163.82$ Hz $\approx 2\cdot82.41$ Hz this is regarded as a harmonic of the low E. The harmonics are moreover observable in the figures as reduced peaks at integer multiples of the fundamental frequencies of the tones. It is furthermore seen from the figures, that the energy in the signals is mainly located at frequencies above 75 Hz and below 1000 Hz for the low E and above 100 Hz and below 2000 Hz for the high E.\\ 
+With a peak detection algorithm implemented in Python the most significant frequencies in the two recordings are registered to be 163.82 Hz and 329.83 Hz for $E_2$ and $E_4$, respectively. As $163.82$ Hz $\approx 2\cdot82.41$ Hz this is regarded as a harmonic of $E_2$. The harmonics are moreover observable in the figures as reduced peaks at integer multiples of the fundamental frequencies of the tones. It is furthermore seen from the figures, that the energy in the signals is mainly located at frequencies above 75 Hz and below 1000 Hz for $E_2$ and above 100 Hz and below 2000 Hz for $E_4$.\\ 
 
 \subsection{Chord}
 Figures \ref{fig:chord_low} and \ref{fig:chord_high} show the frequency spectra of the recordings of low and high E chords, respectively.
@@ -29,13 +29,13 @@ Figures \ref{fig:chord_low} and \ref{fig:chord_high} show the frequency spectra 
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width=0.9\textwidth]{figures/freqanal/chord_low.png}
-\caption{Low E chord.}
+\caption{$E_2$ chord.}
 \label{fig:chord_low}
 \end{subfigure}
 \begin{subfigure}{0.49\textwidth}
 \centering
 \includegraphics[width = 0.9\textwidth]{figures/freqanal/chord_high.png}
-\caption{High E chord.}
+\caption{$E_4$ chord.}
 \label{fig:chord_high}
 \end{subfigure}
 \caption{Frequency spectra of low and high E chords played on a guitar.}
