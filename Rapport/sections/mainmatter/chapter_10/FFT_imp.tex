@@ -68,13 +68,28 @@ $2^{14}$   & $1206.85$ & $0.27$  & $\sim 0.00$ \\ \hline
 \label{tab:FTcompare}
 \end{table}
 
-Table \ref{tab:FTcompare} shows that the time the DFT takes to compute the $N$ numbers grows rapidly, whereas either of the FFTs take less than a second. The values for Numpy's FFT are rounded off to zero, and this function's ability to rapidly perform the computations is due to the fact that Numpy actually performs the computations in C, where the code is already compiled and runs directly on the CPU. On the other hand, Python is an interpreted language, which means that each line of the code has to be translated before it can be run. However, that obviously does not mean that the implementation of the FFT shown above is slow, and it is certainly much faster than the implementation of the DFT. \\
-It is furthermore interesting to examine whether this result corresponds to the theoretical relation of the computational complexities. From section \ref{sec:FFT} the theoretical numbers of arithmetic operations required to compute the DFT and FFT are $N^2$ and $N\log_2(N)$, respectively. The relation $\frac{N^2}{N \cdot \log_2(N)}$ of these computational complexities equals $\frac{N}{\nu}$ for $N = 2^\nu, \nu \in \mathbb{N}$, which is a 
+Table \ref{tab:FTcompare} shows that the time the DFT takes to compute the $N$ numbers grows rapidly, whereas either of the FFTs take less than a second. The values for Numpy's FFT are rounded off to zero, and this function's ability to rapidly perform the computations is due to the fact that Numpy actually performs the computations in C, where the code is already compiled and runs directly on the CPU. On the other hand, Python is an interpreted language, which means that each line of the code has to be translated before it can be run. However, that obviously does not mean that the implementation of the FFT shown above is slow, and it is certainly much faster than the implementation of the DFT.
+\\ \\
+It is furthermore interesting to examine whether this result corresponds to the theoretical relation of the computational complexities. From section \ref{sec:FFT} the theoretical numbers of arithmetic operations required to compute the DFT and FFT are $N^2$ and $N\log_2(N)$, respectively. The theoretical relation $\frac{N^2}{N \cdot \log_2(N)}$ of these computational complexities equals $\frac{N}{\nu}$ for $N = 2^\nu, \nu \in \mathbb{N}$. This is shown in table \ref{tab:com_compare} together with the practical relation of the computation times of the DFT and FFT from table \ref{tab:FTcompare}.
 
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+Relation / $N$	& Theoretical 	& Practical	& Difference		\\ \hline
+$2^9$  	   		& $56.89$    	& $103.00$	& $46.11$	\\ \hline
+$2^{10}$   		& $102.40$    	& $221.50$	& $119.10$	\\ \hline
+$2^{11}$   		& $186.18$   	& $558.67$	& $392.48$	\\ \hline
+$2^{12}$   		& $341.33$   	& $991.71$	& $650.38$	\\ \hline
+$2^{13}$   		& $630.15$  	& $1616.06$	& $985.90$	\\ \hline
+$2^{14}$   		& $1170.29$ 	& $4469.81$	& $3299.52$	\\ \hline
+\end{tabular}
+\caption{Comparison of the theoretical relation in computations and practical relation in computation times between the DFT and FFT.}
+\label{tab:com_compare}
+\end{table}
 
-  
-For $N=2^9$ this gives an approximate relation of the FFT being $57$ times faster than the DFT but the actual relation is $103/1$ from table \ref{tab:FTcompare}. From this the computation of the implemented FFT is approximately twice as fast as found theoretically compared to the implemented DFT, which is due to the number of computations and the computer's processing time cannot be directly compared \martin{Martin udvider sammenligningen af tallene}. \\
-\\
+Therefore, for e.g. $N = 2^9$ the FFT is theoretically $56.89$ times faster than the DFT but in practice it is $103$ times faster. This is because the number of computations and the computer's processing time cannot be directly compared \martin{Nyt. \textregistered}.
+\\ \\
 The implementation of the FFT and Numpy's FFT should also be compared for larger number of samples $N$ since e.g. $N = 2^{19}$ is 11.89 seconds with a sampling frequency of 44100 Hz, which is a reasonable length of an audio file from the recordings described in appendix \ref{recordings}. The DFT will obviously take too long and is therefore not included in the comparison in table \ref{tab:FT2compare}.
 
 \begin{table}[H]
