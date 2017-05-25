@@ -25,7 +25,7 @@ Figure \ref{fig:sine_STFT} is a follow-up from figure \ref{fig:sine_sum} and ini
 
 The human ear and brain is able to perceive the bare signal $f$ and process it into a representation that provides simultaneous information about both time and frequency. This is represented through the staff system shown in figure \ref{fig:cmajor} in chapter \ref{ch2}. The goal of time-frequency analysis (at least in this project) is to create a joint time-frequency representation of a signal \cite{page 22, FTFA}. This is the incentive for the short-time Fourier transform (STFT), which may be thought of as the mathematical analogue of the musical score \cite{page 37, FTFA}. The following is inspired by \cite{page 37, FTFA}.
 \\ \\
-The idea in the STFT is to obtain properties of a local frequency spectrum of $f$ by restricting it to an interval and taking the Fourier transform of this interval. $f$ is restricted on this interval by using a window function, which is close to 1 near the origin and decays towards zero at the edges, which is therefore a smooth cut-off function. The boundaries created by a sharp cut-off function will be interpreted by the Fourier transform as a discontinuity or an abrupt variation of the signal, which is obviously not desirable \cite{Davis}. The following definition of the STFT is inspired by the definition in \cite{page 37, FTFA} but has been adjusted to the definition of the Fourier transform used in this project. Also, $g$ is not assumed to take complex values as in \cite{page 37, FTFA}.
+The idea in the STFT is to obtain properties of a local frequency spectrum of $f$ by restricting it to an interval and taking the Fourier transform of this interval. $f$ is restricted on this interval by using a window function, which is close to 1 near the origin and decays towards zero at the edges, which is therefore a smooth cut-off function. The boundaries created by a sharp cut-off function will be interpreted by the Fourier transform as a discontinuity or an abrupt variation of the signal, which is obviously not desirable \cite{Davis}. The following definition of the STFT is inspired by the definition in \cite{page 37, FTFA} but has been adjusted to the definition of the Fourier transform used in this project. Also, $w$ is not assumed to take complex values as in \cite{page 37, FTFA}.
 
 \begin{definition}[The short-time Fourier transform]\label{def:stft}
 Let $x,w \in \mathcal{L}^2(\mathbb{R}^d)$. For a fixed window function $w \neq 0$ the short-time Fourier transform of a function $x$ with respect to $w$ is defined as:
@@ -65,7 +65,9 @@ Let $x[n],w[n]\in\ell^2$. For a fixed window sequence $w[n] \neq 0$ the discrete
 X[n, \omega] = \sum_{m=-\infty}^{\infty} x[n+m]w[m]\text{e}^{-j\omega m}.
 \end{align}
 \end{definition}
-In figure \ref{fig:discreteSTFT} is seen the discrete STFT illustrated by windowing of a signal by adjacent windows of different overlaps.
+
+Figure \ref{fig:discreteSTFT} shows the discrete STFT illustrated by windowing of a signal by adjacent windows with different overlaps. Clearly, no overlap results in loss of data. On the other hand, a rather large overlap results in more computations \martin{Nyt. \textregistered}.
+
 \begin{figure}[H]
 \begin{subfigure}{0.49\textwidth}
 \centering
@@ -222,7 +224,7 @@ The integral is integrated by parts:
 \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt = \left[ t |x(t)|^2 \right]_{t=-\infty}^\infty - \int_{-\infty}^\infty |x(t)|^2 dt = - \int_{-\infty}^\infty |x(t)|^2 dt
 \end{align*}
 
-where it has been used that $t|x|^2 = tx\overline{x}$, so it follows that according to Hölder's inequality $\|t|x|^2\|_1 = \|tx\overline{x}\|_1 \leq \|tx\|_2 \|x\|_2 < \infty$ as $x,tx \in \mathcal{L}^2$$^{[\footnote{See definition \ref{def:Lpspace} for notation of $\mathcal{L}^p$-norms}]}$. Thus $t|x|^2 \in \mathcal{L}^1$ so $\lim_{|t| \to \infty} t |x(t)|^2 = 0$. This result is substituted into \eqref{eq:Heis_proof3}, which then yields:
+where it has been used that $t|x|^2 = tx\overline{x}$, so it follows that according to Hölder's inequality $\|t|x|^2\|_1 = \|tx\overline{x}\|_1 \leq \|tx\|_2 \|x\|_2 < \infty$ as $x,tx \in \mathcal{L}^2$ $^[$\footnote{See definition \ref{def:Lpspace} for notation of $\mathcal{L}^p$-norms}$^]$. Thus $t|x|^2 \in \mathcal{L}^1$ so $\lim_{|t| \to \infty} t |x(t)|^2 = 0$. This result is substituted into \eqref{eq:Heis_proof3}, which then yields:
 \begin{align*}
 \sigma_t^2 \sigma_\omega^2 &\geq \dfrac{1}{4 \cdot \|x(t)\|^4} \left[ \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt \right]^2 \\
 &= \dfrac{1}{4 \cdot \|x(t)\|^4} \left[ - \int_{-\infty}^\infty |x(t)|^2 dt \right]^2 \\

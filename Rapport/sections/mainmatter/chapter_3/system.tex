@@ -28,7 +28,7 @@ In order for an application to perform this transformation an analog sound has t
 By this the system is fundamentally based upon theory about discrete-time systems, including analyses and processings of such systems and the data at disposal.
 
 \section{Synthesizing} \label{sec:synth}
-To develop and design the system a synthesis approach is used to expand the basic concept of the application in order to define the purpose and thereby requirements for each part of the application.
+To develop and design the system, a synthesis approach is used to expand the basic concept of the application in order to define the purpose and thereby requirements for each part of the application.
 Figure \ref{fig:synth} illustrates the synthesizing of the system down to a level showing the essential parts of the application. Requirements for each part of the application are elaborated in the next section.
 \begin{figure}[H]
 \centering
@@ -105,7 +105,7 @@ Figure \ref{fig:synth} illustrates the synthesizing of the system down to a leve
 \subsection{Requirements and delimitations}
 \subsubsection{Audio file}
 To process an analog sound in a computer the sound has to be digitalized. This is done by a Sample \& Hold circuit and an analog-to-digital converter (ADC), which transform an analog audio signal from a microphone into a digital signal discretized in time and amplitude. These bits are then to be stored as an audio file in .WAV format. This process is done by a sound card in a computer and storage software. In order to correctly sample an analog signal within the human audible range the software needs to provide a sampling frequency of 44.1 kHz and a bit resolution of 16 bits \cite{Mic}. The choice of sampling frequency is supported by the sampling theorem \ref{sampling_theorem}.\\\\
-The audio files contain music and noise separately recorded in an anechoic chamber. This minimizes unknown noise and allows the signal-to-noise ratio to be controlled. The produced audio file acts as the \textit{input signal} for the algorithm that processes the music. Thus the system will not operate in real-time. 
+The audio files contain music and noise separately recorded in an anechoic chamber. This minimizes unknown noise and allows the signal-to-noise ratio to be controlled. The produced audio file acts as the \textit{input signal} for the algorithm that processes the music. Thus, the system will not operate in real-time. 
 
 \subsubsection{Algorithm}
 The main part of the application is an algorithm, which takes an audio file as input and generates a corresponding note sheet as output. This involves signal modification, spectral analysis, a spectral representation over time and generation of a note sheet from the signal:
@@ -113,17 +113,17 @@ The main part of the application is an algorithm, which takes an audio file as i
 \item[] \textbf{Signal modification} is needed in this project to select which frequencies are wanted for the spectral analysis and remove unwanted frequencies. The modification is done by a digital filter designed to reduce noise in the signal because noise is expected in a recorded sound signal. The choice of filter type and definition of desired specifications will be made based on a frequency analysis of recorded music and noise signals that could be representative for the use of the system.
 
 \item[] \textbf{Spectral analysis} concerns the spectrum of frequencies corresponding to the signal. This involves transformation of the signal from time domain to frequency domain.
-One primary method used for this purpose is the Fourier transform. Based on the theoretical focus and learning goals for the project this transformation is used in this project. An alternative to the Fourier transform is the wavelet transform which will be briefly examined in the end of the project in order to discuss eventual advantages by use of the wavelet transform.    
+One primary method used for this purpose is the Fourier transform. Based on the theoretical focus and learning goals for the project this transformation is used in this project. An alternative to the Fourier transform is the wavelet transform, which will be briefly examined at the end of the report in order to discuss eventual advantages by use of the wavelet transform.    
 
-\item[] \textbf{Representation of frequency spectrum over time} is done by plotting the frequency spectrum over time, which forms a spectrogram. By the spectrogram it is possible to analyse the frequencies of the filtered signal over time. As described in chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones. To compute a spectrogram the \textit{short-time Fourier transform} (STFT) is used whereby a trade-off between accuracy in time and accuracy in frequency occurs.  
+\item[] \textbf{Representation of frequency spectrum over time} is done by plotting the frequency spectrum over time, which forms a spectrogram. By the spectrogram it is possible to analyse the frequencies of the filtered signal over time. As described in chapter \ref{ch2} a note sheet is basically a spectrogram showing the frequency of the tones. To compute a spectrogram the \textit{short-time Fourier transform} (STFT) is used, whereby a trade-off between accuracy in time and accuracy in frequency occurs.  
 
 \item[] \textbf{Symbol processing} is required to create a note sheet on behalf of the spectrogram. 
-However, based on the given time limit and the theoretical focus in the project, the system is delimited to leave out the step of actual symbol processing which is marked by the blue parentheses in figure \ref{fig:synth}. As a simplified alternative a simple \textit{amplitude peak detection} algorithm is made to ensure that the significant frequencies, which makes a tone recognizable, can be detected from the spectrogram. \\       
-Hence a visualization of the spectrogram and corresponding significant frequencies detected is the last step in the algorithm which hence is the \textit{output} of the system.
+However, based on the given time limit and the theoretical focus in the project, the system is delimited to leave out the step of actual symbol processing, which is marked by the blue parentheses in figure \ref{fig:synth}. As a simplified alternative a simple \textit{amplitude peak detection} algorithm is made to ensure that the significant frequencies, which makes a tone recognizable, can be detected from the spectrogram. \\       
+Hence, a visualization of the spectrogram and corresponding significant frequencies detected is the last step in the algorithm, which therefore is the \textit{output} of the system.
 \end{itemize}
 
 \section{Final system}
-Based on the stated specifications of the system, figure \ref{fig:system} illustrates the final system which forms a basis of the further work. \\ \\
+Based on the stated specifications of the system, figure \ref{fig:system} illustrates the final system, which forms a basis of the further work. \\ \\
 Focus in this project is the development of the algorithm, and therefore the input of the algorithm is delimited to be a prerecorded audio file containing a known signal. This is furthermore done under the assumption that the system has to work under ideal conditions before it can work under real circumstances. \\ 
 The algorithm inside the application is delimited to create a spectrogram illustrating the frequencies corresponding to the tones on the audio file with a corresponding illustration of the most significant frequencies in the signal. The noise is expected to be reduced in such degree that it is possible to identify the significant frequencies by the spectrogram, which will form the output of the system. \trine{er figuren godkendt? - \smiley}
 \begin{figure}[H]

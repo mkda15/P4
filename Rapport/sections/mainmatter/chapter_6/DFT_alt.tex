@@ -57,7 +57,7 @@ which follows from the fact that the sum is a geometric sum:
 \sum_{i=0}^{N-1} r^i = \dfrac{r^N-1}{1-r}.
 \end{align*}
 
-Therefore, $F^*F = N \cdot I$, where $I$ is the identity matrix. Hence
+Therefore, $F^*F = N \cdot I$, where $I$ is the identity matrix. Hence,
 \begin{align*}
 F^{-1} = \dfrac{1}{N} F^*.
 \end{align*}
@@ -106,7 +106,7 @@ For this case the \textit{circular convolution operator} is defined, which is cl
 %The circular convolution operator is the appropriate description of LSI systems on circularly extended finite-length input, as in the case of DFT. 
 %\chr{Ikke glad for denne sætning}\frede{Det forstår jeg godt, da jeg ikke forstår den \texttrademark}
 %". As we haveseen in Section 3.3.3, the circular convolution operator (3.71) is the appropriate description of LSI systems operating on circularly extended finite-length inputs"
-The circular convolution usesx the modulo function $\langle k\rangle_N$. It is possible to write $k = LN+r$ for $0 \leq r < N$ and $L \in \mathbb{Z}$ in a unique way, and the modulo function finds the remainder $r$ from division of $k$ by $N$:
+The circular convolution uses the modulo function $\langle k\rangle_N$. It is possible to write $k = LN+r$ for $0 \leq r < N$ and $L \in \mathbb{Z}$ in a unique way, and the modulo function finds the remainder $r$ from division of $k$ by $N$:
 \begin{align*}
 \langle k \rangle_N = r.
 \end{align*}
@@ -125,8 +125,9 @@ For a general $k\in\mathbb{Z}$ with $k = LN + r, 0 \leq r \leq N$:
 X[k] = \sum_{n=0}^{N-1} x[n] W_N^{kn} = \sum_{n=0}^{N-1} x[n] W_N^{(LN+r)n} = \sum_{n=0}^{N-1} x[n] W_N^{rn} = X[\langle k\rangle_N].
 \end{align*}
 The following lemma is used in the proof for theorem \ref{theo:DFT_circ}.
+
 \begin{lemma}
-For an length-$N$ sequence $x[n]$ and $0 \leq L \leq N$, then:
+For a length-$N$ sequence $x[n]$ and $0 \leq L \leq N$, then:
 \begin{align*}
 y[n]  = x[\langle n-L\rangle_N] \xleftrightarrow{\text{DFT}} Y[k] = X[k] \text{e}^{-j\frac{2\pi}{N} kL}.
 \end{align*}
@@ -170,7 +171,7 @@ Z[k] &= \sum_{n=0}^{N-1} z[n] \text{e}^{-j\frac{2\pi}{N}kn} = \sum_{n=0}^{N-1} \
 \end{align*}
 \end{proof}
 
-Theorem \ref{theo:DFT_circ} shows that the circular convolution in the time domain corresponds to multiplication in the frequency domain. Therefore, this theorem is analogous to part (d) in theorem \ref{theorem:fund_sym_Fourier}.
+Theorem \ref{theo:DFT_circ} shows that the circular convolution in the time domain corresponds to multiplication in the frequency domain. Therefore, this theorem is analogous to theorem \ref{theorem:fund_sym_Fourier}\ref{theorem:fund_sym_Fourier_d}.
 
 %The following definition is the background for an important property of the DFT \cite{Eigenfunctions}.
 %

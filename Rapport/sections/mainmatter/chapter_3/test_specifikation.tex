@@ -30,13 +30,14 @@ In this section test specifications are determined in order to test and evaluate
 \draw [decoration={text along path,
     text={Project Test and Integration},text align={center}},decorate]  (44) -- (33);
 \end{tikzpicture}
-\caption{Concept of the V-model}
+\caption{Concept of the V-model.}
 \label{fig:vmodel}
 \end{figure}
 %
 %In the previous synthesis section requirements of the system was established. This section describes test specifications of each phase starting from the smallest unit, and working up to the system as a whole. \\
 %\\
 The system is tested from the bottom up, starting with the smallest components (single units). This phase is called the ``Unit Testing''. The test checks each of the units individually and verifies that they are working according to the expectations. Next up the coherence of the system is tested, and finally the full system as a whole unit is tested. Detailed design, implementation and tests are described in chapter \ref{ch10}. Units in the model are as follows:
+
 \begin{multicols}{2}
 \subparagraph{Physical components}  
 \begin{itemize}
@@ -49,7 +50,7 @@ The system is tested from the bottom up, starting with the smallest components (
 \begin{itemize}
 	\item Fourier transform
 	\item Filter
-	\item short-time Fourier transform
+	\item Short-time Fourier transform
 	\item Peak detection
 \end{itemize}
 \end{multicols}
@@ -71,11 +72,11 @@ The spectrogram is made by the short-time Fourier transform described in section
 The peak amplitude detector is tested on a recorded signal with a known single tone. By table \ref{tab:freq} in chapter \ref{ch2} the fundamental frequencies of specific tones are given. Thus the wanted output is known for comparison.         
 
 \subsection{Integration test}
-When each unit is working according to the specifications the next step is to test the units as they are integrated into a single system. This test is done by taking the output of the previous unit and feeding it into the next unit of the algorithm. Hence, focus of this test is the coherence of the algorithm and not the level of performance according to the problem statement. This is the last step in creating the final system.
+When each unit is working according to the specifications the next step is to test the units as they are integrated into a single system. This test is done by taking the output of the previous unit and feeding it into the next unit of the algorithm. Hence, the focus of this test is the coherence of the algorithm and not the level of performance according to the problem statement. This is the last step in creating the final system.
 
 \subsection{System test of the final application}\label{sec:final_test3}
 The final system is tested by giving the final application a recording with a known result and comparing the difference between the application's result and the known result. The same test is performed with different input files containing single tones that vary in complexity by speed and shifts between tones. The aim of the system is to identify significant frequencies in a recording over time sufficient for recognition of tones in the recording. When this has been achieved it is of further interest to test the system on a single chord in order to find the limitations of the system.
-\\\\
-The music used for testing the application is single tones, single chords, simple melodies containing only a single note at a time. The single tones and melodies without chords will allow insight into the methods used without complicating the recognition of the tones by blending together different instruments and different sound frequencies. Naturally, it will be more difficult to recognize the tones in the single chords and melodies with chords. The recordings are described in appendix \ref{recordings}. \\
-\\
+\\ \\
+The music used for testing the application is single tones, single chords, and simple melodies containing only a single note at a time. The single tones and melodies without chords will allow insight into the methods used without complicating the recognition of the tones by blending together different instruments and different sound frequencies. Naturally, it will be more difficult to recognize the tones in the single chords and melodies with chords. The recordings are described in appendix \ref{recordings}.
+\\ \\
 Based upon the final test it is possible to discuss the capabilities and limitations of the system with references to practical use according to the central problem statement of the project.  

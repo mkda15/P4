@@ -65,7 +65,7 @@ On the other hand, if $t\cdot f(t)$ is integrable, then
 \mathcal{F}\{tf(t)\} = j F'(\omega).
 \end{align*}
 
-\item If also $g \in \mathcal{L}^1$, then
+\item If also $g \in \mathcal{L}^1$, then \label{theorem:fund_sym_Fourier_d}
 \begin{align*}
 \mathcal{F}\{f*g\}(\omega) = F(\omega) \cdot G(\omega).
 \end{align*}
@@ -76,7 +76,7 @@ On the other hand, if $t\cdot f(t)$ is integrable, then
 
 \begin{enumerate}[label=(\alph*)]
 \item
-By definitions \ref{def:Fourier_trans}, \ref{def:InverseFourier_trans} and \ref{def:TMD} it follows that:\frede{Tjek det her}
+By definitions \ref{def:TMD}, \ref{def:Fourier_trans} and \ref{def:InverseFourier_trans} it follows that:\frede{Tjek det her}
 \begin{align*}
 \mathcal{F}\{T_a f(t)\} &= \mathcal{F}\{f(t-a)\}(\omega) = \int_{-\infty}^\infty \text{e}^{-j\omega t} f(t - a) dt \\
 &= \int_{-\infty}^\infty \text{e}^{-j \omega t - j a \omega} f(t) dt = \text{e}^{-j a \omega} F(\omega) = E_{-a} F(\omega).
@@ -156,7 +156,7 @@ and each $\phi_i$ equals 1 on a bounded interval $|t - t_i| < a_i$ and 0 elsewhe
 
 By theorem \ref{theorem:fund_sym_Fourier}\ref{theorem:fund_sym_Fourier_a}, the Fourier transform of $\phi_i(t)$ is:
 \begin{align*}
-\mathcal{F}\{\phi_i(t)\}(\omega) = 2 \text{e}^{-jt_i\omega} \frac{\sin(a_i\omega)}{\omega},
+\mathcal{F}\{\phi_i(t)\}(\omega) = 2 \text{e}^{-jt_i\omega} \dfrac{\sin(a_i\omega)}{\omega},
 \end{align*}
 
 which vanishes when $\omega \to \infty$, and hence so does $F(\omega)$.
