@@ -34,17 +34,7 @@ X(\tau,\omega) = \int_{\mathbb{R}^d} x(t) w(t - \tau) \text{e}^{-j \omega \cdot 
 \end{align}
 \end{definition}
 
-However, in this project the STFT is used only for $d = 1$. $X(\tau,\omega)$ can be thought of as a measure for the amplitude of the frequency band near $\omega$ at time $\tau$. The window function $w$ is usually kept fixed, and $X$ is considered to be a linear mapping from functions on $\mathbb{R}^d$ to functions on $\mathbb{R}^{2d}$, which is known as the \textit{time-frequency plane} for $d=1$ in signal analysis \cite{page 38, FTFA}. Definition \ref{def:stft} can be formulated for discrete-time systems as well \cite{page 846, DTSP}.
-
-\begin{definition}[The discrete short-time Fourier transform]\label{def:stft_discrete}
-Let $x[n],w[n]\in\ell^2$. For a fixed window sequence $w[n] \neq 0$ the discrete short-time Fourier transform of a sequence $x[n]$ with respect to $w[n]$ is defined as
-\begin{align}
-X[n, \omega] = \sum_{m=-\infty}^{\infty} x[n+m]w[m]\text{e}^{-j\omega m}.
-\end{align}
-\end{definition}
-
-Figure \ref{fig:sliding_stft} illustrates how the continuous STFT windows a signal.
-
+However, in this project the STFT is used only for $d = 1$. $X(\tau,\omega)$ can be thought of as a measure for the amplitude of the frequency band near $\omega$ at time $\tau$. The window function $w$ is usually kept fixed, and $X$ is considered to be a linear mapping from functions on $\mathbb{R}^d$ to functions on $\mathbb{R}^{2d}$, which is known as the \textit{time-frequency plane} for $d=1$ in signal analysis \cite{page 38, FTFA}. Figure \ref{fig:sliding_stft} illustrates how the continuous STFT windows a signal.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
@@ -65,10 +55,74 @@ legend style={at={(axis cs:10.1,1.5)},anchor=north west}]
 \draw[->,line width=0.5mm]{(axis cs:2,1.2)--(axis cs:2.8,1.2)};
 \end{axis}
 \end{tikzpicture}
-\caption{Illustration of the STFT windowing a signal in a sliding fashion. In the discrete STFT the windowing is done at discrete points in time.}
+\caption{Illustration of the STFT windowing a signal in a sliding fashion.}
 \label{fig:sliding_stft}
 \end{figure}
-\frede{Flyt figur op og lav én til den diskrete STFT.}
+Definition \ref{def:stft} can be formulated for discrete-time systems as well \cite{page 846, DTSP}.
+\begin{definition}[The discrete short-time Fourier transform]\label{def:stft_discrete}
+Let $x[n],w[n]\in\ell^2$. For a fixed window sequence $w[n] \neq 0$ the discrete short-time Fourier transform of a sequence $x[n]$ with respect to $w[n]$ is defined as
+\begin{align}
+X[n, \omega] = \sum_{m=-\infty}^{\infty} x[n+m]w[m]\text{e}^{-j\omega m}.
+\end{align}
+\end{definition}
+In figure \ref{fig:discreteSTFT} is seen the discrete STFT illustrated by windowing of a signal by adjacent windows of different overlaps.
+\begin{figure}[H]
+\begin{subfigure}{0.49\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[scale=1,
+xtick=\empty,
+ytick=\empty,
+xmin=0,
+xmax=8,
+ymin=-1.5,
+ymax=1.5,
+clip=false,
+unit vector ratio*=1 1 1]
+\addplot[samples=500,domain=0:8,line width=0.3mm]{sin(deg(5*x))};
+
+\addplot[samples=50,domain=0:4,line width=0.3mm,dashed]{0.54-0.46*cos(deg(6.283/4*x))};
+\addplot[samples=50,domain=0:4,line width=0.3mm,red]{(0.54-0.46*cos(deg(6.283/4*x)))*sin(deg(5*x))
+};
+
+\addplot[samples=50,domain=4:8,line width=0.3mm,dotted]{0.54-0.46*cos(deg(6.283/4*x))};
+\addplot[samples=50,domain=4:8,line width=0.3mm,orange]{(0.54-0.46*cos(deg(6.283/4*x)))*sin(deg(5*x))
+};
+
+\end{axis}
+\end{tikzpicture}
+\caption{No overlap.}
+\label{fig:discreteSTFT1}
+\end{subfigure}
+\begin{subfigure}{0.49\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[scale=1,
+xtick=\empty,
+ytick=\empty,
+xmin=0,
+xmax=8,
+ymin=-1.5,
+ymax=1.5,
+clip=false,
+unit vector ratio*=1 1 1]
+\addplot[samples=500,domain=0:8,line width=0.3mm]{sin(deg(5*x))};
+
+\addplot[samples=50,domain=0:4,line width=0.3mm,dashed]{0.54-0.46*cos(deg(6.283/4*x))};
+\addplot[samples=50,domain=0:4,line width=0.3mm,red]{(0.54-0.46*cos(deg(6.283/4*x)))*sin(deg(5*x))
+};
+
+\addplot[samples=50,domain=2:6,line width=0.3mm,dotted]{0.54-0.46*cos(deg(6.283/4*(x-2)))};
+\addplot[samples=50,domain=2:6,line width=0.3mm,orange]{(0.54-0.46*cos(deg(6.283/4*(x-2))))*sin(deg(5*x))
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Overlap of 50\%.}
+\label{fig:discreteSTFT2}
+\end{subfigure}
+\caption{Illustrations of \textbf{(a)} two adjacent windows in the discrete STFT with no overlap windowing the signal and \textbf{(b)} two adjacent windows in the discrete STFT with 50\% overlap windowing the signal.}
+\label{fig:discreteSTFT}
+\end{figure}
 The discrete STFT is used to produce a spectrogram, which is also known as the energy density spectrum:
 \begin{align*}
 |X[n,\omega]|^2 = \left| \sum_{m=-\infty}^{\infty} x[n+m]w[m]\text{e}^{-j\omega m} \right|^2.
