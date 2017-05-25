@@ -224,7 +224,7 @@ The integral is integrated by parts:
 \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt = \left[ t |x(t)|^2 \right]_{t=-\infty}^\infty - \int_{-\infty}^\infty |x(t)|^2 dt = - \int_{-\infty}^\infty |x(t)|^2 dt
 \end{align*}
 
-where it has been used that $t|x|^2 = tx\overline{x}$, so it follows that according to Hölder's inequality $\|t|x|^2\|_1 = \|tx\overline{x}\|_1 \leq \|tx\|_2 \|x\|_2 < \infty$ as $x,tx \in \mathcal{L}^2$ $^[$\footnote{See definition \ref{def:Lpspace} for notation of $\mathcal{L}^p$-norms}$^]$. Thus $t|x|^2 \in \mathcal{L}^1$ so $\lim_{|t| \to \infty} t |x(t)|^2 = 0$. This result is substituted into \eqref{eq:Heis_proof3}, which then yields:
+where it has been used that $t|x|^2 = tx\overline{x}$, so it follows that according to Hölder's inequality $\|t|x|^2\|_1 = \|tx\overline{x}\|_1 \leq \|tx\|_2 \|x\|_2 < \infty$ as $x,tx \in \mathcal{L}^2$ $^[$\footnote{See definition \ref{def:Lpspace} for notation of $\mathcal{L}^p$-norms.}$^]$. Thus $t|x|^2 \in \mathcal{L}^1$ so $\lim_{|t| \to \infty} t |x(t)|^2 = 0$. This result is substituted into \eqref{eq:Heis_proof3}, which then yields:
 \begin{align*}
 \sigma_t^2 \sigma_\omega^2 &\geq \dfrac{1}{4 \cdot \|x(t)\|^4} \left[ \int_{-\infty}^\infty t \left[ |x(t)|^2 \right]' dt \right]^2 \\
 &= \dfrac{1}{4 \cdot \|x(t)\|^4} \left[ - \int_{-\infty}^\infty |x(t)|^2 dt \right]^2 \\
