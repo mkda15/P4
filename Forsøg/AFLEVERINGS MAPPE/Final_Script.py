@@ -24,14 +24,13 @@ import scipy.io.wavfile as siw
 freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
 freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
 
-
 # TEST 1 
 #freq , data  = siw.read('Lydfiler/skala/forsoeg_skala_hurtig.wav')     # Data signal
 #freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
 
 # TEST 2 
-freq , data  = siw.read('Lydfiler/melodi/alene/forsoeg_lillepeteredderkop_langsom.wav')     # Data signal
-freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                                   # Noise signal
+#freq , data  = siw.read('Lydfiler/melodi/alene/forsoeg_lillepeteredderkop_langsom.wav')     # Data signal
+#freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                                   # Noise signal
 
 # TEST 3                                  
 #freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
@@ -51,19 +50,17 @@ signal = impuls.add_noise(data,noise,c = 1.0)   # Noise and data conjoined
 
 print('støj adderet 2/9')
 
-""" Variabler til filter """
+""" Variables for filter """
 window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
 cut1 = 70./freq     # Cut off frequency for band
 cut2 = 1000./freq   # Cut off frequency for band 
 sampels = len(data) # Amount of sampels in the signal (data points)
 
-
 plotlength = int(sampels/20) # Length for plotting (arbitrary)
 
-
-""" Til Kaiser vinduet """
-delta_1 = 0.05 # peak approximation error in amplitude 
-delta_2 = 10. # max transition width is 2*delta_2
+""" Specifications for Kaiser window """
+delta_1 = 0.05   # Peak approximation error in amplitude 
+delta_2 = 10.    # Max transition width is 2*delta_2
 
 """ Aksis og linspaces """
 t   = sampels/float(freq)                   # The time for howlong the system runs (for making the time axis)
@@ -71,7 +68,7 @@ tid = np.linspace(0,t,sampels)              # Axis for time domain
 freq_axis = np.linspace(0,freq/2,sampels/2) # Axis for frequency domain
 freq_axis_norm = np.linspace(0,1,sampels/2) 
 
-""" Variabler til spektogram """
+""" Variables for spektogram """
 freq_inter1 = 0    
 freq_inter2 = 200
 
@@ -219,13 +216,12 @@ print('plot plotteret 7/9')
 #==============================================================================
 
 X,o,ws = stft(signal_filt)      # return STFT, stft and used window(time) 
+ 
 
-WS = np.abs(np.fft.fft(ws))                                 # window(frekvenscy) used in STFT  
-#X,v_w,v_t,t = stft_h(signal_filt,overlap = 2)
 
 print('stft udregnet 9/9') 
 
-X = db(np.abs(X).T)                                         # Calculated to dB
+X = db(np.abs(X).T)             # Calculated to dB
 
 x = np.linspace(0,tid[-1],np.shape(X)[1])       
 y = np.linspace(0,freq_axis[-1],np.shape(X)[0]) 
@@ -235,17 +231,17 @@ cb   = plt.colorbar(spec)
 cb.set_label(label = 'Amplitude [dB]', fontsize=fontsize)
 plt.xlabel('Time [s]', fontsize = fontsize)
 plt.ylabel('Frequency [Hz]', fontsize = fontsize)
-plt.axis([0,45,0,2000])
+plt.axis([0,tid[-1],0,2000])
 #plt.savefig("figures/skala.png")
 #plt.savefig("figures/integrationstest/spectrogram.png")
-plt.savefig("figures/systemtest/final_spec1.png")
+#plt.savefig("figures/systemtest/final_spec1.png")
 plt.show()
 
 #==============================================================================
 # Peak Dectection
 #==============================================================================
 
-max_freq_t = peak_dec(X,0.75,y)
+max_freq_t = peak_dec(X,0.75,y) #limit is given as percentages of max amplitude in STFT
 
 """ plot peak dection """
 plt.plot(x,max_freq_t,'o')
@@ -253,25 +249,26 @@ plt.xlabel('Time [s]')
 plt.ylabel('Frequency [Hz]')
 #plt.savefig("figures/peak/peak_lim4.png")
 #plt.savefig("figures/integrationstest/peak_dec.png")
-plt.savefig("figures/systemtest/final_peak1.png")
+#plt.savefig("figures/systemtest/final_peak1.png")
     
 #==============================================================================
 # SNR
 #==============================================================================
 
-#def RMS(x):
-#    x = x**2
-#    RMS = np.sqrt((np.sum(x))) / (len(x))
-#    return RMS
-#
-#def SNR(signal,noise):
-#    SNR = ((RMS(signal))**2 / (RMS(noise))**2)
-#    return SNR
-#
-#SNR = SNR(data,noise)
-#SNRdB = 10*np.log10(SNR)
-#print(SNRdB)   
+def RMS(x):
+    x = x**2
+    RMS = np.sqrt((np.sum(x))) / (len(x))
+    return RMS
+
+def SNR(signal,noise):
+    SNR = ((RMS(signal))**2 / (RMS(noise))**2)
+    return SNR
+
+SNR = SNR(data,noise)
+SNRdB = 10*np.log10(SNR)
+
+print('SNR = %.0f' %SNRdB)   
 
 
-
+ 
             
