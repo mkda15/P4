@@ -7,13 +7,13 @@ Firstly, the implementation of the DFT is described in the following algorithm.
 \caption{DFT algorithm}
 \label{DFTalg}
 \begin{algorithmic}[1]
-\State $N =$length of $x$ \Comment{Number of samples to be computed}
-\Procedure{Compute DFT}{x,N}
-	\State{$X = $np.zeros$(N,$dtype=complex$)$}
-	\For{k between 0 and length of signal}
+\State $N = \ $length of $x$ \Comment{Number of samples to be computed}
+\Procedure{Compute DFT}{$x,N$}
+	\State{$X = \ $np.zeros$(N,$dtype = complex$)$}
+	\For{$k$ between 0 and length of signal}
 		\State{$a = 0 + 0\cdot j$} \Comment{$a$ is zero but of type complex}
-		\For{n between 0 and N}
-			\State{$a += x[n]\cdot \exp(-2\cdot \pi\cdot j 					\cdot k \cdot n/$float$(c))$}
+		\For{$n$ between 0 and $N$}
+			\State{$a$ += $x[n]\cdot \exp(-2\cdot \pi\cdot j 					\cdot k \cdot n/$float$(c))$}
 			\State{$X[k] = a$}
 		\EndFor
 	\EndFor
@@ -30,19 +30,19 @@ The implementation of the FFT shown in the following algorithm uses a function t
 \begin{algorithmic}[1]
 
 \Procedure{Power of 2}{N}
-	\State{Return $N$!=$0$ and $(N \& (N - 1)) == 0$}
+	\State{Return $N$! $= 0$ and $(N \& (N - 1)) == 0$}
 \EndProcedure
 
-\Procedure{Compute FFT}{x}
+\Procedure{Compute FFT}{$x$}
 	\State $N$ = length of $x$ 
-	\If{Power of 2($N$) == False }
+	\If{Power of 2$(N) ==$ False }
 		\State{Raise Valueerror(``N should be a power of 2.'')}
-	\ElsIf{$N$ == 2}
+	\ElsIf{$N == 2$}
 		\State{Return DFT($x$,$N$)} \Comment{$x$ is the signal}
 	\Else
 		\State{$X_{e} = FFT(x[::2])$} \Comment{The even 				samples}
 		\State{$X_{o} = FFT(x[1::2])$} \Comment{The odd 				samples}
-		\State{$factor = \exp(-2j\cdot \pi \cdot 						$np.arange$(N) / N)$} \Comment{The twiddle 			factor}
+		\State{$factor = \exp(-j\cdot 2\pi \cdot 						$np.arange$(N) / N)$} \Comment{The twiddle 			factor}
 		\State{Return np.concatenate$([X_{e} + factor[: 	N/ 2] \cdot X_{o}, X_{e} +  factor[N / 2:] \cdot X_{o}])$}
 	\EndIf
 \EndProcedure

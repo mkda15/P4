@@ -1,17 +1,18 @@
 In this section an STFT will be implemented in Python and tested to check that it fulfils the test criteria specified in chapter \ref{ch3}. This includes creating a spectrogram from the results of the STFT and check if this is consistent with the expected results. The implementation is based on the theory of the discrete STFT described in section \ref{sec:STFT}.
 
 \subsection{Implementation of the STFT and spectrogram}
-The implementation of the STFT requires an FFT algorithm and will use the algorithm described in algorithm \ref{FFTalg}. The algorithm for the implementation is seen below in algorithm \ref{STFTalg}. The Hann window is used as an example window but is later compared to other windows, and an overlap of 50\% is decided due to the conventional usage of this. 
+The implementation of the STFT requires an FFT algorithm and will use the algorithm described in algorithm \ref{FFTalg}. The algorithm for the implementation is shown in algorithm \ref{STFTalg}. The Hann window is used as an example window but is later compared to other windows, and an overlap of 50\% is decided due to the conventional usage of this.
+
 \begin{algorithm}[H]
 \caption{STFT algorithm}
 \label{STFTalg}
 \begin{algorithmic}[1]
-\State $FFTsize=2^{l}$ \Comment{Length of window and FFT in STFT, $l$ integer}
+\State $FFTsize= 2^l$ \Comment{Length of window and FFT in STFT, $l$ integer}
 \State $overlap=2$ \Comment{Overlaps of every FFT - 2 is 50\% overlap of adjacent windows}
 \State $data = filename.wav$ \Comment{Recording imported as .wav file}\\
 \Procedure{Compute STFT}{$FFTsize,overlap,data$}
 \State $step=FFTsize/overlap$
-\State $w=hann(FFTsize)$ \Comment{Hann window of length $=FFTsize$}
+\State $w=hann(FFTsize)$ \Comment{Hann window of length $FFTsize$}
 \For{each $i$ at intervals of $step$ in length of $data-FFTsize$}
 \State $stft = array[FFT(w\cdot data[i:i+FFTsize])]$
 \EndFor
@@ -19,7 +20,7 @@ The implementation of the STFT requires an FFT algorithm and will use the algori
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
-The algorithm for generating a spectrogram from the STFT is seen in algorithm \ref{SPECTROalg}.
+The algorithm for generating a spectrogram from the STFT is shown in algorithm \ref{SPECTROalg}.
 \begin{algorithm}[H]
 \caption{Generate spectrogram}
 \label{SPECTROalg}
@@ -35,8 +36,8 @@ The algorithm for generating a spectrogram from the STFT is seen in algorithm \r
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Validation of the STFT and spectogram}
-The validation of the STFT and spectrograms will be done as a whole entity, and the test specification consists of generating a spectrogram from a discrete signal. The continuous signal to be sampled and used is
+\subsection{Test of the STFT and spectogram}
+The test of the STFT and spectrograms will be done as a whole entity, and the test specification consists of generating a spectrogram from a discrete signal. The continuous signal to be sampled and used is
 \begin{align}\label{eq:SPECTROsignal}
 sig(x)=\begin{cases}\sin(1000\pi x)&\text{for }0\leq x<25\\
 \sin(3000\pi x)&\text{for }25\leq x < 50\\
@@ -58,7 +59,7 @@ The sine waves are then with frequencies of 500, 1500 and 1625 Hz, respectively.
 \caption{}
 \label{fig:test_stft1}
 \end{subfigure}
-\caption{\textbf{(a)} Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with a Hann window of length $2^6=64$ and overlap of 50\%. The low spectral and high temporal resolutions follow from a narrow window used in the STFT. \textbf{(b)} Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with a Hann window of length $2^{13}=8192$ and overlap of 50\%. The high spectral and low temporal resolutions follow from a wide window used in the STFT.}
+\caption{\textbf{(a)} Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with a Hann window of length $2^6=64$ and overlap of 50\%. The low spectral and high temporal resolutions follow from the narrow window used in the STFT. \textbf{(b)} Spectrogram of signal in \eqref{eq:SPECTROsignal} generated with a Hann window of length $2^{13}=8192$ and overlap of 50\%. The high spectral and low temporal resolutions follow from the wide window used in the STFT.}
 \label{fig:test_stft}
 \end{figure}
 From figure \ref{fig:test_stft} it is clearly seen how the length of the window in the STFT used for generating the spectrogram affects the resolution in time and frequency. This agrees with Heisenberg's uncertainty principle described in section \ref{sec:heisenberg}. By figure \ref{fig:test_stft} it is concluded that the implementations of the STFT and spectrogram work as intended. Further optimisation is possible through the type and length of window used in the STFT.
@@ -129,7 +130,8 @@ The STFT uses a window function to taper the segment of the data to be transform
 \end{figure}
 \subsection{Peak detection under varying window orders}
 As the goal of the project is to be able to detect the most significant frequencies in a piece of music from the generated spectrogram it is in this section tested how the order $M$ of the window used in the STFT affects a peak detection algorithm's ability to do so. The algorithm used to detect the most significant frequencies is explained and implemented in section \ref{sec:peak_detection}. The goal is to decide when the peak algorithm no longer detects the most significant frequencies in the signal as a result of bad spectral resolution. From this the minimum required order $M$ of the window in the STFT can be specified.\\\\
-In figure \ref{fig:2048spec} is seen the spectrogram of \ref{eq:SPECTROsignal} generated with a Hann window of order $M=2^{11}$ as well as the associated results of the peak detection algorithm in figure \ref{fig:2048peak}. Likewise figure \ref{fig:1024spec}  shows the spectrogram of \eqref{eq:SPECTROsignal} generated with a Hann window of order $M=2^{10}$ with the associated peak detection in figure \ref{fig:1024peak}.
+Figure \ref{fig:2048spec} shows the spectrogram of \eqref{eq:SPECTROsignal} generated with a Hann window of order $M=2^{11}$ as well as the associated results of the peak detection algorithm in figure \ref{fig:2048peak}. Likewise, figure \ref{fig:1024spec} shows the spectrogram of \eqref{eq:SPECTROsignal} generated with a Hann window of order $M=2^{10}$ with the associated peak detection in figure \ref{fig:1024peak}.
+
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
@@ -164,7 +166,9 @@ In figure \ref{fig:2048spec} is seen the spectrogram of \ref{eq:SPECTROsignal} g
 \caption{\textbf{(a)} Spectrogram of \eqref{eq:SPECTROsignal} generated with a Hann window of order $M=2^{10}$. \textbf{(b)} Peak detection of spectrogram.}
 \label{fig:1024}
 \end{figure}
-From figure \ref{fig:1024} it is seen that a Hann window of order $M=2^{10}$ does not produce a spectral resolution sufficient for the peak detection algorithm to detect the most significant frequency but jumps between different frequencies. Though not visible in the figures the peak detection is also ambiguous in the first two time intervals in figure \ref{fig:1024peak} jumping between two frequencies. Figure \ref{fig:2048} on the other hand shows $M=2^{11}$ is sufficient for the peak detection algorithm. It can be concluded that the order $M$ of the Hann window used in the STFT should be at least $2^{11}$. This analysis is similarly done for the Hamming, Blackman and Bartlett windows as well as the Kaiser window with different values of $\beta$. These tests ended with the conclusion that all of the windows fail to produce a sufficient spectral resolution for the peak detection algorithm to function properly at window orders $M$ less than $2^{11}$. This means that the type of window function in the STFT plays no role in the following peak detection and the window functions will therefore be assessed visually by the spectrograms produced with use of them. Furthermore, Fredric J. Harris wrote an article in 1978 analysing the different windows and their effects in signal processing with the discrete Fourier transform \cite{page 82, fredric_harris}. His analysis included quantative and qualitative arguments, and he ends the article concluding that the Kaiser and Blackman windows are the best choices for this kind of signal processing his favourite being the Kaiser window.
+
+From figure \ref{fig:1024} it is seen that a Hann window of order $M=2^{10}$ does not produce a spectral resolution sufficient for the peak detection algorithm to detect the most significant frequency but jumps between different frequencies. Although it is not visible in the figures the peak detection is also ambiguous in the first two time intervals in figure \ref{fig:1024peak} and jumps between two frequencies. On the other hand, figure \ref{fig:2048} shows that $M=2^{11}$ is sufficient for the peak detection algorithm. It can be concluded that the order $M$ of the Hann window used in the STFT should be at least $2^{11}$. This analysis is similarly done for the Hamming, Blackman, and Bartlett windows as well as the Kaiser window with different values of $\beta$. These tests ended with the conclusion that all of the windows fail to produce a sufficient spectral resolution for the peak detection algorithm to function properly at window orders $M$ less than $2^{11}$. This means that the type of window function in the STFT plays no role in the following peak detection, and the window functions will therefore be assessed visually by the spectrograms produced with the use of these. Furthermore, Fredric J. Harris wrote an article in 1978 analysing the different windows and their effects in signal processing with the discrete Fourier transform \cite{page 82, fredric_harris}. His analysis included quantative and qualitative arguments, and he ends the article concluding that the Kaiser and Blackman windows are the best choices for this kind of signal processing with the Kaiser window being his favourite type of window.
+
 \subsection{Summary}
 From the above spectrograms, which allow for a visual (and qualitative) analysis, it is assessed that the Kaiser and Blackman windows produces the best looking spectrograms. Together with the conclusion from Harris it is decided that a Blackman window of order $M=2^{12}$ will be used for the implementation of the STFT in this project as it produces a sufficient spectral resolution for peak detection and good looking spectrograms. The reason for not using the Kaiser window contrary to the recommendation from Harris is the missing background for calculation of the shape factor $\beta$.\\
 Figure \ref{fig:STFT_test_signal} shows the resulting STFT of a natural minor scale played on a guitar one string at a time with the use of a Blackman window of order $2^{12}$.
@@ -172,6 +176,6 @@ Figure \ref{fig:STFT_test_signal} shows the resulting STFT of a natural minor sc
 \begin{figure}[H]
 \centering
 \includegraphics[width = 1.1\textwidth]{figures/validation/stft/scale.png}
-\caption{Spectrogram of a natural minor scale plucking only one string at a time. STFT computed by use of Bartlett window of order $2^{12}$.}
+\caption{Spectrogram of a natural minor scale plucking only one string at a time. STFT computed by use of Blackman window of order $2^{12}$.}
 \label{fig:STFT_test_signal}
 \end{figure}

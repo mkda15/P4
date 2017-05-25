@@ -8,17 +8,17 @@ Each unit is integrated into one algorithm based on the system specifications de
 \State \textbf{import functions} FFT, Filter, STFT, Spectrogram, Peak\_dec  
 \\
 \Procedure{Import datafiles}{}
-\State $data$, $f_s$ = $signal$, $f_s$) \Comment{List of signal, sampling frequency}
+\State $data = filename.wav$ \Comment{Import of signal}
 \EndProcedure 
 \\
-\State $samples = $len$(signal)$ 
+\State $samples =$ length of signal
 \State $time   = samples/$float$(f_s)$
 \\
 \Procedure  {Filtering of signal in frequency domain}{}
 \State $SIGNAL = FFT(signal) $
 \State $H = FFT(Filter(f_{c1},f_{c2},f_s))$
 \State $filt\_SIGNAL = SIGNAL \cdot H$
-\State $filt\_signal = $np.ifft$(filt\_SIGNAL)$
+\State $filt\_signal = \ $np.ifft$(filt\_SIGNAL)$
 \EndProcedure 
 \\
 \Procedure {Generate spectrogram and detect peaks}{} 
@@ -37,7 +37,7 @@ Each unit is integrated into one algorithm based on the system specifications de
 \end{algorithm}          
 
 \subsection{Integration test}
-During the implementation the output of each step is printed and verified before implementing the next step. This is illustrated by figure \ref{fig:inte_validation}, where the input signal consists of a $E_2$ tone with noise of clapping hands.
+During the implementation the output of each step is printed and verified before implementing the next step. This is illustrated by figure \ref{fig:inte_validation}, where the input signal consists of an $E_2$ tone with noise of clapping hands.
 
 \begin{figure}[H]
 \centering
@@ -76,7 +76,7 @@ During the implementation the output of each step is printed and verified before
 \label{fig:inte_validation}
 \end{figure}
 Figures \ref{fig:inte_signal} and \ref{fig:inte_SIGNAL} show the input signal in the time and frequency domains, respectively. The FFT used is verified as the frequencies with the highest amplitudes are seen to correspond to the known frequencies of an $E_2$ tone (82.41 Hz) and two corresponding harmonics (164.82 Hz and 247.23 Hz). Furthermore, the noise appears similar to white noise across all frequencies.\\
-Figures \ref{fig:inte_SIGNAL} and \ref{fig:inte_SIGNAL_filt} show the filtered signal in the time and frequency domains, respectively. Comparing this to the results of the unit test of the filter, the result is the same, and hence the filtering has integrated as intended. Figure \ref{fig:inte_spec} shows a valid spectrogram computed from the filtered signal. Figure \ref{fig:inte_peak} shows the frequencies with the highest amplitudes over time, which is seen to match the hottest point in the spectrogram. \\
+Figures \ref{fig:inte_SIGNAL} and \ref{fig:inte_SIGNAL_filt} show the filtered signal in the time and frequency domains, respectively. Comparing this to the results of the unit test of the filter, the result is the same, and hence the filtering has been integrated as intended. Figure \ref{fig:inte_spec} shows a valid spectrogram computed from the filtered signal. Figure \ref{fig:inte_peak} shows the frequencies with the highest amplitudes over time, which is seen to match the hottest point in the spectrogram. \\
 \\
 From this it is verified that the implementation of each unit integrated into one single script works, which forms the final application. \\
 It is concluded that the final applicationw works as intended corresponding to the theory used in the implementation. Whether this fulfils the practical purpose of the application when the input gets more complicated is tested in the next section.
