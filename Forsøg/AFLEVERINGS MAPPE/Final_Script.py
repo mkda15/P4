@@ -21,8 +21,9 @@ import scipy.io.wavfile as siw
 #==============================================================================
 """ Data import """
 # Single tone with clap
-#freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
-#freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
+freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
+freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
+
 
 # TEST 1 
 #freq , data  = siw.read('Lydfiler/skala/forsoeg_skala_hurtig.wav')     # Data signal
