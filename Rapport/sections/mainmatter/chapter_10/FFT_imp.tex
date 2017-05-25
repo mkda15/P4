@@ -88,7 +88,7 @@ $2^{14}$   		& $1170.29$ 	& $4469.81$	& $3299.52$	\\ \hline
 \label{tab:com_compare}
 \end{table}
 
-Therefore, for e.g. $N = 2^9$ the FFT is theoretically $56.89$ times faster than the DFT but in practice it is $103$ times faster. This is because the number of computations and the computer's processing time cannot be directly compared \martin{Nyt. \textregistered}.
+Therefore, for e.g. $N = 2^9$ the FFT is theoretically $56.89$ times faster than the DFT but in practice it is $103$ times faster. This is because the number of computations and the computer's processing time cannot be directly compared.
 \\ \\
 The implementation of the FFT and Numpy's FFT should also be compared for larger number of samples $N$ since e.g. $N = 2^{19}$ is 11.89 seconds with a sampling frequency of 44100 Hz, which is a reasonable length of an audio file from the recordings described in appendix \ref{recordings}. The DFT will obviously take too long and is therefore not included in the comparison in table \ref{tab:FT2compare}.
 
@@ -112,4 +112,4 @@ Obviously, the implementation of the FFT takes rather long for large numbers of 
 \\ \\
 Therefore, the implementation of the DFT and FFT described in algorithm \ref{DFTalg} and \ref{FFTalg}, respectively, returns the exact same values as Numpy's FFT. The DFT is obviously extremely slow for even rather small numbers of samples, and the FFT is also rather slow compared to Numpy's FFT for large numbers of samples.
 \\ \\
-Because Numpy's FFT is so much faster than the implemented FFT and because Numpy's FFT is capable of zeropadding and thus computing a signal of any length, it is decided to use Numpy's FFT in the future processings of the signals in this report \martin{Nyt. \textregistered}.
+Because Numpy's FFT is so much faster than the implemented FFT and because Numpy's FFT is capable of zeropadding and thus computing a signal of any length, it is decided to use Numpy's FFT in the future processings of the signals in this report.
