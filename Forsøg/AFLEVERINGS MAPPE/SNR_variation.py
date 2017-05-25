@@ -120,54 +120,6 @@ def filtrering(signal,data,noise,H):
     
     return signal_filt
 
-#signal_filt = filtrering(signal,data,noise,H)
-#signal_filt = signal
-
-#==============================================================================
-# Plt plots af alt det intresante og data gemmes
-#==============================================================================
-
-#plt.plot(freq_axis[:plotlength-50000],np.abs(DATA)[:plotlength-50000])          # FFT of clean data
-#plt.xlabel('Ren Data freq')
-#plt.show()
-#
-#plt.plot(freq_axis[:plotlength],np.abs(H)[:plotlength])             # FFT of impuls respons
-#plt.xlabel('Ren stoej freq')
-#plt.show()
-#
-#plt.plot(freq_axis[:2000],np.abs(NOISE)[:2000])         # FFT of the noise
-#plt.xlabel('Stoej og data freq')
-#plt.show()
-#
-#plt.plot(tid,data)                                                  # Original data
-#plt.xlabel('Ren Data tid')
-#plt.show()
-#
-#plt.plot(tid,noise)                                                 # Original noise
-#plt.xlabel('Ren Stoej tid')
-#plt.show()
-#
-#plt.plot(tid,signal)                                                # Original data with noise added
-#plt.xlabel('Stoej og data tid')
-#plt.show()
-#
-#plt.plot(tid,signal_filt)                                           # The filtered data
-#plt.xlabel('Filtreret signal')
-#plt.show()
-#
-#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   # FFT of the filtered data
-#plt.xlabel('Freq af Filtreret signal')
-#plt.show()
-
-#print('plot plotteret 7/9')
-
-
-""" Data gemmes """
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal_filt.wav',freq,signal_filt)    # The filtered data is saved
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_data.wav',freq,data)                  # Original noise is saved with same length as data
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_noise.wav',freq,noise)                # Original data is saved with same length as noise
-#siw.write('Lydfiler/forsoeg_nopeak/output/out_signal.wav',freq,signal)              # The signal with noise is saved
-
 #==============================================================================
 # Spectrogram
 #==============================================================================
@@ -182,28 +134,9 @@ def stft_plot(signal_filt,fftsize,overlap,freq_inter1,freq_inter2,beta):
     x = np.linspace(0,tid[-1],np.shape(X)[1])
     y = np.linspace(0,freq_axis[-1],np.shape(X)[0])
     
-    
-#    spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],cmap='hot')
-#    cb   = plt.colorbar(spec)
-#    cb.set_label(label = 'Amplitude (dB)', fontsize=fontsize)
-#    plt.xlabel('Time (sec)', fontsize = fontsize)
-#    plt.ylabel('Frequency (Hz)', fontsize = fontsize)
-#    plt.show()
-    
     return X,x,y
 
-#X,x,y = stft_plot(signal_filt,fftsize,overlap,freq_inter1,freq_inter2)
 
-
-#plt.plot(freq_axis,np.angle(H)[:sampels/2])
-#plt.axis([0,500,-4,4])
-#plt.show()
-#
-#Hdb =  db(np.abs(H).T)
-#
-#plt.plot(freq_axis,Hdb[:sampels/2])
-#plt.axis([0,500,-100,2])
-#plt.show()
 
 
 #==============================================================================
@@ -238,56 +171,6 @@ def tabs(X,x):
     u,indices = np.unique(max_freq_t,return_inverse=True)
     return u[np.argmax(np.bincount(indices))]
 
-#if dataType == "Tabs": #Tjeck if data is in single tabs or chords
-#    tabs(X,x)
-
-#elif dataType == "Chords":
-#    max_freq_pos1 = np.zeros(len(X))
-#    max_freq_pos2 = np.zeros(len(X))
-#    max_freq_pos3 = np.zeros(len(X))
-#
-#    for i in range(len(X)):
-#        if sortedX[i][-1] > 20:
-#            a = np.where(X[i][:] == sortedX[i][-1])
-#        else:
-#            a = [[0]]
-#        if sortedX[i][-2] > 20:
-#            b = np.where(X[i][:] == sortedX[i][-2])
-#        else:
-#            b = [[0]]
-#        if sortedX[i][-3] > 20:
-#            c = np.where(X[i][:] == sortedX[i][-3])
-#        else:
-#            c = [[0]]
-#        max_freq_pos1[i] = a[0][0]
-#        max_freq_pos2[i] = b[0][0]
-#        max_freq_pos3[i] = c[0][0]
-#
-#    max_freq_t1 = np.zeros(len(X))
-#    max_freq_t2 = np.zeros(len(X))
-#    max_freq_t3 = np.zeros(len(X))
-#    for i in range(len(X)):
-#        if max_freq_pos1[i] == 0:
-#            max_freq_t1[i] = 0
-#        else:
-#            max_freq_t1[i] = y[int(max_freq_pos1[i])]
-#        if max_freq_pos2[i] == 0:
-#            max_freq_t2[i] = 0
-#        else:
-#            max_freq_t2[i] = y[int(max_freq_pos2[i])]
-#        if max_freq_pos3[i] == 0:
-#            max_freq_t3[i] = 0
-#        else:
-#            max_freq_t3[i] = y[int(max_freq_pos3[i])]
-#    plt.plot(max_freq_t1)
-#    plt.plot(max_freq_t2)
-#    plt.plot(max_freq_t3)
-#
-#    sted = 75
-#    print(max_freq_t1[sted])
-#    print(max_freq_t2[sted])
-#    print(max_freq_t3[sted])
-
 #==============================================================================
 # SNR
 #==============================================================================
@@ -317,10 +200,8 @@ max_freq = np.zeros(N)
 for i in range(N):
 #    noise = np.array([np.random.randn() for k in range(len(signal))])
     gain = (i+1)*0.1
-#    beta = i*0.5
     signal_new, noise_new = noise_variation(signal,noise,gain)
     signal_filt = filtrering(signal_new,signal,noise,H)
-#    signal_filt = signal_new
     X,x,y = stft_plot(signal_filt,fftsize,overlap,freq_inter1,freq_inter2,beta)
     X = X.T
     max_freq[i] = tabs(X,x)
@@ -339,9 +220,3 @@ inter = 10000
 
 S = np.abs(np.fft.fft(signal))
 N = np.abs(np.fft.fft(noise))
-
-#plt.plot(freq_axis[:inter],S[:inter]/np.max(S[:inter]))
-#plt.plot(freq_axis[:inter],np.abs(H)[:inter])
-#plt.plot(freq_axis[:inter],N[:inter]/np.max(N[:inter]))
-#plt.xlabel('Frequency [Hz]',fontsize=13)
-#plt.ylabel('Amplitude',fontsize=13)
