@@ -4,7 +4,7 @@ The filter design process is documented in this section, which includes determin
 The purpose of this filter is to remove all frequencies outside the passband of the filter. As stated in section \ref{sec:filtervalg} the frequencies the analysed signals are located within a frequency band from 82 Hz to 1000 Hz.  
 By letting the cut-off frequencies of the filter be $f_{c1}=70$ Hz and $f_{c2}=1000$ Hz, respectively, this specifies the passband of the filter. \\
 According to section \ref{subsec:FIR} the Kaiser window can be determined from specifications of the allowed transition width $tw$, which is similar to $\Delta \omega$ specified in Hz, and peak approximation error $\delta$ of the amplitude in the pass- and stopbands. \\ 
-By the frequency analysis of different types of noise it is found that the frequency spectrum of the music signal lies within the frequency spectrum of the noise which verifies the need of a narrow transitionband. However, a narrow transitionband means that a higher order of filter is needed, which gives more computations, and hence it is not realistic to let the width of the transitionband go towards zero.  \\
+By the frequency analysis of different types of noise it is found that the frequency spectrum of the music signal lies within the frequency spectrum of the noise, which verifies the need of a narrow transitionband. However, a narrow transitionband means that a higher order of filter is needed, which gives more computations, and hence it is not realistic to let the width of the transitionband go towards zero.  \\
 The maximum allowed width of the transitionband $tw$ and peak approximation error in amplitude $\delta$ is determined as
 \begin{align}
 tw = 20 \ \text{Hz}, \ \ \ \ \  \delta = 0.05. 
@@ -52,7 +52,7 @@ ymax=5.5]
 \end{figure}
 
 \subsection{Implementation of filter}
-The implementation of the filter basically follows algorithm \ref{alg:FIR}. The ideal impulse response is defined as the inverse Fourier transform of the ideal filter specified in figure \ref{fig:spec_Hd}. The derivation of the ideal impulse response of a bandpass filter is shown in appendix \ref{appC}. From the given specifications the shape parametere of the Kaiser window becomes $\beta \approx 1.5$ which gives a filter order of $M=2766$. Figure \ref{fig:FIRimpulse} shows the impulse response of the filter. Figure \ref{fig:freq_filt1} illustrates a plot of the amplitude response corresponding to the filter in the frequency domain. Figure \ref{fig:freq_filt2} illustrates a close-up view of the left transitionband, showing the ripples in the stop- and passband. The boundaries from the specifications are marked by the green lines. It is seen that the specifications are fulfilled. 
+The implementation of the filter basically follows algorithm \ref{alg:FIR}. The ideal impulse response is defined as the inverse Fourier transform of the ideal filter specified in figure \ref{fig:spec_Hd}. The derivation of the ideal impulse response of a bandpass filter is shown in appendix \ref{appC}. From the given specifications the shape parameter of the Kaiser window becomes $\beta \approx 1.5$, which gives a filter order of $M=2766$. Figure \ref{fig:FIRimpulse} shows the impulse response of the filter. Figure \ref{fig:freq_filt1} illustrates a plot of the amplitude response corresponding to the filter in the frequency domain. Figure \ref{fig:freq_filt2} illustrates a close-up view of the left transitionband, showing the ripples in the stop- and passband. The boundaries from the specifications are marked by the green lines. It is seen that the specifications are fulfilled to a certain degree. 
 \begin{figure}[h]
 \centering 
 \includegraphics[scale=0.5]{figures/filtertest/impulse.png}
@@ -78,7 +78,7 @@ The implementation of the filter basically follows algorithm \ref{alg:FIR}. The 
 \label{fig:freq_filt}
 \end{figure}
 
-\begin{algorithm}[H]
+\begin{algorithm}
 \caption{Compute type 1 FIR filter}
 \label{alg:FIR}
 \begin{algorithmic}[1] 
@@ -111,8 +111,6 @@ The implementation of the filter basically follows algorithm \ref{alg:FIR}. The 
 \Procedure{Compute impulse response}{$h_d,w$}
 	\State Return $h = h_d \cdot w$ \Comment{Windowed impulse response}
 \EndProcedure
-
-
 \end{algorithmic}
 \end{algorithm}
 
