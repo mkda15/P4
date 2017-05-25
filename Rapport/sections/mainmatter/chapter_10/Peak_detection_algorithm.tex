@@ -13,7 +13,7 @@ With the signal transformed by the STFT each segmented data set corresponds to a
 The use of such ``code book'' will make an approximation of the tone a possibility even though the spectral resolution is rather low.
 \newpage
 To make sure that the amplitude actually is from a tone being played and not from noise in the signal, a check can be implemented in the algorithm such that the amplitude is set to $0$ if the amplitude is not larger than a given limit. \\
-An algorithm for locating the frequency with the largest amplitude is described in algorithm \ref{alg:Pak}.
+An algorithm for locating the frequency with the largest amplitude is described in algorithm~\ref{alg:Pak}.
 
 \begin{algorithm}[H]
 \caption{Peak amplitude detection of the STFT}
