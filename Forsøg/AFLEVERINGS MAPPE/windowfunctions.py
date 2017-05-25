@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 21 08:46:36 2017
 
-@author: cht15
-"""
 import numpy as np
 import scipy as sc
 
 #==============================================================================
 # Window function, for implementing filters or the STFT.
 #==============================================================================
+
 """ Rectangular vindue """
 def Rectangular(n,M):
     w = np.zeros(len(n))
@@ -21,7 +18,7 @@ def Rectangular(n,M):
     return w
 
 """ Bartlett vindue """
-def Bartlett(n, M):                                         # Bartlett vindue
+def Bartlett(n, M):
     w = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] <= M/2 and n[i] >= 0:
@@ -63,10 +60,9 @@ def Blackman(n,M):
     return w
 
 """ Kaiser vindue"""
-def Kaiser( d1, d2, fs):                                        # Kaiservindue
+def Kaiser(d1, d2, fs):
     M = 0
     beta = 0
-    # defining Beta 
     A = int(-20*np.log10(d1))
     
     if A > 50:

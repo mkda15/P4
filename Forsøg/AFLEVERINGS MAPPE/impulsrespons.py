@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon May 01 13:22:16 2017
-
-@author: cht15
-"""
 
 import numpy as np
 
-""" Impulsrespons Band Stop """
-def ImpulsresponsBS(n,M,cut1,cut2): # Den ønskværdige impulsrespons for et båndstop filter
+""" Impulse response for bandstop filter """
+def ImpulsresponsBS(n,M,cut1,cut2):
     hd = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] == M/2:
@@ -18,8 +13,8 @@ def ImpulsresponsBS(n,M,cut1,cut2): # Den ønskværdige impulsrespons for et bå
             - (np.sin(2 * np.pi * cut2 * (n[i] - M/2.)) / (np.pi*(n[i] - M/2.)))
     return hd
 
-""" Impulsrespons High Pass """
-def ImpulsresponsHP(n, M, f):     # Den ønskværdige impulsrespons for et højpass filter
+""" Impulse response for high pass filter """
+def ImpulsresponsHP(n, M, f):
     hd = np.zeros(len(n))
     for i in range(len(hd)):
         if n[i] == M/2:
@@ -28,17 +23,18 @@ def ImpulsresponsHP(n, M, f):     # Den ønskværdige impulsrespons for et højp
             hd[i] = (-np.sin(2 * np.pi * f * (n[i] - (M/2))))/(np.pi * (n[i] - (M/2)))
     return hd       
 
-""" Impulserespons Low Pass """
-def ImpulsresponsLP(n, M, f):     # Den ønskværdige impulsrespons for et lavpass filter
+""" Impulse response for lowpass filter """
+def ImpulsresponsLP(n, M, f): 
     hd = np.zeros(len(n))
     for i in range(len(hd)):
         if n[i] == M/2:
             hd[i] = f * 2
         else:
             hd[i] = (np.sin(2 * np.pi * f*(n[i] - (M/2))))/(np.pi * (n[i] - (M/2)))
-    return hd 
-""" Impulserespons Band pass """
-def ImpulsresponsBP(n,M,ft1,ft2): # Den ønskværdige impulsrespons for et bandpass filter
+    return hd
+
+""" Impulse response for bandpass filter """
+def ImpulsresponsBP(n,M,ft1,ft2):
     h = np.zeros(len(n))
     for i in range(len(n)):
         if i == M/2:
@@ -49,12 +45,10 @@ def ImpulsresponsBP(n,M,ft1,ft2): # Den ønskværdige impulsrespons for et bandp
     return h
 
 #==============================================================================
-# Noise adding
+# Adding noise
 #==============================================================================
-""" Noise adding """
-def add_noise(data,noise,c = 0.5): #kilde side 229 i DTSP, tager to signaler og addere de to 
-#    signal = np.convolve(data,noise)
-#    return signal
+
+def add_noise(data,noise,c = 0.5):
     signal=np.zeros(len(data))    
     for i in range(len(data)):
         signal[i]=data[i]+float(c)*noise[i]

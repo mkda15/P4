@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 21 08:31:00 2017
 
-@author: cht15
-"""
 #==============================================================================
 # Imports
 #==============================================================================
@@ -17,8 +13,9 @@ import matplotlib.pyplot as plt
 import scipy.io.wavfile as siw
 
 #==============================================================================
-# Variable og data import 
+# Variable and data import 
 #==============================================================================
+
 """ Data import """
 # Single tone with clap
 freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
@@ -36,37 +33,37 @@ freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise
 #freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
 #freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
 
-""" Length of data and noise alings"""
+""" Lengths of data and noise aligned"""
 if len(data) > len(noise):
     while len(data) > len(noise):
         noise = np.append(noise,noise)
 if len(data) < len(noise):
         noise = noise[:len(data)]
 
-print("variabler og data importeret 1/9")
+print("Variables and data imported (1/9)")
 
 """ Generate signal with noise """
 signal = impuls.add_noise(data,noise,c = 1.0)   # Noise and data conjoined
 
-print('støj adderet 2/9')
+print('Noise added (2/9)')
 
 """ Variables for filter """
-window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
-cut1 = 70./freq     # Cut off frequency for band
-cut2 = 1000./freq   # Cut off frequency for band 
-sampels = len(data) # Amount of sampels in the signal (data points)
+window = Kaiser     # The wanted window is named (has to be capitalised and has to be imported under windowfunctions)
+cut1 = 70./freq     # First cut-off frequency
+cut2 = 1000./freq   # Second cut-off frequency
+samples = len(data) # Amount of samples in the signal (data points)
 
-plotlength = int(sampels/20) # Length for plotting (arbitrary)
+plotlength = int(samples/20) # Length for plotting (arbitrary)
 
 """ Specifications for Kaiser window """
 delta_1 = 0.05   # Peak approximation error in amplitude 
 delta_2 = 10.    # Max transition width is 2*delta_2
 
-""" Aksis og linspaces """
-t   = sampels/float(freq)                   # The time for howlong the system runs (for making the time axis)
-tid = np.linspace(0,t,sampels)              # Axis for time domain
-freq_axis = np.linspace(0,freq/2,sampels/2) # Axis for frequency domain
-freq_axis_norm = np.linspace(0,1,sampels/2) 
+""" Axis og linspaces """
+t   = samples/float(freq)                   # The time for how long the system runs (for making the time axis)
+tid = np.linspace(0,t,samples)              # Axis for time domain
+freq_axis = np.linspace(0,freq/2,samples/2) # Axis for frequency domain
+freq_axis_norm = np.linspace(0,1,samples/2) 
 
 """ Variables for spektogram """
 freq_inter1 = 0    
@@ -75,24 +72,24 @@ freq_inter2 = 200
 fontsize = 13
 
 #==============================================================================
-# Filter koefficenter udregnes og filtere anvendes
+# Filter coefficients calculated and filter applied
 #==============================================================================
-""" Vindue funktion og impuls respons udregnes """
 
-if window == Kaiser:                        # If Kaiser window is chosen do this
-    w,M,n,beta = window(delta_1,delta_2,freq)    # Retuns window funcion(time), order M and linspace n of length M+1  
+""" Window function and impulse response """
+if window == Kaiser:                            # If Kaiser window is chosen do this
+    w,M,n,beta = window(delta_1,delta_2,freq)   # Retuns window funcion(time), order M and linspace n of length M+1  
 #    w = w[:-1] 
 #    n = n[:-1]
-else:                                       # If other window is chosen
-    M = 1000.                                    # Set order of filter 
+else:                                           # If other window is chosen
+    M = 1000.                                   # Set order of filter 
     n = np.linspace(0,M,M+1)
     w = window(n,M)                                
 
 print('vindue generet 3/9')
 
-hd = impuls.ImpulsresponsBP(n,M,cut1,cut2)  # Ideal impules reponse 
+hd = impuls.ImpulsresponsBP(n,M,cut1,cut2)      # Ideal impules reponse 
 
-h = hd * w                                  # Actually impulsrespons
+h = hd * w                                      # Actually impulsrespons
 
 print('impuls respons udregnet 4/9')
 

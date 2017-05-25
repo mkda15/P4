@@ -1,7 +1,11 @@
-\chapter{Additional material for FIR filter}
+\chapter{Additional material for the FIR filter}
+This chapter provides the definitions of 5 common windows, the derivation of the ideal impulse response, and the amplitude responses of the windows used in the filter theory and the implementation of the filter in chapters \ref{ch8} and \ref{ch10}, respectively.
+
+\input{sections/appE/appEwindows_table.tex}
+\clearpage
 
 \section{Derivation of ideal impulse response}\label{appC}
-In order to derive the ideal impulse response for the bandpass filter described in chapter \ref{ch10} the ideal frequency response is defined as follows on behalf of figure \ref{fig:spec_Hd}:
+In order to derive the ideal impulse response for the bandpass filter described in chapter \ref{ch10} the ideal frequency response is defined as follows based on figure \ref{fig:spec_Hd}:
 %\begin{align*}
 % H_d(\text{e}^{j\omega}) = \begin{cases}
 % 0, \ \ \ & |\omega| \leq \omega_{c_1} \\
@@ -20,13 +24,13 @@ H_d(\text{e}^{j\omega}) = \begin{cases}
 \end{cases}
 \end{align*}
 
-From this the ideal impulse response is determined by the inverse Fourier transformation described in definition \ref{def:InverseFourier_trans}:
+From this the ideal impulse response is determined by the inverse Fourier transform described in definition \ref{def:InverseFourier_trans}:
 \begin{align*}
 h_d[n] &= \dfrac{1}{2\pi} \int_{-\pi}^\pi H_d(\text{e}^{j\omega}) \text{e}^{j\omega n} d\omega = \dfrac{1}{2\pi} \left(  \int_{-\omega_{c_2}}^{-\omega_{c_1}} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega + \int_{\omega_{c_1}}^{\omega_{c_2}} \text{e}^{-j\omega \frac{M}{2}} \cdot \text{e}^{j \omega n} d\omega \right) \\
 &= \frac{1}{2\pi} \left( \int_{-\omega_{c_2}}^{-\omega_{c_1}} \text{e}^{j\omega \left(n - \frac{M}{2} \right) } d\omega + \int_{\omega_{c_1}}^{\omega_{c_2}} \text{e}^{j\omega \left(n- \frac{M}{2} \right)} d\omega \right).
 \end{align*}
 
-Euler's formula says that $\text{e}^{j\omega t} = \cos(\omega t) + j\sin(\omega t)$. For the first integral above it follows that
+According to Euler's formula $\text{e}^{j\omega t} = \cos(\omega t) + j\sin(\omega t)$. For the first integral above it follows that
 \begin{align*}
 \int_{-\omega_{c_2}}^{-\omega_{c_1}} \text{e}^{j\omega \left(n- \frac{M}{2} \right)} d\omega &= \int_{-\omega_{c_2}}^{-\omega_{c_1}} \cos \left( \omega \left(n-\dfrac{M}{2}\right)\right) + j \sin \left( \omega \left(n-\dfrac{M}{2}\right) \right) d\omega \\
 &= \left[ \sin\left(\omega \left(n-\dfrac{M}{2}\right)\right) \right]_{\omega=-\omega_{c_2}}^{-\omega_{c_1}} \cdot \dfrac{1}{n - \frac{M}{2}}
@@ -42,7 +46,7 @@ h_d[n] &= \dfrac{1}{2\pi} \left( \dfrac{1}{n - \frac{M}{2}} \left( \sin \left( -
 
 This is only true for $n \neq \frac{M}{2}$, and $h_d[M/2]$ must be defined separately. In order to do so l'Hôspital's rule$^[$\footnote{A more detailed version of l'Hôpital's rule may be found at \url{http://tutorial.math.lamar.edu/Classes/CalcI/LHospitalsRule.aspx}.}$^]$, which says that $\lim \frac{f(x)}{g(x)} = \lim \frac{f'(x)}{g'(x)}$, is used. Thus:
 \begin{align*}
-h_d[M/2] &= \dfrac{d}{dn} \left[ \dfrac{1}{\pi \left( n - \frac{M}{2}\right)} \left( \sin\left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) \right) \right]_{\frac{M}{2} = n} \\
+h_d[M/2] &= \dfrac{d}{dn} \left[ \dfrac{1}{\pi \left( n - \frac{M}{2}\right)} \left( \sin\left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) \right) \right]_{n = \frac{M}{2}} \\
 &= \dfrac{1}{\pi} (\cos (\omega_{c_2} \cdot 0) \omega_{c_2} - \cos (\omega_{c_1} \cdot 0) \omega_{c_1}) = \dfrac{1}{\pi} ( \omega_{c_2} - \omega_{c_1})
 \end{align*}
 
@@ -51,11 +55,9 @@ Collectively, the ideal impulse response is:
 h_d[n] = \begin{cases}
 \dfrac{1}{\pi \left( n - \frac{M}{2}\right)} \left( \sin\left( \omega_{c_2} \left( n - \frac{M}{2} \right) \right) - \sin \left( \omega_{c_1} \left( n - \frac{M}{2} \right) \right) \right), \quad &n \neq \dfrac{M}{2} \\
 \dfrac{1}{\pi} ( \omega_{c_2} - \omega_{c_1}), \quad &n = \dfrac{M}{2}
-\end{cases}
+\end{cases}.
 \end{align*}
 
 \clearpage
-
 \input{sections/appD/appDwindows.tex}
 \clearpage
-\input{sections/appE/appEwindows_table.tex}

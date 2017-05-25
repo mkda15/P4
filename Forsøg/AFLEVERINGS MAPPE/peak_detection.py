@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed May 17 09:32:06 2017
 
-@author: Trine
-"""
 import numpy as np
 
 def peak_dec(X, p, y):

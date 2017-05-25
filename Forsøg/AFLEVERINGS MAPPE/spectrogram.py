@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Mar 21 09:40:07 2017
-
-@author: Frederik Vardinghus
-"""
 
 from __future__ import division
 import scipy.io.wavfile as siw
@@ -15,6 +10,7 @@ import time
 #==============================================================================
 # Hent data
 #==============================================================================
+
 wav = siw.read('Lydfiler/forsoeg_nopeak/enkelt_tone/forsoeg_enkelt_dyb.wav')
 #wav = siw.read('Lydfiler/forsoeg_nopeak/melodi/alene/forsoeg_lillepeteredderkop_langsom.wav')
 #wav = siw.read('Lydfiler/forsoeg_nopeak/melodi/akkorder/forsoeg_lillepeteredderkop_langsom.wav')
@@ -43,7 +39,6 @@ freq_inter2 = 20000
 
 save = 0
 
-
 #data1 = np.zeros(len(data))
 #data2 = np.zeros(len(data))
 #for i in range(len(data)):
@@ -61,6 +56,7 @@ bins = np.linspace(0,freq/2,len(data)/2)
 #==============================================================================
 # Udtag og plot afsnit af data
 #==============================================================================
+
 #N = 2000 # Længde af udsnit
 #data = data[0:N]
 #lin = lin[0:N]
@@ -69,6 +65,7 @@ bins = np.linspace(0,freq/2,len(data)/2)
 #==============================================================================
 # Foretag FFT
 #==============================================================================
+
 start = time.time()
 F = 2/float(len(data))*np.abs(np.fft.fft(data)[:len(data)/2])
 end = time.time()
@@ -77,12 +74,14 @@ FFT_time = end - start
 #==============================================================================
 # dB funktion
 #==============================================================================
+
 def db(x):
     return 20*np.log10(x)
 
 #==============================================================================
 # Udtag og plot afsnit af F
 #==============================================================================
+
 #NF = 22050 # Længde af udsnit
 #dataF = np.fft.fft(data[0:NF])
 #linF = np.linspace(0,NF-1,NF)
@@ -93,6 +92,7 @@ def db(x):
 #==============================================================================
 # Frekvensplot og spektrogram genereret med scipy.signal
 #==============================================================================
+
 plt.style.use('ggplot')
 
 if plot == 0:
@@ -125,9 +125,3 @@ if save == 1:
 
 
 #winsound.PlaySound('Lydfiler/forsoeg_nopeak/skala/forsoeg_skala_hurtig.wav', winsound.SND_FILENAME)
-
-
-
-
-
-
