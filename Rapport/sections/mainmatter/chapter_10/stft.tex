@@ -65,7 +65,7 @@ The sine waves are then with frequencies of 500, 1500 and 1625 Hz, respectively.
 From figure \ref{fig:test_stft} it is clearly seen how the length of the window in the STFT used for generating the spectrogram affects the resolution in time and frequency. This agrees with Heisenberg's uncertainty principle described in section \ref{sec:heisenberg}. By figure \ref{fig:test_stft} it is concluded that the implementations of the STFT and spectrogram work as intended. Further optimisation is possible through the type and length of window used in the STFT.
 
 \subsection{Variation of windows in STFT}\label{sec:STFT_variation}
-The STFT uses a window function to taper the segment of the data to be transformed, and different windows produce different results. Figure \ref{fig:stft_windows_10000} shows spectrograms of the test signal generated from different windows of length $2^{13}=8192$. Similarly, figure \ref{fig:stft_windows_100} shows spectrograms from STFTs with windows of length $2^6=64$.
+The STFT uses a window function to taper the segment of the data to be transformed, and different windows produce different results. Figure \ref{fig:stft_windows_10000} shows spectrograms of the test signal generated from different windows of length $2^{13}=8192$. Similarly, figure \ref{fig:stft_windows_100} shows spectrograms from STFTs with windows of length $2^6=64$. In appendix \ref{appD} are seen the corresponding amplitude responses of the windows used in the spectrograms below.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.49\textwidth}
