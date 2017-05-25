@@ -11,7 +11,7 @@ In an audio file this will be the frequency of the tone being played or one of t
 This assumption will hold as long as the signal-to-noise ratio, SNR, of the signal is not smaller than a given lower limit, which is further explored in chapter \ref{ch11}. \\
 With the signal transformed by the STFT each segmented data set corresponds to a FFT of a given time, and hence finding the peak amplitude and the corresponding frequency makes it possible to determine the tone being played at a given time. Due to the trade-off between temporal and spectral resolutions stated in theorem \ref{theo:Heisenberg} the located frequency is an approximation, and hence the frequency needs to be compared with the frequencies that could be expected from the guitar.
 The use of such ``code book'' will make an approximation of the tone a possibility even though the spectral resolution is rather low.
-\\ \\
+\newpage
 To make sure that the amplitude actually is from a tone being played and not from noise in the signal, a check can be implemented in the algorithm such that the amplitude is set to $0$ if the amplitude is not larger than a given limit. \\
 An algorithm for locating the frequency with the largest amplitude is described in algorithm \ref{alg:Pak}.
 

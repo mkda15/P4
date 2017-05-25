@@ -128,6 +128,8 @@ The STFT uses a window function to taper the segment of the data to be transform
 \caption{Spectrograms generated with different windows of length $2^6$ and with overlap of 50\%.}
 \label{fig:stft_windows_100}
 \end{figure}
+
+\newpage
 \subsection{Peak detection under varying window orders}
 As the goal of the project is to be able to detect the most significant frequencies in a piece of music from the generated spectrogram it is in this section tested how the order $M$ of the window used in the STFT affects a peak detection algorithm's ability to do so. The algorithm used to detect the most significant frequencies is explained and implemented in section \ref{sec:peak_detection}. The goal is to decide when the peak algorithm no longer detects the most significant frequencies in the signal as a result of bad spectral resolution. From this the minimum required order $M$ of the window in the STFT can be specified.\\\\
 Figure \ref{fig:2048spec} shows the spectrogram of \eqref{eq:SPECTROsignal} generated with a Hann window of order $M=2^{11}$ as well as the associated results of the peak detection algorithm in figure \ref{fig:2048peak}. Likewise, figure \ref{fig:1024spec} shows the spectrogram of \eqref{eq:SPECTROsignal} generated with a Hann window of order $M=2^{10}$ with the associated peak detection in figure \ref{fig:1024peak}.
