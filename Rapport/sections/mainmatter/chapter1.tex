@@ -17,8 +17,8 @@ There has been undertaken plenty of research regarding automatic transcription o
 \\ \\
 \textit{Signal Processing Methods for Music Transcription} treats different methods relevant when transcribing music \cite{sol1}. 
 The book considers various perspectives on music transcription including analyses of brain activity when transcribing music and studying different human strategies for music transcription. Both of these can be of inspiration when developing an algorithm for the same purpose. 
-Described methods for signal processing and spectrum estimation include harmonic analyses with the Fourier transform for frequency and time-frequency representations and various statistical models to recognize patterns in music. 
-To recognize percussion and tempo in a piece of music a measure of musical stress is suggested.
+Described methods for signal processing and spectrum estimation include harmonic analyses with the Fourier transform for frequency and time-frequency representations and various statistical models to recognise patterns in music. 
+To recognise percussion and tempo in a piece of music a measure of musical stress is suggested.
 
 The book tests the algorithms in small scale tests, and further work with the presented algorithms is encouraged.
 \\ \\
@@ -26,16 +26,16 @@ Camgil, Kappen and Barber have written an article describing an inference to sol
 These tools are used to create a time-domain method suitable for polyphonic signals (music consisting of multiple sounds). 
 The algorithm described in the article is non-suitable for percussive instruments, and the authors point to computational complexity as a major disadvantage of their algorithm and suggest further work using a fast Fourier transform.
 \\ \\
-Transcribe! is an online downloadable software, which helps transcription by hand by analyzing and visualizing the spectrum of recorded music \cite{transcribe!}. The software has recieved acclaim and has been recommended by many different people and organizations underlining the need for this type of solution.
+Transcribe! is an online downloadable software, which helps transcription by hand by analysing and visualising the spectrum of recorded music \cite{transcribe!}. The software has recieved acclaim and has been recommended by many different people and organisations underlining the need for this type of solution.
 \\ \\
 The extensive research conducted in automatic music transcription stems from the applications extending to other areas than just transcribing music for musicians - making computers participate in human performances is another possible application. Although the research is extensive ``[$\ldots$]the performance of transcription systems is still significantly below that of a human expert[$\ldots$]'', and so there is room for improvement \cite{Benetos2013}.
 \\ \\
-As the above sources suggest there are many different ways to grasp this problem. This project will focus on creating a solution with the use of mathematical tools to extract signal information from a digitalized analog signal of music so as to transcribe it automatically to a note sheet.  
+As the above sources suggest there are many different ways to grasp this problem. This project will focus on creating a solution with the use of mathematical tools to extract signal information from a digitised analog signal of music so as to transcribe it automatically to a note sheet.  
 This implies a theoretical study followed by implementation within discrete-time signal processing and time-frequency analysis including the transformation between time and frequency representation of a signal.\\    
 The viability of a solution in form of an algorithm based on the mathematical tools will be tested under controlled circumstances to illustrate the possibilities and limitations of said algorithm.
 
 \section{Problem statement}
-The above analysis is summarized.\\
+The above analysis is summarised.\\
 When musicians compose new music they firstly play, but it stunts their creativity when they need to stop to transcribe the music. There is furthermore not necessarily any correlation between musical talent and the ability to transcribe music. This makes it advantageous for many musicians to use a program, which automatically transcribes music to a note sheet. This leads to the following problem statement:
 
 \begin{center}

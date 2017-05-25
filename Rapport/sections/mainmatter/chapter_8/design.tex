@@ -110,7 +110,7 @@ An important property of the bilinear transformation is that stability is preser
 Design of FIR filters are in contrast to IIR filters based on approximating the desired time-discrete frequency response directly. By this method it is possible to guarantee a generalised linear phase of the system. The method uses the window method, which is described below.
 
 \subsubsection{The window method}
-The window method is considered a simple method for designing FIR filters. The method takes off from the ideal frequency response $H_d$, which is defined to be equal to one in passbands and zero in stopbands corresponding to the desired cut-off frequencies as in section \ref{sec:basic_filter}. Hereby the idealized impulse response $h_d[n]$ is obtained by the inverse Fourier transform of the desired frequency response:
+The window method is considered a simple method for designing FIR filters. The method takes off from the ideal frequency response $H_d$, which is defined to be equal to one in passbands and zero in stopbands corresponding to the desired cut-off frequencies as in section \ref{sec:basic_filter}. Hereby the idealised impulse response $h_d[n]$ is obtained by the inverse Fourier transform of the desired frequency response:
 \begin{align*}
 h_d[n]=\frac{1}{2\pi}\int_{-\pi}^{\pi} H_d(\omega)\text{e}^{j\omega n} d\omega.
 \end{align*}
@@ -163,7 +163,7 @@ Figure \ref{fig:rect_db} illustrates the so-called main and side lobes by a deci
 %\caption{Absolute amplitude response of the rectangular window of order $M=8$.}
 %\label{fig:W_rect}
 %\end{figure}
-The aim is to approximate the ideal frequency response, which is best done by letting the main lobe of $W(\omega)$ be as narrow as possible and the side lobes as small as possible \cite{page 558, DTSP}. This corresponds to minimizing the width of the transitionband and the ripples in the pass- and stopbands, respectively, but it is not possible to achieve both simultaneously. \\
+The aim is to approximate the ideal frequency response, which is best done by letting the main lobe of $W(\omega)$ be as narrow as possible and the side lobes as small as possible \cite{page 558, DTSP}. This corresponds to minimising the width of the transitionband and the ripples in the pass- and stopbands, respectively, but it is not possible to achieve both simultaneously. \\
 By increasing the filter order $M$, the width of the main lope is decreased but the peak amplitude of the side lopes also increases. This indicates a trade-off between the width of the main lope and the peak amplitude of the side lopes.
 \\ \\
 Figure \ref{fig:lowpass_real} shows the actual amplitude response $|H(\omega)|$ of a lowpass filter, which is the Fourier transform of the product of the rectangular window and the desired impulse response
@@ -219,7 +219,7 @@ In table \ref{tab:window} in appendix \ref{appE} five commonly used windows are 
 \label{fig:windows}
 \end{figure}
 
-The defined windows all have the property of being symmetric around the point $\frac{M}{2}$. Hence, if the ideal impulse response is also symmetric the windowed impulse will be symmetric, which results in a frequency response with generalized linear phase. \\
+The defined windows all have the property of being symmetric around the point $\frac{M}{2}$. Hence, if the ideal impulse response is also symmetric the windowed impulse will be symmetric, which results in a frequency response with generalised linear phase. \\
 To summarize, in this section it is seen that in order to design a FIR filter by the window method, the impulse response of the filter is obtained as the product of the desired impulse response and a window of a certain order, and one can vary the chosen window and the order of the filter until the desired specifications have been achieved.
 
 \subsubsection{The Kaiser window method}
@@ -319,8 +319,8 @@ This chapter concludes with a comparison of IIR and FIR filters by considering t
 \\ \\
 The process of designing an IIR filter is rather complicated because the required order needs to be computed and the filter needs to be transformed as described. This design method leads to a recursive algorithm. By this method the amplitude response is the only parameter to be specified, and hence specific requirements for e.g. phase response or group delay are not guaranteed to be fulfilled by this kind of filter. However, once the filter has been designed, it is efficient and does not require a lot of computations.
 \\ \\
-The main advantages of a FIR filter is the easy implementation and the guarantee of getting a precise generalized linear phase, which can be important in order to preserve the wave form of the original signal. The impulse response by the window method is straightforward to implement, although it is not pre-defined as a design equation, and iterations are thus often necessary before desired specifications are achieved.
+The main advantages of a FIR filter is the easy implementation and the guarantee of getting a precise generalised linear phase, which can be important in order to preserve the wave form of the original signal. The impulse response by the window method is straightforward to implement, although it is not pre-defined as a design equation, and iterations are thus often necessary before desired specifications are achieved.
 \\ \\
 When choosing the right filter design computational speed is often considered, which basically is related to the required order of the system and the amount of iterations with respect to the order.
 \\ \\
-By this it is clear that the choice of filter depends on the specific case and how different aspects are weighted. An IIR filter has advantages in efficiency and computations, which makes it preferable in cases, where the need of generalized linear phase is less significant, but in other cases linear phase and easy implementation of a FIR filter can be worth the extra computations.
+By this it is clear that the choice of filter depends on the specific case and how different aspects are weighted. An IIR filter has advantages in efficiency and computations, which makes it preferable in cases, where the need of generalised linear phase is less significant, but in other cases linear phase and easy implementation of a FIR filter can be worth the extra computations.
