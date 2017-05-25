@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Apr 20 12:51:39 2017
-
-@author: Frederik Vardinghus
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,6 +9,7 @@ import scipy.io.wavfile as siw
 #==============================================================================
 # Load data
 #==============================================================================
+
 wav = siw.read('Lydfiler/skala/forsoeg_skala_hurtig.wav')
 freq = wav[0]
 data = wav[1][:-150000]
@@ -24,14 +20,15 @@ bins = np.linspace(0,freq/2.,len(data)/2.)
 N = len(data)
 
 #==============================================================================
-# Parametre
+# Parametres
 #==============================================================================
-#N = 2**18 # Datalængde
-#freq = 2**12 # Samplingsfrekvens i Hz
-#td = 1/float(freq) # Samplingsperiode
-#t = td*N # Samplingsinterval
 
-M = 100 # Længde af vindue
+#N = 2**18              # Length of data
+#freq = 2**12           # Sampling frequency in Hz
+#td = 1/float(freq)     # Sampling period
+#t = td*N               # Sampling interval
+
+M = 100                 # Length of window
 
 fft_size = 2**12
 overlap = 2
@@ -40,7 +37,7 @@ beta = 0
 save = 0
 
 #==============================================================================
-# Genereret signal
+# Generate signal
 #==============================================================================
 def sig(x):
     if x < t/3.:
@@ -50,16 +47,6 @@ def sig(x):
     else:
         return np.sin(1500*2*np.pi*x)+np.sin(1625*2*np.pi*x)
 
-#def sig(x):
-#    if x < t/12.:
-#        return 0
-#    elif t/12 <= x < t/5.:
-#        return np.sin(x**2)
-#    else:
-#        return np.sin(np.sqrt(x))
-
-#def sig(x):
-#    return np.sin(500*2*np.pi*x)
 
 #start = time.time()
 #S = np.fft.fft(s)
@@ -68,19 +55,22 @@ def sig(x):
 #==============================================================================
 # Linspaces
 #==============================================================================
-#tid = np.linspace(0,t,N) # Samplingstidspunkter
-#bins = np.linspace(0,freq/2.,N/2.) # Frekvensintervaller
-#data = np.array([sig(i) for i in tid]) # Signal samplet i tid
+
+#time = np.linspace(0,t,N) # Sample points in time
+#bins = np.linspace(0,freq/2.,N/2.) # Frequency intervals
+#data = np.array([sig(i) for i in tid]) # Signal sampled in time
                
 #==============================================================================
 # Functions                 
 #==============================================================================
+
 def db(x):
-    return 20*np.log10(x)           
+    return 20*np.log10(x)
 
 #==============================================================================
 # STFT
 #==============================================================================
+
 def stft(x, fftsize, overlap, beta):  
     if beta == 0:    
         hop = fftsize / overlap
@@ -102,6 +92,7 @@ X,x,y = stft(data,fft_size,overlap,beta)
 #==============================================================================
 # Peak detection
 #==============================================================================
+
 def tabs(X,x):
     max_freq_pos = np.zeros(len(X))
     for i in range(len(X)):
@@ -123,7 +114,6 @@ def tabs(X,x):
     plt.ylabel('Frequency [Hz]', fontsize = 13)
     plt.show()
     u,indices = np.unique(max_freq_t,return_inverse=True)
-#    print 'Hyppigste frekvens', u[np.argmax(np.bincount(indices))]
     return u[np.argmax(np.bincount(indices))],max_freq_t
 
 #==============================================================================
@@ -149,55 +139,3 @@ plt.ylabel('Frequency [Hz]',fontsize=fontsize)
 
 #if save == 1:
 #    siw.write('forsoeg_nopeak/melodi/akkorder/forsoeg_lillepeteredderkop_langsom.wav',freq,data)
-
-
-
-
-#==============================================================================
-# Varying fftsize
-#==============================================================================
-#iters = 10
-#vari = np.zeros(iters)
-#max_freq = np.zeros(iters)
-
-#for i in xrange(iters):
-#    overlap = 2
-#    fft_size = 2**12
-#    beta = (i+1)*0.5
-#    X,x,y = stft(data,fft_size,overlap,beta)
-#    X = X.T
-#
-#    max_freq[i] = tabs(X,x)
-#    vari[i] = beta
-#
-#    plt.stem(vari,max_freq)
-
-
-
-#    freq_inter1 = 0
-#    freq_inter2 = len(y)
-#    
-#    fontsize = 13
-#    
-#    spec = plt.pcolormesh(x,y[freq_inter1:freq_inter2],X[freq_inter1:freq_inter2],beta,cmap='jet')
-#    cb = plt.colorbar(spec)
-#    cb.set_label(label='Amplitude [dB]',fontsize=fontsize)
-#    plt.xlabel('Time [s]',fontsize=fontsize)
-#    plt.ylabel('Frequency [rad/s]',fontsize=fontsize)
-
-#==============================================================================
-# Varying window and beta
-#==============================================================================
-
-
-
-
-
-
-
-
-
-
-
-
-

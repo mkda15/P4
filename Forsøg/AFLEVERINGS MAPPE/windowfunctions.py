@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 21 08:46:36 2017
 
-@author: cht15
-"""
 import numpy as np
 import scipy as sc
 
 #==============================================================================
 # Window function, for implementing filters or the STFT.
 #==============================================================================
+
 """ Rectangular vindue """
 def Rectangular(n,M):
     w = np.zeros(len(n))
@@ -21,7 +18,7 @@ def Rectangular(n,M):
     return w
 
 """ Bartlett vindue """
-def Bartlett(n, M):                                         # Bartlett vindue
+def Bartlett(n, M):
     w = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] <= M/2 and n[i] >= 0:
@@ -33,7 +30,7 @@ def Bartlett(n, M):                                         # Bartlett vindue
     return w
   
 """ Hanning vindue """    
-def Hanning(n,M):
+def Hann(n,M):
     w = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] >= 0 and n[i] <= M:
@@ -63,10 +60,9 @@ def Blackman(n,M):
     return w
 
 """ Kaiser vindue"""
-def Kaiser( d1, d2, fs):                                        # Kaiservindue
+def Kaiser(d1, d2, fs):
     M = 0
     beta = 0
-    # defining Beta 
     A = int(-20*np.log10(d1))
     
     if A > 50:
@@ -78,7 +74,7 @@ def Kaiser( d1, d2, fs):                                        # Kaiservindue
         
     tw = ((2*d2)/fs)*2*np.pi
     M = int(np.ceil((A - 8) / (2.285 * tw)))
-    print('The filter order calculated by Kaiser window: \n M = %.0f' %M)
+    print('The filter order calculated by the Kaiser window: M = %.0f' %M)
     
     n = np.linspace(0,M,M+1) 
     w = np.zeros(len(n))

@@ -1,29 +1,24 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 21 08:31:00 2017
-
-@author: cht15
-"""
 
 #==============================================================================
 # Imports
 #==============================================================================
 
 from foriertransform import stft , db
-from windowfunctions import Hamming, Hanning, Kaiser
+from windowfunctions import Hamming, Hann, Kaiser
 import numpy as np
 import impulsrespons as impuls
 import matplotlib.pyplot as plt
-#import scipy.signal as ss
 import scipy.io.wavfile as siw
 
 #==============================================================================
-# Variable og data import
+# Variable and data import
 #==============================================================================
+
 """ Data import """
 
 freq , signal = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')  # Data signal
-freq2, noise = siw.read('Lydfiler/stoej/kroelle_stoej.wav')                  # Noise signal
+freq2, noise = siw.read('Lydfiler/stoej/kroelle_stoej.wav')              # Noise signal
 freq3, noise2 = siw.read('Lydfiler/stoej/klap_takt_2.wav')
 freq4, noise3 = siw.read('Lydfiler/stoej/sang_2_lille_peter_edderkop_2.wav')
 freq5, noise4 = siw.read('Lydfiler/stoej/stoej_fra_omraadet_rent.wav')
@@ -47,8 +42,7 @@ signal = np.array([signal[i] for i in range(len(signal))],dtype=np.int64)
 noise = np.array([noise[i] for i in range(len(noise))],dtype=np.int64)
                       
                          
-""" Length of data and noise alings"""
-
+""" Length of data and noise aligned"""
 
 if len(signal) > len(noise):
     while len(signal) > len(noise):
@@ -56,28 +50,27 @@ if len(signal) > len(noise):
 if len(signal) < len(noise):
         noise = noise[:len(signal)]
 
-""" Variabler til filter """
-window = Kaiser     # The wanted window is named (Has to be capitalised and has to be imported under windowfunctions)
+""" Variables for filter """
+window = Kaiser     # The desired window is named (has to be capitalised and has to be imported under windowfunctions)
 M    = 1000.        # Filter order
-cut  = 1000./freq   # Cut off frequency
-cut1 = 70./freq     # Cut off frequency for band
-cut2 = 600./freq    # Cut off frequency for band
+cut  = 1000./freq   # Cut-off frequency
+cut1 = 70./freq     # Lower cut-off frequency
+cut2 = 600./freq    # Upper cut-off frequency
 sampels = len(signal) # Amount of sampels in the signal (data points)
 plotlength = int(sampels/2) # Length for plotting (arbitrary)
 
-
-""" Til Kaiser vinduet """
+""" For the Kaiser window """
 delta_1 = 0.05 # peak approximation error in amplitude
 delta_2 = 10. # max transition width is 2*delta_2
 
-""" Aksis og linspaces """
+""" Axis and linspaces """
 t   = sampels/float(freq)                   # The time for howlong the system runs (for making the time axis)
 tid = np.linspace(0,t,sampels)              # Axis for time domain
 freq_axis = np.linspace(0,freq/2,sampels/2) # Axis for frequency domain
 freq_axis_norm = np.linspace(0,1,sampels/2)
-n   = np.linspace(0,M,M+1)                  # Integer numbers for making window and impulsrespons
+n  = np.linspace(0,M,M+1)                   # Integer numbers for making window and impulse response
 
-""" Variabler til spektogram """
+""" Variables for spektogram """
 freq_inter1 = 0
 freq_inter2 = 10000
 fftsize = 2**12
@@ -85,58 +78,45 @@ overlap = 2
 beta = 4
 
 fontsize = 13
-dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
-
-
-
-#print("variabler og data importeret 1/9")
+dataType = "Tabs" #Variable to peak detection: if the file is with chords dataType == "Chords"; if its tabs the datatype should be == "Tabs"
 
 def noise_variation(signal,noise,gain):
     noise = noise*gain
     return impuls.add_noise(signal,noise,1), noise
 
 #signal, noise = noise_variation(data,noise,0)
-                         
-#print('støj adderet 2/9')
 
 #==============================================================================
-# Filter koefficenter udregnes og filtere anvendes
+# Filter coefficients calculated and filters applied
 #==============================================================================
-""" Vindue funktion og impuls respons udregnes """
 
-if window == Kaiser:                                # What to be returned for different windowfunctions
+""" Window and calculation of impulse response """
+
+if window == Kaiser:   # What to be returned for different windowfunctions
     w,M,beta,A,n = window(delta_1,delta_2,freq)
     w = w[:-1]
     n = n[:-1]
 else:
     w = window(n,M)
 
-#print('vindue generet 3/9')
-
-hd = impuls.ImpulsresponsBP(n,M,cut1,cut2)
+hd = impuls.ImpulseresponseBP(n,M,cut1,cut2)
 #hd = impuls.ImpulsresponsHP(n,M,cut)
-#hd = impuls.ImpulsresponsLP(n,M,cut)    # Desired impulsrespons
+#hd = impuls.ImpulsresponsLP(n,M,cut)   # Desired impulsrespons
 
-h = hd * w                              # The final impulsrespons
+h = hd * w                              # The final impulse response
 H = np.fft.fft(h,(len(signal)))         # The fourier transformed of the final impulsrespons zero padded to fit the signal
 
-#print('impuls respons udregnet 4/9')
-
 def filtrering(signal,data,noise,H):
-    signal = signal / float((np.max(signal))) # Reduktion of amplitude
+    signal = signal / float((np.max(signal))) # Reduction of amplitude
     
-    """ Dataen fourier transformeres """
-    DATA = np.fft.fft(data)     # Pure signal in fourier
-    NOISE = np.fft.fft(noise)   # Noise in fourier
-    SIGNAL = np.fft.fft(signal) # Signal with noise in fourier
+    """ Fourier transform of data """
+    DATA = np.fft.fft(data)     # Fourier transform of pure signal
+    NOISE = np.fft.fft(noise)   # Fourier transform of noise
+    SIGNAL = np.fft.fft(signal) # Fourier transform of signal with noise
     
-    #print('Data fourier transformeret 5/9')
-    
-    SIGNAL_FILT = SIGNAL*H                # Convolution between the filter H and the noise SIGNALx
+    SIGNAL_FILT = SIGNAL*H                  # Convolution between the filter H and the noise SIGNAL
     signal_filt = np.fft.ifft(SIGNAL_FILT)  # Filtered data
     signal_filt = np.real(signal_filt)      # Cast to real, to remove the 0j from ifft.
-    
-    #print('Data filtreret 6/9')
     
     return signal_filt
 
@@ -188,8 +168,6 @@ def filtrering(signal,data,noise,H):
 #siw.write('Lydfiler/forsoeg_nopeak/output/out_noise.wav',freq,noise)                # Original data is saved with same length as noise
 #siw.write('Lydfiler/forsoeg_nopeak/output/out_signal.wav',freq,signal)              # The signal with noise is saved
 
-#print('Data gemt 8/9')
-
 #==============================================================================
 # Spectrogram
 #==============================================================================
@@ -234,13 +212,10 @@ def stft_plot(signal_filt,fftsize,overlap,freq_inter1,freq_inter2,beta):
 
 def sort(X):
     X = X.T
-    # kan laves til en definition og placeres i et andet dokument.
     sortedX = np.zeros(len(X),dtype = object)
     for i in range(len(X)):
         sortedX[i] = np.sort(X[i])
-    
-    
-    
+
 def tabs(X,x):
     max_freq_pos = np.zeros(len(X))
     for i in range(len(X)):
@@ -261,9 +236,7 @@ def tabs(X,x):
 #    plt.ylabel('Frequency (Hz)', fontsize = fontsize)
 #    plt.show()
     u,indices = np.unique(max_freq_t,return_inverse=True)
-#    print 'Hyppigste frekvens', u[np.argmax(np.bincount(indices))]
     return u[np.argmax(np.bincount(indices))]
-
 
 #if dataType == "Tabs": #Tjeck if data is in single tabs or chords
 #    tabs(X,x)
@@ -330,12 +303,11 @@ def SNR(signal,noise):
     else:
         return 20*np.log10(((RMS(signal))**2 / (RMS(noise))**2))
 
-
 #==============================================================================
 # Increase of SNR
 #==============================================================================
 
-N = 50 # Antal loops
+N = 50 # Number of loops
 
 SNR_a = np.zeros(N)
 max_freq = np.zeros(N)
@@ -354,16 +326,14 @@ for i in range(N):
     max_freq[i] = tabs(X,x)
     
     SNR_a[i] = SNR(signal,noise_new)
-    print i 
-
+    print i
     
 plt.stem(SNR_a,max_freq)
 plt.xlabel('SNR [dB]',fontsize=13)
 plt.ylabel('Most significant frequency',fontsize=13)
 for i in range(N-1):
     if max_freq[i+1]-max_freq[i] != 0:
-        print 'Ved SNR = %s detekteres den rigtige frekvens ikke længere' % SNR_a[i+1]
-
+        print 'At SNR = %s the right frequency is no longer detected.' % SNR_a[i+1]
 
 inter = 10000
 
@@ -375,20 +345,3 @@ N = np.abs(np.fft.fft(noise))
 #plt.plot(freq_axis[:inter],N[:inter]/np.max(N[:inter]))
 #plt.xlabel('Frequency [Hz]',fontsize=13)
 #plt.ylabel('Amplitude',fontsize=13)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
