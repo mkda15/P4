@@ -20,8 +20,8 @@ The amplitude and phase response are both real valued and $2\pi$-periodic. If $H
 H(\omega) = A(\omega) \text{e}^{j(-\alpha\omega + \beta)},
 \end{align}
 
-where $\alpha$ and $\beta$ are constants and $A(\omega)$ is real, the filter is said to have \textit{generalized linear phase}. This is due to the phase response consisting of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resulting from jumps of $2\pi$ caused by the $2\pi$-periodicity. \\
-A generalized linear phase response is characterized by a constant \textit{group delay} $\tau(\omega)$:
+where $\alpha$ and $\beta$ are constants and $A(\omega)$ is real, the filter is said to have \textit{generalised linear phase}. This is due to the phase response consisting of constant terms added to the linear function making a straight line with slope $\alpha$ except from the discontinuities resulting from jumps of $2\pi$ caused by the $2\pi$-periodicity. \\
+A generalised linear phase response is characterised by a constant \textit{group delay} $\tau(\omega)$:
 \begin{align*}
 \tau(\omega) = \text{grd}[H(\omega)] = -\frac{d}{d\omega} \left\{ \measuredangle H(\omega) \right\} = \alpha.
 \end{align*}
@@ -46,7 +46,7 @@ Cross multiplying leads to the following condition for the system to have consta
 \sum_{n=-\infty}^{\infty}h[n]\sin\left(\omega \left(n-\alpha \right) + \beta \right) = 0.
 \end{align}
 
-for all $\omega$. This is a necessary condition but not a sufficient condition, however. The phase response is an expression of how each of the signal components are delayed through the system, where linear phase indicates an equal delay for all components of the signal. The generalized linear phase is further described in section \ref{sec:FIR_IIR}.
+for all $\omega$. This is a necessary condition but not a sufficient condition, however. The phase response is an expression of how each of the signal components are delayed through the system, where linear phase indicates an equal delay for all components of the signal. The generalised linear phase is further described in section \ref{sec:FIR_IIR}.
 
 \subsection{Ideal filters} \label{sec:ideal_filt}
 When designing filters it is ideal to have constant amplitude and zero phase corresponding to the frequency response. For an ideal selective frequency filter the amplitude response will be constant unity for the frequencies that are wanted to pass the filter and zero for all other frequencies. These bands are referred to as \textit{bandpass} and \textit{bandstop}. An example is an ideal lowpass filter with frequency response 
@@ -146,13 +146,16 @@ ymax=2.6]
 \caption{Amplitude responses of ideal \textbf{(a)} highpass filter and \textbf{(b)} bandpass filter.}
 \label{fig:ideal}
 \end{figure}
-An ideal filter with zero phase is non-causal and as stated in section \ref{sec:LTI} a non-causal LTI system is not realizable. Thus an approximation of an ideal filter needs to be computed by a causal system with generalized linear phase.
+
+\martin{Ret figur. \textregistered}
+
+An ideal filter with zero phase is non-causal and as stated in section \ref{sec:LTI} a non-causal LTI system is not realizable. Thus an approximation of an ideal filter needs to be computed by a causal system with generalised linear phase.
 
 \section{FIR and IIR filters} \label{sec:FIR_IIR}
-Two classes of filters are essential to identify. For all ideal filters discussed in the previous section the impulse response is defined for $-\infty < n < \infty$. Such a filter is specified as an \textit{infinite impulse response (IIR)} filter which is not further explained in this section. In the case of the impulse response being zero outside a finite interval the filter is referred to as a \textit{finite impulse response (FIR)} filter which is shown to have generalized linear phase.
+Two classes of filters are essential to identify. For all ideal filters discussed in the previous section the impulse response is defined for $-\infty < n < \infty$. Such a filter is specified as an \textit{infinite impulse response (IIR)} filter which is not further explained in this section. In the case of the impulse response being zero outside a finite interval the filter is referred to as a \textit{finite impulse response (FIR)} filter which is shown to have generalised linear phase.
 
 \subsection{FIR filters}
-As described previously, causal systems with generalized linear phase is a possible approximation of the ideal filter. This is to be guaranteed by using specific types of FIR filters. A causal system with generalized linear phase has to fulfil the following relation for all $\omega$ as described in section \ref{sec:basic_filter}:
+As described previously, causal systems with generalised linear phase is a possible approximation of the ideal filter. This is to be guaranteed by using specific types of FIR filters. A causal system with generalised linear phase has to fulfil the following relation for all $\omega$ as described in section \ref{sec:basic_filter}:
 \begin{align*}
 \sum_{n=0}^{\infty}h[n]\sin\left(\omega \left(n-\alpha \right) + \beta \right) = 0.
 \end{align*}
@@ -167,7 +170,7 @@ The point of symmetry for an FIR filter is moved from $\alpha=0$ to $\alpha=\fra
 \end{align}
 
 This implies that $h[n]$ is either symmetric or anti-symmetric. \\
-From these conditions four different types of FIR filter with generalized linear phase can be defined \cite{pages 343-344, DTSP}. However, only the \textit{type 1 FIR filter} will be elaborated here.
+From these conditions four different types of FIR filter with generalised linear phase can be defined \cite{pages 343-344, DTSP}. However, only the \textit{type 1 FIR filter} will be elaborated here.
 A type 1 FIR filter is characterised by having a symmetric impulse response and $M$ being an even integer. By applying the symmetry condition to the definition of the Fourier transform, $H(\omega)$ is defined as \cite{page 343, DTSP}:
 \begin{align} \label{eq:type1}
 H(\omega) = \text{e}^{-j\omega \frac{M}{2}} \sum_{k=0}^{M/2} a[k] \cos (\omega k),
