@@ -130,83 +130,78 @@ print('Data filtreret 6/9')
 
 
 """ Frequency respose of filter """
-#plt.plot(freq_axis,np.abs(H)[:sampels/2],'r')
-#plt.xlabel('Frequency [Hz]')
-#plt.ylabel('Amplitude')
-#plt.axis([0,2500,0,1.1])
+plt.plot(freq_axis,np.abs(H)[:sampels/2],'r')
+plt.xlabel('Frequency [Hz]')
+plt.ylabel('Amplitude')
+plt.axis([0,2500,0,1.1])
 #plt.savefig("figures/filter_test/freq_response1.png")
-#plt.show()
-##close up
-#f, axarr = plt.subplots(2, sharex=True)
-#
-#axarr[0].plot(freq_axis[:plotlength], np.abs(H)[:plotlength],'r')
-#axarr[0].axis([20,130,0.9,1.1])
-#axarr[0].set_ylabel('Amplitude')
-#axarr[0].axvline((70-delta_2), color='green') # Nedre transitionsgrænse
-#axarr[0].axvline((70+delta_2), color='green') # Øvre transitionsgrænse
-#axarr[0].axhline((1+delta_1), color='green') # Nedre knækfrekvens
-#axarr[0].axhline((1-delta_1), color='green') # Nedre knækfrekvens 
-# 
-#plt.plot(freq_axis[:plotlength],np.abs(H)[:plotlength],'r')  
-#plt.xlabel('Frequency [Hz]')
-#plt.ylabel('Amplitude')
-#plt.axvline((70-delta_2), color='green') # Nedre transitionsgrænse
-#plt.axvline((70+delta_2), color='green') # Øvre transitionsgrænse
-#plt.axhline((0+delta_1), color='green') # Nedre knækfrekvens
-#plt.axis([20,130,0,0.2])
+plt.show()
+#close up
+f, axarr = plt.subplots(2, sharex=True)
+
+axarr[0].plot(freq_axis[:plotlength], np.abs(H)[:plotlength],'r')
+axarr[0].axis([20,130,0.9,1.1])
+axarr[0].set_ylabel('Amplitude')
+axarr[0].axvline((70-delta_2), color='green') # Nedre transitionsgrænse
+axarr[0].axvline((70+delta_2), color='green') # Øvre transitionsgrænse
+axarr[0].axhline((1+delta_1), color='green') # Nedre knækfrekvens
+axarr[0].axhline((1-delta_1), color='green') # Nedre knækfrekvens 
+ 
+plt.plot(freq_axis[:plotlength],np.abs(H)[:plotlength],'r')  
+plt.xlabel('Frequency [Hz]')
+plt.ylabel('Amplitude')
+plt.axvline((70-delta_2), color='green') # Nedre transitionsgrænse
+plt.axvline((70+delta_2), color='green') # Øvre transitionsgrænse
+plt.axhline((0+delta_1), color='green') # Nedre knækfrekvens
+plt.axis([20,130,0,0.2])
 #plt.savefig("figures/filter_test/freq_response2.png")
-#plt.show()
+plt.show()
 
 """ dB representation of frequency response of filter """
-#plt.plot(freq_axis,Hdb[:sampels/2])
-#plt.axis([0,1300,-100,2])
-#plt.show()
-
-""" Phase response of frequency response of filter """
-#plt.plot(freq_axis,np.angle(H)[:sampels/2])
-#plt.axis([0,1075,-4,4])
-#plt.show()  
+plt.plot(freq_axis,Hdb[:sampels/2])
+plt.axis([0,1500,-100,2])
+plt.show() 
 
 """ Signal with noise in time domain """
-#plt.plot(tid,signal)  # Original data with noise added 
-#plt.xlabel('Time [s]')
-#plt.ylabel('Amplitude')
-##plt.axis([0,6,-1,1])
+plt.plot(tid,signal)  # Original data with noise added 
+plt.xlabel('Time [s]')
+plt.ylabel('Amplitude')
+#plt.axis([0,6,-1,1])
 #plt.savefig("figures/integrationstest/signal.png")
-#plt.show()
+plt.show()
 
 """ Filtered signal in time domain """
-#plt.plot(tid,signal_filt)  # Original data with noise added 
-#plt.xlabel('Time [s]')
-#plt.ylabel('Amplitude')
-#plt.axis([0,6,-6000,6000])
+plt.plot(tid,signal_filt)  # Original data with noise added 
+plt.xlabel('Time [s]')
+plt.ylabel('Amplitude')
+plt.axis([0,6,-6000,6000])
 #plt.savefig("figures/integrationstest/f_signal.png")
-#plt.show()
-
-""" Pure signal with noise i frekvency domain"""
-#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          
-#plt.xlabel('Frequency [Hz]')
-#plt.ylabel('Amplitude')
-##plt.savefig("figures/filter_test/SIGNAL.png")
-#plt.savefig("figures/integrationstest/FSIGNAL.png")
-#plt.show()
-
-""" Filtered signal in frequency domain """
-#plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   
-#plt.xlabel('Frequency [Hz]')
-#plt.ylabel('Amplitude')
-##plt.savefig("figures/filter_test/f_SIGNAL.png")
-#plt.savefig("figures/integrationstest/f_FSIGNAL.png")
-#plt.show()
+plt.show()
 
 """ Close-up all data in time domain  """
-##plt.plot(tid,signal, 'r-', label = "signal")
-##plt.plot(tid,signal_filt, 'b-', label = "filt") 
-##plt.plot(tid,data, 'g-',label = "ren signal")                       
-##plt.legend(loc = 'upper right')
-##plt.xlabel('Time [sec.]')
-##plt.axis([1.03,1.06,-0.1,0.1])
-##plt.show()                                    
+plt.plot(tid,signal, 'r-', label = "signal")
+plt.plot(tid,signal_filt, 'b-', label = "filt") 
+plt.plot(tid,data, 'g-',label = "ren signal")                       
+plt.legend(loc = 'upper right')
+plt.xlabel('Time [sec.]')
+#plt.axis([1.03,1.04,-0.1,0.1])
+plt.show()                                    
+
+""" Pure signal with noise i frekvency domain"""
+plt.plot(freq_axis[:plotlength],np.abs(SIGNAL)[:plotlength])          
+plt.xlabel('Frequency [Hz]')
+plt.ylabel('Amplitude')
+#plt.savefig("figures/filter_test/SIGNAL.png")
+#plt.savefig("figures/integrationstest/FSIGNAL.png")
+plt.show()
+
+""" Filtered signal in frequency domain """
+plt.plot(freq_axis[:plotlength],np.abs(SIGNAL_FILT[:plotlength]))   
+plt.xlabel('Frequency [Hz]')
+plt.ylabel('Amplitude')
+#plt.savefig("figures/filter_test/f_SIGNAL.png")
+#plt.savefig("figures/integrationstest/f_FSIGNAL.png")
+plt.show()
 
 print('plot plotteret 7/9')
 
