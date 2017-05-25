@@ -216,8 +216,6 @@ print('plot plotteret 7/9')
 #==============================================================================
 
 X,o,ws = stft(signal_filt)      # return STFT, stft and used window(time) 
- 
-
 
 print('stft udregnet 9/9') 
 
