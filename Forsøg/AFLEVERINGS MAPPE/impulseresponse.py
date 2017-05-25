@@ -3,7 +3,7 @@
 import numpy as np
 
 """ Impulse response for bandstop filter """
-def ImpulsresponsBS(n,M,cut1,cut2):
+def ImpulseresponseBS(n,M,cut1,cut2):
     hd = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] == M/2:
@@ -14,7 +14,7 @@ def ImpulsresponsBS(n,M,cut1,cut2):
     return hd
 
 """ Impulse response for high pass filter """
-def ImpulsresponsHP(n, M, f):
+def ImpulseresponseHP(n, M, f):
     hd = np.zeros(len(n))
     for i in range(len(hd)):
         if n[i] == M/2:
@@ -24,7 +24,7 @@ def ImpulsresponsHP(n, M, f):
     return hd       
 
 """ Impulse response for lowpass filter """
-def ImpulsresponsLP(n, M, f): 
+def ImpulseresponseLP(n, M, f): 
     hd = np.zeros(len(n))
     for i in range(len(hd)):
         if n[i] == M/2:
@@ -34,7 +34,7 @@ def ImpulsresponsLP(n, M, f):
     return hd
 
 """ Impulse response for bandpass filter """
-def ImpulsresponsBP(n,M,ft1,ft2):
+def ImpulseresponseBP(n,M,ft1,ft2):
     h = np.zeros(len(n))
     for i in range(len(n)):
         if i == M/2:

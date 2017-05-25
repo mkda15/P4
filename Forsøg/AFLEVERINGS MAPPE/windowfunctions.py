@@ -30,7 +30,7 @@ def Bartlett(n, M):
     return w
   
 """ Hanning vindue """    
-def Hanning(n,M):
+def Hann(n,M):
     w = np.zeros(len(n))
     for i in range(len(n)):
         if n[i] >= 0 and n[i] <= M:
@@ -74,7 +74,7 @@ def Kaiser(d1, d2, fs):
         
     tw = ((2*d2)/fs)*2*np.pi
     M = int(np.ceil((A - 8) / (2.285 * tw)))
-    print('The filter order calculated by Kaiser window: \n M = %.0f' %M)
+    print('The filter order calculated by the Kaiser window: M = %.0f' %M)
     
     n = np.linspace(0,M,M+1) 
     w = np.zeros(len(n))
