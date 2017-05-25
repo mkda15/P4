@@ -107,7 +107,7 @@ where $\omega_c$ is the discrete cut-off frequency. Hereby it is possible to det
 An important property of the bilinear transformation is that stability is preserved if the time-continuous filter is stable.
 
 \subsection{FIR filter} \label{subsec:FIR}
-Design of FIR filters are in contrast to IIR filters based on approximating the desired time-discrete frequency response directly. By this method it is possible to guarantee a general linear phase of the system. The method uses the window method, which is described below.
+Design of FIR filters are in contrast to IIR filters based on approximating the desired time-discrete frequency response directly. By this method it is possible to guarantee a generalised linear phase of the system. The method uses the window method, which is described below.
 
 \subsubsection{The window method}
 The window method is considered a simple method for designing FIR filters. The method takes off from the ideal frequency response $H_d$, which is defined to be equal to one in passbands and zero in stopbands corresponding to the desired cut-off frequencies as in section \ref{sec:basic_filter}. Hereby the idealized impulse response $h_d[n]$ is obtained by the inverse Fourier transform of the desired frequency response:
@@ -223,7 +223,7 @@ The defined windows all have the property of being symmetric around the point $\
 To summarize, in this section it is seen that in order to design a FIR filter by the window method, the impulse response of the filter is obtained as the product of the desired impulse response and a window of a certain order, and one can vary the chosen window and the order of the filter until the desired specifications have been achieved.
 
 \subsubsection{The Kaiser window method}
-The Kaiser window design method considers the Kaiser window as the near-optimal window which -- compared to the other windows -- has two parameters; the length $M+1$ and a shape parameter $\beta$. This results in \textit{one} window where changing the parameters adjusts shape and length of the window. This is done in order to achieve the optimal trade-off between the peak amplitude of the side lopes and the width of the main lope \cite{page 566, DTSP}. The Kaiser window is defined as
+The Kaiser window design method considers the Kaiser window as the near-optimal window, which -- compared to the other windows -- has two parameters; the length $M+1$ and a shape parameter $\beta$. This results in \textit{one} window where changing the parameters adjusts shape and length of the window. This is done in order to achieve the optimal trade-off between the peak amplitude of the side lopes and the width of the main lope \cite{page 566, DTSP}. The Kaiser window is defined as
 \begin{align*}
 w[n] =
 \begin{cases}
@@ -267,6 +267,7 @@ Furthermore, $M$ must satisfy the relation
 \begin{align}
 M = \dfrac{A-8}{2.285\Delta \omega}.
 \end{align}
+
 Specifications for a lowpass filter are illustrated in figure \ref{fig:kaiser_spec}. Figure \ref{fig:kaiser_H} shows an example of the actual amplitude response computed by the use of the Kaiser window, which is designed to fulfil $\delta=0.01$, $\omega_p = 0.4\pi$, and $\omega_p = 0.5\pi$. This gives $M=46$ and $\beta \approx 3.4$. It is noted that there are fewer ripples compared to the rectangular window shown in figure \ref{fig:lowpass_real}.
 
 \begin{figure}[H]

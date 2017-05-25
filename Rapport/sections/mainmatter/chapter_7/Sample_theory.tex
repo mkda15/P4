@@ -54,7 +54,7 @@ Sampling is the process of representing a time-continuous signal by a sequence o
 x(n)=x_c(nT_s),
 \end{align}
 
-where $n \in \mathbb{Z}$ and the \textit{sampling period} $T_s$ (the time between two consecutive samples) is determined by the \textit{sampling frequency} $f_s$ (samples per second). The relation between $T_s$, $f_s$ and the times of samples is described by \cite{page 163, pelgrom}:
+where $n \in \mathbb{Z}$ and the \textit{sampling period} $T_s$ (the time between two consecutive samples) is determined by the \textit{sampling frequency} $f_s$ (samples per second). The relation between $T_s$, $f_s$, and the times of samples is described by \cite{page 163, pelgrom}:
 \begin{align} \label{eq:sample_freq}
 \dfrac{n}{f_s} = nT_s,
 \end{align}
@@ -74,7 +74,7 @@ The Dirac delta function is sometimes interpreted as a function $\delta(t)$ sati
 \\ \\
 In signal processing the similar \textit{Kronecker delta sequence} is often used as a unit impulse.
 \begin{definition}[Kronecker delta sequence]\label{def:kronecker}
-The Kronecker delta sequence is $delta[n]$, where
+The Kronecker delta sequence is $\delta[n]$, where
 \begin{align}
 \delta[n]=
 \begin{cases}1,\text{ for }n=0\\
@@ -247,7 +247,7 @@ c_n &= \dfrac{1}{T_s} \int_{t_0}^{t_0+T_s} \! s(t) \mathrm{e}^{-jnt/T_s} \, dt =
 
 And so the Fourier series of $s(t)$ is
 \begin{align}\label{eq:dirac_series}
-s(t) = \dfrac{1}{T_s} \sum_{n=-\infty}^{\infty} \mathrm{e}^{jnt/T_s} \phantom{mm} \forall n\in \mathbb{Z}.
+s(t) = \dfrac{1}{T_s} \sum_{n=-\infty}^{\infty} \mathrm{e}^{jnt/T_s} \phantom{mm} \forall \ n \in \mathbb{Z}.
 \end{align}
 
 \eqref{eq:dirac_series} shows that the Fourier series of $s(t)$ is merely an inifite number of phase shifted sines of equal frequencies summed. This simplifies the following Fourier transform:
@@ -267,14 +267,14 @@ s(t) = \dfrac{1}{T_s} \sum_{n=-\infty}^{\infty} \mathrm{e}^{jnt/T_s} \phantom{mm
 Calculating the Fourier transform of \eqref{eq:sampling} uses \eqref{eq:fourier_comb2} and the fact that \eqref{eq:sampling} is a product of two functions, which is a convolution in the frequency domain:
 \begin{align} \label{eq:samp_freq}
 \mathcal{F}\{x_s(t)\}(\omega) &= \mathcal{F}\{x_c(t)s(t)\} \nonumber \\
-&= \dfrac{2\pi}{T} \sum_{k=-\infty}^{\infty} X_c(\omega) * S(\omega) \nonumber \\
-X_s(\omega)&=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}X_c(\omega-k\omega_s)
+&= \dfrac{2\pi}{T_s} \sum_{k=-\infty}^{\infty} X_c(\omega) * S(\omega) \nonumber \\
+X_s(\omega) &= \dfrac{2\pi}{T_s}\sum_{k=-\infty}^{\infty}X_c(\omega-k\omega_s)
 \end{align}
 
 Just as \eqref{eq:sampling} mathematically samples $x_c(t)$ in the time domain, \eqref{eq:samp_freq} mathematically samples $X_c(\omega)$ in the frequency domain at intervals of length $\omega_s$. The following section draws conlusions regarding sampling frequencies by studying $X_c(\omega)$.
 
 \subsection{Aliasing} \label{sec:aliasing}
-\textit{Aliasing} is a consequence of not sampling at a sufficiently high sampling frequency $f_s$ which results in the continuous signal $x_c(t)$ being non-reconstructable from the sampled signal $x_s(t)$ \cite{pages 166-170, DTSP}. In this discussion \textit{bandlimited} signals are of interest.
+\textit{Aliasing} is a consequence of not sampling at a sufficiently high sampling frequency $f_s$, which results in the continuous signal $x_c(t)$ being non-reconstructable from the sampled signal $x_s(t)$ \cite{pages 166-170, DTSP}. In this discussion \textit{bandlimited} signals are of interest.
 
 \paragraph{Bandlimited signal}
 A signal is bandlimited if the signal contains no frequencies higher than some frequency $\omega_N$, which means that $F(\omega) = 0$ for $|\omega|>\omega_N$ \cite{page 230, FAA}.
@@ -469,7 +469,7 @@ f(t) &= \dfrac{1}{2\pi} \int_{-\omega_N}^{\omega_N} F(\omega) \mathrm{e}^{j\omeg
 &= \dfrac{1}{2\omega_N} \int_{-\omega_N}^{\omega_N} \! \lim_{N\to\infty} \sum_{n=-N}^{N} f \left( \dfrac{n\pi}{\omega_N} \right) \mathrm{e}^{-jn\pi\omega/\omega_N} \mathrm{e}^{j\omega t} \, d\omega.
 \end{align}
 
-A linear and bounded operator is continuous. From theorem \ref{theo:Plancherel} it follows that the Fourier transform is bounded, and together with the linearity of the Fourier transform it is continuous on $\mathcal{L}^2$. This means that the limit in \eqref{eq:limit} can be moved outside of the integral and the summation and integral may then be switched:
+A linear and bounded operator is continuous. From theorem \ref{theo:Plancherel} it follows that the Fourier transform is bounded, and together with the linearity of the Fourier transform it is continuous on $\mathcal{L}^2$. This means that the limit in \eqref{eq:limit} can be moved outside of the integral, and the summation and integral may then be switched:
 \begin{align*}
 f(t) &= \dfrac{1}{2\omega_N} \sum_{n=-\infty}^{\infty} f \left( \dfrac{n\pi}{\omega_N} \right) \dfrac{\mathrm{e}^{j(\omega_N t - n\pi)\omega/\omega_N}}{j(\omega_Nt - n\pi)/\omega_N}\Bigg|_{\omega=-\omega_N}^{\omega_N}
 \\
@@ -581,7 +581,8 @@ ylabel=Voltage]
 \caption{Plot of continuous levels of voltage versus time (black) and the quantized voltage levels (blue).}
 \label{fig:quant}
 \end{figure}
-The process of sampling described in section \ref{sec:sampling} will be done with an ADC in the recordings described in appendix \ref{app:rec}.
+
+The process of sampling described in section \ref{sec:sampling} will be done with an ADC in the recordings described in appendix \ref{recordings}.
 
 \section{Signals and noise}
 This project has the purpose of measuring sound signals and process it in an advantageous way so as to be able to produce a spectrogram of said signal. It is therefore necessary to clarify what is meant by a signal and which kinds of signals are likely to be encountered.
@@ -615,7 +616,7 @@ White noise bandlimited in a spectrum that covers the spectrum of the interferre
 Any non-white noise; noise which does not have a constant power spectrum.
 \end{itemize}
 
-As noise reduction is generally desired, this project will also seek to eliminate it by recording music in an anechoic rum. Playing a tone alone in an anechoic room is a way of minimizing noise factors. There are many different noise sources from e.g. the surrounding environment, electrical equipment, other people and even the instrument playing itself since it is difficult to make a pure tone by an acoustic sound source such as a guitar. A pure tone is a sinusoidal waveform consisting of a single frequency and may therefore be difficult to play on an instrument \cite{AcousticNoise}. Usually, sound is reflected off the walls in a room which is also a source of noise. This is minimized in the anechoic room together with additive noise from e.g. bypassing cars. The sound may be recorded with a minimum of hardware, which otherwise may also produce noise.
+As noise reduction is generally desired, this project will also seek to eliminate it by recording music in an anechoic rum. Playing a tone alone in an anechoic room is a way of minimizing noise factors. There are many different noise sources from e.g. the surrounding environment, electrical equipment, other people and even the instrument playing itself since it is difficult to make a pure tone by an acoustic sound source such as a guitar. A pure tone is a sinusoidal waveform consisting of a single frequency and may therefore be difficult to play on an instrument \cite{AcousticNoise}. Usually, sound is reflected off the walls in a room, which is also a source of noise. This is minimized in the anechoic room together with additive noise from e.g. bypassing cars. The sound may be recorded with a minimum of hardware, which otherwise may also produce noise.
 \\ \\
 The music used in this project will therefore be recorded in an anechoic room because the noise is minimized. 
 It is not expected that musicians using the system in the future have access to an anechoic room but if the system does not work with sounds recorded in the anechoic room then it does not work at other places either. However, in order to reproduce the conditions of a typical musician working around other people, background noise can also be recorded in the anechoic room. This form of noise is additive whereas e.g. noise reflected off walls is a convolution of the noise and the original signal defined in definition \ref{def:convolution}. In general, convolution noise depends on the state of the system whereas additive noise does not. For additive noise, the noisy signal $s[n]$ is simply the sum of the noise $a[n]$ and the pure signal $x[n]$:
