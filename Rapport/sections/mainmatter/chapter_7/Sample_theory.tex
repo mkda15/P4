@@ -89,11 +89,12 @@ Summing an infinite number of Dirac functions shifted at equally spaced time int
 s(t)=\sum_{n=-\infty}^{\infty}\delta(t-nT_s)
 \end{align}
 
-A Dirac comb is seen in figure \ref{fig:dirac_comb}.\frede{Fjern axis ticks}
+A Dirac comb is seen in figure \ref{fig:dirac_comb}.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
+every x tick/.style={transparent}, minor x tick num=1,
 unit vector ratio*=1 1 1,
 axis lines=middle,
 clip=false,
@@ -132,11 +133,11 @@ x_s(t)&=x_c(t)s(t)\nonumber \\
 \end{align}
 
 \eqref{eq:sampling} is a mathematical representation of sampling of the continuous function $x_c(t)$ into the function $x_s(t)$ \cite{page 165, DTSP}. This process is seen in figure \ref{fig:signal1}, where a signal is shown, and figure \ref{fig:sampling_comb}, where the signal is sampled by multiplication with a Dirac comb.
-\frede{Fjern ticks}
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
+every x tick/.style={transparent}, minor x tick num=1,
 clip=false,
 unit vector ratio*=1 1 1,
 axis lines=middle,
@@ -157,11 +158,11 @@ ylabel=Amplitude]
 \caption{Signal $x_c(t)=\sin(x)$.}
 \label{fig:signal1}
 \end{figure}
-\frede{Fjern ticks}
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
+every x tick/.style={transparent}, minor x tick num=1,
 clip=false,
 unit vector ratio*=1 1 1,
 axis lines=middle,
