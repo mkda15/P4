@@ -22,7 +22,7 @@ import scipy.io.wavfile as siw
 #==============================================================================
 """ Data import """
 
-freq , data  = siw.read('Lydfiler/forsoeg_nopeak/skala/forsoeg_skala_langsom_cut.wav')  # Data signal
+freq , data  = siw.read('Lydfiler/forsoeg_nopeak/akkorder/forsoeg_akkord_dyb.wav')  # Data signal
 freq2, noise = siw.read('Lydfiler/forsoeg_nopeak/stoej/kroelle_stoej.wav')                  # Noise signal
 #freq3, signal = siw.read('Lydfiler/noise_pc.wav')                      # Noise and data as a single file
 
@@ -61,7 +61,7 @@ freq_inter1 = 0
 freq_inter2 = 100
 
 fontsize = 13
-dataType = "Tabs" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
+dataType = "Chords" #Variable to peak detection, if the file is with chords dataType == Chords if its tabs dataType should be == Tabs
 noise = noise * 10
 print("variabler og data importeret 1/9")
 signal = impuls.add_noise(data,noise, 1)   # Noise and data conjoined

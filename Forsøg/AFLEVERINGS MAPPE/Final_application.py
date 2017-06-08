@@ -18,8 +18,8 @@ import scipy.io.wavfile as siw
 
 """ Data import """
 # Single tone with clap
-freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
-freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
+#freq , data  = siw.read('Lydfiler/enkelt_tone/forsoeg_enkelt_dyb.wav')   # Data signal
+#freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise signal
 
 # TEST 1 
 #freq , data  = siw.read('Lydfiler/skala/forsoeg_skala_hurtig.wav')     # Data signal
@@ -30,8 +30,8 @@ freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise
 #freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                                   # Noise signal
 
 # TEST 3                                  
-#freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
-#freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
+freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
+freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
 
 """ Lengths of data and noise aligned"""
 if len(data) > len(noise):
@@ -236,7 +236,7 @@ plt.show()
 # Peak Dectection
 #==============================================================================
 
-max_freq_t = peak_dec(X,0.75,y) #limit is given as percentages of max amplitude in STFT
+max_freq_t = peak_dec(X,0.80,y) #limit is given as percentages of max amplitude in STFT
 
 """ Plot peak dection """
 plt.plot(x,max_freq_t,'o')
