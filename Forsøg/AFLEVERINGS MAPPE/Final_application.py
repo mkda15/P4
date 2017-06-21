@@ -33,6 +33,17 @@ freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')                # Noise
 #freq , data  = siw.read('Lydfiler/akkorder/forsoeg_akkord_dyb2.wav')   # Data signal
 #freq2, noise = siw.read('Lydfiler/stoej/klap_takt_2.wav')              # Noise signal
 
+down_data = np.zeros(len(data/2))
+
+down = 5
+
+for i in range(len(data)/down):
+    down_data[i] = data[down*i]
+
+data = down_data
+
+freq = freq/down
+
 """ Lengths of data and noise aligned"""
 if len(data) > len(noise):
     while len(data) > len(noise):
